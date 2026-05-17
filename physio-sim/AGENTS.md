@@ -1,0 +1,231 @@
+# 🧠 Physio Simulation Monorepo – AGENTS.md
+
+This repository contains a deterministic physiological simulation system that models substance effects (caffeine, nicotine, THC) over time.
+
+The system is split into:
+- backend API (Fastify)
+- mobile app (React Native / Expo)
+- core simulation engine (pure TypeScript)
+- shared types package
+
+---
+
+# ⚙️ MONOREPO RULES (CRITICAL)
+
+- Package manager: pnpm (workspace-based)
+- Build system: Turborepo
+- NEVER use npm or yarn
+- NEVER bypass workspace boundaries
+
+Workspace structure:
+- apps/api → backend only
+- apps/mobile → frontend only
+- packages/engine → PURE logic (NO IO)
+- packages/shared → types only
+
+---
+
+# 🚫 ARCHITECTURE BOUNDARIES (STRICT)
+
+## 1. ENGINE LAYER (MOST IMPORTANT)
+
+packages/engine MUST:
+- be pure functions only
+- contain NO HTTP, DB, UI logic
+- contain NO stateful singletons
+- be deterministic (same input = same output)
+
+Allowed:
+✔ math functions
+✔ curve simulation
+✔ interaction logic
+✔ composition of signals
+
+Not allowed:
+✘ fetch calls
+✘ database access
+✘ React / UI logic
+✘ Fastify / Express usage
+
+---
+
+## 2. API LAYER (apps/api)
+
+Responsibilities:
+- validate input
+- call engine.simulateSession()
+- compute metrics
+- return JSON response
+
+DO NOT implement simulation logic here.
+
+---
+
+## 3. MOBILE LAYER (apps/mobile)
+
+Responsibilities:
+- UI only
+- calls API
+- renders charts
+- manages local state
+
+DO NOT:
+- implement simulation logic
+- compute curves
+- duplicate engine logic
+
+---
+
+# 🧠 CORE DOMAIN MODEL
+
+Substances:
+- coffee (caffeine)
+- nicotine
+- THC (low/high strength)
+
+Context:
+- fasted (boolean)
+- sleepQuality (0–1)
+- stressLevel (0–1)
+
+Output:
+Time series for:
+- cortisol
+- dopamine
+- glucose
+- insulin
+
+---
+
+# 📊 SIMULATION PRINCIPLE
+
+All biological responses are modeled as:
+
+- deterministic curve functions
+- time-based (t in minutes)
+- composed via functional transforms
+
+Base primitives:
+- spike()
+- ramp()
+- decay()
+
+Interaction rules:
+- non-linear stacking of substances
+- context-based multipliers
+- synergistic amplification (e.g. caffeine + nicotine)
+
+---
+
+# 📦 SHARED TYPES (MANDATORY)
+
+All types must be defined in:
+packages/shared
+
+Do NOT duplicate types in apps.
+
+---
+
+# 🔁 SIMULATION CONTRACT
+
+Input:
+- substances[]
+- context
+- duration
+- resolution
+
+Output:
+{
+  cortisol: { t, v }[],
+  dopamine: { t, v }[],
+  glucose: { t, v }[],
+  insulin: { t, v }[],
+  metrics: {
+    stabilityIndex: number,
+    volatilityScore: number
+  }
+}
+
+---
+
+# ⚙️ ENGINE DESIGN RULES
+
+- All functions MUST be pure
+- No hidden state
+- No randomness (no Math.random)
+- Use deterministic math only
+- Keep functions composable
+
+---
+
+# 📈 METRICS DEFINITIONS
+
+stabilityIndex:
+- inverse of variance over time
+
+volatilityScore:
+- peak-to-trough difference across curves
+
+These MUST be computed in backend or engine layer only.
+
+---
+
+# 🧪 TESTING EXPECTATIONS
+
+Every engine function must be testable in isolation.
+
+Required tests:
+- caffeine spike behavior
+- THC dopamine variance
+- interaction stacking correctness
+- deterministic output validation
+
+---
+
+# 🚀 DEV WORKFLOW
+
+Commands:
+
+Install:
+pnpm install
+
+Dev:
+pnpm dev
+
+Build:
+pnpm build
+
+Lint:
+pnpm lint
+
+Test:
+pnpm test
+
+---
+
+# ⚠️ CRITICAL RULES FOR AGENTS
+
+- Do NOT mix frontend/backend/engine logic
+- Do NOT introduce unnecessary libraries
+- Do NOT refactor unrelated modules
+- Keep changes minimal and scoped
+- Prefer functional programming style
+
+---
+
+# 🎯 SUCCESS CRITERIA
+
+A correct implementation must:
+- produce deterministic simulation output
+- respect strict separation of concerns
+- allow engine to run standalone (no API dependency)
+- allow mobile app to render without logic duplication
+
+---
+
+# 🧠 DESIGN INTENT
+
+This project is NOT a tracker.
+
+It is a:
+"deterministic physiological simulation engine for lifestyle inputs"

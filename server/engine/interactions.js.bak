@@ -1,0 +1,158 @@
+/**
+ * Interaction Engine — Compose multiple effects + apply context modifiers
+ */
+
+import { clamp } from "./curves.js";
+
+/**
+ * Stack multiple curve functions and apply context modifiers
+ * @param {Array} effectCurves - Array of {cortisol, dopamine, glucose} objects
+ * @param {Object} context - {fasted, sleepDebt, stressLevel, circadianPhase}
+ * @returns {Function} Composite curve function (t) => {cortisol, dopamine, glucose}
+ */
+function composeEffects(effectCurves, context) {
+  return (t) => {
+    let cortisol = 0;
+    let dopamine = 0;
+    let glucose = 0;
+
+    // Sum all individual effects
+    for (const effect of effectCurves) {
+      if (effect) {
+        cortisol += effect.cortisol(t);
+        dopamine += effect.dopamine(t);
+        glucose += effect.glucose(t);
+      }
+    }
+
+    // Apply context modifiers
+    const modifiers = getContextModifiers(context, t);
+
+    cortisol = clamp(cortisol * modifiers.cortisolMult + modifiers.cortisolAdd);
+    dopamine = clamp(dopamine * modifiers.dopamineMult);
+    glucose = clamp(glucose * modifiers.glucoseMult + modifiers.glucoseAdd);
+
+    return { cortisol, dopamine, glucose };
+  };
+}
+
+/**
+ * Calculate context-based multipliers
+ * @param {Object} context - {fasted, sleepDebt, stressLevel, circadianPhase}
+ * @param {number} t - Current time (for circadian effects)
+ * @returns {Object} Multiplier object
+ */
+function getContextModifiers(context, t) {
+  const {
+    fasted = false,
+    sleepDebt = 0,
+    stressLevel = 0,
+    circadianPhase = "morning",
+  } = context;
+
+  let cortisolMult = 1;
+  let cortisolAdd = 0;
+  let dopamineMult = 1;
+  let glucoseMult = 1;
+  let glucoseAdd = 0;
+
+  // Fasted state: more volatile glucose, higher cortisol
+  if (fasted) {
+    glucoseMult *= 1.4;
+    cortisolMult *= 1.15;
+  }
+
+  // Sleep debt: elevated baseline cortisol, reduced dopamine resilience
+  if (sleepDebt > 0) {
+    cortisolAdd += sleepDebt * 0.3; // Persistent elevation
+    dopamineMult *= Math.max(0.6, 1 - sleepDebt * 0.5);
+  }
+
+  // Chronic stress: blunted cortisol response, dopamine dysregulation
+  if (stressLevel > 0) {
+    // Paradoxically, very high stress can blunt cortisol (HPA burnout)
+    if (stressLevel > 0.7) {
+      cortisolMult *= 0.8;
+    } else {
+      cortisolMult *= 1 + stressLevel * 0.2;
+    }
+    dopamineMult *= Math.max(0.5, 1 - stressLevel * 0.6);
+  }
+
+  // Circadian modulation: cortisol highest in early morning
+  const circadianBoost = getCircadianCortisol(circadianPhase, t);
+  cortisolAdd += circadianBoost;
+
+  return {
+    cortisolMult,
+    cortisolAdd,
+    dopamineMult,
+    glucoseMult,
+    glucoseAdd,
+  };
+}
+
+/**
+ * Circadian rhythm effect on cortisol
+ * Models natural cortisol awakening response (CAR) + circadian decline
+ * @param {string} phase - "morning" | "afternoon" | "evening"
+ * @param {number} t - Time in simulation
+ * @returns {number} Cortisol boost/suppression
+ */
+function getCircadianCortisol(phase, t) {
+  // Simplified: just phase-based adjustment
+  // In real model, this would be time-of-day dependent
+  switch (phase) {
+    case "morning":
+      return 0.2; // Morning cortisol peak
+    case "afternoon":
+      return 0.1;
+    case "evening":
+      return -0.15; // Evening suppression (melatonin rise)
+    default:
+      return 0;
+  }
+}
+
+/**
+ * Calculate interaction synergies (non-linear effects)
+ * Example: caffeine + nicotine = stronger dopamine response
+ * @param {Object} compositeValue - {cortisol, dopamine, glucose}
+ * @param {Array} events - Original events array
+ * @returns {Object} Adjusted values with synergies
+ */
+function applySynergies(compositeValue, events) {
+  const { cortisol, dopamine, glucose } = compositeValue;
+
+  // Check for caffeine + nicotine combo
+  const hasCaffeine = events.some((e) => e.type === "coffee");
+  const hasNicotine = events.some((e) => e.type === "nicotine");
+
+  if (hasCaffeine && hasNicotine) {
+    // Synergy: stronger dopamine + cortisol response
+    return {
+      cortisol: clamp(cortisol * 1.2),
+      dopamine: clamp(dopamine * 1.3), // Amplified synergy
+      glucose: glucose,
+    };
+  }
+
+  // Check for THC + stress (amplifies negative effects)
+  const hasThc = events.some((e) => e.type === "thc");
+  if (hasThc && compositeValue.stressLevel > 0.5) {
+    return {
+      cortisol: clamp(cortisol * 1.15),
+      dopamine: clamp(dopamine * 0.8), // Reduced dopamine under stress
+      glucose: glucose,
+    };
+  }
+
+  return compositeValue;
+}
+
+module.exports = {
+  composeEffects,
+  getContextModifiers,
+  getCircadianCortisol,
+  applySynergies,
+};
