@@ -182,14 +182,11 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 
 ## Architecture
 
-| Dokument | Inhalt |
-|----------|--------|
-| **[ARCHITECTURE.md](./ARCHITECTURE.md)** | KB-Struktur, AI-Enrichment, Simulation Engine, Data Flow |
-| **[VISION.md](./VISION.md)** | Warum dieses Projekt existiert — Philosophie, Richtung, offene Fragen |
-| **[HOT.md](./HOT.md)** | Open Source Biochemie-DBs + nützliche Node Module |
-| **[AGENTS-11-05-2026.md](./AGENTS-11-05-2026.md)** | Physio Timeline Spec + Agent-Workflow |
-| **[UNKLARHEITEN.md](./UNKLARHEITEN.md)** | Offene Design-Fragen (Mood-Skalen, Sleep, Export) |
-| **[OFFEN.md](./OFFEN.md)** | Technische Offene Punkte |
+See **[ARCHITECTURE.md](./ARCHITECTURE.md)** for detailed design:
+- Knowledge Base structure & AI enrichment
+- Simulation engine (curves, interactions, synergies)
+- Data flow & integration patterns
+- Future enhancements
 
 ---
 

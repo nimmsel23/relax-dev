@@ -229,6 +229,8 @@ Port and static dir configurable via env vars (see server.mjs env section).
 ## Notes for Future Sessions
 
 - **Reconceptualization pending**: This is a scaffolding app. Domain inputs will reshape mood tracking, technique taxonomy, and export formats.
+- **Planned feature next**: See `AGENTS-11-05-2026.md` for **Physio Timeline Graph Engine** spec (physiological simulation system). This represents the deeper integration with Psychoneuroimmunology.
+- **Agent workflow**: `AGENTS-11-05-2026.md` is a template for agent-driven feature implementation (backend → frontend → integration). Reference this if building the physio feature.
 - **Data migration**: If scales or structures change, scripts to migrate existing `data/sessions/*.json` files will be needed.
 - **Component library**: No UI framework (no shadcn, no MaterialUI). Styling is Tailwind + CSS variables. Keep it lightweight.
 - **Offline support**: Currently no service worker or IndexedDB caching. If adding, consider local-first sync to `/api/*`.

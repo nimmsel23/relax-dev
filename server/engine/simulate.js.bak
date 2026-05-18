@@ -131,9 +131,4 @@ function calculateVolatility(cortisol, dopamine, glucose) {
   return (cortisolVol + dopamineVol + glucoseVol) / 3;
 }
 
-module.exports = {
-  simulateSession,
-  calculateMetrics,
-  calculateStability,
-  calculateVolatility,
-};
+export { simulateSession, calculateMetrics, calculateStability, calculateVolatility };

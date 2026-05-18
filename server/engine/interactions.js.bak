@@ -150,9 +150,4 @@ function applySynergies(compositeValue, events) {
   return compositeValue;
 }
 
-module.exports = {
-  composeEffects,
-  getContextModifiers,
-  getCircadianCortisol,
-  applySynergies,
-};
+export { composeEffects, getContextModifiers, getCircadianCortisol, applySynergies };

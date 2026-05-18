@@ -5,25 +5,39 @@
 import { clamp } from "./curves.js";
 
 /**
- * Stack multiple curve functions and apply context modifiers
+ * Stack multiple curve functions with non-linear compositing
+ * Prevents "spike stacking" by using saturation curves instead of simple addition
  * @param {Array} effectCurves - Array of {cortisol, dopamine, glucose} objects
+ * @param {Array} events - Original events (for timing interference)
  * @param {Object} context - {fasted, sleepDebt, stressLevel, circadianPhase}
  * @returns {Function} Composite curve function (t) => {cortisol, dopamine, glucose}
  */
-function composeEffects(effectCurves, context) {
+function composeEffects(effectCurves, events, context) {
   return (t) => {
+    // Non-linear composition: use saturation blending instead of addition
     let cortisol = 0;
     let dopamine = 0;
     let glucose = 0;
 
-    // Sum all individual effects
     for (const effect of effectCurves) {
       if (effect) {
-        cortisol += effect.cortisol(t);
-        dopamine += effect.dopamine(t);
-        glucose += effect.glucose(t);
+        const c = effect.cortisol(t);
+        const d = effect.dopamine(t);
+        const g = effect.glucose(t);
+
+        // Non-linear saturation blending: a + b' = a + (1-a)*b
+        // Prevents oversaturation but still allows stacking
+        cortisol = saturate(cortisol, c);
+        dopamine = saturate(dopamine, d);
+        glucose = saturate(glucose, g);
       }
     }
+
+    // Apply interference dampening for closely-timed events
+    const interference = getInterferenceDamping(events, t);
+    cortisol *= interference;
+    dopamine *= interference;
+    glucose *= interference;
 
     // Apply context modifiers
     const modifiers = getContextModifiers(context, t);
@@ -34,6 +48,41 @@ function composeEffects(effectCurves, context) {
 
     return { cortisol, dopamine, glucose };
   };
+}
+
+/**
+ * Non-linear saturation blending
+ * Instead of a + b, use: a + (1 - a) * b
+ * This allows stacking without oversaturation
+ * @param {number} current - Current value (0-1)
+ * @param {number} effect - Effect to add (0-1)
+ * @returns {number} Blended value (0-1)
+ */
+function saturate(current, effect) {
+  return current + (1 - current) * effect;
+}
+
+/**
+ * Interference dampening: closely-timed events interfere with each other
+ * If events are < 60 min apart, reduce their combined effect (physiological fatigue)
+ * @param {Array} events - Original events with time property
+ * @param {number} t - Current time
+ * @returns {number} Damping factor (0.6-1.0)
+ */
+function getInterferenceDamping(events, t) {
+  if (!events || events.length < 2) return 1.0;
+
+  // Find how many events are "active" near time t (within 120 min window)
+  const activeCount = events.filter((e) => {
+    const timeSinceEvent = t - e.time;
+    return timeSinceEvent >= 0 && timeSinceEvent < 120; // Event effect window
+  }).length;
+
+  // Multiple events reduce effectiveness (diminishing returns)
+  // 1 event = 1.0x, 2 events = 0.85x, 3+ events = 0.7x
+  if (activeCount <= 1) return 1.0;
+  if (activeCount === 2) return 0.85;
+  return 0.7;
 }
 
 /**

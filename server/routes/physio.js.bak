@@ -85,9 +85,8 @@ function validateInput(body) {
  * POST /api/physio/simulate handler
  * @param {Object} req - HTTP request
  * @param {Object} res - HTTP response
- * @param {Object} body - Pre-parsed JSON body from server.mjs
  */
-export async function handlePhysioSimulate(req, res, body) {
+export async function handlePhysioSimulate(req, res) {
   // Only allow POST
   if (req.method !== "POST") {
     res.writeHead(405, { "Content-Type": "application/json" });
@@ -95,7 +94,21 @@ export async function handlePhysioSimulate(req, res, body) {
     return;
   }
 
-  const parsedBody = body || {}
+  // Parse body
+  let body = "";
+  await new Promise((resolve) => {
+    req.on("data", (chunk) => (body += chunk));
+    req.on("end", resolve);
+  });
+
+  let parsedBody;
+  try {
+    parsedBody = JSON.parse(body);
+  } catch {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ ok: false, error: "invalid JSON" }));
+    return;
+  }
 
   // Validate input
   const validation = validateInput(parsedBody);

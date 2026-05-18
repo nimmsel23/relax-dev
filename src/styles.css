@@ -2,42 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Catppuccin Mocha (Default, Night) */
 :root {
-  --bg:         #080b12;
-  --bg2:        #0c1019;
-  --panel:      #111827;
-  --card:       #151d2e;
-  --card-hover: #1a2439;
-  --line:       #1e2d44;
-  --ink:        #eef1f8;
-  --muted:      #7b8ba5;
-  --dim:        #4a5874;
-  --accent:     #5eead4;
-  --accent-glow: rgba(94,234,212,0.12);
-  --green:      #22c55e;
-  --red:        #ef4444;
-  --orange:     #f97316;
-  --glass:      rgba(17,24,39,0.85);
-  --glass-border: rgba(94,234,212,0.08);
+  --bg:         #1e1e2e;
+  --bg2:        #181825;
+  --panel:      #11111b;
+  --card:       #313244;
+  --card-hover: #45475a;
+  --line:       #45475a;
+  --ink:        #cdd6f4;
+  --muted:      #9399b2;
+  --dim:        #6c7086;
+  --accent:     #89b4fa;
+  --accent-glow: rgba(137,180,250,0.12);
+  --green:      #a6e3a1;
+  --red:        #f38ba8;
+  --orange:     #fab387;
+  --glass:      rgba(30,30,46,0.85);
+  --glass-border: rgba(137,180,250,0.1);
 }
 
+/* Catppuccin Macchiato (Evening/Dark variant) */
+[data-theme="macchiato"] {
+  --bg:         #24273a;
+  --bg2:        #1e293a;
+  --panel:      #181926;
+  --card:       #363a52;
+  --card-hover: #494d64;
+  --line:       #494d64;
+  --ink:        #cad3f5;
+  --muted:      #a5adcb;
+  --dim:        #8087a2;
+  --accent:     #8aadf4;
+  --accent-glow: rgba(138,173,244,0.12);
+  --green:      #a6da95;
+  --red:        #ed8796;
+  --orange:     #f5a97f;
+  --glass:      rgba(36,39,58,0.85);
+  --glass-border: rgba(138,173,244,0.1);
+}
+
+/* Catppuccin Frappe (Afternoon/Medium) */
+[data-theme="frappe"] {
+  --bg:         #303446;
+  --bg2:        #292c3c;
+  --panel:      #232634;
+  --card:       #414559;
+  --card-hover: #51576d;
+  --line:       #51576d;
+  --ink:        #c6d0f5;
+  --muted:      #949cbb;
+  --dim:        #737994;
+  --accent:     #81c8be;
+  --accent-glow: rgba(129,200,190,0.12);
+  --green:      #a6d189;
+  --red:        #e78284;
+  --orange:     #ef9f76;
+  --glass:      rgba(48,52,70,0.85);
+  --glass-border: rgba(129,200,190,0.1);
+}
+
+/* Catppuccin Latte (Morning/Light) */
 [data-theme="latte"] {
-  --bg:         #f5f0e8;
-  --bg2:        #ebe5db;
-  --panel:      #e2dbd0;
-  --card:       #f0ebe3;
-  --card-hover: #e8e2d8;
-  --line:       #cdc4b6;
-  --ink:        #1e1c19;
-  --muted:      #6b6356;
-  --dim:        #9a9080;
-  --accent:     #0e7a73;
-  --accent-glow: rgba(14,122,115,0.08);
-  --green:      #16a34a;
-  --red:        #dc2626;
-  --orange:     #ea580c;
-  --glass:      rgba(226,219,208,0.85);
-  --glass-border: rgba(14,122,115,0.1);
+  --bg:         #eff1f5;
+  --bg2:        #e6e9ef;
+  --panel:      #dce0e8;
+  --card:       #f2f4f8;
+  --card-hover: #e6e9ef;
+  --line:       #bcc0cc;
+  --ink:        #4c4f69;
+  --muted:      #8c8fa1;
+  --dim:        #9ca0b0;
+  --accent:     #1e66f5;
+  --accent-glow: rgba(30,102,245,0.08);
+  --green:      #40a02b;
+  --red:        #d20f39;
+  --orange:     #fe640b;
+  --glass:      rgba(239,241,245,0.85);
+  --glass-border: rgba(30,102,245,0.1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }

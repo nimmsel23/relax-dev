@@ -1,0 +1,74 @@
+# HOT.md — Open Source Quellen & Node Module
+
+## Biochemie / Substanz-Datenbanken
+
+### Substanzen & Moleküle
+
+| DB | URL | Was | Zugang |
+|----|-----|-----|--------|
+| **PubChem** (NIH) | pubchem.ncbi.nlm.nih.gov | 100M+ Compounds, SMILES, Halbwertszeiten, Bioaktivität | REST API, kostenlos |
+| **ChEMBL** | ebi.ac.uk/chembl | Drug-like molecules + biologische Aktivität | REST API + PostgreSQL-Dump |
+| **DrugBank** | drugbank.com | Drugs + Pharmakokinetik, Metabolismus | akademisch kostenlos |
+| **OpenFoodFacts** | openfoodfacts.org | Lebensmittel-Nährstoffe → Glukosekurve | REST API + CSV-Download |
+
+### Pharmakologie / Timing-Kurven
+
+| DB | URL | Was | Zugang |
+|----|-----|-----|--------|
+| **Psychonaut Wiki** | psychonautwiki.org | Onset/Duration/Intensity für Koffein, Nikotin, THC, Adaptogene | inoffizielle API, JSON strukturiert |
+| **HMDB** | hmdb.ca | Cortisol, Dopamin, Serotonin — endogen, biochemische Pfade | XML-Dump + REST |
+| **KEGG** | kegg.jp | HPA-Achse, Cortisol-Synthese als Pathway-Graph | REST |
+| **BioGRID** | thebiogrid.org | Protein-Interaktionen | REST + Download |
+| **UniProt** | uniprot.org | Protein-Datenbank, Enzymkinetik | REST API |
+
+---
+
+## Node Module
+
+### API / Daten-Fetch
+
+| Paket | Warum |
+|-------|-------|
+| nativer `fetch` (Node 18+) | reicht für PubChem/HMDB REST, kein extra Paket nötig |
+| `axios` | wenn retry-logic + interceptors gebraucht werden |
+
+### Chemie / Moleküle
+
+| Paket | Warum |
+|-------|-------|
+| `openchemlib` | SMILES parsen, Molekül-Properties berechnen — pure JS, kein C++ |
+| `rdkit-js` | RDKit WebAssembly-Port, mächtiger aber schwerer (~15MB) |
+
+### Pharmakologie / Kurven
+
+| Paket | Warum |
+|-------|-------|
+| `ml-regression` (mljs) | Kurvenanpassung für PK-Modelle (1-/2-Kompartiment) |
+| `simple-statistics` | AUC berechnen, Statistik auf Kurvendaten |
+| `numeric` | ODE-Solver für Differentialgleichungen (HPA-Achse modellieren) |
+
+### Caching
+
+| Paket | Warum |
+|-------|-------|
+| `better-sqlite3` | Lokale SQLite für gecachte Substanzdaten — schnell + synchron |
+| `node-cache` | In-Memory TTL-Cache für API-Responses |
+
+### Frontend / Visualisierung
+
+| Paket | Warum |
+|-------|-------|
+| `@nivo/line` | Cortisol/Dopamin/Glukose gleichzeitig — bereits in AGENTS.md erwähnt |
+| `recharts` | einfacher als Nivo, React-nativ, bereits installiert |
+
+---
+
+## Priorität
+
+Minimalster sinnvoller Einstieg:
+
+1. `better-sqlite3` — Substanz-Katalog lokal cachen statt YAML bei jedem Request parsen
+2. `@nivo/line` — Physio-Kurven visualisieren (3 Kurven gleichzeitig)
+3. PubChem REST + Psychonaut Wiki — Basisdaten + Timing-Kurven für Simulation
+
+Rest ist Ausbaustufe.

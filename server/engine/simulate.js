@@ -32,8 +32,8 @@ function simulateSession(input) {
     .map((event) => getEventEffect(event))
     .filter((e) => e !== null);
 
-  // Create composite curve function
-  const compositeCurve = composeEffects(effectCurves, context);
+  // Create composite curve function (with event interference damping)
+  const compositeCurve = composeEffects(effectCurves, events, context);
 
   // Generate time series data
   const timestamps = [];

@@ -20,7 +20,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Service | Port | Dev Path |
 |---------|------|----------|
 | Vite (UI) | 5904 | `npm run ui:dev` (or via dev-runner) |
-| Node API | 9004 | `npm run start` (or via dev-runner) |
+| Node API | 9123 | `npm run start` (or via dev-runner) |
 
 ### Data Structure
 **Local file-based storage** (`data/` directory, created at runtime):
