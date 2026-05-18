@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **relax-dev** — Standalone Relax Centre application for relaxation techniques, stress management, and personal wellness tracking. Self-contained React/Vite frontend + Node.js backend with file-based data storage (no database).
 
-**Status**: Placeholder implementation, being reconceptualized with Psychoneuroimmunology inputs (see `UNKLARHEITEN.md`).
+**Status**: Active development. Core dual-catalog knowledge base + graph visualization implemented. Reconceptualization ongoing with Psychoneuroimmunology inputs (see `UNKLARHEITEN.md`).
 
 ## Architecture
 
@@ -20,7 +20,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Service | Port | Dev Path |
 |---------|------|----------|
 | Vite (UI) | 5904 | `npm run ui:dev` (or via dev-runner) |
-| Node API | 9004 | `npm run start` (or via dev-runner) |
+| Node API | 9123 | `npm run start` (or via dev-runner) |
+
+### Knowledge Base Architecture (Dual-Catalog)
+
+**Concept**: Bidirectional mapping between herbal substances (user-facing) and pure biochemical molecules (scientific view).
+
+**Structure**:
+- **Substances** (`knowledge/substance.catalog.yaml`) — 19 herbal materials (Mulungu, Ashwagandha, Green Tea, etc.)
+  - Each has `references` array → molecule keys it contains
+  - Fields: name, category, source_plant, description, traditional_use, relaxation_relevance, mechanism
+  
+- **Molecules** (`knowledge/molecule.catalog.yaml`) — 27 pure biochemical compounds (Caffeine, L-Theanine, Quercetin, etc.)
+  - Each has `found_in` array → substance keys containing it
+  - Fields: name, formula, category, functions, primary_effects (with onset/peak/duration), affects, relaxation_relevance
+
+- **Interactions** (`knowledge/interactions.yaml`) — 32 molecule-to-molecule interactions (synergistic, antagonistic)
+
+**Dispatcher** (`kb-loader.js`):
+- `dispatchQuery(query)` — intelligently routes to substance or molecule expansion
+- `expandSubstance(query)` — returns substance + all referenced molecules + interactions between them
+- `expandMolecule(query)` — returns molecule + all substances containing it + related molecules
+- Caching + indexing for O(1) lookups
+
+**Frontend**: Knowledge Graph visualization (`KnowledgeGraph.jsx`) with Reactflow:
+- Substance node centered at (0, 0)
+- Molecule nodes arranged in circle (radius 280px)
+- Edges: substance→molecule (animated gray), molecule↔molecule (color-coded: green=synergistic, red=antagonistic dashed)
+- Integrated into `SubstanceCatalog` with List ↔ Graph toggle
+
+**API** (`/api/knowledge/*`):
+- `GET /api/knowledge/expand?q=...` — dispatcher (detects substance or molecule)
+- `GET /api/knowledge/expand/substance/:id` — substance expansion
+- `GET /api/knowledge/expand/molecule/:id` — molecule expansion
+- `GET /api/knowledge/interaction?mol1=...&mol2=...` — interaction lookup (with AI generation fallback)
+- `GET /api/knowledge/search?q=...` — cross-catalog search
+- `GET /api/knowledge/health` — KB status (includes `dual_catalog_enabled: true`, molecule counts by source)
+- All others: `/substances`, `/molecules`, `/interactions`, `/reactions`
 
 ### Data Structure
 **Local file-based storage** (`data/` directory, created at runtime):
@@ -35,6 +71,8 @@ data/
 Single-file HTTP API server (no frameworks, native Node.js):
 - **Static serving**: `dist/` (prod build) → fallback to `public/`
 - **API endpoints**:
+
+**Session & Journal**:
   - `GET /health` — Service health check
   - `GET /techniques` — Available relaxation techniques (hardcoded list)
   - `GET /session?date=YYYY-MM-DD` — Fetch session data
@@ -49,10 +87,22 @@ Single-file HTTP API server (no frameworks, native Node.js):
   - `GET /theme` — Current theme preference
   - `POST /theme` — Save theme preference
 
+**Knowledge Base** (see Knowledge Base Architecture section above):
+  - `GET /api/knowledge/expand?q=...` — Unified dispatcher (substance or molecule)
+  - `GET /api/knowledge/expand/substance/:id` — Substance expansion
+  - `GET /api/knowledge/expand/molecule/:id` — Molecule expansion
+  - `GET /api/knowledge/interaction?mol1=...&mol2=...` — Interaction lookup
+  - `GET /api/knowledge/search?q=...` — Cross-catalog search
+  - `GET /api/knowledge/substances` — All substances
+  - `GET /api/knowledge/molecules` — All molecules
+  - `GET /api/knowledge/health` — KB status
+
 Environment variables:
-- `PORT` (default 9004)
+- `PORT` (default 9123)
 - `HOST` (default 127.0.0.1)
 - `RELAX_STATIC_DIR` (override static root, defaults to dist/ or public/)
+- `GEMINI_API_KEY` (loaded from `~/.env/relax.env`)
+- `GEMINI_MODEL` (default `gemini-2.5-flash`, loaded from `~/.env/relax.env`)
 
 ### Frontend (React/Vite)
 **Views** (tab-based in `src/views/`):
@@ -96,8 +146,8 @@ The **dev runner** (`scripts/dev-runner.mjs`) starts both services in parallel:
 - Both share stdio (combined logs)
 
 ### Vite Proxy
-Dev UI proxies API calls to :9004 via `vite.config.js`:
-- `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → :9004
+Dev UI proxies API calls to :9123 via `vite.config.js`:
+- `/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → :9123
 
 ### Building
 ```bash
@@ -197,17 +247,30 @@ Port and static dir configurable via env vars (see server.mjs env section).
 ## File Manifest
 
 ### Root & Config
-- `package.json` — npm scripts, dependencies (React, Vite, Tailwind, lucide-react)
-- `vite.config.js` — Vite + proxy config
+- `package.json` — npm scripts, dependencies (React, Vite, Tailwind, lucide-react, reactflow, @google/generative-ai)
+- `vite.config.js` — Vite + proxy config (proxies `/api` → :9123)
 - `tailwind.config.cjs` — Tailwind CSS customization
 - `postcss.config.cjs` — PostCSS pipeline
-- `.gitignore` — Standard (node_modules, dist)
-- `README.md` — Quick start (mostly duplicated in this CLAUDE.md)
+- `.gitignore` — Standard (node_modules, dist, data, .env, relax.env)
+- `README.md` — Quick start
+- `CLAUDE.md` — This file (development guidance)
+- `RESULTS.md` — Session results & completed work
+- `NEXT.md` — Active priorities
 - `UNKLARHEITEN.md` — Open design questions
+
+### Knowledge Base Data
+- `knowledge/substance.catalog.yaml` — 19 herbal substances (Mulungu, Ashwagandha, etc.) with bidirectional references
+- `knowledge/molecule.catalog.yaml` — 27 biochemical molecules (Caffeine, L-Theanine, etc.) with found_in references
+- `knowledge/interactions.yaml` — 32 molecule-to-molecule interactions (synergistic, antagonistic)
+- `knowledge/reactions.yaml` — 12 chemical reactions (reference catalog)
 
 ### Backend
 - `server.mjs` — Single-file Node.js HTTP server (MIME, JSON helpers, API routes, static serve)
 - `scripts/dev-runner.mjs` — Parallel dev launcher (API + Vite)
+- `server/routes/knowledge.js` — Knowledge Base API handler (`/api/knowledge/*`)
+- `server/knowledge/kb-loader.js` — Dual-catalog loader + dispatcher (substances, molecules, interactions, reactions)
+- `server/knowledge/ai-enricher.js` — Gemini AI enrichment for molecules
+- `server/knowledge/ai-enricher-v2.js` — Advanced Gemini AI enrichment with context
 
 ### Frontend
 - `src/main.jsx` — Vite entry, React root
@@ -219,18 +282,43 @@ Port and static dir configurable via env vars (see server.mjs env section).
   - `Session.jsx` — Technique logging + mood input
   - `Journal.jsx` — Markdown editor
   - `Stats.jsx` — Summary charts & trends
-- `src/components/` — (empty; leaf components inline in views)
+  - `SubstanceCatalog.jsx` — Herbal substances + graph visualization (with List ↔ Graph toggle)
+- `src/components/` — Reusable components:
+  - `KnowledgeGraph.jsx` — Reactflow network visualization (substances + molecules + interactions)
 
 ### Static Assets
 - `public/` — Fallback static files (index.html, favicon, etc.)
 - `index.html` — Vite template, root div
 - `dist/` — Output of `npm run build` (served in prod)
 
+## Configuration
+
+### Gemini API Setup
+The Knowledge Base supports AI enrichment (generating molecules & interactions) via Google Gemini.
+
+**Required**:
+1. Create `~/.env/relax.env` with your API key:
+   ```
+   GEMINI_API_KEY=your-api-key-here
+   GEMINI_MODEL=gemini-2.5-flash
+   ```
+
+2. Both `ai-enricher.js` and `ai-enricher-v2.js` load from `~/.env/relax.env` at startup
+
+**Behavior**:
+- If API key is missing, server still runs but logs warnings
+- AI enrichment is optional; KB works with existing manual entries
+- Generated molecules are tracked with `_source: "ai_generated"` + `_metadata.confidence`
+- Interactions between molecules can be auto-generated when queried
+
 ## Notes for Future Sessions
 
-- **Reconceptualization pending**: This is a scaffolding app. Domain inputs will reshape mood tracking, technique taxonomy, and export formats.
-- **Planned feature next**: See `AGENTS-11-05-2026.md` for **Physio Timeline Graph Engine** spec (physiological simulation system). This represents the deeper integration with Psychoneuroimmunology.
-- **Agent workflow**: `AGENTS-11-05-2026.md` is a template for agent-driven feature implementation (backend → frontend → integration). Reference this if building the physio feature.
-- **Data migration**: If scales or structures change, scripts to migrate existing `data/sessions/*.json` files will be needed.
+- **Session tracking**: See `RESULTS.md` for completed work and `NEXT.md` for active priorities.
+- **Dual-catalog status**: Knowledge Base architecture is stable. 19 substances + 27 molecules + 32 interactions are loaded and indexed. Dispatcher works correctly.
+- **Browser testing pending**: Graph visualization (Reactflow) is implemented but not yet tested in browser. See `NEXT.md` task 1.
+- **Physiology integration**: User has Obsidian Vault with physiological models. Integration opportunity exists (see `NEXT.md` task 2).
+- **Planned feature next**: See `AGENTS-11-05-2026.md` for **Physio Timeline Graph Engine** spec (physiological simulation system). This represents the deeper integration with Psychoneuroimmunology. Architecture sketch in CLAUDE.md above.
+- **Data migration**: If substance/molecule scales or structures change, scripts to migrate existing `data/sessions/*.json` files will be needed.
 - **Component library**: No UI framework (no shadcn, no MaterialUI). Styling is Tailwind + CSS variables. Keep it lightweight.
 - **Offline support**: Currently no service worker or IndexedDB caching. If adding, consider local-first sync to `/api/*`.
+- **API enrichment**: Knowledge Base can be extended via Gemini AI. Molecules and interactions can be auto-generated with confidence scoring.
