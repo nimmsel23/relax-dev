@@ -1,10 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
+import os from "os";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(__dirname, "../../relax.env") });
+dotenv.config({ path: path.join(os.homedir(), ".env/relax.env") });
 
 const apiKey = process.env.GEMINI_API_KEY;
 const modelId = process.env.GEMINI_MODEL || "gemini-2.5-flash";
