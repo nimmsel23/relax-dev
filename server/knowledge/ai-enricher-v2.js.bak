@@ -23,7 +23,7 @@ const apiKey = process.env.GEMINI_API_KEY;
 const modelId = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
 if (!apiKey) {
-  console.error("❌ GEMINI_API_KEY not found in ~/.env/gemini.env");
+  console.error("❌ GEMINI_API_KEY not found in relax.env");
   process.exit(1);
 }
 
