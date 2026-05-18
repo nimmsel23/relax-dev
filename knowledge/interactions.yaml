@@ -1,0 +1,575 @@
+# Biochemistry Knowledge Base: Molecular Interactions
+# Pairwise and multi-way interactions between substances and physiological processes
+# Last updated: 2026-05-18
+
+interactions:
+  # ─── Stimulant Synergies ───
+  caffeine_nicotine:
+    molecules: [caffeine, nicotine]
+    type: "synergistic"
+    combined_effect: "amplified dopamine and noradrenaline response"
+    dopamine_change: "50"  # percent (vs 30% caffeine alone, 35% nicotine alone)
+    mechanism: "both_converge_on_VTA_dopamine_neurons_via_different_receptors"
+    details:
+      - caffeine: "adenosine_receptor_blockade → disinhibits_dopamine_neurons"
+      - nicotine: "direct_nAChR_agonism → dopamine_neuron_activation"
+      - result: "multiplicative_dopamine_response"
+    user_experience: "heightened_focus, energy, risk_of_anxiety_jitters"
+    note: "smokers_often_pair_coffee_and_cigarette_for_synergistic_dopamine_spike"
+    timing: "sequential_use (caffeine_then_nicotine_within_1h) maximizes_synergy"
+    relaxation_relevance: "negative"
+
+  caffeine_l_theanine:
+    molecules: [caffeine, l_theanine]
+    type: "synergistic_with_modulation"
+    caffeine_alone:
+      dopamine: "30%"
+      effects: [jitters, anxiety_risk, agitation]
+    l_theanine_alone:
+      effects: [alpha_waves, calm, no_stimulation]
+      mechanism: "GABA_potentiation without_sedation"
+    combined_effect: "calm_alertness (focused_without_jitteriness)"
+    dopamine_combined: "30%"
+    gaba_potentiation: "enhanced"
+    optimal_ratio: "1_caffeine_to_1_or_2_L_theanine (100mg_caffeine_to_100_200mg_theanine)"
+    manifestation: "green_tea_effect"
+    timeline:
+      - "L_theanine_onset: 30min"
+      - "peak: 90min"
+      - "synergy_established: 1_2h"
+    user_experience: "focused, alert, calm, no_anxiety"
+    relaxation_relevance: "neutral_to_positive"
+    recommendation: "excellent_afternoon_beverage_for_afternoon_slump_without_sleep_disruption"
+
+  # ─── Stimulant vs Cannabinoid Antagonism ───
+  caffeine_thc:
+    molecules: [caffeine, thc]
+    type: "antagonistic"
+    caffeine_effect: "CNS_stimulation, sympathetic_activation, anxiety_risk"
+    thc_effect:
+      - "reward_pathway_activation (dopamine_modest)"
+      - "anxiety_biphasic (low_dose_anxiolytic, high_dose_anxiogenic)"
+    combined_effect: "anxiety_amplification"
+    cortisol_increase: "45"  # percent (higher than either alone)
+    heart_rate_elevation: "more_pronounced"
+    mechanism:
+      - "caffeine_sympathetic_activation"
+      - "THC_amygdala_reactivity"
+      - "interaction: both_drive_anxiety_physiology"
+    user_experience: "unpleasant_jittery_paranoid_feeling"
+    recommendation: "avoid_combination"
+    relaxation_relevance: "negative"
+
+  nicotine_thc:
+    molecules: [nicotine, thc]
+    type: "complex_interaction"
+    dopamine_both: "both_increase_dopamine"
+    combined_dopamine: "65"  # percent
+    nicotine_effect: "stimulating, focusing"
+    thc_effect: "relaxing, anxiety_variable"
+    combined_result: "tension_between_stimulation_and_relaxation"
+    user_experience: "variable, context_dependent, potential_for_dysphoria"
+    recommendation: "individual_response_highly_variable, experimentation_needed"
+    relaxation_relevance: "variable"
+
+  # ─── Stimulant vs Minerals ───
+  caffeine_magnesium:
+    molecules: [caffeine, magnesium]
+    type: "antagonistic"
+    mechanism: "caffeine_increases_urinary_magnesium_excretion"
+    caffeine_diuresis: "blocks_adenosine_A1_receptors_on_kidney → increased_urinary_output"
+    magnesium_loss: "30_40%_increased_excretion_with_caffeine"
+    consequence: "chronic_caffeine_use → magnesium_depletion"
+    symptoms_of_deficiency:
+      - muscle_tension
+      - anxiety
+      - insomnia_rebound
+      - headaches
+      - irritability
+    mitigation:
+      - magnesium_supplement_evening: "glycinate_or_malate (bioavailable_forms)"
+      - dosage: "300_400mg"
+      - timing: "4_6h_after_last_caffeine"
+    timeline_depletion: "chronic_use_→_4_6_weeks_deficiency_develops"
+    relaxation_relevance: "negative"
+    recommendation: "high_caffeine_users_should_supplement_magnesium_evening"
+
+  caffeine_vitamin_b:
+    molecules: [caffeine, vitamin_b_complex]
+    type: "neutral_to_synergistic"
+    caffeine_effect: "increases_nervous_system_demand_for_B_vitamins"
+    b_vitamins: "essential_cofactors_for_neurotransmitter_synthesis"
+    consequence: "high_caffeine_users_benefit_from_B_supplementation"
+    b6_especially: "critical_for_serotonin_and_dopamine_synthesis"
+    recommendation: "caffeine_users_should_maintain_adequate_B_complex_intake"
+    relaxation_relevance: "positive"
+
+  # ─── Cannabinoid Tolerance ───
+  thc_cb1_tolerance:
+    molecules: [thc, cb1_receptor]
+    type: "rapid_tolerance_development"
+    cb1_location: "throughout_brain (striatum, prefrontal_cortex, amygdala, hippocampus)"
+    acute_dose: "reward_pathway_activation_35%"
+    tolerance_timeline: "3_7_days_heavy_use"
+    mechanism:
+      - "CB1_desensitization (chronic_agonism → reduced_conductance)"
+      - "receptor_internalization"
+      - "G_protein_uncoupling"
+    consequence: "need_more_THC_for_same_effect (escalation)"
+    tolerance_to_different_effects: "reward_and_anxiolysis_disappear_faster_than_motor_impairment"
+    withdrawal_symptoms:
+      - irritability
+      - insomnia
+      - anxiety
+      - restlessness
+      - appetite_loss
+      - mood_dysphoria
+    withdrawal_timeline: "3_7_days_peak_symptoms, 2_4_weeks_gradual_resolution"
+    rem_rebound: "REM_sleep_surges_upon_cessation_after_suppression"
+    recovery_timeline: "4_6_weeks_full_CB1_resensitization"
+    user_implication: "frequent_use_diminishes_benefits; tolerance_breaks_recommended"
+    relaxation_relevance: "negative_with_tolerance"
+
+  cbd_thc_modulation:
+    molecules: [cbd, thc]
+    type: "modulating_antagonism"
+    thc_alone: "anxiogenic_risk_high_dose"
+    cbd_alone: "anxiolytic"
+    combined_effect: "CBD_blunts_THC_anxiety (modulates_reward_pathway)"
+    mechanism: "CBD_→_5HT1A_activation, TRPV1_activation → dampens_amygdala_reactivity"
+    cbd_ratio: "equal_parts_or_CBD_>>_THC_for_anxiety_modulation"
+    user_experience: "THC_benefits_without_paranoia"
+    practical_ratio: "10mg_THC_with_20_40mg_CBD"
+    relaxation_relevance: "positive"
+
+  # ─── Neurotransmitter Synergies ───
+  serotonin_dopamine_balanced:
+    molecules: [serotonin, dopamine]
+    type: "balance_critical"
+    serotonin_excess: "low_motivation, apathy, reduced_reward (if_dopamine_low)"
+    dopamine_excess: "agitation, anxiety, impulsivity (if_serotonin_low)"
+    optimal_ratio: "both_elevated, balanced"
+    consequence_imbalance: "depression (low_both), anxiety (low_serotonin_high_dopamine)"
+    food_combination:
+      - "tryptophan_rich_foods (serotonin)"
+      - "tyrosine_rich_foods (dopamine)"
+      - "timing: tryptophan_evening, tyrosine_morning"
+
+  serotonin_melatonin_cascade:
+    molecules: [serotonin, melatonin]
+    type: "sequential_cascade"
+    mechanism: "serotonin_→_melatonin_via_AANAT_and_ASMT_at_night"
+    process:
+      - "serotonin_produced_throughout_day"
+      - "at_dusk_AANAT_activated (light_sensitive)"
+      - "serotonin → N_acetylserotonin (via_AANAT)"
+      - "N_acetylserotonin → melatonin (via_ASMT)"
+    timing_critical: "serotonin_must_be_available_evening_for_melatonin_synthesis"
+    consequence_low_serotonin: "low_melatonin → sleep_disruption"
+    intervention: "increase_serotonin (morning_light, exercise, tryptophan_evening)"
+    relaxation_relevance: "positive"
+
+  tryptophan_serotonin_melatonin_cascade:
+    molecules: [tryptophan, serotonin, melatonin]
+    type: "sequential_precursor_cascade"
+    pathway:
+      - step: 1
+        molecule: tryptophan
+        location: dietary_intake
+        timing: evening_with_carbohydrates
+        mechanism: "carbs_increase_LNAA_clearance → tryptophan_BBB_transport_favored"
+        note: "30_60min_before_bed_optimal"
+
+      - step: 2
+        molecule: 5_HTP
+        process: "tryptophan → 5_HTP (via_tryptophan_hydroxylase)"
+        requirement: "B6_as_critical_cofactor"
+
+      - step: 3
+        molecule: serotonin
+        process: "5_HTP → serotonin (via_AADC)"
+        requirement: "B6, magnesium_as_cofactors"
+        timeline: "4_6_hours"
+
+      - step: 4
+        molecule: melatonin
+        process: "serotonin → melatonin (night_time_AANAT_activation)"
+        timing: "occurs_during_sleep"
+
+    combined_benefit: "evening_tryptophan_with_carbs → improved_sleep_via_serotonin_→_melatonin"
+    timing_note: "evening_2_3h_before_bed, with_light_carbs (banana, whole_grain_toast)"
+    cofactors: "ensure_adequate_B6_and_magnesium"
+    relaxation_relevance: "high_positive"
+
+  gaba_magnesium_synergy:
+    molecules: [magnesium, gaba]
+    type: "synergistic"
+    mechanism: "magnesium_potentiates_GABA_receptor_function"
+    magnesium_role:
+      - "blocks_NMDA_pore (prevents_excitotoxicity)"
+      - "enhances_GABA_A_conductance"
+    interaction:
+      - "magnesium_ions_sit_in_NMDA_pore_at_rest"
+      - "GABA_A_receptors_need_magnesium_for_optimal_conductance"
+      - "low_magnesium → reduced_GABA_efficacy"
+    combined_effect: "anxiety_reduction, muscle_relaxation, sleep_promotion"
+    synergy_magnitude: "40%_more_anxiolytic_than_GABA_alone"
+    optimal_formulation: "magnesium_glycinate (glycine_also_relaxing)"
+    timing: "magnesium_evening, GABA_supplement_or_food_sources"
+    dosage: "magnesium_300_400mg, GABA_500_1000mg"
+    relaxation_relevance: "high_positive"
+
+  gaba_l_theanine:
+    molecules: [gaba, l_theanine]
+    type: "synergistic"
+    mechanism: "both_enhance_GABA_signaling"
+    gaba_indirect: "GABA_itself_doesn't_cross_BBB_efficiently"
+    l_theanine: "potentiates_GABA_A_receptors"
+    gaba_sources: "food_GABA_or_supplements + supplementation"
+    combined_effect: "enhanced_calm_without_sedation"
+    alpha_waves: "both_promote_alpha_waves"
+    user_experience: "relaxed_alertness"
+    relaxation_relevance: "high_positive"
+
+  dopamine_adenosine_antagonism:
+    molecules: [dopamine, adenosine]
+    type: "functional_antagonism"
+    adenosine_effect: "promotes_sleep_pressure"
+    dopamine_effect: "promotes_wakefulness"
+    mechanism: "adenosine_A2a_receptors_inhibit_dopamine_neurons"
+    consequence: "low_adenosine → high_dopamine_tone (wakefulness)"
+    caffeine_context: "caffeine_blocks_adenosine → masked_adenosine_signal → reduced_sleep_pressure"
+    timing_issue: "afternoon_caffeine_blocks_adenosine → sleep_disruption_evening"
+    relaxation_relevance: "negative_caffeine_interaction"
+
+  # ─── Stress Hormones ───
+  cortisol_gaba:
+    molecules: [cortisol, gaba]
+    type: "antagonistic"
+    mechanism: "chronic_elevated_cortisol → reduced_GABA_synthesis_and_receptor_sensitivity"
+    interaction:
+      - "stress_→_cortisol_elevation"
+      - "elevated_cortisol_suppresses_GAD_enzyme (GABA_synthesis)"
+      - "cortisol_downregulates_GABA_receptors (chronic)"
+      - "result: reduced_anxiety_inhibition"
+    consequence: "chronic_stress → anxiety, insomnia, panic_susceptibility"
+    recovery: "cortisol_reduction → GABA_receptor_resensitization_weeks_to_months"
+    intervention: "stress_reduction_→_cortisol_↓ → GABA_↑"
+    timeline: "2_4_weeks_stress_reduction_→_GABA_recovery"
+    relaxation_relevance: "negative_cortisol, positive_GABA_recovery"
+
+  cortisol_sleep_bidirectional:
+    molecules: [cortisol, sleep]
+    type: "antagonistic_bidirectional"
+    forward_pathway: "elevated_cortisol_evening → sleep_delay, REM_suppression"
+    reverse_pathway: "sleep_deprivation → elevated_cortisol → next_day_fatigue_and_poor_decision_making"
+    vicious_cycle:
+      - step: 1
+        event: "stress → elevated_cortisol_evening"
+      - step: 2
+        event: "cortisol_blocks_melatonin_→_sleep_disruption"
+      - step: 3
+        event: "poor_sleep → elevated_cortisol_↑"
+      - step: 4
+        event: "next_day_stress_amplified (worse_resilience)"
+    recovery_timeline: "3_5_nights_good_sleep → cortisol_normalization"
+    intervention: "sleep_first (→_cortisol_↓) before_expecting_stress_resilience"
+    priority: "sleep_is_foundation_for_stress_recovery"
+    relaxation_relevance: "high_positive_sleep, negative_cortisol"
+
+  cortisol_immune_suppression:
+    molecules: [cortisol, immune_function]
+    type: "biphasic_dose_response"
+    acute_low_cortisol: "enhances_immunity (acute_stress_mobilizes_immune)"
+    chronic_high_cortisol: "suppresses_immunity (TH1_→_TH2_shift, T_cell_suppression)"
+    mechanism:
+      - "cortisol_suppresses_IL_2_TNF_α (Th1_cytokines)"
+      - "cortisol_enhances_IL_10_IL_4 (Th2_cytokines)"
+      - "result: anti_inflammatory_but_immunosuppressive"
+    consequence: "chronic_stress → recurrent_infections, poor_wound_healing, autoimmune_shifts"
+    immune_markers: "elevated_cortisol_associated_with_low_IgA (mucosal_immunity)"
+    timeline: "weeks_of_chronic_stress → measurable_immune_suppression"
+    relaxation_relevance: "negative_cortisol, positive_stress_reduction"
+
+  cortisol_calcium_balance:
+    molecules: [cortisol, calcium]
+    type: "interaction"
+    mechanism: "chronic_cortisol → altered_calcium_regulation"
+    consequence: "increased_urinary_calcium_loss"
+    effect: "bone_loss_risk (osteoporosis)"
+    mitigation: "adequate_calcium_and_vitamin_D_intake, stress_reduction"
+    timeline: "years_chronic_stress → bone_density_loss"
+    relaxation_relevance: "negative_cortisol, positive_stress_reduction"
+
+  # ─── Metabolic Hormones ───
+  insulin_glucose_mood:
+    molecules: [insulin, glucose, mood_neurotransmitters]
+    type: "metabolic_cascade"
+    mechanism:
+      - "high_glucose → insulin_spike"
+      - "insulin_increases_tryptophan_BBB_transport (LNAA_effect)"
+      - "tryptophan → serotonin_increase"
+      - "serotonin → improved_mood"
+      - "BUT: glucose_crash_2_3h_later → mood_dip"
+    consequence: "high_glycemic_index_meals → mood_swing (high_then_low)"
+    stable_glucose: "low_glycemic_index_meals → stable_serotonin → stable_mood"
+    fasting: "low_glucose → low_serotonin → increased_irritability"
+    recovery: "eating_carbs_with_protein → glucose_stable, tryptophan_available → mood_recovery"
+    recommendation: "choose_low_GI_foods, avoid_simple_sugars, pair_carbs_with_protein"
+    relaxation_relevance: "positive_stable_glucose, negative_blood_sugar_swings"
+
+  glucose_cortisol_stress:
+    molecules: [glucose, cortisol, stress]
+    type: "bidirectional_feedback"
+    stress_to_glucose:
+      - "acute_stress → cortisol_and_adrenaline"
+      - "both_mobilize_glucose (hepatic_glycogenolysis)"
+      - "blood_glucose_increase: 80_100_→_150_180mg/dL"
+    glucose_to_stress:
+      - "hypoglycemia_→_emergency_stress_response"
+      - "brain_glucose_dependent → low_glucose_triggers_HPA_axis"
+      - "hypoglycemic_anxiety (tremor, palpitations, panic)"
+    consequence: "erratic_eating → stress_vulnerability"
+    stable_glucose: "breakfast_and_regular_meals → stable_cortisol_baseline"
+    skipped_meals: "↓_glucose → ↑_stress_reactivity"
+    relaxation_relevance: "positive_stable_glucose, negative_glucose_swings"
+
+  leptin_ghrelin_sleep:
+    molecules: [leptin, ghrelin, sleep]
+    type: "cascade_sleep_dependent"
+    sleep_deprivation_effect:
+      - "leptin_↓_satiety_reduced"
+      - "ghrelin_↑_appetite_increased"
+      - "combined: hunger_sensation_increase_30_40%"
+    consequence: "poor_sleep_→_increased_caloric_intake_→_weight_gain"
+    metabolic_effect: "impaired_glucose_tolerance_post_sleep_loss"
+    timeline: "single_night_poor_sleep → altered_hormone_next_day"
+    recovery: "one_good_night_partially_recovers, three_nights_full_recovery"
+    relaxation_relevance: "positive_sleep, negative_sleep_loss"
+
+  # ─── Exercise Physiology ───
+  exercise_cortisol:
+    molecules: [exercise, cortisol, dopamine, endorphins]
+    type: "sequential_cascade"
+    timeline:
+      - minutes: "0_5"
+        event: "Exercise start"
+        cortisol: "light_elevation"
+        dopamine: "increase"
+
+      - minutes: "5_30"
+        event: "Sustained exercise"
+        cortisol: "progressive_elevation"
+        glucose_mobilization: "increased"
+        adrenaline: "elevated"
+
+      - minutes: "15_40"
+        event: "Endorphin release"
+        endorphins: "peak"
+        pain_sensation: "decreased (analgesic)"
+        mood: "elevation"
+
+      - minutes: "30_post"
+        event: "Cortisol peak"
+        cortisol: "maximum"
+
+      - hours: "1_3_post"
+        event: "Recovery and adaptation signals"
+        growth_hormone: "elevated"
+        muscle_protein_synthesis: "increased"
+        mood: "sustained_elevation"
+
+    adaptations_with_training:
+      "2_3_weeks": "increased_dopamine_response, reduced_cortisol_per_workout"
+      "4_8_weeks": "enhanced_endorphin_sensitivity, improved_mood_resilience"
+      "8_12_weeks": "baseline_cortisol_decrease, HPA_axis_efficiency_increase"
+
+    optimal_timing:
+      for_sleep: "morning_or_early_afternoon (avoid_evening; evening_cortisol → delayed_sleep)"
+      for_adenosine: "exercise → ATP_depletion → adenosine_accumulation → enhanced_sleep_pressure"
+
+    post_exercise_sleep:
+      effect: "1_3_nights_post_intense_exercise_show_increased_slow_wave_sleep"
+      benefit: "growth_hormone_secretion_in_SWS → enhanced_muscle_repair"
+      mechanism: "adenosine_elevation_20_30%_over_24h"
+
+    relaxation_relevance: "positive_adaptation, negative_acute_cortisol"
+
+  exercise_sleep:
+    molecules: [exercise, adenosine, sleep]
+    type: "synergistic"
+    mechanism: "exercise_→_ATP_depletion → adenosine_accumulation → enhanced_sleep_pressure"
+    adenosine_elevation: "20_30%_increase_over_24h_post_exercise"
+    sleep_effect:
+      - "increased_sleep_need_post_exercise"
+      - "deeper_NREM_sleep (slow_wave_amplification)"
+      - "extended_REM_rebound_next_sleep_cycle"
+    timeline: "1_3_nights_post_exercise_show_improved_slow_wave_sleep"
+    anabolic_benefit: "growth_hormone_secretion_in_SWS → muscle_repair_enhanced"
+    relaxation_relevance: "high_positive"
+
+  # ─── Inflammation ───
+  inflammation_depression:
+    molecules: [il_6, tnf_alpha, crp, serotonin, dopamine, depression]
+    type: "psychoneuroimmune_pathway"
+    mechanism:
+      - step: 1
+        process: "chronic_stress_or_infection → IL_6_TNF_α_↑"
+
+      - step: 2
+        process: "cytokines_→_hypothalamus"
+        result: "HPA_axis_overactivation, serotonin_depletion"
+
+      - step: 3
+        process: "TNF_α_→_raphe_nucleus"
+        result: "tryptophan_depletion (kynurenine_pathway_activated)"
+        consequence: "reduced_serotonin_synthesis"
+
+      - step: 4
+        process: "IL_6_→_depression_spectrum"
+        markers: "elevated_IL_6_in_40_50%_depression_cases"
+
+    treatment_resistance:
+      - "inflammatory_depression (high_CRP) → poor_SSRI_response"
+      - "need_anti_inflammatory_interventions (exercise, sleep, omega_3)"
+
+    reversal_pathway:
+      - "exercise → IL_10_production (anti_inflammatory)"
+      - "sleep → immune_recovery"
+      - "omega_3_supplementation → TNF_α_↓"
+      - "social_support → vagal_IL_10_↑"
+
+    recovery_timeline: "4_8_weeks_consistent_lifestyle_changes_for_inflammatory_reduction"
+    relaxation_relevance: "high_positive_stress_reduction, positive_exercise_and_sleep"
+
+  # ─── Metabolic ───
+  fasting_ketones_neuroprotection:
+    molecules: [fasting, ketone_bodies, gaba, brain_inflammation]
+    type: "metabolic_neuroprotection_cascade"
+    mechanism:
+      - step: 1
+        process: "fasting_>4h_→_liver_ketogenesis"
+        substrate: "fatty_acids_→_acetyl_CoA_→_ketone_bodies"
+
+      - step: 2
+        process: "ketones_cross_BBB, fuel_neurons"
+        efficiency: "ketones_provide_more_ATP_per_oxygen_than_glucose"
+
+      - step: 3
+        process: "ketones_→_HDAC_inhibition (butyrate_analog_effect)"
+        result: "histone_deacetylase_inhibition → increased_GABA_synthesis_gene_expression"
+
+      - step: 4
+        process: "ketones_→_inflammasome_suppression"
+        mechanism: "NLRP3_inflammasome_inhibition → reduced_IL_1β_IL_18"
+        result: "reduced_neuroinflammation"
+
+      - step: 5
+        outcome: "improved_mood, reduced_seizure_threshold, neuroprotection"
+
+    fasting_timeline:
+      - "4_6h_fasting: ketones_begin (0.1_0.5mM)"
+      - "12h_fasting: nutritional_ketosis (0.5_1.0mM)"
+      - "24_48h_fasting: therapeutic_ketosis (1.0_5.0mM)"
+
+    application: "intermittent_fasting_16_8h_daily → sustained_mild_ketosis → neuroprotection"
+    note: "ketogenic_diet_maintains_chronic_mild_ketosis"
+    relaxation_relevance: "positive"
+
+  # ─── Circadian & Sleep Modulation ───
+  light_melatonin_cortisol:
+    molecules: [light, melatonin, cortisol]
+    type: "circadian_phase_dependent"
+    morning_light:
+      effect: "suppresses_melatonin, stimulates_cortisol_CAR"
+      benefit: "sets_circadian_phase, promotes_alertness"
+    evening_light:
+      effect: "suppresses_melatonin"
+      problem: "blue_light_from_screens_disrupts_sleep"
+    darkness_evening:
+      effect: "promotes_melatonin_synthesis"
+      benefit: "sleep_onset"
+    timing_critical: "light_exposure_timing_→_circadian_phase"
+    recommendation: "morning_light_exposure, evening_darkness, avoid_screens_2h_pre_sleep"
+    relaxation_relevance: "high_positive_darkness, positive_morning_light"
+
+  temperature_melatonin_sleep:
+    molecules: [core_body_temperature, melatonin, sleep]
+    type: "circadian_interaction"
+    mechanism: "core_body_temp_drop_facilitates_melatonin_function"
+    cool_environment:
+      effect: "facilitates_sleep_onset"
+      optimal_temp: "65_68F (18_20C)"
+    warm_environment:
+      effect: "impairs_sleep"
+    pre_sleep_drop:
+      method: "warm_bath_1_2h_pre_sleep → peripheral_vasodilation → core_temp_drop"
+      effect: "enhanced_sleep_onset"
+    relaxation_relevance: "high_positive"
+
+  # ─── Oxytocin & Social ───
+  oxytocin_stress_buffering:
+    molecules: [oxytocin, cortisol, stress]
+    type: "social_stress_modulation"
+    mechanism: "social_support_→_oxytocin_→_HPA_axis_suppression"
+    triggers: [physical_touch, eye_contact, warm_interaction, massage]
+    cortisol_reduction: "20_30%_reduction_if_support_provided_during_stress"
+    anxiety_reduction: "↓_amygdala_reactivity"
+    research: "Tara_Marshall social_support_buffering_HPA_axis"
+    timing: "support_during_stress_critical"
+    consequence_isolation: "oxytocin_system_weak_in_isolation, strong_in_social_context"
+    relaxation_relevance: "high_positive"
+
+  # ─── Supplementation Interactions ───
+  magnesium_calcium_balance:
+    molecules: [magnesium, calcium]
+    type: "antagonistic_balance_critical"
+    mechanism: "calcium_and_magnesium_compete_for_cell_membrane_channels"
+    optimal_ratio: "2_calcium_to_1_magnesium"
+    consequence_of_imbalance:
+      - "excess_calcium_deficient_magnesium → muscle_tension, spasms, anxiety"
+      - "excess_magnesium → calcium_malabsorption, weakening"
+    interaction: "magnesium_maintains_calcium_channel_blockade → prevents_calcium_overload"
+    clinical_relevance: "high_dairy_intake_without_magnesium → muscle_tension"
+    supplementation_strategy: "ensure_magnesium_adequate_if_calcium_supplementing"
+    relaxation_relevance: "positive_magnesium, neutral_calcium"
+
+  zinc_copper_balance:
+    molecules: [zinc, copper]
+    type: "balance_critical"
+    optimal_ratio: "10_to_15_zinc_to_1_copper"
+    consequence_imbalance:
+      - "excess_zinc: copper_malabsorption, immune_dysregulation"
+      - "excess_copper: anxiety, mood_dysregulation (affects_dopamine_synthesis)"
+    mechanism: "both_compete_for_intestinal_absorption_and_transport"
+    supplementation: "zinc_supplementation_should_monitor_copper"
+    relaxation_relevance: "neutral"
+
+  # ─── Timing-Specific Interactions ───
+  late_caffeine_sleep:
+    molecules: [caffeine, sleep]
+    type: "time_dependent_antagonism"
+    timing_issue:
+      - "caffeine_half_life: 5_6_hours"
+      - "afternoon_caffeine (2pm) → 25%_remaining_10pm"
+      - "this_25%_sufficient_to_impair_sleep_onset"
+    sleep_impact:
+      - "delayed_sleep_onset"
+      - "reduced_slow_wave_sleep"
+      - "increased_nighttime_awakenings"
+    recommendation: "no_caffeine_after_2pm (caffeine_cutoff_12h_pre_bedtime_for_some)"
+    individual_variation: "CYP1A2_genetic_polymorphisms_affect_metabolism"
+    slow_metabolizers: "should_avoid_caffeine_after_12pm"
+    relaxation_relevance: "negative_late_caffeine"
+
+  evening_dopamine_elevation_sleep:
+    molecules: [dopamine, sleep, circadian_phase]
+    type: "time_dependent_suppression"
+    mechanism: "dopamine_promotes_wakefulness (antagonistic_to_sleep)"
+    timing_issue: "dopamine_elevation_evening → delayed_sleep_onset"
+    triggers_to_avoid_evening:
+      - stimulants: "caffeine, nicotine, amphetamines"
+      - activities: "intense_exercise, exciting_entertainment, stressful_work"
+      - foods: "high_tyrosine_meals"
+    recommendation: "lower_dopamine_evening (relaxation, meditation, warm_bath)"
+    relaxation_relevance: "high_positive_evening_calm"

@@ -3,6 +3,7 @@ import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { handlePhysioSimulate } from "./server/routes/physio.js";
+import { handleKnowledgeAPI } from "./server/routes/knowledge.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,7 +14,7 @@ const STATIC_DIR = process.env.RELAX_STATIC_DIR
   ? path.resolve(process.env.RELAX_STATIC_DIR)
   : (fs.existsSync(DIST_DIR) ? DIST_DIR : PUBLIC_DIR);
 
-const PORT = Number(process.env.PORT || 9004);
+const PORT = Number(process.env.PORT || 9123);
 const HOST = process.env.HOST || "127.0.0.1";
 
 for (const d of ["sessions", "journal"]) fs.mkdirSync(path.join(DATA_DIR, d), { recursive: true });
@@ -159,7 +160,9 @@ const server = http.createServer(async (req, res) => {
 
   if (p === "/health") return json(res, 200, { ok: true, service: "relax-dev", port: PORT, uptime: Math.floor(process.uptime()) });
 
-  if (p === "/api/physio/simulate") return handlePhysioSimulate(req, res);
+  if (p === "/api/physio/simulate") return handlePhysioSimulate(req, res, B());
+
+  if (p.startsWith("/api/knowledge")) return handleKnowledgeAPI(req, res, p, B());
 
   if (p === "/techniques") {
     return json(res, 200, {

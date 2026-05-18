@@ -1,0 +1,724 @@
+molecules:
+  caffeine:
+    name: Caffeine
+    de_name: Koffein
+    category: alkaloid
+    formula: C8H10N4O2
+    found_in:
+      - green_tea
+      - coffee
+      - dark_chocolate
+    functions:
+      - Adenosine receptor antagonist
+      - Increases wakefulness
+      - Enhances dopamine signaling
+    primary_effects:
+      dopamine:
+        direction: increase
+        magnitude: "30"
+        onset_minutes: 15
+        peak_minutes: 45
+        duration_minutes: 300
+        mechanism: A1/A2a receptor antagonism → reduced inhibition
+      cortisol:
+        direction: increase
+        magnitude: "25"
+        onset_minutes: 30
+        peak_minutes: 90
+        duration_minutes: 240
+        mechanism: sympathetic nervous system activation
+    affects:
+      - dopamine
+      - cortisol
+      - adrenaline
+      - adenosine_receptors
+    relaxation_relevance: high_negative
+
+  l_theanine:
+    name: L-Theanine
+    de_name: L-Theanin
+    category: amino_acid
+    formula: C7H14N2O3
+    found_in:
+      - green_tea
+      - black_tea
+      - l_theanine_supplement
+    functions:
+      - GABA potentiation
+      - Alpha wave enhancement
+      - Calm alertness (with_caffeine)
+    primary_effects:
+      gaba:
+        direction: potentiate
+        magnitude: enhances_GABA_efficacy
+      anxiety:
+        direction: decrease
+        onset_minutes: 30
+        duration_minutes: 120
+      alpha_waves:
+        direction: increase
+        mechanism: relaxed_alertness_EEG_pattern
+    synergies:
+      with_caffeine:
+        effect: smooth_caffeine_jitters → calm_focus
+        optimal_ratio: 1_caffeine_to_1_or_2_theanine
+    affects:
+      - GABA
+      - anxiety
+      - calm
+      - focus
+    relaxation_relevance: high_positive
+
+  magnesium:
+    name: Magnesium
+    de_name: Magnesium
+    category: mineral
+    chemical_symbol: Mg
+    found_in:
+      - magnesium_glycinate
+      - leafy_greens
+      - nuts
+      - seeds
+      - dark_chocolate
+    functions:
+      - GABA receptor potentiation
+      - Muscle relaxation
+      - NMDA antagonism (prevents_excitotoxicity)
+      - Cofactor for 600+ enzymes
+    primary_effects:
+      gaba:
+        direction: potentiate
+        magnitude: 40%_more_anxiolytic_with_magnesium
+        mechanism: enhances_GABA_A_receptor_conductance
+      muscle_tension:
+        direction: decrease
+      anxiety:
+        direction: decrease
+      sleep:
+        direction: improve
+    bioavailable_forms:
+      - glycinate
+      - malate
+      - taurate
+      - threonate
+    poor_forms:
+      - oxide_carbonate
+    interactions:
+      with_calcium:
+        type: balance_critical
+        optimal_ratio: 2_calcium_to_1_magnesium
+      with_caffeine:
+        type: antagonistic
+        effect: caffeine_increases_urinary_magnesium_excretion_30_40%
+    affects:
+      - GABA
+      - sleep
+      - muscle_relaxation
+      - anxiety
+    relaxation_relevance: high_positive
+    notes: Chronic_caffeine_users need magnesium supplementation
+
+  glycine:
+    name: Glycine
+    de_name: Glycin
+    category: amino_acid
+    formula: C2H5NO2
+    found_in:
+      - glycine_supplement
+      - collagen
+      - bone_broth
+      - gelatin
+    functions:
+      - Inhibitory neurotransmitter
+      - Sleep quality enhancement
+      - Collagen synthesis
+    primary_effects:
+      parasympathetic_tone:
+        direction: increase
+        mechanism: inhibitory neurotransmission
+      core_body_temperature:
+        direction: decrease
+        magnitude: aids_sleep_initiation
+      sleep_quality:
+        direction: improve
+    affects:
+      - sleep
+      - parasympathetic_tone
+      - core_temperature
+    relaxation_relevance: high_positive
+    notes: Synergistic with magnesium for sleep support; 3-5g evening dose
+
+  tryptophan:
+    name: L-Tryptophan
+    de_name: L-Tryptophan
+    category: amino_acid
+    formula: C11H12N2O2
+    found_in:
+      - l_tryptophan_supplement
+      - turkey
+      - chicken
+      - cheese
+      - nuts
+      - seeds
+    functions:
+      - Precursor to serotonin
+      - Precursor to melatonin
+      - Protein synthesis
+    produces_to:
+      - serotonin
+      - melatonin
+    primary_effects:
+      serotonin:
+        direction: increase
+        mechanism: tryptophan → 5-HTP → serotonin
+        timing_optimal: evening_with_carbs
+        notes: carbs_↑_tryptophan_BBB_transport_via_LNAA_effect
+      mood:
+        direction: increase
+        timing: 4_6h_post_ingestion
+    affects:
+      - serotonin
+      - melatonin
+      - mood
+    relaxation_relevance: high_positive
+    notes: "Dietary tryptophan = 1% of amino acids. Requires cofactors: B6, magnesium"
+
+  serotonin:
+    name: Serotonin
+    de_name: Serotonin
+    category: neurotransmitter
+    formula: C10H12N2O
+    found_in:
+      - gut_microbiome
+      - pineal_gland
+    produces_from:
+      - tryptophan
+      - l_tryptophan
+    functions:
+      - Mood regulation
+      - Sleep onset (via melatonin synthesis)
+      - Appetite suppression
+      - GI motility
+    primary_effects:
+      mood:
+        direction: increase
+        magnitude: mood_elevation
+      sleep:
+        direction: improve
+        mechanism: evening elevation → melatonin synthesis
+    affects:
+      - melatonin
+      - mood
+      - appetite
+      - sleep
+    relaxation_relevance: high_positive
+
+  melatonin:
+    name: Melatonin
+    de_name: Melatonin
+    category: hormone
+    formula: C13H16N2O2
+    found_in:
+      - pineal_gland
+    produces_from:
+      - serotonin
+    functions:
+      - Sleep-wake cycle regulation
+      - Circadian rhythm synchronization
+      - Antioxidant
+    primary_effects:
+      sleep_onset:
+        direction: improve
+        magnitude: latency_reduction
+        mechanism: suppression of wakefulness signals
+      circadian_alignment:
+        direction: improve
+        notes: light-dependent synthesis
+    affects:
+      - sleep
+      - circadian_rhythm
+      - antioxidant_defense
+    relaxation_relevance: high_positive
+    notes: Synthesis requires evening darkness + serotonin availability
+
+  cbd:
+    name: Cannabidiol
+    de_name: CBD
+    category: phytocannabinoid
+    formula: C21H30O2
+    found_in:
+      - cbd_oil_full_spectrum
+      - cannabis
+      - hemp_oil
+    functions:
+      - 5-HT1A receptor agonist (serotonergic)
+      - TRPV1 agonist
+      - Anti-inflammatory
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: "40"
+        optimal_dose_mg: 200_300
+        dose_response: inverted_U (biphasic)
+        mechanism: 5-HT1A + adenosine A2A enhancement
+      inflammation:
+        direction: decrease
+        mechanism: NLRP3 inflammasome inhibition
+    affects:
+      - anxiety
+      - pain
+      - inflammation
+      - sleep
+    relaxation_relevance: high_positive
+    notes: No tolerance development (unlike THC)
+
+  cbc:
+    name: Cannabichromene
+    de_name: CBC
+    category: phytocannabinoid
+    formula: C21H30O2
+    found_in:
+      - cbd_oil_full_spectrum
+      - cannabis_full_spectrum
+    functions:
+      - Entourage effect amplification
+      - Mild anti-inflammatory
+      - Pain modulation
+    relaxation_relevance: moderate_positive
+    notes: Minor cannabinoid; synergistic with CBD
+
+  cbg:
+    name: Cannabigerol
+    de_name: CBG
+    category: phytocannabinoid
+    formula: C21H30O2
+    found_in:
+      - cbd_oil_full_spectrum
+      - cannabis_full_spectrum
+    functions:
+      - GABA modulation
+      - Entourage effect contributor
+    relaxation_relevance: moderate_positive
+    notes: Precursor to CBD and THC; synergistic effects
+
+  linalool:
+    name: Linalool
+    de_name: Linalool
+    category: terpene
+    formula: C10H18O
+    found_in:
+      - lavender
+      - lavender_oil
+      - cbd_oil_full_spectrum
+    functions:
+      - GABA potentiation
+      - Serotonin modulation
+      - Anxiolytic via olfactory pathways
+    primary_effects:
+      anxiety:
+        direction: decrease
+        mechanism: GABA-A receptor binding
+      relaxation:
+        direction: increase
+        via: aroma_inhalation
+    relaxation_relevance: high_positive
+    notes: Primary anxiolytic terpene in lavender
+
+  gaba:
+    name: Gamma-Aminobutyric Acid
+    de_name: GABA
+    category: neurotransmitter
+    formula: C4H9NO2
+    found_in:
+      - central_nervous_system
+    produces_from:
+      - glutamate
+      - vitamin_b6
+    functions:
+      - Primary inhibitory neurotransmitter
+      - Reduces neuronal excitability
+      - Anxiolytic
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: anxiety_reduction
+      muscle_tension:
+        direction: decrease
+      sleep:
+        direction: improve
+        mechanism: reduces_wakefulness_promoting_activity
+    affects:
+      - anxiety
+      - sleep
+      - muscle_tension
+    relaxation_relevance: high_positive
+    notes: Requires magnesium for optimal GABA receptor function
+
+  dopamine:
+    name: Dopamine
+    de_name: Dopamin
+    category: neurotransmitter
+    formula: C8H11NO2
+    found_in:
+      - ventral_tegmental_area
+      - striatum
+    produces_from:
+      - tyrosine
+      - l_dopa
+    functions:
+      - Motivation and reward
+      - Motor control
+      - Attention and focus
+      - Pleasure (acute only)
+    primary_effects:
+      motivation:
+        direction: increase
+        magnitude: reward_driven_behavior
+      focus:
+        direction: increase
+    affects:
+      - motivation
+      - mood
+      - focus
+      - habit_formation
+    relaxation_relevance: neutral
+    notes: Dopamine shifts from reward to cue in habit formation
+
+  cortisol:
+    name: Cortisol
+    de_name: Kortisol
+    category: hormone
+    formula: C21H30O5
+    found_in:
+      - adrenal_cortex
+    produces_from:
+      - cholesterol
+    functions:
+      - Stress response hormone
+      - Energy mobilization
+      - Immune regulation
+      - Anti-inflammatory (chronically suppressive)
+    primary_effects:
+      glucose:
+        direction: increase
+        magnitude: mobilizes_glucose (hepatic_glycogenolysis)
+      blood_pressure:
+        direction: increase
+      immune:
+        direction: biphasic
+        acute: enhanced (adaptive)
+        chronic: suppressed (TH1→TH2_shift)
+      mood:
+        direction: variable
+        acute: increased_alertness
+        chronic: anxiety_depression
+    circadian_rhythm:
+      peak: morning (CAR)
+      nadir: midnight
+      suppression: evening (should_decrease_for_sleep)
+    affects:
+      - glucose
+      - blood_pressure
+      - immune_function
+      - mood
+      - sleep
+    relaxation_relevance: high_negative
+    notes: Chronic elevation associated with burnout, immune suppression
+
+  oxytocin:
+    name: Oxytocin
+    de_name: Oxytozin
+    category: hormone
+    formula: C43H66N12O12S2
+    found_in:
+      - hypothalamus
+      - pituitary_gland
+    functions:
+      - Social bonding
+      - Stress buffering
+      - HPA axis suppression
+    primary_effects:
+      cortisol:
+        direction: decrease
+        magnitude: 20_30%_reduction_with_social_support
+        mechanism: inhibits_CRH → cortisol_suppression
+      anxiety:
+        direction: decrease
+        mechanism: amygdala_fear_extinction
+    triggers:
+      - physical_touch
+      - eye_contact
+      - warm_social_interaction
+      - massage
+    affects:
+      - cortisol
+      - anxiety
+      - social_engagement
+    relaxation_relevance: high_positive
+    notes: 20s hug → oxytocin peak. System weak in isolation, strong socially
+
+  adenosine:
+    name: Adenosine
+    de_name: Adenosin
+    category: nucleoside
+    formula: C10H13N5O4
+    found_in:
+      - basal_forebrain
+    functions:
+      - Sleep pressure signal
+      - Metabolic byproduct (ATP depletion)
+      - Anti-inflammatory
+    primary_effects:
+      sleep_pressure:
+        direction: increase
+        magnitude: accumulates_during_wakefulness
+        mechanism: binds A1 receptors on sleep_promoting_basal_forebrain
+      inflammation:
+        direction: decrease
+        mechanism: A2a receptor activation → anti-inflammatory
+    affected_by:
+      - caffeine
+    affects:
+      - sleep
+      - inflammation
+    relaxation_relevance: high_positive
+    notes: Caffeine blocks adenosine signal → mask sleep pressure
+
+  withanolide_a:
+    name: Withanolide A
+    de_name: Withanolid A
+    category: alkaloid_steroidal
+    found_in:
+      - ashwagandha
+      - withania_somnifera
+    functions:
+      - Stress hormone modulation
+      - Cortisol reduction
+      - Anxiolytic via GABA modulation
+    primary_effects:
+      cortisol:
+        direction: decrease
+        magnitude: 28_30%_with_chronic_use
+      anxiety:
+        direction: decrease
+    relaxation_relevance: high_positive
+    notes: Primary active alkaloid in ashwagandha
+
+  withaferin_a:
+    name: Withaferin A
+    de_name: Withaferin A
+    category: alkaloid_steroidal
+    found_in:
+      - ashwagandha
+      - withania_somnifera
+    functions:
+      - HSP90 inhibition (stress response protein)
+      - Anti-inflammatory
+      - Anxiolytic
+    relaxation_relevance: high_positive
+    notes: Secondary alkaloid; synergistic with withanolide_a
+
+  erysotrine:
+    name: Erysotrine
+    de_name: Erysotrin
+    category: alkaloid
+    found_in:
+      - mulungu
+      - erythrina_mulungu
+    functions:
+      - GABA modulation
+      - Anxiolytic
+      - Mild CNS depression
+    primary_effects:
+      anxiety:
+        direction: decrease
+      gaba:
+        direction: potentiate
+    relaxation_relevance: high_positive
+    notes: Major alkaloid in mulungu; traditional anxiolytic
+
+  erysovine:
+    name: Erysovine
+    de_name: Erysovine
+    category: alkaloid
+    found_in:
+      - mulungu
+      - erythrina_mulungu
+    functions:
+      - GABA receptor modulation
+      - Anxiolytic
+    relaxation_relevance: high_positive
+    notes: Secondary alkaloid in mulungu; synergistic with erysotrine
+
+  quercetin:
+    name: Quercetin
+    de_name: Quercetin
+    category: flavonoid
+    formula: C15H10O7
+    found_in:
+      - mulungu
+      - green_tea
+      - apples
+      - onions
+    functions:
+      - Antioxidant
+      - Anti-inflammatory
+      - Quercetin potentiation of relaxation herbs
+    primary_effects:
+      inflammation:
+        direction: decrease
+      oxidative_stress:
+        direction: decrease
+    affects:
+      - inflammation
+      - antioxidant_defense
+    relaxation_relevance: moderate_positive
+    notes: Flavonoid antioxidant; enhances efficacy of anxiolytic herbs
+
+  apigenin:
+    name: Apigenin
+    de_name: Apigenin
+    category: flavonoid
+    formula: C15H10O5
+    found_in:
+      - chamomile_tea
+      - matricaria_recutita
+      - parsley
+    functions:
+      - Benzodiazepine-like GABA-A binding
+      - Anxiolytic
+      - Anti-inflammatory
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: mild
+        mechanism: weak GABA_A agonist
+    affects:
+      - anxiety
+      - sleep
+    relaxation_relevance: moderate_positive
+    notes: Weak benzodiazepine-like action; safe daily use
+
+  rosmarinic_acid:
+    name: Rosmarinic Acid
+    de_name: Rosmarinsäure
+    category: polyphenol
+    found_in:
+      - lemon_balm_tea
+      - melissa_officinalis
+      - rosemary
+    functions:
+      - GABA potentiation
+      - Antioxidant
+      - Anti-inflammatory
+    primary_effects:
+      gaba:
+        direction: potentiate
+      inflammation:
+        direction: decrease
+    affects:
+      - anxiety
+      - inflammation
+    relaxation_relevance: moderate_positive
+    notes: Mild anxiolytic; synergistic with GABA
+
+  egcg:
+    name: Epigallocatechin Gallate (EGCG)
+    de_name: EGCG
+    category: catechin_polyphenol
+    found_in:
+      - green_tea
+      - camellia_sinensis
+    functions:
+      - Antioxidant
+      - Anti-inflammatory
+      - Neuroprotection
+    primary_effects:
+      oxidative_stress:
+        direction: decrease
+      inflammation:
+        direction: decrease
+    affects:
+      - antioxidant_defense
+      - neuroprotection
+    relaxation_relevance: moderate_positive
+    notes: Bioactive polyphenol in green tea; synergistic with L-theanine
+
+  il_10:
+    name: Interleukin-10
+    de_name: Interleukin-10
+    category: cytokine
+    found_in:
+      - immune_system
+    functions:
+      - Anti-inflammatory cytokine
+      - Immune regulation
+    primary_effects:
+      inflammation:
+        direction: decrease
+        magnitude: counteracts_pro_inflammatory_IL_6_TNF_α
+      immune_balance:
+        direction: promote_regulatory_T_cells
+    triggers:
+      - exercise
+      - social_support
+      - meditation
+      - vagal_stimulation
+    affects:
+      - inflammation
+      - immune_function
+    relaxation_relevance: high_positive
+
+  endorphins:
+    name: Endogenous Opioids (β-endorphin)
+    de_name: Endorphine
+    category: neuropeptide
+    found_in:
+      - pituitary_gland
+      - hypothalamus
+    functions:
+      - Pain analgesia
+      - Pleasure and reward
+      - Stress buffering
+    primary_effects:
+      pain:
+        direction: decrease
+        mechanism: opioid_receptor_activation
+      mood:
+        direction: increase
+        magnitude: pleasure_and_euphoria
+    triggers:
+      - intense_exercise
+      - laughter
+      - social_bonding
+      - massage
+    affects:
+      - pain
+      - mood
+      - stress_resilience
+    relaxation_relevance: moderate_positive
+    notes: Exercise-induced endorphin release (30+ minutes intense)
+
+  l_dopa:
+    name: L-DOPA (Levodopa)
+    de_name: L-DOPA
+    category: amino_acid
+    found_in:
+      - mucuna_pruriens
+      - fava_beans
+    produces_to:
+      - dopamine
+      - noradrenaline
+    functions:
+      - Dopamine precursor
+      - Dopamine synthesis boost
+    primary_effects:
+      dopamine:
+        direction: increase
+        mechanism: L-DOPA → dopamine via aromatic_amino_acid_decarboxylase
+    affects:
+      - dopamine
+      - motivation
+      - mood
+    relaxation_relevance: moderate_negative
+    notes: More direct dopamine support than tyrosine; morning use

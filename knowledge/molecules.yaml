@@ -1,0 +1,985 @@
+molecules:
+  caffeine:
+    name: Caffeine
+    de_name: Koffein
+    category: alkaloid
+    formula: C8H10N4O2
+    sources:
+      external:
+        - coffee
+        - tea
+        - dark_chocolate
+        - energy_drinks
+    functions:
+      - Adenosine receptor antagonist
+      - Increases wakefulness
+      - Enhances dopamine signaling
+    primary_effects:
+      dopamine:
+        direction: increase
+        magnitude: "30"
+        onset_minutes: 15
+        peak_minutes: 45
+        duration_minutes: 300
+        mechanism: A1/A2a receptor antagonism → reduced inhibition
+      cortisol:
+        direction: increase
+        magnitude: "25"
+        onset_minutes: 30
+        peak_minutes: 90
+        duration_minutes: 240
+        mechanism: sympathetic nervous system activation
+    affects:
+      - dopamine
+      - cortisol
+      - adrenaline
+      - adenosine_receptors
+    relaxation_relevance: high_negative
+  nicotine:
+    name: Nicotine
+    de_name: Nikotin
+    category: alkaloid
+    formula: C10H14N2
+    sources:
+      external:
+        - tobacco
+        - cigarettes
+        - nicotine_patches
+    functions:
+      - nAChR agonist (nicotinic acetylcholine receptor)
+      - Increases dopamine and noradrenaline
+      - Enhances focus and alertness
+    primary_effects:
+      dopamine:
+        direction: increase
+        magnitude: "35"
+        onset_minutes: 10
+        peak_minutes: 20
+        duration_minutes: 120
+        mechanism: direct nAChR activation on VTA dopamine neurons
+      cortisol:
+        direction: increase
+        magnitude: "20"
+        onset_minutes: 15
+      noradrenaline:
+        direction: increase
+        magnitude: "40"
+    affects:
+      - dopamine
+      - cortisol
+      - noradrenaline
+      - heart_rate
+    relaxation_relevance: high_negative
+    notes: Rapid tolerance development (hours to days)
+  thc:
+    name: Δ9-Tetrahydrocannabinol
+    de_name: THC
+    category: phytocannabinoid
+    formula: C21H30O2
+    sources:
+      external:
+        - cannabis
+        - marijuana
+    functions:
+      - CB1 and CB2 receptor agonist
+      - Produces reward pathway activation
+      - Anxiolytic and analgesic
+    primary_effects:
+      dopamine:
+        direction: increase
+        magnitude: "25"
+        onset_minutes: 15
+        peak_minutes: 60
+        duration_minutes: 240
+        mechanism: CB1 activation → disinhibition of dopamine
+      anxiety:
+        direction: variable
+        notes: "biphasic: anxiolytic low-dose, anxiogenic high-dose"
+      cortisol:
+        direction: variable
+        notes: stress-dependent
+    affects:
+      - dopamine
+      - GABA
+      - glutamate
+      - pain_perception
+    relaxation_relevance: moderate_positive
+    notes: CB1 tolerance develops 3-7 days with heavy use
+  cbd:
+    name: Cannabidiol
+    de_name: CBD
+    category: phytocannabinoid
+    formula: C21H30O2
+    sources:
+      external:
+        - cannabis
+        - hemp_oil
+    functions:
+      - 5-HT1A receptor agonist (serotonergic)
+      - TRPV1 agonist
+      - Anti-inflammatory
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: "40"
+        optimal_dose_mg: 200_300
+        dose_response: inverted_U (biphasic)
+        mechanism: 5-HT1A + adenosine A2A enhancement
+      inflammation:
+        direction: decrease
+        mechanism: NLRP3 inflammasome inhibition
+    affects:
+      - anxiety
+      - pain
+      - inflammation
+      - sleep
+    relaxation_relevance: high_positive
+    notes: No tolerance development (unlike THC)
+  serotonin:
+    name: Serotonin
+    de_name: Serotonin
+    category: neurotransmitter
+    formula: C10H12N2O
+    produces_from:
+      - tryptophan
+      - l_tryptophan
+    functions:
+      - Mood regulation
+      - Sleep onset (via melatonin synthesis)
+      - Appetite suppression
+      - GI motility
+    primary_effects:
+      mood:
+        direction: increase
+        magnitude: mood_elevation
+      sleep:
+        direction: improve
+        mechanism: evening elevation → melatonin synthesis
+    affects:
+      - melatonin
+      - mood
+      - appetite
+      - sleep
+    relaxation_relevance: high_positive
+    notes: "Precursor availability critical: tryptophan + vitamin B6 + carbs"
+  dopamine:
+    name: Dopamine
+    de_name: Dopamin
+    category: neurotransmitter
+    formula: C8H11NO2
+    produces_from:
+      - tyrosine
+      - l_dopa
+    functions:
+      - Motivation and reward
+      - Motor control
+      - Attention and focus
+      - Pleasure (acute only)
+    primary_effects:
+      motivation:
+        direction: increase
+        magnitude: reward_driven_behavior
+      focus:
+        direction: increase
+    affects:
+      - motivation
+      - mood
+      - focus
+      - habit_formation
+    relaxation_relevance: neutral
+    notes: Dopamine shifts from reward to cue in habit formation
+  gaba:
+    name: Gamma-Aminobutyric Acid
+    de_name: GABA
+    category: neurotransmitter
+    formula: C4H9NO2
+    produces_from:
+      - glutamate
+      - vitamin_b6
+    functions:
+      - Primary inhibitory neurotransmitter
+      - Reduces neuronal excitability
+      - Anxiolytic
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: anxiety_reduction
+      muscle_tension:
+        direction: decrease
+      sleep:
+        direction: improve
+        mechanism: reduces wakefulness-promoting activity
+    affects:
+      - anxiety
+      - sleep
+      - muscle_tension
+    relaxation_relevance: high_positive
+    notes: Requires magnesium for optimal GABA receptor function
+  acetylcholine:
+    name: Acetylcholine
+    de_name: Acetylcholin
+    category: neurotransmitter
+    formula: C7H16NO2
+    produces_from:
+      - choline
+      - acetyl_coa
+    functions:
+      - Primary parasympathetic neurotransmitter
+      - Memory formation
+      - REM sleep regulation
+    primary_effects:
+      parasympathetic_tone:
+        direction: increase
+        magnitude: rest_and_digest_mode
+      heart_rate:
+        direction: decrease
+      digestion:
+        direction: increase
+    affects:
+      - heart_rate
+      - digestion
+      - sleep
+      - memory
+    relaxation_relevance: high_positive
+    notes: Vagus nerve primary pathway
+  noradrenaline:
+    name: Noradrenaline
+    de_name: Noradrenalin
+    category: neurotransmitter
+    formula: C8H11NO3
+    produces_from:
+      - dopamine
+      - tyrosine
+    functions:
+      - Sympathetic activation
+      - Attention and alertness
+      - Blood pressure regulation
+    primary_effects:
+      alertness:
+        direction: increase
+        magnitude: increased_attention
+      heart_rate:
+        direction: increase
+      blood_pressure:
+        direction: increase
+    affects:
+      - heart_rate
+      - blood_pressure
+      - alertness
+      - anxiety
+    relaxation_relevance: high_negative
+  melatonin:
+    name: Melatonin
+    de_name: Melatonin
+    category: hormone
+    formula: C13H16N2O2
+    produces_from:
+      - serotonin
+    functions:
+      - Sleep-wake cycle regulation
+      - Circadian rhythm synchronization
+      - Antioxidant
+    primary_effects:
+      sleep_onset:
+        direction: improve
+        magnitude: latency_reduction
+        mechanism: suppression of wakefulness signals
+      circadian_alignment:
+        direction: improve
+        notes: light-dependent synthesis
+    affects:
+      - sleep
+      - circadian_rhythm
+      - antioxidant_defense
+    relaxation_relevance: high_positive
+    notes: Synthesis requires evening darkness + serotonin availability
+  adenosine:
+    name: Adenosine
+    de_name: Adenosin
+    category: nucleoside
+    formula: C10H13N5O4
+    functions:
+      - Sleep pressure signal
+      - Metabolic byproduct (ATP depletion)
+      - Anti-inflammatory
+    primary_effects:
+      sleep_pressure:
+        direction: increase
+        magnitude: accumulates_during_wakefulness
+        mechanism: binds A1 receptors on sleep-promoting basal forebrain
+      inflammation:
+        direction: decrease
+        mechanism: A2a receptor activation → anti-inflammatory
+    affected_by:
+      - caffeine
+    affects:
+      - sleep
+      - inflammation
+    relaxation_relevance: high_positive
+    notes: Caffeine blocks adenosine signal → mask sleep pressure
+  cortisol:
+    name: Cortisol
+    de_name: Kortisol
+    category: hormone
+    formula: C21H30O5
+    produces_from:
+      - cholesterol
+    functions:
+      - Stress response hormone
+      - Energy mobilization
+      - Immune regulation
+      - Anti-inflammatory (chronically suppressive)
+    primary_effects:
+      glucose:
+        direction: increase
+        magnitude: mobilizes_glucose (hepatic_glycogenolysis)
+      blood_pressure:
+        direction: increase
+      immune:
+        direction: biphasic
+        acute: enhanced (adaptive)
+        chronic: suppressed (TH1→TH2_shift)
+      mood:
+        direction: variable
+        acute: increased_alertness
+        chronic: anxiety_depression
+    circadian_rhythm:
+      peak: morning (CAR)
+      nadir: midnight
+      suppression: evening (should_decrease_for_sleep)
+    affects:
+      - glucose
+      - blood_pressure
+      - immune_function
+      - mood
+      - sleep
+    relaxation_relevance: high_negative
+    notes: Chronic elevation associated with burnout, immune suppression
+  adrenaline:
+    name: Epinephrine
+    de_name: Adrenalin
+    category: hormone
+    formula: C9H13NO3
+    produces_from:
+      - noradrenaline
+    functions:
+      - Acute stress response
+      - Fight-or-flight activation
+      - Emergency energy mobilization
+    primary_effects:
+      heart_rate:
+        direction: increase
+        magnitude: immediate
+      blood_glucose:
+        direction: increase
+      breathing:
+        direction: increase
+      attention:
+        direction: narrow_focus
+    affects:
+      - heart_rate
+      - glucose
+      - breathing
+      - focus
+    relaxation_relevance: high_negative
+    notes: Peak within minutes, subsides after stressor removal
+  crh:
+    name: Corticotropin-Releasing Hormone
+    de_name: CRH
+    category: hormone
+    formula: C6H15N3O12
+    location: hypothalamus
+    functions:
+      - Initiates HPA axis cascade
+      - Stress response trigger
+    primary_effects:
+      hpa_cascade:
+        direction: initiate
+        next_molecule: ACTH
+    affects:
+      - ACTH
+      - cortisol
+    relaxation_relevance: high_negative
+  acth:
+    name: Adrenocorticotropic Hormone
+    de_name: ACTH
+    category: hormone
+    location: anterior pituitary
+    functions:
+      - Stimulates cortisol release from adrenal cortex
+      - Mediates HPA axis response
+    primary_effects:
+      cortisol:
+        direction: increase
+        magnitude: stimulates_release
+    affects:
+      - cortisol
+    relaxation_relevance: high_negative
+  oxytocin:
+    name: Oxytocin
+    de_name: Oxytozin
+    category: hormone
+    formula: C43H66N12O12S2
+    functions:
+      - Social bonding
+      - Stress buffering
+      - HPA axis suppression
+    primary_effects:
+      cortisol:
+        direction: decrease
+        magnitude: 20_30%_reduction_with_social_support
+        mechanism: inhibits_CRH → cortisol_suppression
+      anxiety:
+        direction: decrease
+        mechanism: amygdala_fear_extinction
+    triggers:
+      - physical_touch
+      - eye_contact
+      - warm_social_interaction
+      - massage
+    affects:
+      - cortisol
+      - anxiety
+      - social_engagement
+    relaxation_relevance: high_positive
+    notes: 20s hug → oxytocin peak. System weak in isolation, strong socially
+  insulin:
+    name: Insulin
+    de_name: Insulin
+    category: hormone
+    formula: C256H381N65O76S6
+    produces_from:
+      - pancreatic_beta_cells
+    functions:
+      - Glucose uptake regulation
+      - Tryptophan transport (BBB)
+      - Nutrient storage
+    primary_effects:
+      glucose_uptake:
+        direction: increase
+        mechanism: glucose_→_cells
+      tryptophan_bbb_transport:
+        direction: increase
+        magnitude: enhanced_serotonin_synthesis
+      mood:
+        direction: variable
+        high_gi_meals: spike_then_crash
+    affected_by:
+      - glucose
+      - carbohydrate_intake
+      - exercise
+    affects:
+      - glucose
+      - serotonin
+      - mood
+    relaxation_relevance: moderate_positive
+  glucose:
+    name: Glucose
+    de_name: Glukose
+    category: monosaccharide
+    formula: C6H12O6
+    functions:
+      - Primary brain fuel
+      - Energy substrate
+      - Stress response trigger
+    primary_effects:
+      brain_function:
+        direction: variable
+        low_glucose: cognitive_impairment_anxiety
+        normal: optimal_cognition
+      cortisol:
+        direction: variable
+        hypoglycemia: triggers_stress_response
+    affected_by:
+      - food_intake
+      - insulin
+      - exercise
+      - stress
+    affects:
+      - cognition
+      - cortisol
+      - mood
+    relaxation_relevance: moderate_positive
+    notes: Stable glucose → stable_mood. Erratic eating → stress_vulnerability
+  ghrelin:
+    name: Ghrelin
+    de_name: Ghrelin
+    category: hormone
+    formula: C27H44N4O5
+    functions:
+      - Appetite stimulation
+      - Sleep regulation
+    primary_effects:
+      appetite:
+        direction: increase
+        magnitude: 30_40%_increase_with_sleep_deprivation
+      sleep:
+        direction: improve
+        mechanism: promotes_sleep_onset
+    affected_by:
+      - sleep_deprivation
+      - fasting
+      - time_of_day
+    affects:
+      - appetite
+      - food_intake
+      - sleep
+    relaxation_relevance: neutral
+  leptin:
+    name: Leptin
+    de_name: Leptin
+    category: hormone
+    formula: C167H252N43O55
+    functions:
+      - Satiety signal
+      - Energy expenditure regulation
+    primary_effects:
+      satiety:
+        direction: increase
+        magnitude: suppresses_appetite
+      energy_expenditure:
+        direction: increase
+    affected_by:
+      - fat_mass
+      - sleep_quality
+    affects:
+      - appetite
+      - energy_expenditure
+    relaxation_relevance: neutral
+    notes: Sleep deprivation → leptin↓ → hunger↑
+  tryptophan:
+    name: L-Tryptophan
+    de_name: L-Tryptophan
+    category: amino_acid
+    formula: C11H12N2O2
+    sources:
+      external:
+        - turkey
+        - chicken
+        - cheese
+        - nuts
+        - seeds
+    functions:
+      - Precursor to serotonin
+      - Precursor to melatonin
+      - Protein synthesis
+    produces_to:
+      - serotonin
+      - melatonin
+    primary_effects:
+      serotonin:
+        direction: increase
+        mechanism: tryptophan → 5-HTP → serotonin
+        timing_optimal: evening_with_carbs
+        notes: carbs_↑_tryptophan_BBB_transport_via_LNAA_effect
+      mood:
+        direction: increase
+        timing: 4_6h_post_ingestion
+    affects:
+      - serotonin
+      - melatonin
+      - mood
+    relaxation_relevance: high_positive
+    notes: "Dietary tryptophan = 1% of amino acids. Requires cofactors: B6, magnesium"
+  tyrosine:
+    name: L-Tyrosine
+    de_name: L-Tyrosin
+    category: amino_acid
+    formula: C9H11NO3
+    sources:
+      external:
+        - almonds
+        - avocados
+        - bananas
+        - chicken
+        - cheese
+    functions:
+      - Precursor to dopamine
+      - Precursor to noradrenaline
+      - Precursor to adrenaline
+    produces_to:
+      - dopamine
+      - noradrenaline
+      - adrenaline
+    primary_effects:
+      dopamine:
+        direction: increase
+        mechanism: tyrosine → L-DOPA → dopamine
+      motivation:
+        direction: increase
+    affects:
+      - dopamine
+      - noradrenaline
+      - motivation
+      - focus
+    relaxation_relevance: moderate_negative
+    notes: More effective in stress/fatigue states. Requires tyrosine hydroxylase +
+      cofactors
+  l_theanine:
+    name: L-Theanine
+    de_name: L-Theanin
+    category: amino_acid
+    formula: C7H14N2O3
+    sources:
+      external:
+        - green_tea
+        - black_tea
+    functions:
+      - GABA potentiation
+      - Alpha wave enhancement
+      - Calm alertness (with_caffeine)
+    primary_effects:
+      gaba:
+        direction: potentiate
+        magnitude: enhances_GABA_efficacy
+      anxiety:
+        direction: decrease
+        onset_minutes: 30
+        duration_minutes: 120
+      alpha_waves:
+        direction: increase
+        mechanism: relaxed_alertness_EEG_pattern
+    synergies:
+      with_caffeine:
+        effect: smooth_caffeine_jitters → calm_focus
+        optimal_ratio: 1_caffeine_to_1_or_2_theanine
+    affects:
+      - GABA
+      - anxiety
+      - calm
+      - focus
+    relaxation_relevance: high_positive
+  magnesium:
+    name: Magnesium
+    de_name: Magnesium
+    category: mineral
+    chemical_symbol: Mg
+    functions:
+      - GABA receptor potentiation
+      - Muscle relaxation
+      - NMDA antagonism (prevents_excitotoxicity)
+      - Cofactor for 600+ enzymes
+    primary_effects:
+      gaba:
+        direction: potentiate
+        magnitude: 40%_more_anxiolytic_with_magnesium
+        mechanism: enhances_GABA_A_receptor_conductance
+      muscle_tension:
+        direction: decrease
+      anxiety:
+        direction: decrease
+      sleep:
+        direction: improve
+    sources:
+      external:
+        - leafy_greens
+        - nuts
+        - seeds
+        - whole_grains
+        - dark_chocolate
+      endogenous: false
+    bioavailable_forms:
+      - glycinate
+      - malate
+      - taurate
+      - threonate
+    poor_forms:
+      - oxide_carbonate
+    interactions:
+      with_calcium:
+        type: balance_critical
+        optimal_ratio: 2_calcium_to_1_magnesium
+      with_caffeine:
+        type: antagonistic
+        effect: caffeine_increases_urinary_magnesium_excretion_30_40%
+    affects:
+      - GABA
+      - sleep
+      - muscle_relaxation
+      - anxiety
+    relaxation_relevance: high_positive
+    notes: Chronic_caffeine_users need magnesium supplementation
+  calcium:
+    name: Calcium
+    de_name: Kalzium
+    category: mineral
+    chemical_symbol: Ca
+    functions:
+      - Neuromuscular function
+      - Heart rate regulation
+      - Cell membrane processes
+    primary_effects:
+      muscle_function:
+        direction: regulate
+      neurotransmission:
+        direction: regulate
+    interactions:
+      with_magnesium:
+        type: balance_critical
+        optimal_ratio: 2_calcium_to_1_magnesium
+        consequence_imbalance: excess_calcium_without_magnesium → muscle_tension
+    sources:
+      external:
+        - dairy
+        - leafy_greens
+        - fortified_foods
+    affects:
+      - muscle_function
+      - neurotransmission
+    relaxation_relevance: neutral
+  il_6:
+    name: Interleukin-6
+    de_name: Interleukin-6
+    category: cytokine
+    functions:
+      - Pro-inflammatory signaling
+      - Acute phase response
+    primary_effects:
+      inflammation:
+        direction: increase
+        magnitude: elevations_in_depression_40_50%
+      mood:
+        direction: decrease
+        mechanism: cytokine_→_serotonin_depletion
+    affected_by:
+      - chronic_stress
+      - poor_sleep
+      - sedentary_lifestyle
+      - high_sugar_diet
+    affects:
+      - inflammation
+      - mood
+      - depression
+    relaxation_relevance: high_negative
+  tnf_alpha:
+    name: Tumor Necrosis Factor-Alpha
+    de_name: TNF-α
+    category: cytokine
+    functions:
+      - Pro-inflammatory cytokine
+      - Immune cell activation
+    primary_effects:
+      inflammation:
+        direction: increase
+      tryptophan_depletion:
+        direction: activate_kynurenine_pathway
+        consequence: reduced_serotonin_synthesis
+    affected_by:
+      - chronic_stress
+      - infection
+      - poor_diet
+    affects:
+      - inflammation
+      - serotonin
+    relaxation_relevance: high_negative
+  il_10:
+    name: Interleukin-10
+    de_name: Interleukin-10
+    category: cytokine
+    functions:
+      - Anti-inflammatory cytokine
+      - Immune regulation
+    primary_effects:
+      inflammation:
+        direction: decrease
+        magnitude: counteracts_pro_inflammatory_IL_6_TNF_α
+      immune_balance:
+        direction: promote_regulatory_T_cells
+    triggers:
+      - exercise
+      - social_support
+      - meditation
+      - vagal_stimulation
+    affects:
+      - inflammation
+      - immune_function
+    relaxation_relevance: high_positive
+  endorphins:
+    name: Endogenous Opioids (β-endorphin)
+    de_name: Endorphine
+    category: neuropeptide
+    functions:
+      - Pain analgesia
+      - Pleasure and reward
+      - Stress buffering
+    primary_effects:
+      pain:
+        direction: decrease
+        mechanism: opioid_receptor_activation
+      mood:
+        direction: increase
+        magnitude: pleasure_and_euphoria
+    triggers:
+      - intense_exercise
+      - laughter
+      - social_bonding
+      - massage
+    affects:
+      - pain
+      - mood
+      - stress_resilience
+    relaxation_relevance: moderate_positive
+    notes: Exercise-induced endorphin release (30+ minutes intense)
+  ketone_bodies:
+    name: Ketone Bodies (acetoacetate, β-hydroxybutyrate)
+    de_name: Ketonkörper
+    category: metabolic_fuel
+    formula: C3H6O2 (acetoacetate), C4H8O3 (β-hydroxybutyrate)
+    produces_from:
+      - fatty_acids_during_fasting
+    functions:
+      - Alternative brain fuel (fasting/ketogenic_diet)
+      - HDAC inhibition (histone deacetylase)
+      - Inflammasome suppression
+    primary_effects:
+      brain_energy:
+        direction: increase
+        efficiency: produces_more_ATP_per_oxygen_than_glucose
+      gaba_synthesis:
+        direction: increase
+        mechanism: HDAC_inhibition → increased_GABA_genes
+      inflammation:
+        direction: decrease
+        mechanism: NLRP3_inflammasome_inhibition
+    fasting_timeline:
+      4_6h: ketones_begin (0.1_0.5mM)
+      12h: nutritional_ketosis (0.5_1.0mM)
+      24_48h: therapeutic_ketosis (1.0_5.0mM)
+    affects:
+      - brain_energy
+      - GABA
+      - inflammation
+      - mood
+    relaxation_relevance: high_positive
+    notes: Intermittent_fasting_16:8 maintains mild ketosis
+  cbd_extract:
+    name: CBD Extract (full spectrum)
+    de_name: CBD-Extrakt
+    category: botanical_extract
+    functions:
+      - Anxiety reduction
+      - Sleep enhancement
+      - Anti-inflammatory
+    affects:
+      - anxiety
+      - sleep
+      - inflammation
+    relaxation_relevance: high_positive
+  ashwagandha:
+    name: Ashwagandha (Withania somnifera)
+    de_name: Ashwagandha
+    category: adaptogenic_herb
+    functions:
+      - Cortisol regulation
+      - Stress resilience
+      - Sleep quality
+    primary_effects:
+      cortisol:
+        direction: decrease
+        magnitude: 28_30%_reduction_chronic_use
+        timeline: 8_weeks
+      anxiety:
+        direction: decrease
+      sleep:
+        direction: improve
+    affects:
+      - cortisol
+      - anxiety
+      - sleep
+      - stress_resilience
+    relaxation_relevance: high_positive
+  lemon_balm:
+    name: Lemon Balm (Melissa officinalis)
+    de_name: Zitronenmelisse
+    category: herb
+    functions:
+      - Mild anxiolytic
+      - Gentle GABA potentiation
+      - Digestion support
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: mild
+      gaba:
+        direction: potentiate
+      digestion:
+        direction: improve
+    affects:
+      - anxiety
+      - digestion
+    relaxation_relevance: moderate_positive
+  cocaine:
+    name: '"Cocaine"'
+    de_name: '"Kokain"'
+    category: '"alkaloid"'
+    formula: '"C17H21NO4"'
+    sources: null
+    external:
+      - Coca plant (Erythroxylum coca)
+    endogenous: "false"
+    functions: null
+    primary_effects: null
+    dopamine: null
+    direction: '"increase"'
+    magnitude: null
+    onset_minutes: '"1-5 minutes"'
+    peak_minutes: '"5-30 minutes"'
+    duration_minutes: '"30-90 minutes"'
+    mechanism: "\"Binds to and blocks the serotonin transporter (SERT), preventing
+      reuptake of serotonin, contributing to its mood-altering effects, though
+      less prominent for the acute 'high' compared to dopamine.\""
+    norepinephrine: null
+    serotonin: null
+    affects: null
+    produces_from: null
+    produces_to: null
+    affected_by: null
+    relaxation_relevance:
+      - '"Hypothalamic-pituitary-adrenal (HPA) axis activity (acute activation,
+        chronic dysregulation)"'
+      - '"Sympathetic nervous system activity (significant activation)"'
+      - '"Cardiovascular system (increased heart rate, blood pressure,
+        vasoconstriction)"'
+      - '"Sleep architecture (significant disruption, insomnia)"'
+      - '"Mood regulation (acute euphoria, subsequent dysphoria, chronic
+        anhedonia)"'
+      - '"Energy levels (acute increase, chronic fatigue)"'
+      - '"Neuroinflammation (chronic use can induce glial activation and
+        inflammatory markers)"'
+      - '"Oxidative stress (increases oxidative damage in brain and other
+        tissues)"'
+      - '"Brain-derived neurotrophic factor (BDNF) levels (can be decreased with
+        chronic use/withdrawal)"'
+      - '"Immune function (chronic use can dysregulate immune responses, e.g.,
+        altered cytokine profiles)"'
+      - '"Glutamate transmission (chronic use can alter glutamatergic pathways,
+        affecting neuroplasticity and craving)"'
+      - '"Route of administration (e.g., smoking/intravenous leads to faster
+        onset, higher peak, shorter duration than intranasal)"'
+      - '"Dose and frequency of use"'
+      - '"Individual genetic polymorphisms (e.g., in dopamine transporters or
+        metabolizing enzymes)"'
+      - '"Co-ingestion of other substances (e.g., alcohol forms cocaethylene, a
+        more cardiotoxic metabolite with a longer half-life)"'
+    notes: "\"Cocaine acutely induces intense euphoria and energy, but this is
+      followed by a 'crash' characterized by severe dysphoria, anxiety, fatigue,
+      and intense craving, directly counteracting relaxation and promoting
+      psychological stress. Chronic use leads to profound dysregulation of mood,
+      sleep, and stress responses, including HPA axis hyperactivity during
+      withdrawal and anhedonia due to persistent dopamine system adaptations. It
+      significantly disrupts sleep architecture, promoting insomnia and reducing
+      restorative sleep stages. The cardiovascular strain it places on the body
+      is a major physiological stressor. Furthermore, chronic use is linked to
+      neuroinflammation and oxidative stress, contributing to brain damage and
+      impaired cognitive function. Withdrawal symptoms are primarily
+      psychological, manifesting as severe depression, anhedonia, and fatigue,
+      all of which are antithetical to relaxation and contribute to chronic
+      psychological stress. The formation of cocaethylene with alcohol enhances
+      its cardiotoxicity and prolongs its effects, exacerbating physiological
+      stress.\""
+    _source: ai_generated
+    _created_at: 2026-05-18T13:09:39.577Z
+    _metadata:
+      confidence: high
+      needs_review: false
+      reviewed: false

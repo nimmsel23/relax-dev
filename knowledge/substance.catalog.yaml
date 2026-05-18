@@ -1,0 +1,347 @@
+substances:
+  mulungu:
+    name: Mulungu
+    de_name: Mulungu
+    category: herbal_adaptogen
+    source_plant: Erythrina mulungu
+    common_names:
+      - Red Coral Tree
+      - Brazilian Red Tree
+    description: Traditional Brazilian ethnobotanical, used for stress, anxiety, and sleep
+    references:
+      - erysotrine
+      - erysovine
+      - erysodine
+      - quercetin
+      - kaempferol
+    traditional_use:
+      - Stress relief
+      - Anxiety reduction
+      - Sleep support
+      - Calming agent
+    relaxation_relevance: high_positive
+    mechanism: "Phytocomplex: contains alkaloids (erysotrine, erysovine) + flavonoids (quercetin, kaempferol); synergistic anxiolytic + GABA-modulating effects"
+    notes: "Traditional use backed by ethnobotany; specific alkaloid mechanisms under research"
+
+  ashwagandha:
+    name: Ashwagandha (Withania somnifera)
+    de_name: Ashwagandha
+    category: herbal_adaptogen
+    source_plant: Withania somnifera
+    common_names:
+      - Indian Ginseng
+      - Winter Cherry
+    description: Ayurvedic adaptogen for stress resilience and cortisol regulation
+    references:
+      - withaferin_a
+      - withanolide_d
+      - withanolide_a
+    traditional_use:
+      - Stress management
+      - Sleep enhancement
+      - Immune support
+      - Energy stabilization
+    relaxation_relevance: high_positive
+    mechanism: "Withanolides inhibit cortisol release; synergistic effects with GABA and serotonin pathways"
+    notes: "Well-researched adaptogen; clinical evidence for 28-30% cortisol reduction over 8 weeks"
+
+  l_theanine_supplement:
+    name: L-Theanine Supplement
+    de_name: L-Theanin-Supplement
+    category: amino_acid_supplement
+    source_plant: Green tea extract (Camellia sinensis)
+    description: Isolated amino acid for calm focus and alpha wave enhancement
+    references:
+      - l_theanine
+    traditional_use:
+      - Anxiety reduction
+      - Focus enhancement
+      - Relaxed alertness
+    relaxation_relevance: high_positive
+    mechanism: "Potentiates GABA; enhances alpha waves (10-12 Hz relaxed alertness state)"
+    notes: "Often combined with caffeine for smooth, jitter-free energy"
+
+  green_tea:
+    name: Green Tea
+    de_name: Grüner Tee
+    category: herbal_beverage
+    source_plant: Camellia sinensis
+    description: Brewed tea containing L-theanine, caffeine, and catechin polyphenols
+    references:
+      - l_theanine
+      - caffeine
+      - egcg
+      - theobromine
+    traditional_use:
+      - Relaxation with mild alertness
+      - Antioxidant support
+      - Mood enhancement
+    relaxation_relevance: moderate_positive
+    mechanism: "Synergistic: L-theanine smooths caffeine's effects; EGCG provides anti-inflammatory + antioxidant benefits"
+    notes: "Balanced caffeine-theanine ratio (natural ~1:2 or 1:3)"
+
+  magnesium_glycinate:
+    name: Magnesium Glycinate
+    de_name: Magnesium-Glycinat
+    category: mineral_supplement
+    description: Chelated magnesium form with enhanced bioavailability and GI tolerance
+    references:
+      - magnesium
+      - glycine
+    traditional_use:
+      - Sleep support
+      - Muscle relaxation
+      - Anxiety reduction
+      - Digestive ease
+    relaxation_relevance: high_positive
+    mechanism: "Magnesium potentiates GABA; glycine enhances sleep quality; superior absorption vs oxide/carbonate forms"
+    notes: "Preferred form for sleep: glycine + magnesium synergy; minimal laxative effect"
+
+  cbd_oil_full_spectrum:
+    name: CBD Oil (Full Spectrum)
+    de_name: CBD-Öl (Vollspektrum)
+    category: cannabis_extract
+    source_plant: Cannabis sativa (hemp)
+    description: Full spectrum CBD extract with minor cannabinoids and terpenes
+    references:
+      - cbd
+      - cbc
+      - cbg
+      - pinene
+      - linalool
+      - myrcene
+    traditional_use:
+      - Anxiety management
+      - Sleep enhancement
+      - Pain relief
+      - Anti-inflammatory support
+    relaxation_relevance: high_positive
+    mechanism: "CBD (5-HT1A agonist, adenosine A2A enhancement) + entourage effect (minor cannabinoids + terpenes)"
+    notes: "Entourage effect: minor cannabinoids (CBC, CBG) + terpenes may enhance efficacy vs isolated CBD"
+
+  valerian_root:
+    name: Valerian Root (Valeriana officinalis)
+    de_name: Baldrianwurzel
+    category: herbal_sleep_aid
+    source_plant: Valeriana officinalis
+    description: Traditional European herb for sleep onset and anxiety relief
+    references:
+      - valerenic_acid
+      - valerenol
+      - gaba
+    traditional_use:
+      - Sleep induction
+      - Mild anxiety reduction
+      - Restlessness management
+    relaxation_relevance: high_positive
+    mechanism: "GABA-modulating compounds; valerenic acid interaction with GABA-A receptors"
+    notes: "Stronger effect with 4-6 week chronic use; onset 30-60 minutes"
+
+  passionflower:
+    name: Passionflower (Passiflora edulis)
+    de_name: Passionsblume
+    category: herbal_anxiolytic
+    source_plant: Passiflora edulis / incarnata
+    description: Traditional anxiolytic herb used in European phytomedicine
+    references:
+      - flavonoid_vitexin
+      - alkaloid_harmaline
+      - gaba
+    traditional_use:
+      - Anxiety reduction
+      - Sleep support
+      - Nervous tension relief
+    relaxation_relevance: high_positive
+    mechanism: "GABA potentiation + MAO inhibition (harmala alkaloids); synergistic anxiolytic"
+    notes: "Often combined with valerian in sleep formulas"
+
+  chamomile_tea:
+    name: Chamomile Tea (Matricaria recutita)
+    de_name: Kamillentee
+    category: herbal_beverage
+    source_plant: Matricaria recutita
+    description: Mild herbal infusion for relaxation and digestive ease
+    references:
+      - apigenin
+      - flavonoid_derivatives
+      - gaba
+    traditional_use:
+      - Relaxation before bed
+      - Digestive support
+      - Gentle anxiety relief
+    relaxation_relevance: moderate_positive
+    mechanism: "Apigenin (benzodiazepine-like) binds GABA-A receptors weakly; traditional safey profile"
+    notes: "Mild effect; suitable for daily use; pairs well with bedtime routine"
+
+  lavender:
+    name: Lavender (Lavandula angustifolia)
+    de_name: Lavendel
+    category: herbal_anxiolytic
+    source_plant: Lavandula angustifolia
+    description: Aromatic herb and essential oil for relaxation and sleep
+    references:
+      - linalool
+      - linalyl_acetate
+      - geraniol
+    traditional_use:
+      - Anxiety reduction
+      - Sleep enhancement
+      - Relaxation inhalation
+    relaxation_relevance: high_positive
+    mechanism: "Terpenes (linalool, linalyl acetate) modulate GABA and serotonin; aroma activates olfactory relaxation pathways"
+    notes: "Effective both as inhalation (essential oil) and ingestion (tea/extract)"
+
+  lemon_balm_tea:
+    name: Lemon Balm Tea (Melissa officinalis)
+    de_name: Zitronenmelisse-Tee
+    category: herbal_beverage
+    source_plant: Melissa officinalis
+    description: Mild herbal tea for gentle relaxation and digestion support
+    references:
+      - rosmarinic_acid
+      - caffeic_acid
+      - gaba
+    traditional_use:
+      - Mild anxiety reduction
+      - Digestion support
+      - Gentle relaxation
+    relaxation_relevance: moderate_positive
+    mechanism: "GABA potentiation; rosmarinic acid provides anti-inflammatory + antioxidant support"
+    notes: "Gentle, suitable for daily afternoon use; pairs well with afternoon wind-down"
+
+  ginseng_korean:
+    name: Korean Red Ginseng (Panax ginseng)
+    de_name: Koreanischer Roter Ginseng
+    category: herbal_adaptogen
+    source_plant: Panax ginseng
+    description: Adaptogenic root for stress resilience and sustained energy
+    references:
+      - ginsenoside_rg1
+      - ginsenoside_rb1
+      - ginsenoside_rd
+    traditional_use:
+      - Stress adaptation
+      - Energy stabilization
+      - Immune support
+    relaxation_relevance: moderate_positive
+    mechanism: "Ginsenosides modulate HPA axis; enhance parasympathetic tone without overstimulation"
+    notes: "Red (fermented) ginseng warmer than white; use morning/afternoon to avoid evening stimulation"
+
+  rhodiola:
+    name: Rhodiola rosea
+    de_name: Rhodiola
+    category: herbal_adaptogen
+    source_plant: Rhodiola rosea
+    description: Nordic adaptogen for fatigue resistance and mood support
+    references:
+      - salidroside
+      - rosavin
+    traditional_use:
+      - Fatigue resistance
+      - Mood enhancement
+      - Stress resilience
+    relaxation_relevance: moderate_positive
+    mechanism: "Salidroside modulates monoamine neurotransmitters; enhances dopamine in fatigue states without overstimulation"
+    notes: "Morning/early afternoon use; synergistic with exercise for stress resilience"
+
+  glycine_supplement:
+    name: Glycine Supplement
+    de_name: Glycin-Supplement
+    category: amino_acid_supplement
+    description: Simple amino acid for sleep quality and collagen synthesis
+    references:
+      - glycine
+    traditional_use:
+      - Sleep quality enhancement
+      - Collagen support
+      - CNS relaxation
+    relaxation_relevance: high_positive
+    mechanism: "Glycine (inhibitory neurotransmitter) promotes parasympathetic tone; lowers core body temperature for sleep"
+    notes: "3-5g evening dose; synergistic with magnesium for sleep support"
+
+  l_tryptophan_supplement:
+    name: L-Tryptophan Supplement
+    de_name: L-Tryptophan-Supplement
+    category: amino_acid_supplement
+    description: Dietary amino acid precursor for serotonin and melatonin synthesis
+    references:
+      - tryptophan
+      - serotonin
+      - melatonin
+    traditional_use:
+      - Mood enhancement
+      - Sleep support
+      - Anxiety reduction (via serotonin)
+    relaxation_relevance: high_positive
+    mechanism: "Tryptophan → 5-HTP → serotonin → melatonin; carb co-ingestion enhances BBB transport via insulin effect"
+    notes: "Evening use with carbs optimal; 500-1000mg doses; peak serotonin effect 4-6h post-ingestion"
+
+  mucuna_pruriens:
+    name: Mucuna pruriens (Velvet Bean)
+    de_name: Samtbohne
+    category: herbal_supplement
+    source_plant: Mucuna pruriens
+    description: Tropical plant source of L-DOPA for dopamine support
+    references:
+      - l_dopa
+      - dopamine
+    traditional_use:
+      - Mood elevation
+      - Motivation enhancement
+      - Motor function support
+    relaxation_relevance: moderate_negative
+    mechanism: "L-DOPA precursor for dopamine; stimulating in nature; use earlier in day"
+    notes: "Morning/early afternoon use; not suitable for evening relaxation; synergistic with tyrosine"
+
+  reishi_mushroom:
+    name: Reishi Mushroom (Ganoderma lucidum)
+    de_name: Reishi-Pilz
+    category: medicinal_mushroom
+    source_plant: Ganoderma lucidum
+    description: Ancient adaptogenic mushroom for immune support and relaxation
+    references:
+      - polysaccharide_beta_glucan
+      - triterpene_ganoderic_acid
+      - adenosine
+    traditional_use:
+      - Sleep quality
+      - Immune regulation
+      - Stress resilience
+    relaxation_relevance: high_positive
+    mechanism: "Polysaccharides modulate immune response; triterpenes enhance GABA-like relaxation; adenosine accumulation aids sleep"
+    notes: "Best taken as decoction (30min boil) for bioavailability; bitter taste; 1-2g daily"
+
+  lion_s_mane:
+    name: Lion's Mane Mushroom (Hericium erinaceus)
+    de_name: Igelstachelbart-Pilz
+    category: medicinal_mushroom
+    source_plant: Hericium erinaceus
+    description: Cognitive-supporting mushroom with neuroprotective properties
+    references:
+      - hericenone_a
+      - erinacine_a
+      - ngf_stimulation
+    traditional_use:
+      - Cognitive support
+      - Neuroplasticity enhancement
+      - Mood stabilization
+    relaxation_relevance: moderate_positive
+    mechanism: "Hericenones and erinacines stimulate NGF (nerve growth factor); enhance neuroplasticity + mood regulation"
+    notes: "Morning use for alertness; supports resilience to stress via neuroplasticity"
+
+  cordyceps:
+    name: Cordyceps militaris
+    de_name: Cordyceps
+    category: medicinal_mushroom
+    source_plant: Cordyceps militaris
+    description: Energy-supporting fungus for vitality and exercise performance
+    references:
+      - adenosine
+      - atp_production
+    traditional_use:
+      - Energy enhancement
+      - Endurance support
+      - Fatigue resistance
+    relaxation_relevance: moderate_negative
+    mechanism: "Enhance ATP mitochondrial production; increase oxygen utilization; stimulating (morning use)"
+    notes: "Morning/training time use; synergistic with exercise for stress resilience via endorphin release"

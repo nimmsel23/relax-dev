@@ -1,39 +1,43 @@
 import { useState, useEffect } from 'react'
-import { Activity, BookOpen, MoonStar, BarChart3 } from 'lucide-react'
+import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock } from 'lucide-react'
 import Dashboard from './views/Dashboard.jsx'
 import Session from './views/Session.jsx'
 import Journal from './views/Journal.jsx'
 import Stats from './views/Stats.jsx'
-import { api } from './api.js'
+import PhysioTimeline from './views/PhysioTimeline.jsx'
+import SubstanceCatalog from './views/SubstanceCatalog.jsx'
+import { useCircadianTheme } from './hooks/useCircadianTheme.js'
 
 const TABS = [
   { id: 'dash',    label: 'Heute',    Icon: Activity },
   { id: 'session', label: 'Session',  Icon: MoonStar },
   { id: 'journal', label: 'Journal',  Icon: BookOpen },
   { id: 'stats',   label: 'Stats',    Icon: BarChart3 },
+  { id: 'physio',  label: 'Physio',   Icon: Zap },
+  { id: 'catalog', label: 'Catalog',  Icon: Beaker },
 ]
 
 export default function App() {
   const [tab, setTab] = useState('dash')
-  const [theme, setTheme] = useState('mocha')
+  const { theme, setManualTheme, resetToCircadian, manualOverride, currentSchedule } = useCircadianTheme()
 
+  // Apply theme to DOM
   useEffect(() => {
-    api.get('/theme').then(d => {
-      if (d?.theme) setTheme(d.theme)
-    }).catch(() => {})
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme === 'latte' ? 'latte' : '')
+    document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
   function toggleTheme() {
-    const next = theme === 'mocha' ? 'latte' : 'mocha'
-    setTheme(next)
-    api.post('/theme', { theme: next }).catch(() => {})
+    if (manualOverride) {
+      resetToCircadian()
+    } else {
+      const themes = ['mocha', 'macchiato', 'frappe', 'latte']
+      const currentIdx = themes.indexOf(theme)
+      const nextIdx = (currentIdx + 1) % themes.length
+      setManualTheme(themes[nextIdx])
+    }
   }
 
-  const View = { dash: Dashboard, session: Session, journal: Journal, stats: Stats }[tab]
+  const View = { dash: Dashboard, session: Session, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog }[tab]
 
   return (
     <div className="flex flex-col h-full" style={{ background: 'var(--bg)', color: 'var(--ink)' }}>
@@ -47,16 +51,24 @@ export default function App() {
         </div>
         <button
           onClick={toggleTheme}
-          className="text-xs px-2.5 py-1 rounded-lg border transition-colors"
+          title={manualOverride ? 'Manual override active (click to reset)' : `Circadian mode: ${currentSchedule?.name || theme}`}
+          className="text-xs px-2.5 py-1 rounded-lg border transition-colors flex items-center gap-1.5"
           style={{ background: 'var(--card)', border: '1px solid var(--line)', color: 'var(--muted)' }}
         >
-          {theme === 'mocha' ? '☀️' : '🌙'}
+          {manualOverride ? (
+            <>
+              <Clock size={14} />
+              {theme.slice(0, 3).toUpperCase()}
+            </>
+          ) : (
+            currentSchedule?.name || '🌓'
+          )}
         </button>
       </header>
 
       {/* View */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
-        <div className="max-w-2xl mx-auto px-4 py-4 pb-28">
+        <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}>
           <View />
         </div>
       </main>
