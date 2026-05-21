@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""physio-dev server — Knowledge Base Doc Viewer + Gemini Enrichment."""
+
+import json
+import os
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+from aiohttp import web
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+BASE = Path(__file__).parent
+PUBLIC = BASE / "public"
+PORT = int(os.environ.get("PORT", 9100))
+HOST = os.environ.get("HOST", "127.0.0.1")
+
+
+def load_env(path: Path):
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            os.environ.setdefault(k.strip(), v.strip())
+
+
+load_env(Path.home() / ".env" / "gemini.env")
+
+GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+KNOWLEDGE_DIRS = ["knowledge", "maps", "refs"]
+
+
+def list_docs() -> list[dict]:
+    """Alle .md Files als flache Liste mit Metadaten."""
+    docs = []
+    for folder in KNOWLEDGE_DIRS:
+        d = BASE / folder
+        if not d.exists():
+            continue
+        for f in sorted(d.rglob("*.md")):
+            rel = f.relative_to(BASE)
+            parts = rel.parts
+            docs.append({
+                "path": str(rel),
+                "name": f.stem.replace("-", " ").replace("_", " ").title(),
+                "folder": "/".join(parts[:-1]),
+                "filename": f.name,
+            })
+    return docs
+
+
+def call_gemini_sync(prompt: str) -> str:
+    payload = {"contents": [{"parts": [{"text": prompt}]}]}
+    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request(
+        GEMINI_URL,
+        data=data,
+        headers={"Content-Type": "application/json", "X-goog-api-key": GEMINI_KEY},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=60) as resp:
+        result = json.loads(resp.read())
+    return result["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+
+# ── Routes ────────────────────────────────────────────────────────────────────
+
+async def get_docs(request: web.Request) -> web.Response:
+    return web.json_response(list_docs())
+
+
+async def get_doc(request: web.Request) -> web.Response:
+    path = request.match_info["path"]
+    # Pfad-Traversal verhindern
+    target = (BASE / path).resolve()
+    if not str(target).startswith(str(BASE.resolve())):
+        raise web.HTTPForbidden()
+    if not target.exists() or target.suffix != ".md":
+        raise web.HTTPNotFound()
+    return web.Response(text=target.read_text(), content_type="text/plain")
+
+
+async def save_doc(request: web.Request) -> web.Response:
+    path = request.match_info["path"]
+    target = (BASE / path).resolve()
+    if not str(target).startswith(str(BASE.resolve())):
+        raise web.HTTPForbidden()
+    if target.suffix != ".md":
+        raise web.HTTPBadRequest()
+    body = await request.json()
+    content = body.get("content", "")
+    target.write_text(content)
+    return web.json_response({"ok": True})
+
+
+async def enrich(request: web.Request) -> web.Response:
+    if not GEMINI_KEY:
+        raise web.HTTPServiceUnavailable(reason="GEMINI_API_KEY nicht konfiguriert")
+    body = await request.json()
+    doc_content = body.get("content", "")
+    user_prompt = body.get("prompt", "")
+    if not user_prompt:
+        raise web.HTTPBadRequest(reason="prompt fehlt")
+
+    prompt = f"""Du bist ein Physiologie-Experte für Vitaltrainer (Ernährungs- + Entspannungstrainer, DACH).
+
+Aktuelles Dokument:
+---
+{doc_content}
+---
+
+Aufgabe vom Nutzer: {user_prompt}
+
+Antworte auf Deutsch. Wenn du den Inhalt des Dokuments ergänzt, nutze Markdown.
+Sei präzise und wissenschaftlich korrekt. Keine Marketing-Sprache."""
+
+    try:
+        result = call_gemini_sync(prompt)
+        return web.json_response({"result": result})
+    except urllib.error.HTTPError as e:
+        raise web.HTTPBadGateway(reason=f"Gemini API Fehler: {e.code}")
+
+
+async def index(request: web.Request) -> web.FileResponse:
+    return web.FileResponse(PUBLIC / "index.html")
+
+
+# ── App ───────────────────────────────────────────────────────────────────────
+
+def create_app() -> web.Application:
+    app = web.Application()
+    app.router.add_get("/", index)
+    app.router.add_get("/api/docs", get_docs)
+    app.router.add_get(r"/api/docs/{path:.+}", get_doc)
+    app.router.add_post(r"/api/docs/{path:.+}", save_doc)
+    app.router.add_post("/api/enrich", enrich)
+    app.router.add_static("/static", PUBLIC)
+    return app
+
+
+if __name__ == "__main__":
+    app = create_app()
+    print(f"physio-dev server → http://{HOST}:{PORT}")
+    web.run_app(app, host=HOST, port=PORT, print=None)
