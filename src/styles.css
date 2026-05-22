@@ -22,10 +22,30 @@
   --glass-border: rgba(137,180,250,0.1);
 }
 
-/* Catppuccin Macchiato (Evening/Dark variant) */
+/* Catppuccin Mocha (Night — explicit selector mirrors :root) */
+[data-theme="mocha"] {
+  --bg:         #1e1e2e;
+  --bg2:        #181825;
+  --panel:      #11111b;
+  --card:       #313244;
+  --card-hover: #45475a;
+  --line:       #45475a;
+  --ink:        #cdd6f4;
+  --muted:      #9399b2;
+  --dim:        #6c7086;
+  --accent:     #89b4fa;
+  --accent-glow: rgba(137,180,250,0.12);
+  --green:      #a6e3a1;
+  --red:        #f38ba8;
+  --orange:     #fab387;
+  --glass:      rgba(30,30,46,0.85);
+  --glass-border: rgba(137,180,250,0.1);
+}
+
+/* Catppuccin Macchiato (Evening) */
 [data-theme="macchiato"] {
   --bg:         #24273a;
-  --bg2:        #1e293a;
+  --bg2:        #1e2030;
   --panel:      #181926;
   --card:       #363a52;
   --card-hover: #494d64;
@@ -42,7 +62,7 @@
   --glass-border: rgba(138,173,244,0.1);
 }
 
-/* Catppuccin Frappe (Afternoon/Medium) */
+/* Catppuccin Frappe (Afternoon) */
 [data-theme="frappe"] {
   --bg:         #303446;
   --bg2:        #292c3c;
@@ -51,30 +71,30 @@
   --card-hover: #51576d;
   --line:       #51576d;
   --ink:        #c6d0f5;
-  --muted:      #949cbb;
-  --dim:        #737994;
-  --accent:     #81c8be;
-  --accent-glow: rgba(129,200,190,0.12);
+  --muted:      #a5adce;
+  --dim:        #838ba7;
+  --accent:     #8caaee;
+  --accent-glow: rgba(140,170,238,0.12);
   --green:      #a6d189;
   --red:        #e78284;
   --orange:     #ef9f76;
   --glass:      rgba(48,52,70,0.85);
-  --glass-border: rgba(129,200,190,0.1);
+  --glass-border: rgba(140,170,238,0.1);
 }
 
-/* Catppuccin Latte (Morning/Light) */
+/* Catppuccin Latte (Morning) */
 [data-theme="latte"] {
   --bg:         #eff1f5;
   --bg2:        #e6e9ef;
   --panel:      #dce0e8;
-  --card:       #f2f4f8;
-  --card-hover: #e6e9ef;
+  --card:       #ccd0da;
+  --card-hover: #bcc0cc;
   --line:       #bcc0cc;
   --ink:        #4c4f69;
-  --muted:      #8c8fa1;
+  --muted:      #7c7f93;
   --dim:        #9ca0b0;
   --accent:     #1e66f5;
-  --accent-glow: rgba(30,102,245,0.08);
+  --accent-glow: rgba(30,102,245,0.1);
   --green:      #40a02b;
   --red:        #d20f39;
   --orange:     #fe640b;
@@ -119,3 +139,36 @@ body {
   animation: spin 0.7s linear infinite;
   display: inline-block;
 }
+
+/* Vault markdown rendering */
+.vault-markdown h1, .vault-markdown h2, .vault-markdown h3 {
+  color: var(--ink);
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+.vault-markdown h1 { font-size: 1.15rem; }
+.vault-markdown h2 { font-size: 1rem; color: var(--accent); }
+.vault-markdown h3 { font-size: 0.9rem; }
+.vault-markdown p { font-size: 0.85rem; line-height: 1.6; color: var(--muted); margin-bottom: 0.5rem; }
+.vault-markdown ul, .vault-markdown ol { padding-left: 1.25rem; margin-bottom: 0.5rem; }
+.vault-markdown li { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.vault-markdown strong { color: var(--ink); font-weight: 600; }
+.vault-markdown em { color: var(--accent); }
+.vault-markdown hr { border-color: var(--line); margin: 0.75rem 0; }
+.vault-markdown table { width: 100%; font-size: 0.8rem; border-collapse: collapse; margin-bottom: 0.75rem; }
+.vault-markdown th { background: var(--glass); color: var(--accent); padding: 0.4rem 0.6rem; text-align: left; }
+.vault-markdown td { padding: 0.35rem 0.6rem; border-top: 1px solid var(--line); color: var(--muted); }
+.vault-markdown blockquote { border-left: 3px solid var(--accent); padding-left: 0.75rem; color: var(--dim); }
+.vault-markdown code { background: var(--glass); padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.8rem; color: var(--green); }
+
+/* Vault wikilinks */
+.vault-link {
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+.vault-link:hover { opacity: 0.75; }
