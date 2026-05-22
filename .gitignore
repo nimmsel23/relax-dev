@@ -3,6 +3,9 @@ dist/
 data/
 *.log
 *.bak
+*.bak2
+__pycache__/
+*.pyc
 .env
 .env.*.local
 .DS_Store

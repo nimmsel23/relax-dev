@@ -1,0 +1,309 @@
+#!/usr/bin/env python3
+"""
+kb — Knowledge Base Dispatcher für relax-dev
+
+Routen:
+  kb serve                      # KB Enricher HTTP-Server :9124
+  kb enrich <key>               # Einzelnes Molekül anreichern
+  kb enrich <key> --dry-run     # Vorschau ohne DB-Write
+  kb batch [--limit N]          # Alle unangereicherten Moleküle
+  kb status                     # DB-Stats + Enrichment-Übersicht
+  kb list                       # Moleküle ohne enriched_at
+  kb browse                     # Interaktiver Katalog-Browser (fzf)
+  kb migrate [--force]          # YAML → SQLite (node script)
+  kb search <query>             # KB-Suche via Node API :9123
+  kb get <key>                  # Molekül/Substanz aus DB anzeigen
+"""
+
+import json
+import shutil
+import sqlite3
+import subprocess
+import sys
+from pathlib import Path
+
+KB_DIR = Path(__file__).resolve().parent
+DB_PATH = KB_DIR / "data" / "kb.db"
+ENRICHER = [sys.executable, "-m", "server.knowledge.kb_enricher"]
+NODE_MIGRATE = ["node", "scripts/migrate-yaml-to-sqlite.mjs"]
+
+HAS_GUM = shutil.which("gum") is not None
+HAS_FZF = shutil.which("fzf") is not None
+
+
+def run(*args, **kwargs):
+    return subprocess.run(list(args), cwd=KB_DIR, **kwargs)
+
+
+def gum_log(level: str, msg: str) -> None:
+    if HAS_GUM:
+        subprocess.run(["gum", "log", f"--level={level}", msg])
+    else:
+        prefix = {"info": "→", "warn": "⚠", "error": "✗"}.get(level, "·")
+        print(f"{prefix} {msg}", file=sys.stderr if level == "error" else sys.stdout)
+
+
+def usage():
+    print(__doc__.strip())
+    sys.exit(0)
+
+
+def main():
+    args = sys.argv[1:]
+
+    if not args or args[0] in ("-h", "--help"):
+        usage()
+
+    cmd, rest = args[0], args[1:]
+
+    # ── Enricher ──────────────────────────────────────────────────────────────
+    if cmd == "serve":
+        run(*ENRICHER, "serve", *rest)
+
+    elif cmd == "enrich":
+        if not rest:
+            gum_log("error", "Usage: kb enrich <key> [--dry-run]")
+            sys.exit(1)
+        run(*ENRICHER, "enrich", *rest)
+
+    elif cmd == "batch":
+        run(*ENRICHER, "batch", *rest)
+
+    elif cmd == "status":
+        _status()
+
+    elif cmd == "list":
+        run(*ENRICHER, "list")
+
+    # ── Browser ───────────────────────────────────────────────────────────────
+    elif cmd == "browse":
+        _browse(rest)
+
+    # ── Migration ─────────────────────────────────────────────────────────────
+    elif cmd == "migrate":
+        run(*NODE_MIGRATE, *rest)
+
+    # ── Suche ─────────────────────────────────────────────────────────────────
+    elif cmd == "search":
+        if not rest:
+            gum_log("error", "Usage: kb search <query>")
+            sys.exit(1)
+        _search(" ".join(rest))
+
+    # ── Get ───────────────────────────────────────────────────────────────────
+    elif cmd == "get":
+        if not rest:
+            gum_log("error", "Usage: kb get <key>")
+            sys.exit(1)
+        _get(rest[0])
+
+    else:
+        gum_log("error", f"Unbekannter Befehl: {cmd!r}")
+        usage()
+
+
+# ── Status ────────────────────────────────────────────────────────────────────
+
+
+def _status() -> None:
+    """DB-Stats als gum-Tabelle, dann Enricher-Status."""
+    con = _connect()
+    rows = []
+    for tbl in ("molecules", "molecule_details", "substances", "interactions", "reactions"):
+        n = con.execute(f"SELECT COUNT(*) FROM {tbl}").fetchone()[0]
+        rows.append(f"{tbl}\t{n}")
+    unenriched = con.execute(
+        """SELECT COUNT(*) FROM molecules m
+           LEFT JOIN molecule_details d ON m.key=d.key
+           WHERE d.enriched_at IS NULL"""
+    ).fetchone()[0]
+    rows.append(f"unenriched\t{unenriched}")
+    con.close()
+
+    if HAS_GUM:
+        tsv = "Tabelle\tAnzahl\n" + "\n".join(rows)
+        subprocess.run(
+            ["gum", "table", "--print", '--separator=\t'],
+            input=tsv, text=True,
+        )
+    else:
+        print("Tabelle                   Anzahl")
+        for r in rows:
+            k, v = r.split("\t")
+            print(f"  {k:<26} {v}")
+
+    if unenriched:
+        gum_log("warn", f"{unenriched} Moleküle noch nicht angereichert — kb batch")
+    else:
+        gum_log("info", "Alle Moleküle sind angereichert")
+
+
+# ── Browse (fzf) ──────────────────────────────────────────────────────────────
+
+
+def _browse(args: list[str]) -> None:
+    """Interaktiver Katalog-Browser via fzf mit Vorschau."""
+    if not HAS_FZF:
+        gum_log("warn", "fzf nicht gefunden — fallback auf kb list")
+        run(*ENRICHER, "list")
+        return
+
+    con = _connect()
+    entries = []
+
+    mols = con.execute(
+        "SELECT key, COALESCE(de_name, name) as label, category, relaxation_relevance FROM molecules ORDER BY category, key"
+    ).fetchall()
+    for m in mols:
+        rel = m["relaxation_relevance"] or ""
+        entries.append(f"[mol]  {m['key']:<32} {m['category']:<22} {m['label']}  {rel}")
+
+    subs = con.execute(
+        "SELECT key, COALESCE(de_name, name) as label, category, relaxation_relevance FROM substances ORDER BY category, key"
+    ).fetchall()
+    for s in subs:
+        rel = s["relaxation_relevance"] or ""
+        entries.append(f"[sub]  {s['key']:<32} {s['category']:<22} {s['label']}  {rel}")
+
+    con.close()
+
+    # fzf mit Vorschau: zeigt kb get <key> in der Preview-Spalte
+    preview_cmd = f"{sys.executable} {__file__} get {{2}}"
+    fzf_args = [
+        "fzf",
+        "--ansi",
+        "--prompt=KB> ",
+        "--header=ENTER: Details anzeigen  |  mol=Molekül  sub=Substanz",
+        f"--preview={preview_cmd}",
+        "--preview-window=right:55%:wrap",
+    ]
+    # optionaler Filter via args
+    if args:
+        fzf_args += ["--query", " ".join(args)]
+
+    result = subprocess.run(
+        fzf_args,
+        input="\n".join(entries),
+        text=True,
+        capture_output=True,
+        cwd=KB_DIR,
+    )
+    if result.returncode == 0 and result.stdout.strip():
+        selected = result.stdout.strip()
+        key = selected.split()[1]
+        _get(key)
+
+
+# ── Search ────────────────────────────────────────────────────────────────────
+
+
+def _search(query: str) -> None:
+    """Suche via Node API oder direkt in SQLite als Fallback."""
+    # Versuche zuerst Node API
+    result = subprocess.run(
+        ["http", "--ignore-stdin", "-b", "GET", ":9123/api/knowledge/search", f"q=={query}"],
+        capture_output=True, text=True, cwd=KB_DIR,
+    )
+    if result.returncode == 0:
+        try:
+            data = json.loads(result.stdout)
+            _print_search_results(data)
+            return
+        except Exception:
+            pass
+
+    # Fallback: SQLite direkt
+    gum_log("warn", "Node API nicht erreichbar — direkte DB-Suche")
+    con = _connect()
+    q = f"%{query}%"
+    mols = con.execute(
+        "SELECT key, name, de_name, category FROM molecules WHERE key LIKE ? OR name LIKE ? OR de_name LIKE ?",
+        (q, q, q),
+    ).fetchall()
+    subs = con.execute(
+        "SELECT key, name, de_name, category FROM substances WHERE key LIKE ? OR name LIKE ? OR de_name LIKE ?",
+        (q, q, q),
+    ).fetchall()
+    con.close()
+
+    if not mols and not subs:
+        gum_log("warn", f"Keine Treffer für: {query!r}")
+        return
+
+    for m in mols:
+        print(f"[mol]  {m['key']:<32} {m['category']:<20} {m['de_name'] or m['name']}")
+    for s in subs:
+        print(f"[sub]  {s['key']:<32} {s['category']:<20} {s['de_name'] or s['name']}")
+
+
+def _print_search_results(data: dict) -> None:
+    total = data.get("total", 0)
+    if not total:
+        gum_log("warn", "Keine Treffer")
+        return
+    for m in data.get("molecules", []):
+        print(f"[mol]  {m.get('_key',''):<32} {m.get('category',''):<20} {m.get('de_name') or m.get('name','')}")
+    for s in data.get("substances", []):
+        print(f"[sub]  {s.get('_key',''):<32} {s.get('category',''):<20} {s.get('de_name') or s.get('name','')}")
+
+
+# ── Get ───────────────────────────────────────────────────────────────────────
+
+
+def _get(key: str) -> None:
+    """Zeigt Molekül oder Substanz direkt aus SQLite."""
+    if not DB_PATH.exists():
+        gum_log("error", f"DB nicht gefunden: {DB_PATH}")
+        sys.exit(1)
+
+    con = _connect()
+
+    mol = con.execute("SELECT * FROM molecules WHERE key=?", (key,)).fetchone()
+    if mol:
+        data = dict(mol)
+        det = con.execute("SELECT * FROM molecule_details WHERE key=?", (key,)).fetchone()
+        if det:
+            det_dict = dict(det)
+            for f in ("functions", "primary_effects", "affects", "extra"):
+                if det_dict.get(f):
+                    try:
+                        det_dict[f] = json.loads(det_dict[f])
+                    except Exception:
+                        pass
+            data.update({k: v for k, v in det_dict.items() if v is not None})
+        con.close()
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+        return
+
+    sub = con.execute("SELECT * FROM substances WHERE key=?", (key,)).fetchone()
+    if sub:
+        data = dict(sub)
+        det = con.execute("SELECT * FROM substance_details WHERE key=?", (key,)).fetchone()
+        if det:
+            det_dict = dict(det)
+            if det_dict.get("extra"):
+                try:
+                    det_dict["extra"] = json.loads(det_dict["extra"])
+                except Exception:
+                    pass
+            data.update({k: v for k, v in det_dict.items() if v is not None})
+        con.close()
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+        return
+
+    con.close()
+    gum_log("error", f"Nicht gefunden: '{key}'")
+    sys.exit(1)
+
+
+# ── DB-Helper ─────────────────────────────────────────────────────────────────
+
+
+def _connect() -> sqlite3.Connection:
+    con = sqlite3.connect(DB_PATH)
+    con.row_factory = sqlite3.Row
+    return con
+
+
+if __name__ == "__main__":
+    main()

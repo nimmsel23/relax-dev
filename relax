@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""
+relax — Service Dispatcher für relax-dev
+
+Routen:
+  relax dev                     # Vite + Node API zusammen (HMR)
+  relax start                   # Node API :9123 alleine
+  relax ui                      # Vite :5904 alleine
+  relax build                   # Vite Production Build → dist/
+  relax health                  # Node API Health-Check
+  relax status                  # Service-Ports + Prozess-Status
+"""
+
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+RELAX_DIR = Path(__file__).resolve().parent
+HAS_GUM = shutil.which("gum") is not None
+
+
+def run(*args, **kwargs):
+    return subprocess.run(list(args), cwd=RELAX_DIR, **kwargs)
+
+
+def gum_log(level: str, msg: str) -> None:
+    if HAS_GUM:
+        subprocess.run(["gum", "log", f"--level={level}", msg])
+    else:
+        prefix = {"info": "→", "warn": "⚠", "error": "✗"}.get(level, "·")
+        stream = sys.stderr if level == "error" else sys.stdout
+        print(f"{prefix} {msg}", file=stream)
+
+
+def usage():
+    print(__doc__.strip())
+    sys.exit(0)
+
+
+def main():
+    args = sys.argv[1:]
+
+    if not args or args[0] in ("-h", "--help"):
+        usage()
+
+    cmd, rest = args[0], args[1:]
+
+    if cmd == "dev":
+        run("node", "scripts/dev-runner.mjs", *rest)
+
+    elif cmd == "start":
+        run("node", "server.mjs", *rest)
+
+    elif cmd == "ui":
+        run("npx", "vite", *rest)
+
+    elif cmd == "build":
+        run("npx", "vite", "build", *rest)
+
+    elif cmd == "health":
+        _health()
+
+    elif cmd == "status":
+        _status()
+
+    else:
+        gum_log("error", f"Unbekannter Befehl: {cmd!r}")
+        usage()
+
+
+def _health() -> None:
+    result = subprocess.run(
+        ["http", "--ignore-stdin", "-b", "GET", ":9123/health"],
+        capture_output=True, text=True, cwd=RELAX_DIR,
+    )
+    if result.returncode == 0:
+        gum_log("info", "Node API :9123 erreichbar")
+        print(result.stdout.strip())
+    else:
+        gum_log("error", "Node API :9123 nicht erreichbar")
+        sys.exit(1)
+
+
+def _status() -> None:
+    ports = [
+        (9123, "Node API"),
+        (5904, "Vite (UI)"),
+        (9124, "KB Enricher"),
+    ]
+
+    rows = []
+    for port, label in ports:
+        result = subprocess.run(
+            ["ss", "-tlnp", f"sport = :{port}"],
+            capture_output=True, text=True,
+        )
+        listening = str(port) in result.stdout
+        status = "running" if listening else "stopped"
+        rows.append(f":{port}\t{label}\t{status}")
+
+    if HAS_GUM:
+        tsv = "Port\tService\tStatus\n" + "\n".join(rows)
+        subprocess.run(
+            ["gum", "table", "--print", '--separator=\t'],
+            input=tsv, text=True,
+        )
+    else:
+        print(f"{'Port':<8} {'Service':<16} Status")
+        for r in rows:
+            port, label, status = r.split("\t")
+            marker = "✓" if status == "running" else "✗"
+            print(f"  {marker} {port:<8} {label:<16} {status}")
+
+
+if __name__ == "__main__":
+    main()

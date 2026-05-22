@@ -6,14 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **relax-dev** — Standalone Relax Centre application for relaxation techniques, stress management, and personal wellness tracking. Self-contained React/Vite frontend + Node.js backend with file-based data storage (no database).
 
-**Status**: Active development. Core dual-catalog knowledge base + graph visualization implemented. Reconceptualization ongoing with Psychoneuroimmunology inputs (see `UNKLARHEITEN.md`).
+**Leitplanke**: **Psychoneuroimmunologie (PNI)** — die wissenschaftliche Grundlage des Projekts. Stressphysiologie (HPA-Achse, Cortisol), Neurotransmitter (GABA, Serotonin, Dopamin), Immunmodulation (IL-10, Inflammation) und deren Wechselwirkungen mit Relaxationstechniken und Substanzen. Alle Features bauen auf diesem Rahmen auf.
+
+**Status**: Active development. Dual-catalog KB + SQLite-Layer + Vault integration + cross-substance graph + Python Enrichment-Engine implementiert. Physio Timeline (PNI-Simulation) ist das nächste Major Feature.
 
 ## Architecture
 
 ### Tech Stack
 - **Frontend**: React 18 + Vite (:5904), Tailwind CSS + custom CSS variables
-- **Backend**: Node.js HTTP server (`server.mjs`, :9004), file-based storage
-- **UI Components**: lucide-react for icons, tab-based navigation
+- **Backend**: Node.js HTTP server (`server.mjs`, :9123), SQLite für KB-Daten, file-based für Sessions/Journal
+- **UI Components**: lucide-react for icons, reactflow for graph, marked for markdown rendering
 - **Theming**: Catppuccin-inspired (mocha/latte), CSS variable-driven
 
 ### Port Convention
@@ -21,47 +23,85 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |---------|------|----------|
 | Vite (UI) | 5904 | `npm run ui:dev` (or via dev-runner) |
 | Node API | 9123 | `npm run start` (or via dev-runner) |
+| KB Enricher (Python) | 9124 | `python server/knowledge/kb_enricher.py serve` |
+
+**Wichtig**: Im Dev-Betrieb immer über `:5904` zugreifen (Vite + HMR). `:9123` direkt serviert nur `dist/` — Änderungen ohne Build unsichtbar.
 
 ### Knowledge Base Architecture (Dual-Catalog)
 
-**Concept**: Bidirectional mapping between herbal substances (user-facing) and pure biochemical molecules (scientific view).
+**Konzept**: Bidirektionales Mapping zwischen Herbal Substances (user-facing) und biochemischen Molekülen (wissenschaftliche Ebene). Fundament ist PNI — jede Substanz wirkt über Moleküle auf Neurotransmitter, Hormone oder Immunmediatoren.
 
-**Structure**:
-- **Substances** (`knowledge/substance.catalog.yaml`) — 19 herbal materials (Mulungu, Ashwagandha, Green Tea, etc.)
-  - Each has `references` array → molecule keys it contains
-  - Fields: name, category, source_plant, description, traditional_use, relaxation_relevance, mechanism
-  
-- **Molecules** (`knowledge/molecule.catalog.yaml`) — 27 pure biochemical compounds (Caffeine, L-Theanine, Quercetin, etc.)
-  - Each has `found_in` array → substance keys containing it
-  - Fields: name, formula, category, functions, primary_effects (with onset/peak/duration), affects, relaxation_relevance
+### Zwei-Schichten-Architektur (KB)
 
-- **Interactions** (`knowledge/interactions.yaml`) — 32 molecule-to-molecule interactions (synergistic, antagonistic)
+**YAML = dünner kuratierter Index** (menschlich editierbar, Source of Truth für Kuration):
+- `knowledge/substance.catalog.yaml` — Index-Felder: name, de_name, category, relaxation_relevance, references (→ molecule keys)
+- `knowledge/molecule.catalog.yaml` — Index-Felder: name, de_name, category, relaxation_relevance, tags, found_in (→ substance keys)
+- `knowledge/interactions.yaml` — Molekül-Interaktionen (bleiben vollständig in YAML + SQLite)
+- `knowledge/reactions.yaml` — Physiologische Kaskaden (bleiben vollständig in YAML + SQLite)
+
+**SQLite = operationale DB** (`data/kb.db`, WAL-Modus):
+- `molecules` + `molecule_details` — Index getrennt von Details (formula, primary_effects, functions, affects, notes, kegg_id, pubchem_cid, sources)
+- `substances` + `substance_details` — Index getrennt von Details (source_plant, description, traditional_use, mechanism, vault_file)
+- `interactions`, `reactions` — vollständige JSON-Blobs
+- `curated=1` Einträge (aus YAML importiert) sind write-protected für die Pipeline
+- Auto-Import: beim Serverstart, wenn DB leer → YAML wird automatisch importiert
+- Re-Import: `node scripts/migrate-yaml-to-sqlite.mjs [--force]`
+
+**Bestände** (Stand 2026-05-19): 11 Substances, 38 Molecules (inkl. Testosteron), 33 Interactions (inkl. Cortisol↔Testosteron), 12 Reactions
 
 **Dispatcher** (`kb-loader.js`):
-- `dispatchQuery(query)` — intelligently routes to substance or molecule expansion
-- `expandSubstance(query)` — returns substance + all referenced molecules + interactions between them
-- `expandMolecule(query)` — returns molecule + all substances containing it + related molecules
-- Caching + indexing for O(1) lookups
+- Liest ausschließlich aus SQLite via `kb-db.js`
+- `dispatchQuery(query)` — routes to substance or molecule expansion
+- `expandSubstance(query)` — substance + referenced plant compounds + endogenous targets (GABA, Cortisol etc.) mit `via`-Metadata
+- `expandMolecule(query)` — molecule + substances containing it + related molecules
+- `buildMoleculeHub(molKey)` — cross-substance graph: welche Substances beeinflussen dieses Molekül
+- `buildNetworkGraph()` — alle Moleküle als Nodes, Edges aus interactions + primary_effects
+- In-memory Name→Key Index für O(1) Lookups, wird bei Writes invalidiert
 
-**Frontend**: Knowledge Graph visualization (`KnowledgeGraph.jsx`) with Reactflow:
-- Substance node centered at (0, 0)
-- Molecule nodes arranged in circle (radius 280px)
-- Edges: substance→molecule (animated gray), molecule↔molecule (color-coded: green=synergistic, red=antagonistic dashed)
-- Integrated into `SubstanceCatalog` with List ↔ Graph toggle
+**Endogene Targets vs. Pflanzenmoleküle**:
+- Neurotransmitter/Hormone/Mineralien (category: neurotransmitter|hormone|amino_acid|mineral|...) = Graph-Nodes (Ziele)
+- Pflanzliche Alkaloide/Flavonoide = Kanten-Labels (Vermittler), keine eigenen Graph-Nodes
+
+**Frontend**: Knowledge Graph (`KnowledgeGraph.jsx`) mit Reactflow — 4 Modi:
+- **overview**: alle Substances als Grid, klickbar
+- **expanded**: eine Substance → endogene Targets (GABA, Kortisol) mit Pflanzenmolekül als Kantenbezeichnung
+- **hub**: Molekül als Zentrum (rot), alle Substances die es beeinflussen oben, verwandte Moleküle unten
+- **network**: alle 38 Moleküle als Nodes (kategorie-geclustert), Edges aus interactions + primary_effects
 
 **API** (`/api/knowledge/*`):
 - `GET /api/knowledge/expand?q=...` — dispatcher (detects substance or molecule)
 - `GET /api/knowledge/expand/substance/:id` — substance expansion
 - `GET /api/knowledge/expand/molecule/:id` — molecule expansion
+- `GET /api/knowledge/hub/:id` — molecule hub: alle Substances + Moleküle die es beeinflussen
+- `GET /api/knowledge/vault/:id` — passendes Vault-Markdown für Substance oder Molecule
 - `GET /api/knowledge/interaction?mol1=...&mol2=...` — interaction lookup (with AI generation fallback)
 - `GET /api/knowledge/search?q=...` — cross-catalog search
-- `GET /api/knowledge/health` — KB status (includes `dual_catalog_enabled: true`, molecule counts by source)
+- `GET /api/knowledge/health` — KB status
 - All others: `/substances`, `/molecules`, `/interactions`, `/reactions`
 
+### Vault Integration
+
+**Sources** (`server/knowledge/vault-search.js`):
+- `~/Vitaltrainer/Sportkompetenz/Endokrinologie/` — Hormone, Neurotransmitter (Dopamin, Kortisol, Melatonin, HPA-Achse...)
+- `~/Vitaltrainer/Sportkompetenz/Biochemie/Supplemente/` — KSM-66 Ashwagandha, Koffein, Kreatin...
+- `~/Vitaltrainer/Sportkompetenz/Physiologie/` — Amygdala, Hippocampus, ZNS...
+- `~/Vitaltrainer/Dipl.Entspannungstrainer/` — Entspannungsprotokolle, PMR, Atemschulung
+- `~/BODY/Kräuter/` — Kräuterprofile (Mulungu, Passionsblume, Lavendel...)
+
+**Matching**: Name-Score (de_name → name → key, first-word fallback) — kein Hardcoding von Pfaden.
+
+**Obsidian-Syntax**:
+- `[[wikilinks]]` → im Vault-Tab als klickbare Spans gerendert, Klick öffnet passendes Substance-Modal
+- `[[wikilinks]]` werden beim Indexieren auch als Relation-Map extrahiert (entry.links)
+- Tags (#cortisol, #Kräuter etc.) sind in Vault-Notes inkonsistent — nicht als primären Linker nutzen. `[[links]]` sind zuverlässiger.
+
+**Vault-Tab im Modal**: Dritter Tab in SubstanceCatalog-Modal nach Übersicht + Moleküle.
+
 ### Data Structure
-**Local file-based storage** (`data/` directory, created at runtime):
 ```
 data/
+  kb.db                        # SQLite: KB-Katalog (molecules, substances, interactions, reactions)
+  cache.db                     # SQLite: API-Cache (PubChem, KEGG, Psychonaut) + enriched molecules
   sessions/YYYY-MM-DD.json     # {date, items: [{id, technique, minutes, mood_before, mood_after, note}], saved_at}
   journal/YYYY-MM-DD.md        # Markdown entries, one file per day
   theme.json                   # {theme: "mocha" | "latte"}
@@ -70,7 +110,7 @@ data/
 ### Core Backend (server.mjs)
 Single-file HTTP API server (no frameworks, native Node.js):
 - **Static serving**: `dist/` (prod build) → fallback to `public/`
-- **API endpoints**:
+- Routes delegieren an `server/routes/knowledge.js` für `/api/knowledge/*`
 
 **Session & Journal**:
   - `GET /health` — Service health check
@@ -82,20 +122,9 @@ Single-file HTTP API server (no frameworks, native Node.js):
   - `GET /journal?date=...` — Fetch markdown entry
   - `POST /journal` — Save markdown entry
   - `GET /journal/list` — List 50 most recent entries
-  - `GET /stats/summary?days=14` — Aggregated stats (mood delta, streak, by_technique, per_day)
+  - `GET /stats/summary?days=14` — Aggregated stats
   - `GET /export/csv?days=14` — CSV download
-  - `GET /theme` — Current theme preference
-  - `POST /theme` — Save theme preference
-
-**Knowledge Base** (see Knowledge Base Architecture section above):
-  - `GET /api/knowledge/expand?q=...` — Unified dispatcher (substance or molecule)
-  - `GET /api/knowledge/expand/substance/:id` — Substance expansion
-  - `GET /api/knowledge/expand/molecule/:id` — Molecule expansion
-  - `GET /api/knowledge/interaction?mol1=...&mol2=...` — Interaction lookup
-  - `GET /api/knowledge/search?q=...` — Cross-catalog search
-  - `GET /api/knowledge/substances` — All substances
-  - `GET /api/knowledge/molecules` — All molecules
-  - `GET /api/knowledge/health` — KB status
+  - `GET /theme` / `POST /theme` — Theme preference
 
 Environment variables:
 - `PORT` (default 9123)
@@ -109,223 +138,138 @@ Environment variables:
 1. **Dashboard** — Daily overview, today's quick stats
 2. **Session** — Log relaxation techniques with timing and mood tracking
 3. **Journal** — Write/edit markdown journal entries
-4. **Stats** — View aggregated summaries (charts, streak, mood trends)
+4. **Stats** — View aggregated summaries
+5. **SubstanceCatalog** — Substances als Basis (nicht Molecules). Modal: Übersicht / Moleküle / Vault-Tab. `[[wikilinks]]` im Vault-Tab navigierbar. List ↔ Graph toggle.
 
-**Theme system**: CSS custom properties (`data-theme` attribute on `<html>`):
-- `--bg`, `--ink`, `--glass`, `--glass-border`, `--card`, `--line`, `--muted`, `--dim`, `--accent`
+**Theme system**: CSS custom properties (`data-theme` auf `<html>`):
+- `--bg`, `--ink`, `--glass`, `--card`, `--line`, `--muted`, `--dim`, `--accent`
 - Toggled via top-right button; persisted via `/theme` endpoint
 
-**Mobile-first design**:
-- Bottom navigation (lucide icons + labels)
-- Glassmorphism header/footer (blur backdrop)
-- Safe area padding for notches (`pb-safe`)
-- Vertical scroll layout
+**Mobile-first design**: Bottom navigation, Glassmorphism header, safe area padding.
 
 ## Development
 
-### Setup
-```bash
-npm install
-```
-
 ### Running
 ```bash
-# Both UI + API together (recommended for dev)
-npm run dev
+# Both UI + API together (recommended)
+cd ~/relax-dev && npm run dev
 
-# UI only (needs API running separately)
-npm run ui:dev
-
-# API only
-npm run start
+# Access via :5904 (Vite HMR) — not :9123
 ```
 
 The **dev runner** (`scripts/dev-runner.mjs`) starts both services in parallel:
-- API: nodemon watches `server.mjs` for changes
-- Vite: standard hot reload on source changes
-- Both share stdio (combined logs)
+- API: nodemon watches `server.mjs` AND `server/` (routes + knowledge) — restart bei Backend-Änderungen automatisch
+- Vite: HMR auf Source-Änderungen
+- Änderungen an `dev-runner.mjs` selbst erfordern manuellen Neustart
+
+**KB Enricher** (Python, optional, separat starten):
+```bash
+# Von relax-dev root (python -m wegen Paket-Imports):
+python -m server.knowledge.kb_enricher serve          # HTTP :9124
+python -m server.knowledge.kb_enricher enrich cortisol
+python -m server.knowledge.kb_enricher batch --limit 5
+python -m server.knowledge.kb_enricher status
+```
 
 ### Vite Proxy
-Dev UI proxies API calls to :9123 via `vite.config.js`:
-- `/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → :9123
+`/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → `:9123`
 
 ### Building
 ```bash
-npm run build          # Vite build → dist/
-npm run preview        # Test prod build locally
+npm run build   # Vite build → dist/
 ```
+Production: `node server.mjs` serves `dist/`.
 
-Production: `node server.mjs` serves `dist/` if present, else `public/`.
+## Key Design Notes
 
-## Key Decisions & Design Notes
+- **Kein Framework** im Backend (raw Node.js) — minimal, schnell, single-file
+- **Kein UI-Framework** (kein shadcn, kein MaterialUI) — Tailwind + CSS variables, leichtgewichtig halten
+- **SQLite für KB** (`better-sqlite3`, sync, WAL) — KB-Katalog und API-Cache; Sessions/Journal bleiben file-based
+- **YAML = Authoring, SQLite = Betrieb** — YAML manuell editieren, SQLite per Migration importieren; nie direkt YAML zur Laufzeit schreiben
+- **Pipeline schreibt nur Detail-Tabellen** — `curated=1` Index-Einträge sind write-protected; Gemini kann Details anreichern, nie kuratierte Einträge überschreiben
+- **`marked`** für Markdown-Rendering (Vault-Tab) — bereits installiert
+- **`reactflow`** für Graph-Visualisierung — bereits installiert
 
-### Why file-based storage?
-- No external dependencies (no database, no driver config)
-- Transparent to git (human-readable JSON/Markdown)
-- Portable and backup-friendly
-- Suitable for single-user personal app
-
-### Why no framework (raw Node.js in server.mjs)?
-- Minimal overhead, fast cold start
-- Single file easy to reason about
-- Sufficient for CRUD + static serving
-- Lightweight—no npm dependency cruft
-
-### CSS variables over Tailwind config
-Theming via `data-theme` attribute + CSS custom properties allows runtime theme toggle without bundler restart. Catppuccin palette (mocha = dark, latte = light) provides semantic color tokens.
-
-### Tab-based nav over router
-Single-view SPA with tab switching (no route changes). Simpler state management, instant transitions. Suitable for mobile-first UX.
-
-## Common Development Tasks
-
-### Adding a new technique
-Edit `server.mjs` line ~162 (`/techniques` endpoint), add entry to the techniques array.
-
-### Adding a new API endpoint
-1. Add handler in `server.mjs` (check pathname, parse query/body, return JSON)
-2. Add Vite proxy entry in `vite.config.js` if frontend needs it
-3. Add `api.get()` or `api.post()` call in React view (`src/api.js`)
-
-### Modifying stats aggregation
-`computeSummary()` in `server.mjs` (line ~82) calculates `total_minutes`, `days_with_sessions`, `streak_days`, `avg_mood_delta`, `by_technique`, `per_day`. Adjust formulas there.
-
-### Adding a new view
-1. Create `src/views/NewView.jsx`
-2. Add to `TABS` array in `src/App.jsx` with icon from lucide-react
-3. Import view and add to tab → view map in App
-
-### Testing API manually
+## Testing API
 ```bash
-# Session & stats
-http POST :9123/session date=2026-05-17 items='[{"technique":"breath-4-7-8","minutes":5,"mood_before":3,"mood_after":4}]'
-http GET ':9123/stats/summary?days=14'
-http GET ':9123/export/csv?days=7'
-
-# Knowledge Base
-http GET ':9123/api/knowledge/expand?q=mulungu'
-http GET ':9123/api/knowledge/expand?q=caffeine'
-http GET ':9123/api/knowledge/interaction?mol1=caffeine&mol2=l_theanine'
+http GET :9123/api/knowledge/hub/cortisol
+http GET :9123/api/knowledge/vault/mulungu
+http GET ':9123/api/knowledge/expand?q=ashwagandha'
 http GET ':9123/api/knowledge/health'
+http GET ':9123/api/knowledge/network'
+http GET ':9123/api/knowledge/interaction?mol1=cortisol&mol2=testosterone'
+# KB-DB neu importieren (nach YAML-Änderungen):
+node scripts/migrate-yaml-to-sqlite.mjs --force
 ```
 
-## Considerations for Reconceptualization (UNKLARHEITEN.md)
+## Planned Feature: Physio Timeline (PNI-Simulation)
 
-Project is in **placeholder mode** pending Psychoneuroimmunology inputs. Three open questions:
-1. **Mood scales**: Current 1–5 for mood; alternatives: stress 1–10, tension 1–10
-2. **Sleep tracking**: Separate JSON structure or journal markdown?
-3. **CSV export granularity**: Per-item or per-day summary?
+Das zentrale nächste Feature — direkter Ausdruck der PNI-Leitplanke:
 
-All questions will be revisited after domain expert inputs. Current mood tracking, technique taxonomy, and aggregation logic may change.
-
-### Planned Feature: Physio Timeline Graph Engine
-
-See `AGENTS-11-05-2026.md` for detailed spec. Next major feature:
-
-> **Physiological Simulation System** — Models cortisol, dopamine, glucose curves in response to lifestyle events (coffee, nicotine, THC, meals) with context modifiers (fasted, sleep debt, stress level).
-
-**Implementation approach** (from AGENTS.md):
-- Backend: Deterministic math-based simulation (pure functions, no ML)
-- Frontend: Event input UI + Nivo line chart (3 curves)
-- Shared types for API contract
-- MVP-first: functionality over perfection, simplicity over flexibility
+> **Physiological Simulation System** — Modelliert Kortisol, Dopamin, Glukose-Kurven als Reaktion auf Lifestyle-Events (Kaffee, Training, Mulungu, Fasten) mit Kontext-Modifikatoren (nüchtern, Schlafdefizit, Stresslevel).
 
 **Architecture**:
 ```
-Backend: POST /api/physio/simulate → simulation engine (curves, events, interactions)
-Frontend: /physio-timeline page → event panel + chart
-Shared: types, constants (Event, SimulationRequest, SimulationResponse)
+Backend: POST /api/physio/simulate → deterministisches Simulations-Engine (pure functions, kein ML)
+Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven gleichzeitig)
 ```
 
-This feature will likely replace or significantly enhance the current mood tracking and integrate deeper psychoneuroimmunology concepts (HPA axis, autonomic nervous system, nutrient timing).
+**Datenquellen** (dokumentiert in `HOT.md`):
+- PubChem REST — Moleküldaten
+- Psychonaut Wiki — Onset/Duration/Intensity-Kurven
+- HMDB — endogene Biochemie (Kortisol, Dopamin, Serotonin)
+- DSLD (NIH) — Supplement-Daten (Adaptogene, Mikronährstoffe)
 
-## Deployment
-
-### Dev Environment
-Running `npm run dev` on localhost (both :5904 and :9004) is the standard. Logs to stdout; shutdown with Ctrl+C.
-
-### Production (Standalone)
-1. `npm run build` → creates `dist/`
-2. `node server.mjs` (or systemd unit if integrated into AlphaOS)
-3. Server auto-detects `dist/`, serves SPA with proper 404 → index.html fallback
-
-Port and static dir configurable via env vars (see server.mjs env section).
+**Bezug zu PNI**: HPA-Achse (Kortisol-Kurve), autonomes Nervensystem (Dopamin/Adenosin), Nährstoff-Timing (Glukose + Insulin → Tryptophan → Serotonin).
 
 ## File Manifest
 
 ### Root & Config
-- `package.json` — npm scripts, dependencies (React, Vite, Tailwind, lucide-react, reactflow, @google/generative-ai)
-- `vite.config.js` — Vite + proxy config (proxies `/api` → :9123)
-- `tailwind.config.cjs` — Tailwind CSS customization
-- `postcss.config.cjs` — PostCSS pipeline
-- `.gitignore` — Standard (node_modules, dist, data, .env, relax.env)
-- `README.md` — Quick start
-- `CLAUDE.md` — This file (development guidance)
-- `RESULTS.md` — Session results & completed work
-- `NEXT.md` — Active priorities
-- `UNKLARHEITEN.md` — Open design questions
+- `package.json` — dependencies: React, Vite, Tailwind, lucide-react, reactflow, marked, @google/generative-ai
+- `vite.config.js` — Vite + proxy config
+- `CLAUDE.md` — This file
+- `HOT.md` — Open-source Datenquellen + Node-Module für Physio-Simulation
 
 ### Knowledge Base Data
-- `knowledge/substance.catalog.yaml` — 19 herbal substances (Mulungu, Ashwagandha, etc.) with bidirectional references
-- `knowledge/molecule.catalog.yaml` — 27 biochemical molecules (Caffeine, L-Theanine, etc.) with found_in references
-- `knowledge/interactions.yaml` — 32 molecule-to-molecule interactions (synergistic, antagonistic)
-- `knowledge/reactions.yaml` — 12 chemical reactions (reference catalog)
+- `knowledge/substance.catalog.yaml` — 11 kuratierte Substanzen
+- `knowledge/molecule.catalog.yaml` — 38 biochemische Moleküle (inkl. Testosteron)
+- `knowledge/interactions.yaml` — 33 Molekül-Interaktionen (inkl. PNI-Kaskaden)
+- `knowledge/reactions.yaml` — 12 physiologische Reaktionskaskaden
 
 ### Backend
-- `server.mjs` — Single-file Node.js HTTP server (MIME, JSON helpers, API routes, static serve)
-- `scripts/dev-runner.mjs` — Parallel dev launcher (API + Vite)
-- `server/routes/knowledge.js` — Knowledge Base API handler (`/api/knowledge/*`)
-- `server/knowledge/kb-loader.js` — Dual-catalog loader + dispatcher (substances, molecules, interactions, reactions)
-- `server/knowledge/ai-enricher.js` — Gemini AI enrichment for molecules
-- `server/knowledge/ai-enricher-v2.js` — Advanced Gemini AI enrichment with context
+- `server.mjs` — Single-file Node.js HTTP server
+- `scripts/dev-runner.mjs` — Parallel dev launcher (nodemon + Vite)
+- `scripts/migrate-yaml-to-sqlite.mjs` — YAML → SQLite Migration (einmalig oder `--force`)
+- `server/routes/knowledge.js` — Knowledge Base API (`/api/knowledge/*`)
+- `server/knowledge/kb-db.js` — SQLite-Layer (better-sqlite3): Schema, CRUD, curated-Guard
+- `server/knowledge/kb-loader.js` — Dispatcher + Hub-Builder + Graph; liest ausschließlich via kb-db
+- `server/knowledge/kb-cache.js` — SQLite API-Cache (PubChem/KEGG/Psychonaut TTL-Cache)
+- `server/knowledge/vault-search.js` — Vault-Index, Name-Matching, Obsidian-Sanitizer
+- `server/knowledge/enricher-pipeline.js` — PubChem + KEGG + Psychonaut → Gemini → KB-Detail (Node.js, via `/api/knowledge/enrich`)
+- `server/knowledge/kb_enricher/` — Python Enrichment-Engine :9124 (modulares Paket)
+  - `config.py` — Env-Loading, Gemini-Konstanten, Pfade
+  - `db.py` — SQLite-Helpers (COALESCE-Semantik, enriched_at-Kriterium)
+  - `gemini.py` — Gemini REST Client + Prompt-Builder (kein SDK)
+  - `enricher.py` — Core-Logik: enrich_molecule() / enrich_batch()
+  - `server.py` — aiohttp HTTP-Server + Route-Handler
+  - `cli.py` — typer CLI (serve/enrich/batch/status/list)
+  - `README.md` — Doku, Design-Entscheidungen, Erweiterungs-Guide
+- `server/knowledge/pubchem.js` — PubChem REST Client (CID, formula, pharmacology)
+- `server/knowledge/kegg.js` — KEGG REST Client (Compound-ID, Pathway-Namen)
+- `server/knowledge/psychonaut.js` — Psychonaut Wiki GraphQL (Onset/Peak/Duration)
 
 ### Frontend
-- `src/main.jsx` — Vite entry, React root
-- `src/App.jsx` — Main component (tab nav, theme toggle)
-- `src/api.js` — Fetch helpers (get, post), date utilities, download handler
-- `src/styles.css` — Catppuccin palette CSS variables, base typography
-- `src/views/` — View components:
-  - `Dashboard.jsx` — Today overview
-  - `Session.jsx` — Technique logging + mood input
-  - `Journal.jsx` — Markdown editor
-  - `Stats.jsx` — Summary charts & trends
-  - `SubstanceCatalog.jsx` — Herbal substances + graph visualization (with List ↔ Graph toggle)
-- `src/components/` — Reusable components:
-  - `KnowledgeGraph.jsx` — Reactflow network visualization (substances + molecules + interactions)
-
-### Static Assets
-- `public/` — Fallback static files (index.html, favicon, etc.)
-- `index.html` — Vite template, root div
-- `dist/` — Output of `npm run build` (served in prod)
-
-## Configuration
-
-### Gemini API Setup
-The Knowledge Base supports AI enrichment (generating molecules & interactions) via Google Gemini.
-
-**Required**:
-1. Create `~/.env/relax.env` with your API key:
-   ```
-   GEMINI_API_KEY=your-api-key-here
-   GEMINI_MODEL=gemini-2.5-flash
-   ```
-
-2. Both `ai-enricher.js` and `ai-enricher-v2.js` load from `~/.env/relax.env` at startup
-
-**Behavior**:
-- If API key is missing, server still runs but logs warnings
-- AI enrichment is optional; KB works with existing manual entries
-- Generated molecules are tracked with `_source: "ai_generated"` + `_metadata.confidence`
-- Interactions between molecules can be auto-generated when queried
+- `src/views/SubstanceCatalog.jsx` — Substances-Liste + Graph-Toggle + Modal (Übersicht/Moleküle/Vault)
+- `src/components/KnowledgeGraph.jsx` — Reactflow: overview / expanded / hub Modi
+- `src/styles.css` — Catppuccin CSS variables + `.vault-markdown` + `.vault-link` styles
 
 ## Notes for Future Sessions
 
-- **Session tracking**: See `RESULTS.md` for completed work and `NEXT.md` for active priorities.
-- **Dual-catalog status**: Knowledge Base architecture is stable. 19 substances + 27 molecules + 32 interactions are loaded and indexed. Dispatcher works correctly.
-- **Browser testing pending**: Graph visualization (Reactflow) is implemented but not yet tested in browser. See `NEXT.md` task 1.
-- **Physiology integration**: User has Obsidian Vault with physiological models. Integration opportunity exists (see `NEXT.md` task 2).
-- **Planned feature next**: See `AGENTS-11-05-2026.md` for **Physio Timeline Graph Engine** spec (physiological simulation system). This represents the deeper integration with Psychoneuroimmunology. Architecture sketch in CLAUDE.md above.
-- **Data migration**: If substance/molecule scales or structures change, scripts to migrate existing `data/sessions/*.json` files will be needed.
-- **Component library**: No UI framework (no shadcn, no MaterialUI). Styling is Tailwind + CSS variables. Keep it lightweight.
-- **Offline support**: Currently no service worker or IndexedDB caching. If adding, consider local-first sync to `/api/*`.
-- **API enrichment**: Knowledge Base can be extended via Gemini AI. Molecules and interactions can be auto-generated with confidence scoring.
+- **PNI-Leitplanke**: Psychoneuroimmunologie ist der inhaltliche Rahmen. Kortisol, GABA, HPA-Achse, Vagaltonus, Entzündungs-Depression-Kaskade — alles hängt zusammen. Beim Erweitern des KB immer fragen: wie passt das ins PNI-Bild?
+- **Katalog-Status**: 11 Substances, 38 Molecules (inkl. Testosteron), 33 Interactions — kuratiert auf eigene Erfahrung. Neue Substanzen nur hinzufügen wenn tatsächlich genutzt.
+- **YAML editieren → Migration**: Nach manuellen YAML-Änderungen immer `node scripts/migrate-yaml-to-sqlite.mjs --force` ausführen, damit SQLite aktuell bleibt.
+- **Vault-Notes**: Obsidian-Vault `~/Vitaltrainer/` (Symlink auf `~/Dokumente/Vitaltrainer/`). `[[links]]` sind konsistenter als `#tags`. Vault-Files können KB-Frontmatter bekommen: `kb_key`, `category`, `formula`, `kb_interactions`.
+- **KB Enricher (Python)**: `server/knowledge/kb_enricher/` (Paket). Start: `python -m server.knowledge.kb_enricher serve`. Gemini REST direkt (kein SDK). `enriched_at IS NULL` = noch nicht angereichert. COALESCE-Semantik. 503-Retry (3x). Immer von relax-dev root aufrufen.
+- **Nächste Features**: Physio Timeline (PNI-Simulation). `HOT.md` enthält Datenquellen-Recherche.
+- **Keine UI-Framework-Creep**: Tailwind + CSS variables reicht. Nicht shadcn/MUI einführen.
+- **Gemini AI**: Optional für KB-Enrichment. Key in `~/.env/relax.env`. Pipeline schreibt in `molecule_details`, nie in kuratierte Index-Einträge.

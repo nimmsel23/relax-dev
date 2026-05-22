@@ -562,6 +562,14 @@ interactions:
     slow_metabolizers: "should_avoid_caffeine_after_12pm"
     relaxation_relevance: "negative_late_caffeine"
 
+  cortisol_testosterone:
+    molecules: [cortisol, testosterone]
+    type: antagonistic
+    mechanism: "Chronisch erhöhtes Kortisol → HPG-Achsen-Suppression → LH↓ → Testosteron↓. Cortisol konkurriert mit Testosteron um gemeinsame Vorläufer (Pregnenolon-Steal)."
+    combined_effect: "Katabole Dominanz bei Kortisol-Überhang; anabole Dominanz bei T-Überhang. T/C-Ratio <0.35 = Übertraining."
+    relaxation_relevance: negative
+    pni_context: "Chronischer Stress → HPA-Aktivierung → HPG-Suppression. Stress-Management (Ashwagandha, Schlaf) verbessert T/C-Ratio."
+
   evening_dopamine_elevation_sleep:
     molecules: [dopamine, sleep, circadian_phase]
     type: "time_dependent_suppression"

@@ -33,7 +33,12 @@ molecules:
       - adrenaline
       - adenosine_receptors
     relaxation_relevance: high_negative
-
+    tags:
+      - stimulant
+      - adenosine-antagonist
+      - HPA-axis
+      - dopamine-modulator
+      - cortisol-modulator
   l_theanine:
     name: L-Theanine
     de_name: L-Theanin
@@ -42,7 +47,6 @@ molecules:
     found_in:
       - green_tea
       - black_tea
-      - l_theanine_supplement
     functions:
       - GABA potentiation
       - Alpha wave enhancement
@@ -68,7 +72,12 @@ molecules:
       - calm
       - focus
     relaxation_relevance: high_positive
-
+    tags:
+      - anxiolytic
+      - GABA-modulator
+      - sleep
+      - calm-alertness
+      - neuroprotection
   magnesium:
     name: Magnesium
     de_name: Magnesium
@@ -117,7 +126,12 @@ molecules:
       - anxiety
     relaxation_relevance: high_positive
     notes: Chronic_caffeine_users need magnesium supplementation
-
+    tags:
+      - GABA-modulator
+      - sleep
+      - muscle-relaxation
+      - HPA-axis
+      - anxiolytic
   glycine:
     name: Glycine
     de_name: Glycin
@@ -125,6 +139,7 @@ molecules:
     formula: C2H5NO2
     found_in:
       - glycine_supplement
+      - magnesium_glycinate
       - collagen
       - bone_broth
       - gelatin
@@ -147,14 +162,17 @@ molecules:
       - core_temperature
     relaxation_relevance: high_positive
     notes: Synergistic with magnesium for sleep support; 3-5g evening dose
-
+    tags:
+      - sleep
+      - inhibitory
+      - parasympathetic
+      - amino-acid
   tryptophan:
     name: L-Tryptophan
     de_name: L-Tryptophan
     category: amino_acid
     formula: C11H12N2O2
     found_in:
-      - l_tryptophan_supplement
       - turkey
       - chicken
       - cheese
@@ -172,7 +190,6 @@ molecules:
         direction: increase
         mechanism: tryptophan → 5-HTP → serotonin
         timing_optimal: evening_with_carbs
-        notes: carbs_↑_tryptophan_BBB_transport_via_LNAA_effect
       mood:
         direction: increase
         timing: 4_6h_post_ingestion
@@ -181,8 +198,12 @@ molecules:
       - melatonin
       - mood
     relaxation_relevance: high_positive
-    notes: "Dietary tryptophan = 1% of amino acids. Requires cofactors: B6, magnesium"
-
+    notes: Dietary amino acid — endogenous reference molecule for serotonin cascade
+    tags:
+      - serotonin-precursor
+      - sleep
+      - mood
+      - melatonin-precursor
   serotonin:
     name: Serotonin
     de_name: Serotonin
@@ -193,7 +214,6 @@ molecules:
       - pineal_gland
     produces_from:
       - tryptophan
-      - l_tryptophan
     functions:
       - Mood regulation
       - Sleep onset (via melatonin synthesis)
@@ -212,7 +232,11 @@ molecules:
       - appetite
       - sleep
     relaxation_relevance: high_positive
-
+    tags:
+      - mood
+      - sleep
+      - melatonin-precursor
+      - gut-brain-axis
   melatonin:
     name: Melatonin
     de_name: Melatonin
@@ -240,67 +264,11 @@ molecules:
       - antioxidant_defense
     relaxation_relevance: high_positive
     notes: Synthesis requires evening darkness + serotonin availability
-
-  cbd:
-    name: Cannabidiol
-    de_name: CBD
-    category: phytocannabinoid
-    formula: C21H30O2
-    found_in:
-      - cbd_oil_full_spectrum
-      - cannabis
-      - hemp_oil
-    functions:
-      - 5-HT1A receptor agonist (serotonergic)
-      - TRPV1 agonist
-      - Anti-inflammatory
-    primary_effects:
-      anxiety:
-        direction: decrease
-        magnitude: "40"
-        optimal_dose_mg: 200_300
-        dose_response: inverted_U (biphasic)
-        mechanism: 5-HT1A + adenosine A2A enhancement
-      inflammation:
-        direction: decrease
-        mechanism: NLRP3 inflammasome inhibition
-    affects:
-      - anxiety
-      - pain
-      - inflammation
+    tags:
       - sleep
-    relaxation_relevance: high_positive
-    notes: No tolerance development (unlike THC)
-
-  cbc:
-    name: Cannabichromene
-    de_name: CBC
-    category: phytocannabinoid
-    formula: C21H30O2
-    found_in:
-      - cbd_oil_full_spectrum
-      - cannabis_full_spectrum
-    functions:
-      - Entourage effect amplification
-      - Mild anti-inflammatory
-      - Pain modulation
-    relaxation_relevance: moderate_positive
-    notes: Minor cannabinoid; synergistic with CBD
-
-  cbg:
-    name: Cannabigerol
-    de_name: CBG
-    category: phytocannabinoid
-    formula: C21H30O2
-    found_in:
-      - cbd_oil_full_spectrum
-      - cannabis_full_spectrum
-    functions:
-      - GABA modulation
-      - Entourage effect contributor
-    relaxation_relevance: moderate_positive
-    notes: Precursor to CBD and THC; synergistic effects
-
+      - circadian
+      - antioxidant
+      - pineal
   linalool:
     name: Linalool
     de_name: Linalool
@@ -309,7 +277,6 @@ molecules:
     found_in:
       - lavender
       - lavender_oil
-      - cbd_oil_full_spectrum
     functions:
       - GABA potentiation
       - Serotonin modulation
@@ -323,7 +290,69 @@ molecules:
         via: aroma_inhalation
     relaxation_relevance: high_positive
     notes: Primary anxiolytic terpene in lavender
-
+    tags:
+      - anxiolytic
+      - GABA-modulator
+      - aromatherapy
+      - terpene
+  linalyl_acetate:
+    name: Linalyl Acetate
+    de_name: Linalylacetat
+    category: terpene_ester
+    formula: C12H20O2
+    found_in:
+      - lavender
+      - lavender_oil
+    functions:
+      - Sedative and anxiolytic
+      - Synergistic with linalool
+      - Smooth muscle relaxation
+    primary_effects:
+      anxiety:
+        direction: decrease
+        mechanism: synergistic_GABA_modulation_with_linalool
+      muscle_tension:
+        direction: decrease
+    affects:
+      - anxiety
+      - muscle_relaxation
+    relaxation_relevance: high_positive
+    notes: Second major active terpene in lavender; enhances linalool effects
+    tags:
+      - anxiolytic
+      - muscle-relaxation
+      - aromatherapy
+      - sedative
+      - terpene
+  geraniol:
+    name: Geraniol
+    de_name: Geraniol
+    category: terpene
+    formula: C10H18O
+    found_in:
+      - lavender
+      - rose_oil
+      - palmarosa
+    functions:
+      - Mild anxiolytic
+      - Anti-inflammatory
+      - Neuroprotective
+    primary_effects:
+      anxiety:
+        direction: decrease
+        magnitude: mild
+      inflammation:
+        direction: decrease
+    affects:
+      - anxiety
+      - inflammation
+    relaxation_relevance: moderate_positive
+    notes: Minor terpene in lavender; contributes to overall relaxation profile
+    tags:
+      - anxiolytic
+      - anti-inflammatory
+      - aromatherapy
+      - terpene
   gaba:
     name: Gamma-Aminobutyric Acid
     de_name: GABA
@@ -353,7 +382,12 @@ molecules:
       - muscle_tension
     relaxation_relevance: high_positive
     notes: Requires magnesium for optimal GABA receptor function
-
+    tags:
+      - inhibitory
+      - anxiolytic
+      - sleep
+      - muscle-relaxation
+      - neurotransmitter
   dopamine:
     name: Dopamine
     de_name: Dopamin
@@ -364,12 +398,10 @@ molecules:
       - striatum
     produces_from:
       - tyrosine
-      - l_dopa
     functions:
       - Motivation and reward
       - Motor control
       - Attention and focus
-      - Pleasure (acute only)
     primary_effects:
       motivation:
         direction: increase
@@ -382,8 +414,13 @@ molecules:
       - focus
       - habit_formation
     relaxation_relevance: neutral
-    notes: Dopamine shifts from reward to cue in habit formation
-
+    notes: Endogenous reference molecule; relevant for Physio Timeline
+    tags:
+      - reward
+      - motivation
+      - focus
+      - neurotransmitter
+      - mood
   cortisol:
     name: Cortisol
     de_name: Kortisol
@@ -424,7 +461,12 @@ molecules:
       - sleep
     relaxation_relevance: high_negative
     notes: Chronic elevation associated with burnout, immune suppression
-
+    tags:
+      - HPA-axis
+      - stress
+      - immune-modulation
+      - circadian
+      - sleep-disruptor
   oxytocin:
     name: Oxytocin
     de_name: Oxytozin
@@ -456,7 +498,12 @@ molecules:
       - social_engagement
     relaxation_relevance: high_positive
     notes: 20s hug → oxytocin peak. System weak in isolation, strong socially
-
+    tags:
+      - social-bonding
+      - HPA-axis
+      - anxiolytic
+      - cortisol-modulator
+      - vagal-tone
   adenosine:
     name: Adenosine
     de_name: Adenosin
@@ -483,11 +530,15 @@ molecules:
       - inflammation
     relaxation_relevance: high_positive
     notes: Caffeine blocks adenosine signal → mask sleep pressure
-
+    tags:
+      - sleep-pressure
+      - anti-inflammatory
+      - energy-sensing
   withanolide_a:
     name: Withanolide A
     de_name: Withanolid A
     category: alkaloid_steroidal
+    formula: C28H38O6
     found_in:
       - ashwagandha
       - withania_somnifera
@@ -501,9 +552,44 @@ molecules:
         magnitude: 28_30%_with_chronic_use
       anxiety:
         direction: decrease
+    affects:
+      - Cortisol
+      - GABA
+      - BDNF
+      - NF-kappaB
+      - Glutamate
     relaxation_relevance: high_positive
+    tags:
+      - HPA-axis
+      - anxiolytic
+      - adaptogen
+      - neuroregeneration
     notes: Primary active alkaloid in ashwagandha
-
+  withanolide_d:
+    name: Withanolide D
+    de_name: Withanolid D
+    category: alkaloid_steroidal
+    found_in:
+      - ashwagandha
+      - withania_somnifera
+    functions:
+      - Neuroprotection
+      - Anti-inflammatory
+      - Synergistic adaptogenic effects
+    primary_effects:
+      inflammation:
+        direction: decrease
+      neuroprotection:
+        direction: enhance
+    affects:
+      - inflammation
+      - neuroprotection
+    relaxation_relevance: moderate_positive
+    notes: Secondary withanolide; synergistic with withanolide_a and withaferin_a
+    tags:
+      - adaptogen
+      - anti-inflammatory
+      - neuroprotection
   withaferin_a:
     name: Withaferin A
     de_name: Withaferin A
@@ -517,11 +603,16 @@ molecules:
       - Anxiolytic
     relaxation_relevance: high_positive
     notes: Secondary alkaloid; synergistic with withanolide_a
-
+    tags:
+      - adaptogen
+      - anti-inflammatory
+      - HSP90
+      - cortisol-modulator
   erysotrine:
     name: Erysotrine
     de_name: Erysotrin
     category: alkaloid
+    formula: C19H23NO3
     found_in:
       - mulungu
       - erythrina_mulungu
@@ -534,9 +625,18 @@ molecules:
         direction: decrease
       gaba:
         direction: potentiate
+    affects:
+      - Acetylcholin
+      - GABA
+      - HPA-Achse (Cortisol-Reaktivität)
+      - Limbisches System
     relaxation_relevance: high_positive
+    tags:
+      - HPA-axis
+      - anxiolytic
+      - sedative
+      - erythrina-alkaloid
     notes: Major alkaloid in mulungu; traditional anxiolytic
-
   erysovine:
     name: Erysovine
     de_name: Erysovine
@@ -549,7 +649,35 @@ molecules:
       - Anxiolytic
     relaxation_relevance: high_positive
     notes: Secondary alkaloid in mulungu; synergistic with erysotrine
-
+    tags:
+      - anxiolytic
+      - GABA-modulator
+      - alkaloid
+  erysodine:
+    name: Erysodine
+    de_name: Erysodin
+    category: alkaloid
+    found_in:
+      - mulungu
+      - erythrina_mulungu
+    functions:
+      - Nicotinic receptor antagonism
+      - Mild anxiolytic
+      - Sedative
+    primary_effects:
+      anxiety:
+        direction: decrease
+        mechanism: nicotinic_receptor_antagonism → reduced_excitatory_tone
+    affects:
+      - anxiety
+      - cns_excitability
+    relaxation_relevance: high_positive
+    notes: Third major alkaloid in mulungu; contributes sedative profile
+    tags:
+      - anxiolytic
+      - nicotinic-antagonist
+      - sedative
+      - alkaloid
   quercetin:
     name: Quercetin
     de_name: Quercetin
@@ -574,7 +702,43 @@ molecules:
       - antioxidant_defense
     relaxation_relevance: moderate_positive
     notes: Flavonoid antioxidant; enhances efficacy of anxiolytic herbs
-
+    tags:
+      - antioxidant
+      - anti-inflammatory
+      - flavonoid
+  kaempferol:
+    name: Kaempferol
+    de_name: Kaempferol
+    category: flavonoid
+    formula: C15H10O6
+    found_in:
+      - mulungu
+      - broccoli
+      - kale
+      - green_tea
+    functions:
+      - Antioxidant
+      - Anti-inflammatory
+      - Mild anxiolytic
+    primary_effects:
+      inflammation:
+        direction: decrease
+      oxidative_stress:
+        direction: decrease
+      anxiety:
+        direction: decrease
+        magnitude: mild
+    affects:
+      - inflammation
+      - antioxidant_defense
+      - anxiety
+    relaxation_relevance: moderate_positive
+    notes: Flavonoid in mulungu; synergistic with quercetin and alkaloids
+    tags:
+      - antioxidant
+      - anti-inflammatory
+      - anxiolytic
+      - flavonoid
   apigenin:
     name: Apigenin
     de_name: Apigenin
@@ -598,7 +762,98 @@ molecules:
       - sleep
     relaxation_relevance: moderate_positive
     notes: Weak benzodiazepine-like action; safe daily use
-
+    tags:
+      - anxiolytic
+      - GABA-modulator
+      - anti-inflammatory
+      - flavonoid
+      - sleep
+  flavonoid_derivatives:
+    name: Chamomile Flavonoid Derivatives
+    de_name: Kamille-Flavonoid-Derivate
+    category: flavonoid_complex
+    found_in:
+      - chamomile_tea
+      - matricaria_recutita
+    functions:
+      - Antispasmodic
+      - Anti-inflammatory
+      - Mild anxiolytic support
+    primary_effects:
+      muscle_spasm:
+        direction: decrease
+      inflammation:
+        direction: decrease
+    affects:
+      - inflammation
+      - digestive_function
+    relaxation_relevance: moderate_positive
+    notes: Collective term for chamomile flavonoids (chrysin, luteolin, etc.) beyond
+      apigenin
+    tags:
+      - anti-inflammatory
+      - antispasmodic
+      - flavonoid
+  flavonoid_vitexin:
+    name: Vitexin
+    de_name: Vitexin
+    category: flavonoid_c_glycoside
+    formula: C21H20O10
+    found_in:
+      - passionflower
+      - passiflora_incarnata
+      - hawthorn
+    functions:
+      - GABA-A receptor binding
+      - Anxiolytic
+      - Mild sedative
+    primary_effects:
+      anxiety:
+        direction: decrease
+        mechanism: GABA-A_receptor_positive_modulation
+      sleep:
+        direction: improve
+    affects:
+      - anxiety
+      - sleep
+    relaxation_relevance: high_positive
+    notes: Primary anxiolytic flavonoid in passionflower; well-characterized mechanism
+    tags:
+      - anxiolytic
+      - GABA-modulator
+      - sedative
+      - flavonoid
+      - sleep
+  alkaloid_harmaline:
+    name: Harmaline
+    de_name: Harmalin
+    category: beta_carboline_alkaloid
+    formula: C13H14N2O
+    found_in:
+      - passionflower
+      - passiflora_incarnata
+      - peganum_harmala
+    functions:
+      - Reversible MAO-A inhibition
+      - Serotonin potentiation
+      - Mild anxiolytic
+    primary_effects:
+      serotonin:
+        direction: potentiate
+        mechanism: MAO-A_inhibition → reduced_serotonin_breakdown
+      anxiety:
+        direction: decrease
+    affects:
+      - serotonin
+      - anxiety
+    relaxation_relevance: moderate_positive
+    notes: Harmala alkaloid in passionflower; reversible MAO-A inhibitor — mild
+      effect at passionflower doses
+    tags:
+      - serotonin-modulator
+      - MAO-inhibitor
+      - anxiolytic
+      - alkaloid
   rosmarinic_acid:
     name: Rosmarinic Acid
     de_name: Rosmarinsäure
@@ -621,7 +876,40 @@ molecules:
       - inflammation
     relaxation_relevance: moderate_positive
     notes: Mild anxiolytic; synergistic with GABA
-
+    tags:
+      - GABA-modulator
+      - anti-inflammatory
+      - antioxidant
+      - polyphenol
+  caffeic_acid:
+    name: Caffeic Acid
+    de_name: Kaffeesäure
+    category: hydroxycinnamic_acid
+    formula: C9H8O4
+    found_in:
+      - lemon_balm_tea
+      - melissa_officinalis
+      - coffee
+      - herbs
+    functions:
+      - Antioxidant
+      - Anti-inflammatory
+      - MAO inhibition (weak)
+    primary_effects:
+      oxidative_stress:
+        direction: decrease
+      inflammation:
+        direction: decrease
+    affects:
+      - antioxidant_defense
+      - inflammation
+    relaxation_relevance: moderate_positive
+    notes: Polyphenol in lemon balm; contributes antioxidant and mild anxiolytic
+      profile
+    tags:
+      - antioxidant
+      - anti-inflammatory
+      - polyphenol
   egcg:
     name: Epigallocatechin Gallate (EGCG)
     de_name: EGCG
@@ -643,7 +931,166 @@ molecules:
       - neuroprotection
     relaxation_relevance: moderate_positive
     notes: Bioactive polyphenol in green tea; synergistic with L-theanine
-
+    tags:
+      - antioxidant
+      - anti-inflammatory
+      - neuroprotection
+      - catechin
+  theobromine:
+    name: Theobromine
+    de_name: Theobromin
+    category: alkaloid_methylxanthine
+    formula: C7H8N4O2
+    found_in:
+      - green_tea
+      - dark_chocolate
+      - cocoa
+    functions:
+      - Mild adenosine receptor antagonism (weaker than caffeine)
+      - Vasodilation
+      - Mild mood lift
+    primary_effects:
+      alertness:
+        direction: increase
+        magnitude: mild
+        onset_minutes: 30
+        duration_minutes: 360
+        mechanism: weak_adenosine_antagonism (less_CNS_stimulation_than_caffeine)
+      blood_pressure:
+        direction: decrease
+        mechanism: vasodilation
+    affects:
+      - alertness
+      - cardiovascular
+    relaxation_relevance: mild_negative
+    notes: "In green tea: present in trace amounts vs dark chocolate. Gentler
+      stimulation than caffeine; longer duration, less crash"
+    tags:
+      - stimulant
+      - vasodilation
+      - adenosine-antagonist
+      - methylxanthine
+  salidroside:
+    name: Salidroside
+    de_name: Salidrosid
+    category: phenylpropanoid_glycoside
+    formula: C14H20O7
+    found_in:
+      - rhodiola
+      - rhodiola_rosea
+    functions:
+      - Monoamine neurotransmitter modulation
+      - Neuroprotection
+      - Anti-fatigue
+    primary_effects:
+      dopamine:
+        direction: modulate
+        mechanism: supports_dopamine_in_fatigue_states
+      serotonin:
+        direction: modulate
+      fatigue:
+        direction: decrease
+    affects:
+      - dopamine
+      - serotonin
+      - fatigue
+      - stress_resilience
+    relaxation_relevance: moderate_positive
+    notes: Primary active compound in rhodiola; key driver of adaptogenic effects
+    tags:
+      - adaptogen
+      - anti-fatigue
+      - dopamine-modulator
+      - serotonin-modulator
+  rosavin:
+    name: Rosavin
+    de_name: Rosavin
+    category: cinnamyl_glycoside
+    found_in:
+      - rhodiola
+      - rhodiola_rosea
+    functions:
+      - HPA axis modulation
+      - Cortisol regulation
+      - Mood support
+    primary_effects:
+      cortisol:
+        direction: modulate
+        mechanism: HPA_axis_normalization
+      mood:
+        direction: improve
+    affects:
+      - cortisol
+      - mood
+      - stress_resilience
+    relaxation_relevance: moderate_positive
+    notes: Rhodiola-specific compound; synergistic with salidroside; 3% rosavin
+      standard in quality extracts
+    tags:
+      - adaptogen
+      - HPA-axis
+      - cortisol-modulator
+      - mood
+  eurycomanone:
+    name: Eurycomanone
+    de_name: Eurycomanon
+    category: quassinoid
+    formula: C20H24O9
+    found_in:
+      - tongkat_ali
+      - eurycoma_longifolia
+    functions:
+      - Cortisol reduction
+      - LH stimulation (testosterone support)
+      - Adaptogenic stress modulation
+    primary_effects:
+      cortisol:
+        direction: decrease
+        magnitude: 16_26%_reduction_chronic_use
+        mechanism: HPA_axis_modulation
+      testosterone:
+        direction: increase
+        mechanism: LH_stimulation → Leydig_cell_activation
+    affects:
+      - cortisol
+      - testosterone
+      - stress_resilience
+    relaxation_relevance: moderate_positive
+    tags:
+      - HPA-axis
+      - stress-management
+      - anti-inflammatory
+      - adaptogen
+    notes: Primary bioactive in tongkat ali; 2% eurycomanone = standard extract
+      quality
+  eurypeptides:
+    name: Eurypeptides (Longjack Peptides)
+    de_name: Eurypeptide
+    category: bioactive_peptides
+    found_in:
+      - tongkat_ali
+      - eurycoma_longifolia
+    functions:
+      - cAMP signaling enhancement
+      - Testosterone pathway support
+      - Anti-fatigue
+    primary_effects:
+      energy:
+        direction: increase
+        mechanism: cAMP_elevation → improved_cellular_energy_signaling
+      fatigue:
+        direction: decrease
+    affects:
+      - energy
+      - fatigue
+      - testosterone_signaling
+    relaxation_relevance: moderate_positive
+    notes: Protein fraction in tongkat ali; synergistic with eurycomanone for stress
+      resilience
+    tags:
+      - adaptogen
+      - anti-fatigue
+      - testosterone-signaling
   il_10:
     name: Interleukin-10
     de_name: Interleukin-10
@@ -668,7 +1115,11 @@ molecules:
       - inflammation
       - immune_function
     relaxation_relevance: high_positive
-
+    tags:
+      - anti-inflammatory
+      - immune-modulation
+      - cytokine
+      - vagal-tone
   endorphins:
     name: Endogenous Opioids (β-endorphin)
     de_name: Endorphine
@@ -698,27 +1149,52 @@ molecules:
       - stress_resilience
     relaxation_relevance: moderate_positive
     notes: Exercise-induced endorphin release (30+ minutes intense)
+    tags:
+      - pain-relief
+      - mood
+      - stress-resilience
+      - opioid
+      - reward
 
-  l_dopa:
-    name: L-DOPA (Levodopa)
-    de_name: L-DOPA
-    category: amino_acid
+  testosterone:
+    name: Testosterone
+    de_name: Testosteron
+    category: hormone
+    formula: C19H28O2
     found_in:
-      - mucuna_pruriens
-      - fava_beans
-    produces_to:
-      - dopamine
-      - noradrenaline
+      - leydig_cells_testes
+      - adrenal_cortex
     functions:
-      - Dopamine precursor
-      - Dopamine synthesis boost
+      - Primäres anaboles Steroidhormon
+      - Muskelproteinsynthese (mTOR-Aktivierung)
+      - HPG-Achsen-Effektor (negative Rückkopplung)
+      - Dopamin-Modulation im mesolimbischen System
     primary_effects:
+      cortisol:
+        direction: decrease
+        mechanism: Katabole/anabole Balance — T/C-Ratio als Übertraining-Marker
       dopamine:
         direction: increase
-        mechanism: L-DOPA → dopamine via aromatic_amino_acid_decarboxylase
+        mechanism: Mesolimbisches System, Motivation und Reward
+      gaba:
+        direction: modulate
+        mechanism: Via 5α-reduzierte Steroide (Neurosteroid-Metaboliten) — anxiolytisch
+    circadian_rhythm:
+      peak: "06:00–10:00 Uhr (+25–30% über Tagesmittel)"
+      nadir: "20:00–24:00 Uhr"
     affects:
+      - cortisol
       - dopamine
-      - motivation
-      - mood
-    relaxation_relevance: moderate_negative
-    notes: More direct dopamine support than tyrosine; morning use
+      - gaba
+      - shbg
+      - igf1
+    relaxation_relevance: moderate_positive
+    tags:
+      - HPG-axis
+      - hormone
+      - anabolic
+      - stress-resilience
+      - circadian
+      - cortisol-modulator
+      - dopamine-modulator
+    notes: "T/C-Ratio <0.35 = Übertraining-Verdacht. Ashwagandha +15–17% T via Kortisol↓, Tongkat Ali +15–20% T via LH-Stimulation. Peak 6–10h morgens."

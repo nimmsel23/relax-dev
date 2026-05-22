@@ -1,8 +1,0 @@
-node_modules/
-dist/
-data/
-*.log
-.env
-.env.*.local
-relax.env
-.DS_Store

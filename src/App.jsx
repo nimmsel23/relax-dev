@@ -21,7 +21,6 @@ export default function App() {
   const [tab, setTab] = useState('dash')
   const { theme, setManualTheme, resetToCircadian, manualOverride, currentSchedule } = useCircadianTheme()
 
-  // Apply theme to DOM
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
@@ -31,8 +30,7 @@ export default function App() {
       resetToCircadian()
     } else {
       const themes = ['mocha', 'macchiato', 'frappe', 'latte']
-      const currentIdx = themes.indexOf(theme)
-      const nextIdx = (currentIdx + 1) % themes.length
+      const nextIdx = (themes.indexOf(theme) + 1) % themes.length
       setManualTheme(themes[nextIdx])
     }
   }

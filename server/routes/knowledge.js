@@ -5,7 +5,11 @@
  */
 
 import { kb } from "../knowledge/kb-loader.js";
-import { advancedEnricher } from "../knowledge/ai-enricher-v2.js";
+import { vaultSearch } from "../knowledge/vault-search.js";
+import { kbCache } from "../knowledge/kb-cache.js";
+import { enrichFromPubChem } from "../knowledge/pubchem.js";
+import { fetchPsychonautTiming } from "../knowledge/psychonaut.js";
+import { runEnrichmentPipeline } from "../knowledge/enricher-pipeline.js";
 
 export async function handleKnowledgeAPI(req, res, path, body) {
   // ============ DISPATCHER (Unified Query) ============
@@ -101,51 +105,27 @@ export async function handleKnowledgeAPI(req, res, path, body) {
       });
     }
 
-    // Not found: Use Advanced Enricher with context
-    console.log(`🤖 Advanced Enricher: Researching "${query}" with KB context...`);
-    const allMolecules = kb.loadMolecules();
-    const kbInteractions = kb.loadInteractions();
+    // Not found: run enrichment pipeline (PubChem + KEGG + Psychonaut → Gemini)
+    console.log(`🔬 Pipeline: Enriching "${query}"...`);
+    const result = await runEnrichmentPipeline(query, kb);
 
-    const result = await advancedEnricher.generateMoleculeWithContext(
-      query,
-      allMolecules,
-      kbInteractions
-    );
-
-    if (result.valid) {
-      // Validate passed: save to KB
+    if (result.ok && result.data) {
       const key = query.toLowerCase().replace(/\s+/g, "_");
-      kb.addMolecule(key, result.data, "ai_generated", {
-        confidence: result.confidence,
-        needs_review: false,
-      });
-
-      console.log(`✅ Added "${query}" to KB (confidence: ${result.confidence})`);
-
+      kb.addMolecule(key, result.data, "pipeline", { confidence: "high", needs_review: true });
+      console.log(`✅ Pipeline added "${key}" to KB`);
       return json(res, 201, {
         ok: true,
         molecule: result.data,
-        source: "ai_generated",
-        confidence: result.confidence,
+        source: "pipeline",
+        sources_used: result.sources,
         saved: true,
-        message: `Generated with ${result.confidence} confidence. Review suggested: ${result.data._metadata?.needs_review}`,
-      });
-    } else if (result.data && !result.valid) {
-      // Partial data (validation failed)
-      return json(res, 206, {
-        ok: true,
-        molecule: result.data,
-        source: "ai_generated_unvalidated",
-        confidence: result.confidence || "low",
-        saved: false,
-        validation_errors: result.errors,
-        message: "Generated but failed validation. Review required before using.",
       });
     } else {
       return json(res, 404, {
         ok: false,
-        error: `Could not generate or find "${query}"`,
-        details: result.error,
+        error: `Konnte "${query}" nicht generieren`,
+        errors: result.errors,
+        sources_tried: result.sources,
       });
     }
   }
@@ -289,6 +269,44 @@ export async function handleKnowledgeAPI(req, res, path, body) {
     });
   }
 
+  // GET /api/knowledge/hub/:id — molecule hub: all substances + molecules affecting it
+  const hubMatch = path.match(/^\/api\/knowledge\/hub\/([^/?]+)/);
+  if (req.method === "GET" && hubMatch) {
+    const id = decodeURIComponent(hubMatch[1]);
+    const result = kb.buildMoleculeHub(id);
+    return json(res, result ? 200 : 404, {
+      ok: !!result,
+      ...(result || { error: `Molecule "${id}" not found` }),
+    });
+  }
+
+  // GET /api/knowledge/vault/:id — find and serve matching vault markdown
+  const vaultMatch = path.match(/^\/api\/knowledge\/vault\/([^/?]+)/);
+  if (req.method === "GET" && vaultMatch) {
+    const id = decodeURIComponent(vaultMatch[1]);
+    const substances = kb.loadSubstances();
+    const molecules = kb.loadMolecules();
+    const meta = substances[id] || molecules[id] || {};
+
+    const entry = vaultSearch.findFile(id, meta);
+    if (!entry) {
+      return json(res, 404, { ok: false, error: `No vault file found for "${id}"` });
+    }
+
+    try {
+      const markdown = vaultSearch.readAndSanitize(entry.path);
+      return json(res, 200, {
+        ok: true,
+        id,
+        title: entry.name,
+        section: entry.section,
+        markdown,
+      });
+    } catch (err) {
+      return json(res, 500, { ok: false, error: "Could not read vault file" });
+    }
+  }
+
   // Health check
   if (req.method === "GET" && path === "/api/knowledge/health") {
     const substances = kb.loadSubstances();
@@ -319,6 +337,80 @@ export async function handleKnowledgeAPI(req, res, path, body) {
         dual_catalog_enabled: true,
       },
     });
+  }
+
+  // GET /api/knowledge/network — full molecular interaction network (nodes + edges)
+  if (req.method === "GET" && path === "/api/knowledge/network") {
+    const result = kb.buildNetworkGraph();
+    return json(res, 200, { ok: true, ...result });
+  }
+
+  // POST /api/knowledge/enrich — Pipeline: PubChem + KEGG + Psychonaut → Gemini → KB-Eintrag
+  // body: { query: "apigenin", mode: "dry_run" | "commit" }
+  if (req.method === "POST" && path === "/api/knowledge/enrich") {
+    const { query, mode = "dry_run" } = body || {};
+    if (!query) return json(res, 400, { ok: false, error: "query required" });
+
+    // Check if already in KB
+    const existing = kb.getMolecule(query) || kb.getSubstance(query);
+    if (existing && mode !== "commit") {
+      return json(res, 200, { ok: true, query, source: "kb", data: existing, already_in_kb: true });
+    }
+
+    const result = await runEnrichmentPipeline(query, kb);
+    if (!result.ok) {
+      return json(res, 422, { ok: false, query, ...result });
+    }
+
+    if (mode === "commit" && result.data) {
+      const key = query.toLowerCase().replace(/\s+/g, "_");
+      kb.addMolecule(key, {
+        ...result.data,
+        tags: result.data.tags || [],
+      }, "pipeline", { confidence: "high", needs_review: true });
+      console.log(`[pipeline] Committed "${key}" to KB`);
+    }
+
+    return json(res, result.ok ? 200 : 422, {
+      ok: result.ok,
+      query,
+      mode,
+      committed: mode === "commit" && result.ok,
+      data: result.data,
+      errors: result.errors,
+      sources: result.sources,
+    });
+  }
+
+  // GET /api/knowledge/enrich/:id — raw API data (PubChem + Psychonaut, no Gemini)
+  const enrichMatch = path.match(/^\/api\/knowledge\/enrich\/([^/?]+)/);
+  if (req.method === "GET" && enrichMatch) {
+    const id = decodeURIComponent(enrichMatch[1]);
+    const mol = kb.getMolecule(id);
+    const searchName = mol?.name || id.replace(/_/g, " ");
+
+    const cached = kbCache.getEnriched(id);
+    if (cached) return json(res, 200, { ok: true, id, source: "cache", enrichment: cached });
+
+    const [pubchem, psychonaut] = await Promise.all([
+      enrichFromPubChem(searchName),
+      fetchPsychonautTiming(searchName),
+    ]);
+
+    const enrichment = { pubchem, psychonaut, enriched_at: new Date().toISOString() };
+    if (pubchem || psychonaut) kbCache.saveEnriched(id, enrichment, "pubchem+psychonaut");
+
+    return json(res, pubchem || psychonaut ? 200 : 404, {
+      ok: !!(pubchem || psychonaut),
+      id,
+      source: "live",
+      enrichment,
+    });
+  }
+
+  // GET /api/knowledge/cache/stats — SQLite cache statistics
+  if (req.method === "GET" && path === "/api/knowledge/cache/stats") {
+    return json(res, 200, { ok: true, ...kbCache.stats() });
   }
 
   // Not found
