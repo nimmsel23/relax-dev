@@ -2,6 +2,8 @@ import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import Fastify from "fastify";
+import fastifyStatic from "@fastify/static";
 import { handlePhysioSimulate } from "./server/routes/physio.js";
 import { handleKnowledgeAPI } from "./server/routes/knowledge.js";
 
@@ -16,41 +18,22 @@ const STATIC_DIR = process.env.RELAX_STATIC_DIR
 
 const PORT = Number(process.env.PORT || 9123);
 const HOST = process.env.HOST || "127.0.0.1";
+const BRIDGE_URL = process.env.BRIDGE_URL || "http://127.0.0.1:9080";
 
 for (const d of ["sessions", "journal"]) fs.mkdirSync(path.join(DATA_DIR, d), { recursive: true });
 
-const MIME = {
-  ".html": "text/html;charset=utf-8",
-  ".js": "application/javascript;charset=utf-8",
-  ".css": "text/css;charset=utf-8",
-  ".json": "application/json;charset=utf-8",
-  ".svg": "image/svg+xml",
-  ".png": "image/png",
-  ".ico": "image/x-icon",
-  ".woff2": "font/woff2",
-  ".woff": "font/woff",
-  ".webmanifest": "application/manifest+json",
-};
+// ── Helpers ────────────────────────────────────────────────────────────────────
 
-function mime(p) {
-  return MIME[path.extname(p)] || "application/octet-stream";
-}
-
-function json(res, code, data) {
-  const body = JSON.stringify(data);
-  res.writeHead(code, {
-    "Content-Type": "application/json",
-    "Content-Length": Buffer.byteLength(body),
-  });
-  res.end(body);
+function firestoreSync(date) {
+  const url = `${BRIDGE_URL}/api/relax-firestore/sync?date=${date}`;
+  http.request(url, { method: "POST" }, (r) => r.resume())
+    .on("error", () => {})
+    .end();
 }
 
 function readJson(p, fallback = null) {
-  try {
-    return JSON.parse(fs.readFileSync(p, "utf8"));
-  } catch {
-    return fallback;
-  }
+  try { return JSON.parse(fs.readFileSync(p, "utf8")); }
+  catch { return fallback; }
 }
 
 function writeJson(p, data) {
@@ -77,18 +60,13 @@ function sumMinutes(session) {
   return (session?.items || []).reduce((a, it) => a + (Number(it.minutes) || 0), 0);
 }
 
-function clamp(n, min, max) {
-  return Math.min(max, Math.max(min, n));
-}
+function clamp(n, min, max) { return Math.min(max, Math.max(min, n)); }
 
 function computeSummary(days) {
   const dates = lastDates(days);
   const byTechnique = {};
   const perDay = [];
-
-  let moodDeltaSum = 0;
-  let moodDeltaCount = 0;
-  let daysWithSessions = 0;
+  let moodDeltaSum = 0, moodDeltaCount = 0, daysWithSessions = 0;
 
   for (const date of dates) {
     const sess = readJson(path.join(DATA_DIR, "sessions", `${date}.json`));
@@ -99,21 +77,13 @@ function computeSummary(days) {
     for (const it of (sess?.items || [])) {
       const technique = String(it.technique || "").trim() || "—";
       byTechnique[technique] = (byTechnique[technique] || 0) + (Number(it.minutes) || 0);
-
-      const before = Number(it.mood_before);
-      const after = Number(it.mood_after);
-      if (Number.isFinite(before) && Number.isFinite(after)) {
-        moodDeltaSum += after - before;
-        moodDeltaCount++;
-      }
+      const before = Number(it.mood_before), after = Number(it.mood_after);
+      if (Number.isFinite(before) && Number.isFinite(after)) { moodDeltaSum += after - before; moodDeltaCount++; }
     }
   }
 
   let streak = 0;
-  for (const { minutes } of perDay) {
-    if (minutes > 0) streak++;
-    else break;
-  }
+  for (const { minutes } of perDay) { if (minutes > 0) streak++; else break; }
 
   return {
     days,
@@ -126,200 +96,183 @@ function computeSummary(days) {
   };
 }
 
-function parseJsonBody(raw) {
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return {};
-  }
-}
+function escapeCsvValue(v) { return String(v ?? "").replaceAll('"', '""'); }
 
-function escapeCsvValue(v) {
-  return String(v ?? "").replaceAll('"', '""');
-}
+// ── Fastify ────────────────────────────────────────────────────────────────────
 
-const server = http.createServer(async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  if (req.method === "OPTIONS") {
-    res.writeHead(204);
-    res.end();
-    return;
-  }
+const app = Fastify({ logger: false });
 
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const p = url.pathname.replace(/\/$/, "") || "/";
-
-  let rawBody = "";
-  if (req.method !== "GET") {
-    await new Promise((resolve) => {
-      req.on("data", (c) => (rawBody += c));
-      req.on("end", resolve);
-    });
-  }
-  const B = () => parseJsonBody(rawBody);
-
-  if (p === "/health") return json(res, 200, { ok: true, service: "relax-dev", port: PORT, uptime: Math.floor(process.uptime()) });
-
-  if (p === "/api/physio/simulate") return handlePhysioSimulate(req, res, B());
-
-  if (p.startsWith("/api/knowledge")) return handleKnowledgeAPI(req, res, p, B());
-
-  if (p === "/techniques") {
-    return json(res, 200, {
-      ok: true,
-      techniques: [
-        { id: "breath-4-7-8", name: "Atemübung 4-7-8" },
-        { id: "box-breath", name: "Box Breathing (4-4-4-4)" },
-        { id: "nsdr", name: "NSDR / Yoga Nidra" },
-        { id: "bodyscan", name: "Body Scan" },
-        { id: "pmr", name: "Progressive Muskelrelaxation (PMR)" },
-        { id: "meditation", name: "Meditation (Achtsamkeit)" },
-        { id: "stretch", name: "Stretching / Mobility" },
-        { id: "walk", name: "Spaziergang (low stress)" },
-        { id: "music", name: "Musik + Atmung" },
-      ],
-    });
-  }
-
-  if (p === "/stats/summary") {
-    const days = clamp(Number(url.searchParams.get("days") || 14), 1, 365);
-    return json(res, 200, { ok: true, summary: computeSummary(days) });
-  }
-
-  if (p === "/export/csv") {
-    const days = clamp(Number(url.searchParams.get("days") || 14), 1, 365);
-    const dates = lastDates(days).reverse();
-    const rows = [["date", "technique", "minutes", "mood_before", "mood_after", "note"]];
-
-    for (const date of dates) {
-      const sess = readJson(path.join(DATA_DIR, "sessions", `${date}.json`));
-      for (const it of (sess?.items || [])) {
-        rows.push([
-          date,
-          escapeCsvValue(it.technique),
-          String(Number(it.minutes) || 0),
-          String(Number(it.mood_before) || ""),
-          String(Number(it.mood_after) || ""),
-          escapeCsvValue(it.note),
-        ]);
-      }
-    }
-
-    const csv = rows.map((r) => r.map((v) => `"${v}"`).join(",")).join("\n") + "\n";
-    return json(res, 200, { ok: true, filename: `relax-${days}d-${localToday()}.csv`, csv });
-  }
-
-  if (p === "/session") {
-    const date = url.searchParams.get("date") || localToday();
-    const file = path.join(DATA_DIR, "sessions", `${date}.json`);
-
-    if (req.method === "GET") {
-      const data = readJson(file);
-      return data ? json(res, 200, { ok: true, data }) : json(res, 404, { ok: false });
-    }
-
-    if (req.method === "POST") {
-      const data = B();
-      const itemsIn = Array.isArray(data.items) ? data.items : [];
-      const items = itemsIn.map((it) => ({
-        id: String(it.id || ""),
-        technique: String(it.technique || "").trim(),
-        minutes: clamp(Number(it.minutes) || 0, 0, 240),
-        mood_before: clamp(Number(it.mood_before) || 3, 1, 5),
-        mood_after: clamp(Number(it.mood_after) || 3, 1, 5),
-        note: String(it.note || "").slice(0, 2000),
-      }));
-      writeJson(file, { date, items, saved_at: new Date().toISOString() });
-      return json(res, 200, { ok: true });
-    }
-
-    return json(res, 405, { ok: false, error: "method not allowed" });
-  }
-
-  if (p === "/session/history") {
-    const limit = clamp(Number(url.searchParams.get("limit") || 10), 1, 365);
-    const dir = path.join(DATA_DIR, "sessions");
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort().reverse().slice(0, limit);
-    const sessions = files.map((f) => {
-      const d = readJson(path.join(dir, f));
-      return { date: f.replace(".json", ""), ...d };
-    });
-    return json(res, 200, { ok: true, sessions });
-  }
-
-  if (p === "/session/latest") {
-    const dir = path.join(DATA_DIR, "sessions");
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort().reverse();
-    if (!files.length) return json(res, 404, { ok: false });
-    const data = readJson(path.join(dir, files[0]));
-    return json(res, 200, { ok: true, session: { date: files[0].replace(".json", ""), data } });
-  }
-
-  if (p === "/journal") {
-    const date = url.searchParams.get("date") || localToday();
-    const file = path.join(DATA_DIR, "journal", `${date}.md`);
-
-    if (req.method === "GET") {
-      if (!fs.existsSync(file)) return json(res, 404, { ok: false });
-      const content = fs.readFileSync(file, "utf8");
-      const mtime = fs.statSync(file).mtime.toISOString().slice(0, 10);
-      return json(res, 200, { ok: true, content, mtime });
-    }
-
-    if (req.method === "POST") {
-      const { content } = B();
-      fs.writeFileSync(file, content || "");
-      return json(res, 200, { ok: true });
-    }
-
-    return json(res, 405, { ok: false, error: "method not allowed" });
-  }
-
-  if (p === "/journal/list") {
-    const dir = path.join(DATA_DIR, "journal");
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md")).sort().reverse().slice(0, 50);
-    const entries = files.map((f) => {
-      const date = f.replace(".md", "");
-      const mtime = fs.statSync(path.join(dir, f)).mtime.toISOString();
-      return { date, mtime };
-    });
-    return json(res, 200, { ok: true, entries });
-  }
-
-  const themeFile = path.join(DATA_DIR, "theme.json");
-  if (p === "/theme") {
-    if (req.method === "GET") return json(res, 200, readJson(themeFile, { theme: "mocha" }));
-    if (req.method === "POST") {
-      writeJson(themeFile, B());
-      return json(res, 200, { ok: true });
-    }
-    return json(res, 405, { ok: false, error: "method not allowed" });
-  }
-
-  // ── Static ──
-  let file = p === "/" ? "/index.html" : p;
-  const abs = path.join(STATIC_DIR, file);
-  if (!abs.startsWith(STATIC_DIR)) {
-    res.writeHead(403);
-    res.end();
-    return;
-  }
-
-  if (!fs.existsSync(abs)) {
-    const idx = path.join(STATIC_DIR, "index.html");
-    if (fs.existsSync(idx)) {
-      res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-      fs.createReadStream(idx).pipe(res);
-      return;
-    }
-    res.writeHead(404);
-    res.end("Not Found");
-    return;
-  }
-
-  res.writeHead(200, { "Content-Type": mime(abs) });
-  fs.createReadStream(abs).pipe(res);
+app.addHook("onRequest", (_req, reply, done) => {
+  reply.header("Access-Control-Allow-Origin", "*");
+  done();
 });
 
-server.listen(PORT, HOST, () => console.log(`🧘 relax-dev on http://${HOST}:${PORT}`));
+app.options("*", (_req, reply) => reply.code(204).send());
 
+// Static files (SPA fallback handled by setNotFoundHandler)
+if (fs.existsSync(STATIC_DIR)) {
+  app.register(fastifyStatic, { root: STATIC_DIR, wildcard: false, index: "index.html" });
+}
+
+// ── API Routes ─────────────────────────────────────────────────────────────────
+
+app.get("/health", (_req, reply) =>
+  reply.send({ ok: true, service: "relax-dev", port: PORT, uptime: Math.floor(process.uptime()) })
+);
+
+app.get("/techniques", (_req, reply) =>
+  reply.send({
+    ok: true,
+    techniques: [
+      { id: "breath-4-7-8", name: "Atemübung 4-7-8" },
+      { id: "box-breath",   name: "Box Breathing (4-4-4-4)" },
+      { id: "nsdr",         name: "NSDR / Yoga Nidra" },
+      { id: "bodyscan",     name: "Body Scan" },
+      { id: "pmr",          name: "Progressive Muskelrelaxation (PMR)" },
+      { id: "meditation",   name: "Meditation (Achtsamkeit)" },
+      { id: "stretch",      name: "Stretching / Mobility" },
+      { id: "walk",         name: "Spaziergang (low stress)" },
+      { id: "music",        name: "Musik + Atmung" },
+    ],
+  })
+);
+
+app.get("/stats/summary", (req, reply) => {
+  const days = clamp(Number(req.query.days || 14), 1, 365);
+  return reply.send({ ok: true, summary: computeSummary(days) });
+});
+
+app.get("/export/csv", (req, reply) => {
+  const days = clamp(Number(req.query.days || 14), 1, 365);
+  const dates = lastDates(days).reverse();
+  const rows = [["date", "technique", "minutes", "mood_before", "mood_after", "note"]];
+
+  for (const date of dates) {
+    const sess = readJson(path.join(DATA_DIR, "sessions", `${date}.json`));
+    for (const it of (sess?.items || [])) {
+      rows.push([
+        date,
+        escapeCsvValue(it.technique),
+        String(Number(it.minutes) || 0),
+        String(Number(it.mood_before) || ""),
+        String(Number(it.mood_after) || ""),
+        escapeCsvValue(it.note),
+      ]);
+    }
+  }
+
+  const csv = rows.map((r) => r.map((v) => `"${v}"`).join(",")).join("\n") + "\n";
+  return reply.send({ ok: true, filename: `relax-${days}d-${localToday()}.csv`, csv });
+});
+
+// ── Session ────────────────────────────────────────────────────────────────────
+
+app.get("/session", (req, reply) => {
+  const date = req.query.date || localToday();
+  const data = readJson(path.join(DATA_DIR, "sessions", `${date}.json`));
+  return data ? reply.send({ ok: true, data }) : reply.code(404).send({ ok: false });
+});
+
+app.post("/session", (req, reply) => {
+  const date = req.query.date || localToday();
+  const file = path.join(DATA_DIR, "sessions", `${date}.json`);
+  const itemsIn = Array.isArray(req.body?.items) ? req.body.items : [];
+  const items = itemsIn.map((it) => ({
+    id: String(it.id || ""),
+    technique: String(it.technique || "").trim(),
+    minutes: clamp(Number(it.minutes) || 0, 0, 240),
+    mood_before: clamp(Number(it.mood_before) || 3, 1, 5),
+    mood_after: clamp(Number(it.mood_after) || 3, 1, 5),
+    note: String(it.note || "").slice(0, 2000),
+  }));
+  writeJson(file, { date, items, saved_at: new Date().toISOString() });
+  firestoreSync(date);
+  return reply.send({ ok: true });
+});
+
+app.get("/session/history", (req, reply) => {
+  const limit = clamp(Number(req.query.limit || 10), 1, 365);
+  const dir = path.join(DATA_DIR, "sessions");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort().reverse().slice(0, limit);
+  const sessions = files.map((f) => ({ date: f.replace(".json", ""), ...readJson(path.join(dir, f)) }));
+  return reply.send({ ok: true, sessions });
+});
+
+app.get("/session/latest", (req, reply) => {
+  const dir = path.join(DATA_DIR, "sessions");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort().reverse();
+  if (!files.length) return reply.code(404).send({ ok: false });
+  const data = readJson(path.join(dir, files[0]));
+  return reply.send({ ok: true, session: { date: files[0].replace(".json", ""), data } });
+});
+
+// ── Journal ────────────────────────────────────────────────────────────────────
+
+app.get("/journal", (req, reply) => {
+  const date = req.query.date || localToday();
+  const file = path.join(DATA_DIR, "journal", `${date}.md`);
+  if (!fs.existsSync(file)) return reply.code(404).send({ ok: false });
+  const content = fs.readFileSync(file, "utf8");
+  const mtime = fs.statSync(file).mtime.toISOString().slice(0, 10);
+  return reply.send({ ok: true, content, mtime });
+});
+
+app.post("/journal", (req, reply) => {
+  const date = req.query.date || localToday();
+  const file = path.join(DATA_DIR, "journal", `${date}.md`);
+  fs.writeFileSync(file, req.body?.content || "");
+  firestoreSync(date);
+  return reply.send({ ok: true });
+});
+
+app.get("/journal/list", (_, reply) => {
+  const dir = path.join(DATA_DIR, "journal");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md")).sort().reverse().slice(0, 50);
+  const entries = files.map((f) => ({
+    date: f.replace(".md", ""),
+    mtime: fs.statSync(path.join(dir, f)).mtime.toISOString(),
+  }));
+  return reply.send({ ok: true, entries });
+});
+
+// ── Theme ──────────────────────────────────────────────────────────────────────
+
+const themeFile = path.join(DATA_DIR, "theme.json");
+
+app.get("/theme", (_req, reply) => reply.send(readJson(themeFile, { theme: "mocha" })));
+
+app.post("/theme", (req, reply) => {
+  writeJson(themeFile, req.body);
+  return reply.send({ ok: true });
+});
+
+// ── Legacy raw handlers (Knowledge + Physio) ──────────────────────────────────
+// These write directly to reply.raw — hijack tells Fastify not to touch the response.
+
+app.all("/api/knowledge/*", (req, reply) => {
+  reply.hijack();
+  return handleKnowledgeAPI(req.raw, reply.raw, req.url, req.body ?? {});
+});
+
+app.all("/api/physio/*", (req, reply) => {
+  reply.hijack();
+  return handlePhysioSimulate(req.raw, reply.raw, req.body ?? {});
+});
+
+// ── SPA Fallback ───────────────────────────────────────────────────────────────
+
+app.setNotFoundHandler((_req, reply) => {
+  const idx = path.join(STATIC_DIR, "index.html");
+  if (fs.existsSync(idx)) {
+    reply.type("text/html").send(fs.readFileSync(idx));
+  } else {
+    reply.code(404).send("Not Found");
+  }
+});
+
+// ── Start ──────────────────────────────────────────────────────────────────────
+
+app.listen({ port: PORT, host: HOST }, (err) => {
+  if (err) { console.error(err); process.exit(1); }
+  console.log(`🧘 relax-dev on http://${HOST}:${PORT}`);
+});
