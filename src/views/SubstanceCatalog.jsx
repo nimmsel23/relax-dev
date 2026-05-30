@@ -89,7 +89,6 @@ export default function SubstanceCatalog() {
     if (fuzzy) {
       openSubstance(fuzzy[0], fuzzy[1])
     }
-    // if nothing found: silently ignore (molecule-only entries have no substance card yet)
   }
 
   const grouped = (subs) => {
@@ -196,8 +195,6 @@ export default function SubstanceCatalog() {
             style={{ background: 'var(--glass)', borderColor: 'var(--line)', color: 'var(--ink)' }}
           />
         </div>
-
-        {loading && <p className="text-xs mt-2" style={{ color: 'var(--muted)' }}>Lädt...</p>}
       </div>
 
       {/* Content */}
@@ -224,7 +221,9 @@ export default function SubstanceCatalog() {
         </div>
       ) : (
         <div className="flex-1 overflow-auto p-4">
-          {groupedFiltered.length === 0 ? (
+          {loading ? (
+            <p className="text-center mt-8" style={{ color: 'var(--muted)' }}>Lädt...</p>
+          ) : groupedFiltered.length === 0 ? (
             <p className="text-center mt-8" style={{ color: 'var(--muted)' }}>Keine Substanzen gefunden</p>
           ) : (
             <div className="space-y-4">
@@ -296,6 +295,7 @@ export default function SubstanceCatalog() {
             <div className="flex border-b shrink-0" style={{ borderColor: 'var(--line)' }}>
               {[
                 { id: 'overview', label: '📋 Übersicht' },
+                { id: 'mechanisms', label: '🧬 Wirkweise' },
                 { id: 'molecules', label: '🧪 Moleküle' },
                 { id: 'vault', label: '📖 Vault' },
               ].map(tab => (
@@ -303,7 +303,7 @@ export default function SubstanceCatalog() {
                   key={tab.id}
                   onClick={() => {
                     setSelectedTab(tab.id)
-                    if (tab.id === 'molecules' && !expandedData && !expandLoading) fetchExpanded(selected.key)
+                    if ((tab.id === 'molecules' || tab.id === 'mechanisms') && !expandedData && !expandLoading) fetchExpanded(selected.key)
                     if (tab.id === 'vault' && !vaultContent && !vaultLoading) fetchVault(selected.key)
                   }}
                   className="flex-1 py-2.5 text-sm font-semibold border-b-2 transition"
@@ -354,23 +354,94 @@ export default function SubstanceCatalog() {
                 </div>
               )}
 
+              {/* Wirkweise (Physiological Targets) */}
+              {selectedTab === 'mechanisms' && (
+                <div className="space-y-6">
+                  {expandLoading && <p className="text-sm" style={{ color: 'var(--muted)' }}>Analysiere Wirkwege...</p>}
+                  
+                  {!expandLoading && expandedData && (
+                    <>
+                      {/* Physiologische Effekte (Targets) */}
+                      {expandedData.targets && expandedData.targets.length > 0 ? (
+                        <div>
+                          <h3 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent)' }}>Physiologische Einflüsse</h3>
+                          <div className="space-y-3">
+                            {expandedData.targets.map(target => (
+                              <div key={target._key} className="p-3 rounded-lg border" style={{ background: 'var(--glass)', borderColor: 'var(--line)' }}>
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="font-bold text-sm" style={{ color: 'var(--ink)' }}>{target.de_name || target.name}</span>
+                                  <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'var(--card)', color: 'var(--dim)' }}>{target.category?.replace(/_/g, ' ')}</span>
+                                </div>
+                                <div className="space-y-2">
+                                  {target.via.map((v, i) => (
+                                    <div key={i} className="flex items-start gap-2 text-xs">
+                                      <span className="shrink-0 mt-0.5">
+                                        {v.direction === 'increase' ? '📈' : v.direction === 'decrease' ? '📉' : '🔄'}
+                                      </span>
+                                      <div>
+                                        <p style={{ color: 'var(--ink)' }}>
+                                          <span className="font-semibold">{v.mol_name}</span> ({v.direction === 'increase' ? 'erhöht' : 'senkt'})
+                                        </p>
+                                        {v.mechanism && <p style={{ color: 'var(--muted)' }} className="mt-0.5">{v.mechanism}</p>}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-center p-8 bg-black/5 rounded-2xl">
+                          <p className="text-sm" style={{ color: 'var(--muted)' }}>Keine direkten physiologischen Ziele in der KB verknüpft.</p>
+                          <p className="text-[10px] mt-2" style={{ color: 'var(--dim)' }}>Verfügbare Moleküle prüfen oder KB-Enrichment anstoßen.</p>
+                        </div>
+                      )}
+
+                      {/* Interaktionen der Inhaltsstoffe */}
+                      {expandedData.interactions && expandedData.interactions.length > 0 && (
+                        <div>
+                          <h3 className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: 'var(--accent)' }}>Interaktionen der Wirkstoffe</h3>
+                          <div className="space-y-2">
+                            {expandedData.interactions.map((inter, idx) => (
+                              <div key={idx} className="p-2.5 rounded-lg border text-xs" style={{ background: 'var(--glass)', borderColor: 'var(--line)' }}>
+                                <div className="flex items-center gap-1.5 mb-1 font-semibold" style={{ color: 'var(--ink)' }}>
+                                  <span>{inter.molecules.join(' + ')}</span>
+                                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-black/10">{inter.type}</span>
+                                </div>
+                                <p style={{ color: 'var(--muted)' }}>{inter.combined_effect}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+
               {/* Molecules */}
               {selectedTab === 'molecules' && (
                 <div className="space-y-3">
                   {expandLoading && <p className="text-sm" style={{ color: 'var(--muted)' }}>Lädt Moleküle...</p>}
-                  {expandedData?.molecules && Object.entries(expandedData.molecules).map(([key, mol]) => (
-                    <div key={key} className="p-3 rounded-lg" style={{ background: 'var(--glass)' }}>
+                  {expandedData?.molecules && expandedData.molecules.map((mol, idx) => (
+                    <div key={mol._key || idx} className="p-3 rounded-lg" style={{ background: 'var(--glass)' }}>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-semibold text-sm" style={{ color: 'var(--ink)' }}>{mol.name}</span>
+                        <span className="font-semibold text-sm" style={{ color: 'var(--ink)' }}>{mol.de_name || mol.name}</span>
                         {mol.formula && <span className="text-xs font-mono" style={{ color: 'var(--dim)' }}>{mol.formula}</span>}
                       </div>
-                      <p className="text-xs" style={{ color: 'var(--muted)' }}>{mol.de_name} · {mol.category}</p>
+                      <p className="text-xs" style={{ color: 'var(--muted)' }}>{mol.name} · {mol.category?.replace(/_/g, ' ')}</p>
                       {mol.functions?.length > 0 && (
-                        <p className="text-xs mt-1.5" style={{ color: 'var(--muted)' }}>{mol.functions.slice(0, 2).join(' · ')}</p>
+                        <p className="text-xs mt-1.5" style={{ color: 'var(--muted)' }}>{mol.functions.slice(0, 3).join(' · ')}</p>
+                      )}
+                      {mol.relaxation_relevance && (
+                         <div className="mt-2 text-[10px] font-bold uppercase" style={{ color: 'var(--accent)' }}>
+                           Relevanz: {mol.relaxation_relevance.replace(/_/g, ' ')}
+                         </div>
                       )}
                     </div>
                   ))}
-                  {expandedData && Object.keys(expandedData.molecules || {}).length === 0 && (
+                  {expandedData && (!expandedData.molecules || expandedData.molecules.length === 0) && (
                     <p style={{ color: 'var(--muted)' }}>Keine Moleküldaten verfügbar</p>
                   )}
                 </div>

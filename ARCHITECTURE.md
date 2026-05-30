@@ -9,7 +9,6 @@
 - Substance interaction checking
 - Personalized recommendations (RELAX-003, upcoming)
 - Educational catalog of molecules and processes
-
 ---
 
 ## Knowledge Base Structure
@@ -18,17 +17,35 @@
 
 ```
 knowledge/
-  molecules.yaml        # 70+ molecules (hormones, neurotransmitters, minerals, etc.)
-  reactions.yaml        # 12 major biochemical cascades (HPA axis, sleep, stress, etc.)
-  interactions.yaml     # 30+ molecule-to-molecule interactions
+  substance.catalog.yaml # High-level substances (e.g., Ashwagandha, Coffee)
+  molecule.catalog.yaml  # 70+ molecules (hormones, neurotransmitters, etc.)
+  reactions.yaml         # 12 major biochemical cascades (HPA axis, sleep, etc.)
+  interactions.yaml      # 30+ molecule-to-molecule interactions
 ```
 
-#### molecules.yaml
+#### substance.catalog.yaml
+
+This layer defines substances as they are consumed or encountered by the user. It maps substances to their active components (molecules) and high-level physiological impacts.
+
+```yaml
+ashwagandha:
+  name: "Ashwagandha"
+  de_name: "Ashwagandha"
+  category: "herbal_adaptogen"
+  description: "Ayurvedic adaptogen for stress resilience..."
+  references: ["withaferin_a", "withanolide_d", "gaba"] # Links to molecules
+  traditional_use: ["Stress management", "Sleep enhancement"]
+  relaxation_relevance: "high_positive"
+  mechanism: "Withanolides inhibit cortisol release..."
+```
+
+#### molecule.catalog.yaml (formerly molecules.yaml)
 
 Each molecule has:
 ```yaml
 caffeine:
-  name: "Caffeine"
+...
+```
   de_name: "Koffein"
   category: "alkaloid"
   formula: "C8H10N4O2"

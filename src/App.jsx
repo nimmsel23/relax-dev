@@ -18,7 +18,9 @@ const TABS = [
 ]
 
 export default function App() {
-  const [tab, setTab] = useState('dash')
+  const [tab, setTab] = useState(() => {
+    return window.location.port === '9124' ? 'catalog' : 'dash'
+  })
   const { theme, setManualTheme, resetToCircadian, manualOverride, currentSchedule } = useCircadianTheme()
 
   useEffect(() => {

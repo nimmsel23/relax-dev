@@ -198,7 +198,7 @@ app.get("/session/history", (req, reply) => {
   return reply.send({ ok: true, sessions });
 });
 
-app.get("/session/latest", (req, reply) => {
+app.get("/session/latest", (_, reply) => {
   const dir = path.join(DATA_DIR, "sessions");
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort().reverse();
   if (!files.length) return reply.code(404).send({ ok: false });
