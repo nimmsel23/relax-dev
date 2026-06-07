@@ -1,0 +1,29 @@
+id: cortisol
+name: Cortisol
+type: hormone
+category: glucocorticoid
+source: adrenal_cortex
+short_description: "Wichtigstes Stresshormon — reguliert Energie, Immunsystem und zirkadiane Rhythmik."
+key_functions:
+  - "Mobilisiert Glukose aus Leber (Glukoneogenese)"
+  - "Katabolismus von Muskelprotein zur Energiegewinnung"
+  - "Anti-inflammatorische Unterdrückung der Immunantwort"
+  - "Regulierung des Schlaf-Wach-Rhythmus (CAR)"
+rhythm:
+  peak: "30–45 min nach Aufwachen"
+  trough: "Abendstunden"
+  antagonist: insulin
+nutrition_impact:
+  - "Kaffee nüchtern verstärkt Cortisol-Antwort"
+  - "Intermittent Fasting erhöht Cortisol leicht"
+  - "Hoher Zucker führt zu chronisch hohem Cortisol"
+supplements:
+  - magnesium
+  - vitamin_c
+  - omega_3
+client_explanation: |
+  "Cortisol ist dein natürlicher Weckdienst und Energielieferant — morgens hoch, abends niedrig. 
+  Probleme entstehen wenn es dauerhaft hoch bleibt: dann baut es Muskeln ab, macht Fett am Bauch, 
+  und blockiert den Schlaf."
+refs:
+  - hpa-achse
