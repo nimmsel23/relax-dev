@@ -9,5 +9,27 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          window.__swRegistration = reg
+          const notify = () => window.dispatchEvent(new CustomEvent('sw-update-available'))
+          if (reg.waiting) notify()
+          reg.addEventListener('updatefound', () => {
+            const nw = reg.installing
+            if (!nw) return
+            nw.addEventListener('statechange', () => {
+              if (nw.state === 'installed' && navigator.serviceWorker.controller) notify()
+            })
+          })
+        }).catch(() => {})
+        let reloading = false
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (reloading) return
+          reloading = true
+          window.location.reload()
+        })
+      }
+    </script>
   </body>
 </html>
