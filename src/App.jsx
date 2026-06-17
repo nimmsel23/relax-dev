@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock } from 'lucide-react'
+import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock, Settings2 } from 'lucide-react'
 import Dashboard from './views/Dashboard.jsx'
 import Session from './views/Session.jsx'
 import Journal from './views/Journal.jsx'
 import Stats from './views/Stats.jsx'
 import PhysioTimeline from './views/PhysioTimeline.jsx'
 import SubstanceCatalog from './views/SubstanceCatalog.jsx'
+import Settings from './views/Settings.jsx'
 import { useCircadianTheme } from './hooks/useCircadianTheme.js'
 
 const TABS = [
@@ -15,6 +16,7 @@ const TABS = [
   { id: 'stats',   label: 'Stats',    Icon: BarChart3 },
   { id: 'physio',  label: 'Physio',   Icon: Zap },
   { id: 'catalog', label: 'Catalog',  Icon: Beaker },
+  { id: 'settings',label: 'Mehr',     Icon: Settings2 },
 ]
 
 export default function App() {
@@ -37,7 +39,7 @@ export default function App() {
     }
   }
 
-  const View = { dash: Dashboard, session: Session, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog }[tab]
+  const View = { dash: Dashboard, session: Session, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog, settings: Settings }[tab]
 
   return (
     <div className="flex flex-col h-full" style={{ background: 'var(--bg)', color: 'var(--ink)' }}>
