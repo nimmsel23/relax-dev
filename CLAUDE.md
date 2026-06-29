@@ -273,3 +273,17 @@ Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven glei
 - **Nächste Features**: Physio Timeline (PNI-Simulation). `HOT.md` enthält Datenquellen-Recherche.
 - **Keine UI-Framework-Creep**: Tailwind + CSS variables reicht. Nicht shadcn/MUI einführen.
 - **Gemini AI**: Optional für KB-Enrichment. Key in `~/.env/relax.env`. Pipeline schreibt in `molecule_details`, nie in kuratierte Index-Einträge.
+
+---
+
+## Dispatcher
+
+Jedes neue Skript/Tool in diesem Repo gehört als Option in den zentralen Dispatcher — nicht als loses Standalone-Script.
+Bei Bash vs. Python: Python bevorzugen. Deps: `typer` + `loguru` + `gum`-Fallback für TUI.
+Referenz-Implementierung: `~/aos-dev/bin/bridge-devctl menu`
+
+| Dispatcher | Typ | Funktion |
+|---|---|---|
+| `relax` | python3 | Relax Service-Dispatcher (typer-basiert) — **Haupteinstieg** |
+
+`relax` ist bereits Python/typer — alle neuen Befehle hier als typer-Commands einbauen, kein separates Skript.
