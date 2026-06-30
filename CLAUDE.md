@@ -284,6 +284,9 @@ Referenz-Implementierung: `~/aos-dev/bin/bridge-devctl menu`
 
 | Dispatcher | Typ | Funktion |
 |---|---|---|
-| `relax` | python3 | Relax Service-Dispatcher (typer-basiert) — **Haupteinstieg** |
+| `relax` | python3 | **Domain CLI** — direkter SQLite-Zugriff, HTTP-Fallback via `server/knowledge/http.py` |
+| `relax-devctl` | python3 | **Server-Controller** — start/stop/restart/enricher/deploy → /opt |
 
-`relax` ist bereits Python/typer — alle neuen Befehle hier als typer-Commands einbauen, kein separates Skript.
+`relax` = KB-Queries, Sessions, Journal, Enrich — alles direkt ohne laufenden Server.
+`relax-devctl` = Service-Management + Deploy. Neues Server-Tool → hierher.
+`server/knowledge/http.py` = HTTP-Fallback-Modul (sauberer Modulimport via `import server.knowledge.http`).

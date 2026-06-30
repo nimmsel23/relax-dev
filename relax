@@ -1,117 +1,312 @@
 #!/usr/bin/env python3
 """
-relax — Service Dispatcher für relax-dev
+relax — Domain CLI für Relaxation Knowledge Base
 
-Routen:
-  relax dev                     # Vite + Node API zusammen (HMR)
-  relax start                   # Node API :9123 alleine
-  relax ui                      # Vite :5904 alleine
-  relax build                   # Vite Production Build → dist/
-  relax health                  # Node API Health-Check
-  relax status                  # Service-Ports + Prozess-Status
+  relax substances           Alle Substanzen auflisten
+  relax molecules            Alle Moleküle auflisten
+  relax substance <key>      Substanz-Detail
+  relax molecule <key>       Molekül-Detail
+  relax interactions <key>   Molekül-Interaktionen
+  relax search <query>       KB durchsuchen
+  relax enrich <key>         Molekül via Gemini anreichern
+  relax enricher <sub>       KB Enricher steuern (start|stop|status|batch|list)
+  relax session <sub>        Session queries (today|get|list)
+  relax journal <sub>        Journal queries (today|get|list)
+  relax stats                Aggregierte Stats
+  relax migrate              YAML → SQLite neu importieren
+
+Server/Service-Control → use: relax-devctl
 """
 
-import shutil
+import json
 import subprocess
 import sys
 from pathlib import Path
 
-RELAX_DIR = Path(__file__).resolve().parent
-HAS_GUM = shutil.which("gum") is not None
+import typer
+from wasabi import Printer
 
+msg = Printer()
 
-def run(*args, **kwargs):
-    return subprocess.run(list(args), cwd=RELAX_DIR, **kwargs)
+DEV_DIR = Path(__file__).resolve().parent
 
+# kb_enricher als Paket importierbar machen
+if str(DEV_DIR) not in sys.path:
+    sys.path.insert(0, str(DEV_DIR))
 
-def gum_log(level: str, msg: str) -> None:
-    if HAS_GUM:
-        subprocess.run(["gum", "log", f"--level={level}", msg])
-    else:
-        prefix = {"info": "→", "warn": "⚠", "error": "✗"}.get(level, "·")
-        stream = sys.stderr if level == "error" else sys.stdout
-        print(f"{prefix} {msg}", file=stream)
+app = typer.Typer(help="Relax — Knowledge Base Domain CLI", no_args_is_help=True)
 
+# ── DB direct access ──────────────────────────────────────────────────────────
 
-def usage():
-    print(__doc__.strip())
-    sys.exit(0)
+def _db():
+    from server.knowledge.kb_enricher.db import _connect
+    return _connect()
 
+def _try_http(fn_name: str, *args, **kwargs):
+    import server.knowledge.http as _http
+    return getattr(_http, fn_name)(*args, **kwargs)
 
-def main():
-    args = sys.argv[1:]
+# ── KB Commands ───────────────────────────────────────────────────────────────
 
-    if not args or args[0] in ("-h", "--help"):
-        usage()
-
-    cmd, rest = args[0], args[1:]
-
-    if cmd == "dev":
-        run("node", "scripts/dev-runner.mjs", *rest)
-
-    elif cmd == "start":
-        run("node", "server.mjs", *rest)
-
-    elif cmd == "ui":
-        run("npx", "vite", *rest)
-
-    elif cmd == "build":
-        run("npx", "vite", "build", *rest)
-
-    elif cmd == "health":
-        _health()
-
-    elif cmd == "status":
-        _status()
-
-    else:
-        gum_log("error", f"Unbekannter Befehl: {cmd!r}")
-        usage()
-
-
-def _health() -> None:
-    result = subprocess.run(
-        ["http", "--ignore-stdin", "-b", "GET", ":9123/health"],
-        capture_output=True, text=True, cwd=RELAX_DIR,
-    )
-    if result.returncode == 0:
-        gum_log("info", "Node API :9123 erreichbar")
-        print(result.stdout.strip())
-    else:
-        gum_log("error", "Node API :9123 nicht erreichbar")
-        sys.exit(1)
-
-
-def _status() -> None:
-    ports = [
-        (9123, "Node API"),
-        (5904, "Vite (UI)"),
-        (9124, "KB Enricher"),
-    ]
-
-    rows = []
-    for port, label in ports:
-        result = subprocess.run(
-            ["ss", "-tlnp", f"sport = :{port}"],
-            capture_output=True, text=True,
-        )
-        listening = str(port) in result.stdout
-        status = "running" if listening else "stopped"
-        rows.append(f":{port}\t{label}\t{status}")
-
-    if HAS_GUM:
-        tsv = "Port\tService\tStatus\n" + "\n".join(rows)
-        subprocess.run(
-            ["gum", "table", "--print", '--separator=\t'],
-            input=tsv, text=True,
-        )
-    else:
-        print(f"{'Port':<8} {'Service':<16} Status")
+@app.command()
+def substances(limit: int = typer.Option(50, "-n")):
+    """Alle Substanzen aus SQLite auflisten."""
+    try:
+        rows = _db().execute(
+            "SELECT key, name, category FROM substances ORDER BY name LIMIT ?", (limit,)
+        ).fetchall()
         for r in rows:
-            port, label, status = r.split("\t")
-            marker = "✓" if status == "running" else "✗"
-            print(f"  {marker} {port:<8} {label:<16} {status}")
+            print(f"  {r['key']:<24} {r['name']:<30} {r['category'] or ''}")
+    except Exception:
+        for s in _try_http("substances", limit):
+            print(f"  {s.get('key',''):<24} {s.get('name','')}")
+
+
+@app.command()
+def molecules(limit: int = typer.Option(100, "-n")):
+    """Alle Moleküle aus SQLite auflisten."""
+    try:
+        rows = _db().execute(
+            "SELECT key, name, formula FROM molecules ORDER BY name LIMIT ?", (limit,)
+        ).fetchall()
+        for r in rows:
+            print(f"  {r['key']:<24} {r['name']:<30} {r['formula'] or ''}")
+    except Exception:
+        for m in _try_http("molecules", limit):
+            print(f"  {m.get('key',''):<24} {m.get('name','')}")
+
+
+@app.command()
+def substance(key: str = typer.Argument(..., help="Substanz-Key (z.B. magnesium)")):
+    """Substanz-Detail aus SQLite."""
+    try:
+        row = _db().execute(
+            "SELECT key, name, category, description FROM substances WHERE key = ?", (key,)
+        ).fetchone()
+        if row:
+            print(json.dumps(dict(row), indent=2, ensure_ascii=False))
+            return
+        msg.warn(f"'{key}' nicht in DB — HTTP-Fallback...")
+    except Exception:
+        pass
+    print(json.dumps(_try_http("substance_detail", key), indent=2, ensure_ascii=False))
+
+
+@app.command()
+def molecule(key: str = typer.Argument(..., help="Molekül-Key (z.B. cortisol)")):
+    """Molekül-Detail aus SQLite."""
+    try:
+        row = _db().execute(
+            "SELECT key, name, formula, description, enriched_at FROM molecules WHERE key = ?", (key,)
+        ).fetchone()
+        if row:
+            print(json.dumps(dict(row), indent=2, ensure_ascii=False))
+            return
+        msg.warn(f"'{key}' nicht in DB — HTTP-Fallback...")
+    except Exception:
+        pass
+    print(json.dumps(_try_http("molecule_detail", key), indent=2, ensure_ascii=False))
+
+
+@app.command()
+def interactions(key: str = typer.Argument(..., help="Molekül-Key")):
+    """Interaktionen eines Moleküls aus SQLite."""
+    try:
+        rows = _db().execute(
+            """SELECT m2.key, m2.name, i.effect, i.direction
+               FROM interactions i
+               JOIN molecules m1 ON i.molecule_a = m1.key
+               JOIN molecules m2 ON i.molecule_b = m2.key
+               WHERE m1.key = ?
+               UNION
+               SELECT m1.key, m1.name, i.effect, i.direction
+               FROM interactions i
+               JOIN molecules m1 ON i.molecule_a = m1.key
+               JOIN molecules m2 ON i.molecule_b = m2.key
+               WHERE m2.key = ?""",
+            (key, key),
+        ).fetchall()
+        if rows:
+            for r in rows:
+                print(f"  {r['key']:<20} {r['name']:<24} {r['effect'] or ''} {r['direction'] or ''}")
+            return
+        msg.warn(f"Keine Interaktionen für '{key}' in DB — HTTP-Fallback...")
+    except Exception:
+        pass
+    for i in _try_http("interactions", key):
+        print(f"  {i.get('key',''):<20} {i.get('effect','')}")
+
+
+@app.command()
+def search(query: str = typer.Argument(..., help="Suchbegriff")):
+    """KB durchsuchen (Name, Beschreibung)."""
+    try:
+        q = f"%{query}%"
+        rows = _db().execute(
+            """SELECT 'substance' as type, key, name FROM substances
+               WHERE name LIKE ? OR description LIKE ?
+               UNION
+               SELECT 'molecule', key, name FROM molecules
+               WHERE name LIKE ? OR description LIKE ?
+               LIMIT 20""",
+            (q, q, q, q),
+        ).fetchall()
+        if rows:
+            for r in rows:
+                print(f"  [{r['type']:<10}] {r['key']:<24} {r['name']}")
+            return
+    except Exception:
+        pass
+    for r in _try_http("search", query):
+        print(f"  {r.get('key',''):<24} {r.get('name','')}")
+
+
+@app.command()
+def enrich(key: str = typer.Argument(..., help="Molekül-Key")):
+    """Molekül via Gemini anreichern (direkt via kb_enricher)."""
+    import asyncio
+    from server.knowledge.kb_enricher.enricher import enrich_molecule
+    try:
+        result = asyncio.run(enrich_molecule(key))
+        msg.good(f"Enriched: {key}")
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    except Exception as e:
+        msg.fail(f"Enrichment failed: {e}")
+        raise typer.Exit(1)
+
+
+@app.command()
+def migrate(force: bool = typer.Option(False, "--force", help="Auch wenn DB nicht leer")):
+    """YAML → SQLite neu importieren."""
+    cmd = ["node", "scripts/migrate-yaml-to-sqlite.mjs"]
+    if force:
+        cmd.append("--force")
+    subprocess.run(cmd, cwd=DEV_DIR)
+
+
+# ── Enricher sub-app ──────────────────────────────────────────────────────────
+
+enricher_app = typer.Typer(help="KB Enricher steuern (start|stop|status|batch|list)")
+app.add_typer(enricher_app, name="enricher")
+
+@enricher_app.command("start")
+def enricher_start():
+    """KB Enricher Server starten."""
+    subprocess.run([str(DEV_DIR / "relax-devctl"), "enricher", "start"])
+
+@enricher_app.command("stop")
+def enricher_stop():
+    """KB Enricher Server stoppen."""
+    subprocess.run([str(DEV_DIR / "relax-devctl"), "enricher", "stop"])
+
+@enricher_app.command("status")
+def enricher_status():
+    """KB Enricher Status."""
+    subprocess.run([str(DEV_DIR / "relax-devctl"), "enricher", "status"])
+
+@enricher_app.command("batch")
+def enricher_batch(limit: int = typer.Option(0, "-n", help="Max Moleküle (0=alle)")):
+    """Alle unangereicherten Moleküle verarbeiten."""
+    import asyncio
+    from server.knowledge.kb_enricher.enricher import enrich_batch
+    asyncio.run(enrich_batch())
+
+@enricher_app.command("list")
+def enricher_list():
+    """Moleküle ohne enriched_at auflisten."""
+    rows = _db().execute(
+        "SELECT key, name FROM molecules WHERE enriched_at IS NULL ORDER BY name"
+    ).fetchall()
+    msg.info(f"{len(rows)} Moleküle noch nicht angereichert")
+    for r in rows:
+        print(f"  {r['key']:<24} {r['name']}")
+
+
+# ── Session sub-app ───────────────────────────────────────────────────────────
+
+_SESSIONS_DIR = DEV_DIR / "data" / "sessions"
+_JOURNAL_DIR  = DEV_DIR / "data" / "journal"
+
+session_app = typer.Typer(help="Session queries (today | get DATE | list)")
+app.add_typer(session_app, name="session")
+
+def _read_session(date_str: str) -> dict:
+    f = _SESSIONS_DIR / f"{date_str}.json"
+    if f.exists():
+        return json.loads(f.read_text())
+    return _try_http("session_get", date_str)
+
+@session_app.command("today")
+def session_today():
+    """Heutige Session direkt aus Datei."""
+    from datetime import date
+    print(json.dumps(_read_session(str(date.today())), indent=2, ensure_ascii=False))
+
+@session_app.command("get")
+def session_get(date: str = typer.Argument(..., help="YYYY-MM-DD")):
+    """Session für ein Datum direkt aus Datei."""
+    print(json.dumps(_read_session(date), indent=2, ensure_ascii=False))
+
+@session_app.command("list")
+def session_list(limit: int = typer.Option(10, "-n")):
+    """Letzte N Sessions direkt aus Dateien."""
+    files = sorted(_SESSIONS_DIR.glob("*.json"), reverse=True)[:limit]
+    sessions = [json.loads(f.read_text()) for f in files] if files else _try_http("session_list", limit)
+    print(json.dumps(sessions, indent=2, ensure_ascii=False))
+
+
+# ── Journal sub-app ───────────────────────────────────────────────────────────
+
+journal_app = typer.Typer(help="Journal queries (today | get DATE | list)")
+app.add_typer(journal_app, name="journal")
+
+def _read_journal(date_str: str) -> str:
+    f = _JOURNAL_DIR / f"{date_str}.md"
+    if f.exists():
+        return f.read_text()
+    data = _try_http("journal_get", date_str)
+    return data.get("content", json.dumps(data))
+
+@journal_app.command("today")
+def journal_today():
+    """Heutiger Journal-Eintrag direkt aus Datei."""
+    from datetime import date
+    print(_read_journal(str(date.today())))
+
+@journal_app.command("get")
+def journal_get(date: str = typer.Argument(..., help="YYYY-MM-DD")):
+    """Journal-Eintrag für ein Datum."""
+    print(_read_journal(date))
+
+@journal_app.command("list")
+def journal_list():
+    """Journal-Einträge auflisten."""
+    files = sorted(_JOURNAL_DIR.glob("*.md"), reverse=True)
+    if files:
+        for f in files:
+            print(f"  {f.stem}")
+    else:
+        for e in _try_http("journal_list"):
+            print(f"  {e.get('date','')}")
+
+
+# ── Stats ─────────────────────────────────────────────────────────────────────
+
+@app.command()
+def stats(days: int = typer.Option(14, "-d")):
+    """Aggregierte Session-Stats direkt aus Dateien."""
+    from datetime import date, timedelta
+    today = date.today()
+    total_min, count = 0, 0
+    for i in range(days):
+        f = _SESSIONS_DIR / f"{today - timedelta(days=i)}.json"
+        if f.exists():
+            d = json.loads(f.read_text())
+            for item in d.get("items", []):
+                total_min += item.get("minutes", 0)
+            count += 1
+    print(f"  Letzte {days} Tage: {count} Sessions, {total_min} Minuten")
 
 
 if __name__ == "__main__":
-    main()
+    app()

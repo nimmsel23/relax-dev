@@ -1,0 +1,277 @@
+#!/usr/bin/env python3
+"""
+relax-devctl — Relax Centre Server Controller
+Controls: Node API (:9123, aos-relax-dev.service) + KB Enricher (:9124, Python)
+Deploy: ~/relax-dev → /opt/relax (relax.service, system scope, sudo)
+
+Domain CLI → use: relax
+"""
+
+import datetime
+import os
+import subprocess
+import sys
+import time
+import urllib.request
+from pathlib import Path
+from typing import Optional
+
+import typer
+from wasabi import Printer
+
+msg = Printer()
+
+app = typer.Typer(help="Relax Centre Server Controller", no_args_is_help=True)
+
+DEV_DIR = Path(__file__).resolve().parent
+NODE_SERVICE = os.getenv("RELAX_NODE_SERVICE", "aos-relax-dev.service")
+NODE_PORT = os.getenv("RELAX_NODE_PORT", "9123")
+ENRICHER_PORT = os.getenv("RELAX_ENRICHER_PORT", "9124")
+NODE_URL = f"http://127.0.0.1:{NODE_PORT}"
+ENRICHER_URL = f"http://127.0.0.1:{ENRICHER_PORT}"
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _http_ok(url: str, timeout: float = 2.0) -> bool:
+    try:
+        urllib.request.urlopen(url, timeout=timeout)
+        return True
+    except Exception:
+        return False
+
+def _service_active(unit: str) -> bool:
+    return subprocess.run(
+        ["systemctl", "--user", "is-active", "--quiet", unit],
+        capture_output=True,
+    ).returncode == 0
+
+def _service_enabled(unit: str) -> bool:
+    return subprocess.run(
+        ["systemctl", "--user", "is-enabled", "--quiet", unit],
+        capture_output=True,
+    ).returncode == 0
+
+def _ctl(*args: str) -> int:
+    return subprocess.run(["systemctl", "--user", *args]).returncode
+
+def _wait_healthy(timeout: int = 10) -> None:
+    for _ in range(timeout):
+        if _http_ok(NODE_URL):
+            msg.good("Node API healthy")
+            return
+        time.sleep(1)
+    msg.warn(f"Node API not healthy after {timeout}s")
+
+# ── Commands ──────────────────────────────────────────────────────────────────
+
+@app.command()
+def status():
+    """Service + Health Status."""
+    node_active = _service_active(NODE_SERVICE)
+    node_enabled = _service_enabled(NODE_SERVICE)
+    node_health = _http_ok(NODE_URL)
+    enricher_health = _http_ok(ENRICHER_URL)
+
+    msg.divider("Relax Dev Stack")
+    print(f"  {'Service':<32} {'Active':<10} {'Boot':<10} {'Health'}")
+    print(f"  {'-'*62}")
+    print(f"  {NODE_SERVICE:<32} {'up' if node_active else 'down':<10} {'enabled' if node_enabled else 'disabled':<10} {'up' if node_health else 'down'}")
+    print(f"  {'kb-enricher (:9124)':<32} {'—':<10} {'—':<10} {'up' if enricher_health else 'down'}")
+    print()
+    print(f"  Node API:    {NODE_URL}")
+    print(f"  KB Enricher: {ENRICHER_URL}")
+
+
+@app.command()
+def start():
+    """Node API via systemd starten."""
+    msg.info(f"Starting {NODE_SERVICE}...")
+    if _ctl("start", NODE_SERVICE) == 0:
+        msg.good(f"{NODE_SERVICE} started")
+    else:
+        msg.fail(f"Failed to start {NODE_SERVICE}")
+    _wait_healthy()
+
+
+@app.command()
+def stop():
+    """Node API stoppen."""
+    _ctl("stop", NODE_SERVICE)
+    msg.good(f"{NODE_SERVICE} stopped")
+
+
+@app.command()
+def restart():
+    """Node API neu starten."""
+    _ctl("restart", NODE_SERVICE)
+    msg.good(f"{NODE_SERVICE} restarted")
+    _wait_healthy()
+
+
+@app.command()
+def enable():
+    """Autostart beim Boot aktivieren."""
+    _ctl("enable", NODE_SERVICE)
+    msg.good(f"{NODE_SERVICE} enabled")
+
+
+@app.command()
+def disable():
+    """Autostart deaktivieren."""
+    _ctl("disable", NODE_SERVICE)
+    msg.good(f"{NODE_SERVICE} disabled")
+
+
+@app.command()
+def health():
+    """HTTP Health-Check."""
+    node_ok = _http_ok(NODE_URL)
+    enricher_ok = _http_ok(ENRICHER_URL)
+    (msg.good if node_ok else msg.fail)(f"Node API {'online' if node_ok else 'offline'} ({NODE_URL})")
+    (msg.good if enricher_ok else msg.warn)(f"KB Enricher {'online' if enricher_ok else 'offline'} ({ENRICHER_URL})")
+    if not node_ok:
+        raise typer.Exit(1)
+
+
+@app.command()
+def logs(
+    service: str = typer.Argument("node", help="node | enricher"),
+    follow: bool = typer.Option(True, "-f/--no-follow"),
+):
+    """Systemd Journal Logs folgen."""
+    unit = NODE_SERVICE if service == "node" else "fitness-python-backend.service"
+    cmd = ["journalctl", "--user", "-u", unit]
+    cmd += (["-f", "--no-pager"] if follow else ["-n", "50", "--no-pager"])
+    subprocess.run(cmd)
+
+
+@app.command()
+def dev():
+    """Vite + Node API im Vordergrund starten (Ctrl+C zum Stoppen)."""
+    msg.divider("Foreground Dev Mode")
+    try:
+        subprocess.run(["node", "scripts/dev-runner.mjs"], cwd=DEV_DIR)
+    except KeyboardInterrupt:
+        print()
+        msg.info("Stopped.")
+
+
+@app.command()
+def build():
+    """Vite Production Build → dist/."""
+    msg.info("npm run build...")
+    subprocess.run(["npx", "vite", "build"], cwd=DEV_DIR)
+
+
+@app.command()
+def enricher(
+    action: str = typer.Argument("status", help="start | stop | status"),
+):
+    """KB Enricher Python-Server (:9124) steuern."""
+    pidfile = Path("/tmp/relax-enricher.pid")
+    logfile = Path("/tmp/relax-enricher.log")
+
+    if action == "start":
+        if pidfile.exists():
+            try:
+                pid = int(pidfile.read_text().strip())
+                os.kill(pid, 0)
+                msg.warn(f"Enricher already running (PID {pid})")
+                return
+            except (ProcessLookupError, ValueError):
+                pidfile.unlink(missing_ok=True)
+        proc = subprocess.Popen(
+            [sys.executable, "-m", "server.knowledge.kb_enricher", "serve"],
+            cwd=DEV_DIR,
+            stdout=open(logfile, "a"),
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+        pidfile.write_text(str(proc.pid))
+        time.sleep(1)
+        msg.good(f"Enricher started (PID {proc.pid}, :{ENRICHER_PORT})")
+
+    elif action == "stop":
+        if pidfile.exists():
+            import signal
+            pid = int(pidfile.read_text().strip())
+            try:
+                os.kill(pid, signal.SIGTERM)
+                pidfile.unlink(missing_ok=True)
+                msg.good(f"Enricher stopped (PID {pid})")
+            except ProcessLookupError:
+                pidfile.unlink(missing_ok=True)
+                msg.warn("Enricher was not running")
+        else:
+            msg.warn("No pidfile found")
+
+    elif action == "status":
+        ok = _http_ok(ENRICHER_URL)
+        (msg.good if ok else msg.warn)(f"KB Enricher {'online' if ok else 'offline'} ({ENRICHER_URL})")
+
+    else:
+        msg.fail(f"Unknown action: {action} (start|stop|status)")
+        raise typer.Exit(1)
+
+
+@app.command()
+def deploy(
+    dry_run: bool = typer.Option(False, "--dry-run"),
+    skip_build: bool = typer.Option(False, "--skip-build"),
+):
+    """Deploy ~/relax-dev → /opt/relax (sudo, restarts relax.service)."""
+    dest = Path("/opt/relax")
+    backup_dir = Path("/opt/relax_backups")
+
+    if dry_run:
+        msg.info(f"DRY RUN — would sync {DEV_DIR} → {dest}")
+        msg.info(f"Would backup to {backup_dir}/relax_<timestamp>/")
+        msg.info("Would run: npm install + npx vite build in /opt/relax")
+        msg.info("Would run: sudo systemctl restart relax.service")
+        return
+
+    import shutil
+    if shutil.which("gum"):
+        r = subprocess.run(["gum", "confirm", f"Deploy to {dest} and restart relax.service?"])
+        if r.returncode != 0:
+            msg.warn("Aborted.")
+            raise typer.Exit(0)
+    else:
+        ans = input(f"Deploy {DEV_DIR} → {dest} and restart relax.service? [y/N] ")
+        if ans.lower() != "y":
+            msg.warn("Aborted.")
+            raise typer.Exit(0)
+
+    ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    if dest.exists():
+        msg.info(f"Backup: {dest} → {backup_dir}/relax_{ts}")
+        subprocess.run(["sudo", "mkdir", "-p", str(backup_dir)], check=True)
+        subprocess.run(["sudo", "cp", "-a", str(dest), str(backup_dir / f"relax_{ts}")], check=True)
+
+    if not dest.exists():
+        subprocess.run(["sudo", "mkdir", "-p", str(dest)], check=True)
+        subprocess.run(["sudo", "chown", f"{os.getuid()}:{os.getgid()}", str(dest)], check=True)
+
+    msg.info(f"Syncing {DEV_DIR}/ → {dest}/")
+    subprocess.run([
+        "sudo", "rsync", "-av", "--delete",
+        "--exclude=.git", "--exclude=node_modules", "--exclude=.archiv", "--exclude=*.bak",
+        f"{DEV_DIR}/", f"{dest}/",
+    ], check=True)
+
+    subprocess.run(["sudo", "chown", "-R", f"{os.getuid()}:{os.getgid()}", str(dest)], check=True)
+
+    if not skip_build:
+        msg.info("npm install + vite build in /opt/relax...")
+        subprocess.run(["npm", "install", "--silent"], cwd=dest, check=True)
+        subprocess.run(["npx", "vite", "build"], cwd=dest, check=True)
+
+    r = subprocess.run(["sudo", "systemctl", "restart", "relax.service"])
+    if r.returncode == 0:
+        msg.good("relax.service restarted — deploy complete")
+    else:
+        msg.warn("relax.service not found or restart failed")
+
+
+if __name__ == "__main__":
+    app()
