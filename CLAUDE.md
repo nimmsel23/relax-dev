@@ -284,9 +284,24 @@ Referenz-Implementierung: `~/aos-dev/bin/bridge-devctl menu`
 
 | Dispatcher | Typ | Funktion |
 |---|---|---|
-| `relax` | python3 | **Domain CLI** — direkter SQLite-Zugriff, HTTP-Fallback via `server/knowledge/http.py` |
+| `relax` | python3 | **Domain CLI** — direkter SQLite-Zugriff + File-Reads, HTTP-Fallback via `server/knowledge/http.py` |
 | `relax-devctl` | python3 | **Server-Controller** — start/stop/restart/enricher/deploy → /opt |
 
-`relax` = KB-Queries, Sessions, Journal, Enrich — alles direkt ohne laufenden Server.
+`relax` = KB-Queries, Sessions, Journal, Enrich — alles direkt ohne laufenden Server (SQLite + JSON-Files).
 `relax-devctl` = Service-Management + Deploy. Neues Server-Tool → hierher.
-`server/knowledge/http.py` = HTTP-Fallback-Modul (sauberer Modulimport via `import server.knowledge.http`).
+
+### HTTP-Fallback-Modul
+
+`server/knowledge/http.py` — sauberes Python-Modul (`import server.knowledge.http as _http`).
+Wird von `relax` via `_try_http()` aufgerufen wenn kein direkter DB/File-Zugriff möglich.
+Ziel: Node-Server `:9123` (env: `RELAX_NODE_PORT`).
+
+```python
+from server.knowledge import http as _http
+_http.substances(limit)         # GET /api/knowledge/substances?limit=N
+_http.molecules(limit)          # GET /api/knowledge/molecules?limit=N
+_http.substance_detail(key)     # GET /api/knowledge/substance/<key>
+_http.molecule_detail(key)      # GET /api/knowledge/molecule/<key>
+_http.interactions(key)         # GET /api/knowledge/interactions/<key>
+_http.search(query)             # GET /api/knowledge/search?q=...
+```
