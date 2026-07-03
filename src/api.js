@@ -1,4 +1,8 @@
-const BASE = import.meta.env.VITE_API_BASE || ''
+// Standalone: same-origin (Vite-Proxy :5904 → :9123). Embedded in der
+// vitalos-Shell setzt der RelaxApp-Wrapper window.__RELAX_API_BASE__ = '/relax-api'.
+const BASE = import.meta.env.VITE_API_BASE
+  || (typeof window !== 'undefined' && window.__RELAX_API_BASE__)
+  || ''
 
 export const api = {
   async get(path) {

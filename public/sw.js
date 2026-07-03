@@ -1,7 +1,7 @@
 // relax-dev Service Worker
 // v1: static cache + network-first navigations + auto-update flow
 
-const CACHE = 'relax-v1'
+const CACHE = 'relax-v2'
 
 const STATIC = [
   '/',
