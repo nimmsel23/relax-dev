@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>physio-dev — Knowledge Base</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b22;
+      --bg3: #1c2128;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text2: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --warn: #d29922;
+      --sidebar: 260px;
+      --enrichbar: 320px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: grid;
+      grid-template-columns: var(--sidebar) 1fr var(--enrichbar);
+      grid-template-rows: 48px 1fr;
+      overflow: hidden;
+    }
+
+    /* Header */
+    header {
+      grid-column: 1 / -1;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+    }
+    header h1 { font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+    header span { font-size: 12px; color: var(--text2); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); }
+
+    /* Sidebar */
+    aside {
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 8px 0;
+    }
+    .folder-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text2);
+      padding: 10px 14px 4px;
+    }
+    .doc-item {
+      display: block;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--text2);
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-left: 2px solid transparent;
+      transition: all .1s;
+    }
+    .doc-item:hover { color: var(--text); background: var(--bg3); }
+    .doc-item.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--bg3);
+    }
+
+    /* Main content */
+    main {
+      overflow-y: auto;
+      padding: 32px 40px;
+      background: var(--bg);
+    }
+    .empty-state {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text2);
+      gap: 8px;
+    }
+    .empty-state h2 { font-size: 18px; font-weight: 500; }
+    .empty-state p { font-size: 13px; }
+
+    /* Markdown styles */
+    .md-body { max-width: 720px; line-height: 1.7; }
+    .md-body h1 { font-size: 26px; font-weight: 700; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .md-body h2 { font-size: 18px; font-weight: 600; margin: 28px 0 10px; color: var(--text); }
+    .md-body h3 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: var(--text2); }
+    .md-body p { margin-bottom: 12px; color: var(--text); }
+    .md-body ul, .md-body ol { margin: 8px 0 12px 20px; }
+    .md-body li { margin-bottom: 4px; font-size: 14px; }
+    .md-body code { background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; font-size: 12px; font-family: "JetBrains Mono", monospace; }
+    .md-body pre { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; overflow-x: auto; margin: 12px 0; }
+    .md-body pre code { background: none; border: none; padding: 0; font-size: 12px; line-height: 1.6; }
+    .md-body blockquote { border-left: 3px solid var(--accent); padding: 8px 16px; margin: 12px 0; background: var(--bg2); border-radius: 0 6px 6px 0; color: var(--text2); font-style: italic; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+    .md-body th { background: var(--bg3); padding: 8px 12px; text-align: left; border: 1px solid var(--border); font-weight: 600; }
+    .md-body td { padding: 8px 12px; border: 1px solid var(--border); }
+    .md-body tr:nth-child(even) td { background: var(--bg2); }
+    .md-body a { color: var(--accent); text-decoration: none; }
+    .md-body a:hover { text-decoration: underline; }
+    .md-body strong { color: var(--text); }
+
+    .doc-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .btn {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg2);
+      color: var(--text2);
+      transition: all .1s;
+    }
+    .btn:hover { background: var(--bg3); color: var(--text); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #000; }
+    .btn.primary:hover { opacity: .88; }
+    .btn.success { background: var(--accent2); border-color: var(--accent2); color: #000; }
+
+    /* Enrich panel */
+    .enrich-panel {
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .enrich-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .gemini-badge {
+      background: linear-gradient(135deg, #4285f4, #34a853);
+      color: white;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-weight: 700;
+      letter-spacing: .05em;
+    }
+    .enrich-body { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .enrich-footer { padding: 12px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+    textarea.enrich-input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 13px;
+      padding: 10px;
+      resize: none;
+      height: 90px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .15s;
+    }
+    textarea.enrich-input:focus { border-color: var(--accent); }
+    textarea.enrich-input::placeholder { color: var(--text2); }
+
+    .msg {
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 10px 12px;
+      border-radius: 6px;
+    }
+    .msg.user { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+    .msg.gemini { background: #1a2332; color: var(--text); border: 1px solid #2d4a6e; }
+    .msg.gemini pre { background: var(--bg); font-size: 11px; }
+    .msg.gemini code { font-size: 11px; }
+    .msg-actions { display: flex; gap: 6px; margin-top: 8px; }
+
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .no-doc-hint {
+      font-size: 12px;
+      color: var(--text2);
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="dot"></div>
+  <h1>physio-dev</h1>
+  <span>Physiologie Knowledge Base</span>
+</header>
+
+<aside id="sidebar">
+  <div style="padding:12px 14px 4px;font-size:12px;color:var(--text2);">Lade...</div>
+</aside>
+
+<main id="main">
+  <div class="empty-state">
+    <h2>Knowledge Base</h2>
+    <p>Dokument aus der Sidebar wählen</p>
+  </div>
+</main>
+
+<div class="enrich-panel">
+  <div class="enrich-header">
+    Gemini Enrichment <span class="gemini-badge">AI</span>
+  </div>
+  <div class="enrich-body" id="chat-body">
+    <div class="no-doc-hint">Zuerst ein Dokument öffnen, dann hier anreichern lassen.</div>
+  </div>
+  <div class="enrich-footer">
+    <textarea class="enrich-input" id="enrich-input"
+      placeholder="z.B. &quot;Ergänze Klienten-FAQ&quot; oder &quot;Füge Studienlage zu Melatonin hinzu&quot;"
+      disabled></textarea>
+    <div style="display:flex;gap:6px;">
+      <button class="btn primary" id="enrich-btn" disabled onclick="sendEnrich()">Anreichern</button>
+      <button class="btn" id="clear-btn" onclick="clearChat()">Leeren</button>
+    </div>
+  </div>
+</div>
+
+<script>
+marked.setOptions({ breaks: true, gfm: true });
+
+let currentPath = null;
+let currentContent = null;
+let docs = [];
+
+// ── Load sidebar ─────────────────────────────────────────────────────────────
+
+async function loadDocs() {
+  const res = await fetch("/api/docs");
+  docs = await res.json();
+  renderSidebar();
+}
+
+function renderSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const folders = {};
+  for (const doc of docs) {
+    (folders[doc.folder] ??= []).push(doc);
+  }
+  sidebar.innerHTML = Object.entries(folders).map(([folder, items]) => `
+    <div class="folder-label">${folder}</div>
+    ${items.map(d => `
+      <div class="doc-item" data-path="${d.path}" onclick="openDoc('${d.path}')">
+        ${d.name}
+      </div>`).join("")}
+  `).join("");
+}
+
+// ── Open doc ─────────────────────────────────────────────────────────────────
+
+async function openDoc(path) {
+  document.querySelectorAll(".doc-item").forEach(el =>
+    el.classList.toggle("active", el.dataset.path === path));
+
+  const res = await fetch(`/api/docs/${path}`);
+  if (!res.ok) return;
+
+  currentContent = await res.text();
+  currentPath = path;
+
+  const docName = docs.find(d => d.path === path)?.name ?? path;
+  document.getElementById("main").innerHTML = `
+    <div class="md-body">
+      <div class="doc-actions">
+        <button class="btn" onclick="copyDoc()">Kopieren</button>
+        <button class="btn" onclick="reloadDoc()">Neu laden</button>
+      </div>
+      <div id="md-content">${marked.parse(currentContent)}</div>
+    </div>`;
+
+  document.getElementById("enrich-input").disabled = false;
+  document.getElementById("enrich-btn").disabled = false;
+
+  const hint = document.querySelector(".no-doc-hint");
+  if (hint) hint.textContent = `Aktives Doc: ${docName}`;
+}
+
+async function reloadDoc() {
+  if (currentPath) openDoc(currentPath);
+}
+
+function copyDoc() {
+  navigator.clipboard.writeText(currentContent);
+}
+
+// ── Enrich ───────────────────────────────────────────────────────────────────
+
+async function sendEnrich() {
+  const input = document.getElementById("enrich-input");
+  const prompt = input.value.trim();
+  if (!prompt || !currentContent) return;
+
+  input.value = "";
+  input.disabled = true;
+  document.getElementById("enrich-btn").disabled = true;
+
+  appendMsg("user", prompt);
+  const loadingId = appendLoading();
+
+  try {
+    const res = await fetch("/api/enrich", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: currentContent, prompt }),
+    });
+    removeLoading(loadingId);
+
+    if (!res.ok) {
+      appendMsg("gemini", `Fehler: ${res.statusText}`);
+      return;
+    }
+    const data = await res.json();
+    appendGeminiMsg(data.result);
+  } catch (e) {
+    removeLoading(loadingId);
+    appendMsg("gemini", `Netzwerkfehler: ${e.message}`);
+  } finally {
+    input.disabled = false;
+    document.getElementById("enrich-btn").disabled = false;
+    input.focus();
+  }
+}
+
+function appendMsg(role, text) {
+  const body = document.getElementById("chat-body");
+  const div = document.createElement("div");
+  div.className = `msg ${role}`;
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+  return div;
+}
+
+function appendGeminiMsg(text) {
+  const body = document.getElementById("chat-body");
+  const div = document.createElement("div");
+  div.className = "msg gemini";
+  div.innerHTML = marked.parse(text);
+
+  const actions = document.createElement("div");
+  actions.className = "msg-actions";
+
+  const appendBtn = document.createElement("button");
+  appendBtn.className = "btn success";
+  appendBtn.textContent = "Ans Doc anhängen";
+  appendBtn.onclick = () => appendToDoc(text, div);
+
+  const replaceBtn = document.createElement("button");
+  replaceBtn.className = "btn";
+  replaceBtn.textContent = "Doc ersetzen";
+  replaceBtn.onclick = () => replaceDoc(text, div);
+
+  actions.appendChild(appendBtn);
+  actions.appendChild(replaceBtn);
+  div.appendChild(actions);
+
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+
+function appendLoading() {
+  const body = document.getElementById("chat-body");
+  const div = document.createElement("div");
+  div.className = "msg gemini";
+  div.id = "loading-" + Date.now();
+  div.innerHTML = '<span class="spinner"></span> Gemini denkt...';
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+  return div.id;
+}
+
+function removeLoading(id) {
+  document.getElementById(id)?.remove();
+}
+
+async function appendToDoc(newText, msgEl) {
+  const updated = currentContent + "\n\n---\n\n" + newText;
+  await saveDoc(updated);
+  markSaved(msgEl);
+}
+
+async function replaceDoc(newText, msgEl) {
+  await saveDoc(newText);
+  markSaved(msgEl);
+}
+
+async function saveDoc(content) {
+  await fetch(`/api/docs/${currentPath}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content }),
+  });
+  currentContent = content;
+  document.getElementById("md-content").innerHTML = marked.parse(content);
+}
+
+function markSaved(msgEl) {
+  msgEl.querySelector(".msg-actions")?.remove();
+  const tag = document.createElement("div");
+  tag.style.cssText = "font-size:11px;color:var(--accent2);margin-top:6px;";
+  tag.textContent = "✓ Gespeichert";
+  msgEl.appendChild(tag);
+}
+
+function clearChat() {
+  const body = document.getElementById("chat-body");
+  body.innerHTML = currentPath
+    ? `<div class="no-doc-hint">Aktives Doc: ${docs.find(d=>d.path===currentPath)?.name ?? currentPath}</div>`
+    : `<div class="no-doc-hint">Zuerst ein Dokument öffnen.</div>`;
+}
+
+// ── Keyboard ─────────────────────────────────────────────────────────────────
+
+document.getElementById("enrich-input").addEventListener("keydown", e => {
+  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) sendEnrich();
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadDocs();
+</script>
+</body>
+</html>
