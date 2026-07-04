@@ -1,0 +1,35 @@
+name: Deploy 24h Preview on Dev Push
+'on':
+  push:
+    branches:
+      - dev
+jobs:
+  build_and_preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build:cloud
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        id: firebase_deploy
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FITNESS_AOS }}'
+          projectId: fitness-aos
+          expires: 24h
+
+      - name: Send Telegram Notification
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🚀 Neue Preview für Journal (Dev) gebaut!
+            
+            🔗 Preview Link: ${{ steps.firebase_deploy.outputs.details_url }}
+            ⏱️ Gültig für 24 Stunden.
+            
+            Commit: ${{ github.event.head_commit.message }}
