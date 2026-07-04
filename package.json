@@ -9,7 +9,11 @@
     "start": "node server.mjs",
     "ui:dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:preview": "npm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "deploy:prev": "npm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "build:preview": "npm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "build:prev": "npm run build && firebase hosting:channel:deploy preview --expires 24h"
   },
   "dependencies": {
     "@fastify/static": "^9.1.3",
