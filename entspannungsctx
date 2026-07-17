@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+# entspannungsctx — Entspannungs-Session logger
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$DIR/scripts/entspannung-api.sh"
+
+echo ""
+echo "${CY}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NO}"
+echo "${CY}  🧘 Entspannungs-Session Logger${NO}"
+echo "${CY}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NO}"
+
+check_api
+
+current=$(get_progress)
+
+echo ""
+echo "${YE}📊 Fortschritt: $current / 30${NO}"
+echo ""
+
+datum=$(date +%Y-%m-%d)
+printf "${CY}📅 Datum [%s]: ${NO}" "$datum"
+read -r input_datum
+[[ -n "$input_datum" ]] && datum="$input_datum"
+
+methoden=(
+  "Progressive Muskelrelaxation (PMR)"
+  "Autogenes Training (AT)"
+  "Atemschulung"
+  "Yoga"
+  "Pilates"
+  "Phantasiereise"
+  "Meditation"
+  "Stretching + Entspannung"
+)
+echo ""
+echo "${CY}🧘 Methode:${NO}"
+for i in "${!methoden[@]}"; do
+  printf "  %d) %s\n" $((i+1)) "${methoden[$i]}"
+done
+printf "Auswahl [1]: "
+read -r meth_nr
+idx=$(( ${meth_nr:-1} - 1 ))
+[[ $idx -lt 0 || $idx -ge ${#methoden[@]} ]] && idx=0
+methode="${methoden[$idx]}"
+
+echo ""
+echo "${CY}⏱️  Dauer:${NO}  1) 15min  2) 20min  3) 30min  4) 45min  5) 60min"
+printf "Auswahl [3]: "
+read -r dauer_nr
+case "${dauer_nr:-3}" in
+  1) dauer="15min" ;; 2) dauer="20min" ;; 4) dauer="45min" ;; 5) dauer="60min" ;; *) dauer="30min" ;;
+esac
+
+echo ""
+printf "${CY}📍 Ort [Wien-Sanctuary]: ${NO}"
+read -r ort
+[[ -z "$ort" ]] && ort="Wien-Sanctuary"
+
+echo ""
+echo "${CY}🕐 Tageszeit:${NO}  1) Morgen  2) Mittag  3) Abend  4) Nacht"
+printf "Auswahl [3]: "
+read -r tz_nr
+case "${tz_nr:-3}" in
+  1) tageszeit="Morgen" ;; 2) tageszeit="Mittag" ;; 4) tageszeit="Nacht" ;; *) tageszeit="Abend" ;;
+esac
+
+echo ""
+echo "${CY}🧠 Stimmung VORHER (1-5):${NO}  [3]"
+printf "Auswahl: "
+read -r mood_before
+[[ -z "$mood_before" ]] && mood_before=3
+
+echo ""
+echo "${CY}🧠 Stimmung NACHHER (1-5):${NO}  [4]"
+printf "Auswahl: "
+read -r mood_after
+[[ -z "$mood_after" ]] && mood_after=4
+
+echo ""
+printf "${CY}📝 Notizen (optional): ${NO}"
+read -r notizen
+
+response=$(save_session "$datum" "$methode" "$dauer" "$ort" "$tageszeit" "$mood_before" "$mood_after" "$notizen")
+
+session_nr=$(echo "$response" | python3 -c "import sys,json; print(json.load(sys.stdin)['session_nr'])")
+total=$(echo "$response" | python3 -c "import sys,json; print(json.load(sys.stdin)['total'])")
+remaining=$(echo "$response" | python3 -c "import sys,json; print(json.load(sys.stdin)['remaining'])")
+
+echo ""
+echo "${GR}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NO}"
+echo "${GR}✅ Session #$session_nr gespeichert!${NO}"
+echo "${GR}🧘 $methode ($dauer) — $ort, $tageszeit${NO}"
+echo "${YE}🧠 Stimmung: $mood_before -> $mood_after${NO}"
+[[ -n "$notizen" ]] && echo "${YE}📝 $notizen${NO}"
+echo "${YE}📊 $total / 30 — noch $remaining verbleibend${NO}"
+echo "${GR}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NO}"
+echo ""

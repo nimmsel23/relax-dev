@@ -346,12 +346,24 @@ def post_relaxation_session(background_tasks: BackgroundTasks, payload: Dict[str
         prefix = f"[{', '.join(meta)}] "
         compiled_note = prefix + compiled_note
         
+    mood_before = payload.get("mood_before")
+    if mood_before is not None:
+        try: mood_before = int(mood_before)
+        except ValueError: mood_before = 3
+    else: mood_before = 3
+
+    mood_after = payload.get("mood_after")
+    if mood_after is not None:
+        try: mood_after = int(mood_after)
+        except ValueError: mood_after = 4
+    else: mood_after = 4
+
     new_item = {
         "id": str(uuid.uuid4()),
         "technique": methode,
         "minutes": min(240, max(0, minutes)),
-        "mood_before": 3,
-        "mood_after": 4,
+        "mood_before": mood_before,
+        "mood_after": mood_after,
         "note": compiled_note[:2000]
     }
     
