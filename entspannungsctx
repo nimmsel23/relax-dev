@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # entspannungsctx — Entspannungs-Session logger
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DIR="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
 source "$DIR/scripts/entspannung-api.sh"
 
 echo ""
