@@ -1,10 +1,20 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 
+const __dirname = dirname(fileURLToPath(import.meta.url))
 const BACKEND = 'http://localhost:9123'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      // Standalone-Default (:9123-Backend). Im vitalos-Firebase-Build biegt
+      // die Shell '@db' auf shell/db/relax.js → firestore/sessions.js um.
+      '@db': resolve(__dirname, 'src/lib/db/index.js'),
+    },
+  },
   plugins: [
     react(),
     // PWA nach dem habits-Muster: workbox precached mit Content-Hashes,

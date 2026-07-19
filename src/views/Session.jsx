@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Save, Download, Plus, Trash2 } from 'lucide-react'
-import { api, localToday, downloadText } from '../api.js'
+import { getRelaxSession, saveRelaxSession, getRelaxTechniques, exportRelaxCsv } from '@db'
+import { localToday, downloadText } from '../lib/db/shared/utils.js'
 
 const MOOD = [
   { v: 1, label: '😞' },
@@ -24,13 +25,12 @@ export default function Session() {
   const [toast, setToast] = useState('')
 
   useEffect(() => {
-    api.get('/techniques').then(d => setTechniques(d?.techniques || [])).catch(() => {})
+    getRelaxTechniques().then(t => setTechniques(t || [])).catch(() => {})
   }, [])
 
   useEffect(() => {
-    api.get(`/session?date=${date}`).then(d => {
-      if (d?.ok && d?.data?.items) setItems(d.data.items)
-      else setItems([])
+    getRelaxSession(date).then(d => {
+      setItems(d?.items || [])
     }).catch(() => setItems([]))
   }, [date])
 
@@ -74,7 +74,7 @@ export default function Session() {
         mood_after: clamp(Number(it.mood_after) || 3, 1, 5),
         note: String(it.note || '').slice(0, 2000),
       })).filter(it => it.technique || it.minutes > 0 || it.note)
-      await api.post(`/session?date=${date}`, { items: sanitized })
+      await saveRelaxSession(date, sanitized)
       showToast('Gespeichert')
     } catch {
       showToast('Fehler beim Speichern')
@@ -85,9 +85,8 @@ export default function Session() {
 
   async function exportCsv(days) {
     try {
-      const d = await api.get(`/export/csv?days=${days}`)
-      if (!d?.csv) throw new Error('no csv')
-      downloadText(d.filename || `relax-${days}d.csv`, d.csv, 'text/csv;charset=utf-8')
+      const d = await exportRelaxCsv(days)
+      downloadText(d.filename, d.csv, 'text/csv;charset=utf-8')
     } catch {
       showToast('Export fehlgeschlagen')
     }

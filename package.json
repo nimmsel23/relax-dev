@@ -25,7 +25,8 @@
     "reactflow": "^11.11.4",
     "recharts": "^3.8.1",
     "yaml": "^2.4.5",
-    "zustand": "^5.0.13"
+    "zustand": "^5.0.13",
+    "firebase": "^11.10.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.2",

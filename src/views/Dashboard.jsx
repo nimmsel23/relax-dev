@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CalendarDays, Download, Flame, MoonStar } from 'lucide-react'
-import { api, localToday, getWeekDates, downloadText } from '../api.js'
+import { getRelaxSession, getRelaxStatsSummary, exportRelaxCsv } from '@db'
+import { localToday, getWeekDates, downloadText } from '../lib/db/shared/utils.js'
 
 const DAY_LABELS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
 
@@ -17,12 +18,12 @@ export default function Dashboard() {
     const dates = getWeekDates()
     Promise.all(
       dates.map(date =>
-        api.get(`/session?date=${date}`).then(d => ({ date, minutes: sumMinutes(d?.data) })).catch(() => ({ date, minutes: 0 })),
+        getRelaxSession(date).then(d => ({ date, minutes: sumMinutes(d) })).catch(() => ({ date, minutes: 0 })),
       ),
     ).then(setWeek)
 
-    api.get('/stats/summary?days=7').then(d => {
-      if (d?.ok) setSummary7(d.summary)
+    getRelaxStatsSummary(7).then(s => {
+      if (s) setSummary7(s)
     }).catch(() => {})
   }, [])
 
@@ -31,9 +32,8 @@ export default function Dashboard() {
 
   async function exportCsv(days) {
     try {
-      const d = await api.get(`/export/csv?days=${days}`)
-      if (!d?.csv) throw new Error('no csv')
-      downloadText(d.filename || `relax-${days}d.csv`, d.csv, 'text/csv;charset=utf-8')
+      const d = await exportRelaxCsv(days)
+      downloadText(d.filename, d.csv, 'text/csv;charset=utf-8')
     } catch {
       // ignore
     }
