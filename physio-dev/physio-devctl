@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PORT="${PORT:-1200}"
+HEALTH_URL="http://127.0.0.1:${PORT}/api/docs"
+DEV_DIR="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
+LOGFILE="${LOGFILE:-/tmp/physio-dev.log}"
+PIDFILE="${PIDFILE:-/tmp/physio-dev.pid}"
+
+have_gum() { command -v gum >/dev/null 2>&1; }
+msg()  { have_gum && gum log --level info  "$*" || printf '\033[1;32m%s\033[0m\n' "$*"; }
+warn() { have_gum && gum log --level warn  "$*" >&2 || printf '\033[1;33m%s\033[0m\n' "$*" >&2; }
+err()  { have_gum && gum log --level error "$*" >&2 || printf '\033[1;31m%s\033[0m\n' "$*" >&2; }
+die()  { err "$*"; exit 1; }
+
+cmd_status() {
+  if curl -fsS --connect-timeout 1 --max-time 2 "$HEALTH_URL" >/dev/null 2>&1; then
+    local pid="unknown"
+    [[ -f "$PIDFILE" ]] && pid="$(cat "$PIDFILE" 2>/dev/null || true)"
+    msg "physio-dev läuft auf :$PORT (pid: ${pid:-unknown})"
+    printf 'ui:   http://127.0.0.1:%s\n' "$PORT"
+    printf 'docs: %s\n' "$HEALTH_URL"
+  else
+    warn "physio-dev antwortet nicht auf :$PORT"
+    return 1
+  fi
+}
+
+cmd_start() {
+  if curl -fsS --connect-timeout 1 --max-time 2 "$HEALTH_URL" >/dev/null 2>&1; then
+    warn "physio-dev läuft bereits auf :$PORT"
+    return 0
+  fi
+  cd "$DEV_DIR"
+  : > "$LOGFILE"
+  PORT="$PORT" python3 server.py > "$LOGFILE" 2>&1 &
+  echo $! > "$PIDFILE"
+  sleep 2
+  if curl -fsS --connect-timeout 1 --max-time 3 "$HEALTH_URL" >/dev/null 2>&1; then
+    msg "physio-dev gestartet"
+    printf 'ui:  http://127.0.0.1:%s\n' "$PORT"
+    printf 'log: %s\n' "$LOGFILE"
+  else
+    warn "physio-dev nicht sauber gestartet — letzte Log-Zeilen:"
+    tail -20 "$LOGFILE" || true
+    return 1
+  fi
+}
+
+cmd_stop() {
+  local pid=""
+  [[ -f "$PIDFILE" ]] && pid="$(cat "$PIDFILE" 2>/dev/null || true)"
+  if [[ -n "$pid" ]] && kill -0 "$pid" 2>/dev/null; then
+    kill "$pid" 2>/dev/null || true
+    sleep 1
+    kill -0 "$pid" 2>/dev/null && kill -9 "$pid" 2>/dev/null || true
+  fi
+  pkill -f "python3 server.py" >/dev/null 2>&1 || true
+  rm -f "$PIDFILE"
+  msg "physio-dev gestoppt"
+}
+
+cmd_restart() { cmd_stop; sleep 1; cmd_start; }
+
+cmd_logs() {
+  [[ -f "$LOGFILE" ]] && tail -f "$LOGFILE" || die "kein Logfile: $LOGFILE"
+}
+
+cmd_dev() {
+  msg "physio-dev im Vordergrund starten..."
+  cd "$DEV_DIR"
+  PORT="$PORT" python3 server.py
+}
+
+cmd_gitstatus() {
+  [[ -d "$DEV_DIR/.git" ]] || die "kein .git in $DEV_DIR"
+  msg "==> physio-dev git status"
+  git -C "$DEV_DIR" status --short --branch
+}
+
+cmd_help() {
+  cat <<EOF
+physio-devctl — Physiologie Knowledge Base Server (Python/aiohttp :$PORT)
+
+Commands:
+  status      Server-Status prüfen
+  start       Im Hintergrund starten
+  stop        Stoppen
+  restart     Neu starten
+  logs        Log tail ($LOGFILE)
+  dev         Im Vordergrund starten
+  gitstatus   git status
+  help        Diese Hilfe
+
+Repo:  $DEV_DIR
+UI:    http://127.0.0.1:$PORT
+Log:   $LOGFILE
+PID:   $PIDFILE
+EOF
+}
+
+case "${1:-help}" in
+  status)         cmd_status ;;
+  start)          cmd_start ;;
+  stop)           cmd_stop ;;
+  restart)        cmd_restart ;;
+  logs)           cmd_logs ;;
+  dev)            cmd_dev ;;
+  gitstatus)      cmd_gitstatus ;;
+  help|--help|-h) cmd_help ;;
+  *) die "unbekannter Befehl: $1 (→ physio-devctl help)" ;;
+esac

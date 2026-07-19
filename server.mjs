@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import http from "node:http";
+import crypto from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import Fastify from "fastify";
@@ -244,6 +245,59 @@ app.get("/theme", (_req, reply) => reply.send(readJson(themeFile, { theme: "moch
 app.post("/theme", (req, reply) => {
   writeJson(themeFile, req.body);
   return reply.send({ ok: true });
+});
+
+// ── Relaxation Session Logger Endpoints ────────────────────────────────────────
+
+app.get("/relaxation/sessions/progress", (_req, reply) => {
+  const dir = path.join(DATA_DIR, "sessions");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json"));
+  return reply.send({ total: files.length });
+});
+
+app.post("/relaxation/session", (req, reply) => {
+  const { datum, methode, dauer, ort, tageszeit, notizen } = req.body || {};
+  const date = datum || localToday();
+  const file = path.join(DATA_DIR, "sessions", `${date}.json`);
+  
+  let session = readJson(file, { date, items: [] });
+  
+  let minutes = 30;
+  if (dauer) {
+    const m = String(dauer).match(/^(\d+)/);
+    if (m) minutes = parseInt(m[1], 10);
+  }
+  
+  let note = notizen || "";
+  let meta = [];
+  if (ort) meta.push(`Ort: ${ort}`);
+  if (tageszeit) meta.push(`Tageszeit: ${tageszeit}`);
+  if (meta.length > 0) {
+    note = `[${meta.join(", ")}] ${note}`.trim();
+  }
+  
+  const newItem = {
+    id: crypto.randomUUID?.() || String(Date.now()),
+    technique: methode || "Progressive Muskelrelaxation (PMR)",
+    minutes: clamp(minutes, 0, 240),
+    mood_before: 3,
+    mood_after: 4,
+    note: note.slice(0, 2000),
+  };
+  
+  session.items.push(newItem);
+  writeJson(file, session);
+  firestoreSync(date);
+  
+  const dir = path.join(DATA_DIR, "sessions");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json"));
+  const total = files.length;
+  
+  return reply.send({
+    session_nr: total,
+    total: total,
+    remaining: Math.max(0, 30 - total)
+  });
 });
 
 // ── Legacy raw handlers (Knowledge + Physio) ──────────────────────────────────

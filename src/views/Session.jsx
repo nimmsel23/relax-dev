@@ -146,7 +146,10 @@ export default function Session() {
               Für die Prüfung: täglich kurze Entspannungs-Session loggen (Technik + Minuten + Stimmung).
             </div>
           </div>
-        ) : items.map((it) => (
+        ) : items.map((it) => {
+          const isCustom = it.customTechnique === true ||
+            (it.customTechnique !== false && it.technique && !techniques.some(t => t.name === it.technique))
+          return (
           <div key={it.id} className="p-4 rounded-2xl border space-y-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
             <div className="flex items-center justify-between gap-2">
               <div className="font-bold">Session</div>
@@ -163,17 +166,43 @@ export default function Session() {
             <div className="grid grid-cols-1 gap-3">
               <div>
                 <div className="text-xs" style={{ color: 'var(--muted)' }}>Technik</div>
-                <input
-                  list="techniques"
-                  value={it.technique}
-                  onChange={e => updateItem(it.id, { technique: e.target.value })}
-                  placeholder="z.B. Atemübung (4-7-8), PMR, Bodyscan ..."
-                  className="mt-1 w-full px-3 py-2 rounded-xl border text-sm"
-                  style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
-                />
-                <datalist id="techniques">
-                  {techniques.map(t => <option key={t.id} value={t.name} />)}
-                </datalist>
+                {isCustom ? (
+                  <div className="mt-1 flex gap-2">
+                    <input
+                      autoFocus
+                      value={it.technique}
+                      onChange={e => updateItem(it.id, { technique: e.target.value })}
+                      placeholder="z.B. Atemübung (4-7-8), PMR, Bodyscan ..."
+                      className="flex-1 px-3 py-2 rounded-xl border text-sm"
+                      style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
+                    />
+                    <button
+                      onClick={() => updateItem(it.id, { customTechnique: false })}
+                      className="px-3 py-2 rounded-xl border text-sm"
+                      style={{ borderColor: 'var(--line)', background: 'transparent', color: 'var(--dim)' }}
+                      title="Zurück zur Liste"
+                    >
+                      Liste
+                    </button>
+                  </div>
+                ) : (
+                  <select
+                    value={it.technique}
+                    onChange={e => {
+                      if (e.target.value === '__custom__') {
+                        updateItem(it.id, { customTechnique: true, technique: '' })
+                      } else {
+                        updateItem(it.id, { technique: e.target.value })
+                      }
+                    }}
+                    className="mt-1 w-full px-3 py-2 rounded-xl border text-sm"
+                    style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
+                  >
+                    <option value="" disabled>Technik wählen ...</option>
+                    {techniques.map(t => <option key={t.id} value={t.name}>{t.name}</option>)}
+                    <option value="__custom__">✏️ Eigene Technik ...</option>
+                  </select>
+                )}
               </div>
 
               <div className="grid grid-cols-3 gap-3">
@@ -225,7 +254,7 @@ export default function Session() {
               </div>
             </div>
           </div>
-        ))}
+        )})}
       </div>
 
       {toast && (
