@@ -7,7 +7,7 @@
  * getSession/saveSession/exportCsv als fitness-dev-SSOT vergeben hat.
  */
 
-import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, collection, query, orderBy, limit as fbLimit, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../firebase.js";
 import { getUid } from "./core.js";
 import { localToday, lastDates, TECHNIQUES, computeSummary } from "../shared/utils.js";
@@ -26,6 +26,20 @@ export async function saveRelaxSession(date = localToday(), items = []) {
     saved_at: serverTimestamp(),
   });
   return { ok: true };
+}
+
+// Für die journal-dev Timeline-Aggregation (Journal zeigt alle Pillars).
+export async function getRelaxSessionHistory(n = 30) {
+  const q = query(
+    collection(db, "relax", getUid(), "sessions"),
+    orderBy("date", "desc"),
+    fbLimit(n),
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => {
+    const data = d.data() || {};
+    return { date: data.date || d.id, items: Array.isArray(data.items) ? data.items : [], saved_at: data.saved_at };
+  });
 }
 
 export async function getRelaxTechniques() {
