@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Save, Download, Plus, Trash2 } from 'lucide-react'
-import { api, localToday, downloadText } from '../api.js'
+import { getRelaxSession, saveRelaxSession, getRelaxTechniques, exportRelaxCsv } from '@db'
+import { localToday, downloadText } from '../lib/db/shared/utils.js'
 
 const MOOD = [
   { v: 1, label: '😞' },
@@ -24,13 +25,12 @@ export default function Session() {
   const [toast, setToast] = useState('')
 
   useEffect(() => {
-    api.get('/techniques').then(d => setTechniques(d?.techniques || [])).catch(() => {})
+    getRelaxTechniques().then(t => setTechniques(t || [])).catch(() => {})
   }, [])
 
   useEffect(() => {
-    api.get(`/session?date=${date}`).then(d => {
-      if (d?.ok && d?.data?.items) setItems(d.data.items)
-      else setItems([])
+    getRelaxSession(date).then(d => {
+      setItems(d?.items || [])
     }).catch(() => setItems([]))
   }, [date])
 
@@ -74,7 +74,7 @@ export default function Session() {
         mood_after: clamp(Number(it.mood_after) || 3, 1, 5),
         note: String(it.note || '').slice(0, 2000),
       })).filter(it => it.technique || it.minutes > 0 || it.note)
-      await api.post(`/session?date=${date}`, { items: sanitized })
+      await saveRelaxSession(date, sanitized)
       showToast('Gespeichert')
     } catch {
       showToast('Fehler beim Speichern')
@@ -85,9 +85,8 @@ export default function Session() {
 
   async function exportCsv(days) {
     try {
-      const d = await api.get(`/export/csv?days=${days}`)
-      if (!d?.csv) throw new Error('no csv')
-      downloadText(d.filename || `relax-${days}d.csv`, d.csv, 'text/csv;charset=utf-8')
+      const d = await exportRelaxCsv(days)
+      downloadText(d.filename, d.csv, 'text/csv;charset=utf-8')
     } catch {
       showToast('Export fehlgeschlagen')
     }
@@ -147,7 +146,10 @@ export default function Session() {
               Für die Prüfung: täglich kurze Entspannungs-Session loggen (Technik + Minuten + Stimmung).
             </div>
           </div>
-        ) : items.map((it) => (
+        ) : items.map((it) => {
+          const isCustom = it.customTechnique === true ||
+            (it.customTechnique !== false && it.technique && !techniques.some(t => t.name === it.technique))
+          return (
           <div key={it.id} className="p-4 rounded-2xl border space-y-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
             <div className="flex items-center justify-between gap-2">
               <div className="font-bold">Session</div>
@@ -164,17 +166,43 @@ export default function Session() {
             <div className="grid grid-cols-1 gap-3">
               <div>
                 <div className="text-xs" style={{ color: 'var(--muted)' }}>Technik</div>
-                <input
-                  list="techniques"
-                  value={it.technique}
-                  onChange={e => updateItem(it.id, { technique: e.target.value })}
-                  placeholder="z.B. Atemübung (4-7-8), PMR, Bodyscan ..."
-                  className="mt-1 w-full px-3 py-2 rounded-xl border text-sm"
-                  style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
-                />
-                <datalist id="techniques">
-                  {techniques.map(t => <option key={t.id} value={t.name} />)}
-                </datalist>
+                {isCustom ? (
+                  <div className="mt-1 flex gap-2">
+                    <input
+                      autoFocus
+                      value={it.technique}
+                      onChange={e => updateItem(it.id, { technique: e.target.value })}
+                      placeholder="z.B. Atemübung (4-7-8), PMR, Bodyscan ..."
+                      className="flex-1 px-3 py-2 rounded-xl border text-sm"
+                      style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
+                    />
+                    <button
+                      onClick={() => updateItem(it.id, { customTechnique: false })}
+                      className="px-3 py-2 rounded-xl border text-sm"
+                      style={{ borderColor: 'var(--line)', background: 'transparent', color: 'var(--dim)' }}
+                      title="Zurück zur Liste"
+                    >
+                      Liste
+                    </button>
+                  </div>
+                ) : (
+                  <select
+                    value={it.technique}
+                    onChange={e => {
+                      if (e.target.value === '__custom__') {
+                        updateItem(it.id, { customTechnique: true, technique: '' })
+                      } else {
+                        updateItem(it.id, { technique: e.target.value })
+                      }
+                    }}
+                    className="mt-1 w-full px-3 py-2 rounded-xl border text-sm"
+                    style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
+                  >
+                    <option value="" disabled>Technik wählen ...</option>
+                    {techniques.map(t => <option key={t.id} value={t.name}>{t.name}</option>)}
+                    <option value="__custom__">✏️ Eigene Technik ...</option>
+                  </select>
+                )}
               </div>
 
               <div className="grid grid-cols-3 gap-3">
@@ -226,7 +254,7 @@ export default function Session() {
               </div>
             </div>
           </div>
-        ))}
+        )})}
       </div>
 
       {toast && (

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BarChart3, Sparkles } from 'lucide-react'
-import { api } from '../api.js'
+import { getRelaxStatsSummary } from '@db'
 
 function round1(n) {
   return Math.round((Number(n) || 0) * 10) / 10
@@ -11,10 +11,7 @@ export default function Stats() {
   const [summary, setSummary] = useState(null)
 
   useEffect(() => {
-    api.get(`/stats/summary?days=${days}`).then(d => {
-      if (d?.ok) setSummary(d.summary)
-      else setSummary(null)
-    }).catch(() => setSummary(null))
+    getRelaxStatsSummary(days).then(s => setSummary(s || null)).catch(() => setSummary(null))
   }, [days])
 
   const techniques = useMemo(() => {
