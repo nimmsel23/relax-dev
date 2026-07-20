@@ -1,13 +1,18 @@
 node_modules/
 dist/
-data/
+dist-firebase/
+.firebase/
+.firebase/hosting.*.cache
 *.log
-*.bak
-*.bak2
-__pycache__/
-*.pyc
 .env
 .env.*.local
 .DS_Store
-dist-firebase/
-.firebase/
+*.bak
+*.bak*
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Runtime data
+data/
