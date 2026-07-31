@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+# relax-log — Entspannungs-Sessions + Journal chronologisch anzeigen (Aequivalent zu fitness-log clients).
+# Liest direkt aus data/sessions/*.json + data/journal/*.md, kein Server noetig.
+set -euo pipefail
+
+DIR="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
+DATA_DIR="${RELAX_DATA_DIR:-$DIR/data}"
+SESSIONS_DIR="$DATA_DIR/sessions"
+JOURNAL_DIR="$DATA_DIR/journal"
+
+DAYS=90
+ALL=0
+
+usage() {
+  cat <<'EOF'
+relax-log — Entspannungs-Sessions + Journal chronologisch anzeigen
+
+Usage:
+  relax-log [--days N] [--all]
+
+  --days N   Fenster in Tagen (Default 90)
+  --all      Gesamtes Archiv (ignoriert --days)
+EOF
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --days|-d) DAYS="$2"; shift 2 ;;
+    --all|-a) ALL=1; shift ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unbekannte Option: $1" >&2; usage; exit 1 ;;
+  esac
+done
+
+have_gum() { command -v gum >/dev/null 2>&1; }
+
+if [[ "$ALL" -eq 1 ]]; then
+  CUTOFF="0000-00-00"
+else
+  CUTOFF=$(date -d "-${DAYS} days" +%Y-%m-%d 2>/dev/null || date -v-"${DAYS}"d +%Y-%m-%d)
+fi
+
+if [[ ! -d "$SESSIONS_DIR" && ! -d "$JOURNAL_DIR" ]]; then
+  if have_gum; then gum log --level warn "Keine Daten unter $DATA_DIR gefunden."
+  else echo "Keine Daten unter $DATA_DIR gefunden." >&2; fi
+  exit 1
+fi
+
+# Alle Datumsstempel aus Sessions + Journal sammeln, absteigend sortieren.
+dates=$(
+  {
+    [[ -d "$SESSIONS_DIR" ]] && find "$SESSIONS_DIR" -maxdepth 1 -name "????-??-??.json" -printf "%f\n" 2>/dev/null | sed 's/\.json$//'
+    [[ -d "$JOURNAL_DIR" ]] && find "$JOURNAL_DIR" -maxdepth 1 -name "????-??-??.md" -printf "%f\n" 2>/dev/null | sed 's/\.md$//'
+  } | sort -u -r
+)
+
+if have_gum; then
+  gum style --bold --foreground 45 "🧘 Entspannung — $([[ $ALL -eq 1 ]] && echo alle || echo "letzte ${DAYS} Tage")"
+else
+  echo "== Entspannung — $([[ $ALL -eq 1 ]] && echo alle || echo "letzte ${DAYS} Tage") =="
+fi
+echo
+
+shown=0
+for d in $dates; do
+  [[ "$d" < "$CUTOFF" ]] && continue
+
+  session_file="$SESSIONS_DIR/$d.json"
+  journal_file="$JOURNAL_DIR/$d.md"
+  weekday=$(date -d "$d" +"%a %d.%m.%y" 2>/dev/null || date -j -f "%Y-%m-%d" "$d" +"%a %d.%m.%y" 2>/dev/null || echo "$d")
+
+  if [[ -f "$session_file" ]]; then
+    line=$(jq -r '.items[] | "\(.technique) (\(.minutes)min, Mood \(.mood_before // "?")→\(.mood_after // "?"))"' "$session_file" 2>/dev/null | paste -sd "; " -)
+    if have_gum; then
+      printf "   %s   %s\n" "$(gum style --foreground 244 "$weekday")" "$line"
+    else
+      printf "   %s   %s\n" "$weekday" "$line"
+    fi
+    shown=1
+  fi
+
+  if [[ -f "$journal_file" ]]; then
+    content=$(tr '\n' ' ' < "$journal_file" | sed 's/  */ /g; s/^ *//; s/ *$//')
+    [[ -z "$content" ]] && continue
+    prefix="↳ 📓"
+    if [[ -f "$session_file" ]]; then
+      if have_gum; then
+        printf "      %s %s\n" "$(gum style --foreground 244 "$prefix")" "$(gum style --foreground 244 "$content")"
+      else
+        printf "      %s %s\n" "$prefix" "$content"
+      fi
+    else
+      if have_gum; then
+        printf "   %s   %s %s\n" "$(gum style --foreground 244 "$weekday")" "$(gum style --foreground 86 "📓")" "$content"
+      else
+        printf "   %s   📓 %s\n" "$weekday" "$content"
+      fi
+    fi
+    shown=1
+  fi
+done
+
+if [[ "$shown" -eq 0 ]]; then
+  echo "   Keine Eintraege im Fenster."
+fi
+echo
