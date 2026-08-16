@@ -16,6 +16,16 @@ export default defineConfig({
     },
   },
   plugins: [
+    {
+      name: 'relax-strip-dev-entry-from-build-html',
+      apply: 'build',
+      transformIndexHtml(html) {
+        return html.replace(
+          /\s*<script type="module" src="\/src\/main\.jsx"><\/script>\s*/u,
+          '\n'
+        )
+      },
+    },
     react(),
     // PWA nach dem habits-Muster: workbox precached mit Content-Hashes,
     // ersetzt public/sw.js (relax-v2, manuell versioniert → archive/).
