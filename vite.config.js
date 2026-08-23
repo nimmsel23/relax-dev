@@ -16,6 +16,25 @@ export default defineConfig({
     },
   },
   plugins: [
+    {
+      name: 'relax-strip-dev-entry-from-build-html',
+      apply: 'build',
+      // order: 'post' ist Pflicht — ohne das läuft der Hook VOR Vite's
+      // eigenem internen Entry-Scan (vite:build-html) und der Script-Tag
+      // ist beim Bundlen schon weg. Ergebnis: Rollup findet main.jsx nie
+      // als Entry, das Bundle enthält nur noch den PWA-Registration-Stub
+      // (711 Bytes statt der echten App). Erst mit 'post' greift die
+      // Entfernung nur noch auf das fertig geschriebene HTML.
+      transformIndexHtml: {
+        order: 'post',
+        handler(html) {
+          return html.replace(
+            /\s*<script type="module"[^>]*src="[^"]*\/main\.[jt]sx?"[^>]*><\/script>\s*/u,
+            '\n'
+          )
+        },
+      },
+    },
     react(),
     // PWA nach dem habits-Muster: workbox precached mit Content-Hashes,
     // ersetzt public/sw.js (relax-v2, manuell versioniert → archive/).
@@ -48,7 +67,7 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 5904,
+    port: 5903,
     proxy: {
       '/api': BACKEND,
       '/session':   BACKEND,

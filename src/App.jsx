@@ -19,11 +19,26 @@ const TABS = [
   { id: 'settings',label: 'Mehr',     Icon: Settings2 },
 ]
 
+const TAB_IDS = TABS.map((t) => t.id)
+
 export default function App() {
   const [tab, setTab] = useState(() => {
+    const hashTab = window.location.hash.replace('#', '')
+    if (TAB_IDS.includes(hashTab)) return hashTab
     return window.location.port === '9124' ? 'catalog' : 'dash'
   })
   const { theme, setManualTheme, resetToCircadian, manualOverride, currentSchedule } = useCircadianTheme()
+
+  // Erlaubt Deep-Links von außen (z.B. VitalOS-Vue-Shell setzt iframe-src
+  // auf /relax/#session, um direkt zu einem Tab zu springen).
+  useEffect(() => {
+    const onHashChange = () => {
+      const hashTab = window.location.hash.replace('#', '')
+      if (TAB_IDS.includes(hashTab)) setTab(hashTab)
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -78,17 +93,29 @@ export default function App() {
       {/* Bottom nav */}
       <nav style={{ background: 'var(--glass)', borderTop: '1px solid var(--glass-border)', backdropFilter: 'blur(20px)' }}
         className="flex shrink-0 px-2 pb-safe z-20">
-        {TABS.map(({ id, label, Icon }) => (
-          <button
-            key={id}
-            onClick={() => setTab(id)}
-            className="flex-1 flex flex-col items-center gap-0.5 py-2 rounded-xl text-[10px] font-semibold tracking-wide transition-all"
-            style={{ color: tab === id ? 'var(--accent)' : 'var(--dim)', background: 'none', border: 'none' }}
-          >
-            <Icon size={22} />
-            {label}
-          </button>
-        ))}
+        {TABS.map(({ id, label, Icon }) => {
+          const isActive = tab === id
+          return (
+            <button
+              key={id}
+              onClick={() => setTab(id)}
+              className="flex-1 flex flex-col items-center gap-0.5 py-2 rounded-xl text-[10px] font-semibold tracking-wide transition-all"
+              style={{ color: isActive ? 'var(--accent)' : 'var(--dim)', background: 'none', border: 'none' }}
+            >
+              <span
+                className="flex items-center justify-center rounded-full transition-all"
+                style={{
+                  width: 34,
+                  height: 26,
+                  background: isActive ? 'color-mix(in srgb, var(--accent) 18%, transparent)' : 'transparent',
+                }}
+              >
+                <Icon size={20} />
+              </span>
+              {label}
+            </button>
+          )
+        })}
       </nav>
     </div>
   )
