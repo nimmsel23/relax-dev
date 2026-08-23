@@ -19,11 +19,26 @@ const TABS = [
   { id: 'settings',label: 'Mehr',     Icon: Settings2 },
 ]
 
+const TAB_IDS = TABS.map((t) => t.id)
+
 export default function App() {
   const [tab, setTab] = useState(() => {
+    const hashTab = window.location.hash.replace('#', '')
+    if (TAB_IDS.includes(hashTab)) return hashTab
     return window.location.port === '9124' ? 'catalog' : 'dash'
   })
   const { theme, setManualTheme, resetToCircadian, manualOverride, currentSchedule } = useCircadianTheme()
+
+  // Erlaubt Deep-Links von außen (z.B. VitalOS-Vue-Shell setzt iframe-src
+  // auf /relax/#session, um direkt zu einem Tab zu springen).
+  useEffect(() => {
+    const onHashChange = () => {
+      const hashTab = window.location.hash.replace('#', '')
+      if (TAB_IDS.includes(hashTab)) setTab(hashTab)
+    }
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
