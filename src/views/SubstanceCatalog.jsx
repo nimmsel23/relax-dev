@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Search, X, ChevronDown, Network, BookOpen } from 'lucide-react'
 import KnowledgeGraph from '../components/KnowledgeGraph'
 import { marked } from 'marked'
+import { useSwipeToDismiss } from '../hooks/useSwipeToDismiss.js'
 
 export default function SubstanceCatalog() {
   const [substances, setSubstances] = useState({})
@@ -12,6 +13,7 @@ export default function SubstanceCatalog() {
   const [viewMode, setViewMode] = useState('list')
   const [expandedGroups, setExpandedGroups] = useState({})
   const [selected, setSelected] = useState(null)
+  const detailSheetRef = useSwipeToDismiss(() => setSelected(null), { enabled: Boolean(selected) })
   const [selectedTab, setSelectedTab] = useState('overview')
   const [expandedData, setExpandedData] = useState(null)
   const [expandLoading, setExpandLoading] = useState(false)
@@ -278,8 +280,8 @@ export default function SubstanceCatalog() {
 
       {/* Detail Modal */}
       {selected && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50">
-          <div className="w-full max-h-[90vh] rounded-t-3xl overflow-hidden flex flex-col" style={{ background: 'var(--card)' }}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end z-50" onClick={() => setSelected(null)}>
+          <div ref={detailSheetRef} onClick={(e) => e.stopPropagation()} className="w-full max-h-[90vh] rounded-t-3xl overflow-hidden flex flex-col" style={{ background: 'var(--card)' }}>
             {/* Modal Header */}
             <div className="sticky top-0 border-b p-4 flex items-center justify-between shrink-0" style={{ borderColor: 'var(--line)', background: 'var(--card)' }}>
               <div className="flex-1">
