@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""
+relax-add — Entspannungs-Session nicht-interaktiv loggen (CRUD-Ergaenzung).
+
+`entspannungsctx` ist rein interaktiv und braucht den laufenden API-Server;
+`relax session ...` kann nur lesen. Dieses Skript merged einen Eintrag direkt
+in data/sessions/YYYY-MM-DD.json — gleiches Schema wie server.py save_session
+(id/technique/minutes/mood_before/mood_after/note), damit relax-log,
+`relax session` und der Firestore-Sync es unveraendert lesen.
+
+Beispiele:
+  relax-add Sauna 15 --note "direkt nach Workout"
+  relax-add Meditation 20 --before 3 --after 4 --date 2026-09-08
+  relax-add --list
+"""
+from __future__ import annotations
+
+import json
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Optional
+
+import typer
+from loguru import logger
+
+DEV_DIR = Path(__file__).resolve().parent
+SESSIONS_DIR = Path(
+    __import__("os").environ.get("RELAX_DATA_DIR", str(DEV_DIR / "data"))
+) / "sessions"
+
+app = typer.Typer(add_completion=False, help=__doc__)
+
+
+def _session_path(date_str: str) -> Path:
+    return SESSIONS_DIR / f"{date_str}.json"
+
+
+def _load(date_str: str) -> dict:
+    p = _session_path(date_str)
+    if p.exists():
+        return json.loads(p.read_text())
+    return {"date": date_str, "items": []}
+
+
+def _save(date_str: str, data: dict) -> None:
+    SESSIONS_DIR.mkdir(parents=True, exist_ok=True)
+    data["saved_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    _session_path(date_str).write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+
+
+@app.command()
+def add(
+    technique: str = typer.Argument(..., help="Technik, z.B. Sauna / Meditation / PMR"),
+    minutes: int = typer.Argument(..., min=0, max=240, help="Dauer in Minuten"),
+    note: str = typer.Option("", "--note", "-n", help="Notiz"),
+    before: int = typer.Option(3, "--before", "-b", min=1, max=5, help="Stimmung vorher (1-5)"),
+    after: int = typer.Option(4, "--after", "-a", min=1, max=5, help="Stimmung nachher (1-5)"),
+    date: Optional[str] = typer.Option(None, "--date", "-d", help="YYYY-MM-DD (Default heute)"),
+    list_: bool = typer.Option(False, "--list", "-l", help="Session danach ausgeben"),
+):
+    """Einen Eintrag in die Tages-Session mergen (ueberschreibt nicht)."""
+    date_str = date or datetime.now().strftime("%Y-%m-%d")
+    data = _load(date_str)
+    item = {
+        "id": str(uuid.uuid4()),
+        "technique": technique.strip(),
+        "minutes": int(minutes),
+        "mood_before": int(before),
+        "mood_after": int(after),
+        "note": note[:2000],
+    }
+    data.setdefault("items", []).append(item)
+    _save(date_str, data)
+    logger.info(f"{date_str}: +{item['technique']} ({item['minutes']}min, {before}→{after})"
+                + (f" — {note}" if note else ""))
+    if list_:
+        print(json.dumps(data, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    app()
