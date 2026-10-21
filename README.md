@@ -160,6 +160,7 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 
 ### Stats
 - `GET /stats/summary?days=14` — Aggregated stats (mood delta, streak, by_technique, per_day)
+- `GET /stats/trends?days=30` — Trend analysis: rolling 7-day avg minutes, weekly aggregates, technique ranking by avg mood delta, Pearson correlation minutes ↔ mood delta
 
 ### Physio
 - `POST /api/physio/simulate` — Run simulation
@@ -298,7 +299,7 @@ relax-dev/
 
 - **RELAX-003:** Substance Response Tracking + Personal Learning (Gemini analyzes observations)
 - **Wearables:** HRV, HR, sleep data integration
-- **Advanced Stats:** Trend analysis, correlation detection
+- **Advanced Stats (done):** `/stats/trends` endpoint — trend analysis + correlation detection
 - **Offline:** Service worker + IndexedDB for offline-first PWA
 - **Knowledge Graph:** Visualize molecule → interaction → process networks
 - **Recommendations:** AI-powered suggestions based on user profile
@@ -313,4 +314,5 @@ relax-dev/
 - **Substance Catalog:** Frontend for KB exploration; can feed into Physio simulation
 - **RELAX-003:** Next major feature integrates Substance Response Tracking with AI learning
 - **No Database:** File-based persistence intentional (simple, portable, git-friendly)
+- **Stats Trends:** `/stats/trends` computes rolling averages, weekly aggregates, technique effectiveness ranking and minutes↔mood-delta correlation purely from stored sessions
 
