@@ -99,7 +99,82 @@ function computeSummary(days) {
 
 function escapeCsvValue(v) { return String(v ?? "").replaceAll('"', '""'); }
 
-// ── Fastify ────────────────────────────────────────────────────────────────────
+function pearson(xs, ys) {
+  const n = xs.length;
+  if (n < 2) return 0;
+  const mx = xs.reduce((a, b) => a + b, 0) / n;
+  const my = ys.reduce((a, b) => a + b, 0) / n;
+  let num = 0, dx = 0, dy = 0;
+  for (let i = 0; i < n; i++) {
+    const a = xs[i] - mx, b = ys[i] - my;
+    num += a * b; dx += a * a; dy += b * b;
+  }
+  return (dx && dy) ? num / Math.sqrt(dx * dy) : 0;
+}
+
+function computeTrends(days) {
+  const dates = lastDates(days).reverse();
+  const perDay = [];
+  const techniqueStats = {};
+
+  for (const date of dates) {
+    const sess = readJson(path.join(DATA_DIR, "sessions", date + ".json"));
+    const items = sess?.items || [];
+    const minutes = sumMinutes(sess);
+    let deltaSum = 0, deltaCount = 0;
+
+    for (const it of items) {
+      const before = Number(it.mood_before), after = Number(it.mood_after);
+      if (Number.isFinite(before) && Number.isFinite(after)) { deltaSum += after - before; deltaCount++; }
+      const technique = String(it.technique || "").trim() || "—";
+      const t = (techniqueStats[technique] ||= { minutes: 0, sessions: 0, delta_sum: 0, delta_count: 0 });
+      t.minutes += Number(it.minutes) || 0;
+      t.sessions += 1;
+      if (Number.isFinite(before) && Number.isFinite(after)) { t.delta_sum += after - before; t.delta_count++; }
+    }
+
+    perDay.push({ date, minutes, avg_mood_delta: deltaCount ? +(deltaSum / deltaCount).toFixed(2) : null });
+  }
+
+  const rolling = perDay.map((d, i) => {
+    const slice = perDay.slice(Math.max(0, i - 6), i + 1);
+    return { date: d.date, avg_minutes_7d: +(slice.reduce((a, s) => a + s.minutes, 0) / slice.length).toFixed(1) };
+  });
+
+  const active = perDay.filter((d) => d.avg_mood_delta !== null);
+  const correlation = pearson(active.map((d) => d.minutes), active.map((d) => d.avg_mood_delta));
+
+  const techniqueRanking = Object.entries(techniqueStats)
+    .map(([technique, t]) => ({
+      technique,
+      minutes: t.minutes,
+      sessions: t.sessions,
+      avg_mood_delta: t.delta_count ? +(t.delta_sum / t.delta_count).toFixed(2) : null,
+    }))
+    .sort((a, b) => (b.avg_mood_delta ?? -99) - (a.avg_mood_delta ?? -99));
+
+  const weeks = {};
+  for (const d of perDay) {
+    const [y, m, day] = d.date.split("-").map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, day));
+    dt.setUTCDate(dt.getUTCDate() - ((dt.getUTCDay() + 6) % 7));
+    const key = dt.toISOString().slice(0, 10);
+    const w = (weeks[key] ||= { week_start: key, minutes: 0, days_active: 0 });
+    w.minutes += d.minutes;
+    if (d.minutes > 0) w.days_active += 1;
+  }
+
+  return {
+    days,
+    per_day: perDay,
+    rolling_7d_minutes: rolling,
+    correlation_minutes_vs_mood_delta: +correlation.toFixed(3),
+    technique_ranking: techniqueRanking,
+    weekly: Object.values(weeks),
+  };
+}
+
+// ── Fastify
 
 const app = Fastify({ logger: false });
 
@@ -141,6 +216,11 @@ app.get("/techniques", (_req, reply) =>
 app.get("/stats/summary", (req, reply) => {
   const days = clamp(Number(req.query.days || 14), 1, 365);
   return reply.send({ ok: true, summary: computeSummary(days) });
+});
+
+app.get("/stats/trends", (req, reply) => {
+  const days = clamp(Number(req.query.days || 30), 2, 365);
+  return reply.send({ ok: true, trends: computeTrends(days) });
 });
 
 app.get("/export/csv", (req, reply) => {
