@@ -1,3 +1,4 @@
+import { vosChangelog } from './scripts/vos-changelog/vos-changelog-vite.mjs'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -15,7 +16,7 @@ export default defineConfig({
       '@db': resolve(__dirname, 'src/lib/db/index.js'),
     },
   },
-  plugins: [
+  plugins: [vosChangelog({ appId: 'relax', appName: 'Relax', accent: '#fb923c' }),
     {
       name: 'relax-strip-dev-entry-from-build-html',
       apply: 'build',
