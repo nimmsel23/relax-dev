@@ -47,6 +47,15 @@ export async function getRelaxStatsSummary(days = 14) {
   }
 }
 
+export async function getRelaxStatsTrends(days = 30) {
+  try {
+    const d = await api.get(`/stats/trends?days=${days}`)
+    return d?.trends || null
+  } catch {
+    return null
+  }
+}
+
 export async function exportRelaxCsv(days = 14) {
   const d = await api.get(`/export/csv?days=${days}`)
   if (!d?.csv) throw new Error('no csv')
