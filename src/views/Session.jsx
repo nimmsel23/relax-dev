@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Save, Download, Plus, Trash2 } from 'lucide-react'
 import { getRelaxSession, saveRelaxSession, getRelaxTechniques, exportRelaxCsv } from '@db'
 import { localToday, downloadText } from '../lib/db/shared/utils.js'
+import StilleTimer from '../components/StilleTimer.jsx'
 
 const MOOD = [
   { v: 1, label: '😞' },
@@ -137,6 +138,8 @@ export default function Session() {
           <Download size={16} /> 14d
         </button>
       </div>
+
+      <StilleTimer />
 
       <div className="space-y-3">
         {items.length === 0 ? (
