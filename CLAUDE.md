@@ -305,3 +305,9 @@ _http.molecule_detail(key)      # GET /api/knowledge/molecule/<key>
 _http.interactions(key)         # GET /api/knowledge/interactions/<key>
 _http.search(query)             # GET /api/knowledge/search?q=...
 ```
+
+### Update 2026-10-25: PATH und Deploy
+
+- `bin/` ist jetzt ein echter Ordner mit relativen Symlinks (`relax`, `relax-add`, `relax-log`, `entspannungsctx`, `relax-devctl`, `physio-devctl`, `physio-kb`, `deploy-relax-dev`); PATH zeigt auf `~/relax-dev/bin` (`~/.dotfiles/config/shell/paths.sh`). Der frühere Symlink `bin -> ~/relax/bin` liegt in `archive/bin-symlink-2026-10-25`.
+- `~/relax` (separater Klon) ist nach `~/.local/relax` umgezogen. `deploy.sh` deployt dorthin (`RELAX_DEPLOY_DIR` überschreibt), per rsync + `npm run build`, ohne sudo; `/opt/relax`, Backup-Ordner und `relax.service`-Restart entfallen (die Unit gab es nicht).
+- `relax <Freitext>` loggt eine Session (Technik, Dauer, Wochentag/gestern, Notiz), siehe `relax log --help`.
