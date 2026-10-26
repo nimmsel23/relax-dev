@@ -9,3 +9,7 @@ __pycache__/
 .env
 .env.*.local
 .DS_Store
+
+# Backups und Archiv (lokal)
+*.bak*
+archive/
