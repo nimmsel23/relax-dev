@@ -205,3 +205,22 @@ substances:
     relaxation_relevance: moderate_positive
     mechanism: "Eurycomanone inhibits cortisol and increases free testosterone via LH stimulation; eurypeptides modulate HPA axis stress response"
     notes: "100-200mg standardized extract (2% eurycomanone); morning use preferred; not sedating — reduces allostatic load"
+
+  brahmi:
+    name: Brahmi (Bacopa monnieri)
+    de_name: Brahmi
+    category: herbal_adaptogen
+    source_plant: Bacopa monnieri
+    common_names:
+      - Bacopa
+      - Water Hyssop
+    description: Ayurvedic nootropic herb for memory, focus and stress resilience
+    references:
+      - bacosides
+    traditional_use:
+      - Memory and learning support
+      - Stress resilience
+      - Calming focus
+    relaxation_relevance: moderate_positive
+    mechanism: "Bacosides modulate cholinergic and serotonergic signalling; effects typically need weeks of regular intake"
+    notes: "Von fuel-dev als botanical-Supplement verlinkt (substance: brahmi); Studienlage: Effekt erst nach ca. 8-12 Wochen regelmäßiger Einnahme"
