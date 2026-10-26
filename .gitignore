@@ -16,3 +16,6 @@ __pycache__/
 
 # Runtime data
 data/
+*.bak2
+# Backups und Archiv (lokal)
+archive/

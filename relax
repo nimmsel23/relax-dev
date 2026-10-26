@@ -13,6 +13,8 @@ relax — Domain CLI für Relaxation Knowledge Base
   relax session <sub>        Session entries (today|get|list|add|remove)
   relax journal <sub>        Journal queries (today|get|list)
   relax stats                Aggregierte Stats
+  relax log <freitext>       Session loggen: relax Sauna 90 min am Freitagabend in Therme Oberlaa
+  relax <freitext>           Kurzform von `relax log` (erstes Wort ist kein Befehl)
   relax migrate              YAML → SQLite neu importieren
 
 Server/Service-Control → use: relax-devctl
@@ -391,5 +393,98 @@ def stats(days: int = typer.Option(14, "-d")):
     print(f"  Letzte {days} Tage: {count} Sessions, {total_min} Minuten")
 
 
-if __name__ == "__main__":
+# ── Session loggen (Freitext) ─────────────────────────────────────────────────
+
+_WEEKDAYS = {"montag": 0, "dienstag": 1, "mittwoch": 2, "donnerstag": 3, "freitag": 4,
+             "samstag": 5, "sonnabend": 5, "sonntag": 6}
+_DAYTIME = ("vormittag", "nachmittag", "abend", "morgen", "mittag", "nacht")
+_MIN_RE = None  # lazy, siehe _parse_log
+
+
+def _parse_log(words: list[str], today):
+    """Freitext → (technique, minutes|None, date, note). Datum: heute/gestern/vorgestern/Wochentag."""
+    import re
+    from datetime import timedelta
+
+    text = " ".join(words)
+    minutes = None
+    m = re.search(r"(\d+(?:[.,]\d+)?)\s*(h|std|stunden?|min|minuten?)\b", text, re.IGNORECASE)
+    if m:
+        val = float(m.group(1).replace(",", "."))
+        minutes = round(val * 60) if m.group(2).lower().startswith(("h", "std", "stunde")) else round(val)
+        text = (text[:m.start()] + text[m.end():]).strip()
+
+    day = today
+    tokens = text.split()
+    kept: list[str] = []
+    for i, tok in enumerate(tokens):
+        low = tok.lower().strip(",.")
+        base = low
+        for suffix in _DAYTIME:  # "freitagabend" → "freitag"
+            if low.endswith(suffix) and low[: -len(suffix)] in _WEEKDAYS:
+                base = low[: -len(suffix)]
+        if base in ("heute",):
+            continue
+        if base == "gestern":
+            day = today - timedelta(days=1)
+            continue
+        if base == "vorgestern":
+            day = today - timedelta(days=2)
+            continue
+        if base in _WEEKDAYS:
+            day = today - timedelta(days=(today.weekday() - _WEEKDAYS[base]) % 7)
+            if kept and kept[-1].lower() in ("am", "letzten", "letzter"):
+                kept.pop()
+            continue
+        if low in _DAYTIME and i > 0:  # "Freitag abend"
+            continue
+        kept.append(tok)
+
+    if not kept:
+        return None, minutes, day, ""
+    technique, note = kept[0], " ".join(kept[1:]).strip()
+    return technique, minutes, day, note
+
+
+@app.command("log")
+def log_session(
+    words: list[str] = typer.Argument(..., help="Freitext, z.B. Sauna 90 min am Freitagabend in Therme Oberlaa"),
+    minutes: int = typer.Option(None, "--min", "-m", help="Dauer in Minuten (sonst aus dem Text, sonst Rückfrage)"),
+    before: int = typer.Option(3, "--before", "-b", min=1, max=5),
+    after: int = typer.Option(4, "--after", "-a", min=1, max=5),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Nur anzeigen, nichts schreiben"),
+):
+    """Session aus Freitext loggen (Technik = erstes Wort, Rest = Notiz; Datum aus Wochentag/gestern)."""
+    from datetime import date as _date
+
+    technique, parsed_min, day, note = _parse_log(words, _date.today())
+    if not technique:
+        msg.fail("Keine Technik erkannt (erstes Wort, z.B. Sauna / Meditation / PMR).")
+        raise typer.Exit(1)
+    minutes = minutes or parsed_min
+    if not minutes:
+        if not sys.stdin.isatty():
+            msg.fail("Dauer fehlt: --min N oder '90 min' im Text angeben.")
+            raise typer.Exit(1)
+        minutes = typer.prompt(f"Wie viele Minuten {technique}?", type=int)
+    msg.info(f"{day.isoformat()} · {technique} · {minutes} min" + (f" · {note}" if note else ""))
+    if dry_run:
+        return
+    cmd = [str(DEV_DIR / "relax-add"), technique, str(minutes), "--date", day.isoformat(),
+           "--before", str(before), "--after", str(after)]
+    if note:
+        cmd += ["--note", note]
+    raise typer.Exit(subprocess.run(cmd).returncode)
+
+
+def _main() -> None:
+    """Erstes Wort kein Befehl/Option → Freitext, als `relax log …` behandeln."""
+    known = {c.name or c.callback.__name__.replace("_", "-") for c in app.registered_commands}
+    known |= {g.name for g in app.registered_groups}
+    if len(sys.argv) > 1 and not sys.argv[1].startswith("-") and sys.argv[1] not in known:
+        sys.argv.insert(1, "log")
     app()
+
+
+if __name__ == "__main__":
+    _main()
