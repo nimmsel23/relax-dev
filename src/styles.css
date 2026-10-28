@@ -129,6 +129,10 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
 
+/* horizontale Chip-Leisten ohne Scrollbar */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 /* spinner */
 @keyframes spin { to { transform: rotate(360deg); } }
 .spinner {
