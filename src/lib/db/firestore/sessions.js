@@ -7,7 +7,15 @@
  * getSession/saveSession/exportCsv als fitness-dev-SSOT vergeben hat.
  */
 
-import { doc, setDoc, getDoc, getDocs, collection, query, orderBy, limit as fbLimit, serverTimestamp } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  query,
+  orderBy,
+  limit as fbLimit,
+  serverTimestamp,
+} from "firebase/firestore";
+import { setDoc, getDoc, getDocs } from "./offline.js";
 import { db } from "../../../firebase.js";
 import { getUid } from "./core.js";
 import { localToday, lastDates, TECHNIQUES, computeSummary } from "../shared/utils.js";

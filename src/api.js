@@ -6,12 +6,13 @@ const BASE = import.meta.env.VITE_API_BASE
 
 export const api = {
   async get(path) {
-    const res = await fetch(BASE + path, { cache: 'no-store' })
+    const res = await fetch(BASE + path, { cache: 'no-store', signal: AbortSignal.timeout(8000) }) // Lie-Fi: nicht ewig hängen
     if (!res.ok) throw new Error(`GET ${path} → ${res.status}`)
     return res.json()
   },
   async post(path, data) {
     const res = await fetch(BASE + path, {
+      signal: AbortSignal.timeout(10000),
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
