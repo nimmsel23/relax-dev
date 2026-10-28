@@ -137,6 +137,7 @@ Environment variables:
 **Views** (tab-based in `src/views/`):
 1. **Dashboard** — Daily overview, today's quick stats
 2. **Session** — Log relaxation techniques with timing and mood tracking
+2b. **Breath** (`#atem`) — Atem-Tab: Kategorien (Beruhigen/Schlaf/Fokus/Energie/SOS), Muster-Karten mit PNI-Erklärung, immersiver Orb-Visualizer (`components/breath/BreathPlayer.jsx`), Abschluss loggt nach Stimmungsabfrage ins Session-Log. Muster + Timing-Logik (`phaseAt`) liegen rein datengetrieben in `src/lib/breath/patterns.js` (Test: `tests/breath.test.mjs`). Neues Muster = ein Eintrag in `PATTERNS`. **Nicht `src/data/` nutzen** — von `.gitignore` (`data/`) verschluckt.
 3. **Journal** — Write/edit markdown journal entries
 4. **Stats** — View aggregated summaries
 5. **SubstanceCatalog** — Substances als Basis (nicht Molecules). Modal: Übersicht / Moleküle / Vault-Tab. `[[wikilinks]]` im Vault-Tab navigierbar. List ↔ Graph toggle.
