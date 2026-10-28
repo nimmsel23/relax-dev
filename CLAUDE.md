@@ -260,6 +260,7 @@ Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven glei
 - `server/knowledge/psychonaut.js` — Psychonaut Wiki GraphQL (Onset/Peak/Duration)
 
 ### Frontend
+- `src/views/Breath.jsx` + `src/components/breath/BreathPlayer.jsx` + `src/lib/breath/patterns.js` — Atem-Tab (siehe Views)
 - `src/views/SubstanceCatalog.jsx` — Substances-Liste + Graph-Toggle + Modal (Übersicht/Moleküle/Vault)
 - `src/components/KnowledgeGraph.jsx` — Reactflow: overview / expanded / hub Modi
 - `src/styles.css` — Catppuccin CSS variables + `.vault-markdown` + `.vault-link` styles
