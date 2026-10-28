@@ -4,27 +4,12 @@ import { getRelaxSession, saveRelaxSession } from '@db'
 import { localToday } from '../lib/db/shared/utils.js'
 import { CATEGORIES, PATTERNS, patternsByCategory, getPattern, cycleSeconds, roundsFor } from '../lib/breath/patterns.js'
 import BreathPlayer, { KIND_COLOR } from '../components/breath/BreathPlayer.jsx'
+import { loadPrefs, savePrefs } from '../lib/breath/prefs.js'
+import { isBreathTechnique } from '../lib/breath/stats.js'
 
 const ICONS = { Wind, Moon, Target, Zap, LifeBuoy }
 const DURATIONS = [1, 3, 5, 10]
 const MOOD = ['😞', '😕', '😐', '🙂', '😄']
-const LS_KEY = 'relax.breath.v1'
-const BREATH_RE = /atem|box breathing/i
-
-function loadPrefs() {
-  try {
-    return JSON.parse(localStorage.getItem(LS_KEY)) || {}
-  } catch {
-    return {}
-  }
-}
-
-function savePrefs(patch) {
-  try {
-    localStorage.setItem(LS_KEY, JSON.stringify({ ...loadPrefs(), ...patch }))
-  } catch { /* Storage evtl. gesperrt */ }
-}
-
 function PhaseBar({ pattern }) {
   return (
     <div className="flex gap-0.5 h-1.5 w-full" aria-hidden="true">
@@ -83,7 +68,7 @@ export default function Breath() {
   function refreshToday() {
     getRelaxSession(localToday()).then((d) => {
       const sum = (d?.items || [])
-        .filter((it) => BREATH_RE.test(it.technique || ''))
+        .filter((it) => isBreathTechnique(it.technique))
         .reduce((a, it) => a + (Number(it.minutes) || 0), 0)
       setTodayMin(sum)
     }).catch(() => {})

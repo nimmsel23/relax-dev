@@ -88,7 +88,7 @@ export default function App() {
       {/* View */}
       <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}>
-          <View />
+          <View onNavigate={setTab} />
         </div>
       </main>
 

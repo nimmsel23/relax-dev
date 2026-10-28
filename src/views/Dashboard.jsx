@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { CalendarDays, Download, Flame, MoonStar } from 'lucide-react'
 import { getRelaxSession, getRelaxStatsSummary, exportRelaxCsv } from '@db'
 import { localToday, getWeekDates, downloadText } from '../lib/db/shared/utils.js'
+import BreathCard from '../components/breath/BreathCard.jsx'
 
 const DAY_LABELS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
 
@@ -9,7 +10,7 @@ function sumMinutes(session) {
   return (session?.items || []).reduce((a, it) => a + (Number(it.minutes) || 0), 0)
 }
 
-export default function Dashboard() {
+export default function Dashboard({ onNavigate }) {
   const today = localToday()
   const [week, setWeek] = useState([])
   const [summary7, setSummary7] = useState(null)
@@ -90,6 +91,8 @@ export default function Dashboard() {
           })}
         </div>
       </div>
+
+      <BreathCard onNavigate={onNavigate} />
 
       {summary7 && (
         <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
