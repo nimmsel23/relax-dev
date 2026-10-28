@@ -1,0 +1,38 @@
+# Check für Relax: Build auf jedem PR/dev-Push, ohne Deploy und ohne Firebase-Secrets.
+#
+# Gleicher Aufbau wie preview-dev.yml (standalone, npm), aber ohne Pfadfilter und ohne
+# Preview (Muster aus fitness-dev/check.yml).
+
+name: Check (Relax)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [vitalos, master, dev]
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build Relax
+        run: npm run build

@@ -1,0 +1,87 @@
+# Preview-Deploy für Relax: dev-Push → 24h-Channel "dev", PR → eigener PR-Channel.
+#
+# Relax baut standalone (npm, eigenes package-lock.json), kein vitalos-Meta-Repo nötig.
+# Ersetzt firebase-hosting-dev-preview.yml (jetzt in workflows.disabled/): der alte Workflow
+# lief nur auf dev-Push, hatte keinen PR-Trigger und war beim letzten Lauf (2026-08-23) im
+# Firebase-Schritt rot. Hosting-Site relax-vos steht als einzige Site in firebase.json.
+# Telegram-Link wie in den anderen Modulen.
+
+name: Preview (Relax dev)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [dev]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'index.html'
+      - 'vite.config.*'
+      - 'postcss.config.*'
+      - 'tailwind.config.*'
+      - 'firebase.json'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/preview-dev.yml'
+      - '!**/*.md'
+      - '!**/*.bak*'
+  pull_request:
+    branches: [vitalos, master, dev]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'index.html'
+      - 'vite.config.*'
+      - 'postcss.config.*'
+      - 'tailwind.config.*'
+      - 'firebase.json'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/preview-dev.yml'
+      - '!**/*.md'
+      - '!**/*.bak*'
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build Relax
+        run: npm run build
+
+      - name: Deploy Preview Channel
+        id: firebase_deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FITNESS_AOS || secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: fitness-aos
+          channelId: ${{ github.event_name != 'pull_request' && 'dev' || '' }}
+          expires: 24h
+
+      - name: Telegram-Link senden
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            🚀 Preview für Relax (${{ github.event_name == 'pull_request' && format('PR #{0}', github.event.pull_request.number) || 'dev' }}) gebaut!
+
+            🔗 ${{ steps.firebase_deploy.outputs.details_url }}
+            ⏱️ Gültig 24h.
+
+            Commit: ${{ github.event.pull_request.title || github.event.head_commit.message }}
