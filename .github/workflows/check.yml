@@ -29,11 +29,10 @@ jobs:
       # Version kommt aus "packageManager" in package.json (pnpm@11.x)
       - uses: pnpm/action-setup@v4
 
-      # Kein "cache: pnpm": setup-node braucht dafür eine pnpm-lock.yaml, die dieses Repo nicht hat
-      # (Lockfile liegt im pnpm-Workspace von vitalos).
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: pnpm
 
       # scripts/ci-install.sh: pnpm 11 braucht freigegebene Build-Skripte (allowBuilds), siehe dort.
       - name: Install

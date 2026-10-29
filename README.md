@@ -42,7 +42,7 @@ pnpm run preview  # Test prod build locally
 Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `data/`:
 
 - **Devcontainer / Codespaces:** `.devcontainer/devcontainer.json` (Node 22, richtet sich per `postCreateCommand` selbst ein, leitet 5904 und 9123 weiter).
-- **Setup:** `scripts/ci-install.sh` ist der gemeinsame Einstieg für Devcontainer und CI. Es gibt bewusst kein Lockfile (liegt im vitalos-Workspace) und kein `pnpm-workspace.yaml` im Repo; das Skript schreibt die nötige `allowBuilds`-Freigabe flüchtig, wenn kein Workspace darüber liegt.
+- **Setup:** `scripts/ci-install.sh` ist der gemeinsame Einstieg für Devcontainer und CI. `pnpm-lock.yaml` ist eingecheckt und wird strikt verwendet (`--frozen-lockfile`); nach Änderungen an `package.json` mit `pnpm install` neu erzeugen und mit committen. Ein `pnpm-workspace.yaml` liegt bewusst nicht im Repo; das Skript schreibt die nötige `allowBuilds`-Freigabe flüchtig, wenn kein Workspace darüber liegt.
 - **Datenbank:** `node:sqlite` ist in Node eingebaut, kein natives Modul. Beim ersten Start importiert der Server die KB aus `knowledge/*.yaml` nach `data/kb.db`.
 - **Optional:** Vault-Treffer (`~/Vitaltrainer`, `~/BODY`) gibt es nur mit lokalem Vault; ohne ihn antwortet `/api/knowledge/vault/*` mit 404. Gemini-Anreicherung braucht `GEMINI_API_KEY` als Umgebungsvariable (als Codespaces-Secret o. ä.).
 - **CI:** `check.yml` (Install, Tests, Build) läuft bei jedem PR und `dev`-Push, `preview-dev.yml` baut einen 24-h-Preview-Channel. Live-Deploys laufen nicht von einem Rechner, sondern über den Release-Weg `dev` → `vitalos` (siehe CI-Deploy-Doku im Meta-Repo).

@@ -1,6 +1,6 @@
 # Preview-Deploy für Relax: dev-Push → 24h-Channel "dev", PR → eigener PR-Channel.
 #
-# Relax baut standalone (pnpm laut packageManager, ohne Lockfile im Repo), kein vitalos-Meta-Repo nötig.
+# Relax baut standalone (pnpm laut packageManager, mit pnpm-lock.yaml), kein vitalos-Meta-Repo nötig.
 # Ersetzt firebase-hosting-dev-preview.yml (jetzt in workflows.disabled/): der alte Workflow
 # lief nur auf dev-Push, hatte keinen PR-Trigger und war beim letzten Lauf (2026-08-23) im
 # Firebase-Schritt rot. Hosting-Site relax-vos steht als einzige Site in firebase.json.
@@ -56,11 +56,10 @@ jobs:
       # Version kommt aus "packageManager" in package.json (pnpm@11.x)
       - uses: pnpm/action-setup@v4
 
-      # Kein "cache: pnpm": setup-node braucht dafür eine pnpm-lock.yaml, die dieses Repo nicht hat
-      # (Lockfile liegt im pnpm-Workspace von vitalos).
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: pnpm
 
       # scripts/ci-install.sh: pnpm 11 braucht freigegebene Build-Skripte (allowBuilds), siehe dort.
       - name: Install

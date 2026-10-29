@@ -176,7 +176,7 @@ python -m server.knowledge.kb_enricher status
 `/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → `:9123`
 
 ### Cloud-Entwicklung / frischer Checkout
-Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci-install.sh`, dann `pnpm test` (inkl. `tests/server-smoke.test.mjs`, startet den Server) und `pnpm run build`. Node >= 22.13 (`node:sqlite`), siehe `.nvmrc`. Kein Lockfile und kein eingechecktes `pnpm-workspace.yaml` (bewusst, vitalos-Workspace); `scripts/ci-install.sh` schreibt `allowBuilds` flüchtig. Devcontainer in `.devcontainer/`. Details im README-Abschnitt „Cloud-Entwicklung".
+Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci-install.sh`, dann `pnpm test` (inkl. `tests/server-smoke.test.mjs`, startet den Server) und `pnpm run build`. Node >= 22.13 (`node:sqlite`), siehe `.nvmrc`. `pnpm-lock.yaml` ist eingecheckt (CI installiert mit `--frozen-lockfile`, bei Änderungen an `package.json` mit committen); kein eingechecktes `pnpm-workspace.yaml`, `scripts/ci-install.sh` schreibt `allowBuilds` flüchtig. Devcontainer in `.devcontainer/`. Details im README-Abschnitt „Cloud-Entwicklung".
 
 ### Building
 ```bash
