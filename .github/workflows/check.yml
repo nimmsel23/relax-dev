@@ -35,15 +35,12 @@ jobs:
         with:
           node-version: 22
 
-      # pnpm 11 bricht bei nicht freigegebenen Build-Skripten ab (ERR_PNPM_IGNORED_BUILDS).
-      # Die Freigabe (wie im vitalos-Workspace) nur flüchtig im CI-Checkout schreiben, nicht ins
-      # Repo: ein pnpm-workspace.yaml hier würde relax-app im vitalos-Workspace zum eigenen Root machen.
-      - name: Build-Skripte freigeben
-        run: |
-          printf "allowBuilds:\n  '@firebase/util': true\n  esbuild: true\n  protobufjs: true\n" > pnpm-workspace.yaml
-
+      # scripts/ci-install.sh: pnpm 11 braucht freigegebene Build-Skripte (allowBuilds), siehe dort.
       - name: Install
-        run: pnpm install --no-frozen-lockfile
+        run: bash scripts/ci-install.sh
+
+      - name: Tests
+        run: pnpm test
 
       - name: Build Relax
         run: pnpm run build

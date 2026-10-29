@@ -175,9 +175,12 @@ python -m server.knowledge.kb_enricher status
 ### Vite Proxy
 `/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → `:9123`
 
+### Cloud-Entwicklung / frischer Checkout
+Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci-install.sh`, dann `pnpm test` (inkl. `tests/server-smoke.test.mjs`, startet den Server) und `pnpm run build`. Node >= 22.13 (`node:sqlite`), siehe `.nvmrc`. Kein Lockfile und kein eingechecktes `pnpm-workspace.yaml` (bewusst, vitalos-Workspace); `scripts/ci-install.sh` schreibt `allowBuilds` flüchtig. Devcontainer in `.devcontainer/`. Details im README-Abschnitt „Cloud-Entwicklung".
+
 ### Building
 ```bash
-npm run build   # Vite build → dist/
+pnpm run build   # Vite build → dist/
 ```
 Production: `node server.mjs` serves `dist/`.
 

@@ -19,3 +19,6 @@ data/
 *.bak2
 # Backups und Archiv (lokal)
 archive/
+
+# flüchtig von scripts/ci-install.sh geschrieben
+pnpm-workspace.yaml

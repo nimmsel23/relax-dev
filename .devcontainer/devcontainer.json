@@ -1,0 +1,15 @@
+{
+  "name": "relax-dev",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "postCreateCommand": "corepack enable && bash scripts/ci-install.sh",
+  "forwardPorts": [5904, 9123],
+  "portsAttributes": {
+    "5904": { "label": "UI (Vite, HMR)", "onAutoForward": "openBrowser" },
+    "9123": { "label": "API (Node)" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "bradlc.vscode-tailwindcss"]
+    }
+  }
+}
