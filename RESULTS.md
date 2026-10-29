@@ -1,3 +1,14 @@
+# Release dev → master und Live-Deploy (2026-10-29)
+
+Nachtrag zur Atem-/Build-Session: Der Release-Weg `dev` → `master` → Live-Deploy lief durch, nachdem ein roter CI-Check behoben war. Der Hinweis „nichts gepusht oder deployt" im Eintrag darunter gilt damit für den Release nicht mehr.
+
+- **`package.json` (test-Script, `a217146`)**: `Check (Relax)` war auf `607b528` rot, weil `node --test tests/` unter Node 22.23 den Ordner als Modulpfad auflöst (lokal mit Node 26 unauffällig). Script nutzt jetzt `node --test tests/*.test.mjs`; mit der offiziellen Node-22.23.4-Binary reproduziert und verifiziert (23/23 Tests, Build grün).
+- **Release-PR `dev` → `master` (#1)**: gemergt, `Check (Relax)` grün, Auto-Merge lief, danach Dispatch von „Live Deploy (Relax master)" (`deploy-master.yml`) erfolgreich.
+- **`.github/workflows/automerge.yml`**: musste nicht mehr angepasst werden — `origin/master` hatte die Korrektur (`--base master`, `3daa8cc`) schon, nur `dev` hinkte hinterher; `deploy-master.yml` lag bisher nur auf `master`.
+- **Branch `dev`**: lokal per Fast-Forward auf `origin/master` (`0d43599`) gebracht, Workflows auf beiden Branches identisch. `dev` ist 7 Commits vor `origin/dev`, nichts gepusht.
+
+---
+
 # Atem-Tab, Build-Fixes, node:sqlite und Cloud-Tauglichkeit (2026-10-29)
 
 Neues Feature „Atem" (Visualizer, Streaks, Dashboard-Karte) plus Aufräumen am Build: Der Vite-Build lieferte wegen absoluter bzw. veralteter Kopien unter `public/` nur einen 5-kB-Stub. Außerdem `better-sqlite3` durch `node:sqlite` ersetzt, CI auf pnpm umgestellt und das Repo aus einem frischen Checkout lauffähig gemacht. Alles auf `dev` committet, nichts gepusht oder deployt.
