@@ -1,6 +1,6 @@
 # Preview-Deploy für Relax: dev-Push → 24h-Channel "dev", PR → eigener PR-Channel.
 #
-# Relax baut standalone (npm, eigenes package-lock.json), kein vitalos-Meta-Repo nötig.
+# Relax baut standalone (pnpm laut packageManager, ohne Lockfile im Repo), kein vitalos-Meta-Repo nötig.
 # Ersetzt firebase-hosting-dev-preview.yml (jetzt in workflows.disabled/): der alte Workflow
 # lief nur auf dev-Push, hatte keinen PR-Trigger und war beim letzten Lauf (2026-08-23) im
 # Firebase-Schritt rot. Hosting-Site relax-vos steht als einzige Site in firebase.json.
@@ -21,7 +21,7 @@ on:
       - 'tailwind.config.*'
       - 'firebase.json'
       - 'package.json'
-      - 'package-lock.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/preview-dev.yml'
       - '!**/*.md'
       - '!**/*.bak*'
@@ -36,7 +36,7 @@ on:
       - 'tailwind.config.*'
       - 'firebase.json'
       - 'package.json'
-      - 'package-lock.json'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/preview-dev.yml'
       - '!**/*.md'
       - '!**/*.bak*'
@@ -51,16 +51,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Version kommt aus "packageManager" in package.json (pnpm@11.x)
+      - uses: pnpm/action-setup@v4
+
+      # Kein "cache: pnpm": setup-node braucht dafür eine pnpm-lock.yaml, die dieses Repo nicht hat
+      # (Lockfile liegt im pnpm-Workspace von vitalos).
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+
+      # pnpm 11 bricht bei nicht freigegebenen Build-Skripten ab (ERR_PNPM_IGNORED_BUILDS).
+      # Die Freigabe (wie im vitalos-Workspace) nur flüchtig im CI-Checkout schreiben, nicht ins
+      # Repo: ein pnpm-workspace.yaml hier würde relax-app im vitalos-Workspace zum eigenen Root machen.
+      - name: Build-Skripte freigeben
+        run: |
+          printf "allowBuilds:\n  '@firebase/util': true\n  esbuild: true\n  protobufjs: true\n" > pnpm-workspace.yaml
 
       - name: Install
-        run: npm ci
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build Relax
-        run: npm run build
+        run: pnpm run build
 
       - name: Deploy Preview Channel
         id: firebase_deploy

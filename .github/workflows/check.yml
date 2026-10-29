@@ -1,6 +1,6 @@
 # Check für Relax: Build auf jedem PR/dev-Push, ohne Deploy und ohne Firebase-Secrets.
 #
-# Gleicher Aufbau wie preview-dev.yml (standalone, npm), aber ohne Pfadfilter und ohne
+# Gleicher Aufbau wie preview-dev.yml (standalone, pnpm), aber ohne Pfadfilter und ohne
 # Preview (Muster aus fitness-dev/check.yml).
 
 name: Check (Relax)
@@ -26,13 +26,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Version kommt aus "packageManager" in package.json (pnpm@11.x)
+      - uses: pnpm/action-setup@v4
+
+      # Kein "cache: pnpm": setup-node braucht dafür eine pnpm-lock.yaml, die dieses Repo nicht hat
+      # (Lockfile liegt im pnpm-Workspace von vitalos).
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+
+      # pnpm 11 bricht bei nicht freigegebenen Build-Skripten ab (ERR_PNPM_IGNORED_BUILDS).
+      # Die Freigabe (wie im vitalos-Workspace) nur flüchtig im CI-Checkout schreiben, nicht ins
+      # Repo: ein pnpm-workspace.yaml hier würde relax-app im vitalos-Workspace zum eigenen Root machen.
+      - name: Build-Skripte freigeben
+        run: |
+          printf "allowBuilds:\n  '@firebase/util': true\n  esbuild: true\n  protobufjs: true\n" > pnpm-workspace.yaml
 
       - name: Install
-        run: npm ci
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build Relax
-        run: npm run build
+        run: pnpm run build
