@@ -185,7 +185,7 @@ Production: `node server.mjs` serves `dist/`.
 
 - **Kein Framework** im Backend (raw Node.js) — minimal, schnell, single-file
 - **Kein UI-Framework** (kein shadcn, kein MaterialUI) — Tailwind + CSS variables, leichtgewichtig halten
-- **SQLite für KB** (`better-sqlite3`, sync, WAL) — KB-Katalog und API-Cache; Sessions/Journal bleiben file-based
+- **SQLite für KB** (`node:sqlite` / `DatabaseSync`, eingebaut ab Node 22, sync, WAL, kein Native-Build) — KB-Katalog und API-Cache; Sessions/Journal bleiben file-based
 - **YAML = Authoring, SQLite = Betrieb** — YAML manuell editieren, SQLite per Migration importieren; nie direkt YAML zur Laufzeit schreiben
 - **Pipeline schreibt nur Detail-Tabellen** — `curated=1` Index-Einträge sind write-protected; Gemini kann Details anreichern, nie kuratierte Einträge überschreiben
 - **`marked`** für Markdown-Rendering (Vault-Tab) — bereits installiert
@@ -242,7 +242,7 @@ Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven glei
 - `scripts/dev-runner.mjs` — Parallel dev launcher (nodemon + Vite)
 - `scripts/migrate-yaml-to-sqlite.mjs` — YAML → SQLite Migration (einmalig oder `--force`)
 - `server/routes/knowledge.js` — Knowledge Base API (`/api/knowledge/*`)
-- `server/knowledge/kb-db.js` — SQLite-Layer (better-sqlite3): Schema, CRUD, curated-Guard
+- `server/knowledge/kb-db.js` — SQLite-Layer (node:sqlite): Schema, CRUD, curated-Guard
 - `server/knowledge/kb-loader.js` — Dispatcher + Hub-Builder + Graph; liest ausschließlich via kb-db
 - `server/knowledge/kb-cache.js` — SQLite API-Cache (PubChem/KEGG/Psychonaut TTL-Cache)
 - `server/knowledge/vault-search.js` — Vault-Index, Name-Matching, Obsidian-Sanitizer

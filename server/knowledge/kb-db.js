@@ -7,7 +7,7 @@
  * DB: data/kb.db (WAL mode)
  */
 
-import Database from "better-sqlite3";
+import { DatabaseSync } from "node:sqlite";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
@@ -18,9 +18,9 @@ const DB_PATH = path.join(__dirname, "../..", "data", "kb.db");
 class KnowledgeDB {
   constructor() {
     fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
-    this.db = new Database(DB_PATH);
-    this.db.pragma("journal_mode = WAL");
-    this.db.pragma("foreign_keys = ON");
+    this.db = new DatabaseSync(DB_PATH);
+    this.db.exec("PRAGMA journal_mode = WAL");
+    this.db.exec("PRAGMA foreign_keys = ON");
     this._initSchema();
   }
 

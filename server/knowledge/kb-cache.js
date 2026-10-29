@@ -1,4 +1,4 @@
-import Database from "better-sqlite3";
+import { DatabaseSync } from "node:sqlite";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -14,8 +14,8 @@ class KBCache {
   open() {
     if (this.db) return;
     fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
-    this.db = new Database(DB_PATH);
-    this.db.pragma("journal_mode = WAL");
+    this.db = new DatabaseSync(DB_PATH);
+    this.db.exec("PRAGMA journal_mode = WAL");
     this._migrate();
   }
 

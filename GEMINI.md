@@ -10,7 +10,7 @@ This `GEMINI.md` provides an overview of the `relax-dev` project, its architectu
 
 **Key Technologies:**
 - **Frontend:** React 18, Vite, Zustand (state management), Recharts (visualizations), Tailwind CSS.
-- **Backend:** Node.js, Fastify (HTTP API), `better-sqlite3` (for KB cache), `yaml` (for KB data).
+- **Backend:** Node.js, Fastify (HTTP API), `node:sqlite` (for KB cache), `yaml` (for KB data).
 - **AI/Knowledge:** Google Gemini API (`@google/generative-ai`), `dotenv`.
 - **Persistence:** Local file system (`data/`).
 
