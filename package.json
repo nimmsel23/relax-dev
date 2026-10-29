@@ -3,17 +3,20 @@
   "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Relax Centre — Entspannung & Stress-Reset (Standalone)",
+  "packageManager": "pnpm@11.3.0",
+  "description": "Relax Centre \u2014 Entspannung & Stress-Reset (Standalone)",
   "scripts": {
     "dev": "node scripts/dev-runner.mjs",
     "start": "node server.mjs",
     "ui:dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy:preview": "npm run build && firebase hosting:channel:deploy preview --expires 24h",
-    "deploy:prev": "npm run build && firebase hosting:channel:deploy preview --expires 24h",
-    "build:preview": "npm run build && firebase hosting:channel:deploy preview --expires 24h",
-    "build:prev": "npm run build && firebase hosting:channel:deploy preview --expires 24h"
+    "deploy:cloud": "firebase deploy --only hosting --project fitness-aos",
+    "firebase": "pnpm run build && pnpm run deploy:cloud",
+    "deploy:preview": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "deploy:prev": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "build:preview": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "build:prev": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h"
   },
   "dependencies": {
     "@fastify/static": "^9.1.3",

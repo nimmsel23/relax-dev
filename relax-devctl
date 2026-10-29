@@ -139,7 +139,7 @@ def logs(
     follow: bool = typer.Option(True, "-f/--no-follow"),
 ):
     """Systemd Journal Logs folgen."""
-    unit = NODE_SERVICE if service == "node" else "fitness-python-backend.service"
+    unit = NODE_SERVICE if service == "node" else "fitness-api.service"
     cmd = ["journalctl", "--user", "-u", unit]
     cmd += (["-f", "--no-pager"] if follow else ["-n", "50", "--no-pager"])
     subprocess.run(cmd)

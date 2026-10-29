@@ -10,7 +10,7 @@ relax — Domain CLI für Relaxation Knowledge Base
   relax search <query>       KB durchsuchen
   relax enrich <key>         Molekül via Gemini anreichern
   relax enricher <sub>       KB Enricher steuern (start|stop|status|batch|list)
-  relax session <sub>        Session queries (today|get|list)
+  relax session <sub>        Session entries (today|get|list|add|remove)
   relax journal <sub>        Journal queries (today|get|list)
   relax stats                Aggregierte Stats
   relax log <freitext>       Session loggen: relax Sauna 90 min am Freitagabend in Therme Oberlaa
@@ -21,8 +21,11 @@ Server/Service-Control → use: relax-devctl
 """
 
 import json
+import os
 import subprocess
 import sys
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 
 import typer
@@ -226,17 +229,39 @@ def enricher_list():
 
 # ── Session sub-app ───────────────────────────────────────────────────────────
 
-_SESSIONS_DIR = DEV_DIR / "data" / "sessions"
-_JOURNAL_DIR  = DEV_DIR / "data" / "journal"
+_DATA_DIR = Path(os.environ.get("RELAX_DATA_DIR", DEV_DIR / "data")).expanduser()
+_SESSIONS_DIR = _DATA_DIR / "sessions"
+_JOURNAL_DIR  = _DATA_DIR / "journal"
 
-session_app = typer.Typer(help="Session queries (today | get DATE | list)")
+session_app = typer.Typer(help="Session entries (today | get DATE | list | add | remove)")
 app.add_typer(session_app, name="session")
+
+def _now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+
+def _empty_session(date_str: str) -> dict:
+    return {"date": date_str, "items": []}
 
 def _read_session(date_str: str) -> dict:
     f = _SESSIONS_DIR / f"{date_str}.json"
     if f.exists():
         return json.loads(f.read_text())
-    return _try_http("session_get", date_str)
+    try:
+        data = _try_http("session_get", date_str)
+        return data.get("data", data)
+    except Exception:
+        return _empty_session(date_str)
+
+def _write_session(date_str: str, data: dict) -> dict:
+    _SESSIONS_DIR.mkdir(parents=True, exist_ok=True)
+    clean = {
+        "date": date_str,
+        "items": list(data.get("items") or []),
+        "saved_at": _now_iso(),
+    }
+    f = _SESSIONS_DIR / f"{date_str}.json"
+    f.write_text(json.dumps(clean, indent=2, ensure_ascii=False) + "\n")
+    return clean
 
 @session_app.command("today")
 def session_today():
@@ -255,6 +280,64 @@ def session_list(limit: int = typer.Option(10, "-n")):
     files = sorted(_SESSIONS_DIR.glob("*.json"), reverse=True)[:limit]
     sessions = [json.loads(f.read_text()) for f in files] if files else _try_http("session_list", limit)
     print(json.dumps(sessions, indent=2, ensure_ascii=False))
+
+@session_app.command("add")
+def session_add(
+    technique: str = typer.Argument(..., help="Technik/Eintrag, z.B. Sauna"),
+    minutes: int = typer.Option(10, "--minutes", "-m", help="Dauer in Minuten"),
+    date_str: str = typer.Option(None, "--date", "-d", help="YYYY-MM-DD (Default: heute)"),
+    mood_before: int = typer.Option(3, "--before", help="Mood vorher 1-5"),
+    mood_after: int = typer.Option(4, "--after", help="Mood nachher 1-5"),
+    note: str = typer.Option("", "--note", help="Optionale Notiz"),
+):
+    """Session-Item an einen Tag anhängen."""
+    from datetime import date
+
+    d = date_str or str(date.today())
+    session = _read_session(d)
+    item = {
+        "id": str(uuid.uuid4()),
+        "technique": technique.strip(),
+        "minutes": max(0, min(int(minutes or 0), 240)),
+        "mood_before": max(1, min(int(mood_before or 3), 5)),
+        "mood_after": max(1, min(int(mood_after or 3), 5)),
+        "note": note[:2000],
+    }
+    session.setdefault("items", []).append(item)
+    saved = _write_session(d, session)
+    msg.good(f"{d}: {item['technique']} ({item['minutes']}min) gespeichert")
+    print(json.dumps(saved, indent=2, ensure_ascii=False))
+
+@session_app.command("remove")
+def session_remove(
+    date_str: str = typer.Argument(..., help="YYYY-MM-DD"),
+    item: str = typer.Argument(..., help="Item-ID oder 1-basiger Index aus `session get`"),
+):
+    """Session-Item per ID oder Index entfernen."""
+    session = _read_session(date_str)
+    items = list(session.get("items") or [])
+    if not items:
+        msg.warn(f"{date_str}: keine Session-Items")
+        raise typer.Exit(1)
+
+    remove_idx = None
+    if item.isdigit():
+        idx = int(item) - 1
+        if 0 <= idx < len(items):
+            remove_idx = idx
+    if remove_idx is None:
+        for idx, existing in enumerate(items):
+            if str(existing.get("id")) == item:
+                remove_idx = idx
+                break
+    if remove_idx is None:
+        msg.fail(f"Item nicht gefunden: {item}")
+        raise typer.Exit(1)
+
+    removed = items.pop(remove_idx)
+    session["items"] = items
+    _write_session(date_str, session)
+    msg.good(f"{date_str}: entfernt {removed.get('technique', '')} ({removed.get('minutes', 0)}min)")
 
 
 # ── Journal sub-app ───────────────────────────────────────────────────────────
