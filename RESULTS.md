@@ -1,3 +1,14 @@
+# Push von dev und Meta-Repo-Release relax-release (2026-10-29)
+
+Abschluss der Release-Kette `dev` → `master` → `vitalos` für das Atem-Feature. Die Hinweise „nichts gepusht" in den beiden Einträgen darunter gelten damit nicht mehr.
+
+- **Branch `dev`**: gepusht (`2d07df5..952eecd`), `dev` und `origin/dev` sind gleich. Neben dem Fast-Forward auf `origin/master` (`0d43599`) enthält der Push den Docs-Commit `952eecd` (RESULTS/NEXT). Kein neues Release, live bleibt der Stand von `0d43599`.
+- **`relax-release --yes`**: lief durch (ein vorheriger Aufruf `releax-release` war ein Tippfehler und führte nichts aus). Der Branch `vitalos` in `relax-dev` wurde von `3daa8cc` auf `0d43599` vorgezogen und gepusht; der `relax-app`-Pointer im Meta-Repo `~/vitalos` steht auf `0d43599` (Skript meldete „No parent submodule pointer changes detected", im Meta-Repo war nichts mehr zu pushen).
+- **Zusätzlicher Hosting-Deploy**: `relax-release` hat lokal gebaut und per `firebase deploy` erneut auf die Site `relax-vos` ausgeliefert; inhaltlich derselbe Stand wie der CI-Deploy von 13:08 UTC.
+- **Live-Ort des Atem-Features**: https://relax-vos.web.app/#atem (Firebase-Hosting-Site `relax-vos`, Projekt `fitness-aos`, laut `firebase.json`). Die Atem-Dateien liegen auf `origin/master`. Die Seite selbst wurde nicht im Browser geöffnet.
+
+---
+
 # Release dev → master und Live-Deploy (2026-10-29)
 
 Nachtrag zur Atem-/Build-Session: Der Release-Weg `dev` → `master` → Live-Deploy lief durch, nachdem ein roter CI-Check behoben war. Der Hinweis „nichts gepusht oder deployt" im Eintrag darunter gilt damit für den Release nicht mehr.

@@ -17,10 +17,10 @@ Next work priorities for relax-dev.
 ## Offen aus Atem-/Build-Session (2026-10-29)
 
 - **Echt-Check vor Push:** Atem-Tab und Dashboard-Karte wurden nur gegen einen Mock getestet — kurz auf :5904 mit echtem Setup und gegen Firestore/Emulator prüfen. Release-PR `dev` → `master` (#1) ist gemergt und per CI deployt (siehe RESULTS.md); das Echt-Setup wurde dabei nicht geprüft.
-- **`origin/dev` nachziehen:** lokales `dev` ist nach dem Fast-Forward auf `origin/master` 7 Commits vor `origin/dev` (nichts gepusht). Push wäre nur Kosmetik und löst einen Preview-Lauf aus — bei Bedarf pushen.
 - **CI unverifiziert:** `pnpm/action-setup@v4` mit pnpm 11 und der Devcontainer wurden nicht gegen echtes GitHub Actions bzw. Container getestet — nach dem ersten Lauf ansehen.
 - **`data/kb.db`** hat lokal 11 Substanzen, die YAML 12: `node scripts/migrate-yaml-to-sqlite.mjs --force` (noch nicht ausgeführt), danach CLAUDE.md-Bestandszahlen angleichen.
 - **Firestore-Details Atem:** Dashboard-Karte liest 60 Tage Verlauf (bis zu 60 Reads pro Öffnen) — ggf. auf 30 Tage kürzen (Rekord wird dann 30-Tage-Rekord). Speichern überschreibt das Tagesdokument komplett (offline auf zwei Geräten am selben Tag Datenverlust möglich; betrifft auch den Session-Tab).
+- **Live-Check `relax-vos.web.app/#atem`:** Seite wurde nach `relax-release` nicht im Browser geöffnet. Bei alter Version Service Worker (`sw.js`) per hartem Neuladen umgehen; Atem-Tab und Dashboard-Karte dort gegen echtes Firestore prüfen.
 - **`.bak`-Dateien** im Repo (per `.gitignore` ignoriert) nicht angefasst; Aufräumen nur mit Bedacht, nie blind restoren.
 
 ## Parking Lot (Not Now)
@@ -36,3 +36,8 @@ Next work priorities for relax-dev.
 **Gemini-Review (potenzielle blinde Flecken, 2026-10-29):**
 *   **Ungeprüfte Annahme beim Deploy:** Bei beiden Staging-Deploys (Fitness und Fuel) wurde explizit gemeldet: „Kein frischer Build — bestehende dist/ wird übernommen“. Wenn die „staging fixes“ Frontend-Änderungen enthielten, wurden diese nicht deployt, da kein neuer Build erstellt wurde. Claude hat dies nicht hinterfragt oder einen Build erzwungen.
 *   **Inkonsistenz in der Selbstzusammenfassung:** Die Selbstzusammenfassung behauptet, „`dev` ist 7 Commits vor `origin/dev`, nichts gepusht“, obwohl die `git status`-Ausgaben nach den `git merge --ff-only origin/dev`-Befehlen für
+
+**Gemini-Review (potenzielle blinde Flecken, 2026-10-29):**
+*   **Unerwarteter Side-Effekt des `relax-release` Skripts:** Das Skript führte einen vollständigen lokalen Build und `firebase deploy` durch, obwohl der Hauptzweck die Aktualisierung des Meta-Repo-Pointers war. Claude bemerkte dies als "unerwartet", hinterfragte aber nicht, warum dies geschieht oder ob es immer wünschenswert/sicher ist.
+*   **Ungeklärte Rolle des `vitalos`-Branches in `relax-dev`:** Der `relax-release`-Output zeigte einen Push auf einen `vitalos`-Branch im `relax-dev`-Repository selbst. Claude berichtete dies, untersuchte aber nicht die genaue Funktion oder Notwendigkeit dieses Branches im Kontext des Submoduls und des Meta-Repos.
+*   **Widersprüchliche Skript-Meldung:** Das `relax-release`-Skript meldete "No parent submodule pointer changes detected", obwohl es den `relax-app`-Pointer im Meta-Repo gerade aktualisiert hatte. Claude erwähnte die Meldung, versöhnte sie aber nicht mit der tatsächlichen Änderung, was auf eine
