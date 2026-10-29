@@ -14,24 +14,38 @@ Kombination aus:
 ## Quickstart
 
 ```bash
-# Install dependencies
-npm install
+# Install dependencies (pnpm 11 über corepack; Node >= 22.13, siehe .nvmrc)
+corepack enable
+bash scripts/ci-install.sh
 
 # Development (Vite HMR + Nodemon backend)
-npm run dev
+pnpm run dev
 
 # Or separate terminals:
-npm run ui:dev   # Vite only (:5904)
-npm run start    # API only (:9123)
+pnpm run ui:dev   # Vite only (:5904)
+pnpm run start    # API only (:9123)
+
+# Tests (node:test, inkl. Server-Smoke-Test)
+pnpm test
 
 # Production build
-npm run build    # → dist/
-npm run preview  # Test prod build locally
+pnpm run build    # → dist/
+pnpm run preview  # Test prod build locally
 ```
 
 **Ports:**
 - UI (Vite + HMR): `http://localhost:5904`
 - API (Node HTTP): `http://localhost:9123`
+
+### Cloud-Entwicklung (ohne eigenen Rechner)
+
+Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `data/`:
+
+- **Devcontainer / Codespaces:** `.devcontainer/devcontainer.json` (Node 22, richtet sich per `postCreateCommand` selbst ein, leitet 5904 und 9123 weiter).
+- **Setup:** `scripts/ci-install.sh` ist der gemeinsame Einstieg für Devcontainer und CI. `pnpm-lock.yaml` ist eingecheckt und wird strikt verwendet (`--frozen-lockfile`); nach Änderungen an `package.json` mit `pnpm install` neu erzeugen und mit committen. Ein `pnpm-workspace.yaml` liegt bewusst nicht im Repo; das Skript schreibt die nötige `allowBuilds`-Freigabe flüchtig, wenn kein Workspace darüber liegt.
+- **Datenbank:** `node:sqlite` ist in Node eingebaut, kein natives Modul. Beim ersten Start importiert der Server die KB aus `knowledge/*.yaml` nach `data/kb.db`.
+- **Optional:** Vault-Treffer (`~/Vitaltrainer`, `~/BODY`) gibt es nur mit lokalem Vault; ohne ihn antwortet `/api/knowledge/vault/*` mit 404. Gemini-Anreicherung braucht `GEMINI_API_KEY` als Umgebungsvariable (als Codespaces-Secret o. ä.).
+- **CI:** `check.yml` (Install, Tests, Build) läuft bei jedem PR und `dev`-Push, `preview-dev.yml` baut einen 24-h-Preview-Channel. Live-Deploys laufen nicht von einem Rechner, sondern per CI über den Release-Weg `dev` → `master` → `vitalos` (siehe `AGENTS.md`).
 
 ---
 
@@ -129,9 +143,8 @@ CSV includes: date, technique, minutes, mood_before, mood_after, note.
 
 ### Environment Variables
 
-**Required for AI features:**
+**Required for AI features** (als Umgebungsvariable oder in `~/.env/relax.env`):
 ```bash
-# ~/.env/gemini.env
 GEMINI_API_KEY=AIzaSy...
 GEMINI_MODEL=gemini-2.5-flash
 ```

@@ -1,6 +1,6 @@
 # Check für Relax: Build auf jedem PR/dev-Push, ohne Deploy und ohne Firebase-Secrets.
 #
-# Gleicher Aufbau wie preview-dev.yml (standalone, npm), aber ohne Pfadfilter und ohne
+# Gleicher Aufbau wie preview-dev.yml (standalone, pnpm), aber ohne Pfadfilter und ohne
 # Preview (Muster aus fitness-dev/check.yml).
 
 name: Check (Relax)
@@ -26,13 +26,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Version kommt aus "packageManager" in package.json (pnpm@11.x)
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
 
+      # scripts/ci-install.sh: pnpm 11 braucht freigegebene Build-Skripte (allowBuilds), siehe dort.
       - name: Install
-        run: npm ci
+        run: bash scripts/ci-install.sh
+
+      - name: Tests
+        run: pnpm test
 
       - name: Build Relax
-        run: npm run build
+        run: pnpm run build

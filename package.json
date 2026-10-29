@@ -4,12 +4,16 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.3.0",
-  "description": "Relax Centre \u2014 Entspannung & Stress-Reset (Standalone)",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "description": "Relax Centre — Entspannung & Stress-Reset (Standalone)",
   "scripts": {
     "dev": "node scripts/dev-runner.mjs",
     "start": "node server.mjs",
     "ui:dev": "vite",
     "build": "vite build",
+    "test": "node --test tests/*.test.mjs",
     "preview": "vite preview",
     "deploy:cloud": "firebase deploy --only hosting --project fitness-aos",
     "firebase": "pnpm run build && pnpm run deploy:cloud",
@@ -22,7 +26,6 @@
     "@fastify/static": "^9.1.3",
     "@google/generative-ai": "^0.21.0",
     "@tanstack/react-query": "^5.100.10",
-    "better-sqlite3": "^12.10.0",
     "dotenv": "^16.4.5",
     "firebase": "^11.10.0",
     "fastify": "^5.8.5",

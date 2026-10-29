@@ -175,9 +175,12 @@ python -m server.knowledge.kb_enricher status
 ### Vite Proxy
 `/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → `:9123`
 
+### Cloud-Entwicklung / frischer Checkout
+Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci-install.sh`, dann `pnpm test` (inkl. `tests/server-smoke.test.mjs`, startet den Server) und `pnpm run build`. Node >= 22.13 (`node:sqlite`), siehe `.nvmrc`. `pnpm-lock.yaml` ist eingecheckt (CI installiert mit `--frozen-lockfile`, bei Änderungen an `package.json` mit committen); kein eingechecktes `pnpm-workspace.yaml`, `scripts/ci-install.sh` schreibt `allowBuilds` flüchtig. Devcontainer in `.devcontainer/`. Details im README-Abschnitt „Cloud-Entwicklung".
+
 ### Building
 ```bash
-npm run build   # Vite build → dist/
+pnpm run build   # Vite build → dist/
 ```
 Production: `node server.mjs` serves `dist/`.
 
@@ -185,7 +188,7 @@ Production: `node server.mjs` serves `dist/`.
 
 - **Kein Framework** im Backend (raw Node.js) — minimal, schnell, single-file
 - **Kein UI-Framework** (kein shadcn, kein MaterialUI) — Tailwind + CSS variables, leichtgewichtig halten
-- **SQLite für KB** (`better-sqlite3`, sync, WAL) — KB-Katalog und API-Cache; Sessions/Journal bleiben file-based
+- **SQLite für KB** (`node:sqlite` / `DatabaseSync`, eingebaut ab Node 22, sync, WAL, kein Native-Build) — KB-Katalog und API-Cache; Sessions/Journal bleiben file-based
 - **YAML = Authoring, SQLite = Betrieb** — YAML manuell editieren, SQLite per Migration importieren; nie direkt YAML zur Laufzeit schreiben
 - **Pipeline schreibt nur Detail-Tabellen** — `curated=1` Index-Einträge sind write-protected; Gemini kann Details anreichern, nie kuratierte Einträge überschreiben
 - **`marked`** für Markdown-Rendering (Vault-Tab) — bereits installiert
@@ -242,7 +245,7 @@ Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven glei
 - `scripts/dev-runner.mjs` — Parallel dev launcher (nodemon + Vite)
 - `scripts/migrate-yaml-to-sqlite.mjs` — YAML → SQLite Migration (einmalig oder `--force`)
 - `server/routes/knowledge.js` — Knowledge Base API (`/api/knowledge/*`)
-- `server/knowledge/kb-db.js` — SQLite-Layer (better-sqlite3): Schema, CRUD, curated-Guard
+- `server/knowledge/kb-db.js` — SQLite-Layer (node:sqlite): Schema, CRUD, curated-Guard
 - `server/knowledge/kb-loader.js` — Dispatcher + Hub-Builder + Graph; liest ausschließlich via kb-db
 - `server/knowledge/kb-cache.js` — SQLite API-Cache (PubChem/KEGG/Psychonaut TTL-Cache)
 - `server/knowledge/vault-search.js` — Vault-Index, Name-Matching, Obsidian-Sanitizer

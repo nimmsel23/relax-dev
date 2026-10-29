@@ -1,3 +1,17 @@
+# Atem-Tab, Build-Fixes, node:sqlite und Cloud-Tauglichkeit (2026-10-29)
+
+Neues Feature „Atem" (Visualizer, Streaks, Dashboard-Karte) plus Aufräumen am Build: Der Vite-Build lieferte wegen absoluter bzw. veralteter Kopien unter `public/` nur einen 5-kB-Stub. Außerdem `better-sqlite3` durch `node:sqlite` ersetzt, CI auf pnpm umgestellt und das Repo aus einem frischen Checkout lauffähig gemacht. Alles auf `dev` committet, nichts gepusht oder deployt.
+
+- **Atem-Tab** (`src/views/Breath.jsx`, `src/components/breath/BreathPlayer.jsx`, `src/lib/breath/patterns.js`, `e12c69d`): 5 Kategorien mit 15 Techniken, Muster-Karten mit PNI-Erklärung, Orb-Visualizer (Phasenring, Countdown, 3-s-Vorlauf, Wake-Lock, Pause/Beenden, optionale Vibration). Abschluss fragt Stimmung ab und schreibt ins normale Session-Log (Läufe < 20 s verworfen). Tab `#atem` in `src/App.jsx`, `.no-scrollbar` in `src/styles.css`, CLAUDE.md ergänzt. Muster liegen bewusst in `src/lib/`, weil `src/data/` von `.gitignore` verschluckt wird.
+- **Atem-Statistik** (`src/lib/breath/stats.js`, `src/lib/breath/prefs.js`, `tests/breath-stats.test.mjs`, `f4520b5`): Atem-Erkennung, Minuten pro Tag, aktuelle/längste Serie, Tageszeit-Vorschlag; `Breath.jsx` nutzt die gemeinsamen Module.
+- **Dashboard-Karte „Atmen"** (`src/components/breath/BreathCard.jsx`, `fbf0b1d`): Serie, Rekord, 7-Tage-Balken, Tageszeit-Vorschlag mit Sprung in den Atem-Tab. Nur gegen Mock-Server im Headless-Browser getestet.
+- **Build-Fix Symlinks/Kopien** (`31ffa4c`, `74e81c2`, `eca76ec`): `public/src`, `public/index.html`, `public/physio`, `scripts/deploy.sh`, `scripts/kb`, `scripts/physio-devctl`, `physio-sim/fuel-dev` und `physio-devctl` entfernt; `bin/physio-devctl` ist jetzt ein relativer Symlink. `npm run build` liefert wieder die volle App (~820 kB statt Stub), `dist/` enthält kein `src/` und kein `physio/` mehr.
+- **`server/knowledge/kb-db.js`, `kb-cache.js`, `package.json`** (`22a1917`): `better-sqlite3` durch eingebautes `node:sqlite` (`DatabaseSync`) ersetzt, Abhängigkeit entfernt, CLAUDE.md/GEMINI.md angepasst. Gegen Kopie der DB geprüft (Lese-/Schreibpfade, `curated`-Schutz, WAL, Foreign Keys).
+- **CI und Cloud-Setup** (`693f6b0`, `1468d1f`, `a1b3af7`, `a217146`): `.github/workflows/check.yml` und `preview-dev.yml` auf pnpm, neues `scripts/ci-install.sh` (gemeinsamer Einstieg für CI/Devcontainer, schreibt `allowBuilds` nur flüchtig und nur ohne übergeordneten Workspace, standalone `--frozen-lockfile`), `pnpm-lock.yaml` eingecheckt, `.nvmrc` + `engines` (Node ≥ 22.13), `.devcontainer/devcontainer.json`, `tests/server-smoke.test.mjs`, `test`-Script als Dateiliste, README/CLAUDE.md um „Cloud-Entwicklung" ergänzt (inkl. Korrektur `~/.env/relax.env`). In frischer Kopie mit leerem `HOME` verifiziert: Install, Tests, Build grün.
+- **README** (`607b528`): Release-Weg auf `dev` → `master` → `vitalos` korrigiert (laut `AGENTS.md`).
+
+---
+
 ## 2026-10-21 — Gemeinsamer Changelog
 
 Universalisierten VitalOS-Release-Dialog über vendorte Vite-Module eingebunden. Standalone mit eigener Bestätigung; eingebettet unterdrückt zugunsten des zentralen Shell-Dialogs.

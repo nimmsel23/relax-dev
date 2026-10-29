@@ -1,6 +1,6 @@
 # Preview-Deploy für Relax: dev-Push → 24h-Channel "dev", PR → eigener PR-Channel.
 #
-# Relax baut standalone (npm, eigenes package-lock.json), kein vitalos-Meta-Repo nötig.
+# Relax baut standalone (pnpm laut packageManager, mit pnpm-lock.yaml), kein vitalos-Meta-Repo nötig.
 # Ersetzt firebase-hosting-dev-preview.yml (jetzt in workflows.disabled/): der alte Workflow
 # lief nur auf dev-Push, hatte keinen PR-Trigger und war beim letzten Lauf (2026-08-23) im
 # Firebase-Schritt rot. Hosting-Site relax-vos steht als einzige Site in firebase.json.
@@ -21,7 +21,8 @@ on:
       - 'tailwind.config.*'
       - 'firebase.json'
       - 'package.json'
-      - 'package-lock.json'
+      - 'scripts/ci-install.sh'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/preview-dev.yml'
       - '!**/*.md'
       - '!**/*.bak*'
@@ -36,7 +37,8 @@ on:
       - 'tailwind.config.*'
       - 'firebase.json'
       - 'package.json'
-      - 'package-lock.json'
+      - 'scripts/ci-install.sh'
+      - 'pnpm-lock.yaml'
       - '.github/workflows/preview-dev.yml'
       - '!**/*.md'
       - '!**/*.bak*'
@@ -51,16 +53,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Version kommt aus "packageManager" in package.json (pnpm@11.x)
+      - uses: pnpm/action-setup@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          cache: pnpm
 
+      # scripts/ci-install.sh: pnpm 11 braucht freigegebene Build-Skripte (allowBuilds), siehe dort.
       - name: Install
-        run: npm ci
+        run: bash scripts/ci-install.sh
 
       - name: Build Relax
-        run: npm run build
+        run: pnpm run build
 
       - name: Deploy Preview Channel
         id: firebase_deploy
