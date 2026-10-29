@@ -13,7 +13,7 @@
     "start": "node server.mjs",
     "ui:dev": "vite",
     "build": "vite build",
-    "test": "node --test tests/",
+    "test": "node --test tests/*.test.mjs",
     "preview": "vite preview",
     "deploy:cloud": "firebase deploy --only hosting --project fitness-aos",
     "firebase": "pnpm run build && pnpm run deploy:cloud",
