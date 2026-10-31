@@ -89,3 +89,7 @@ All API endpoints tested & functional:
 - Browser testing of graph visualization not yet performed (API side verified only)
 - Physiology Obsidian Vault integration not explored (user asked, deferred)
 - Physio Timeline Graph Engine (cortisol/dopamine simulation) not implemented (planned feature)
+
+## 2026-10-31 — Dependabot
+
+Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions and npm/pnpm updates; version updates target `dev`. Minor/patch updates are grouped; vendored mini-app-shell copies stay maintained at their source. Validated YAML, repository manifest paths and update targets.
