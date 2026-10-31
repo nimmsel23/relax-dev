@@ -2,7 +2,7 @@
 """
 relax-devctl — Relax Centre Server Controller
 Controls: Node API (:9123, aos-relax-dev.service) + KB Enricher (:9124, Python)
-Deploy: ~/relax-dev → /opt/relax (relax.service, system scope, sudo)
+Deploy: ~/dev/relax-dev → /opt/relax (relax.service, system scope, sudo)
 
 Domain CLI → use: relax
 """
@@ -219,7 +219,7 @@ def deploy(
     dry_run: bool = typer.Option(False, "--dry-run"),
     skip_build: bool = typer.Option(False, "--skip-build"),
 ):
-    """Deploy ~/relax-dev → /opt/relax (sudo, restarts relax.service)."""
+    """Deploy ~/dev/relax-dev → /opt/relax (sudo, restarts relax.service)."""
     dest = Path("/opt/relax")
     backup_dir = Path("/opt/relax_backups")
 

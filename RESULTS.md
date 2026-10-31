@@ -111,3 +111,8 @@ All API endpoints tested & functional:
 - Browser testing of graph visualization not yet performed (API side verified only)
 - Physiology Obsidian Vault integration not explored (user asked, deferred)
 - Physio Timeline Graph Engine (cortisol/dopamine simulation) not implemented (planned feature)
+
+
+## 2026-10-31 — Dev-Projekte unter ~/dev
+
+Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgestellt. Runtime-Daten, Branches und Release-Checkouts behalten ihre Zuständigkeit. Keine Pushes oder Releases. Gesamter Umzug und Prüfungen: `~/RESULTS.md`.

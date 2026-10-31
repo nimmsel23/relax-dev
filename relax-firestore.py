@@ -9,7 +9,7 @@ Firestore-Struktur:
   relax/default/sessions/{date}  → {date, items:[...], saved_at}
   relax/default/journal/{date}   → {date, content:""}
 
-Lokal (RELAX_DATA_DIR, default ~/relax-dev/data/):
+Lokal (RELAX_DATA_DIR, default ~/dev/relax-dev/data/):
   sessions/YYYY-MM-DD.json  → {date, items:[...], saved_at}
   journal/YYYY-MM-DD.md     → markdown text
 
@@ -39,7 +39,7 @@ from loguru import logger
 # ── Config ─────────────────────────────────────────────────────────────────────
 
 RELAX_DATA_DIR = Path(
-    os.getenv("RELAX_DATA_DIR", str(Path.home() / "relax-dev" / "data"))
+    os.getenv("RELAX_DATA_DIR", str(Path.home() / "dev" / "relax-dev" / "data"))
 ).expanduser()
 
 SA_PATH = Path(
