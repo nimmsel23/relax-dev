@@ -771,3 +771,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Alle Dateien im älteren Entspannungstrainer-PDF-Archiv per SHA-256 mit dem aktuellen FlexyFit-Archiv verglichen.
 - Die abweichenden Dateinamen (u. a. `Stresstheorie B-Lizenz.pdf` und mehrere PDF-Dateien ohne Endung) stimmen bytegenau mit erfassten Originalquellen überein; die Sicherung enthält keine zusätzlichen Kurs-PDFs.
 - Quellenmatrix, TODO und NEXT halten fest, dass auch die lokale Sicherung keine Anleitung für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation ergänzt.
+# Drive-Treffer anhand konkreter Kurskapitel auf Anleitungen geprüft (2026-11-02)
+
+- Die Suche nach AT-Grundstufe/Ruhetönung, Fantasiereisen-Rücknahme, Meditation und Mentaltraining nach Eberspächer lieferte die Master-MOC und `🦉Vitaltrainer-Diplom.md` als mögliche Kursquellen.
+- Beide Dateien wiederholen Themen und Kapitelüberschriften; die Diplom-Notiz ergänzt eine allgemeine Einleitung, aber keine konkrete Anleitung oder Schrittfolge für die fehlenden Methoden.
+- Quellenmatrix, TODO und NEXT enthalten jetzt diese Prüfung. Die Methodenkarten bleiben bei den durch Kursunterlagen belegten Angaben.
