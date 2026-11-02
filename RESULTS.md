@@ -5,6 +5,12 @@
 - Gesundheitsbehauptungen und Einnahmeangaben werden als Inhalte der Vorlage kenntlich gemacht und nicht als bestätigte Wirkung oder Trainerempfehlung dargestellt.
 - Quellenmatrix und TODO aktualisiert.
 
+# Stressansätze und Wirkungsübersicht ergänzt (2026-11-02)
+
+- Grundlagenansicht um die im Skript gegenübergestellten Stressansätze, die Einführung in Sympathikus/Parasympathikus und die vereinfachte Hormonübersicht erweitert.
+- Die Wirkungsaufzählung zu Entspannung und die EEG-Bandübersicht sind jetzt als Aussagen der Kursunterlage auffindbar und ausdrücklich von individueller Wirkung oder App-Messwerten getrennt.
+- Quellenmatrix, Fundstellen und TODO mit S. 18–21 und 62–68 ergänzt.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
