@@ -534,3 +534,7 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Beim Praxisnachweis ist die konkrete unterstützende Praxis nun Pflicht, wenn „Weitere unterstützende Verfahren“ ausgewählt wird.
 - Browserseitige Pflichtfeldprüfung und zusätzliche Formularvalidierung verhindern einen generischen oder nur aus Leerzeichen bestehenden Eintrag.
+# Ausdauer-Quellenbereich und Praxisvarianten präzisiert (2026-11-02)
+
+- Methodenkarte nennt jetzt den tatsächlichen Inhaltsbereich S. 4–26 statt S. 4–24.
+- Die Praxisübersicht trennt die Empfehlungen aus S. 23, Lauf-/Bergsportbeispiele inklusive Trailrunning aus S. 24, Wasser- und Mannschaftssport aus S. 25 sowie Naturwege/Bewegungsparks aus S. 26.

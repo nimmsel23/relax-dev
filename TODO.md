@@ -72,6 +72,7 @@
 - [x] Naturheilmittel S. 90–104 mit dem vollständigen Kräuterinventar und Johanniskraut-Wechselwirkungshinweis sowie die beiden Kräuterteemischungen S. 106–107 als Quellenstoff sichtbar machen, ohne Dosierungs- oder Einnahmeempfehlung auszugeben.
 - [x] Das Wirbelsäulen-Skript bis zum tatsächlichen Ende des Bewegungsfreude-Kapitels (S. 39) abgleichen, die fehlenden Kursmethoden ergänzen und die verrutschten Seitenbezüge bei Beckenuhr/Druckpunkten korrigieren.
 - [x] Das Ausdauer-PDF bis zu den Inhaltsseiten S. 26 abgleichen und die fehlenden Natur-/Bewegungspark-Beispiele sowie Flow als nicht garantiertes Erleben ergänzen.
+- [x] Quellenbereich der Ausdauer-Methodenkarte auf S. 4–26 angleichen und Trailrunning sowie die Inhalte von S. 23–25 präziser aufführen.
 - [x] Stresstheorie S. 5–13 um Stressor/Reaktion/Erleben und das Steinzeit-/Moderner-Mensch-Reaktionsschema als begrenztes Lehrmodell ergänzen.
 - [x] Die Bildgegenüberstellung Stress/Entspannung aus Stresstheorie S. 66 in der Grundlagenansicht darstellen, ohne die unbeschrifteten Pfeile als physiologische Messwerte auszulegen.
 - [x] Die bebilderten Flexibilitätstrainingsseiten Assisted Stretching S. 18–28 in der Methodenkarte ausweisen und die vorbereitende Gegenbewegung S. 41 aufnehmen, ohne nicht beschriftete Zeichnungen mit erfundenen Übungsnamen zu versehen.
