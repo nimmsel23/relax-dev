@@ -9,5 +9,6 @@ Nächste Schritte für das Entspannungstrainer-Fachmodul in `relax-dev`.
 3. **Lokale Reflexion sichern:** Headless-Firefox hat echte Tastatureingabe, Speicherung von drei Methodenfeldern samt Fachgesprächs-Selbstcheck, Wiederherstellung nach Reload und Markdown-Export für Atemschulung bestätigt. Exportinhalt und getrennte Ablage waren korrekt. Auf iPhone/iPad die Texteingabe und den Export ergänzend prüfen; Methodenreflexionen bleiben vom formalen 30-Einheiten-Nachweis getrennt.
 4. **Quellenänderungen nachziehen:** Bei neuen PDFs oder Aufgaben das MOC, `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`, Methodenkarten, Lerncheck und Arbeitsblätter gemeinsam abgleichen.
 5. **Ausbildungsgrenzen erhalten:** Kursangaben zu Ernährung, Stresswirkungen und Physiologie weiter als Lehrmaterial kennzeichnen; keine Diagnosen, Messungen, Heilversprechen oder individuellen Verordnungen daraus ableiten.
+6. **Kursindex prüfen:** Der neue aufklappbare MOC-Index in der Modul-Startansicht ordnet die Kursfächer den App-Bereichen zu. Bei Ergänzungen die lokale Ausbildungs-MOC und Quellenmatrix gemeinsam abgleichen.
 
 Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT-legacy-2026-10-29.md` bewahrt die ältere Arbeitsliste und damalige Betriebsnotizen; deren aktueller Status wurde hier nicht neu geprüft.

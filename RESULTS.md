@@ -776,3 +776,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die Suche nach AT-Grundstufe/Ruhetönung, Fantasiereisen-Rücknahme, Meditation und Mentaltraining nach Eberspächer lieferte die Master-MOC und `🦉Vitaltrainer-Diplom.md` als mögliche Kursquellen.
 - Beide Dateien wiederholen Themen und Kapitelüberschriften; die Diplom-Notiz ergänzt eine allgemeine Einleitung, aber keine konkrete Anleitung oder Schrittfolge für die fehlenden Methoden.
 - Quellenmatrix, TODO und NEXT enthalten jetzt diese Prüfung. Die Methodenkarten bleiben bei den durch Kursunterlagen belegten Angaben.
+# Ausbildungs-MOC in der Modul-Startansicht erschlossen (2026-11-02)
+
+- Die Startansicht enthält jetzt einen aufklappbaren Kursindex mit den Fächern aus der Ausbildungsübersicht: Stresstheorie, Methoden, Atemschulung, PMR, Bewegung/Körperarbeit, Ernährung, Stundenplanung und Aufgaben/Nachweis.
+- Jeder Eintrag führt direkt zum passenden App-Bereich; Atemschulung öffnet den bestehenden Atem-Tab. Hinweise stellen klar, dass die Navigation weder absolvierte Kurseinheiten bestätigt noch Originalskripte ersetzt.
+- TODO, NEXT und diese Ergebnisnotiz aktualisiert.

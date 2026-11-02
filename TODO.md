@@ -5,6 +5,7 @@
 - [ ] `relax-dev` als digitale Repräsentation des Entspannungstrainer-Moduls der Präventiven Vitaltrainer-Ausbildung weiterentwickeln.
 - [x] Ausbildungsinhalte und Trainerpraxis mit lokalen Ausbildungsnotizen abgleichen.
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
+- [x] Die Fächerübersicht der Ausbildungs-MOC in der Modul-Startansicht mit direkten Einstiegen zu Grundlagen, Methoden, Atemschulung, Fallaufgabe, Planung und Praxisnachweis verknüpfen.
 - [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
 - [x] Methodenbeschreibungen gegen die vorhandenen Original-PDFs prüfen und belegte Seitenbereiche direkt auf den Methodenkarten sichtbar machen; unbelegte Anleitungen und Dauerangaben als solche kennzeichnen.
 - [x] Methodenbibliothek nach Namen, Schwerpunkten, Anleitungstexten und Kursquellen durchsuchbar machen.

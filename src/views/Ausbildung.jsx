@@ -544,7 +544,7 @@ async function getCompleteRelaxSessionHistory() {
   return rows
 }
 
-export default function Ausbildung() {
+export default function Ausbildung({ onNavigate }) {
   const [{ section, method }, setRoute] = useState(readTrainingRoute)
   const [pmrStep, setPmrStep] = useState(null)
   const [methodQuery, setMethodQuery] = useState('')
@@ -936,6 +936,21 @@ export default function Ausbildung() {
           ['5', 'Nachweisen', 'Selbst durchgeführte Einheiten bestätigen, sammeln und im 30-Zeilen-Format ausgeben.', [['nachweis', 'Praxisnachweis öffnen']]],
         ].map(([number, title, detail, actions]) => <div key={number} className="rounded-xl p-3" style={{ background: 'var(--bg2)' }}><div className="flex items-center gap-2"><span className="flex h-6 w-6 items-center justify-center rounded-full text-xs font-black" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}>{number}</span><h3 className="text-sm font-bold">{title}</h3></div><p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{detail}</p><div className="mt-3 flex flex-wrap gap-2">{actions.map(([target, label]) => <button key={target} onClick={() => navigateSection(target)} className="rounded-lg border px-3 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>{label}</button>)}</div></div>)}</div>
       </section>
+      <details className="rounded-2xl border p-4" style={panel}>
+        <summary className="cursor-pointer font-bold">Kursfächer aus der Ausbildungsübersicht</summary>
+        <p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Der Kursindex ordnet die Themen deiner MOC den passenden App-Bereichen zu. Eine Zuordnung öffnet den Lernbereich; sie bestätigt weder eine absolvierte Kurseinheit noch ersetzt sie das Originalskript.</p>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">{[
+          ['Stresstheorie & Stressmanagement', 'Stressreaktion, Stressansätze, Ressourcen, SORKC und Messbarkeit.', [['grundlagen', 'Grundlagen']]],
+          ['Entspannungsmethoden im Überblick', 'Vier Ebenen, PMR, Autogenes Training, Mentaltraining, Fantasiereisen, Meditation, Selbsthypnose und unterstützende Verfahren; fehlende Ablaufskripte sind an den Methodenkarten markiert.', [['methoden', 'Methoden']]],
+          ['Atemschulung', 'Atemmechanik, Kursübungen sowie Arbeitsblätter zur eigenen Anleitung und Gruppenpraxis.', [['atem', 'Atemschulung']]],
+          ['Progressive Muskelrelaxation', 'Grundlagen, Praxisrahmen, Rücknahme und die im Skript ergänzten fünf Tibeter.', [['methoden', 'PMR und fünf Tibeter']]],
+          ['Bewegung und Körperarbeit', 'Yoga, Pilates, Assisted Stretching, Faszientraining/SMR, Wirbelsäulenwahrnehmung und entspannungsorientierte Ausdauer.', [['methoden', 'Bewegungsmethoden']]],
+          ['Entspannung und Ernährung', 'Stressessen, Ernährungsthemen sowie Lebensmittel, Pflanzenstoffe, Naturheilmittel und Rezepte als Kursinhalte.', [['fallkonzept', 'Ernährungsaufgabe']]],
+          ['Stundenplanung', 'Ziele, Gruppe, Raum, Vorbereitung, Stundenaufbau, Zeitblöcke, Rücknahme und Abschluss.', [['planung', 'Stunde planen']]],
+          ['Pflichtaufgabe und Praxisprotokoll', 'Vier-Wochen-Konzept mit Tageszyklus sowie der getrennte Nachweis der 30 Praxiseinheiten.', [['fallkonzept', 'Vier-Wochen-Fall'], ['nachweis', '30 Einheiten']]],
+        ].map(([title, description, actions]) => <article key={title} className="rounded-xl p-3" style={{ background: 'var(--bg2)' }}><h3 className="text-sm font-bold">{title}</h3><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{description}</p><div className="mt-3 flex flex-wrap gap-2">{actions.map(([target, label]) => <button key={target} type="button" onClick={() => target === 'atem' ? onNavigate?.('atem') : navigateSection(target)} className="min-h-10 rounded-lg border px-3 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>{label}</button>)}</div></article>)}</div>
+        <p className="mt-3 text-[11px]" style={{ color: 'var(--dim)' }}>Grundlage: lokale Ausbildungs-MOC „MOC-Dipl.Entspannungstrainer“ und die zugeordneten Kurs-PDFs. Die Aufteilung hier ist eine Navigation für die App, keine offizielle Prüfungsreihenfolge.</p>
+      </details>
     </>}
 
     {section === 'grundlagen' && <>
