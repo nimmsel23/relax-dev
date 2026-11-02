@@ -39,3 +39,4 @@
 - [x] Die Kursinhalte zu Stressmessung, LCU-Grenze und Biofeedback aus Stresstheorie S. 45–47 als Theorie mit Trainergrenze und passender Lerncheck-Frage abbilden.
 - [x] Alle 22 Haltungen und Bewegungsformen des Yoga-Originalskripts mit Seitenverweisen in der Methodenkarte aufführen; ausgewählte Beispiele nicht länger als vollständigen Kursumfang erscheinen lassen.
 - [x] Pilates-Kategorien mit den 19 Übungsnamen und Seitenbereichen der Originalsammlung (S. 17–97) verknüpfen, ohne fehlende Kategorienzuordnungen zu erfinden.
+- [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.

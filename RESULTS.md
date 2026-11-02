@@ -309,3 +309,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Seitenabgleich des Pilates-Originals bestätigte acht Kategorien (S. 17–21) und 19 benannte Übungsfolgen (S. 24–97).
 - Die Methodenkarte führt die Kategorien samt Fundstellen und listet die Bewegungen nach den im Skript beschriebenen Ausgangspositionen. Wo das PDF die Kategorien bei den späteren Einzelseiten nicht wiederholt, wird keine zusätzliche Zuordnung behauptet.
+
+## 2026-11-02 — Stressbewältigung und unterstützende Maßnahmen ergänzt
+
+- Die Grundlagen nennen jetzt die Kurslisten für Soforthilfe (PMR, AT, Selbsthypnose), langfristige Prävention und unterstützende Verfahren wie Tai-Chi, Qigong, Yoga, Zen, Benson-Meditation, CSM, achtsamkeitsbasierte Stressreduktion und Feldenkrais.
+- Die App unterscheidet diese Übersicht von einer konkreten Kursanleitung und markiert, welche Verfahren im Archiv nicht praktisch ausgearbeitet sind. Salutogenese und Stressmodelle haben präzisere Seitenfundstellen.
+- Der Lerncheck enthält eine Frage zu den unterstützenden Maßnahmen.
