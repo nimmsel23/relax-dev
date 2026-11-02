@@ -644,3 +644,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 # Offene Anleitungsquellen um Mentaltraining ergänzt (2026-11-02)
 
 - TODO, Quellenmatrix und Quellenabgrenzung führen Mentales Training jetzt neben AT, Fantasiereisen und Meditation als fehlende methodenspezifische Anleitung. Die Themenkarte aus der MOC wird nicht mit einem Kurs-Anleitungsskript verwechselt.
+
+# Schwerpunktmethode in den Durchführungs-Timer übernommen (2026-11-02)
+
+- Beim Start des Timers werden Name, Fokus, Kursrahmen, Anpassung und Quelle der im Stundenentwurf gewählten Methode übernommen und während der Durchführung angezeigt.
+- Der aktive Timer speichert diese Methodenkurzdaten zusammen mit seinen Abschnitten, damit sie nach Modulwechsel oder App-Neustart weiter verfügbar bleiben.

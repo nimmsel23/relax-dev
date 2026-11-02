@@ -599,7 +599,15 @@ export default function Ausbildung() {
   function updateBlock(id, patch) { setPlan(current => ({ ...current, blocks: current.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })) }
   function beginDelivery() {
     if (!plan.blocks.length) return
-    setDelivery({ title: plan.title, blocks: plan.blocks.map(block => ({ ...block })), index: 0, remaining: Math.max(1, Number(plan.blocks[0].minutes) || 1) * 60, running: false, endsAt: null })
+    const selectedMethod = METHODS.find(item => item.name === plan.method)
+    const method = selectedMethod ? {
+      name: selectedMethod.name,
+      focus: selectedMethod.focus,
+      practice: selectedMethod.practice,
+      adapt: selectedMethod.adapt,
+      source: selectedMethod.source,
+    } : null
+    setDelivery({ title: plan.title, method, blocks: plan.blocks.map(block => ({ ...block })), index: 0, remaining: Math.max(1, Number(plan.blocks[0].minutes) || 1) * 60, running: false, endsAt: null })
   }
   function changeDeliveryBlock(index) {
     if (!delivery) return
@@ -729,6 +737,14 @@ export default function Ausbildung() {
         <p className="mx-auto max-w-md text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{block.detail}</p>
         {delivery.remaining === 0 && <div className="mt-4 rounded-xl p-3 text-sm font-semibold" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}>Zeit für diesen Abschnitt ist um. Wechsle weiter, wenn es für die Gruppe passt.</div>}
       </section>
+      {delivery.method && <section className="rounded-2xl border p-4" style={panel}>
+        <div className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Geplante Schwerpunktmethode</div>
+        <h2 className="mt-1 font-bold">{delivery.method.name}</h2>
+        <p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{delivery.method.focus}</p>
+        <p className="mt-3 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{delivery.method.practice}</p>
+        <p className="mt-2 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Anpassung: {delivery.method.adapt}</p>
+        <p className="mt-2 text-[10px] leading-relaxed" style={{ color: 'var(--dim)' }}>Kursbezug: {delivery.method.source}</p>
+      </section>}
       <div className="flex items-center justify-center gap-3">
         <button aria-label="Vorheriger Abschnitt" disabled={delivery.index === 0} onClick={() => changeDeliveryBlock(delivery.index - 1)} className="rounded-xl border p-3 disabled:opacity-40" style={{ borderColor: 'var(--line)' }}><SkipBack size={20} /></button>
         <button onClick={toggleDeliveryTimer} className="flex min-w-36 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>{delivery.running ? <Pause size={18} /> : <Play size={18} />}{delivery.running ? 'Pause' : delivery.remaining === 0 ? 'Timer erneut' : 'Timer starten'}</button>
