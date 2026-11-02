@@ -591,3 +591,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Browser-Titel und Beschreibung nennen jetzt das Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung.
 - PWA-Name, Homescreen-Kurzname, Manifestbeschreibung, Changelog-Label, Paketbeschreibung und README-Einstieg sind konsistent auf denselben Produktzweck ausgerichtet.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+
+# Ausbildungs-Deep-Links im Shell-Router korrekt erkannt (2026-11-02)
+
+- Der Top-Level-Router liest jetzt das erste Segment des URL-Hashs. Links wie `#ausbildung/methoden/<name>` wählen explizit den Modul-Tab, statt auf die Standardroute zurückzufallen.
+- Bestehende einteilige Hash-Routen wie `#atem` oder `#session` bleiben unverändert auflösbar.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.

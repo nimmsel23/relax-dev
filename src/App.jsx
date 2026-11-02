@@ -28,11 +28,15 @@ const MORE_TABS = [
 ]
 const TAB_IDS = [...PRIMARY_TABS, ...MORE_TABS].map(item => item.id)
 const VIEWS = { dash: Dashboard, session: Session, atem: Breath, ausbildung: Ausbildung, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog, settings: Settings }
+function tabFromHash() {
+  const routeTab = window.location.hash.replace(/^#/, '').split('/')[0]
+  return TAB_IDS.includes(routeTab) ? routeTab : null
+}
 
 export default function App() {
   const [tab, setTab] = useState(() => {
-    const hashTab = window.location.hash.replace('#', '')
-    if (TAB_IDS.includes(hashTab)) return hashTab
+    const hashTab = tabFromHash()
+    if (hashTab) return hashTab
     return window.location.port === '9124' ? 'catalog' : 'ausbildung'
   })
   const [moreOpen, setMoreOpen] = useState(false)
@@ -40,9 +44,7 @@ export default function App() {
 
   useEffect(() => {
     const onHashChange = () => {
-      const hashTab = window.location.hash.replace('#', '')
-      if (TAB_IDS.includes(hashTab)) setTab(hashTab)
-      else setTab(window.location.port === '9124' ? 'catalog' : 'ausbildung')
+      setTab(tabFromHash() || (window.location.port === '9124' ? 'catalog' : 'ausbildung'))
     }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
