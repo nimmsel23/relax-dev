@@ -800,3 +800,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die Karte und eine neue Lerncheck-Frage verbinden die MOC mit Stresstheorie S. 43: Veränderung eigener Bewertungen ist dort ein Coping-Ansatz; eine eigenständige Technik oder Schrittfolge ist im Skript nicht ausgeführt.
 - Die App grenzt die Themenübersicht ausdrücklich von Therapie ab und verweist für die beschreibende Selbstreflexion auf das vorhandene SORKC-Arbeitsblatt.
 - Quellenmatrix und TODO aktualisiert.
+# Veralteten Projekt-Entscheidungsstand abgegrenzt (2026-11-02)
+
+- `UNKLARHEITEN.md` beschrieb noch die frühere Planung einer Psychoneuroimmunologie-App und bezeichnete den inzwischen entwickelten Ausbildungsbereich als Platzhalter.
+- Die Datei dokumentiert diesen Text nun als historischen Stand und stellt klar, dass die alten Skalen-/Schlaf-/CSV-Fragen das aktuelle Ziel der Kursrepräsentation nicht blockieren.
+- `NEXT.md` hält die neue direkte Kursindex-Verknüpfung der kognitiven Umstrukturierung aktuell.
