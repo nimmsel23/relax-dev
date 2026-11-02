@@ -838,3 +838,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Mentaltraining- und AT-Karten zeigen diesen Rahmen nun ausdrücklich neben den MOC-Themen. Die bestehende Reflexion verlinkt auf die programmspezifische Kursbeschreibung; die fehlenden Übungsfolgen bleiben offen, bis passende Kursmaterialien vorliegen.
 - Die Kursbeschreibung nennt außerdem die mündlich-praktische Abschlussprüfung; die freiwillige Reflexionsprobe bleibt als App-Lernhilfe und nicht als offizielle Prüfungsrubrik gekennzeichnet.
 - Der Produktionsbuild mit dem dokumentierten pnpm-Installationssetup lief durch und generierte den PWA-Service-Worker; `git diff --check` ist sauber. Keine Tests ausgeführt.
+
+# Öffentliche FlexyFit-Lernhinweise am Reflexionsablauf ergänzt (2026-11-02)
+
+- Die aktuelle FlexyFit-FAQ beschreibt Lehrvideos, Übungsdemonstrationen, regelmäßige eigene Wiederholung, Beobachtung erfahrener Trainer:innen und frühe Anleitungspraxis mit freiwilligen Übungspartnern als Lernwege.
+- Diese Hinweise stehen jetzt am Methoden-Reflexionsfeld und in der Quellenmatrix als ergänzende Lernempfehlungen. Sie werden ausdrücklich nicht als fehlende methodenspezifische Originalanleitung oder als Ersatz des A-Lizenz-Praxisnachweises ausgegeben.
