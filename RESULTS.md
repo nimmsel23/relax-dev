@@ -235,3 +235,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Ausbildungsnachweis bietet neben CSV nun eine A4-Druckansicht mit 30 nummerierten Zeilen und den offiziellen Spalten Datum, Beschreibung und Unterschrift.
 - Erfasste Einheiten werden übernommen; Unterschriftsfelder bleiben für die handschriftliche Signatur frei.
+
+## 2026-11-02 — Vollständigkeitsanzeige für die Pflichtaufgabe ergänzt
+
+- Der Vier-Wochen-Entwurf zeigt den Arbeitsstand für Zielsetzung, alle vier Wochen, den ausgearbeiteten Tageszyklus und sämtliche Ernährungskapitel.
+- Der Check erkennt nur leere Pflichtbereiche und weist ausdrücklich darauf hin, dass er keine fachliche Bewertung ersetzt.
+- Gegen das offizielle Aufgaben-PDF abgeglichen: Wochenroutine, Übungsauswahl, Stundenaufbau/Zeitstruktur sowie Rezepte, Naturheilkunde, Lebensmittel und Nahrungsergänzung sind getrennt vertreten.

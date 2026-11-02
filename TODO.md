@@ -26,3 +26,4 @@
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training oder Phantasiereisen ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
+- [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.

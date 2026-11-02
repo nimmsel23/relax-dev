@@ -263,6 +263,13 @@ export default function Ausbildung() {
   const candidates = useMemo(() => history.flatMap(day => (day.items || []).filter(item => item.trainingUnit !== true && Number(item.minutes) >= 15).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
   const totalMinutes = plan.blocks.reduce((sum, block) => sum + (Number(block.minutes) || 0), 0)
   const completed = practice.filter(item => Number(item.minutes) >= 15 && item.signed === true).length
+  const caseProgress = [
+    { label: 'Ziele formuliert', done: Boolean(casePlan.goals.trim()) },
+    ...casePlan.weeks.map(week => ({ label: `Woche ${week.number} ausgearbeitet`, done: ['focus', 'routine', 'relaxation', 'nutrition'].every(key => Boolean(week[key]?.trim())) })),
+    { label: 'Tageszyklus mit Zeitstruktur beschrieben', done: ['time', 'goal', 'sequence', 'duration', 'transition'].every(key => Boolean(casePlan.dayCycle[key]?.trim())) },
+    { label: 'Ernährungskapitel vollständig bearbeitet', done: ['foodIdeas', 'brainFood', 'powerFood', 'soulFood', 'recipeIdeas', 'naturalProducts', 'supplementNotes'].every(key => Boolean(casePlan[key]?.trim())) },
+  ]
+  const caseProgressCount = caseProgress.filter(item => item.done).length
 
   function notify(text) { setMessage(text); window.setTimeout(() => setMessage(''), 2400) }
   function updateBlock(id, patch) { setPlan(current => ({ ...current, blocks: current.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })) }
@@ -490,6 +497,11 @@ export default function Ausbildung() {
         <div className="flex items-center justify-between gap-2"><h3 className="font-bold">Konzeptentwurf</h3><button onClick={exportCaseConcept} className="flex items-center gap-1 rounded-lg border px-2 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)' }}><Download size={14} /> Markdown</button></div>
         <label className="block text-xs" style={{ color: 'var(--muted)' }}>Titel<input value={casePlan.title} onChange={event => setCasePlan(current => ({ ...current, title: event.target.value }))} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>
         <label className="block text-xs" style={{ color: 'var(--muted)' }}>Ziele<textarea value={casePlan.goals} onChange={event => setCasePlan(current => ({ ...current, goals: event.target.value }))} rows={3} placeholder="Welche Veränderungen soll der Fallkunde selbst wahrnehmen? Formuliere überprüfbare, realistische Ziele." className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>
+      </section>
+      <section className="rounded-2xl border p-4" style={panel} aria-live="polite">
+        <div className="flex items-baseline justify-between gap-3"><h3 className="font-bold">Arbeitsstand</h3><span className="text-xs font-bold" style={{ color: 'var(--accent)' }}>{caseProgressCount} / {caseProgress.length} Bereiche</span></div>
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">{caseProgress.map(item => <div key={item.label} className="flex items-center gap-2 rounded-lg px-3 py-2 text-xs" style={{ background: 'var(--bg2)', color: item.done ? 'var(--green)' : 'var(--muted)' }}><span aria-hidden="true">{item.done ? '✓' : '○'}</span>{item.label}</div>)}</div>
+        <p className="mt-3 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Der Check zeigt nur, ob Pflichtbereiche Text enthalten. Er bewertet weder fachliche Richtigkeit noch Qualität oder Einreichungsfähigkeit.</p>
       </section>
       <div className="space-y-3">{casePlan.weeks.map((week, index) => <section key={week.number} className="rounded-2xl border p-4 space-y-3" style={panel}>
         <h3 className="font-bold">Woche {week.number}</h3>
