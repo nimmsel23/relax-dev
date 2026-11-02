@@ -27,6 +27,7 @@
 - [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.
 - [x] Das Skript „Entspannung & Wirbelsäule“ mit Schmerzverständnis, psychosozialem Kontext und psychologischer Bewältigung als Theorie sowie Körper-, Atemraum-, Bewegungs- und Standwahrnehmung in der Methodenbibliothek abbilden; Selbsttests und Medikamentenhinweise nicht als Traineranleitung ausgeben.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
+- [x] Das FlexyFit-PMR-Kursskript (S. 3–28) zusätzlich zur lokalen Handout-Langform abbilden: Methode, Vorbereitung, Kurszeiten, Gruppenabfolge, Rückführung und Nachexploration; abweichende 16-Schritte-Listen kennzeichnen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
 - [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.

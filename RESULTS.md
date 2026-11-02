@@ -11,6 +11,12 @@
 - Die Wirkungsaufzählung zu Entspannung und die EEG-Bandübersicht sind jetzt als Aussagen der Kursunterlage auffindbar und ausdrücklich von individueller Wirkung oder App-Messwerten getrennt.
 - Quellenmatrix, Fundstellen und TODO mit S. 18–21 und 62–68 ergänzt.
 
+# PMR-Kursskript von der Handout-Langform getrennt abgebildet (2026-11-02)
+
+- PMR-Methodenkarte erweitert um Prinzip, Lernschritte, Vorbereitung, Kursrahmen für Anspannen/Nachspüren, Gruppenfolge, Rückführung und Nachbesprechung.
+- Die Überschrift „16 Schritte“ stimmt in der Quelle nicht klar mit den beiden gelisteten Abläufen überein; die App weist auf diese Unstimmigkeit hin, statt eine eigene Reihenfolge als Original auszugeben.
+- Lokale interaktive 20-Schritte-Langform und offizielles PMR-Kursskript sind in der Karte als unterschiedliche Quellen ausgewiesen.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
