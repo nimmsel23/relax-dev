@@ -15,5 +15,6 @@
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gemäß den lokalen Ausbildungsnotizen in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
 - [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
+- [x] Die fünf Tibeter als eigenständige Bewegungsreihe aus dem offiziellen PMR-Kursskript erfassen und von der PMR-Technik unterscheiden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
-- [ ] Weitere methodenspezifische Abläufe (z. B. Autogenes Training) ergänzen, sobald verlässliche Originalabläufe vorliegen; die PMR-Folge hier basiert bislang auf einer lokalen Zusammenfassung.
+- [ ] Weitere methodenspezifische Abläufe für Autogenes Training oder Phantasiereisen ergänzen, falls passende Originalanleitungen verfügbar werden.

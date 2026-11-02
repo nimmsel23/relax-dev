@@ -180,3 +180,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Originale Aufgaben-PDF im separaten FlexyFit-Archiv gefunden und Anforderungen übernommen: Ziele, alltagstaugliche Wochenroutine, ein Tageszyklus mit Übungsauswahl und Zeitstruktur sowie Lebensmittel-, Rezept-, Naturheilkunde- und Supplementbausteine.
 - Neuer lokal gespeicherter Arbeitsbereich mit vier Wochenfeldern, Tageszyklus, Ernährungskapiteln und Markdown-Export. Vorformulierungen bleiben als Eingabeaufforderungen offen, damit der Entwurf aus den Skripten und der eigenen Kursarbeit entsteht.
 - Kursquellen-Inventar berichtigt: wichtige Skripte, PMR-Handout und Ausbildungsaufgaben sind als PDFs vorhanden; AT- und Phantasiereisen-Anleitungs-PDFs fehlen weiterhin.
+
+## 2026-11-02 — Fünf Tibeter aus dem PMR-Kursskript ergänzt
+
+- Methodenbibliothek bildet den zweiten Praxisteil des 48-seitigen PMR-Skripts als eigenständige Bewegungsreihe ab: Kreisel, Kerze, Halbmond, Brücke und Berg.
+- Die Karte hält die im Skript vorgesehene Dreiteilung (Ausgangsposition, Endposition, Ausgleich) fest und grenzt die Bewegungsreihe von PMR ab. Für die genaue Ausführung verweist sie auf das Originalskript und die praktische Einschulung.
