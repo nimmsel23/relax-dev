@@ -41,3 +41,4 @@
 - [x] Pilates-Kategorien mit den 19 Übungsnamen und Seitenbereichen der Originalsammlung (S. 17–97) verknüpfen, ohne fehlende Kategorienzuordnungen zu erfinden.
 - [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.
 - [x] Stundenplanung um Trainerhaltung und Teamkommunikation, optionale Musik, Wiederholung, Demonstration sowie den Puls-/Zeit-Richtwert für kombinierte Kurse erweitern.
+- [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.

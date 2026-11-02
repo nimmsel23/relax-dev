@@ -56,11 +56,17 @@ const METHODS = [
     ['Vierfüßlerstand · S. 85–88', 'Quadruped.'],
     ['Weitere Übungen im Stand · S. 89–97', 'Roll Down und Standing Balance. Die Einzelseiten führen diese Übungen im Stand aus; eine Kategoriezuordnung wird dort nicht wiederholt.'],
   ] },
-  { name: 'Stretching & Assisted Stretching', duration: '30 Min. / Ausklang 10–15 Min.', icon: Clock3, focus: 'Beweglichkeit achtsam und individuell erkunden', practice: 'Vor jeder Einheit aufwärmen und den Bewegungsumfang (ROM) testen. Eine entspannte Atmosphäre und ein Handtuch vorbereiten; Gelenke und Becken neutral halten, die eigene Körperhaltung beachten und fließend zwischen individuell gewählten Übungen wechseln. Atmung und Körpergefühl beachten: „Wollen ist gut – zu viel tut weh.“', adapt: 'Eignung, Tagesform und Einschränkungen vorher klären. Feedback und Wohlergehen laufend erfragen; Berührungen nur nach ausdrücklicher Zustimmung. Bei Schmerz oder Unsicherheit abbrechen oder eine andere Übung wählen.', source: 'FlexyFit Academy: Assisted Stretching, S. 30–35', outlineTitle: 'Dosierung laut Kursskript', outline: [
-    ['Eigenständige Entspannungseinheit', '30-Minuten-Session; pro Muskel 2 × 15 Sekunden bei 7 RPE.'],
-    ['Ausklang nach einem Training', '10–15-Minuten-Session; pro Muskel 1 × 10–15 Sekunden bei 7 RPE.'],
-    ['Session-Check', 'ROM testen, angenehme Atmosphäre schaffen, Handtuch nutzen, Gelenke und Becken neutral halten, Feedback einholen und passende Übungen individuell auswählen.'],
-    ['Trainer:innen-Praxis', 'Eigene Körperhaltung und fließende Übergänge beachten. Das Skript fordert Kundenkontakt; kläre vor jeder Berührung Zustimmung und halte verbales Feedback offen.'],
+  { name: 'Stretching & Assisted Stretching', duration: '30 Min. / Ausklang 10–15 Min.', icon: Clock3, focus: 'Beweglichkeit achtsam und individuell erkunden', practice: 'Vor jeder Einheit aufwärmen und den Bewegungsumfang (ROM) testen. Eine entspannte Atmosphäre und ein Handtuch vorbereiten; Gelenke und Becken neutral halten, die eigene Körperhaltung beachten und fließend zwischen individuell gewählten Übungen wechseln. Atmung und Körpergefühl beachten: „Wollen ist gut – zu viel tut weh.“', adapt: 'Eignung, Tagesform und Einschränkungen vorher klären. Feedback und Wohlergehen laufend erfragen; Berührungen nur nach ausdrücklicher Zustimmung. Bei Schmerz oder Unsicherheit abbrechen oder eine andere Übung wählen.', source: 'FlexyFit Academy: Assisted Stretching, S. 4–17, 29–35', outlineTitle: 'Flexibilitätstraining · Grundlagen im Kursskript', outline: [
+    ['Begriff · S. 4–5', 'Beweglichkeit/Flexibilität bezeichnet im Skript die mögliche Bewegungsweite. Es unterscheidet Gelenkigkeit von der Dehnfähigkeit beteiligter Gewebe.'],
+    ['Einflussfaktoren · S. 8–10', 'Das Skript nennt Tageszeit, Innen- und Außentemperatur, Ermüdung, Alter, Geschlecht und Wasserverlust sowie den Muskeltonus als Einflussgrößen.'],
+    ['Dehnmethoden · S. 12–14', 'Übersicht über aktive und passive statische, intermittierende und Anspannungs-Entspannungs-Methoden (u. a. PNF) sowie aktive/passive dynamische und gemischte Formen.'],
+    ['Ziel und Methode · S. 15–17', 'Das Kursprinzip lautet: Das Ziel entscheidet über die Methode. Das Skript listet Bewegungsreichweite, Dehnungstoleranz und subjektives Wohlbefinden als mögliche Zielbereiche und diskutiert Grenzen von Wirkversprechen.'],
+    ['Grundregeln · S. 29', 'Atmung beachten, dem Körpergefühl folgen, nicht über die angenehme Grenze gehen und nie ohne Aufwärmen dehnen.'],
+  ], outlineExtraTitle: 'Assisted Stretching · Dosierung und Umgang', outlineExtra: [
+    ['Eigenständige Entspannungseinheit · S. 31–35', '30-Minuten-Session; pro Muskel 2 × 15 Sekunden bei 7 RPE.'],
+    ['Ausklang nach einem Training · S. 31–35', '10–15-Minuten-Session; pro Muskel 1 × 10–15 Sekunden bei 7 RPE.'],
+    ['Session-Check · S. 32–35', 'ROM testen, angenehme Atmosphäre schaffen, Handtuch nutzen, Gelenke und Becken neutral halten, Feedback einholen und passende Übungen individuell auswählen.'],
+    ['Trainer:innen-Praxis · S. 32–35', 'Eigene Körperhaltung und fließende Übergänge beachten. Berührung nur nach ausdrücklicher Zustimmung; verbales Feedback offen halten.'],
   ] },
   { name: 'Faszientraining · SMR', duration: 'Im Stundenentwurf festlegen', icon: HeartPulse, focus: 'Körperwahrnehmung und Bewegungsrichtungen in faszialen Ketten erkunden', practice: 'Das Assisted-Stretching-Skript stellt Self Myofascial Release (SMR) als verbreitete Form des Faszientrainings vor. In der Praxisnotiz werden Vordehnen, veränderte Winkel und Druck sowie die Rückkehr aus mehreren Bewegungsrichtungen in die Ausgangsposition genannt.', adapt: 'Das PDF enthält nur eine knappe Praxisübersicht, kein vollständiges Übungsprogramm. Konkrete Übungen deshalb praktisch erlernen und individuell auswählen; keine therapeutische Wirkung versprechen oder Beschwerden behandeln.', source: 'FlexyFit Academy: Assisted Stretching, S. 36–40', outlineTitle: 'Praxisideen aus dem Skript', outline: [
     ['SMR · Self Myofascial Release', 'Das Skript nennt Wahrnehmung, Gleitfähigkeit und Hydration als Lernziele des Abschnitts; dies sind Kursinhalte, keine Wirkungszusage der App.'],
@@ -148,6 +154,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Das Skript nennt 5–12 Personen als optimale Gruppengröße und betont persönlichen Raum sowie selbst gewählten Mattenabstand.',
     source: 'Stundenplanung · Gruppengröße und Platz',
+  },
+  {
+    question: 'Was bestimmt laut Flexibilitätstraining die Wahl der Dehnmethode?',
+    answers: ['Das Ziel des Trainings.', 'Für alle Teilnehmenden dieselbe Methode.', 'Ausschließlich die Dauer der Musik.'],
+    correct: 0,
+    why: 'Das Skript hält fest: Das Ziel entscheidet über die Methode. Es stellt dazu verschiedene aktive/passive sowie statische/dynamische Formen vor.',
+    source: 'Assisted Stretching · Flexibilitätstraining, S. 12–15',
   },
   {
     question: 'Welche Assisted-Stretching-Dosierung unterscheidet das Kursskript?',

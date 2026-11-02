@@ -321,3 +321,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Didaktische Leitlinien umfassen jetzt Trainerhaltung, Konzeptvermittlung, Erklären/Demonstrieren/Erproben, Wiederholung und sprachliches Feedback.
 - Die Vorbereitungsliste enthält die Abstimmung mit der Einrichtung und den optionalen Musikeinsatz; beim Kombinationskurs sind 15 Minuten und der im Skript genannte Pulswert unter 120 als Kursangabe samt Einschränkung sichtbar.
 - Der Lerncheck fragt den Zeitrichtwert ab.
+
+## 2026-11-02 — Flexibilitätstraining als Grundlagenblock ergänzt
+
+- Die Stretching-Karte umfasst jetzt auch die allgemeinen PDF-Abschnitte zu Beweglichkeit/Dehnfähigkeit, Einflussfaktoren, Methodenfamilien, zielorientierter Wahl und Grundregeln (S. 4–17, 29).
+- Die Assisted-Stretching-Dosierung und Kundenpraxis stehen separat daneben (S. 31–35); ein Lerncheck fragt die Zielorientierung bei der Methodenwahl ab.
