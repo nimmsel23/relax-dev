@@ -29,3 +29,4 @@
 - [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.
 - [x] Quellkritische Hinweise zu Lebensmitteln gegen Stress, Power-Food-Werbung und Nahrungsergänzung direkt am Ernährungsarbeitsblatt mit PDF-Seitenangaben sichtbar machen.
 - [x] Kursbasierte Atemübungen von ergänzenden App-Rhythmen unterscheiden und Bhramari/Sama Vritti mit Fundstelle im Atemschulungs-PDF markieren.
+- [x] Nicht kursbelegte PNI- und physiologische Wirkversprechen im Atemtrainer entfernen; Rhythmus als Übungsvorgabe ohne Mess- oder Wirkungszusage kennzeichnen.

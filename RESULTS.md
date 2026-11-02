@@ -251,3 +251,4 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Bhramari und Sama Vritti sind im Atemtrainer jetzt nach dem Atemschulungs-PDF (S. 38) benannt und mit Fundstelle markiert.
 - Die Bauchatmung wird als eigene Kursübung (S. 48) ohne festes Atemtempo benannt; andere Timer-Muster sind als Zusatzübungen statt als Ausbildungsvorgaben gekennzeichnet.
+- PNI-Texte mit physiologischen Wirkungsversprechen entfernt und durch neutrale Übungsbeschreibungen sowie einen Hinweis zu freiwilligen Atempausen und fehlender Körpermessung ersetzt.

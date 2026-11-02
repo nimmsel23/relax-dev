@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Wind, Moon, Target, Zap, LifeBuoy, Play, Vibrate, TriangleAlert, Check, ChevronDown } from 'lucide-react'
+import { Wind, Moon, Target, Zap, LifeBuoy, Play, Vibrate, TriangleAlert, Check } from 'lucide-react'
 import { getRelaxSession, saveRelaxSession } from '@db'
 import { localToday } from '../lib/db/shared/utils.js'
 import { CATEGORIES, PATTERNS, patternsByCategory, getPattern, cycleSeconds, roundsFor } from '../lib/breath/patterns.js'
@@ -49,7 +49,6 @@ export default function Breath() {
   const [minutes, setMinutes] = useState(null) // null = Default des Musters
   const [vibrate, setVibrate] = useState(!!prefs.vibrate)
   const [moodBefore, setMoodBefore] = useState(3)
-  const [showWhy, setShowWhy] = useState(false)
 
   const [running, setRunning] = useState(null) // { pattern, rounds, moodBefore }
   const [result, setResult] = useState(null) // { pattern, seconds, rounds, completed }
@@ -95,7 +94,6 @@ export default function Breath() {
     const next = patId === id ? null : id
     setPatId(next)
     setMinutes(null)
-    setShowWhy(false)
     if (next) savePrefs({ pattern: next })
   }
 
@@ -167,6 +165,9 @@ export default function Breath() {
         </p>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Kursübungen aus „Atemschulung“: Bauchatmung wahrnehmen (S. 48), Bhramari und Sama Vritti (S. 38). Die übrigen geführten Atemrhythmen sind ergänzende App-Übungen, keine Vorgaben des Ausbildungsskripts.
+        </p>
+        <p className="text-xs" style={{ color: 'var(--dim)' }}>
+          Ein Timer gibt nur einen Rhythmus vor und misst keine Körperreaktionen. Atemtiefe und Pausen bleiben freiwillig; wenn etwas unangenehm ist, wieder natürlich atmen oder die Übung beenden.
         </p>
       </section>
 
@@ -261,16 +262,6 @@ export default function Breath() {
                       {p.caution}
                     </div>
                   )}
-
-                  <button
-                    onClick={() => setShowWhy((v) => !v)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-widest"
-                    style={{ background: 'none', border: 'none', color: 'var(--accent)', padding: 0 }}
-                  >
-                    Warum es wirkt (PNI)
-                    <ChevronDown size={14} style={{ transform: showWhy ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }} />
-                  </button>
-                  {showWhy && <div className="text-sm" style={{ color: 'var(--muted)' }}>{p.pni}</div>}
 
                   <div>
                     <div className="text-xs mb-1.5" style={{ color: 'var(--muted)' }}>Dauer</div>
