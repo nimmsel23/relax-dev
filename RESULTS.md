@@ -113,6 +113,12 @@
 - Das zugespitzte Schema ist ausdrücklich als Unterrichtsillustration und nicht als allgemeine Stressfolge oder individuelle Prognose eingeordnet.
 - Quellenmatrix und TODO aktualisiert.
 
+# Bebilderte Flexibilitätsübungen und Gegenbewegungen ergänzt (2026-11-02)
+
+- Der PDF-Abgleich zeigte, dass S. 18–28 eigene Ober- und Unterkörper-Übungstafeln enthalten und S. 41 vorbereitende Gegenbewegungen beschreibt.
+- Die Stretching-Karte dokumentiert diese Bereiche und trennt die nicht ausformulierten Zeichnungen von der textlichen Anleitung, statt Namen oder Cues zu erfinden.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
