@@ -609,3 +609,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Der Durchführungszustand wird lokal gespeichert und beim Öffnen der Modulansicht validiert wiederhergestellt.
 - Eine laufende Einheit setzt die Restzeit aus der absoluten Endzeit fort; pausierte Einheiten behalten ihren Stand. Beenden und Abschließen entfernen den gespeicherten Lauf.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+
+# Kursanleitungen in Google Drive abgeglichen (2026-11-02)
+
+- Gezielt nach konkreten Anleitungen zu Autogenem Training, Fantasiereisen und Meditation gesucht und die passende Entspannungstrainer-MOC geprüft.
+- Drive-Treffer sind thematische MOCs ohne methodenspezifische Schrittfolgen; Quellenmatrix und offene Beschaffung dieser Originalanleitungen entsprechend dokumentiert.
