@@ -52,11 +52,14 @@ Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `da
 ## Features
 
 ### Ausbildungsbereich Entspannungstrainer
-Der Tab **Ausbildung** bildet die zentralen Praxisabläufe des Fachmoduls ab:
-- Modulüberblick und didaktische Leitlinien aus der Ausbildungsnotiz „Stundenplanung“
+Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fachmoduls ab:
+- Grundlagen zu Stressmodellen, Ressourcen, Körperreaktionen, Bewegung, Ernährung und Wirbelsäulen-Wahrnehmung
+- didaktische Leitlinien und Präventionsrolle aus den Ausbildungsnotizen
 - Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga/Pilates, Stretching, Meditation und entspannungsorientierter Ausdauer
-- anpassbarer Stundenentwurf mit Ankommen, Einschulung, Hauptteil, Nachspüren und Rücknahme
+- anpassbarer Stundenentwurf mit Vorbereitungscheckliste, Ankommen, Einschulung, Hauptteil, Nachspüren, Rücknahme und anschließender Reflexion
 - 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher, inklusive CSV-Export
+
+Die Kernnavigation ist auf Heute, Modul, Praxis und Atem ausgerichtet. Journal, Stats, Physio, Catalog und Einstellungen liegen unter **Mehr**.
 
 Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden.
 

@@ -123,3 +123,11 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Methodenbeschreibungen und Stundenstruktur an den lokalen Ausbildungsnotizen (Stundenplanung, Atemschulung, PMR, Assisted Stretching, Entspannung & Ausdauer und Protokoll) ausgerichtet; Übungen enthalten Optionen zur individuellen Anpassung.
 - Praxisnachweise nutzen das bestehende Relax-Session-Datenmodell und Firestore-/Offline-Speicher. CSV-Export für das Protokoll ergänzt.
 - Ausbildungs-Notizen für das Ziel und Folgeabgleich in `TODO.md` festgehalten. Kein Push oder Release.
+
+## 2026-11-02 — Ausbildungsweg als Hauptnavigation
+
+- App-Einstieg ist jetzt der Modulbereich; Kopfzeile benennt das Produkt als Entspannungstrainer.
+- Mobile Navigation bündelt die Kernwege Heute, Modul, Praxis und Atem. Journal, Stats, Physio, Catalog und Einstellungen sind über „Mehr“ erreichbar; bestehende Hash-Deep-Links bleiben gültig.
+- Modulgrundlagen um Stressmodelle, Ressourcen, Aktivierung/Erholung sowie die Ausbildungsbezüge zu Ernährung, Wirbelsäule und moderater Ausdauer erweitert. Präventive Rolle und didaktische Wahlmöglichkeiten sind ausdrücklich beschrieben.
+- Stundenentwurf ergänzt um gespeicherte Vorbereitungshäkchen und Nachreflexion.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich. Keine Tests, kein Push und kein Release.
