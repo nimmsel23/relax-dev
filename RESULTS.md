@@ -59,6 +59,12 @@
 - Diese Kursrahmen sind nun direkt bei den beiden Methoden sichtbar. Sie werden ausdrücklich nicht als fehlende methodenspezifische Schritt-für-Schritt-Anleitung ausgegeben.
 - Quellenmatrix und TODO aktualisiert.
 
+# Umgebungs- und Gruppenbedingungen konkretisiert (2026-11-02)
+
+- Die Stundenplanung S. 11, 16 und 19 differenziert die Vorbereitung nach Musiktyp und Lautstärke, Störquellen außerhalb des Raums und Betreuung größerer Gruppen.
+- Diese Bedingungen sind nun konkret als abhaktbare Punkte in der Vorbereitungsliste sichtbar.
+- TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
