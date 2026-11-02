@@ -766,3 +766,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Den direkten Entspannungstrainer-Ordner und gezielte Drive-Suchen für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation geprüft.
 - Der Ordner enthält die Pflichtaufgabe in zwei gleich großen PDF-Kopien, die Aufgaben-Markdown-Datei und Trainingsprotokoll-Kopien, aber keine eigenständigen Methoden-Anleitungen. Die ausgelesene Aufgaben-PDF bestätigt den App-Workflow aus Zielen, Vier-Wochen-Routine, ausgearbeitetem Tageszyklus und Ernährungstipps.
 - Quellenmatrix und NEXT dokumentieren den aktuellen Suchstand; fehlende Schrittfolgen bleiben offen und werden nicht aus der Aufgabenbeschreibung abgeleitet.
+# Ältere Kursarchiv-Sicherung gegen aktuelle Originalquellen abgeglichen (2026-11-02)
+
+- Alle Dateien im älteren Entspannungstrainer-PDF-Archiv per SHA-256 mit dem aktuellen FlexyFit-Archiv verglichen.
+- Die abweichenden Dateinamen (u. a. `Stresstheorie B-Lizenz.pdf` und mehrere PDF-Dateien ohne Endung) stimmen bytegenau mit erfassten Originalquellen überein; die Sicherung enthält keine zusätzlichen Kurs-PDFs.
+- Quellenmatrix, TODO und NEXT halten fest, dass auch die lokale Sicherung keine Anleitung für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation ergänzt.

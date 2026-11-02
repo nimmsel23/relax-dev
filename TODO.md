@@ -16,6 +16,7 @@
 - [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
 - [x] Hinweis unter der Methodenliste mit allen vier Themenbereichen ohne vollständige Anleitung abgleichen.
 - [x] Google-Drive-Suche nach eigenständigen Mentaltraining-, AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
+- [x] Ältere lokale Kursarchiv-Sicherung per SHA-256 mit dem aktuellen FlexyFit-Archiv verglichen; anders benannte Dateien sind Kopien, keine zusätzlichen Methoden-Anleitungen.
 - [x] Persönliche Entspannungs-Sitzungsnotizen und die erweiterte Atemnotiz gegen Original-Kursquellen abgrenzen, damit eigene Praxis und unbelegte Erweiterungen nicht als FlexyFit-Anleitungen erscheinen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Selbsterfahrung direkt an Methoden-Karten mit lokalem Reflexionsbogen erfassen und getrennt vom formalen 30-Einheiten-Nachweis halten.
