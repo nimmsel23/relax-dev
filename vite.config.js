@@ -9,6 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const BACKEND = 'http://localhost:9123'
 
 export default defineConfig({
+  base: './',
   resolve: {
     alias: {
       // Standalone-Default (:9123-Backend). Im vitalos-Firebase-Build biegt
@@ -40,8 +41,8 @@ export default defineConfig({
     // PWA nach dem habits-Muster: workbox precached mit Content-Hashes,
     // ersetzt public/sw.js (relax-v2, manuell versioniert → archive/).
     VitePWA({
-      base: '/',
-      scope: '/',
+      base: './',
+      scope: './',
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       manifest: {
@@ -52,18 +53,18 @@ export default defineConfig({
         theme_color: '#1e1e2e',
         background_color: '#1e1e2e',
         display: 'standalone',
-        start_url: '/',
-        scope: '/',
+        start_url: './',
+        scope: './',
         icons: [
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: './icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+          { src: './icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        navigateFallback: '/index.html',
+        navigateFallback: './index.html',
         navigateFallbackDenylist: [/^\/api/, /^\/session/, /^\/journal/, /^\/stats/, /^\/techniques/, /^\/export/, /^\/theme/, /^\/health/],
       },
     }),

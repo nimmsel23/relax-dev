@@ -684,3 +684,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Stresstheorie S. 47 beschreibt Biofeedback als Gerät, das körpereigene Signale unmittelbar zurückmeldet, und nennt selbstgewählte Entspannungsschritte sowie größere Unabhängigkeit vom Gerät als Lernziel.
 - Die Methodenkarte und eine Lerncheck-Frage bilden diese Passage ab. Sie enthalten keine Geräteanleitung, Diagnostik, Messung in der App oder individuelle Wirkungsgarantie.
+
+# Relative Vite- und PWA-Pfade ausgerichtet (2026-11-02)
+
+- Der Standalone-Build erzeugt Assets, PWA-Registrierung, Manifest-Icons und Offline-Fallback relativ zum App-Verzeichnis statt zum Domain-Root.
+- Die eigenständige Firebase-Site bleibt unverändert am Domain-Root nutzbar; der App-eigene Build erfüllt nun die gemeinsame Vite-Konvention für relative Assets.
