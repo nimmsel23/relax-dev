@@ -1,3 +1,8 @@
+# Übungswiederholung im editierbaren Stundenentwurf verankert (2026-11-02)
+
+- Der Standardtext des Hauptteils erinnert jetzt daran, ausgewählte Übungen oder kleine Übungskomplexe zu wiederholen, damit das Erlernte leichter in den Alltag übergeht.
+- Die Empfehlung aus „Stundenplanung“, S. 7, steht damit direkt im bearbeitbaren und exportierbaren Stundenentwurf, nicht nur in den allgemeinen didaktischen Leitlinien.
+
 # 30-Zeilen-Praxisnachweis auf eine A4-Seite angepasst (2026-11-02)
 
 - Der erste Druckvergleich ergab zwei Seiten statt einer; Seitenränder und Zeilenhöhe wurden an das offizielle einseitige A4-Formular angeglichen.
