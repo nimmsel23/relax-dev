@@ -1,3 +1,10 @@
+# Praxis-Session an Ausbildungsablauf angepasst (2026-11-02)
+
+- Session-Tab zum strukturierten Selbsterfahrungsprotokoll erweitert: Fokus, Rahmenbedingungen, optionale Zeiten für Ankommen/Einschulung, Hauptteil und Nachspüren/Rücknahme, persönliche Befindlichkeit, Reflexion und Transfer.
+- Den offiziellen 30-Einheiten-Nachweis klar getrennt gelassen und direkt mit Stundenplanung und Nachweis verlinkt.
+- Lokale API-Speicherung und CSV-Export um die neuen Felder ergänzt; alte Einträge und freie Notizen bleiben lesbar.
+- Produktionsbuild und Python-Syntaxprüfung erfolgreich; keine Tests ausgeführt.
+
 # Quellenabgleich Entspannungstrainer fortgesetzt (2026-11-02)
 
 - Zusätzliche Markdown-Umsetzungen in `Dokumente/Dipl. Präventiver Vitaltrainer/Dipl.Entspannungstrainer/` gegen App und Original-PDFs geprüft; die Umsetzungen liegen häufig außerhalb des FlexyFit-PDF-Ordners.

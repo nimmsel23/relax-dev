@@ -65,11 +65,16 @@ export async function getRelaxStatsSummary(days = 14) {
 
 export async function exportRelaxCsv(days = 14) {
   const dates = lastDates(days);
-  const rows = [["date", "technique", "minutes", "mood_before", "mood_after", "note"]];
+  const rows = [["date", "technique", "minutes", "focus", "arrival_minutes", "practice_minutes", "return_minutes", "setting", "mood_before", "mood_after", "reflection", "transfer", "note"]];
   for (const date of dates) {
     const sess = await getRelaxSession(date);
     for (const it of (sess?.items || [])) {
-      rows.push([date, it.technique || "", it.minutes || "", it.mood_before ?? "", it.mood_after ?? "", it.note || ""]);
+      rows.push([
+        date, it.technique || "", it.minutes || "", it.focus || "",
+        it.arrival_minutes ?? "", it.practice_minutes ?? "", it.return_minutes ?? "",
+        it.setting || "", it.mood_before ?? "", it.mood_after ?? "",
+        it.reflection || it.note || "", it.transfer || "", it.note || "",
+      ]);
     }
   }
   const csv = rows.map((r) => r.map((v) => `"${String(v).replaceAll('"', '""')}"`).join(",")).join("\n");
