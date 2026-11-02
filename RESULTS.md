@@ -6,6 +6,11 @@
 - Noch offen: passende Original-Ablaufanleitungen für Mentales Training, Autogenes Training, Fantasiereisen und Meditation sind im geprüften Archiv nicht vorhanden. Eine reale iPhone-/iPad-Abnahme liegt ebenfalls nicht vor; die breite Inhaltsprüfung ist noch nicht abgeschlossen.
 - `npm run build` und `git diff --check` erfolgreich; keine Tests ausgeführt.
 
+# Release-CI an bereinigten Atemmuster-Text angepasst (2026-11-02)
+
+- CI fand einen veralteten Pflichtfeld-Check für `pni`; Commit `2b1bb10` hatte die unbelegten Wirkbehauptungen bewusst entfernt.
+- Den bestehenden Testvertrag auf die verwendete Kurzbeschreibung `desc` umgestellt. Keine neue Testabdeckung hinzugefügt und keine Tests lokal ausgeführt; CI wird den PR erneut prüfen.
+
 # Kontraindikationsliste aus Assisted Stretching ergänzt (2026-11-02)
 
 - Beim Abgleich des Markdown-Exports und des Original-PDFs wurde die Liste auf S. 33 gefunden; sie fehlte bisher in der Methodenkarte.
