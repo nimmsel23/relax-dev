@@ -315,3 +315,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die Grundlagen nennen jetzt die Kurslisten für Soforthilfe (PMR, AT, Selbsthypnose), langfristige Prävention und unterstützende Verfahren wie Tai-Chi, Qigong, Yoga, Zen, Benson-Meditation, CSM, achtsamkeitsbasierte Stressreduktion und Feldenkrais.
 - Die App unterscheidet diese Übersicht von einer konkreten Kursanleitung und markiert, welche Verfahren im Archiv nicht praktisch ausgearbeitet sind. Salutogenese und Stressmodelle haben präzisere Seitenfundstellen.
 - Der Lerncheck enthält eine Frage zu den unterstützenden Maßnahmen.
+
+## 2026-11-02 — Trainerrahmen und Zeitvorgaben der Stundenplanung ergänzt
+
+- Didaktische Leitlinien umfassen jetzt Trainerhaltung, Konzeptvermittlung, Erklären/Demonstrieren/Erproben, Wiederholung und sprachliches Feedback.
+- Die Vorbereitungsliste enthält die Abstimmung mit der Einrichtung und den optionalen Musikeinsatz; beim Kombinationskurs sind 15 Minuten und der im Skript genannte Pulswert unter 120 als Kursangabe samt Einschränkung sichtbar.
+- Der Lerncheck fragt den Zeitrichtwert ab.
