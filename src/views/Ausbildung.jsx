@@ -451,10 +451,10 @@ export default function Ausbildung() {
     return () => { alive = false }
   }, [])
 
-  const practice = useMemo(() => history.flatMap(day => (day.items || []).filter(item => item.trainingUnit === true).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
-  const candidates = useMemo(() => history.flatMap(day => (day.items || []).filter(item => item.trainingUnit !== true && Number(item.minutes) >= 15).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
+  const practice = useMemo(() => history.flatMap(day => (day.items || []).filter(item => item.trainingUnit === true && item.signed === true && Number(item.minutes) >= 15).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
+  const candidates = useMemo(() => history.flatMap(day => (day.items || []).filter(item => !(item.trainingUnit === true && item.signed === true && Number(item.minutes) >= 15) && Number(item.minutes) >= 15).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
   const totalMinutes = plan.blocks.reduce((sum, block) => sum + (Number(block.minutes) || 0), 0)
-  const completed = practice.filter(item => Number(item.minutes) >= 15 && item.signed === true).length
+  const completed = practice.length
   const caseProgress = [
     { label: 'Ziele formuliert', done: Boolean(casePlan.goals.trim()) },
     ...casePlan.weeks.map(week => ({ label: `Woche ${week.number} ausgearbeitet`, done: ['focus', 'routine', 'relaxation', 'nutrition'].every(key => Boolean(week[key]?.trim())) })),

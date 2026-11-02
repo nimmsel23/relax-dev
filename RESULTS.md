@@ -553,3 +553,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - `VISION.md` beschreibt jetzt den Ausbildungsweg vom Kursverständnis über Planung und Anleitung bis zum Praxisnachweis sowie die Quellen- und Trainergrenzen.
 - `NEXT.md` priorisiert Kursabgleich, 30-Einheiten-Nachweis, Pflichtaufgabe und mobile/offline Akzeptanz. Physio- und Katalogthemen sind als Zusatzbereiche eingeordnet.
 - README und Agentenhinweise verweisen auf dieselbe Produktpriorität; unbelegte Wirkmodelle sind nicht länger als zentrales Produktziel formuliert.
+# Bestätigungsstatus des Praxisnachweises konsistent ausgewertet (2026-11-02)
+
+- Der 30er-Zähler, die Protokollliste sowie CSV- und Druckexport enthalten nun nur Einheiten ab 15 Minuten mit `trainingUnit` und expliziter Bestätigung.
+- Ältere Sessions ohne gültige Bestätigung bleiben als prüfbare Kandidaten sichtbar, auch wenn ein alter Datensatz bereits `trainingUnit: true` markiert hatte.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.
