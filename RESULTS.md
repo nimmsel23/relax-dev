@@ -664,3 +664,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - GEMINI.md nennt nun das Entspannungstrainer-Fachmodul als Produktfokus und Physio/Knowledge Base als Zusatzbereiche; Quickstart-Befehle verwenden das festgelegte pnpm.
 - CLAUDE.md startet den Dev-Server mit pnpm. Die ältere Physio-Timeline-AGENTS-Datei bleibt erhalten, ist aber sichtbar als historische Spezifikation und nicht als aktive Repo-Anweisung markiert.
+
+# Doppelte Aufgaben-PDFs im Quelleninventar ausgewiesen (2026-11-02)
+
+- SHA-256-Abgleich bestätigt, dass die beiden Vier-Wochen-Aufgaben-PDFs byte-identisch sind.
+- Ebenso sind die zwei Trainingsprotokoll-PDFs identische Kopien mit denselben 30 Zeilen. Die Quellenmatrix weist sie deshalb gemeinsam aus, ohne eine separate Aufgabenvariante anzunehmen.
