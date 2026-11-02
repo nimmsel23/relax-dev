@@ -730,3 +730,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 # Timer-Metazeile auf schmalen Displays angepasst (2026-11-02)
 
 - Die Timer-Kopfzeile verwendet unter der Small-Breakpoint eine kleinere Schrift, damit die Abschnittsanzahl bei 320 Pixeln nicht allein in eine neue Zeile rutscht.
+
+# Timer-Abschluss zum unbestätigten Nachweis geprüft (2026-11-02)
+
+- Im Headless-Firefox bei 320 Pixeln führte der Abschlussknopf aus einem pausierten Timerzustand zum Nachweis-Entwurf und übernahm Methode und Stundenname.
+- Die Selbstbestätigung blieb leer und der Nachweiszähler bei 0/30. Die Prüfung nutzte nur ein wegwerfbares Browserprofil; der echte iPhone/iPad-Ablauf, laufender Timer-Restore sowie Druck und CSV bleiben offen.
