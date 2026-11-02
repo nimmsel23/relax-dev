@@ -25,3 +25,4 @@
 - [x] Das Skript „Entspannung & Wirbelsäule“ mit eigenen Körper-, Atemraum-, Bewegungs- und Standwahrnehmungsfeldern in der Methodenbibliothek abbilden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training oder Phantasiereisen ergänzen, falls passende Originalanleitungen verfügbar werden.
+- [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.

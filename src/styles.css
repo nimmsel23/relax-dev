@@ -176,3 +176,36 @@ body {
   transition: opacity 0.15s;
 }
 .vault-link:hover { opacity: 0.75; }
+
+/* Printable 30-session training record */
+#training-print { display: none; }
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+  body * { visibility: hidden !important; }
+  #training-print, #training-print * { visibility: visible !important; }
+  #training-print {
+    display: block !important;
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    color: #111;
+    background: #fff;
+    font: 9pt/1.25 Arial, sans-serif;
+  }
+  #training-print .training-print-header { display: flex; justify-content: space-between; gap: 8mm; align-items: flex-start; margin-bottom: 6mm; }
+  #training-print h1 { margin: 2mm 0 4mm; font-size: 17pt; }
+  #training-print p { margin: 2mm 0; }
+  #training-print .training-print-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  #training-print .training-print-table th,
+  #training-print .training-print-table td { border: 1px solid #555; padding: 1.5mm 2mm; text-align: left; vertical-align: top; }
+  #training-print .training-print-table thead { display: table-header-group; }
+  #training-print .training-print-table tr { break-inside: avoid; }
+  #training-print .training-print-table th:first-child,
+  #training-print .training-print-table td:first-child { width: 7mm; text-align: center; }
+  #training-print .training-print-table th:nth-child(2),
+  #training-print .training-print-table td:nth-child(2) { width: 27mm; }
+  #training-print .training-print-table th:last-child,
+  #training-print .training-print-table td:last-child { width: 38mm; }
+  #training-print .training-print-table td:last-child { height: 8mm; }
+  #training-print .training-print-note { margin-top: 4mm; font-size: 8pt; }
+}

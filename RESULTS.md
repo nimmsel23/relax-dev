@@ -230,3 +230,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Yoga- und Pilatesmethoden jetzt direkt den FlexyFit-Originalskripten zugeordnet; unbelegte Sitzposition Sukhasana aus der Asana-Auswahl entfernt und durch die im PDF beschriebene Utthita Parsvakonasana ersetzt.
 - Viparita Karani korrekt als Umkehr-Mudra statt als Asana gekennzeichnet. Verletzungsbezogene Kurzmodifikation aus der früheren Zusammenfassung durch Verweis auf praktische Einschulung ersetzt.
 - Yoga-/Pilatesdauer nicht mehr als Kursvorgabe ausgewiesen; Dauer wird im eigenen Stundenentwurf festgelegt.
+
+## 2026-11-02 — Druckvorlage für 30 Praxiseinheiten ergänzt
+
+- Der Ausbildungsnachweis bietet neben CSV nun eine A4-Druckansicht mit 30 nummerierten Zeilen und den offiziellen Spalten Datum, Beschreibung und Unterschrift.
+- Erfasste Einheiten werden übernommen; Unterschriftsfelder bleiben für die handschriftliche Signatur frei.
