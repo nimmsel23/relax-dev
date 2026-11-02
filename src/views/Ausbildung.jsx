@@ -35,7 +35,8 @@ const METHODS = [
     ['Herkunftserzählung · S. 31', 'Das Skript weist selbst darauf hin, dass die Entstehungsgeschichte um Peter Kelders Buch nicht unumstritten ist und vermutete Yoga-Wurzeln hat. Die Erzählung wird nicht als historische Tatsache oder Wirkungsbeleg verwendet.'],
   ] },
   { name: 'Autogenes Training', duration: '20–30 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“; das Kursarchiv enthält keine Schritt-für-Schritt-Anleitung.', icon: Sparkles, focus: 'Eine systematische Entspannungsmethode kennenlernen', practice: 'Die Stresstheorie ordnet Autogenes Training der vegetativen Ebene zu; die Stundenplanung nennt es als systematische Kursmethode. Eine lokale MOC-Notiz führt weitere AT-Themen auf, ist aber kein Anleitungsskript. Die genaue Übungsfolge deshalb nur aus praktisch vermitteltem Originalmaterial anleiten.', adapt: 'Bei Unwohlsein Augen öffnen, Haltung ändern oder Übung beenden lassen. Keine Wirkung versprechen und individuelle Reaktionen ernst nehmen.', source: 'FlexyFit Academy: Stresstheorie, S. 55–56; Stundenplanung, S. 6, 12–13; ergänzend lokale Notiz „MOC-Dipl.Entspannungstrainer“', outlineTitle: 'Kursrahmen und ergänzende Themenübersicht · keine AT-Übungsfolge', outline: [
-    ['Einordnung und AT-Themen laut lokaler MOC-Notiz', 'Die persönliche Ausbildungsübersicht nennt Grund-, Mittel- und Oberstufe sowie Ruhetönung, Schwere-, Wärme-, Atem- und Herzregulierung, Bauchwärme und Stirnkühlung. Ihre Methodenübersicht führt AT unter der muskulären Ebene; das FlexyFit-Skript „Stresstheorie“ ordnet es auf S. 55 der vegetativen Ebene zu. Für diese App gilt die Original-PDF-Zuordnung. Die MOC enthält keine Formeln oder Schrittfolge und ist keine AT-Anleitung.'],
+    ['AT-Kapitelthemen laut Ausbildungs-MOC · keine Anleitung', 'Die MOC führt Ursprung/Entwicklung, Definition und Anwendungsbereiche, autogene Entspannung und Wirkungsweisen sowie Grundlagen und Grund-, Mittel- und Oberstufe als Themen auf. Genannt sind außerdem Rahmenbedingungen und Kontraindikationen; Übungen zu Ruhetönung, Schwere, Wärme, Atmung, Herzregulierung, Bauchwärme und Stirnkühlung; formelhafte Vorsatzbildung in der Mittelstufe und psychologisch orientierte Übungen/tiefere Bewusstseinsebenen in der Oberstufe. Das sind Kapitelstichworte, keine Formeln, Eignungsprüfung oder Durchführungsfolge.'],
+    ['Abweichende Ebenenzuordnung', 'Die Master-MOC führt AT unter der muskulären Ebene. Das FlexyFit-Skript „Stresstheorie“ ordnet es auf S. 55 der vegetativen Ebene zu; für die Ebenenzuordnung der App gilt das Original-PDF.'],
     ['Rücknahme · Stundenplanung, S. 12', 'Für liegende Übungen mit geschlossenen Augen nennt das Skript eine ausreichend lange, schrittweise Rücknahme. Bei AT empfiehlt es ein wiederkehrendes Ritual; als Beispiel wird das Zählen von 4 auf 1 mit kleinen Bewegungen, Dehnen, Strecken, bewusstem Atmen und leichter Aktivierung bis zum Sitzen oder Stehen beschrieben. Das ist ein Kursbeispiel, keine vollständige AT-Anleitung.'],
     ['Abschluss · Stundenplanung, S. 13', 'Nach der Entspannungseinheit Zeit für ein Gespräch über das Erleben einplanen. Das Skript empfiehlt gezieltes, offenes Nachfragen und die Reflexion des eigenen Stundenkonzepts.'],
   ] },
@@ -403,6 +404,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Die Stresstheorie und die MOC geben Themen und Einordnungen vor. Die geprüften Dateien enthalten jedoch keine methodenspezifische Schritt-für-Schritt-Anleitung; die App ergänzt deshalb keine als Original ausgegebene Folge.',
     source: 'Stresstheorie · S. 52, 55; Stundenplanung · S. 12; Kursquellen-MOC',
+  },
+  {
+    question: 'Welche AT-Inhalte listet die Ausbildungs-MOC?',
+    answers: ['Themen von Ursprung und Anwendungsbereichen bis Grund-, Mittel- und Oberstufe sowie einzelne Übungsfelder; sie enthält aber keine Formeln oder Durchführungsfolge.', 'Eine vollständige Folge mit verbindlichen Formeln, Haltezeiten und Rücknahme.', 'Eine medizinische Eignungsprüfung und individuelle Indikationen für jede Übung.'],
+    correct: 0,
+    why: 'Die MOC führt AT-Kapitel und Übungsfelder als Stichworte auf. Die App macht diese Themen auffindbar, ohne aus ihnen eine AT-Anleitung oder Eignungsprüfung abzuleiten.',
+    source: 'Lokale Ausbildungs-MOC · Autogenes Training, Themenübersicht',
   },
   {
     question: 'Welche Aussage zur Mentaltraining-Themenliste ist durch die Ausbildungs-MOC belegt?',

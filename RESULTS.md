@@ -810,3 +810,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die auf der Modulkarte verwendete Überschrift „Anleitungsidee“ konnte bei reinen Kursübersichten mit fehlender Schrittfolge wie eine konkrete Anleitung wirken.
 - Die Überschrift heißt jetzt „Praxisrahmen“; der Markdown-Export des Stundenentwurfs verwendet ebenfalls „Praxisrahmen und Anpassung“.
 - Die gebaute Ansicht des neuen Kursindex-Routings wurde manuell in Firefox bei dessen kleinstmöglicher Fensterbreite (500 CSS-Pixel) geprüft: Coping-Ansatz-Button öffnet die richtige Karte, der Deep-Link ist korrekt und die Dokumentbreite überschreitet die Viewportbreite nicht. Die echte 390-Pixel-Ansicht auf iPhone/iPad bleibt offen.
+# AT-Themenübersicht gegen die Ausbildungs-MOC vervollständigt (2026-11-02)
+
+- Die aktuelle Drive-Fassung der Master-MOC wurde direkt abgerufen und der AT-Abschnitt vollständig mit der Methodenkarte abgeglichen.
+- Die Karte enthält jetzt neben Grund-/Mittel-/Oberstufe auch Ursprung, Definition/Anwendungsbereiche, Entspannung/Wirkungsweisen, Rahmenbedingungen/Kontraindikationen und alle genannten Übungsfelder samt Themen für Mittel- und Oberstufe.
+- Eine Lerncheck-Frage prüft die Unterscheidung zwischen MOC-Kapitelstichworten und tatsächlich vorhandener Übungsanleitung. Quellenmatrix, TODO und NEXT aktualisiert.
