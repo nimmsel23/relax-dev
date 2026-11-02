@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BookOpen, ClipboardList, Download, Plus, Check, Clock3, Wind, HeartPulse, Sparkles, Play, Pause, SkipBack, SkipForward, Square } from 'lucide-react'
+import { BookOpen, ClipboardList, Download, Upload, Plus, Check, Clock3, Wind, HeartPulse, Sparkles, Play, Pause, SkipBack, SkipForward, Square } from 'lucide-react'
 import { getRelaxSession, getRelaxSessionHistory, saveRelaxSession } from '@db'
 import { downloadText, localToday } from '../lib/db/shared/utils.js'
 
@@ -426,6 +426,8 @@ const STRESS_REFLECTION_KEY = 'relax-stress-reflection-v1'
 const DELIVERY_STORAGE_KEY = 'relax-training-delivery-v1'
 const METHOD_REFLECTION_KEY = 'relax-method-reflections-v1'
 const LEARNING_CHECK_KEY = 'relax-learning-check-v1'
+const MODULE_BACKUP_FORMAT = 'relax-ausbildung-arbeitsstand'
+const MODULE_BACKUP_KEYS = [STORAGE_KEY, CASE_STORAGE_KEY, DELIVERY_STORAGE_KEY, STRESS_REFLECTION_KEY, METHOD_REFLECTION_KEY, LEARNING_CHECK_KEY]
 const METHOD_REFLECTION_FIELDS = [
   ['experience', 'Eigene Erfahrung', 'Was hast du bei der tatsächlich durchgeführten oder besuchten Methode wahrgenommen? Was war angenehm, ungewohnt oder offen?'],
   ['conditions', 'Hilfreiche Bedingungen und Anpassungen', 'Welche Rahmenbedingungen, Wahlmöglichkeiten oder Anpassungen haben deine Teilnahme unterstützt?'],
@@ -463,6 +465,18 @@ function emptyCasePlan() {
 }
 
 function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"` }
+function validateModuleBackup(backup) {
+  if (!backup || backup.format !== MODULE_BACKUP_FORMAT || backup.version !== 1 || !backup.data || typeof backup.data !== 'object' || Array.isArray(backup.data)) return false
+  if (MODULE_BACKUP_KEYS.some(key => !Object.hasOwn(backup.data, key))) return false
+  if (Object.keys(backup.data).some(key => !MODULE_BACKUP_KEYS.includes(key))) return false
+  const { [STORAGE_KEY]: plan, [CASE_STORAGE_KEY]: casePlan, [DELIVERY_STORAGE_KEY]: delivery, [STRESS_REFLECTION_KEY]: stress, [METHOD_REFLECTION_KEY]: methods, [LEARNING_CHECK_KEY]: learning } = backup.data
+  const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value)
+  return isObject(plan) && typeof plan.title === 'string' && Array.isArray(plan.blocks)
+    && isObject(casePlan) && Array.isArray(casePlan.weeks) && casePlan.weeks.length === 4 && isObject(casePlan.dayCycle)
+    && (delivery === null || (isObject(delivery) && Array.isArray(delivery.blocks) && delivery.blocks.length > 0 && Number.isInteger(delivery.index) && delivery.index >= 0 && delivery.index < delivery.blocks.length && Number.isFinite(delivery.remaining) && delivery.remaining >= 0 && typeof delivery.running === 'boolean' && (!delivery.running || Number.isFinite(delivery.endsAt))))
+    && isObject(stress) && isObject(methods)
+    && isObject(learning) && Number.isInteger(learning.index) && learning.index >= 0 && learning.index <= LEARNING_CHECK.length && Number.isInteger(learning.score) && learning.score >= 0 && learning.score <= LEARNING_CHECK.length
+}
 function restoreDelivery() {
   try {
     const saved = JSON.parse(localStorage.getItem(DELIVERY_STORAGE_KEY) || 'null')
@@ -719,6 +733,57 @@ export default function Ausbildung() {
     downloadText(`entspannungstrainer-praxis-${localToday()}.csv`, rows.map(row => row.map(csvCell).join(';')).join('\r\n'), 'text/csv;charset=utf-8')
   }
 
+  function exportModuleBackup() {
+    try {
+      const data = {
+        [STORAGE_KEY]: plan,
+        [CASE_STORAGE_KEY]: casePlan,
+        [DELIVERY_STORAGE_KEY]: delivery,
+        [STRESS_REFLECTION_KEY]: stressReflection,
+        [METHOD_REFLECTION_KEY]: methodReflections,
+        [LEARNING_CHECK_KEY]: learningCheck,
+      }
+      const backup = { format: MODULE_BACKUP_FORMAT, version: 1, exportedAt: new Date().toISOString(), data }
+      downloadText(`relax-ausbildung-arbeitsstand-${localToday()}.json`, JSON.stringify(backup, null, 2), 'application/json;charset=utf-8')
+      notify('Ausbildungs-Arbeitsstand exportiert.')
+    } catch {
+      notify('Arbeitsstand konnte nicht gelesen werden. Bitte Eingaben prüfen und erneut sichern.')
+    }
+  }
+
+  async function importModuleBackup(event) {
+    const input = event.currentTarget
+    const file = input.files?.[0]
+    input.value = ''
+    if (!file) return
+    if (file.size > 2 * 1024 * 1024) {
+      notify('Die Sicherungsdatei ist größer als 2 MB.')
+      return
+    }
+    try {
+      const backup = JSON.parse(await file.text())
+      if (!validateModuleBackup(backup)) throw new Error('invalid backup')
+      if (!window.confirm('Dieser Ausbildungs-Arbeitsstand ersetzt die lokalen Arbeitsblätter und den Timer auf diesem Gerät. Der formale Praxisnachweis bleibt separat. Fortfahren?')) return
+      const previous = Object.fromEntries(MODULE_BACKUP_KEYS.map(key => [key, localStorage.getItem(key)]))
+      try {
+        for (const key of MODULE_BACKUP_KEYS) {
+          const value = backup.data[key]
+          if (value === null) localStorage.removeItem(key)
+          else localStorage.setItem(key, JSON.stringify(value))
+        }
+      } catch (error) {
+        for (const key of MODULE_BACKUP_KEYS) {
+          if (previous[key] === null) localStorage.removeItem(key)
+          else localStorage.setItem(key, previous[key])
+        }
+        throw error
+      }
+      window.location.reload()
+    } catch {
+      notify('Datei ungültig oder konnte nicht gespeichert werden. Der vorhandene Arbeitsstand blieb erhalten.')
+    }
+  }
+
   function exportTrainingPlan() {
     const selectedMethod = METHODS.find(item => item.name === plan.method)
     const lines = [
@@ -821,6 +886,15 @@ export default function Ausbildung() {
     </section>
 
     {section === 'start' && <>
+      <section className="rounded-2xl border p-4" style={panel} aria-labelledby="module-backup-title">
+        <div className="flex items-start gap-3">
+          <div className="min-w-0 flex-1"><h2 id="module-backup-title" className="font-bold">Arbeitsstand auf ein anderes Gerät mitnehmen</h2><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Sichert Stundenentwurf, Fallaufgabe, Lerncheck, Reflexionen und einen pausierten oder laufenden Timer als JSON-Datei. Die Datei lässt sich auf iPhone, iPad oder Rechner übertragen und dort wiederherstellen.</p></div>
+          <button type="button" onClick={exportModuleBackup} className="shrink-0 inline-flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}><Download size={15} /> Sichern</button>
+        </div>
+        <label htmlFor="module-backup-file" className="mt-3 inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}><Upload size={16} /> Sicherung wiederherstellen</label>
+        <input id="module-backup-file" type="file" accept="application/json,.json" onChange={importModuleBackup} className="sr-only" />
+        <p className="mt-2 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Die Datei enthält persönliche Texte und bleibt in deiner Verantwortung. Der formale Praxisnachweis wird separat im Relax-Session-Speicher geführt und nicht importiert.</p>
+      </section>
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-2xl border p-4" style={panel}><div className="text-xs" style={{ color: 'var(--muted)' }}>Praxisnachweis</div><div className="mt-1 text-2xl font-black">{Math.min(completed, 30)}<span className="text-sm font-semibold" style={{ color: 'var(--muted)' }}> / 30</span></div><div className="mt-2 h-2 overflow-hidden rounded-full" style={{ background: 'var(--bg2)' }}><div className="h-full rounded-full" style={{ width: `${Math.min(100, completed / 30 * 100)}%`, background: 'var(--accent)' }} /></div></div>
         <div className="rounded-2xl border p-4" style={panel}><div className="text-xs" style={{ color: 'var(--muted)' }}>Stundenentwurf</div><div className="mt-1 text-2xl font-black">{totalMinutes}<span className="text-sm font-semibold" style={{ color: 'var(--muted)' }}> Min.</span></div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Richtwert: 60 Minuten</div></div>

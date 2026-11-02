@@ -19,6 +19,7 @@
 - [x] Persönliche Entspannungs-Sitzungsnotizen und die erweiterte Atemnotiz gegen Original-Kursquellen abgrenzen, damit eigene Praxis und unbelegte Erweiterungen nicht als FlexyFit-Anleitungen erscheinen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Selbsterfahrung direkt an Methoden-Karten mit lokalem Reflexionsbogen erfassen und getrennt vom formalen 30-Einheiten-Nachweis halten.
+- [x] Lokale Ausbildungsarbeitsblätter und Timerstand als versionierte JSON-Sicherung exportieren und auf einem anderen Gerät mit Formatprüfung und ausdrücklicher Ersetzungsbestätigung wiederherstellen.
 - [x] Methodenreflexion um freiwillige, nicht-offizielle Fachgesprächs-/Praxisprobe ergänzen: erklären, praktisch zeigen und an Teilnehmende anpassen; fehlende Einschulung nicht als Kompetenz abhaken.
 - [x] Startansicht als durchgängigen Lernpfad von Grundlagen und Lerncheck bis Reflexion, Fallaufgabe, Stundenplanung und Praxisnachweis verknüpfen; die Abfolge als App-Orientierung statt offizielle Prüfungsreihenfolge kennzeichnen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
