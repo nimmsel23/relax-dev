@@ -326,3 +326,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Stretching-Karte umfasst jetzt auch die allgemeinen PDF-Abschnitte zu Beweglichkeit/Dehnfähigkeit, Einflussfaktoren, Methodenfamilien, zielorientierter Wahl und Grundregeln (S. 4–17, 29).
 - Die Assisted-Stretching-Dosierung und Kundenpraxis stehen separat daneben (S. 31–35); ein Lerncheck fragt die Zielorientierung bei der Methodenwahl ab.
+
+## 2026-11-02 — Atemmechanik im Atemtrainer ergänzt
+
+- Der Atemtrainer enthält jetzt die Kursfrage aus der Gruppenarbeit (S. 4) und eine aufklappbare Übersicht zu Einatmung, Brust- und Bauchatmung (S. 9–14).
+- Die Anatomieangaben sind auf die Kursmechanik begrenzt und als Ausbildungsinhalt statt Diagnose- oder Behandlungshinweis markiert.

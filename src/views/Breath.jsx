@@ -173,6 +173,18 @@ export default function Breath() {
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Kursübungen aus „Atemschulung“: Bauchatmung wahrnehmen (S. 48), Bhramari und Sama Vritti (S. 38). Die übrigen geführten Atemrhythmen sind ergänzende App-Übungen, keine Vorgaben des Ausbildungsskripts.
         </p>
+        <p className="rounded-xl p-3 text-sm" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>
+          Kursfrage aus der Gruppenarbeit, S. 4: <strong>Was hat der Atem mit Entspannung zu tun?</strong>
+        </p>
+        <details className="rounded-xl border p-3" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
+          <summary className="cursor-pointer text-sm font-semibold">Atemmechanik im Kursskript · S. 9–14</summary>
+          <div className="mt-3 space-y-3 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>
+            <p><strong>Einatmung · S. 9:</strong> Das Skript beschreibt Zwischenrippenmuskeln und Zwerchfell als beteiligte Atemmuskeln. Bei der Einatmung kontrahiert das Zwerchfell und flacht ab; so vergrößert sich der Brustraum.</p>
+            <p><strong>Brustatmung · S. 10–13:</strong> Die äußeren Zwischenrippenmuskeln heben und erweitern den Brustkorb. Nach größerer Anstrengung können laut Skript weitere Atemhilfsmuskeln unterstützen.</p>
+            <p><strong>Bauchatmung · S. 14:</strong> Bei der Zwerchfellatmung senkt sich das kontrahierende Zwerchfell und dehnt die Lungenflügel nach unten.</p>
+            <p className="text-[11px]" style={{ color: 'var(--dim)' }}>Kursinhalt zur Atemmechanik, keine Anleitung zur Diagnose oder Behandlung von Atembeschwerden.</p>
+          </div>
+        </details>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Ein Timer gibt nur einen Rhythmus vor und misst keine Körperreaktionen. Atemtiefe und Pausen bleiben freiwillig; wenn etwas unangenehm ist, wieder natürlich atmen oder die Übung beenden.
         </p>
