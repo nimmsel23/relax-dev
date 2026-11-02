@@ -185,3 +185,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Methodenbibliothek bildet den zweiten Praxisteil des 48-seitigen PMR-Skripts als eigenständige Bewegungsreihe ab: Kreisel, Kerze, Halbmond, Brücke und Berg.
 - Die Karte hält die im Skript vorgesehene Dreiteilung (Ausgangsposition, Endposition, Ausgleich) fest und grenzt die Bewegungsreihe von PMR ab. Für die genaue Ausführung verweist sie auf das Originalskript und die praktische Einschulung.
+
+## 2026-11-02 — Entspannungsverfahren nach Stresstheorie eingeordnet
+
+- Grundlagenkarte ergänzt um die vier Ebenen des Originalskripts: muskulär, vegetativ, emotional und kognitiv samt den dort genannten Methoden.
+- Lerncheck fragt die Zuordnung ab. Die AT- und Fantasiereisen-Karten nennen nun klar, dass die Skripte die Verfahren einordnen, aber keine konkrete Schritt-für-Schritt-Anleitung enthalten.
