@@ -6,7 +6,7 @@
 - [x] Ausbildungsinhalte und Trainerpraxis mit lokalen Ausbildungsnotizen abgleichen.
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
 - [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
-- [ ] Methodenbeschreibungen weiter gegen die vorhandenen Original-PDFs prüfen und Quellen pro Inhalt sichtbar machen; für Autogenes Training und Phantasiereisen liegt noch kein spezifisches Anleitungs-PDF im Archiv.
+- [ ] Methodenbeschreibungen weiter gegen die vorhandenen Original-PDFs prüfen und Quellen pro Inhalt sichtbar machen; für Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
 - [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
@@ -24,7 +24,7 @@
 - [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.
 - [x] Das Skript „Entspannung & Wirbelsäule“ mit eigenen Körper-, Atemraum-, Bewegungs- und Standwahrnehmungsfeldern in der Methodenbibliothek abbilden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
-- [ ] Weitere methodenspezifische Abläufe für Autogenes Training oder Phantasiereisen ergänzen, falls passende Originalanleitungen verfügbar werden.
+- [ ] Weitere methodenspezifische Abläufe für Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
 - [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.
 - [x] Quellkritische Hinweise zu Lebensmitteln gegen Stress, Power-Food-Werbung und Nahrungsergänzung direkt am Ernährungsarbeitsblatt mit PDF-Seitenangaben sichtbar machen.

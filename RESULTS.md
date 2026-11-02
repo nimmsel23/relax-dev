@@ -252,3 +252,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Bhramari und Sama Vritti sind im Atemtrainer jetzt nach dem Atemschulungs-PDF (S. 38) benannt und mit Fundstelle markiert.
 - Die Bauchatmung wird als eigene Kursübung (S. 48) ohne festes Atemtempo benannt; andere Timer-Muster sind als Zusatzübungen statt als Ausbildungsvorgaben gekennzeichnet.
 - PNI-Texte mit physiologischen Wirkungsversprechen entfernt und durch neutrale Übungsbeschreibungen sowie einen Hinweis zu freiwilligen Atempausen und fehlender Körpermessung ersetzt.
+
+## 2026-11-02 — Meditation als Kurseinordnung abgegrenzt
+
+- Die Methodenkarte nennt jetzt die Zuordnung zur kognitiven Ebene auf S. 55–56 des Stresstheorie-Skripts und kennzeichnet Atem-/Bodenkontakt-Anker ausdrücklich als allgemeine App-Ergänzung.
+- Das Skript enthält keine konkrete Schrittfolge für Meditation; die Dauer wird daher nicht als Kursvorgabe ausgegeben.
