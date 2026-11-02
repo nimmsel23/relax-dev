@@ -1,3 +1,9 @@
+# Kursfächer und Ausbildungsaufgaben klar getrennt (2026-11-02)
+
+- Den Kursindex auf genau die zwölf offiziellen Unterrichtsfächer begrenzt.
+- Vier-Wochen-Pflichtaufgabe und 30-Einheiten-Praxisprotokoll als separate ergänzende Ausbildungsaufgaben unter eigener Überschrift dargestellt, mit direkten Einstiegen in beide Bereiche.
+- Den Hinweistext an die sichtbare Trennung angepasst. `git diff --check` sauber; keine Tests ausgeführt.
+
 # Ausbildungsarbeitsstand zwischen Geräten übertragen (2026-11-02)
 
 - Der Modulstart kann Stundenentwurf, Vier-Wochen-Fallaufgabe, Lerncheck, Reflexionen, die beiden Atemschulungs-Arbeitsblätter und den pausierten oder laufenden Timer gemeinsam als versionierte JSON-Datei sichern und auf einem anderen Gerät wiederherstellen.
