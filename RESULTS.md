@@ -654,3 +654,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Beim bewussten Abschließen des letzten Timerabschnitts öffnet sich der Praxisnachweis mit heutigem Datum, gewählter Methode und Stundentitel als bearbeitbarem Entwurf.
 - Dauer bleibt leer und die Selbstbestätigung bleibt aus; die Einheit wird erst nach ausdrücklichem Bestätigen im Formular gezählt.
+
+# Produktunterlagen an den aktuellen Fachmodul-Ablauf angeglichen (2026-11-02)
+
+- Vision und README nennen Mentaltraining jetzt als Themenübersicht ohne Anleitung und dokumentieren die Methodenreflexion sowie den Übergang vom Timer zum unbestätigten Praxisnachweis.
+- NEXT.md enthält nur aktuelle Prioritäten zum Fachmodul; die historische Liste mit Betriebsnotizen ist zur Nachvollziehbarkeit in `docs/NEXT-legacy-2026-10-29.md` erhalten.

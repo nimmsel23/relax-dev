@@ -56,9 +56,10 @@ Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fac
 - Grundlagen zu Stressmodellen, Ressourcen, Körperreaktionen, Bewegung, Ernährung und Wirbelsäulen-Wahrnehmung
 - interaktiver Lerncheck mit Rückmeldung und Quellenhinweis zur lokalen Ausbildungsnotiz
 - didaktische Leitlinien und Präventionsrolle aus den Ausbildungsnotizen
-- Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga-Asanas, den acht Pilates-Bewegungskategorien, Stretching, Meditation und entspannungsorientierter Ausdauer
+- Methodenorientierung zu Atemschulung, PMR, Mentaltraining-Themen, Autogenem Training, Phantasiereisen, Yoga-Asanas, den acht Pilates-Bewegungskategorien, Stretching, Meditation und entspannungsorientierter Ausdauer
+- lokale Selbsterfahrung und freiwillige Fachgesprächs-/Praxis-Selbstchecks an jeder Methodenkarte; sie zählen nicht als formaler Ausbildungsnachweis
 - anpassbarer Stundenentwurf mit Vorbereitungscheckliste, Ankommen, Einschulung, Hauptteil, Nachspüren, Rücknahme und anschließender Reflexion
-- Durchführungsansicht mit pausierbarem Abschnitts-Timer; Trainer:innen steuern die Übergänge selbst
+- Durchführungsansicht mit pausierbarem Abschnitts-Timer, angezeigter Schwerpunktmethode und unbestätigtem Übergang zum Nachweis; Trainer:innen steuern die Übergänge selbst und bestätigen die Praxis separat
 - 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher; bisherige Sessions können nach persönlicher Bestätigung übernommen und als 30-Zeilen-CSV exportiert werden. Eine Dauer ist im offiziellen Formular nicht vorgeschrieben; die App-Dauerangabe ist optional.
 
 Die Kernnavigation ist auf Heute, Modul, Praxis und Atem ausgerichtet. Journal, Stats, Physio, Catalog und Einstellungen liegen unter **Mehr**.
@@ -68,7 +69,7 @@ Die Ansichten werden bei Bedarf separat geladen. So starten Modul und Atem ohne 
 
 Das Tagesprotokoll für Stimmung und Entspannungszeit bleibt vom formalen Ausbildungsnachweis getrennt. Die Methodenansicht führt zur Atemübung oder übernimmt die gewählte Methode in den Nachweis.
 
-Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden.
+Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden. Das betrifft im geprüften Archiv Mentaltraining, Autogenes Training, Fantasiereisen und Meditation.
 
 Die Zuordnung der lokalen PDF-Quellen und Kursnotizen zu den App-Bereichen ist im [Quellenabgleich](./docs/ENTSPANNUNGSTRAINER-QUELLEN.md) dokumentiert.
 

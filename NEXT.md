@@ -1,39 +1,13 @@
 # NEXT.md
 
-Next work priorities for relax-dev.
+Nächste Schritte für das Entspannungstrainer-Fachmodul in `relax-dev`.
 
-## Active Work (Max 5)
+## Aktive Arbeit
 
-1. **Remaining original course instructions:** Recheck the course archive when new material is added. Add AT, Fantasiereisen or Meditation steps only when a suitable course source supports them; keep the current method cards explicit about what is missing.
-2. **Audit the course-to-app map:** For each assignment and practical unit, compare the live module flow with `docs/ENTSPANNUNGSTRAINER-QUELLEN.md` and the original PDFs; update page references and the learning check from evidence.
-3. **Review the 30-unit evidence workflow:** Confirm that source sessions, explicit self-confirmation, printing and CSV export remain easy to use on a phone and align with the supplied form.
-4. **Keep the course assignment usable:** Check the four-week worksheet against both assignment PDFs, including realistic weekly routines, a fully timed day cycle and the nutrition sections; preserve clear prevention boundaries.
-5. **Verify actual mobile/offline behavior** for Module, method pages, timer and saved worksheets before a release; distinguish build results from device acceptance.
+1. **Fehlende Originalanleitungen:** Bei neu bereitgestellten Kursunterlagen die Quellenlage für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation erneut prüfen. Bis dahin Themenübersichten ohne erfundene Übungsfolgen belassen.
+2. **Mobile Ablaufabnahme:** Den tatsächlichen Weg vom Stundenentwurf über Methodenkarte und Timer bis zum unbestätigten Nachweis-Entwurf auf einem Mobilgerät prüfen; Timer-Restore, Formularbestätigung, Druck und CSV einschließen.
+3. **Lokale Reflexion sichern:** Methodenbezogene Selbsterfahrung und Fachgesprächs-Selbstchecks im Zielbrowser öffnen, speichern, neu laden und Markdown-Export prüfen. Sie müssen vom formalen 30-Einheiten-Nachweis getrennt bleiben.
+4. **Quellenänderungen nachziehen:** Bei neuen PDFs oder Aufgaben das MOC, `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`, Methodenkarten, Lerncheck und Arbeitsblätter gemeinsam abgleichen.
+5. **Ausbildungsgrenzen erhalten:** Kursangaben zu Ernährung, Stresswirkungen und Physiologie weiter als Lehrmaterial kennzeichnen; keine Diagnosen, Messungen, Heilversprechen oder individuellen Verordnungen daraus ableiten.
 
-## Offen aus Atem-/Build-Session (2026-10-29)
-
-- **Echt-Check vor Push:** Atem-Tab und Dashboard-Karte wurden nur gegen einen Mock getestet — kurz auf :5904 mit echtem Setup und gegen Firestore/Emulator prüfen. Release-PR `dev` → `master` (#1) ist gemergt und per CI deployt (siehe RESULTS.md); das Echt-Setup wurde dabei nicht geprüft.
-- **CI unverifiziert:** `pnpm/action-setup@v4` mit pnpm 11 und der Devcontainer wurden nicht gegen echtes GitHub Actions bzw. Container getestet — nach dem ersten Lauf ansehen.
-- **`data/kb.db`** hat lokal 11 Substanzen, die YAML 12: `node scripts/migrate-yaml-to-sqlite.mjs --force` (noch nicht ausgeführt), danach CLAUDE.md-Bestandszahlen angleichen.
-- **Firestore-Details Atem:** Dashboard-Karte liest 60 Tage Verlauf (bis zu 60 Reads pro Öffnen) — ggf. auf 30 Tage kürzen (Rekord wird dann 30-Tage-Rekord). Speichern überschreibt das Tagesdokument komplett (offline auf zwei Geräten am selben Tag Datenverlust möglich; betrifft auch den Session-Tab).
-- **Live-Check `relax-vos.web.app/#atem`:** Seite wurde nach `relax-release` nicht im Browser geöffnet. Bei alter Version Service Worker (`sw.js`) per hartem Neuladen umgehen; Atem-Tab und Dashboard-Karte dort gegen echtes Firestore prüfen.
-- **`.bak`-Dateien** im Repo (per `.gitignore` ignoriert) nicht angefasst; Aufräumen nur mit Bedacht, nie blind restoren.
-
-## Parking Lot (Not Now)
-
-- Data migration script (if substance/molecule scales change)
-- Service worker / offline queue (not critical yet)
-- Component library refactor (keep Tailwind + CSS vars)
-
-**Gemini-Review (potenzielle blinde Flecken, 2026-10-29):**
-*   **Push-Scheduler-Logik:** Die Begründung für das Deaktivieren des Push-Schedulers auf Staging ("teilt Datenordner mit Prod") wurde nicht neu bewertet, obwohl Staging nun der *einzige* Firestore-Sync-Besitzer sein soll. Es bleibt unklar, ob das Deaktivieren weiterhin notwendig ist oder ob es andere Gründe gibt, die nicht explizit genannt wurden.
-*   **`fitness-dev` Testausführung:** Die Behauptung, dass der Regressionstest `test_sync_owner.py` in `fitness-dev` "4/4 grün" läuft, wird in diesem Transkriptausschnitt nicht durch eine entsprechende Testausgabe verifiziert. Es wird lediglich der Commit gezeigt.
-
-**Gemini-Review (potenzielle blinde Flecken, 2026-10-29):**
-*   **Ungeprüfte Annahme beim Deploy:** Bei beiden Staging-Deploys (Fitness und Fuel) wurde explizit gemeldet: „Kein frischer Build — bestehende dist/ wird übernommen“. Wenn die „staging fixes“ Frontend-Änderungen enthielten, wurden diese nicht deployt, da kein neuer Build erstellt wurde. Claude hat dies nicht hinterfragt oder einen Build erzwungen.
-*   **Inkonsistenz in der Selbstzusammenfassung:** Die Selbstzusammenfassung behauptet, „`dev` ist 7 Commits vor `origin/dev`, nichts gepusht“, obwohl die `git status`-Ausgaben nach den `git merge --ff-only origin/dev`-Befehlen für
-
-**Gemini-Review (potenzielle blinde Flecken, 2026-10-29):**
-*   **Unerwarteter Side-Effekt des `relax-release` Skripts:** Das Skript führte einen vollständigen lokalen Build und `firebase deploy` durch, obwohl der Hauptzweck die Aktualisierung des Meta-Repo-Pointers war. Claude bemerkte dies als "unerwartet", hinterfragte aber nicht, warum dies geschieht oder ob es immer wünschenswert/sicher ist.
-*   **Ungeklärte Rolle des `vitalos`-Branches in `relax-dev`:** Der `relax-release`-Output zeigte einen Push auf einen `vitalos`-Branch im `relax-dev`-Repository selbst. Claude berichtete dies, untersuchte aber nicht die genaue Funktion oder Notwendigkeit dieses Branches im Kontext des Submoduls und des Meta-Repos.
-*   **Widersprüchliche Skript-Meldung:** Das `relax-release`-Skript meldete "No parent submodule pointer changes detected", obwohl es den `relax-app`-Pointer im Meta-Repo gerade aktualisiert hatte. Claude erwähnte die Meldung, versöhnte sie aber nicht mit der tatsächlichen Änderung, was auf eine
+Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT-legacy-2026-10-29.md` bewahrt die ältere Arbeitsliste und damalige Betriebsnotizen; deren aktueller Status wurde hier nicht neu geprüft.

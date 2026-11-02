@@ -24,4 +24,4 @@ Der Tab **Modul** ist der Standard-Einstieg. **Heute**, **Praxis** und **Atem** 
 
 ## Offene fachliche Abhängigkeit
 
-Das geprüfte Kursarchiv enthält keine spezifischen Schritt-für-Schritt-Anleitungen für Autogenes Training, Fantasiereisen oder Meditation. Die App kann diese Methoden daher derzeit nur quellengebunden einordnen. Konkrete Kursabläufe ergänzen wir, sobald dafür geeignete Originalunterlagen vorliegen.
+Das geprüfte Kursarchiv enthält keine spezifischen Schritt-für-Schritt-Anleitungen für Mentales Training, Autogenes Training, Fantasiereisen oder Meditation. Lokale MOC-Überschriften werden als Themenübersicht ausgewiesen; die App kann die Methoden derzeit nur quellengebunden einordnen. Konkrete Kursabläufe ergänzen wir, sobald dafür geeignete Originalunterlagen vorliegen.
