@@ -273,3 +273,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Angabe „fünf Minuten, zwei- bis dreimal täglich“ wurde aus dem Kursbezug entfernt: Sie steht nicht im Atemschulungs-PDF.
 - Die App verweist nun auf die tatsächliche Praxisaufgabe auf S. 48 (Bauchatmung wahrnehmen und eigenen Anleitungstext vorbereiten) und kennzeichnet Timerlängen als App-Auswahl.
+
+## 2026-11-02 — Lokale Kursrichtwerte wiederhergestellt
+
+- Die separate Kursnotiz `00_Entspannungs-Protokoll-MINIMAL.md` nennt Richtwerte für Atemschulung (15–20 Min.), PMR (15–30 Min.), AT und Fantasiereisen (je 20–30 Min.), Yoga/Pilates (je 30–60 Min.) und Meditation (15–30 Min.).
+- Diese Werte erscheinen auf den Methodenkarten ausdrücklich als lokale Kursrichtwerte; Abweichungen zur Dauerangabe im Original-PDF werden benannt, und fehlende Praxisanleitungen bleiben offen.

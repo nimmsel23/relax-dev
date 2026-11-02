@@ -161,7 +161,7 @@ export default function Breath() {
           Das Skript leitet dazu an, die Hände auf den Bauch zu legen und Ein- und Ausatmung wahrzunehmen; außerdem soll ein eigener Anleitungstext zur Bauchatmung vorbereitet werden. Es gibt dafür keine feste Übungsdauer oder Häufigkeit vor.
         </p>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
-          Quelle: FlexyFit Academy, „Atemschulung“, S. 48. Die Timer-Dauern sind frei wählbare App-Einstellungen, keine Kursdosierung. Bei Unwohlsein zur natürlichen Atmung zurückkehren.
+          Quelle zur Übung: FlexyFit Academy, „Atemschulung“, S. 48. Eine separate lokale Kursnotiz nennt für Atemschulung 15–20 Minuten („00_Entspannungs-Protokoll-MINIMAL.md“); das ist ein Richtwert, keine Dosierung aus dem PDF. Timer-Dauern bleiben frei wählbare App-Einstellungen. Bei Unwohlsein zur natürlichen Atmung zurückkehren.
         </p>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Kursübungen aus „Atemschulung“: Bauchatmung wahrnehmen (S. 48), Bhramari und Sama Vritti (S. 38). Die übrigen geführten Atemrhythmen sind ergänzende App-Übungen, keine Vorgaben des Ausbildungsskripts.
