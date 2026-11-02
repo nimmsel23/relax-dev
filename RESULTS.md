@@ -659,3 +659,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Vision und README nennen Mentaltraining jetzt als Themenübersicht ohne Anleitung und dokumentieren die Methodenreflexion sowie den Übergang vom Timer zum unbestätigten Praxisnachweis.
 - NEXT.md enthält nur aktuelle Prioritäten zum Fachmodul; die historische Liste mit Betriebsnotizen ist zur Nachvollziehbarkeit in `docs/NEXT-legacy-2026-10-29.md` erhalten.
+
+# Agentenkontext vom alten Physio-Kernziel bereinigt (2026-11-02)
+
+- GEMINI.md nennt nun das Entspannungstrainer-Fachmodul als Produktfokus und Physio/Knowledge Base als Zusatzbereiche; Quickstart-Befehle verwenden das festgelegte pnpm.
+- CLAUDE.md startet den Dev-Server mit pnpm. Die ältere Physio-Timeline-AGENTS-Datei bleibt erhalten, ist aber sichtbar als historische Spezifikation und nicht als aktive Repo-Anweisung markiert.

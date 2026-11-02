@@ -21,8 +21,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Port Convention
 | Service | Port | Dev Path |
 |---------|------|----------|
-| Vite (UI) | 5904 | `npm run ui:dev` (or via dev-runner) |
-| Node API | 9123 | `npm run start` (or via dev-runner) |
+| Vite (UI) | 5904 | `pnpm run ui:dev` (or via dev-runner) |
+| Node API | 9123 | `pnpm run start` (or via dev-runner) |
 | KB Enricher (Python) | 9124 | `python server/knowledge/kb_enricher.py serve` |
 
 **Wichtig**: Im Dev-Betrieb immer über `:5904` zugreifen (Vite + HMR). `:9123` direkt serviert nur `dist/` — Änderungen ohne Build unsichtbar.
@@ -153,7 +153,7 @@ Environment variables:
 ### Running
 ```bash
 # Both UI + API together (recommended)
-cd ~/relax-dev && npm run dev
+cd ~/relax-dev && pnpm run dev
 
 # Access via :5904 (Vite HMR) — not :9123
 ```

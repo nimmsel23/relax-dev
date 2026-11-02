@@ -222,7 +222,7 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 | **[ARCHITECTURE.md](./ARCHITECTURE.md)** | KB-Struktur, AI-Enrichment, Simulation Engine, Data Flow |
 | **[VISION.md](./VISION.md)** | Produktziel, Ausbildungsweg und fachliche Leitplanken des Moduls |
 | **[HOT.md](./HOT.md)** | Open Source Biochemie-DBs + nützliche Node Module |
-| **[AGENTS-11-05-2026.md](./AGENTS-11-05-2026.md)** | Physio Timeline Spec + Agent-Workflow |
+| **[AGENTS-11-05-2026.md](./AGENTS-11-05-2026.md)** | Historische Physio-Timeline-Spezifikation (nicht aktive Repo-Anweisung) |
 | **[UNKLARHEITEN.md](./UNKLARHEITEN.md)** | Offene Design-Fragen (Mood-Skalen, Sleep, Export) |
 | **[OFFEN.md](./OFFEN.md)** | Technische Offene Punkte |
 
@@ -260,7 +260,7 @@ curl -X POST http://localhost:9123/api/physio/simulate \
 ## Production
 
 ```bash
-npm run build          # Create dist/
+pnpm run build         # Create dist/
 node server.mjs        # Serve dist/ + API
 ```
 

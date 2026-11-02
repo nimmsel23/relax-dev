@@ -6,7 +6,9 @@ This `GEMINI.md` provides an overview of the `relax-dev` project, its architectu
 
 ## 1. Project Overview
 
-`relax-dev` is a standalone application combining relaxation techniques, physiological tracking, and substance interaction analysis. It features a React 18 frontend (Vite), a Node.js HTTP API (Fastify), and a dynamic biochemistry knowledge base (KB) powered by Gemini AI for on-demand enrichment. The application uses file-based persistence for user data and YAML files for the core knowledge base.
+**Product focus:** `relax-dev` is the learning and practice companion for the Entspannungstrainer module of the Präventiver Vitaltrainer Ausbildung. The Module tab is the main product path: course foundations, source-aware methods, lesson planning and delivery, the four-week assignment, personal reflection, and the 30-unit practice record.
+
+The React/Vite app also contains personal tracking, a physiology simulator, and a biochemistry knowledge base. These are supporting areas, not course sources or individual health assessments. For course content, follow `VISION.md`, `NEXT.md`, and `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`; the backend and KB sections below are technical inventory and may need verification against current source.
 
 **Key Technologies:**
 - **Frontend:** React 18, Vite, Zustand (state management), Recharts (visualizations), Tailwind CSS.
@@ -15,11 +17,10 @@ This `GEMINI.md` provides an overview of the `relax-dev` project, its architectu
 - **Persistence:** Local file system (`data/`).
 
 **Core Features:**
-- **Session Tracking:** Log relaxation techniques, timing, and mood.
-- **Journal:** Markdown-based daily entries.
-- **Physio Timeline:** Deterministic physiological simulation of various biochemical curves based on events and context.
-- **Biochemistry Knowledge Base:** Dynamic KB with AI-powered enrichment for molecules, reactions, and interactions.
-- **Substance Catalog:** Frontend for exploring the knowledge base with a dual-layer approach:
+- **Entspannungstrainer module:** Course foundations, source-aware method cards, learning check, four-week assignment, lesson planner/timer, local method reflection, and 30-unit practice record.
+- **Practice tracking:** Log relaxation techniques, timing, and mood; keep the daily journal separate from the formal training record.
+- **Supporting physiology and knowledge tools:** Physio Timeline, Gemini-assisted Knowledge Base, substance catalog, and knowledge graph. These are supplemental app features, not Ausbildung content or individual health guidance.
+- **Substance Catalog:** Frontend for exploring the supporting knowledge base with a dual-layer approach:
   - **Wirkweise (Mechanisms):** High-level overview of physiological impacts (e.g., Cortisol, Dopamine) mapped from molecular components.
   - **Moleküle (Molecules):** Deep scientific detail of individual active ingredients.
   - **Knowledge Graph:** Interactive visualization of substance-molecule networks.
@@ -28,29 +29,29 @@ This `GEMINI.md` provides an overview of the `relax-dev` project, its architectu
 
 ## 2. Building and Running
 
-The project utilizes `npm` for dependency management and scripts for development and production workflows.
+The repository uses `pnpm` for dependency management and scripts for development and production workflows.
 
-**Quickstart:**
+**Quickstart (pnpm is the repository package manager):**
 
 1.  **Install dependencies:**
     ```bash
-    npm install
+    pnpm install
     ```
 2.  **Development (Vite HMR + Nodemon backend):**
     ```bash
-    npm run dev
+    pnpm run dev
     ```
     This runs both the UI and API concurrently.
 
     Alternatively, run separately:
     ```bash
-    npm run ui:dev   # Vite only (UI: http://localhost:5904)
-    npm run start    # API only (API: http://localhost:9123)
+    pnpm run ui:dev   # Vite only (UI: http://localhost:5904)
+    pnpm run start    # API only (API: http://localhost:9123)
     ```
 3.  **Production build:**
     ```bash
-    npm run build    # Creates optimized build in `dist/`
-    npm run preview  # Test production build locally
+    pnpm run build    # Creates optimized build in `dist/`
+    pnpm run preview  # Preview production build locally
     ```
 
 ---
