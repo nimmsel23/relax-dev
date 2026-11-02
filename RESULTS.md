@@ -578,4 +578,10 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Tabwechsel schreiben den Tab jetzt in den URL-Hash; bestehende Hash-Links bleiben nutzbar.
 - Beim Browser-Zurück zu einer URL ohne Hash wird der passende Standard-Tab wiederhergestellt (Modul, beziehungsweise Catalog auf dem isolierten Knowledge-Port).
-- Vite-Produktionsbuild und `git diff --check` folgen.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.
+
+# Ausbildungs-Unterseiten direkt verlinkbar gemacht (2026-11-02)
+
+- Grundlagen, Lerncheck, Methodenliste, Fallkonzept, Stundenplanung und Praxisnachweis aktualisieren den Hash unter `#ausbildung/<abschnitt>`.
+- Einzelne Methodenkarten nutzen `#ausbildung/methoden/<methodenname>`; direkter Aufruf und Browser-Zurück/Vor stellen die passende Karte wieder her.
+- README und TODO aktualisiert; Vite-Produktionsbuild erfolgreich.

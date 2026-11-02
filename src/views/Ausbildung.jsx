@@ -390,6 +390,17 @@ function emptyCasePlan() {
 }
 
 function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"` }
+const MODULE_SECTIONS = new Set(['start', 'grundlagen', 'selbstcheck', 'methoden', 'fallkonzept', 'planung', 'nachweis'])
+function readTrainingRoute() {
+  const [root, section = 'start', methodName = ''] = window.location.hash.slice(1).split('/')
+  if (root !== 'ausbildung') return { section: 'start', method: null }
+  const validSection = MODULE_SECTIONS.has(section) ? section : 'start'
+  let decodedName = ''
+  try { decodedName = decodeURIComponent(methodName) } catch {}
+  const method = validSection === 'methoden' ? METHODS.find(item => item.name === decodedName) || null : null
+  return { section: validSection, method }
+}
+
 function practiceDescription(item) {
   const technique = String(item.technique || '').trim()
   const note = String(item.note || '').trim()
@@ -413,8 +424,7 @@ async function getCompleteRelaxSessionHistory() {
 }
 
 export default function Ausbildung() {
-  const [section, setSection] = useState('start')
-  const [method, setMethod] = useState(null)
+  const [{ section, method }, setRoute] = useState(readTrainingRoute)
   const [pmrStep, setPmrStep] = useState(null)
   const [plan, setPlan] = useState(() => {
     const defaults = { title: 'Ruhig ankommen', focus: '', method: METHODS[0].name, blocks: DEFAULT_BLOCKS, checks: {}, reflection: '' }
@@ -444,6 +454,26 @@ export default function Ausbildung() {
   const [checkScore, setCheckScore] = useState(0)
   const [message, setMessage] = useState('')
   const [entry, setEntry] = useState({ date: localToday(), technique: METHODS[0].name, minutes: 20, description: '', signed: false })
+
+  useEffect(() => {
+    const syncTrainingRoute = () => {
+      if (window.location.hash === '#ausbildung' || window.location.hash.startsWith('#ausbildung/')) setRoute(readTrainingRoute())
+    }
+    window.addEventListener('hashchange', syncTrainingRoute)
+    return () => window.removeEventListener('hashchange', syncTrainingRoute)
+  }, [])
+
+  function navigateSection(nextSection) {
+    const validSection = MODULE_SECTIONS.has(nextSection) ? nextSection : 'start'
+    setRoute({ section: validSection, method: null })
+    const nextHash = validSection === 'start' ? '#ausbildung' : `#ausbildung/${validSection}`
+    if (window.location.hash !== nextHash) window.location.hash = nextHash
+  }
+
+  function selectMethod(nextMethod) {
+    setRoute({ section: 'methoden', method: nextMethod })
+    window.location.hash = `#ausbildung/methoden/${encodeURIComponent(nextMethod.name)}`
+  }
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)) }, [plan])
   useEffect(() => { localStorage.setItem(CASE_STORAGE_KEY, JSON.stringify(casePlan)) }, [casePlan])
@@ -600,7 +630,7 @@ export default function Ausbildung() {
       <h1 className="mt-2 text-2xl font-black">Entspannung anleiten lernen</h1>
       <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Theorie verstehen, eine stimmige Einheit gestalten und die eigene Praxis für den Ausbildungsnachweis dokumentieren.</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">{[['start', 'Überblick'], ['grundlagen', 'Grundlagen'], ['selbstcheck', 'Lerncheck'], ['methoden', 'Methoden'], ['fallkonzept', '4-Wochen-Fall'], ['planung', 'Stunde planen'], ['nachweis', 'Praxisnachweis']].map(([id, label]) => <button key={id} onClick={() => { setSection(id); setMethod(null) }} aria-pressed={section === id} className="shrink-0 rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: section === id ? 'var(--accent)' : 'var(--line)', color: section === id ? 'var(--accent)' : 'var(--muted)', background: section === id ? 'var(--accent-glow)' : 'transparent' }}>{label}</button>)}</div>
+        <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">{[['start', 'Überblick'], ['grundlagen', 'Grundlagen'], ['selbstcheck', 'Lerncheck'], ['methoden', 'Methoden'], ['fallkonzept', '4-Wochen-Fall'], ['planung', 'Stunde planen'], ['nachweis', 'Praxisnachweis']].map(([id, label]) => <button key={id} onClick={() => navigateSection(id)} aria-pressed={section === id} className="shrink-0 rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: section === id ? 'var(--accent)' : 'var(--line)', color: section === id ? 'var(--accent)' : 'var(--muted)', background: section === id ? 'var(--accent-glow)' : 'transparent' }}>{label}</button>)}</div>
       </div>
     </section>
 
@@ -613,8 +643,8 @@ export default function Ausbildung() {
         ['Verstehen', 'Stress, Belastung, Ressourcen und individuelle Reaktionen einordnen.'], ['Anleiten', 'Methode erklären, vormachen, üben lassen und Körperwahrnehmung fördern.'], ['Gestalten', 'Ziel, Schwerpunkt, Zeit und ruhige Übergänge bewusst planen.'], ['Reflektieren', 'Erleben erfragen, Feedback aufnehmen und die nächste Stunde anpassen.'],
       ].map(([title, text]) => <div className="rounded-xl p-3" key={title} style={{ background: 'var(--bg2)' }}><div className="text-sm font-bold">{title}</div><div className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</div></div>)}</div></div>
       <div className="rounded-2xl border p-4" style={panel}><h2 className="font-bold">Didaktische Leitlinien</h2><ul className="mt-2 space-y-2 text-sm" style={{ color: 'var(--muted)' }}><li>• Ziel, Schwerpunkt und Ablauf zu Beginn verständlich machen und die Herkunft der Methode einordnen.</li><li>• Übungen erklären, demonstrieren und ausprobieren lassen; an die Teilnehmenden anpassen.</li><li>• Ruhig sprechen, Pausen lassen und den Sprechstil anhand von Rückmeldungen abstimmen.</li><li>• Körperwahrnehmung zählt mehr als korrekte oder vergleichbare Ausführung; Leistungsdenken und Vergleiche vermeiden.</li><li>• Einzelne Übungen wiederholen, damit Teilnehmende sie leichter in den Alltag integrieren können.</li><li>• Raum, Temperatur, Privatsphäre und genügend Zeit für eine sanfte Rücknahme vorbereiten.</li><li>• Ein gemeinsamer Beginn und Abschluss schaffen Orientierung; Feedback gehört dazu.</li></ul><p className="mt-3 text-xs" style={{ color: 'var(--dim)' }}>Grundlage: FlexyFit Academy, „Stundenplanung“, S. 4–9.</p></div>
-      <div className="flex gap-3"><button onClick={() => setSection('planung')} className="flex-1 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Einheit entwerfen</button><button onClick={() => setSection('methoden')} className="flex-1 rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)' }}>Methoden ansehen</button></div>
-      <button onClick={() => setSection('fallkonzept')} className="w-full rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>4-Wochen-Fallkonzept bearbeiten</button>
+      <div className="flex gap-3"><button onClick={() => navigateSection('planung')} className="flex-1 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Einheit entwerfen</button><button onClick={() => navigateSection('methoden')} className="flex-1 rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)' }}>Methoden ansehen</button></div>
+      <button onClick={() => navigateSection('fallkonzept')} className="w-full rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>4-Wochen-Fallkonzept bearbeiten</button>
     </>}
 
     {section === 'grundlagen' && <>
@@ -681,7 +711,7 @@ export default function Ausbildung() {
     {section === 'methoden' && <>
       {method ? (
         <article className="rounded-2xl border p-5" style={panel}>
-          <button onClick={() => setMethod(null)} className="text-xs font-bold" style={{ color: 'var(--accent)' }}>← Alle Methoden</button>
+          <button onClick={() => navigateSection('methoden')} className="text-xs font-bold" style={{ color: 'var(--accent)' }}>← Alle Methoden</button>
           <div className="mt-3 text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Ausbildungsorientierung · {method.duration}</div>
           {method.durationSource && <p className="mt-1 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Dauerquelle: {method.durationSource}</p>}
           <h2 className="mt-1 text-xl font-black">{method.name}</h2>
@@ -719,11 +749,11 @@ export default function Ausbildung() {
           {method.name === 'Entspannungsorientierte Ausdauer' && <div className="mt-4 rounded-xl p-3 text-xs leading-relaxed" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>Einzelne Entspannungseinheit und allgemeine Bewegungsempfehlung sind verschiedene Größen: Für Erwachsene nennt das österreichische Gesundheitsportal 150–300 Minuten Ausdauerbewegung mit mittlerer Intensität pro Woche sowie muskelkräftigende Übungen an mindestens zwei Tagen. <a href="https://www.gesundheit.gv.at/leben/bewegung/gesund-durch-sport/bewegungsempfehlungen-erwachsene.html" target="_blank" rel="noreferrer" className="font-semibold underline" style={{ color: 'var(--accent)' }}>Österreichische Bewegungsempfehlungen ↗</a></div>}
           <p className="mt-4 border-t pt-3 text-xs" style={{ borderColor: 'var(--line)', color: 'var(--dim)' }}>Ausbildungsbezug: {method.source}. Praxis immer an Person, Tagesform und Qualifikation anpassen.</p>
           {method.name === 'Atemschulung' && <button onClick={() => onNavigate?.('atem')} className="mt-4 w-full rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>Zur geführten Atemübung</button>}
-          <button onClick={() => { setEntry(current => ({ ...current, technique: method.name })); setSection('nachweis') }} className="mt-2 w-full rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Methode im Ausbildungsnachweis dokumentieren</button>
+          <button onClick={() => { setEntry(current => ({ ...current, technique: method.name })); navigateSection('nachweis') }} className="mt-2 w-full rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Methode im Ausbildungsnachweis dokumentieren</button>
         </article>
       ) : (
         <div className="space-y-3">
-          {METHODS.map(item => { const Icon = item.icon; return <button key={item.name} onClick={() => setMethod(item)} className="flex w-full items-center gap-3 rounded-2xl border p-4 text-left" style={panel}><div className="rounded-xl p-2" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}><Icon size={19} /></div><div className="min-w-0 flex-1"><div className="font-bold">{item.name}</div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>{item.duration} · {item.focus}</div></div><span style={{ color: 'var(--dim)' }}>›</span></button>})}
+          {METHODS.map(item => { const Icon = item.icon; return <button key={item.name} onClick={() => selectMethod(item)} className="flex w-full items-center gap-3 rounded-2xl border p-4 text-left" style={panel}><div className="rounded-xl p-2" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}><Icon size={19} /></div><div className="min-w-0 flex-1"><div className="font-bold">{item.name}</div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>{item.duration} · {item.focus}</div></div><span style={{ color: 'var(--dim)' }}>›</span></button>})}
           <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Autogenes Training, Fantasiereisen und Meditation sind im Skript eingeordnet; das Kursarchiv enthält dazu keine konkrete Schrittfolge. Die App ergänzt deshalb keine vermeintlichen Original-Anleitungen.</p>
         </div>
       )}

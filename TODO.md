@@ -85,3 +85,4 @@
 - [x] Die Pilates-Bildtafeln zu funktionell wichtigen Körpersegmenten (S. 22–23) in Quellenmatrix und Methodenansicht ergänzen, ohne sie als zusätzliche Bewegungsabläufe zu interpretieren.
 - [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.
 - [x] Hauptnavigation mit URL-Hash und Browser-Zurück synchronisieren, sodass der Modul-Tab direkt verlinkbar ist und die hashlose Route wieder zum Standard-Einstieg führt.
+- [x] Ausbildungsabschnitte und einzelne Methodenkarten ebenfalls in URL und Browser-Verlauf abbilden, einschließlich direkter Links und Wiederherstellung bei Zurück/Vor.
