@@ -53,6 +53,12 @@
 - Die Übersicht bleibt anatomischer Kursstoff; Prozentangaben werden nicht als individuelle Messung gezeigt und forcierte Atembewegungen nicht angeleitet.
 - Quellenmatrix und TODO aktualisiert.
 
+# Rücknahme bei AT und Fantasiereisen quellenbasiert ergänzt (2026-11-02)
+
+- Die Stundenplanung S. 12 beschreibt für AT und Fantasiereisen eine ausreichend lange, schrittweise Rücknahme und nennt ein wiederkehrendes Aktivierungsritual als Beispiel; S. 13 empfiehlt ein Abschlussgespräch.
+- Diese Kursrahmen sind nun direkt bei den beiden Methoden sichtbar. Sie werden ausdrücklich nicht als fehlende methodenspezifische Schritt-für-Schritt-Anleitung ausgegeben.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
