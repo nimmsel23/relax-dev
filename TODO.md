@@ -9,6 +9,7 @@
 - [x] Methodenbeschreibungen gegen die vorhandenen Original-PDFs prüfen und belegte Seitenbereiche direkt auf den Methodenkarten sichtbar machen; unbelegte Anleitungen und Dauerangaben als solche kennzeichnen.
 - [ ] Für Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
+- [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
 - [x] Google-Drive-Suche nach eigenständigen AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
 - [x] Persönliche Entspannungs-Sitzungsnotizen und die erweiterte Atemnotiz gegen Original-Kursquellen abgrenzen, damit eigene Praxis und unbelegte Erweiterungen nicht als FlexyFit-Anleitungen erscheinen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.

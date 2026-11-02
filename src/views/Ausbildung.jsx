@@ -38,6 +38,11 @@ const METHODS = [
     ['Rücknahme · Stundenplanung, S. 12', 'Für liegende Übungen mit geschlossenen Augen nennt das Skript eine ausreichend lange, schrittweise Rücknahme. Bei AT empfiehlt es ein wiederkehrendes Ritual; als Beispiel wird das Zählen von 4 auf 1 mit kleinen Bewegungen, Dehnen, Strecken, bewusstem Atmen und leichter Aktivierung bis zum Sitzen oder Stehen beschrieben. Das ist ein Kursbeispiel, keine vollständige AT-Anleitung.'],
     ['Abschluss · Stundenplanung, S. 13', 'Nach der Entspannungseinheit Zeit für ein Gespräch über das Erleben einplanen. Das Skript empfiehlt gezieltes, offenes Nachfragen und die Reflexion des eigenen Stundenkonzepts.'],
   ] },
+  { name: 'Mentales Training · Themenübersicht', duration: 'Im Stundenentwurf festlegen', icon: Sparkles, focus: 'Mentales Training als Themenfeld des Fachmoduls einordnen', practice: 'Die lokale Ausbildungs-MOC führt mentales Training im Kapitel „Mentales- & autogenes Training“ auf; die offizielle Kursbeschreibung nennt das Fach ebenfalls. Im geprüften Kursarchiv liegt dazu kein eigenes Anleitungs-PDF. Diese Karte erschließt daher nur die Themenübersicht und leitet keine konkrete Übung an.', adapt: 'Visualisierung, Autosuggestion, Ankern oder Zielsetzung sind hier Themenüberschriften, keine Anleitung oder Wirkungszusage. Konkrete Techniken nur aus tatsächlich vermitteltem Kursmaterial übernehmen und die eigene Kompetenzgrenze benennen.', source: 'Lokale Ausbildungs-MOC „MOC-Dipl.Entspannungstrainer“, Kapitel Mentales Training; offizielle FlexyFit-Diplom-Kursbeschreibung', outlineTitle: 'Themen laut Ausbildungs-MOC · keine Schrittfolge', outline: [
+    ['Grundlagen und Zielbereiche', 'Die MOC nennt Definition und Entwicklung, Ziel und Nutzen, Psychoregulation sowie den optimalen Leistungszustand mit Entspannen, Aktivieren und Fokussieren. Es handelt sich um Kapitelüberschriften, nicht um ausgearbeitete Lehrtexte.'],
+    ['Genannte Themenfelder', 'Aufgeführt sind Visualisierung und Sinneseindrücke, Autosuggestion, Ankern, Zielsetzungstraining, Mentales Training nach Eberspächer und ideomotorische Bewegungen. Die MOC enthält hier keine vollständige Durchführung oder Dosierung.'],
+    ['Quellenabgrenzung', 'Die lokale MOC ist eine Themenübersicht. Bei der Suche im FlexyFit-Kursarchiv wurde kein eigenständiges Skript zu Mentaltraining gefunden; die Visualisierung im Wirbelsäulen-Skript bezieht sich dort auf anatomische Anschauung und ist keine Mentaltrainings-Anleitung.'],
+  ] },
   { name: 'Selbsthypnose · Kursübersicht', duration: 'Im Stundenentwurf festlegen', icon: Sparkles, focus: 'Eine im Skript genannte Soforthilfe einordnen', practice: 'Die Stresstheorie führt Selbsthypnose neben Autogenem Training und PMR als Verfahren der Soforthilfe auf. Sie beschreibt Ähnlichkeiten zu AT und nennt eigene Ziele als möglichen Anwendungskontext. Ein spezifisches Selbsthypnose-Anleitungsskript liegt im Kursarchiv nicht vor; die Karte dokumentiert nur den Kursverweis.', adapt: 'Keine Selbsthypnose-Formel oder Wirkung aus der knappen Quellenbeschreibung ableiten. Nicht als Behandlung oder Empfehlung für ein individuelles Ziel darstellen.', source: 'FlexyFit Academy: Stresstheorie, S. 52 · Überblick, keine Schrittfolge', outlineTitle: 'Soforthilfe im Skript', outline: [
     ['Quellenaussage · S. 52', 'Das Skript beschreibt Selbsthypnose als dem Autogenen Training ähnlich und verbindet sie mit bestimmten persönlichen Zielen. Weitergehende Wirkungsangaben sind Aussagen der Unterlage; sie werden hier nicht als bestätigt oder individuell geeignet übernommen.'],
     ['Anleitungsgrenze', 'Das Kursarchiv enthält keine methodenspezifische Selbsthypnose-Formel oder vollständige Schrittfolge. Die Karte dient der Quellenorientierung, nicht der Durchführung.'],
@@ -386,6 +391,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Die Stresstheorie und die MOC geben Themen und Einordnungen vor. Die geprüften Dateien enthalten jedoch keine methodenspezifische Schritt-für-Schritt-Anleitung; die App ergänzt deshalb keine als Original ausgegebene Folge.',
     source: 'Stresstheorie · S. 52, 55; Stundenplanung · S. 12; Kursquellen-MOC',
+  },
+  {
+    question: 'Welche Aussage zur Mentaltraining-Themenliste ist durch die Ausbildungs-MOC belegt?',
+    answers: ['Sie nennt Themen wie Visualisierung, Autosuggestion, Ankern und Zielsetzung, liefert dazu aber keine vollständige Schrittfolge.', 'Sie enthält einen vollständigen verbindlichen Ablauf für Visualisierungsübungen.', 'Sie belegt, dass jede genannte Technik bei allen Teilnehmenden dieselbe Wirkung hat.'],
+    correct: 0,
+    why: 'Die lokale MOC führt diese Begriffe als Themen des Kapitels auf. Im geprüften Kursarchiv liegt kein eigenständiges Mentaltraining-Anleitungsskript vor.',
+    source: 'Lokale Ausbildungs-MOC · Mentales Training, Themenübersicht',
   },
 ].map((question, index) => {
   const offset = index % question.answers.length
