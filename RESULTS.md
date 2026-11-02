@@ -29,6 +29,12 @@
 - Taktile Übungen sind explizit freiwillig und zustimmungsbasiert; keine diagnostische Auswertung oder Anleitung an schmerzhaften Bereichen.
 - Quellenmatrix und TODO um die konkret abgebildeten Praxisinhalte aktualisiert.
 
+# Fünf Tibeter mit Kursbewegungen abgeglichen (2026-11-02)
+
+- Methodenkarte beschreibt jetzt Ausgangsposition, Hauptbewegung und Ausgleich der fünf Folgen anhand der PMR-Originalseiten 31–45.
+- Wiederholungsempfehlung und umstrittene Herkunftserzählung sind als Quellinhalt eingeordnet und nicht als persönliche Trainingsvorgabe bzw. gesicherte historische Tatsache dargestellt.
+- Quellenmatrix und TODO an den Umfang der Praxisübersicht angepasst.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
