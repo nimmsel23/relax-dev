@@ -65,6 +65,12 @@
 - Diese Bedingungen sind nun konkret als abhaktbare Punkte in der Vorbereitungsliste sichtbar.
 - TODO aktualisiert.
 
+# Essverhalten bei Stress differenziert eingeordnet (2026-11-02)
+
+- Ernährung S. 14–24 beschreibt Stress-Essen und Stress-Hungern, situative Kompensation und warnt vor pauschaler Abwertung oder Ermahnung zu mehr Selbstdisziplin.
+- Die Pflichtaufgaben-Übersicht hält diese Lehrinhalte jetzt sichtbarer fest und kennzeichnet die Muster ausdrücklich nicht als feste Typen oder Diagnosekategorien.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
