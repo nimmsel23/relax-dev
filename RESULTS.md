@@ -789,3 +789,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Den Fallprompt mit den im Original-PDF genannten Angaben ergänzt: männlich, 38 Jahre, Abteilungsleiter eines Großunternehmens und leichtes Übergewicht.
 - Der präventive Hinweis stellt jetzt ausdrücklich klar, dass das im Fall erwähnte Übergewicht kein zusätzliches Abnehmziel begründet; Verdauungs- und Schlafbeschwerden bleiben als Fallangaben, nicht als Diagnose, gekennzeichnet.
 - TODO und diese Ergebnisnotiz aktualisiert.
+# Lerncheck an die offizielle Vier-Wochen-Pflichtaufgabe angeschlossen (2026-11-02)
+
+- Zwei quellengebundene Fragen prüfen jetzt den geforderten Arbeitsablauf und die vier Ernährungskapitel der Pflichtaufgabe.
+- Begründungen verlinken die jeweilige Aufgabenanforderung und grenzen sie von medizinischer Behandlung sowie individueller Ernährungs-/Supplementempfehlung ab.
+- TODO und diese Ergebnisnotiz aktualisiert.

@@ -413,6 +413,20 @@ const LEARNING_CHECK = [
     why: 'Auf S. 47 beschreibt das Skript die Rückmeldung über eine Apparatur und als Ziel eine größere Unabhängigkeit von der Technik. Die App selbst erhebt keine Körpersignale.',
     source: 'Stresstheorie · Biofeedback, S. 47',
   },
+  {
+    question: 'Welche Arbeitsschritte verlangt die offizielle Vier-Wochen-Pflichtaufgabe?',
+    answers: ['Ziele definieren, eine alltagstaugliche Wochenroutine entwerfen und einen Tageszyklus mit Übungsauswahl, Stundenaufbau und Zeitstruktur ausarbeiten.', 'Nur eine Liste bevorzugter Entspannungsmethoden ohne Wochenplan erstellen.', 'Körperwerte messen und einen medizinischen Behandlungsplan für die Verdauungsbeschwerden festlegen.'],
+    correct: 0,
+    why: 'Das Aufgabenblatt verlangt zuerst Ziele, dann das Vier-Wochen-Konzept samt genauer Beschreibung einer Trainingseinheit. Übungen, Stundenbild und Zeitstruktur sind dabei ausdrücklich genannt; die App bildet diese Felder im Fallkonzept ab.',
+    source: 'ESPT_Pflichtaufgabe_ENTSPANNUNGSTRAINER · systematische Vorgehensweise',
+  },
+  {
+    question: 'Welche vier Ernährungsbereiche nennt die Pflichtaufgabe?',
+    answers: ['Rezepte gegen Stress, nervenberuhigende Naturheilkunde, Lebensmittel gegen Stress und Nahrungsergänzungsmittel.', 'Kalorienziel, Gewichtsabnahme, tägliche Supplementdosierung und Kontrollmessung.', 'Nur regelmäßige Mahlzeiten und Trinkmengen.'],
+    correct: 0,
+    why: 'Diese vier Bereiche stehen als Ernährungstipps im Aufgabenblatt. Ihre Nennung ist eine Aufgabenanforderung, keine individuelle Ernährungs-, Heilmittel- oder Supplementempfehlung.',
+    source: 'ESPT_Pflichtaufgabe_ENTSPANNUNGSTRAINER · Ernährungstipps',
+  },
 ].map((question, index) => {
   const offset = index % question.answers.length
   return {

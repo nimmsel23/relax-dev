@@ -37,6 +37,7 @@
 - [x] Modulansicht vom Physio-/Catalog-Paket trennen, damit der Ausbildungsstart nur benötigte Ansichten lädt.
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gegen die Original-PDFs prüfen und in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
+- [x] Lerncheck an die konkreten Anforderungen der offiziellen Vier-Wochen-Pflichtaufgabe (Ziele, Wochenroutine, Tageszyklus, Ernährungskapitel) anschließen.
 - [x] Lerncheck-Fortschritt lokal speichern und nach Modulwechsel oder erneutem Öffnen fortsetzen.
 - [x] Korrekte Antwortpositionen im Lerncheck deterministisch verteilen, damit die Lösung nicht aus einem wiederkehrenden Positionsmuster geraten werden kann.
 - [x] Lerncheck um quellgebundene Fragen zu Yoga, Pilates, den fünf Tibetern und der abweichenden PMR-Gruppenliste erweitern; fehlende Schrittfolgen bei Mentaltraining, AT und Fantasiereisen als Quellenkompetenz abfragen.
