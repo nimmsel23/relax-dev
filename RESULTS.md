@@ -14,7 +14,7 @@
 
 - Die App übernimmt zwei weitere Teile des eigenen ausgearbeiteten Konzepts: eine kleine Alltagsvariante für volle Tage und den Rückblick auf hilfreiche Methoden/Essensvorbereitung sowie zwei weiterzuführende Routinen.
 - Beide Abschnitte sind als persönliche Ergänzungen und nicht als offizielle Pflichtfelder gekennzeichnet; der Markdown-Export enthält sie.
-- `npm run build` einschließlich PWA-Service-Worker und `git diff --check` liefen erfolgreich. Der Headless-Firefox-Prozess endete beim Start mit Exit-Code 139; die neuen Formularfelder konnten deshalb nicht im Browser abgenommen werden.
+- `npm run build` einschließlich PWA-Service-Worker und `git diff --check` liefen erfolgreich. Ein isolierter Headless-Firefox/Marionette-Lauf unter Xvfb bei 500 CSS-Pixeln Breite bestätigte Tastatureingabe und Reload-Speicherung aller neuen Felder, Wochenselbstcheck 7/10 sowie fehlenden horizontalen Überlauf. Version-2-JSON-Export enthielt den Fallstand und die Atemschulungs-Schlüssel; der Import stellte nach absichtlicher lokaler Änderung den exportierten Fallstand nach Bestätigung und Reload wieder her. Die lokale Vorschau hatte keine API-Proxys und las keine Sessions. Direkter Firefox-Start ohne Xvfb scheiterte zuvor mit Exit-Code 139; die iPhone-/iPad-Abnahme bleibt offen.
 
 # Unterstützende Maßnahmen im Methoden- und Praxisprotokoll auswählbar gemacht (2026-11-02)
 
