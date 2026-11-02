@@ -12,6 +12,7 @@ import {
   collection,
   query,
   orderBy,
+  startAfter,
   limit as fbLimit,
   serverTimestamp,
 } from "firebase/firestore";
@@ -37,12 +38,11 @@ export async function saveRelaxSession(date = localToday(), items = []) {
 }
 
 // Für die journal-dev Timeline-Aggregation (Journal zeigt alle Pillars).
-export async function getRelaxSessionHistory(n = 30) {
-  const q = query(
-    collection(db, "relax", getUid(), "sessions"),
-    orderBy("date", "desc"),
-    fbLimit(n),
-  );
+export async function getRelaxSessionHistory(n = 30, before = null) {
+  const constraints = [orderBy("date", "desc")];
+  if (before) constraints.push(startAfter(before));
+  constraints.push(fbLimit(n));
+  const q = query(collection(db, "relax", getUid(), "sessions"), ...constraints);
   const snap = await getDocs(q);
   return snap.docs.map((d) => {
     const data = d.data() || {};

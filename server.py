@@ -242,9 +242,13 @@ def save_session(background_tasks: BackgroundTasks, payload: Dict[str, Any], dat
     return { "ok": True }
 
 @app.get("/session/history")
-def get_session_history(limit: int = Query(10, ge=1, le=365)):
+def get_session_history(limit: int = Query(10, ge=1, le=365), before: Optional[str] = Query(None)):
     sessions_dir = DATA_DIR / "sessions"
-    files = sorted([f for f in sessions_dir.glob("*.json")], key=lambda x: x.name, reverse=True)[:limit]
+    files = sorted(
+        [f for f in sessions_dir.glob("*.json") if before is None or f.stem < before],
+        key=lambda x: x.name,
+        reverse=True,
+    )[:limit]
     sessions = []
     for f in files:
         data = read_json(f)

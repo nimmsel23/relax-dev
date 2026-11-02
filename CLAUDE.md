@@ -117,7 +117,7 @@ Single-file HTTP API server (no frameworks, native Node.js):
   - `GET /techniques` — Available relaxation techniques (hardcoded list)
   - `GET /session?date=YYYY-MM-DD` — Fetch session data
   - `POST /session` — Save session items
-  - `GET /session/history?limit=10` — Last N sessions
+  - `GET /session/history?limit=10&before=YYYY-MM-DD` — Sessions before an optional date cursor (exclusive), newest first; request earlier pages with the last returned date
   - `GET /session/latest` — Most recent session
   - `GET /journal?date=...` — Fetch markdown entry
   - `POST /journal` — Save markdown entry

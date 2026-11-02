@@ -384,6 +384,20 @@ function emptyCasePlan() {
 
 function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"` }
 
+async function getCompleteRelaxSessionHistory() {
+  const rows = []
+  let before = null
+  while (true) {
+    const page = await getRelaxSessionHistory(365, before)
+    rows.push(...(page || []))
+    if (!page || page.length < 365) break
+    const nextBefore = page[page.length - 1]?.date
+    if (!nextBefore || nextBefore === before) break
+    before = nextBefore
+  }
+  return rows
+}
+
 export default function Ausbildung() {
   const [section, setSection] = useState('start')
   const [method, setMethod] = useState(null)
@@ -433,7 +447,7 @@ export default function Ausbildung() {
   }, [delivery?.running])
   useEffect(() => {
     let alive = true
-    getRelaxSessionHistory(365).then(rows => { if (alive) setHistory(rows || []) }).catch(() => { if (alive) setHistory([]) }).finally(() => { if (alive) setLoading(false) })
+    getCompleteRelaxSessionHistory().then(rows => { if (alive) setHistory(rows || []) }).catch(() => { if (alive) setHistory([]) }).finally(() => { if (alive) setLoading(false) })
     return () => { alive = false }
   }, [])
 
@@ -481,7 +495,7 @@ export default function Ausbildung() {
       const items = current?.items || []
       items.push({ id: crypto.randomUUID?.() || String(Date.now()), technique: entry.technique, minutes: Number(entry.minutes), mood_before: 3, mood_after: 3, note: entry.description.trim(), trainingUnit: true, signed: true })
       await saveRelaxSession(entry.date, items)
-      const rows = await getRelaxSessionHistory(365)
+      const rows = await getCompleteRelaxSessionHistory()
       setHistory(rows || [])
       setEntry(value => ({ ...value, date: localToday(), description: '', signed: false }))
       notify('Einheit gespeichert')

@@ -183,7 +183,7 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 ### Sessions
 - `GET /session?date=YYYY-MM-DD` — Fetch session
 - `POST /session` — Save session
-- `GET /session/history?limit=10` — Last N sessions
+  - `GET /session/history?limit=10&before=YYYY-MM-DD` — Sessions before an optional date cursor (exclusive), newest first; request earlier pages with the last returned date
 - `GET /session/latest` — Most recent session
 
 ### Journal

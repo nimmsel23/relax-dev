@@ -538,3 +538,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Methodenkarte nennt jetzt den tatsächlichen Inhaltsbereich S. 4–26 statt S. 4–24.
 - Die Praxisübersicht trennt die Empfehlungen aus S. 23, Lauf-/Bergsportbeispiele inklusive Trailrunning aus S. 24, Wasser- und Mannschaftssport aus S. 25 sowie Naturwege/Bewegungsparks aus S. 26.
+## 2026-11-02 — Vollständige Historie für Ausbildungsnachweis
+
+- Session-Historie kann über einen exklusiven `before`-Datums-Cursor rückwärts paginiert werden (Firestore und lokale Server).
+- Der Ausbildungsnachweis lädt die Seiten vollständig, sodass ältere bestätigte Einheiten und noch zu prüfende Praxislogs auch bei langen Ausbildungsverläufen sichtbar bleiben. Der Drucknachweis bleibt bei seinen 30 Formularzeilen.
+- API-Vertrag dokumentiert; Vite-Produktionsbuild erfolgreich und `git diff --check` sauber.
