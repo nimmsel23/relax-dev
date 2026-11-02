@@ -573,3 +573,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Kandidaten merken ihre Position im Tagesprotokoll als Rückfallkennung. Wenn ein älterer Datensatz keine ID enthält, aktualisiert die Bestätigung dadurch nur die ausgewählte Zeile.
 - Sessions mit ID werden weiterhin anhand ihrer ID zugeordnet.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+
+# Modulnavigation mit URL und Browser-Zurück synchronisiert (2026-11-02)
+
+- Tabwechsel schreiben den Tab jetzt in den URL-Hash; bestehende Hash-Links bleiben nutzbar.
+- Beim Browser-Zurück zu einer URL ohne Hash wird der passende Standard-Tab wiederhergestellt (Modul, beziehungsweise Catalog auf dem isolierten Knowledge-Port).
+- Vite-Produktionsbuild und `git diff --check` folgen.

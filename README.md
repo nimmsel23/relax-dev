@@ -62,6 +62,7 @@ Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fac
 - 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher; bisherige Sessions können nach persönlicher Bestätigung übernommen und als 30-Zeilen-CSV exportiert werden. Eine Dauer ist im offiziellen Formular nicht vorgeschrieben; die App-Dauerangabe ist optional.
 
 Die Kernnavigation ist auf Heute, Modul, Praxis und Atem ausgerichtet. Journal, Stats, Physio, Catalog und Einstellungen liegen unter **Mehr**.
+Der aktive Bereich steht im URL-Hash; direkte Links, Neuladen und Browser-Zurück bleiben mit der Navigation synchron.
 
 Die Ansichten werden bei Bedarf separat geladen. So starten Modul und Atem ohne React-Flow- und Physiologie-Ansichten im Hauptpaket; die PWA hält weiterhin alle App-Bereiche offline verfügbar.
 

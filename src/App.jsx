@@ -42,6 +42,7 @@ export default function App() {
     const onHashChange = () => {
       const hashTab = window.location.hash.replace('#', '')
       if (TAB_IDS.includes(hashTab)) setTab(hashTab)
+      else setTab(window.location.port === '9124' ? 'catalog' : 'ausbildung')
     }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
@@ -60,6 +61,7 @@ export default function App() {
   function navigate(nextTab) {
     setTab(nextTab)
     setMoreOpen(false)
+    if (window.location.hash !== `#${nextTab}`) window.location.hash = nextTab
   }
 
   const View = VIEWS[tab]

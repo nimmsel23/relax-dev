@@ -84,3 +84,4 @@
 - [x] Die bebilderten Flexibilitätstrainingsseiten Assisted Stretching S. 18–28 in der Methodenkarte ausweisen und die vorbereitende Gegenbewegung S. 41 aufnehmen, ohne nicht beschriftete Zeichnungen mit erfundenen Übungsnamen zu versehen.
 - [x] Die Pilates-Bildtafeln zu funktionell wichtigen Körpersegmenten (S. 22–23) in Quellenmatrix und Methodenansicht ergänzen, ohne sie als zusätzliche Bewegungsabläufe zu interpretieren.
 - [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.
+- [x] Hauptnavigation mit URL-Hash und Browser-Zurück synchronisieren, sodass der Modul-Tab direkt verlinkbar ist und die hashlose Route wieder zum Standard-Einstieg führt.
