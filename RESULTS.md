@@ -1,6 +1,7 @@
 # Ernährungs-Pflichtaufgabe mit Quellenübersicht erweitert (2026-11-02)
 
 - Aufklappbare Übersicht im Fallkonzept ergänzt: Essverhalten bei Stress, Brain-Food-Beispiele, Power-Food-Kapitel, Supplemente sowie Naturheilmittel und Rezepte mit Seitenbereichen.
+- Grundlagenkapitel S. 25–38 ergänzt: ausgewogene Ernährung, Mahlzeitenrhythmus, Getränke und Essenssituation; einzelne Lebensmittel werden laut Skript nicht als direkte Stressreduktion belegt.
 - Gesundheitsbehauptungen und Einnahmeangaben werden als Inhalte der Vorlage kenntlich gemacht und nicht als bestätigte Wirkung oder Trainerempfehlung dargestellt.
 - Quellenmatrix und TODO aktualisiert.
 
