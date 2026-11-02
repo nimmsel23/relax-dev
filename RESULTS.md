@@ -10,6 +10,12 @@
 - Das Fallarbeitsblatt bildet jetzt auch den freiwilligen Wochenrückblick aus dem eigenen ausgearbeiteten Ernährung-/Entspannungskonzept ab: innere Unruhe, Einschlafen, Verdauung und Routinen auf einer 1–10-Skala.
 - Skalenrichtung und Grenzen sind direkt an den Feldern erläutert. Der Check bleibt optional, ergänzt keine offizielle Pflichtanforderung und erscheint auch im Markdown-Export.
 
+# Kurzvariante und Abschlussrückblick in der Fallaufgabe ergänzt (2026-11-02)
+
+- Die App übernimmt zwei weitere Teile des eigenen ausgearbeiteten Konzepts: eine kleine Alltagsvariante für volle Tage und den Rückblick auf hilfreiche Methoden/Essensvorbereitung sowie zwei weiterzuführende Routinen.
+- Beide Abschnitte sind als persönliche Ergänzungen und nicht als offizielle Pflichtfelder gekennzeichnet; der Markdown-Export enthält sie.
+- `npm run build` einschließlich PWA-Service-Worker und `git diff --check` liefen erfolgreich. Der Headless-Firefox-Prozess endete beim Start mit Exit-Code 139; die neuen Formularfelder konnten deshalb nicht im Browser abgenommen werden.
+
 # Unterstützende Maßnahmen im Methoden- und Praxisprotokoll auswählbar gemacht (2026-11-02)
 
 - Neuer Sammelpunkt erschließt Tai-Chi, Qigong und Feldenkrais aus Stresstheorie S. 58; Yoga und Meditation bleiben mit eigenen Methodenkarten vertreten.

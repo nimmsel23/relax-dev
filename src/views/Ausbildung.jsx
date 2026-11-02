@@ -454,6 +454,7 @@ function emptyCasePlan() {
     title: '4-Wochen-Konzept bei Stress',
     goals: '',
     weeks: Array.from({ length: 4 }, (_, index) => ({ number: index + 1, focus: '', routine: '', relaxation: '', nutrition: '', weeklyCheck: { stress: '', sleep: '', digestion: '', routine: '' } })),
+    minimalRoutine: '',
     dayCycle: { time: '', goal: '', sequence: '', duration: '', transition: '' },
     foodIdeas: '',
     brainFood: '',
@@ -462,6 +463,7 @@ function emptyCasePlan() {
     recipeIdeas: '',
     naturalProducts: '',
     supplementNotes: '',
+    review: { method: '', continue: '' },
   }
 }
 
@@ -480,6 +482,8 @@ function normalizeModuleBackup(backup) {
   const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value)
   const valid = isObject(plan) && typeof plan.title === 'string' && Array.isArray(plan.blocks)
     && isObject(casePlan) && Array.isArray(casePlan.weeks) && casePlan.weeks.length === 4 && isObject(casePlan.dayCycle)
+    && (casePlan.minimalRoutine === undefined || typeof casePlan.minimalRoutine === 'string')
+    && (casePlan.review === undefined || (isObject(casePlan.review) && ['method', 'continue'].every(key => typeof casePlan.review[key] === 'string')))
     && (delivery === null || (isObject(delivery) && Array.isArray(delivery.blocks) && delivery.blocks.length > 0 && Number.isInteger(delivery.index) && delivery.index >= 0 && delivery.index < delivery.blocks.length && Number.isFinite(delivery.remaining) && delivery.remaining >= 0 && typeof delivery.running === 'boolean' && (!delivery.running || Number.isFinite(delivery.endsAt))))
     && isObject(stress) && isObject(methods)
     && isObject(learning) && Number.isInteger(learning.index) && learning.index >= 0 && learning.index <= LEARNING_CHECK.length && Number.isInteger(learning.score) && learning.score >= 0 && learning.score <= LEARNING_CHECK.length
@@ -828,9 +832,11 @@ export default function Ausbildung() {
       '', '## Ziele', casePlan.goals || '', '', '## Wochenroutine',
       ...casePlan.weeks.flatMap(week => [`### Woche ${week.number}${week.focus ? ` · ${week.focus}` : ''}`, `- Alltag/Routine: ${week.routine || ''}`, `- Entspannung: ${week.relaxation || ''}`, `- Ernährung: ${week.nutrition || ''}`, `- Wochenselbstcheck (optional): innere Unruhe ${week.weeklyCheck?.stress || '—'}/10; Einschlafen ${week.weeklyCheck?.sleep || '—'}/10; Verdauung ${week.weeklyCheck?.digestion || '—'}/10; Routinen ${week.weeklyCheck?.routine || '—'}/10`, '']),
       '## Einordnung des Wochenselbstchecks', 'Die Werte sind ein freiwilliger, subjektiver Rückblick aus meinem Konzeptentwurf. Bei Beschwerden bedeutet 1 = gering und 10 = stark; bei Routinen 1 = kaum und 10 = sehr gut eingehalten. Sie sind keine Messwerte, Diagnose oder Behandlungsempfehlung.',
+      '', '## Minimalvariante für hektische Tage', casePlan.minimalRoutine || '_Noch nicht ausgefüllt._',
       '## Ausgearbeiteter Tageszyklus',
       `- Tageszeit: ${casePlan.dayCycle.time || ''}`, `- Ziel: ${casePlan.dayCycle.goal || ''}`, `- Übungen und Reihenfolge: ${casePlan.dayCycle.sequence || ''}`, `- Zeitstruktur: ${casePlan.dayCycle.duration || ''}`, `- Übergänge und Rücknahme: ${casePlan.dayCycle.transition || ''}`,
       '', '## Ernährungsideen aus dem Skript', `- Lebensmittel/Mahlzeiten: ${casePlan.foodIdeas || ''}`, `- Brain Food: ${casePlan.brainFood || ''}`, `- Power Food: ${casePlan.powerFood || ''}`, `- Soul Food: ${casePlan.soulFood || ''}`, `- Rezeptideen: ${casePlan.recipeIdeas || ''}`, `- Naturheilkundliche Inhalte: ${casePlan.naturalProducts || ''}`, `- Nahrungsergänzungsmittel: ${casePlan.supplementNotes || ''}`,
+      '', '## Rückblick nach vier Wochen', `- Hilfreichste Entspannungsmethode und Essensvorbereitung: ${casePlan.review?.method || ''}`, `- Zwei Routinen zum Weiterführen: ${casePlan.review?.continue || ''}`,
       '', '---', 'Arbeitsstand aus dem Relax-Ausbildungsmodul. Inhalte individuell prüfen und keine Diagnose oder Therapie ableiten.',
     ]
     downloadText(`stresskonzept-4-wochen-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
@@ -1078,6 +1084,7 @@ export default function Ausbildung() {
         {[['focus', 'Wochenziel', 'Welcher kleine Schwerpunkt passt zu dieser Woche?'], ['routine', 'Alltagsroutine', 'Wann und wie lässt sich die Veränderung realistisch in den Alltag einbauen?'], ['relaxation', 'Entspannungsübung', 'Welche Methode aus den Skripten wird eingeplant und wie wird sie angeleitet?'], ['nutrition', 'Ernährungsbaustein', 'Welche passende Skriptidee wird ausgewählt und wie alltagstauglich umgesetzt?']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={week[key]} onChange={event => updateCaseWeek(index, key, event.target.value)} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
         <div className="rounded-xl p-3" style={{ background: 'var(--bg2)' }}><h4 className="text-xs font-bold">Wochenselbstcheck · optionale Ergänzung deines Konzeptentwurfs</h4><p className="mt-1 text-[11px] leading-relaxed" style={{ color: 'var(--muted)' }}>Nur subjektiv einschätzen: Bei Beschwerden bedeutet 1 = gering und 10 = stark; bei Routinen 1 = kaum und 10 = sehr gut eingehalten. Keine Messung oder Diagnose.</p><div className="mt-3 grid grid-cols-2 gap-3">{[['stress', 'Innere Unruhe'], ['sleep', 'Einschlafen'], ['digestion', 'Verdauung'], ['routine', 'Routine eingehalten']].map(([key, label]) => <label key={key} className="text-xs" style={{ color: 'var(--muted)' }}>{label}<select value={week.weeklyCheck?.[key] || ''} onChange={event => updateCaseWeekReview(index, key, event.target.value)} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input}><option value="">Offen</option>{Array.from({ length: 10 }, (_, value) => <option key={value + 1} value={String(value + 1)}>{value + 1} / 10</option>)}</select></label>)}</div></div>
       </section>)}</div>
+      <section className="rounded-2xl border p-4 space-y-3" style={panel}><h3 className="font-bold">Kurzvariante für hektische Tage · eigene Konzept-Ergänzung</h3><p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Welche kleine Alternative bleibt realistisch, wenn der geplante Ablauf an einem vollen Arbeitstag nicht klappt? In deinem Beispiel sind es kurze Atemwahrnehmung, eine echte Mittagspause und ein kurzer Spaziergang.</p><textarea value={casePlan.minimalRoutine || ''} onChange={event => setCasePlan(current => ({ ...current, minimalRoutine: event.target.value }))} rows={3} placeholder="Beschreibe deine eigene kurze Alltagsvariante." className="w-full rounded-xl border px-3 py-2 text-sm" style={input} /></section>
       <section className="rounded-2xl border p-4 space-y-3" style={panel}>
         <h3 className="font-bold">Eine Einheit als Tageszyklus ausarbeiten</h3>
         {[['time', 'Zeitpunkt und Alltagssituation', 'z. B. Feierabend; Voraussetzungen und Dauer'], ['goal', 'Ziel der Einheit', 'Was soll der Teilnehmer üben oder wahrnehmen?'], ['sequence', 'Übungsauswahl und Reihenfolge', 'Ankommen, Einschulung, Hauptteil, Nachspüren'], ['duration', 'Zeitstruktur', 'Minuten je Abschnitt; Gesamtzeit'], ['transition', 'Rücknahme und Abschluss', 'Orientierung, Feedback und Transfer in den Alltag']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={casePlan.dayCycle[key]} onChange={event => setCasePlan(current => ({ ...current, dayCycle: { ...current.dayCycle, [key]: event.target.value } }))} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
@@ -1103,6 +1110,7 @@ export default function Ausbildung() {
         {[['foodIdeas', 'Lebensmittel und Mahlzeitenideen', 'Skriptbezug und Tageszeit'], ['brainFood', 'Brain Food', 'Beispiele und Skriptstelle'], ['powerFood', 'Power Food', 'Beispiele und Skriptstelle'], ['soulFood', 'Soul Food', 'Beispiele und Skriptstelle'], ['recipeIdeas', 'Rezeptideen', 'Welche einfache Zubereitung passt zur Wochenroutine?'], ['naturalProducts', 'Nervenberuhigende Naturheilkunde', 'Kursinhalt und Grenzen der präventiven Trainerrolle'], ['supplementNotes', 'Nahrungsergänzungsmittel', 'Skriptinhalt, offene Fragen und nötige fachliche Abklärung']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={casePlan[key]} onChange={event => setCasePlan(current => ({ ...current, [key]: event.target.value }))} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
         <div className="rounded-xl p-3 text-xs" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>Der Entwurf speichert lokal auf diesem Gerät. Er ist ein Ausbildungsarbeitsblatt, keine Diagnose oder individuelle Behandlungsempfehlung.</div>
       </section>
+      <section className="rounded-2xl border p-4 space-y-3" style={panel}><h3 className="font-bold">Rückblick nach vier Wochen · optionale Konzept-Ergänzung</h3><p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Halte fest, was sich in diesem Fallkonzept als praktikabel erwiesen hat und was weiterlaufen soll.</p><label className="block text-xs" style={{ color: 'var(--muted)' }}>Hilfreichste Entspannungsmethode und Essensvorbereitung<textarea value={casePlan.review?.method || ''} onChange={event => setCasePlan(current => ({ ...current, review: { ...(current.review || {}), method: event.target.value } }))} rows={3} placeholder="Was würdest du im Beispielkonzept beibehalten?" className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="block text-xs" style={{ color: 'var(--muted)' }}>Zwei Routinen für die nächsten vier Wochen<textarea value={casePlan.review?.continue || ''} onChange={event => setCasePlan(current => ({ ...current, review: { ...(current.review || {}), continue: event.target.value } }))} rows={2} placeholder="Welche zwei kleinen Gewohnheiten bleiben alltagstauglich?" className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label></section>
     </>}
 
     {section === 'planung' && <>
