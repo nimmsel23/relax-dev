@@ -483,9 +483,10 @@ export default function Ausbildung() {
   useEffect(() => {
     if (!delivery?.running) return undefined
     const timer = window.setInterval(() => setDelivery(current => {
-      if (!current || !current.running) return current
-      if (current.remaining <= 1) return { ...current, remaining: 0, running: false }
-      return { ...current, remaining: current.remaining - 1 }
+      if (!current?.running || !current.endsAt) return current
+      const remaining = Math.max(0, Math.ceil((current.endsAt - Date.now()) / 1000))
+      if (remaining === 0) return { ...current, remaining: 0, running: false, endsAt: null }
+      return remaining === current.remaining ? current : { ...current, remaining }
     }), 1000)
     return () => window.clearInterval(timer)
   }, [delivery?.running])
@@ -511,13 +512,24 @@ export default function Ausbildung() {
   function updateBlock(id, patch) { setPlan(current => ({ ...current, blocks: current.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })) }
   function beginDelivery() {
     if (!plan.blocks.length) return
-    setDelivery({ title: plan.title, blocks: plan.blocks.map(block => ({ ...block })), index: 0, remaining: Math.max(1, Number(plan.blocks[0].minutes) || 1) * 60, running: false })
+    setDelivery({ title: plan.title, blocks: plan.blocks.map(block => ({ ...block })), index: 0, remaining: Math.max(1, Number(plan.blocks[0].minutes) || 1) * 60, running: false, endsAt: null })
   }
   function changeDeliveryBlock(index) {
     if (!delivery) return
     if (index >= delivery.blocks.length) { setDelivery(null); notify('Einheit abgeschlossen. Zeit fürs Feedback einplanen.'); return }
     const block = delivery.blocks[index]
-    setDelivery(current => ({ ...current, index, remaining: Math.max(1, Number(block.minutes) || 1) * 60, running: false }))
+    setDelivery(current => ({ ...current, index, remaining: Math.max(1, Number(block.minutes) || 1) * 60, running: false, endsAt: null }))
+  }
+  function toggleDeliveryTimer() {
+    setDelivery(current => {
+      if (!current) return current
+      if (current.running) {
+        const remaining = Math.max(0, Math.ceil(((current.endsAt || Date.now()) - Date.now()) / 1000))
+        return { ...current, remaining, running: false, endsAt: null }
+      }
+      const remaining = current.remaining > 0 ? current.remaining : Math.max(1, Number(current.blocks[current.index].minutes) || 1) * 60
+      return { ...current, remaining, running: true, endsAt: Date.now() + remaining * 1000 }
+    })
   }
   function formatTimer(seconds) { return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}` }
   function answerCheck(index) {
@@ -617,7 +629,7 @@ export default function Ausbildung() {
       </section>
       <div className="flex items-center justify-center gap-3">
         <button aria-label="Vorheriger Abschnitt" disabled={delivery.index === 0} onClick={() => changeDeliveryBlock(delivery.index - 1)} className="rounded-xl border p-3 disabled:opacity-40" style={{ borderColor: 'var(--line)' }}><SkipBack size={20} /></button>
-        <button onClick={() => setDelivery(current => current.remaining === 0 ? { ...current, remaining: Math.max(1, Number(current.blocks[current.index].minutes) || 1) * 60, running: true } : { ...current, running: !current.running })} className="flex min-w-36 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>{delivery.running ? <Pause size={18} /> : <Play size={18} />}{delivery.running ? 'Pause' : delivery.remaining === 0 ? 'Timer erneut' : 'Timer starten'}</button>
+        <button onClick={toggleDeliveryTimer} className="flex min-w-36 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>{delivery.running ? <Pause size={18} /> : <Play size={18} />}{delivery.running ? 'Pause' : delivery.remaining === 0 ? 'Timer erneut' : 'Timer starten'}</button>
         <button aria-label={isLastBlock ? 'Einheit abschließen' : 'Nächster Abschnitt'} onClick={() => changeDeliveryBlock(delivery.index + 1)} className="rounded-xl border p-3" style={{ borderColor: 'var(--line)' }}>{isLastBlock ? <Square size={20} /> : <SkipForward size={20} />}</button>
       </div>
       <p className="text-center text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Der Timer unterstützt deine Zeitplanung. Du leitest weiterhin selbst an, beobachtest die Gruppe und passt Dauer oder Übergang an.</p>

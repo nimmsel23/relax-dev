@@ -597,3 +597,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Der Top-Level-Router liest jetzt das erste Segment des URL-Hashs. Links wie `#ausbildung/methoden/<name>` wählen explizit den Modul-Tab, statt auf die Standardroute zurückzufallen.
 - Bestehende einteilige Hash-Routen wie `#atem` oder `#session` bleiben unverändert auflösbar.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+
+# Durchführungs-Timer mit absoluter Endzeit stabilisiert (2026-11-02)
+
+- Abschnitts-Timer berechnet Restzeit anhand einer Endzeit statt jede Intervall-Ausführung als verstrichene Sekunde zu zählen.
+- Bei Hintergrunddrosselung und Rückkehr in die App wird dadurch die tatsächliche Restzeit angezeigt; Pause, Fortsetzen, Abschnittswechsel und Neustart setzen die Endzeit passend zurück.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.
