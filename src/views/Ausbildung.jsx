@@ -38,6 +38,10 @@ const METHODS = [
     ['Rücknahme · Stundenplanung, S. 12', 'Für liegende Übungen mit geschlossenen Augen nennt das Skript eine ausreichend lange, schrittweise Rücknahme. Bei AT empfiehlt es ein wiederkehrendes Ritual; als Beispiel wird das Zählen von 4 auf 1 mit kleinen Bewegungen, Dehnen, Strecken, bewusstem Atmen und leichter Aktivierung bis zum Sitzen oder Stehen beschrieben. Das ist ein Kursbeispiel, keine vollständige AT-Anleitung.'],
     ['Abschluss · Stundenplanung, S. 13', 'Nach der Entspannungseinheit Zeit für ein Gespräch über das Erleben einplanen. Das Skript empfiehlt gezieltes, offenes Nachfragen und die Reflexion des eigenen Stundenkonzepts.'],
   ] },
+  { name: 'Selbsthypnose · Kursübersicht', duration: 'Im Stundenentwurf festlegen', icon: Sparkles, focus: 'Eine im Skript genannte Soforthilfe einordnen', practice: 'Die Stresstheorie führt Selbsthypnose neben Autogenem Training und PMR als Verfahren der Soforthilfe auf. Sie beschreibt Ähnlichkeiten zu AT und nennt eigene Ziele als möglichen Anwendungskontext. Ein spezifisches Selbsthypnose-Anleitungsskript liegt im Kursarchiv nicht vor; die Karte dokumentiert nur den Kursverweis.', adapt: 'Keine Selbsthypnose-Formel oder Wirkung aus der knappen Quellenbeschreibung ableiten. Nicht als Behandlung oder Empfehlung für ein individuelles Ziel darstellen.', source: 'FlexyFit Academy: Stresstheorie, S. 52 · Überblick, keine Schrittfolge', outlineTitle: 'Soforthilfe im Skript', outline: [
+    ['Quellenaussage · S. 52', 'Das Skript beschreibt Selbsthypnose als dem Autogenen Training ähnlich und verbindet sie mit bestimmten persönlichen Zielen. Weitergehende Wirkungsangaben sind Aussagen der Unterlage; sie werden hier nicht als bestätigt oder individuell geeignet übernommen.'],
+    ['Anleitungsgrenze', 'Das Kursarchiv enthält keine methodenspezifische Selbsthypnose-Formel oder vollständige Schrittfolge. Die Karte dient der Quellenorientierung, nicht der Durchführung.'],
+  ] },
   { name: 'Phantasiereise & innere Bilder', duration: '20–30 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“; das Kursarchiv enthält keine Schritt-für-Schritt-Anleitung.', icon: BookOpen, focus: 'Mit einer ruhigen, freiwilligen Vorstellungsübung arbeiten', practice: 'Die Stresstheorie ordnet Fantasiereisen der emotionalen Ebene zu und nennt sie als langfristige Stressbewältigung. Ein spezifisches Fantasiereisen-Anleitungsskript liegt im Kursarchiv nicht vor; konkrete Texte daher anhand der praktischen Einschulung selbst vorbereiten.', adapt: 'Keine belastenden oder überraschenden Szenen vorgeben. Augen offen halten oder aussteigen lassen und eine schrittweise Rücknahme mit Orientierung einplanen.', source: 'FlexyFit Academy: Stresstheorie, S. 55–56; Stundenplanung, S. 12–13', outlineTitle: 'Kursrahmen zur Rücknahme · keine Fantasiereisen-Anleitung', outline: [
     ['Rücknahme · Stundenplanung, S. 12', 'Für liegende Übungen mit geschlossenen Augen nennt das Skript eine ausreichend lange, schrittweise Rücknahme. Fantasiereisen werden ausdrücklich als Methode genannt, bei der eine gute Rücknahme wichtig ist. Ein wiederkehrendes Ritual mit kleinen Bewegungen und schrittweiser Aktivierung ist ein Kursbeispiel; einen konkreten Reise-Text enthält die Unterlage nicht.'],
     ['Abschluss · Stundenplanung, S. 13', 'Nach der Entspannungseinheit Zeit für ein Gespräch über das Erleben einplanen. Das Skript empfiehlt gezieltes, offenes Nachfragen und die Reflexion des eigenen Stundenkonzepts.'],
@@ -306,6 +310,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Die Liste auf S. 55 nennt die drei Verfahren als Beispiele für die muskuläre Ebene. Sie liefert für die zwei nicht anderweitig ausgearbeiteten Verfahren hier keine eigene Schrittfolge.',
     source: 'Stresstheorie · Entspannungstechniken, S. 55',
+  },
+  {
+    question: 'Welche Verfahren nennt das Stresstheorie-Skript im Abschnitt „Soforthilfe“?',
+    answers: ['Autogenes Training, Progressive Muskelrelaxation und Selbsthypnose.', 'Suggestive Musik, Yoga und Feldenkrais.', 'Nur Meditation und Atemtechniken.'],
+    correct: 0,
+    why: 'Die Übersicht auf S. 52 nennt AT, PMR und Selbsthypnose als Verfahren der Soforthilfe. Für Selbsthypnose enthält das geprüfte Archiv jedoch keine konkrete Anleitung.',
+    source: 'Stresstheorie · Soforthilfe, S. 52',
   },
   {
     question: 'Was sagt das Ernährungsskript über einzelne Lebensmittel und Stress?',

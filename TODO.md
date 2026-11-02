@@ -51,6 +51,7 @@
 - [x] Pilates-Kategorien mit den 19 Übungsnamen und Seitenbereichen der Originalsammlung (S. 17–97) verknüpfen, ohne fehlende Kategorienzuordnungen zu erfinden.
 - [x] Pilates-Konzeptbegriffe und Atem-/Haltungscues aus dem Original (S. 8–15) mit Fundstellen ergänzen und als Quellbegriffe statt universeller Bewegungsvorgaben einordnen.
 - [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.
+- [x] Selbsthypnose aus Stresstheorie S. 52 in der Methodenliste und im Lerncheck als Kursverweis ohne Anleitung oder individuelle Wirkungsempfehlung abbilden.
 - [x] Stundenplanung um Trainerhaltung und Teamkommunikation, optionale Musik, Wiederholung, Demonstration sowie den Puls-/Zeit-Richtwert für kombinierte Kurse erweitern.
 - [x] Das Anfangsritual aus Stundenplanung S. 22 im Stundenentwurf konkretisieren: bewusste Teilnahmeentscheidung, passende Position und Innenwendung der Aufmerksamkeit; Augenschluss als optionale Möglichkeit.
 - [x] Die noch fehlenden Grundlagen zur Atemmechanik aus Atemschulung S. 9–14 und die Einstiegsfrage der Kursdiskussion auf S. 4 im Atemtrainer abbilden.

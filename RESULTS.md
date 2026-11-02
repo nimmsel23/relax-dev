@@ -1,3 +1,8 @@
+# Selbsthypnose als Soforthilfe-Kursverweis ergänzt (2026-11-02)
+
+- Methodenliste und Lerncheck enthalten jetzt Selbsthypnose aus Stresstheorie S. 52.
+- Die Karte kennzeichnet die Stelle als Überblick und gibt weder die Wirkbehauptungen der Quelle als bestätigt aus noch ergänzt sie eine fehlende Schrittfolge. Quellenmatrix und TODO aktualisiert.
+
 # Persönliche Sitzungsnotizen als Praxisprotokolle abgegrenzt (2026-11-02)
 
 - Quellenmatrix kennzeichnet die beiden lokalen Sitzungsnotizen als eigene Praxisdokumentation, nicht als FlexyFit-Anleitungen.
