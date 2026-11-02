@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-relax-devctl — Relax Centre Server Controller
-Controls: Node API (:9123, aos-relax-dev.service) + KB Enricher (:9124, Python)
+relax-devctl — Relax UI and API status controller
+Controls: Coach API (:9150, in-process Relax routes) + KB Enricher (:9124, Python)
 Deploy: ~/dev/relax-dev → /opt/relax (relax.service, system scope, sudo)
 
 Domain CLI → use: relax
@@ -24,10 +24,10 @@ msg = Printer()
 app = typer.Typer(help="Relax Centre Server Controller", no_args_is_help=True)
 
 DEV_DIR = Path(__file__).resolve().parent
-NODE_SERVICE = os.getenv("RELAX_NODE_SERVICE", "aos-relax-dev.service")
-NODE_PORT = os.getenv("RELAX_NODE_PORT", "9123")
+COACH_SERVICE = os.getenv("COACH_API_SERVICE", "coach-api.service")
+COACH_URL = os.getenv("COACH_API_URL", "http://127.0.0.1:9150")
 ENRICHER_PORT = os.getenv("RELAX_ENRICHER_PORT", "9124")
-NODE_URL = f"http://127.0.0.1:{NODE_PORT}"
+RELAX_URL = f"{COACH_URL.rstrip('/')}/relax-api"
 ENRICHER_URL = f"http://127.0.0.1:{ENRICHER_PORT}"
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -56,16 +56,16 @@ def _ctl(*args: str) -> int:
 
 def _wait_healthy(timeout: int = 10) -> bool:
     for _ in range(timeout):
-        service_active = _service_active(NODE_SERVICE)
-        api_healthy = _http_ok(NODE_URL)
+        service_active = _service_active(COACH_SERVICE)
+        api_healthy = _http_ok(f"{RELAX_URL}/health")
         if service_active and api_healthy:
-            msg.good("Node API healthy (service active)")
+            msg.good("Relax API healthy inside Coach :9150")
             return True
         time.sleep(1)
-    service_active = _service_active(NODE_SERVICE)
-    api_healthy = _http_ok(NODE_URL)
+    service_active = _service_active(COACH_SERVICE)
+    api_healthy = _http_ok(f"{RELAX_URL}/health")
     msg.fail(
-        f"Node API not healthy after {timeout}s "
+        f"Relax API not healthy after {timeout}s "
         f"(service {'active' if service_active else 'inactive'}, "
         f"endpoint {'responding' if api_healthy else 'offline'})"
     )
@@ -76,91 +76,97 @@ def _wait_healthy(timeout: int = 10) -> bool:
 @app.command()
 def status():
     """Service + Health Status."""
-    node_active = _service_active(NODE_SERVICE)
-    node_enabled = _service_enabled(NODE_SERVICE)
-    node_health = _http_ok(NODE_URL)
+    coach_active = _service_active(COACH_SERVICE)
+    coach_enabled = _service_enabled(COACH_SERVICE)
+    relax_health = _http_ok(f"{RELAX_URL}/health")
     enricher_health = _http_ok(ENRICHER_URL)
 
     msg.divider("Relax Dev Stack")
     print(f"  {'Service':<32} {'Active':<10} {'Boot':<10} {'Health'}")
     print(f"  {'-'*62}")
-    print(f"  {NODE_SERVICE:<32} {'up' if node_active else 'down':<10} {'enabled' if node_enabled else 'disabled':<10} {'up' if node_health else 'down'}")
+    print(f"  {COACH_SERVICE:<32} {'up' if coach_active else 'down':<10} {'enabled' if coach_enabled else 'disabled':<10} {'up' if relax_health else 'down'}")
     print(f"  {'kb-enricher (:9124)':<32} {'—':<10} {'—':<10} {'up' if enricher_health else 'down'}")
     print()
-    print(f"  Node API:    {NODE_URL}")
+    print(f"  Relax API:   {RELAX_URL}")
+    print(f"  Coach host:  {COACH_URL}")
     print(f"  KB Enricher: {ENRICHER_URL}")
 
 
 @app.command()
 def start():
-    """Node API via systemd starten."""
-    msg.info(f"Starting {NODE_SERVICE}...")
-    if _ctl("start", NODE_SERVICE) != 0:
-        msg.fail(f"Failed to start {NODE_SERVICE}")
+    """Gemeinsamen Coach-Host mit Relax-Routen starten."""
+    msg.info(f"Starting {COACH_SERVICE}...")
+    if _ctl("start", COACH_SERVICE) != 0:
+        msg.fail(f"Failed to start {COACH_SERVICE}")
         raise typer.Exit(1)
     if not _wait_healthy():
         raise typer.Exit(1)
-    msg.good(f"{NODE_SERVICE} started")
+    msg.good(f"{COACH_SERVICE} started with Relax routes")
 
 
 @app.command()
 def stop():
-    """Node API stoppen."""
-    _ctl("stop", NODE_SERVICE)
-    msg.good(f"{NODE_SERVICE} stopped")
+    """Relax ist Teil des gemeinsamen Coach-Hosts und nicht separat stoppbar."""
+    msg.fail("Relax läuft in Coach :9150. Zum Stoppen des gemeinsamen Hosts `coach-server stop` verwenden.")
+    raise typer.Exit(2)
 
 
 @app.command()
 def restart():
-    """Node API neu starten."""
-    if _ctl("restart", NODE_SERVICE) != 0:
-        msg.fail(f"Failed to restart {NODE_SERVICE}")
+    """Gemeinsamen Coach-Host inklusive Relax-Routen neu starten."""
+    if _ctl("restart", COACH_SERVICE) != 0:
+        msg.fail(f"Failed to restart {COACH_SERVICE}")
         raise typer.Exit(1)
     if not _wait_healthy():
         raise typer.Exit(1)
-    msg.good(f"{NODE_SERVICE} restarted")
+    msg.good(f"{COACH_SERVICE} restarted")
 
 
 @app.command()
 def enable():
-    """Autostart beim Boot aktivieren."""
-    _ctl("enable", NODE_SERVICE)
-    msg.good(f"{NODE_SERVICE} enabled")
+    """Autostart des gemeinsamen Coach-Hosts aktivieren."""
+    _ctl("enable", COACH_SERVICE)
+    msg.good(f"{COACH_SERVICE} enabled")
 
 
 @app.command()
 def disable():
-    """Autostart deaktivieren."""
-    _ctl("disable", NODE_SERVICE)
-    msg.good(f"{NODE_SERVICE} disabled")
+    """Verhindert versehentliches Deaktivieren des gemeinsamen Coach-Hosts."""
+    msg.fail("Relax hat keinen eigenen Dienst mehr. `coach-server disable` würde auch Fitness und Fuel betreffen.")
+    raise typer.Exit(2)
 
 
 @app.command()
 def health():
     """HTTP Health-Check."""
-    node_ok = _http_ok(NODE_URL)
+    relax_ok = _http_ok(f"{RELAX_URL}/health")
     enricher_ok = _http_ok(ENRICHER_URL)
-    (msg.good if node_ok else msg.fail)(f"Node API {'online' if node_ok else 'offline'} ({NODE_URL})")
+    (msg.good if relax_ok else msg.fail)(f"Relax API {'online' if relax_ok else 'offline'} ({RELAX_URL})")
     (msg.good if enricher_ok else msg.warn)(f"KB Enricher {'online' if enricher_ok else 'offline'} ({ENRICHER_URL})")
-    if not node_ok:
+    if not relax_ok:
         raise typer.Exit(1)
 
 
 @app.command()
 def logs(
-    service: str = typer.Argument("node", help="node | enricher"),
+    service: str = typer.Argument("coach", help="coach | enricher"),
     follow: bool = typer.Option(True, "-f/--no-follow"),
 ):
-    """Systemd Journal Logs folgen."""
-    unit = NODE_SERVICE if service == "node" else "fitness-api.service"
-    cmd = ["journalctl", "--user", "-u", unit]
-    cmd += (["-f", "--no-pager"] if follow else ["-n", "50", "--no-pager"])
+    """Coach-Journal oder Enricher-Dateilog anzeigen."""
+    if service == "enricher":
+        logfile = Path("/tmp/relax-enricher.log")
+        cmd = ["tail", "-f" if follow else "-n", *([] if follow else ["80"]), str(logfile)]
+    elif service in ("coach", "relax", "node"):
+        cmd = ["journalctl", "--user", "-u", COACH_SERVICE]
+        cmd += (["-f", "--no-pager"] if follow else ["-n", "80", "--no-pager"])
+    else:
+        raise typer.BadParameter("service muss coach oder enricher sein")
     subprocess.run(cmd)
 
 
 @app.command()
 def dev():
-    """Vite + Node API im Vordergrund starten (Ctrl+C zum Stoppen)."""
+    """Nur Vite im Vordergrund starten; API kommt aus Coach :9150."""
     msg.divider("Foreground Dev Mode")
     try:
         subprocess.run(["node", "scripts/dev-runner.mjs"], cwd=DEV_DIR)

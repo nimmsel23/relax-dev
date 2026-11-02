@@ -85,7 +85,7 @@ async def handle_index(request: web.Request) -> web.Response:
     return web.Response(text="Frontend not built. Run 'npm run build'", status=404)
 
 async def handle_proxy(request: web.Request) -> web.Response:
-    target_url = f"http://127.0.0.1:9123{request.path_qs}"
+    target_url = f"http://127.0.0.1:9150/api/relax{request.path_qs}"
     async with aiohttp.ClientSession() as session:
         try:
             async with session.request(
@@ -98,7 +98,7 @@ async def handle_proxy(request: web.Request) -> web.Response:
                 return web.Response(body=await resp.read(), status=resp.status, headers=headers)
         except aiohttp.ClientError as e:
             logger.error(f"Proxy error: {e}")
-            return web.Response(text="Backend API (9123) not reachable", status=502)
+            return web.Response(text="Coach Relax API (:9150) not reachable", status=502)
 
 # ── App ───────────────────────────────────────────────────────────────────────
 
@@ -112,7 +112,7 @@ def make_app() -> web.Application:
     app.router.add_post("/enrich", handle_enrich)
     app.router.add_post("/batch-enrich", handle_batch)
 
-    # Proxy requests to the main Node API
+    # Forward API calls into Coach's in-process Relax routes.
     for prefix in ["/api", "/session", "/journal", "/stats", "/techniques", "/export", "/theme"]:
         app.router.add_route("*", f"{prefix}{{path:.*}}", handle_proxy)
 

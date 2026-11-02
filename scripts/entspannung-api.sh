@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-API="http://localhost:9123"
+API="http://127.0.0.1:9150/relax-api"
 
 # Colors
 CY=$'\e[36m'
@@ -10,7 +10,7 @@ NO=$'\e[0m'
 
 check_api() {
   if ! curl -sf "$API/health" > /dev/null 2>&1; then
-    echo "${RE}❌ Server nicht erreichbar (Port 9123)${NO}"
+    echo "${RE}❌ Relax API auf Port 9150 nicht erreichbar${NO}"
     exit 1
   fi
 }

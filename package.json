@@ -10,7 +10,7 @@
   "description": "Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung",
   "scripts": {
     "dev": "node scripts/dev-runner.mjs",
-    "start": "node server.mjs",
+    "start": "python3 server.py",
     "ui:dev": "vite",
     "build": "vite build",
     "test": "node --test tests/*.test.mjs",

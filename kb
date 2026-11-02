@@ -11,7 +11,7 @@ Routen:
   kb list                       # Moleküle ohne enriched_at
   kb browse                     # Interaktiver Katalog-Browser (fzf)
   kb migrate [--force]          # YAML → SQLite (node script)
-  kb search <query>             # KB-Suche via Node API :9123
+  kb search <query>             # KB-Suche via Coach Relax-Routen :9150
   kb get <key>                  # Molekül/Substanz aus DB anzeigen
 """
 
@@ -198,10 +198,10 @@ def _browse(args: list[str]) -> None:
 
 
 def _search(query: str) -> None:
-    """Suche via Node API oder direkt in SQLite als Fallback."""
-    # Versuche zuerst Node API
+    """Suche via Coach Relax-Routen oder direkt in SQLite als Fallback."""
+    # Versuche zuerst die integrierte Relax-API
     result = subprocess.run(
-        ["http", "--ignore-stdin", "-b", "GET", ":9123/api/knowledge/search", f"q=={query}"],
+        ["http", "--ignore-stdin", "-b", "GET", ":9150/api/relax/api/knowledge/search", f"q=={query}"],
         capture_output=True, text=True, cwd=KB_DIR,
     )
     if result.returncode == 0:
@@ -213,7 +213,7 @@ def _search(query: str) -> None:
             pass
 
     # Fallback: SQLite direkt
-    gum_log("warn", "Node API nicht erreichbar — direkte DB-Suche")
+    gum_log("warn", "Coach Relax API nicht erreichbar — direkte DB-Suche")
     con = _connect()
     q = f"%{query}%"
     mols = con.execute(

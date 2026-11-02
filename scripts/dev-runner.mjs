@@ -1,4 +1,4 @@
-// Starts both the API server and Vite in parallel for dev mode.
+// Start the Relax UI only; its API is mounted by Coach on :9150.
 import { spawn } from 'child_process'
 
 function run(cmd, args, env = {}) {
@@ -11,8 +11,7 @@ function run(cmd, args, env = {}) {
   return p
 }
 
-const api  = run('node', ['node_modules/.bin/nodemon', '--watch', 'server.mjs', '--watch', 'server/', '--ext', 'mjs,js', '--signal', 'SIGTERM', 'server.mjs'])
 const vite = run('node', ['node_modules/.bin/vite'], { VITE_API_BASE: '' })
 
-process.on('SIGTERM', () => { api.kill(); vite.kill() })
-process.on('SIGINT',  () => { api.kill(); vite.kill() })
+process.on('SIGTERM', () => vite.kill())
+process.on('SIGINT',  () => vite.kill())

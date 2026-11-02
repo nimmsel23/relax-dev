@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**relax-dev** — App für das Entspannungstrainer-Fachmodul der Präventiven Vitaltrainer-Ausbildung, ergänzt um persönliche Praxis- und Trackingbereiche. Der Modul-Tab ist der Standard-Einstieg. React/Vite-Frontend mit Node.js-Backend; Session- und Journaldaten sind dateibasiert, die optionale Knowledge Base nutzt SQLite.
+**relax-dev** — App für das Entspannungstrainer-Fachmodul der Präventiven Vitaltrainer-Ausbildung, ergänzt um persönliche Praxis- und Trackingbereiche. Der Modul-Tab ist der Standard-Einstieg. React/Vite-Frontend; die Relax FastAPI-Routen laufen in Coach :9150. Session- und Journaldaten bleiben dateibasiert, die optionale Knowledge Base nutzt SQLite.
 
 **Inhaltliche Leitplanke**: Für Ausbildungsinhalte haben die lokalen Kurs-PDFs Vorrang. Kursaussagen werden als solche kenntlich gemacht. Zusätzliche biochemische Modelle oder Katalogdaten sind kein Beleg für individuelle Wirkungen und dürfen nicht als Diagnose, Messung oder Trainerempfehlung erscheinen.
 
@@ -13,19 +13,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture
 
 ### Tech Stack
-- **Frontend**: React 18 + Vite (:5904), Tailwind CSS + custom CSS variables
-- **Backend**: Node.js HTTP server (`server.mjs`, :9123), SQLite für KB-Daten, file-based für Sessions/Journal
+- **Frontend**: React 18 + Vite (:5903), Tailwind CSS + custom CSS variables
+- **Backend**: Relax FastAPI-Routen in Coach (`server.py`, :9150); SQLite für KB-Daten, Dateien für Sessions/Journal
 - **UI Components**: lucide-react for icons, reactflow for graph, marked for markdown rendering
 - **Theming**: Catppuccin-inspired (mocha/latte), CSS variable-driven
 
 ### Port Convention
 | Service | Port | Dev Path |
 |---------|------|----------|
-| Vite (UI) | 5904 | `pnpm run ui:dev` (or via dev-runner) |
-| Node API | 9123 | `pnpm run start` (or via dev-runner) |
+| Vite (UI) | 5903 | `pnpm run ui:dev` (only UI) |
+| Coach API + Relax routes | 9150 | `coach-server start` |
 | KB Enricher (Python) | 9124 | `python server/knowledge/kb_enricher.py serve` |
 
-**Wichtig**: Im Dev-Betrieb immer über `:5904` zugreifen (Vite + HMR). `:9123` direkt serviert nur `dist/` — Änderungen ohne Build unsichtbar.
+**Wichtig**: Im Dev-Betrieb `:5903` für Vite verwenden. Coach stellt Relax-Routen unter `/relax-api/*` und `/api/relax/*` bereit.
 
 ### Knowledge Base Architecture (Dual-Catalog)
 
@@ -107,10 +107,8 @@ data/
   theme.json                   # {theme: "mocha" | "latte"}
 ```
 
-### Core Backend (server.mjs)
-Single-file HTTP API server (no frameworks, native Node.js):
-- **Static serving**: `dist/` (prod build) → fallback to `public/`
-- Routes delegieren an `server/routes/knowledge.js` für `/api/knowledge/*`
+### Relax API (server.py)
+FastAPI application mounted inside Coach on :9150. Relax keeps ownership of session files, journal entries, theme, physiology simulation, and the Knowledge Base.
 
 **Session & Journal**:
   - `GET /health` — Service health check
@@ -127,8 +125,7 @@ Single-file HTTP API server (no frameworks, native Node.js):
   - `GET /theme` / `POST /theme` — Theme preference
 
 Environment variables:
-- `PORT` (default 9123)
-- `HOST` (default 127.0.0.1)
+- `COACH_API_URL` (default `http://127.0.0.1:9150`)
 - `RELAX_STATIC_DIR` (override static root, defaults to dist/ or public/)
 - `GEMINI_API_KEY` (loaded from `~/.env/relax.env`)
 - `GEMINI_MODEL` (default `gemini-2.5-flash`, loaded from `~/.env/relax.env`)
@@ -152,16 +149,13 @@ Environment variables:
 
 ### Running
 ```bash
-# Both UI + API together (recommended)
+# UI only; Coach provides the API on :9150
 cd ~/relax-dev && pnpm run dev
 
-# Access via :5904 (Vite HMR) — not :9123
+# Access via :5903 (Vite HMR); API routes are in Coach :9150
 ```
 
-The **dev runner** (`scripts/dev-runner.mjs`) starts both services in parallel:
-- API: nodemon watches `server.mjs` AND `server/` (routes + knowledge) — restart bei Backend-Änderungen automatisch
-- Vite: HMR auf Source-Änderungen
-- Änderungen an `dev-runner.mjs` selbst erfordern manuellen Neustart
+The **dev runner** (`scripts/dev-runner.mjs`) starts Vite only. Relax API changes require restarting the shared Coach service; the runner never creates another API server.
 
 **KB Enricher** (Python, optional, separat starten):
 ```bash
@@ -173,22 +167,22 @@ python -m server.knowledge.kb_enricher status
 ```
 
 ### Vite Proxy
-`/api`, `/session`, `/journal`, `/stats`, `/techniques`, `/export`, `/theme`, `/health` → `:9123`
+Vite rewrites `/api/*` and Relax root routes to Coach :9150; the API is mounted at `/api/relax/*` and `/relax-api/*`.
 
 ### Cloud-Entwicklung / frischer Checkout
-Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci-install.sh`, dann `pnpm test` (inkl. `tests/server-smoke.test.mjs`, startet den Server) und `pnpm run build`. Node >= 22.13 (`node:sqlite`), siehe `.nvmrc`. `pnpm-lock.yaml` ist eingecheckt (CI installiert mit `--frozen-lockfile`, bei Änderungen an `package.json` mit committen); kein eingechecktes `pnpm-workspace.yaml`, `scripts/ci-install.sh` schreibt `allowBuilds` flüchtig. Devcontainer in `.devcontainer/`. Details im README-Abschnitt „Cloud-Entwicklung".
+Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci-install.sh`, dann `pnpm test` und `pnpm run build`. Relax API-Routen laufen in Coach :9150. `pnpm-lock.yaml` ist eingecheckt (CI installiert mit `--frozen-lockfile`, bei Änderungen an `package.json` mit committen); kein eingechecktes `pnpm-workspace.yaml`, `scripts/ci-install.sh` schreibt `allowBuilds` flüchtig. Devcontainer in `.devcontainer/`. Details im README-Abschnitt „Cloud-Entwicklung".
 
 ### Building
 ```bash
 pnpm run build   # Vite build → dist/
 ```
-Production: `node server.mjs` serves `dist/`.
+Production API: Coach :9150. The retired `server.mjs` entrypoint does not listen.
 
 ## Key Design Notes
 
-- **Kein Framework** im Backend (raw Node.js) — minimal, schnell, single-file
+- Relax uses FastAPI routes mounted into the existing Coach process.
 - **Kein UI-Framework** (kein shadcn, kein MaterialUI) — Tailwind + CSS variables, leichtgewichtig halten
-- **SQLite für KB** (`node:sqlite` / `DatabaseSync`, eingebaut ab Node 22, sync, WAL, kein Native-Build) — KB-Katalog und API-Cache; Sessions/Journal bleiben file-based
+- **SQLite für KB** (`sqlite3` via Python, WAL) — KB-Katalog und API-Cache; Sessions/Journal bleiben dateibasiert
 - **YAML = Authoring, SQLite = Betrieb** — YAML manuell editieren, SQLite per Migration importieren; nie direkt YAML zur Laufzeit schreiben
 - **Pipeline schreibt nur Detail-Tabellen** — `curated=1` Index-Einträge sind write-protected; Gemini kann Details anreichern, nie kuratierte Einträge überschreiben
 - **`marked`** für Markdown-Rendering (Vault-Tab) — bereits installiert
@@ -196,12 +190,12 @@ Production: `node server.mjs` serves `dist/`.
 
 ## Testing API
 ```bash
-http GET :9123/api/knowledge/hub/cortisol
-http GET :9123/api/knowledge/vault/mulungu
-http GET ':9123/api/knowledge/expand?q=ashwagandha'
-http GET ':9123/api/knowledge/health'
-http GET ':9123/api/knowledge/network'
-http GET ':9123/api/knowledge/interaction?mol1=cortisol&mol2=testosterone'
+http GET :9150/api/relax/api/knowledge/hub/cortisol
+http GET :9150/api/relax/api/knowledge/vault/mulungu
+http GET ':9150/api/relax/api/knowledge/expand?q=ashwagandha'
+http GET ':9150/api/relax/api/knowledge/health'
+http GET ':9150/api/relax/api/knowledge/network'
+http GET ':9150/api/relax/api/knowledge/interaction?mol1=cortisol&mol2=testosterone'
 # KB-DB neu importieren (nach YAML-Änderungen):
 node scripts/migrate-yaml-to-sqlite.mjs --force
 ```
@@ -228,15 +222,15 @@ Physio-Timeline und Substanzkatalog sind zusätzliche Bereiche. Sie dürfen den 
 - `knowledge/reactions.yaml` — 12 physiologische Reaktionskaskaden
 
 ### Backend
-- `server.mjs` — Single-file Node.js HTTP server
-- `scripts/dev-runner.mjs` — Parallel dev launcher (nodemon + Vite)
+- `server.py` — Relax FastAPI routes mounted by Coach
+- `scripts/dev-runner.mjs` — Vite-only dev launcher
 - `scripts/migrate-yaml-to-sqlite.mjs` — YAML → SQLite Migration (einmalig oder `--force`)
-- `server/routes/knowledge.js` — Knowledge Base API (`/api/knowledge/*`)
-- `server/knowledge/kb-db.js` — SQLite-Layer (node:sqlite): Schema, CRUD, curated-Guard
-- `server/knowledge/kb-loader.js` — Dispatcher + Hub-Builder + Graph; liest ausschließlich via kb-db
-- `server/knowledge/kb-cache.js` — SQLite API-Cache (PubChem/KEGG/Psychonaut TTL-Cache)
+- `server/knowledge/fastapi_api.py` — Knowledge Base routes mounted in Coach
+- `server/knowledge/kb-db.js` — SQLite migration helper used by the YAML import script
+- `server/knowledge/kb-loader.js` — YAML import/migration helpers; runtime queries use the Python router
+- `server/knowledge/kb-cache.js` — legacy Node cache helper; runtime API cache is handled by the Python route module
 - `server/knowledge/vault-search.js` — Vault-Index, Name-Matching, Obsidian-Sanitizer
-- `server/knowledge/enricher-pipeline.js` — PubChem + KEGG + Psychonaut → Gemini → KB-Detail (Node.js, via `/api/knowledge/enrich`)
+- `server/knowledge/enricher-pipeline.js` — retired Node implementation; runtime enrichment routes are in `fastapi_api.py`
 - `server/knowledge/kb_enricher/` — Python Enrichment-Engine :9124 (modulares Paket)
   - `config.py` — Env-Loading, Gemini-Konstanten, Pfade
   - `db.py` — SQLite-Helpers (COALESCE-Semantik, enriched_at-Kriterium)
@@ -245,8 +239,8 @@ Physio-Timeline und Substanzkatalog sind zusätzliche Bereiche. Sie dürfen den 
   - `server.py` — aiohttp HTTP-Server + Route-Handler
   - `cli.py` — typer CLI (serve/enrich/batch/status/list)
   - `README.md` — Doku, Design-Entscheidungen, Erweiterungs-Guide
-- `server/knowledge/pubchem.js` — PubChem REST Client (CID, formula, pharmacology)
-- `server/knowledge/kegg.js` — KEGG REST Client (Compound-ID, Pathway-Namen)
+- `server/knowledge/pubchem.js` — legacy Node PubChem client
+- `server/knowledge/kegg.js` — legacy Node KEGG client
 - `server/knowledge/psychonaut.js` — Psychonaut Wiki GraphQL (Onset/Peak/Duration)
 
 ### Frontend
@@ -286,7 +280,7 @@ Referenz-Implementierung: `~/aos-dev/bin/bridge-devctl menu`
 
 `server/knowledge/http.py` — sauberes Python-Modul (`import server.knowledge.http as _http`).
 Wird von `relax` via `_try_http()` aufgerufen wenn kein direkter DB/File-Zugriff möglich.
-Ziel: Node-Server `:9123` (env: `RELAX_NODE_PORT`).
+Ziel: Coach Relax-Routen auf `:9150` (env: `COACH_API_URL`).
 
 ```python
 from server.knowledge import http as _http
