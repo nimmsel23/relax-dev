@@ -83,6 +83,12 @@
 - Wirkversprechen bleiben sichtbar als Aussagen des Lehrskripts gekennzeichnet und werden nicht als Empfehlung übernommen.
 - Quellenmatrix und TODO aktualisiert.
 
+# Soul Food und Ernährung/Depression ergänzt (2026-11-02)
+
+- Die Pflichtaufgaben-Übersicht umfasst nun auch Capsaicin/scharfe Lebensmittel und Moodfood (S. 79–83) sowie den bislang ausgelassenen Abschnitt „Ernährung und Depression“ (S. 84).
+- Stimmungs- und Gesundheitswirkungen werden als Aussagen der Kursunterlage kenntlich gemacht, nicht als Diagnose oder Behandlungsempfehlung.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
