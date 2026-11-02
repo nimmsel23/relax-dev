@@ -53,4 +53,5 @@
 - [x] Die Rücknahme für AT und Fantasiereisen nach Stundenplanung S. 12 mit dem Kursbeispiel eines wiederkehrenden Aktivierungsrituals sowie das Abschlussgespräch nach S. 13 direkt in den Methodenansichten abbilden, ohne eine fehlende Übungsanleitung zu erfinden.
 - [x] Die Vorbereitungsliste um die konkreten Rahmenbedingungen aus Stundenplanung S. 11, 16 und 19 ergänzen: Musik-/Naturgeräusch-Auswahl, Schutz vor Vorraumlärm und Anforderungen an größere Gruppen.
 - [x] Essverhalten bei Stress aus Ernährung S. 14–24 um Stress-Essen/-Hungern, den im Skript berichteten Situationswechsel und die Warnung vor pauschaler Abwertung/Ermahnung ergänzen, ohne daraus Diagnosetypen zu machen.
+- [x] Die Grundempfehlungen Ernährung S. 25–38 mit konkreten Skriptthemen und dem explizit als Kursrichtwert gekennzeichneten Trinkmengenbeispiel auffindbar machen.
 - [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.

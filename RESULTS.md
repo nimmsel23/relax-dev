@@ -71,6 +71,12 @@
 - Die Pflichtaufgaben-Übersicht hält diese Lehrinhalte jetzt sichtbarer fest und kennzeichnet die Muster ausdrücklich nicht als feste Typen oder Diagnosekategorien.
 - Quellenmatrix und TODO aktualisiert.
 
+# Ernährungsgrundlagen S. 25–38 konkretisiert (2026-11-02)
+
+- Das Arbeitsblatt benennt jetzt die Kursabschnitte zu komplexen Kohlenhydraten, Nährstoffbeispielen, Trink-Richtwert und ruhigen Mahlzeitenpausen mit Seitenangaben.
+- Die Mengenangabe und Wirkannahmen bleiben klar als Aussagen der Kursunterlage statt als persönliche Vorgaben markiert.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
