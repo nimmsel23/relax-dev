@@ -311,6 +311,13 @@ const LEARNING_CHECK = [
     why: 'Das Skript warnt davor, den Gesundheitszustand aus den Mustern abzuleiten und Stress-Essen als unnormal zu bewerten. Ermahnungen zu mehr Selbstdisziplin können laut S. 24 zusätzlichen Stress auslösen.',
     source: 'Entspannung und Ernährung · S. 19–24',
   },
+  {
+    question: 'Welches Essmuster berichtet die im Skript beschriebene Studie?',
+    answers: ['Das Essverhalten kann sich zwischen belastenden und positiven Situationen umkehren; die Studie beschreibt ein mögliches Kompensationsmuster.', 'Stress-Esser essen in jeder Situation mehr als Stress-Hungerer.', 'Die Studie zeigt, dass Essverhalten unabhängig von Situation und Stimmung immer gleich bleibt.'],
+    correct: 0,
+    why: 'In der beschriebenen Untersuchung aßen Stress-Hungerer in der positiven Situation mehr als die Stress-Esser; das Skript fasst dies als Kompensationsmuster auf (S. 20–23). Es ist ein Studienbericht und keine feste Regel für einzelne Personen.',
+    source: 'Entspannung und Ernährung · S. 20–23',
+  },
 ]
 const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'

@@ -1,3 +1,8 @@
+# Kompensationsmuster aus der Ernährungsstudie im Lerncheck ergänzt (2026-11-02)
+
+- Eine weitere Lernfrage behandelt den im Skript beschriebenen Wechsel des Essverhaltens zwischen belastenden und positiven Situationen (S. 20–23).
+- Die Begründung ordnet dies als Studienbericht und mögliches Muster ein, nicht als Regel für einzelne Personen. TODO aktualisiert.
+
 # Essverhalten bei Stress im Lerncheck ergänzt (2026-11-02)
 
 - Lerncheck fragt jetzt auch ab, dass „Stress-Esser“ und „Stress-Hungerer“ vereinfachte Beschreibungen und weder Diagnosen noch feste Gesundheitstypen sind.
