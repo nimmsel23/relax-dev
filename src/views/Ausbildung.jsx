@@ -611,7 +611,13 @@ export default function Ausbildung() {
   }
   function changeDeliveryBlock(index) {
     if (!delivery) return
-    if (index >= delivery.blocks.length) { setDelivery(null); notify('Einheit abgeschlossen. Zeit fürs Feedback einplanen.'); return }
+    if (index >= delivery.blocks.length) {
+      setEntry(current => ({ ...current, date: localToday(), technique: delivery.method?.name || plan.method || METHODS[0].name, minutes: '', description: delivery.title || '', signed: false }))
+      setDelivery(null)
+      navigateSection('nachweis')
+      notify('Nachweis-Entwurf vorbereitet. Nur nach tatsächlich durchgeführter Einheit bestätigen.')
+      return
+    }
     const block = delivery.blocks[index]
     setDelivery(current => ({ ...current, index, remaining: Math.max(1, Number(block.minutes) || 1) * 60, running: false, endsAt: null }))
   }

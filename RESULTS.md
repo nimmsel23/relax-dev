@@ -649,3 +649,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Beim Start des Timers werden Name, Fokus, Kursrahmen, Anpassung und Quelle der im Stundenentwurf gewählten Methode übernommen und während der Durchführung angezeigt.
 - Der aktive Timer speichert diese Methodenkurzdaten zusammen mit seinen Abschnitten, damit sie nach Modulwechsel oder App-Neustart weiter verfügbar bleiben.
+
+# Durchgeführte Stunde für den Praxisnachweis vorbereiten (2026-11-02)
+
+- Beim bewussten Abschließen des letzten Timerabschnitts öffnet sich der Praxisnachweis mit heutigem Datum, gewählter Methode und Stundentitel als bearbeitbarem Entwurf.
+- Dauer bleibt leer und die Selbstbestätigung bleibt aus; die Einheit wird erst nach ausdrücklichem Bestätigen im Formular gezählt.
