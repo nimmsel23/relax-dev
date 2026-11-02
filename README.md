@@ -57,6 +57,7 @@ Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fac
 - didaktische Leitlinien und Präventionsrolle aus den Ausbildungsnotizen
 - Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga/Pilates, Stretching, Meditation und entspannungsorientierter Ausdauer
 - anpassbarer Stundenentwurf mit Vorbereitungscheckliste, Ankommen, Einschulung, Hauptteil, Nachspüren, Rücknahme und anschließender Reflexion
+- Durchführungsansicht mit pausierbarem Abschnitts-Timer; Trainer:innen steuern die Übergänge selbst
 - 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher, inklusive CSV-Export
 
 Die Kernnavigation ist auf Heute, Modul, Praxis und Atem ausgerichtet. Journal, Stats, Physio, Catalog und Einstellungen liegen unter **Mehr**.

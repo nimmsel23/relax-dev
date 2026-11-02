@@ -132,6 +132,12 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Stundenentwurf ergänzt um gespeicherte Vorbereitungshäkchen und Nachreflexion.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich. Keine Tests, kein Push und kein Release.
 
+## 2026-11-02 — Geplanter Kursabschnitt durchführbar
+
+- Stundenplan kann jetzt als Durchführungsansicht gestartet werden: Abschnittshinweis, Dauer, Countdown, Pause/Fortsetzen sowie manuelle Navigation und Abschluss.
+- Übergänge bleiben bewusst unter Trainerkontrolle und können nach Gruppe und Situation angepasst werden.
+- Kein PMR-Skript aus der lokal vorliegenden, nicht als Akademie-Original gekennzeichneten Zusammenfassung abgeleitet.
+
 ## 2026-11-02 — Lern- und Praxisablauf verknüpft
 
 - Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.

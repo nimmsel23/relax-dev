@@ -9,4 +9,5 @@
 - [ ] Bei Verfügbarkeit der Originalskripte die Methodenbeschreibungen gegenprüfen und mit korrekten Quellenangaben ergänzen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
-- [ ] Weiteren geführten Methoden wie PMR um interaktive Übungsabläufe ergänzen, sobald Ablaufmaterial aus den Originalskripten vorliegt.
+- [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
+- [ ] Methoden-spezifische geführte Übungsabläufe (z. B. PMR) ergänzen, wenn dafür verlässliche Originalabläufe vorliegen.

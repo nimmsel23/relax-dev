@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { BookOpen, ClipboardList, Download, Plus, Check, Clock3, Wind, HeartPulse, Sparkles } from 'lucide-react'
+import { BookOpen, ClipboardList, Download, Plus, Check, Clock3, Wind, HeartPulse, Sparkles, Play, Pause, SkipBack, SkipForward, Square } from 'lucide-react'
 import { getRelaxSession, getRelaxSessionHistory, saveRelaxSession } from '@db'
 import { downloadText, localToday } from '../lib/db/shared/utils.js'
 
@@ -45,10 +45,20 @@ export default function Ausbildung() {
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
+  const [delivery, setDelivery] = useState(null)
   const [message, setMessage] = useState('')
   const [entry, setEntry] = useState({ date: localToday(), technique: METHODS[0].name, minutes: 20, description: '', signed: false })
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)) }, [plan])
+  useEffect(() => {
+    if (!delivery?.running) return undefined
+    const timer = window.setInterval(() => setDelivery(current => {
+      if (!current || !current.running) return current
+      if (current.remaining <= 1) return { ...current, remaining: 0, running: false }
+      return { ...current, remaining: current.remaining - 1 }
+    }), 1000)
+    return () => window.clearInterval(timer)
+  }, [delivery?.running])
   useEffect(() => {
     let alive = true
     getRelaxSessionHistory(365).then(rows => { if (alive) setHistory(rows || []) }).catch(() => { if (alive) setHistory([]) }).finally(() => { if (alive) setLoading(false) })
@@ -61,6 +71,17 @@ export default function Ausbildung() {
 
   function notify(text) { setMessage(text); window.setTimeout(() => setMessage(''), 2400) }
   function updateBlock(id, patch) { setPlan(current => ({ ...current, blocks: current.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })) }
+  function beginDelivery() {
+    if (!plan.blocks.length) return
+    setDelivery({ title: plan.title, blocks: plan.blocks.map(block => ({ ...block })), index: 0, remaining: Math.max(1, Number(plan.blocks[0].minutes) || 1) * 60, running: false })
+  }
+  function changeDeliveryBlock(index) {
+    if (!delivery) return
+    if (index >= delivery.blocks.length) { setDelivery(null); notify('Einheit abgeschlossen. Zeit fürs Feedback einplanen.'); return }
+    const block = delivery.blocks[index]
+    setDelivery(current => ({ ...current, index, remaining: Math.max(1, Number(block.minutes) || 1) * 60, running: false }))
+  }
+  function formatTimer(seconds) { return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}` }
 
   async function addPractice(event) {
     event.preventDefault()
@@ -84,6 +105,27 @@ export default function Ausbildung() {
     const rows = [['Nr.', 'DATUM', 'BESCHREIBUNG', 'UNTERSCHRIFT']]
     practice.forEach((item, index) => rows.push([index + 1, item.date, `${item.technique} (${item.minutes} min)${item.note ? ` — ${item.note}` : ''}`, item.signed ? '✓' : '']))
     downloadText(`entspannungstrainer-praxis-${localToday()}.csv`, rows.map(row => row.map(csvCell).join(';')).join('\r\n'), 'text/csv;charset=utf-8')
+  }
+
+  if (delivery) {
+    const block = delivery.blocks[delivery.index]
+    const isLastBlock = delivery.index === delivery.blocks.length - 1
+    return <div className="space-y-4 pb-4">
+      <section className="rounded-3xl border p-5 text-center" style={{ ...panel, background: 'linear-gradient(160deg, color-mix(in srgb, var(--accent) 20%, var(--card)), var(--card))' }}>
+        <button onClick={() => setDelivery(null)} className="float-left rounded-lg border p-2 text-xs font-semibold" style={{ borderColor: 'var(--line)', color: 'var(--muted)' }}>Beenden</button>
+        <div className="pt-10 text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{delivery.title} · Abschnitt {delivery.index + 1} von {delivery.blocks.length}</div>
+        <h1 className="mt-3 text-2xl font-black">{block.name}</h1>
+        <div className="my-6 font-mono text-6xl font-black tabular-nums" role="timer" aria-live="off">{formatTimer(delivery.remaining)}</div>
+        <p className="mx-auto max-w-md text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{block.detail}</p>
+        {delivery.remaining === 0 && <div className="mt-4 rounded-xl p-3 text-sm font-semibold" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}>Zeit für diesen Abschnitt ist um. Wechsle weiter, wenn es für die Gruppe passt.</div>}
+      </section>
+      <div className="flex items-center justify-center gap-3">
+        <button aria-label="Vorheriger Abschnitt" disabled={delivery.index === 0} onClick={() => changeDeliveryBlock(delivery.index - 1)} className="rounded-xl border p-3 disabled:opacity-40" style={{ borderColor: 'var(--line)' }}><SkipBack size={20} /></button>
+        <button onClick={() => setDelivery(current => current.remaining === 0 ? { ...current, remaining: Math.max(1, Number(current.blocks[current.index].minutes) || 1) * 60, running: true } : { ...current, running: !current.running })} className="flex min-w-36 items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>{delivery.running ? <Pause size={18} /> : <Play size={18} />}{delivery.running ? 'Pause' : delivery.remaining === 0 ? 'Timer erneut' : 'Timer starten'}</button>
+        <button aria-label={isLastBlock ? 'Einheit abschließen' : 'Nächster Abschnitt'} onClick={() => changeDeliveryBlock(delivery.index + 1)} className="rounded-xl border p-3" style={{ borderColor: 'var(--line)' }}>{isLastBlock ? <Square size={20} /> : <SkipForward size={20} />}</button>
+      </div>
+      <p className="text-center text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Der Timer unterstützt deine Zeitplanung. Du leitest weiterhin selbst an, beobachtest die Gruppe und passt Dauer oder Übergang an.</p>
+    </div>
   }
 
   return <div className="space-y-4 pb-4">
@@ -131,7 +173,7 @@ export default function Ausbildung() {
     {section === 'planung' && <>
       <div className="rounded-2xl border p-4" style={panel}><div className="flex items-center gap-2"><ClipboardList size={19} style={{ color: 'var(--accent)' }} /><h2 className="font-bold">Stundenentwurf</h2></div><label className="mt-4 block text-xs" style={{ color: 'var(--muted)' }}>Titel<input value={plan.title} onChange={event => setPlan({ ...plan, title: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="mt-3 block text-xs" style={{ color: 'var(--muted)' }}>Stundenziel<textarea value={plan.focus} onChange={event => setPlan({ ...plan, focus: event.target.value })} placeholder="Was sollen die Teilnehmenden wahrnehmen oder kennenlernen?" rows={2} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="mt-3 block text-xs" style={{ color: 'var(--muted)' }}>Schwerpunktmethode<select value={plan.method} onChange={event => setPlan({ ...plan, method: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input}>{METHODS.map(item => <option key={item.name}>{item.name}</option>)}</select></label></div>
       <div className="space-y-3">{plan.blocks.map((block, index) => <div className="rounded-2xl border p-4" style={panel} key={block.id}><div className="flex items-start gap-3"><div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-black" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}>{index + 1}</div><div className="min-w-0 flex-1"><input value={block.name} onChange={event => updateBlock(block.id, { name: event.target.value })} className="w-full rounded-lg border px-2 py-1 text-sm font-bold" style={input} /><textarea value={block.detail} onChange={event => updateBlock(block.id, { detail: event.target.value })} rows={2} className="mt-2 w-full rounded-lg border px-2 py-1 text-xs leading-relaxed" style={input} /></div><label className="text-center text-[10px]" style={{ color: 'var(--muted)' }}><input type="number" min="0" max="120" value={block.minutes} onChange={event => updateBlock(block.id, { minutes: event.target.value })} className="w-14 rounded-lg border px-1 py-2 text-center text-sm font-bold" style={input} />Min.</label></div></div>)}</div>
-      <div className="rounded-2xl border p-4" style={panel}><div className="flex items-center justify-between font-bold"><span>Gesamtdauer</span><span style={{ color: totalMinutes === 60 ? 'var(--green)' : 'var(--accent)' }}>{totalMinutes} Minuten</span></div><p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Der Entwurf folgt dem Aufbau Ankommen → Einschulung → Hauptteil → Nachspüren → Rücknahme. In Kombination mit anderen Trainingsformen kann der Entspannungsteil kürzer sein; passe alle Zeiten an die Gruppe an.</p><div className="mt-3 flex items-center gap-2 text-xs" style={{ color: 'var(--green)' }}><Check size={15} />Entwurf wird automatisch auf diesem Gerät gespeichert.</div></div>
+      <div className="rounded-2xl border p-4" style={panel}><div className="flex items-center justify-between font-bold"><span>Gesamtdauer</span><span style={{ color: totalMinutes === 60 ? 'var(--green)' : 'var(--accent)' }}>{totalMinutes} Minuten</span></div><p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Der Entwurf folgt dem Aufbau Ankommen → Einschulung → Hauptteil → Nachspüren → Rücknahme. In Kombination mit anderen Trainingsformen kann der Entspannungsteil kürzer sein; passe alle Zeiten an die Gruppe an.</p><div className="mt-3 flex items-center gap-2 text-xs" style={{ color: 'var(--green)' }}><Check size={15} />Entwurf wird automatisch auf diesem Gerät gespeichert.</div><button onClick={beginDelivery} className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}><Play size={16} />Stunde durchführen</button></div>
       <div className="rounded-2xl border p-4" style={panel}><h2 className="font-bold">Vor der Stunde</h2><p className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Rahmenbedingungen aus der Stundenplanung abhaken.</p><div className="mt-3 space-y-2">{PREPARATION_CHECKS.map(([id, label]) => <label key={id} className="flex items-start gap-2 rounded-xl p-3 text-sm" style={{ background: 'var(--bg2)' }}><input type="checkbox" checked={Boolean(plan.checks?.[id])} onChange={event => setPlan(current => ({ ...current, checks: { ...current.checks, [id]: event.target.checked } }))} className="mt-0.5" /><span>{label}</span></label>)}</div></div>
       <div className="rounded-2xl border p-4" style={panel}><h2 className="font-bold">Nach der Stunde reflektieren</h2><p className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Was hat die Gruppe zurückgemeldet? Was möchtest du beim nächsten Mal anpassen?</p><textarea value={plan.reflection} onChange={event => setPlan(current => ({ ...current, reflection: event.target.value }))} rows={4} maxLength={1500} className="mt-3 w-full rounded-xl border px-3 py-2 text-sm" style={input} placeholder="Beobachtungen, Feedback, nächster Schritt …" /></div>
     </>}
