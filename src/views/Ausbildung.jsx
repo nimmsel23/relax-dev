@@ -466,7 +466,7 @@ export default function Ausbildung() {
   }, [])
 
   const practice = useMemo(() => history.flatMap(day => (day.items || []).filter(item => item.trainingUnit === true && item.signed === true).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
-  const candidates = useMemo(() => history.flatMap(day => (day.items || []).filter(item => !(item.trainingUnit === true && item.signed === true) && (String(item.technique || '').trim() || Number(item.minutes) > 0 || String(item.note || '').trim())).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
+  const candidates = useMemo(() => history.flatMap(day => (day.items || []).map((item, itemIndex) => ({ ...item, date: day.date, _sessionItemIndex: itemIndex })).filter(item => !(item.trainingUnit === true && item.signed === true) && (String(item.technique || '').trim() || Number(item.minutes) > 0 || String(item.note || '').trim()))).sort((a, b) => a.date.localeCompare(b.date)), [history])
   const totalMinutes = plan.blocks.reduce((sum, block) => sum + (Number(block.minutes) || 0), 0)
   const completed = practice.length
   const caseProgress = [
@@ -523,7 +523,10 @@ export default function Ausbildung() {
     setMarkingId(candidate.id)
     try {
       const current = await getRelaxSession(candidate.date)
-      const updated = (current?.items || []).map(item => item.id === candidate.id ? { ...item, trainingUnit: true, signed: true } : item)
+      const updated = (current?.items || []).map((item, index) => {
+        const matches = candidate.id != null ? item.id === candidate.id : index === candidate._sessionItemIndex
+        return matches ? { ...item, trainingUnit: true, signed: true } : item
+      })
       await saveRelaxSession(candidate.date, updated)
       setHistory(rows => rows.map(day => day.date === candidate.date ? { ...day, items: updated } : day))
       notify('Session als Praxiseinheit bestätigt')

@@ -568,3 +568,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Abgleich von `ESPT_Pflichtaufgabe_Trainingsprotokoll-A_Lizenz.pdf`, der zweiten offiziellen Formularvorlage und `Stundenplanung.pdf`: Die Formulare verlangen Datum, Beschreibung und Unterschrift, enthalten aber keine allgemeine Mindestdauer. Die 15 Minuten in der Stundenplanung gelten für einen Entspannungsteil in einem kombinierten Kurs.
 - Dauer im App-Nachweis ist nun optional; Sessions können ohne 15-Minuten-Schwelle nach ausdrücklicher Bestätigung übernommen und gezählt werden. Der CSV-Export lässt die Unterschrift wie die Druckansicht frei.
 - Quellenmatrix, README und TODO korrigiert. Vite-Produktionsbuild und `git diff --check` erfolgreich.
+# Legacy-Sessions beim Nachweisimport einzeln bestätigen (2026-11-02)
+
+- Kandidaten merken ihre Position im Tagesprotokoll als Rückfallkennung. Wenn ein älterer Datensatz keine ID enthält, aktualisiert die Bestätigung dadurch nur die ausgewählte Zeile.
+- Sessions mit ID werden weiterhin anhand ihrer ID zugeordnet.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.

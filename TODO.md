@@ -16,6 +16,7 @@
 - [x] Vorhandene Tages-Sessions nach ausdrücklicher Selbstbestätigung in den Ausbildungsnachweis übernehmen; Export an 30-Zeilen-Vorlage anlehnen.
 - [x] Für den Ausbildungsnachweis die komplette Session-Historie rückwärts paginieren, damit ältere Einheiten und Übernahmekandidaten nicht nach einem 365-Tage-Fenster verschwinden.
 - [x] Im 30-Einheiten-Nachweis nur ausdrücklich bestätigte Einheiten zählen/drucken und ältere unbestätigte Einträge zur nachträglichen Prüfung anbieten; keine nicht belegte allgemeine Mindestdauer voraussetzen.
+- [x] Bei der nachträglichen Bestätigung älterer Sessions auch ID-lose Legacy-Einträge einzeln statt alle gleichartigen Tageszeilen gemeinsam markieren.
 - [x] Modulansicht vom Physio-/Catalog-Paket trennen, damit der Ausbildungsstart nur benötigte Ansichten lädt.
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gegen die Original-PDFs prüfen und in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
