@@ -290,6 +290,20 @@ const LEARNING_CHECK = [
     why: 'Das Skript unterscheidet muskuläre, vegetative, emotionale und kognitive Ebenen und ordnet jeder Beispiele zu.',
     source: 'Stresstheorie · Entspannungstechniken',
   },
+  {
+    question: 'Was sagt das Ernährungsskript über einzelne Lebensmittel und Stress?',
+    answers: ['Kein bestimmtes Lebensmittel reduziert Stress direkt; eine ausgewogene, alltagstaugliche Ernährung ist der passende Rahmen.', 'Ein einzelnes „Brain Food“ wirkt zuverlässig gegen Stress und ersetzt Erholung.', 'Power Food senkt bei allen Menschen nachweislich Stresshormone.'],
+    correct: 0,
+    why: 'Die Unterlage sagt ausdrücklich, dass kein bestimmtes Lebensmittel Stress direkt reduziert (S. 27); Lebensmittelbeispiele und Wirkbehauptungen werden als Kursinhalte eingeordnet.',
+    source: 'Entspannung und Ernährung · S. 27, 53–55',
+  },
+  {
+    question: 'Welche Aussage zu Nahrungsergänzung gibt das Ernährungsskript wieder?',
+    answers: ['Bei gesunden Menschen mit ausgewogener Ernährung sind Supplemente laut Skript in der Regel nicht erforderlich.', 'Alle Personen mit Stress sollten vorsorglich mehrere Supplemente einnehmen.', 'Trainer:innen sollen passende Dosierungen anhand des Stressempfindens festlegen.'],
+    correct: 0,
+    why: 'Das Skript sagt, dass Nahrungsergänzung bei gesunden Menschen mit ausgewogener Ernährung in der Regel nicht erforderlich ist (S. 85–86). Die App leitet daraus keine individuelle Verordnung ab.',
+    source: 'Entspannung und Ernährung · S. 85–89',
+  },
 ]
 const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'

@@ -1,3 +1,8 @@
+# Ernährung im Lerncheck ergänzt (2026-11-02)
+
+- Zwei Fragen prüfen jetzt die Aussage, dass kein einzelnes Lebensmittel Stress direkt reduziert, und die Skriptaussage, dass Supplemente bei gesunden Menschen mit ausgewogener Ernährung in der Regel nicht erforderlich sind.
+- Beide Antworten verweisen auf die Ernährungsseiten und grenzen Kursaussagen von individuellen Empfehlungen ab. TODO aktualisiert.
+
 # Relative Entspannung aus dem Lehrskript ergänzt (2026-11-02)
 
 - Grundlagenkarte erklärt jetzt den Hinweis aus Stresstheorie S. 63: eine spürbare Entspannung gegenüber einem hohen Ausgangsniveau bedeutet nicht zwingend, dass bereits umfassende Ruhe erreicht ist.
