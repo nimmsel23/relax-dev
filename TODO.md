@@ -47,6 +47,7 @@
 - [x] Pilates-Konzeptbegriffe und Atem-/Haltungscues aus dem Original (S. 8–15) mit Fundstellen ergänzen und als Quellbegriffe statt universeller Bewegungsvorgaben einordnen.
 - [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.
 - [x] Stundenplanung um Trainerhaltung und Teamkommunikation, optionale Musik, Wiederholung, Demonstration sowie den Puls-/Zeit-Richtwert für kombinierte Kurse erweitern.
+- [x] Das Anfangsritual aus Stundenplanung S. 22 im Stundenentwurf konkretisieren: bewusste Teilnahmeentscheidung, passende Position und Innenwendung der Aufmerksamkeit; Augenschluss als optionale Möglichkeit.
 - [x] Die noch fehlenden Grundlagen zur Atemmechanik aus Atemschulung S. 9–14 und die Einstiegsfrage der Kursdiskussion auf S. 4 im Atemtrainer abbilden.
 - [x] Die Pranayama-Gruppenaufgabe aus Atemschulung S. 38–39 als lokal speicherbaren und exportierbaren Ablauf von Übungsauswahl über Textvorbereitung und Sprechprobe bis Gruppenanleitung/Feedback abbilden; holotropes Atmen und Qigong als Theorieexkurse ohne Praxisanleitung einordnen.
 - [x] Atemmechanik über die Brust-/Bauchatmung hinaus um Ein-/Ausatmungsmechanik, Kehlkopf und Zwerchfell aus Atemschulung S. 15–20, 24–27 ergänzen; forcierte Atembewegungen nicht als Anleitung darstellen.

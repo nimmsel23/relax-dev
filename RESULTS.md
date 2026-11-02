@@ -1,3 +1,8 @@
+# Anfangsritual im Stundenentwurf konkretisiert (2026-11-02)
+
+- Der Einleitungsblock nennt jetzt die drei Schritte des Kursrituals aus „Stundenplanung“, S. 22: bewusste Entscheidung, Entspannungsposition und Innenwendung der Aufmerksamkeit.
+- Augenschluss ist ausdrücklich optional. TODO aktualisiert.
+
 # Stressgrundlagen aus dem Ernährungsskript ergänzt (2026-11-02)
 
 - Kursübersicht im 4-Wochen-Fallkonzept ergänzt: Stressreaktion, Alarm-/Widerstands-/Erschöpfungsphasen, im Skript aufgeführte Folgen und Gegenmaßnahmen aus „Entspannung und Ernährung“, S. 4–12.

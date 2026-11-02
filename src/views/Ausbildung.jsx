@@ -157,7 +157,7 @@ const PMR_STEPS = [
 ]
 
 const DEFAULT_BLOCKS = [
-  { id: 'ankommen', name: 'Einleitung & Befinden', minutes: 5, detail: 'Begrüßung, Ziel und organisatorische Hinweise; Befinden erfragen, neue Teilnehmende willkommen heißen und ein gemeinsames Anfangsritual setzen.' },
+  { id: 'ankommen', name: 'Einleitung & Befinden', minutes: 5, detail: 'Begrüßung, Ziel und organisatorische Hinweise; Befinden erfragen und neue Teilnehmende willkommen heißen. Ein wiederkehrendes Anfangsritual lädt dazu ein, sich bewusst für die Übung zu entscheiden, eine passende Entspannungsposition einzunehmen und die Aufmerksamkeit nach innen zu richten. Augen schließen bleibt optional.' },
   { id: 'einstimmung', name: 'Einstimmung & Übungseinschulung', minutes: 8, detail: 'Methode und Herkunft kurz vorstellen, Position finden, erklären, demonstrieren und ausprobieren.' },
   { id: 'hauptteil', name: 'Hauptteil', minutes: 35, detail: 'Ausgewählte Übungen methodisch sinnvoll aufbauen und so dosieren, dass die Gruppe entspannt folgen kann.' },
   { id: 'ruhe', name: 'Ruhe & Nachspüren', minutes: 5, detail: 'Den individuellen Entspannungszustand kurz in Ruhe oder mit zarter Musik nachspüren lassen.' },
