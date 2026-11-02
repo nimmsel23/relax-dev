@@ -6,7 +6,8 @@
 - [x] Ausbildungsinhalte und Trainerpraxis mit lokalen Ausbildungsnotizen abgleichen.
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
 - [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
-- [ ] Methodenbeschreibungen weiter gegen die vorhandenen Original-PDFs prüfen und Quellen pro Inhalt sichtbar machen; für Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv.
+- [x] Methodenbeschreibungen gegen die vorhandenen Original-PDFs prüfen und belegte Seitenbereiche direkt auf den Methodenkarten sichtbar machen; unbelegte Anleitungen und Dauerangaben als solche kennzeichnen.
+- [ ] Für Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
 - [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.

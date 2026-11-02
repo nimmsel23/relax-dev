@@ -257,3 +257,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Methodenkarte nennt jetzt die Zuordnung zur kognitiven Ebene auf S. 55–56 des Stresstheorie-Skripts und kennzeichnet Atem-/Bodenkontakt-Anker ausdrücklich als allgemeine App-Ergänzung.
 - Das Skript enthält keine konkrete Schrittfolge für Meditation; die Dauer wird daher nicht als Kursvorgabe ausgegeben.
+
+## 2026-11-02 — Seitenfundstellen in der Methodenbibliothek ergänzt
+
+- Methodenkarten verweisen jetzt mit Seitenbereichen auf die Atemschulung, das PMR-Handout und PMR-Kursskript, Stresstheorie, Yoga, Pilates, Assisted Stretching, Ausdauer sowie Wirbelsäule.
+- Nicht belegte Dauerangaben für Atemschulung, Autogenes Training und Fantasiereisen auf „Dauer nach Stundenentwurf“ umgestellt; PMR-Dauer auf die 20–30 Minuten des Handouts ausgerichtet.
+- PMR-Handout als extern quellenbasiertes Handout statt als originales Akademie-Skript gekennzeichnet.
