@@ -14,7 +14,7 @@ Stand: 2026-11-02. Die App fasst Ausbildungsinhalte zusammen; die PDFs selbst li
 | `_Entspannungstrainer/Entspannung_Ausdauer.pdf`, S. 20–23 | Extensive, gleichmäßige Ausdauer; Beispiele und Belastungsrahmen | Karte „Entspannungsorientierte Ausdauer“, einschließlich der Beispieldauern als Kursbeispiele. |
 | `_Entspannungstrainer/Entspannung_Ernährung.pdf`, S. 25–38, 39–69, 70–84, 85–108 | Grundempfehlungen, Brain Food, Power Food, Soul Food, Nahrungsergänzung, Naturheilmittel und Rezepte | Pflichtaufgaben-Arbeitsblatt mit getrennten Eingabefeldern. Quellkritische Hinweise zu Stress-/Power-Food-Versprechen und Nahrungsergänzung stehen direkt am Arbeitsblatt; es gibt keine vorgefüllten individuellen Empfehlungen. |
 | `_Entspannungstrainer/Entspannung_Wirbelsäule.pdf`, S. 4–23, 24–38 | Schmerzverständnis und psychosozialer Kontext; anschließend Wahrnehmungs- und Entspannungstechniken | Grundlagenkarte mit Seitenverweisen und Trainergrenze sowie Methodenkarte für Körper-, Atemraum-, Bewegungs- und Standwahrnehmung. Selbsttests, Behandlung und Medikamente werden nicht als Traineranleitung ausgegeben. |
-| `_Entspannungstrainer/Grundübungen_Yoga.pdf`, S. 6–69 | Asanas und Abschlussruhe | Ausgewählte Asanas mit Kursbezug; Viparita Karani ist als Mudra gekennzeichnet. Keine im Original nicht genannte Dauer pro Yogaeinheit. |
+| `_Entspannungstrainer/Grundübungen_Yoga.pdf`, S. 6–72 | Einleitung und 22 Haltungen/Bewegungsformen einschließlich Abschlussruhe und bequemem Sitz | Methodenkarte führt jetzt alle 22 Formen mit Seitenverweisen auf; Ausfallschritt und Katze-Kuh werden als Bewegungsformen, Viparita Karani als Mudra kenntlich gemacht. Die Einheitendauer bleibt als lokale Kursnotiz getrennt. |
 | `_Entspannungstrainer/Grundübungen_Pilates.pdf`, S. 17–21 | Acht Kategorien des Pilates-Basisprogramms | Karte mit den acht Kategorien; detaillierte Übungsbeschreibungen bleiben dem Originalskript und der praktischen Einschulung zugeordnet. |
 | `_Entspannungstrainer/Aufgaben/ESPT_Pflichtaufgabe_ENTSPANNUNGSTRAINER.pdf` | Vier-Wochen-Konzept, Ziele, Tageszyklus und Ernährungskapitel | Lokal gespeichertes, exportierbares Fallkonzept mit sichtbarem Arbeitsstand für alle Pflichtbereiche. |
 | `_Entspannungstrainer/Aufgaben/ESPT_Pflichtaufgabe_Trainingsprotokoll-A_Lizenz.pdf` und weitere Protokollvorlagen | 30 Einheiten, Datum, Beschreibung und Unterschrift | 30-Zeilen-Nachweis mit CSV und A4-Druckansicht; Unterschrift bleibt für die handschriftliche Signatur frei. |
@@ -22,6 +22,8 @@ Stand: 2026-11-02. Die App fasst Ausbildungsinhalte zusammen; die PDFs selbst li
 ## Lokale Kursnotizen
 
 `Dokumente/Dipl. Präventiver Vitaltrainer/Dipl.Entspannungstrainer/00_Entspannungs-Protokoll-MINIMAL.md` enthält zusätzlich Richtwerte für die Methodendauer. Die App zeigt diese ausdrücklich als **lokale Kursnotiz** und trennt sie von den Seitenangaben der Original-PDFs. Diese Notiz liefert keine AT-, Fantasiereisen- oder Meditationsanleitung.
+
+Weitere lokale Vertiefungsnotizen enthalten persönliche, nachträglich ergänzte und teils weitergehende Aussagen (z. B. Wirkversprechen zu Pranayama/Vagotonus). Sie sind keine eigenständigen FlexyFit-Originalskripte. Für Kurszuordnung und Praxisangaben haben die Original-PDFs Vorrang; nur klar als lokal gekennzeichnete Dauer-Richtwerte werden zusätzlich verwendet.
 
 Das lokale PMR-Handout `Progressive Muskelrelaxation Handout.pdf` ist kein als FlexyFit-Original ausgewiesenes Skript; es nennt selbst eine externe Quelle. Die App kennzeichnet die geführte Langform entsprechend.
 

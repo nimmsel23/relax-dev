@@ -299,3 +299,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Grundlagen und Lerncheck decken jetzt die in „Stresstheorie“, S. 45–47 genannten Beobachtungs-, Fragebogen-, Ereignis-, biologischen und körperbezogenen Messzugänge sowie Biofeedback ab.
 - Die LCU-Einschränkung zum subjektiven Stresserleben ist sichtbar; die App selbst misst keine Körperwerte und leitet daraus keine Diagnose ab.
+
+## 2026-11-02 — Yoga-Übungssammlung vollständig indexiert
+
+- Der Seitenabgleich des Originalskripts „Grundübungen Yoga“ (S. 6–72) ergab 22 Haltungen und Bewegungsformen; bisher zeigte die Karte zehn Beispiele.
+- Die Methodenkarte führt nun alle 22 mit Seitenbereichen und knapper Beschreibung. Ausfallschritt, Katze-Kuh und Viparita Karani sind entsprechend der Quelle als Bewegungsform bzw. Mudra abgegrenzt.
