@@ -148,6 +148,11 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Alle App-Bereiche per React `lazy`/`Suspense` aufgeteilt. Der gebaute Haupt-JS-Chunk sank von ca. 865 KB auf 166 KB; der Ausbildungsbereich liegt bei ca. 36 KB. Die PWA precacht weiterhin alle Bereiche für Offline-Verfügbarkeit.
 - Produktionsbuild erfolgreich; kein Einzelchunk überschreitet Vites 500-KB-Warnschwelle. Keine Tests, kein Push oder Release.
 
+## 2026-11-02 — Yoga und Pilates aus Ausbildungsstoff abgebildet
+
+- Die gemeinsame Karte getrennt: Yoga listet ausgewählte Asanas samt Kursnotizen zu Atem, Varianten und Abschlussruhe; Pilates zeigt die acht im Basisprogramm aufgeführten Bewegungskategorien.
+- Methodenhinweise direkt aus `Grundübungen Yoga.md` und `Grundübungen_Pilates.md` zusammengefasst. Anspruchsvolle Positionen sind als praktische Einschulung erfordernde Inhalte markiert.
+
 ## 2026-11-02 — Lern- und Praxisablauf verknüpft
 
 - Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.

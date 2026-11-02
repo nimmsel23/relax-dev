@@ -55,7 +55,7 @@ Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `da
 Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fachmoduls ab:
 - Grundlagen zu Stressmodellen, Ressourcen, Körperreaktionen, Bewegung, Ernährung und Wirbelsäulen-Wahrnehmung
 - didaktische Leitlinien und Präventionsrolle aus den Ausbildungsnotizen
-- Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga/Pilates, Stretching, Meditation und entspannungsorientierter Ausdauer
+- Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga-Asanas, den acht Pilates-Bewegungskategorien, Stretching, Meditation und entspannungsorientierter Ausdauer
 - anpassbarer Stundenentwurf mit Vorbereitungscheckliste, Ankommen, Einschulung, Hauptteil, Nachspüren, Rücknahme und anschließender Reflexion
 - Durchführungsansicht mit pausierbarem Abschnitts-Timer; Trainer:innen steuern die Übergänge selbst
 - 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher; bisherige Sessions ab 15 Minuten können nach persönlicher Bestätigung übernommen und als 30-Zeilen-CSV exportiert werden
