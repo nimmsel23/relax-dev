@@ -826,8 +826,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die Kennzahl ist ausdrücklich als selbstberichteter Kontextindikator und nicht als Stressprävalenz oder FlexyFit-Kursinhalt gekennzeichnet. Erhebungsbasen (Trend n = 44.096; Branchenvergleich 2025 n = 4.179) und direkte Quellenverknüpfung stehen dabei.
 - Quellenmatrix und TODO führen die externe Ergänzung mit denselben Abgrenzungen.
 
-# Startstatus des Relax-Dev-Dienstes gegen fremde Listener abgesichert (2026-11-02)
+# Startstatus des Relax-Dev-Dienstes gegen Portkonflikte abgesichert (2026-11-02)
 
-- Ein autorisierter Startversuch meldete zunächst „Node API healthy“, obwohl `aos-relax-dev.service` auf :9123 mit `EADDRINUSE` wiederholt abstürzte. Die API-Prüfung hatte einen bereits antwortenden Listener mit dem gestarteten Dienst verwechselt.
-- `start` und `restart` gelten jetzt erst als erfolgreich, wenn User-Service und API gleichzeitig aktiv sind; andernfalls endet der CLI-Aufruf mit Fehler und nennt beide Zustände. Der bestehende Listener wurde nicht verändert.
-- Die aktuelle Sandbox kann den fremden Prozess nicht identifizieren oder erreichen. Kein Test ausgeführt; die neue Erfolgskontrolle benötigt auf dem Host einen erneuten Startversuch nach Klärung des Portbesitzers.
+- Ein Startversuch meldete zunächst „Node API healthy“, obwohl `aos-relax-dev.service` auf :9123 mit `EADDRINUSE` wiederholt abstürzte. Der vorhandene Listener war derselbe `server.mjs`-Checkout unter `coach-relax.service` (PID 875); sein Health-Endpunkt antwortete mit HTTP 200.
+- Die fehlschlagende Dublette `aos-relax-dev.service` wurde gestoppt; `coach-relax.service` blieb aktiv und unverändert. Das User-Service des standalone Dev-Controllers ist nicht aktiviert.
+- `relax-devctl start` und `restart` gelten jetzt erst als erfolgreich, wenn das jeweils konfigurierte User-Service und die API gleichzeitig aktiv sind; andernfalls endet der CLI-Aufruf mit Fehler und nennt beide Zustände. Die UI auf :5904 läuft derzeit nicht.
+- Syntax per Python-AST und `git diff --check` geprüft; keine Tests ausgeführt.

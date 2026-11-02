@@ -12,7 +12,7 @@
 - [x] Methodenliste und lange Methodendetails bei 390×844 im Headless-Firefox visuell prüfen und Scrollleisten im Firefox-Thema angleichen.
 - [x] Methodenliste bei 320×640 prüfen und den App-Titel im Kopfbereich für sehr schmale Ansichten verkleinern.
 - [x] Vite- und PWA-Assetpfade relativ ausgeben, damit die Mini-App keinem Domain-Root-Pfad für Assets oder Offline-Fallback verpflichtet ist.
-- [x] `relax-devctl start/restart` nur als erfolgreich melden, wenn sowohl das User-Service aktiv ist als auch der Node-API-Endpunkt antwortet; ein fremder Listener auf :9123 darf keinen falschen Healthy-Status erzeugen.
+- [x] `relax-devctl start/restart` nur als erfolgreich melden, wenn sowohl das User-Service aktiv ist als auch der Node-API-Endpunkt antwortet; ein bereits antwortender Listener auf :9123 darf keinen falschen Healthy-Status erzeugen.
 - [ ] Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; die Themenkarten bleiben Übersichten, konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
 - [x] Die vollständigen AT-Kapitelthemen der Ausbildungs-MOC (Ursprung, Anwendungsbereiche, Wirkungsweisen, drei Stufen, Rahmenbedingungen und Übungsfelder) in Karte und Lerncheck abbilden, ohne Formeln oder Durchführungsschritte zu erfinden.
