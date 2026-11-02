@@ -85,6 +85,14 @@ def sum_minutes(session: Optional[Dict[str, Any]]) -> int:
         return 0
     return sum(int(it.get("minutes") or 0) for it in session["items"])
 
+def optional_minutes(value: Any) -> Any:
+    if value in (None, ""):
+        return ""
+    try:
+        return min(240, max(0, int(value)))
+    except (ValueError, TypeError):
+        return ""
+
 def compute_summary(days: int) -> Dict[str, Any]:
     dates = last_dates(days)
     by_technique = {}
@@ -172,7 +180,7 @@ def export_csv(days: int = Query(14, ge=1, le=365)):
     import io
     output = io.StringIO()
     writer = csv.writer(output, quoting=csv.QUOTE_ALL)
-    writer.writerow(["date", "technique", "minutes", "mood_before", "mood_after", "note"])
+    writer.writerow(["date", "technique", "minutes", "focus", "arrival_minutes", "practice_minutes", "return_minutes", "setting", "mood_before", "mood_after", "reflection", "transfer", "note"])
     
     for date in dates:
         session_file = DATA_DIR / "sessions" / f"{date}.json"
@@ -183,8 +191,15 @@ def export_csv(days: int = Query(14, ge=1, le=365)):
                     date,
                     it.get("technique", ""),
                     str(int(it.get("minutes") or 0)),
+                    it.get("focus", ""),
+                    str(it.get("arrival_minutes") or ""),
+                    str(it.get("practice_minutes") or ""),
+                    str(it.get("return_minutes") or ""),
+                    it.get("setting", ""),
                     str(it.get("mood_before") or ""),
                     str(it.get("mood_after") or ""),
+                    it.get("reflection", it.get("note", "")),
+                    it.get("transfer", ""),
                     it.get("note", "")
                 ])
                 
@@ -227,9 +242,16 @@ def save_session(background_tasks: BackgroundTasks, payload: Dict[str, Any], dat
             "id": str(it.get("id") or ""),
             "technique": str(it.get("technique") or "").strip(),
             "minutes": minutes,
+            "arrival_minutes": optional_minutes(it.get("arrival_minutes")),
+            "practice_minutes": optional_minutes(it.get("practice_minutes")),
+            "return_minutes": optional_minutes(it.get("return_minutes")),
             "mood_before": mood_before,
             "mood_after": mood_after,
-            "note": str(it.get("note") or "")[:2000]
+            "focus": str(it.get("focus") or "")[:500],
+            "setting": str(it.get("setting") or "")[:500],
+            "reflection": str(it.get("reflection") or it.get("note") or "")[:2000],
+            "transfer": str(it.get("transfer") or "")[:1000],
+            "note": str(it.get("note") or it.get("reflection") or "")[:2000]
         })
         
     write_json(session_file, {
