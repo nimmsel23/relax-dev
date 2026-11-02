@@ -89,6 +89,12 @@
 - Stimmungs- und Gesundheitswirkungen werden als Aussagen der Kursunterlage kenntlich gemacht, nicht als Diagnose oder Behandlungsempfehlung.
 - Quellenmatrix und TODO aktualisiert.
 
+# Kräuter- und Rezeptabschnitt quellenkritisch erweitert (2026-11-02)
+
+- Die Arbeitsblatt-Übersicht nennt nun das vollständige Kräuterinventar S. 90–104, den Johanniskraut-Wechselwirkungshinweis (S. 94), die ärztliche Abklärung bei anhaltender Unruhe/Erschöpfung (S. 89) und die beiden Teemischungen (S. 106–107).
+- Einnahme- und Dosierungsangaben werden nicht als App-Anleitung übernommen; die Abschnitte bleiben als Kursquelle erkennbar.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
