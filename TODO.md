@@ -4,6 +4,7 @@
 
 - [ ] `relax-dev` als digitale Repräsentation des Entspannungstrainer-Moduls der Präventiven Vitaltrainer-Ausbildung weiterentwickeln.
 - [x] Session-Tab als ausbildungsnahes Praxis- und Selbsterfahrungsprotokoll mit Ablaufphasen, Reflexion und Transfer erweitern; vom bestätigungspflichtigen 30-Einheiten-Nachweis getrennt halten.
+- [x] Session-Tab auf großen Screens als breite Journal-/Tagesleisten-Ansicht darstellen und den mobilen Einspaltenfluss beibehalten.
 - [x] Ausbildungsinhalte und Trainerpraxis mit lokalen Ausbildungsnotizen abgleichen.
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
 - [x] Die Fächerübersicht der Ausbildungs-MOC in der Modul-Startansicht mit direkten Einstiegen zu Grundlagen, Methoden, Atemschulung, Fallaufgabe, Planung und Praxisnachweis verknüpfen.

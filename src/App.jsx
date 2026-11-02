@@ -80,7 +80,7 @@ export default function App() {
       </header>
 
       <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
-        <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}>
+        <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : tab === 'session' ? 'w-full max-w-screen-2xl mx-auto px-4 sm:px-6 xl:px-10 py-5 pb-28' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}>
           <Suspense fallback={<div role="status" className="rounded-2xl border p-4 text-sm" style={{ background: 'var(--card)', borderColor: 'var(--line)', color: 'var(--muted)' }}>Bereich wird geladen …</div>}><View onNavigate={navigate} /></Suspense>
         </div>
       </main>
