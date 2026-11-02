@@ -947,7 +947,7 @@ export default function Ausbildung() {
       ) : (
         <div className="space-y-3">
           {METHODS.map(item => { const Icon = item.icon; return <button key={item.name} onClick={() => selectMethod(item)} className="flex w-full items-center gap-3 rounded-2xl border p-4 text-left" style={panel}><div className="rounded-xl p-2" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}><Icon size={19} /></div><div className="min-w-0 flex-1"><div className="font-bold">{item.name}</div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>{item.duration} · {item.focus}</div></div><span style={{ color: 'var(--dim)' }}>›</span></button>})}
-          <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Autogenes Training, Fantasiereisen und Meditation sind im Skript eingeordnet; das Kursarchiv enthält dazu keine konkrete Schrittfolge. Die App ergänzt deshalb keine vermeintlichen Original-Anleitungen.</p>
+          <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Mentales Training, Autogenes Training, Fantasiereisen und Meditation sind als Kursinhalte oder Themenübersichten eingeordnet; das Kursarchiv enthält dazu keine vollständigen methodenspezifischen Anleitungen. Die App ergänzt deshalb keine vermeintlichen Original-Abläufe.</p>
         </div>
       )}
     </>}

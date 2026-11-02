@@ -689,3 +689,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Standalone-Build erzeugt Assets, PWA-Registrierung, Manifest-Icons und Offline-Fallback relativ zum App-Verzeichnis statt zum Domain-Root.
 - Die eigenständige Firebase-Site bleibt unverändert am Domain-Root nutzbar; der App-eigene Build erfüllt nun die gemeinsame Vite-Konvention für relative Assets.
+
+# Methodenlisten-Hinweis zur Quellenlage vervollständigt (2026-11-02)
+
+- Der Hinweis unter der Methodenliste nennt jetzt auch Mentales Training als Themenübersicht ohne vollständige methodenspezifische Anleitung.
+- Damit stimmt der sichtbare App-Hinweis mit der Methodenkarte, der TODO-Liste und der Quellenmatrix überein.
