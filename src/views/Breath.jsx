@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Wind, Moon, Target, Zap, LifeBuoy, Play, Vibrate, TriangleAlert, Check } from 'lucide-react'
+import { Wind, Moon, Target, Zap, LifeBuoy, Play, Vibrate, TriangleAlert, Check, Download } from 'lucide-react'
 import { getRelaxSession, saveRelaxSession } from '@db'
-import { localToday } from '../lib/db/shared/utils.js'
+import { downloadText, localToday } from '../lib/db/shared/utils.js'
 import { CATEGORIES, PATTERNS, patternsByCategory, getPattern, cycleSeconds, roundsFor } from '../lib/breath/patterns.js'
 import BreathPlayer, { KIND_COLOR } from '../components/breath/BreathPlayer.jsx'
 import { loadPrefs, savePrefs } from '../lib/breath/prefs.js'
@@ -10,6 +10,7 @@ import { isBreathTechnique } from '../lib/breath/stats.js'
 const ICONS = { Wind, Moon, Target, Zap, LifeBuoy }
 const DURATIONS = [1, 3, 5, 10]
 const MOOD = ['😞', '😕', '😐', '🙂', '😄']
+const TEACHING_SCRIPT_KEY = 'relax-breath-teaching-script-v1'
 function PhaseBar({ pattern }) {
   return (
     <div className="flex gap-0.5 h-1.5 w-full" aria-hidden="true">
@@ -56,6 +57,9 @@ export default function Breath() {
   const [saving, setSaving] = useState(false)
   const [toast, setToast] = useState('')
   const [todayMin, setTodayMin] = useState(0)
+  const [teachingScript, setTeachingScript] = useState(() => {
+    try { return localStorage.getItem(TEACHING_SCRIPT_KEY) || '' } catch { return '' }
+  })
   const chipsRef = useRef(null)
 
   const category = CATEGORIES.find((c) => c.id === catId)
@@ -73,6 +77,9 @@ export default function Breath() {
     }).catch(() => {})
   }
   useEffect(refreshToday, [])
+  useEffect(() => {
+    try { localStorage.setItem(TEACHING_SCRIPT_KEY, teachingScript) } catch {}
+  }, [teachingScript])
 
   // Gemerkte Kategorie in der Chip-Leiste ins Bild holen.
   useEffect(() => {
@@ -169,6 +176,29 @@ export default function Breath() {
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Ein Timer gibt nur einen Rhythmus vor und misst keine Körperreaktionen. Atemtiefe und Pausen bleiben freiwillig; wenn etwas unangenehm ist, wieder natürlich atmen oder die Übung beenden.
         </p>
+        <div className="space-y-2 pt-2">
+          <label htmlFor="breath-teaching-script" className="block text-sm font-semibold">Mein Anleitungstext für die Bauchatmung</label>
+          <textarea
+            id="breath-teaching-script"
+            value={teachingScript}
+            onChange={(event) => setTeachingScript(event.target.value)}
+            rows={5}
+            placeholder="Formuliere hier deine persönliche Anleitung zur Bauchatmung …"
+            className="w-full rounded-xl border p-3 text-sm"
+            style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}
+          />
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs" style={{ color: 'var(--dim)' }}>Lokal auf diesem Gerät gespeichert · Kursaufgabe: Atemschulung, S. 48</span>
+            <button
+              type="button"
+              onClick={() => downloadText(`bauchatmung-anleitung-${localToday()}.md`, `# Mein Anleitungstext für die Bauchatmung\n\n${teachingScript || '(Noch kein Text)' }\n\nQuelle der Schreibaufgabe: FlexyFit Academy, Atemschulung, S. 48.`, 'text/markdown;charset=utf-8')}
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold"
+              style={{ background: 'transparent', borderColor: 'var(--line)', color: 'var(--ink)' }}
+            >
+              <Download size={14} /> Markdown exportieren
+            </button>
+          </div>
+        </div>
       </section>
 
       {result && (

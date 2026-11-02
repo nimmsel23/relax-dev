@@ -34,3 +34,4 @@
 - [x] Unbelegte „fünf Minuten, zwei- bis dreimal täglich“-Dosierung aus dem Atemtrainer entfernt; S. 48 des Original-PDFs nennt Atemwahrnehmung und Vorbereitung eines eigenen Anleitungstextes, aber keine Frequenz oder Dauer.
 - [x] Dauer-Richtwerte aus der separaten lokalen Kursprotokollnotiz wieder eingebunden und von PDF-Angaben getrennt; fehlende Schritt-für-Schritt-Anleitungen für AT, Fantasiereisen und Meditation bleiben kenntlich.
 - [x] Kursquellen, Seitenbereiche, App-Abbildungen und Grenzen der nicht mitgelieferten bzw. fehlenden Anleitungen in einer Quellenmatrix zusammengeführt.
+- [x] Schreibaufgabe zur Bauchatmung aus Atemschulung S. 48 als lokal gespeichertes Arbeitsfeld mit Markdown-Export im Atemtrainer abbilden.

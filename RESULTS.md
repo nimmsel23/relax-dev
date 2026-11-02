@@ -283,3 +283,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Neue Quellenmatrix ordnet Originalskripte, Pflichtaufgaben und lokale Kursnotizen den App-Bereichen zu und hält Seitenbereiche sowie absichtliche Grenzen fest.
 - README verlinkt die Matrix als Einstieg für weitere Kursabgleiche.
+
+## 2026-11-02 — Anleitungstext zur Bauchatmung bearbeitbar gemacht
+
+- Die Praxisaufgabe aus Atemschulung S. 48 ist im Atemtrainer nun als persönliches Textfeld direkt bei der Kursübung verfügbar.
+- Der Entwurf wird lokal auf dem Gerät gespeichert und kann als Markdown-Datei exportiert werden; die Quelle der Schreibaufgabe steht im Export.
