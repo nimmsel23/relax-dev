@@ -54,6 +54,14 @@ const METHODS = [
     ['Beispiele im Skript', 'Joggen 20–30 Minuten; Walking oder Radfahren 30–45 Minuten; weitere Beispiele sind Schwimmen, Rudern und Skilanglauf. Sportart nach Vorliebe und Erleben auswählen.'],
     ['Rahmen', 'Ohne Zeitdruck üben; ruhige Umgebung, Natur, allein oder in der Gruppe erwägen. Alltagswege können als Bewegungsanlass dienen.'],
   ] },
+  { name: 'Körperwahrnehmung & Wirbelsäule', duration: 'Kursblock nach Stundenentwurf', icon: Wind, focus: 'Körperteile, Atemräume und Bewegungsmöglichkeiten bewusst wahrnehmen', practice: 'Das Skript enthält Wahrnehmungsübungen zu Körperteilen, zur Verbindung von Armen, Beinen und Wirbelsäule, zu Wirbelsäulenbewegungen und Atemräumen sowie zur Fuß- und Standwahrnehmung. Es schließt mit spielerischen und kreativen Bewegungsformen für Bewegungsfreude.', adapt: 'Die Inhalte dienen dem Kennenlernen und Erleben, nicht der Diagnose oder Behandlung von Beschwerden. Bewegungen bleiben freiwillig und im angenehmen Bereich; taktile Partnerübungen nur mit ausdrücklicher Zustimmung. Die genaue Übungsausführung praktisch aus dem Kurs lernen.', source: 'FlexyFit Academy: Entspannung & Wirbelsäule', outlineTitle: 'Wahrnehmungs- und Praxisfelder im Skript', outline: [
+    ['Körperteile kennenlernen', 'Rücken, Becken, Brustkorb und Schultergürtel ertasten und anatomische Begriffe anhand einer Erklärung, eines Skeletts oder Plakats einordnen.'],
+    ['Arme, Beine und Wirbelsäule verbinden', 'In Rückenlage Bewegungen der Beine oder Arme mit der wahrgenommenen Veränderung von Becken, Wirbelsäule und Brustkorb verbinden.'],
+    ['Wirbelsäulenbewegungen', 'Beugung, Streckung, Seitneigung und Rotation als unterschiedliche Bewegungsmöglichkeiten erkunden; das Skript behandelt Kopf- und Rumpfbewegung.'],
+    ['Atemräume', 'Atembewegung im Bauch, an den Rippen und in den Flanken wahrnehmen.'],
+    ['Stand und Fuß', 'Fußkontakt, Gewichtsverteilung und Stand beobachten; das Skript ergänzt dazu eine optionale Fußmassage.'],
+    ['Becken und Bewegungsfreude', 'Die Beckenuhr ist eine kleine Wahrnehmungsübung in Rückenlage. Zum Abschluss nennt das Skript kreative, kooperative, musikalische und spielerische Bewegungsformen.'],
+  ] },
   { name: 'Achtsamkeit & Meditation', duration: '15–30 Min.', icon: Sparkles, focus: 'Aufmerksamkeit freundlich im gegenwärtigen Erleben halten', practice: 'Einen einfachen Anker wie Atem, Geräusche oder Kontakt zum Boden anbieten. Abschweifen ist normal; die Aufmerksamkeit kann ohne Bewertung zurückkehren.', adapt: 'Augen offen, Bewegung oder ein äußerer Anker sind gleichwertige Optionen.', source: 'Methodenübersicht; Ausbildungsnotizen' },
 ]
 
@@ -139,6 +147,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Das Skript empfiehlt für den Entspannungskontext eine extensive gleichmäßige Belastung, lockeres Sprechen, individuelle Sportwahl und keinen Leistungsfokus.',
     source: 'Entspannung & Ausdauer · Trainingsmethodische Grundlagen',
+  },
+  {
+    question: 'Welche Wahrnehmungsfelder enthält das Skript „Entspannung & Wirbelsäule“?',
+    answers: ['Körperteile, Bewegungsmöglichkeiten der Wirbelsäule, Atemräume sowie Fuß- und Standwahrnehmung.', 'Nur Krafttests und Schmerzdiagnostik.', 'Ausschließlich Atemrhythmen mit festen Atempausen.'],
+    correct: 0,
+    why: 'Das Skript führt mehrere Körper- und Atemwahrnehmungsübungen sowie Bewegungsfreude als Praxisfelder auf.',
+    source: 'Entspannung & Wirbelsäule · Wahrnehmungs- und Entspannungstechniken',
   },
   {
     question: 'Was gehört nach einer tiefen Entspannung in Rückenlage zum Abschluss?',

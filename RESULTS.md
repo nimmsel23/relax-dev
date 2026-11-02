@@ -218,3 +218,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Das Vier-Wochen-Arbeitsblatt enthält nun eigene Felder für Brain Food, Power Food und Soul Food, die drei Kategorien aus dem Skript „Entspannung und Ernährung“.
 - Markdown-Export führt alle drei Kategorien mit; der Arbeitsbereich bleibt quellenbezogen und gibt keine eigenen Lebensmittel- oder Wirkungsversprechen vor.
+
+## 2026-11-02 — Wahrnehmungsübungen zur Wirbelsäule ergänzt
+
+- Eigenständige Methodenkarte nach dem Originalskript mit Körperteil- und Bewegungswahrnehmung, Atemräumen, Fuß-/Standwahrnehmung, Beckenuhr und Bewegungsfreude.
+- Die Karte trennt Kurslernen von Diagnose und Behandlung; taktile Partnerübungen sind ausdrücklich zustimmungsbasiert.
+- Lerncheck prüft die im Skript aufgeführten Wahrnehmungsfelder.
