@@ -7,6 +7,7 @@
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
 - [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
 - [x] Methodenbeschreibungen gegen die vorhandenen Original-PDFs prüfen und belegte Seitenbereiche direkt auf den Methodenkarten sichtbar machen; unbelegte Anleitungen und Dauerangaben als solche kennzeichnen.
+- [x] Methodenbibliothek nach Namen, Schwerpunkten, Anleitungstexten und Kursquellen durchsuchbar machen.
 - [x] Vite- und PWA-Assetpfade relativ ausgeben, damit die Mini-App keinem Domain-Root-Pfad für Assets oder Offline-Fallback verpflichtet ist.
 - [ ] Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; die Themenkarten bleiben Übersichten, konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.

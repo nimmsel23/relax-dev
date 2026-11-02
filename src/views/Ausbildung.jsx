@@ -513,6 +513,7 @@ async function getCompleteRelaxSessionHistory() {
 export default function Ausbildung() {
   const [{ section, method }, setRoute] = useState(readTrainingRoute)
   const [pmrStep, setPmrStep] = useState(null)
+  const [methodQuery, setMethodQuery] = useState('')
   const [plan, setPlan] = useState(() => {
     const defaults = { title: 'Ruhig ankommen', focus: '', method: METHODS[0].name, blocks: DEFAULT_BLOCKS, checks: {}, reflection: '' }
     try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); return stored ? { ...defaults, ...stored, checks: stored.checks || {}, reflection: stored.reflection || '' } : defaults }
@@ -616,6 +617,7 @@ export default function Ausbildung() {
     { label: 'Ernährungskapitel vollständig bearbeitet', done: ['foodIdeas', 'brainFood', 'powerFood', 'soulFood', 'recipeIdeas', 'naturalProducts', 'supplementNotes'].every(key => Boolean(casePlan[key]?.trim())) },
   ]
   const caseProgressCount = caseProgress.filter(item => item.done).length
+  const matchingMethods = METHODS.filter(item => `${item.name} ${item.focus} ${item.practice} ${item.source}`.toLocaleLowerCase('de-AT').includes(methodQuery.trim().toLocaleLowerCase('de-AT')))
 
   function notify(text) { setMessage(text); window.setTimeout(() => setMessage(''), 2400) }
   function updateBlock(id, patch) { setPlan(current => ({ ...current, blocks: current.blocks.map(block => block.id === id ? { ...block, ...patch } : block) })) }
@@ -946,7 +948,9 @@ export default function Ausbildung() {
         </article>
       ) : (
         <div className="space-y-3">
-          {METHODS.map(item => { const Icon = item.icon; return <button key={item.name} onClick={() => selectMethod(item)} className="flex w-full items-center gap-3 rounded-2xl border p-4 text-left" style={panel}><div className="rounded-xl p-2" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}><Icon size={19} /></div><div className="min-w-0 flex-1"><div className="font-bold">{item.name}</div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>{item.duration} · {item.focus}</div></div><span style={{ color: 'var(--dim)' }}>›</span></button>})}
+          <label className="block text-xs font-semibold" style={{ color: 'var(--muted)' }}>Methode finden<input type="search" value={methodQuery} onChange={event => setMethodQuery(event.target.value)} placeholder="Name, Thema oder Quelle" aria-label="Methoden nach Name, Thema oder Quelle durchsuchen" className="mt-1 w-full rounded-xl border px-3 py-3 text-sm font-normal" style={input} /></label>
+          <p className="px-1 text-[11px]" style={{ color: 'var(--dim)' }}>{matchingMethods.length} von {METHODS.length} Methoden</p>
+          {matchingMethods.length ? matchingMethods.map(item => { const Icon = item.icon; return <button key={item.name} onClick={() => selectMethod(item)} className="flex w-full items-center gap-3 rounded-2xl border p-4 text-left" style={panel}><div className="rounded-xl p-2" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}><Icon size={19} /></div><div className="min-w-0 flex-1"><div className="font-bold">{item.name}</div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>{item.duration} · {item.focus}</div></div><span style={{ color: 'var(--dim)' }}>›</span></button>}) : <div className="rounded-2xl border p-4 text-sm" style={{ ...panel, color: 'var(--muted)' }}>Keine Methoden gefunden. Suche nach einem Themenbegriff wie „Atem“, „Rücknahme“ oder „Stresstheorie“.</div>}
           <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Mentales Training, Autogenes Training, Fantasiereisen und Meditation sind als Kursinhalte oder Themenübersichten eingeordnet; das Kursarchiv enthält dazu keine vollständigen methodenspezifischen Anleitungen. Die App ergänzt deshalb keine vermeintlichen Original-Abläufe.</p>
         </div>
       )}

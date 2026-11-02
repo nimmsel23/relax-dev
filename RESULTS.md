@@ -694,3 +694,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Hinweis unter der Methodenliste nennt jetzt auch Mentales Training als Themenübersicht ohne vollständige methodenspezifische Anleitung.
 - Damit stimmt der sichtbare App-Hinweis mit der Methodenkarte, der TODO-Liste und der Quellenmatrix überein.
+
+# Methodenbibliothek durchsuchbar gemacht (2026-11-02)
+
+- Die Methodenliste filtert nun live nach Namen, Schwerpunkten, Anleitungstexten und Quellen.
+- Trefferzahl und verständlicher Leerzustand unterstützen die Suche auf schmalen Bildschirmen.
