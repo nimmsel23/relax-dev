@@ -33,7 +33,7 @@ Die offizielle [Diplom-Kursbeschreibung von FlexyFit](https://www.flexyfitacadem
 
 ## Abweichungen zwischen Master-MOC und Originalskripten
 
-Die lokale Master-MOC ist eine zusammenfassende Kursübersicht. Wo ihre Gruppierung von konkreten FlexyFit-PDFs abweicht, folgt die App dem Originalskript und benennt den Unterschied: Die Master-MOC führt Autogenes Training unter „muskuläre Ebene“, während „Stresstheorie“, S. 55, es der vegetativen Ebene zuordnet. Die Master-MOC fasst das Pilates-Basisprogramm in sechs Gruppen zusammen; „Grundübungen Pilates“, S. 17–21, trennt acht Kategorien (unter anderem Sitz und Stand sowie Stützkraft und Ganzkörperintegration). Die Methodenkarte und der Lerncheck folgen den PDF-Angaben.
+Die lokale Master-MOC ist eine zusammenfassende Kursübersicht. Wo ihre Gruppierung von konkreten FlexyFit-PDFs abweicht, folgt die App dem Originalskript und benennt den Unterschied: Die Master-MOC führt Autogenes Training unter „muskuläre Ebene“, während „Stresstheorie“, S. 55, es der vegetativen Ebene zuordnet. Die Master-MOC fasst das Pilates-Basisprogramm in sechs Gruppen und 16 Übungseinträge zusammen; „Grundübungen Pilates“, S. 17–21, trennt acht Kategorien und führt in den bebilderten Übungsabschnitten 19 Einträge (S. 24–97) auf. Die Methodenkarte und der Lerncheck folgen den PDF-Angaben.
 
 Dieselbe Diplom-Kursbeschreibung sagt zur praktischen Abschlussprüfung, Fragen zu Kursinhalten mündlich zu beantworten sowie Inhalte praktisch vorzuzeigen und zu erklären. Die Methodenreflexion enthält deshalb eine freiwillige Fachgesprächs- und Praxisprobe. Sie ist ausdrücklich keine offizielle Prüfungsrubrik oder Bewertung; bei fehlender praktischer Einschulung bleibt die Demonstration offen.
 
