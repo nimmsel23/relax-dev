@@ -370,6 +370,10 @@ All API endpoints tested & functional:
 
 Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgestellt. Runtime-Daten, Branches und Release-Checkouts behalten ihre Zuständigkeit. Keine Pushes oder Releases. Gesamter Umzug und Prüfungen: `~/RESULTS.md`.
 
+## 2026-10-31 — Dependabot
+
+Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions and npm/pnpm updates; version updates target `dev`. Minor/patch updates are grouped; vendored mini-app-shell copies stay maintained at their source. Validated YAML, repository manifest paths and update targets.
+
 ## 2026-11-02 — Entspannungstrainer-Modul als App-Bereich
 
 - Ausbildungsbereich `Ausbildung` in die App-Navigation integriert: Modulüberblick, didaktische Leitlinien, Methodenbibliothek, editierbarer 60-Minuten-Stundenentwurf und 30-Einheiten-Praxisnachweis.
