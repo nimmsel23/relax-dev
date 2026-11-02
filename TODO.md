@@ -7,4 +7,6 @@
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
 - [x] Verfügbare Kursmaterialien geprüft: Im Ausbildungsordner liegen Markdown-Zusammenfassungen, aber keine Original-PDF/Handouts. Methoden, deren genaue Abläufe dort fehlen, bleiben als Orientierung gekennzeichnet.
 - [ ] Bei Verfügbarkeit der Originalskripte die Methodenbeschreibungen gegenprüfen und mit korrekten Quellenangaben ergänzen.
-- [ ] Bestehende Dashboard-, Atem- und Praxisabläufe aus Sicht des Ausbildungswegs weiter integrieren.
+- [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
+- [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
+- [ ] Weiteren geführten Methoden wie PMR um interaktive Übungsabläufe ergänzen, sobald Ablaufmaterial aus den Originalskripten vorliegt.

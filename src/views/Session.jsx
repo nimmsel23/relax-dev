@@ -15,7 +15,7 @@ function clamp(n, min, max) {
   return Math.min(max, Math.max(min, n))
 }
 
-export default function Session() {
+export default function Session({ onNavigate }) {
   const today = localToday()
 
   const [techniques, setTechniques] = useState([])
@@ -139,11 +139,15 @@ export default function Session() {
       </div>
 
       <div className="space-y-3">
+        <div className="rounded-xl border p-3 text-xs leading-relaxed" style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--muted)' }}>
+          Dieses Tagesprotokoll erfasst deine Entspannungszeit und Stimmung. Der formale 30-Einheiten-Ausbildungsnachweis wird separat im Modul geführt.
+          <button onClick={() => onNavigate?.('ausbildung')} className="ml-1 font-bold underline" style={{ color: 'var(--accent)' }}>Zum Modul</button>
+        </div>
         {items.length === 0 ? (
           <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
             <div className="font-bold">Keine Einträge</div>
             <div className="text-sm mt-1" style={{ color: 'var(--muted)' }}>
-              Für die Prüfung: täglich kurze Entspannungs-Session loggen (Technik + Minuten + Stimmung).
+              Hier kannst du eine persönliche Übung beginnen und deine Stimmung beobachten.
             </div>
           </div>
         ) : items.map((it) => {

@@ -131,3 +131,10 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Modulgrundlagen um Stressmodelle, Ressourcen, Aktivierung/Erholung sowie die Ausbildungsbezüge zu Ernährung, Wirbelsäule und moderater Ausdauer erweitert. Präventive Rolle und didaktische Wahlmöglichkeiten sind ausdrücklich beschrieben.
 - Stundenentwurf ergänzt um gespeicherte Vorbereitungshäkchen und Nachreflexion.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich. Keine Tests, kein Push und kein Release.
+
+## 2026-11-02 — Lern- und Praxisablauf verknüpft
+
+- Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.
+- Eine Methode kann direkt für den Nachweis vorausgewählt werden; Atemschulung verlinkt zusätzlich in den geführten Atemtrainer.
+- Es liegen im Ausbildungsordner nur Markdown-Zusammenfassungen, keine Original-PDF/Handouts. Fehlende detaillierte Kursabläufe bleiben deshalb als solche markiert.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich. Keine Tests, kein Push und kein Release.
