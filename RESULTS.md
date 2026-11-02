@@ -1,3 +1,10 @@
+# Breite Desktop-Ansicht für das Praxisjournal (2026-11-02)
+
+- Den globalen 2xl-Container nur für den Session-Tab auf `max-w-screen-2xl` geöffnet; übrige Ansichten behalten ihre bisherigen Breiten.
+- Desktop teilt die Fläche in Journal und sticky Tages-/Aktionsleiste. Auf Mobilgeräten bleibt die Reihenfolge untereinander.
+- Die Ablaufphasen sind in der Seitenleiste dauerhaft als nachvollziehbare Kurssequenz sichtbar.
+- Produktionsbuild und `git diff --check` erfolgreich; keine Tests ausgeführt.
+
 # Praxis-Session an Ausbildungsablauf angepasst (2026-11-02)
 
 - Session-Tab zum strukturierten Selbsterfahrungsprotokoll erweitert: Fokus, Rahmenbedingungen, optionale Zeiten für Ankommen/Einschulung, Hauptteil und Nachspüren/Rücknahme, persönliche Befindlichkeit, Reflexion und Transfer.
