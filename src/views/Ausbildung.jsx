@@ -405,6 +405,11 @@ const METHOD_REFLECTION_FIELDS = [
   ['conditions', 'Hilfreiche Bedingungen und Anpassungen', 'Welche Rahmenbedingungen, Wahlmöglichkeiten oder Anpassungen haben deine Teilnahme unterstützt?'],
   ['teaching', 'Anleiten und erklären', 'Was kannst du über Ziel und Ablauf verständlich erklären oder demonstrieren? Wo brauchst du noch praktische Einschulung?'],
 ]
+const METHOD_ORAL_PRACTICE_CHECKS = [
+  ['canExplain', 'Ich kann Ziel, Kursbezug und Quellen-Grenzen der Methode mündlich erklären.'],
+  ['canDemonstrate', 'Ich kann eine im Kurs praktisch gelernte Übungsfolge zeigen und erläutern.'],
+  ['canAdapt', 'Ich kann Befinden erfragen, passende Wahlmöglichkeiten anbieten und meine Trainerrolle benennen.'],
+]
 const STRESS_REFLECTION_FIELDS = [
   { id: 'stressors', title: 'S · Stressoren und Bewertung', prompt: 'Welche konkrete Situation oder Anforderung möchtest du betrachten? Erlebst du sie eher als Herausforderung, Bedrohung oder Schaden/Verlust? Welche eigenen Bewältigungsmöglichkeiten nimmst du wahr?' },
   { id: 'organism', title: 'O · Persönliche Voraussetzungen', prompt: 'Welche Erfahrungen, Gewohnheiten, Überzeugungen, Fertigkeiten oder aktuellen Belastungen spielen für deine Einschätzung eine Rolle? Teile nur, was du festhalten möchtest.' },
@@ -691,6 +696,9 @@ export default function Ausbildung() {
       `# Selbsterfahrung: ${selectedMethod.name}`,
       '', `Datum des Exports: ${localToday()}`, '',
       ...METHOD_REFLECTION_FIELDS.flatMap(([id, title]) => [`## ${title}`, reflection[id] || '', '']),
+      '## Freiwillige Fachgesprächs- und Praxisprobe',
+      ...METHOD_ORAL_PRACTICE_CHECKS.map(([id, label]) => `- [${reflection.readiness?.[id] ? 'x' : ' '}] ${label}`),
+      '',
       `Ausbildungsbezug: ${selectedMethod.source}`,
       '', 'Persönliche Reflexion nach eigener Erfahrung oder praktischer Einschulung. Kein Nachweis einer absolvierten Ausbildungseinheit.',
     ]
@@ -855,6 +863,7 @@ export default function Ausbildung() {
             <h3 className="text-sm font-bold">Selbsterfahrung & Lernreflexion</h3>
             <p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Nach eigener Teilnahme oder praktischer Einschulung festhalten. Bei reinen Themenübersichten keine Durchführung ableiten. Die Notizen bleiben lokal in diesem Browser und zählen nicht als Ausbildungs-Praxiseinheit. Die <a href="https://www.flexyfitacademy.com/de/sport/yoga-pilates-entspannungstrainer" target="_blank" rel="noreferrer" className="font-semibold underline" style={{ color: 'var(--accent)' }}>offizielle Diplom-Kursbeschreibung ↗</a> nennt praktische Teile und Selbsterfahrung; bei Yoga auch Anleiten und Korrigieren ausgewählter Übungen.</p>
             <div className="mt-3 space-y-3">{METHOD_REFLECTION_FIELDS.map(([id, title, prompt]) => <label key={id} className="block text-xs font-semibold">{title}<span className="mt-1 block font-normal leading-relaxed" style={{ color: 'var(--muted)' }}>{prompt}</span><textarea value={methodReflections[method.name]?.[id] || ''} onChange={event => setMethodReflections(current => ({ ...current, [method.name]: { ...(current[method.name] || {}), [id]: event.target.value.slice(0, 1500) } }))} rows={3} maxLength={1500} className="mt-2 w-full rounded-xl border px-3 py-2 text-sm font-normal" style={input} /></label>)}</div>
+            <div className="mt-4 border-t pt-3" style={{ borderColor: 'var(--line)' }}><h4 className="text-xs font-bold">Fachgesprächs- und Praxisprobe · freiwilliger Selbstcheck</h4><p className="mt-1 text-[11px] leading-relaxed" style={{ color: 'var(--muted)' }}>Die offizielle Prüfungsbeschreibung nennt mündliches Beantworten sowie praktisches Vorzeigen und Erklären. Diese Markierungen sind deine Lernnotizen, keine offizielle Prüfung oder Bewertung. Eine Übungsfolge nur abhaken, wenn du sie praktisch gelernt hast.</p><div className="mt-2 space-y-2">{METHOD_ORAL_PRACTICE_CHECKS.map(([id, label]) => <label key={id} className="flex items-start gap-2 rounded-lg p-2 text-xs leading-relaxed" style={{ background: 'var(--card)' }}><input type="checkbox" checked={Boolean(methodReflections[method.name]?.readiness?.[id])} onChange={event => setMethodReflections(current => ({ ...current, [method.name]: { ...(current[method.name] || {}), readiness: { ...(current[method.name]?.readiness || {}), [id]: event.target.checked } } }))} className="mt-0.5" /><span>{label}</span></label>)}</div></div>
             <button onClick={() => exportMethodReflection(method)} className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}><Download size={15} /> Reflexion als Markdown exportieren</button>
           </section>
           {method.name === 'Atemschulung' && <button onClick={() => onNavigate?.('atem')} className="mt-4 w-full rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>Zur geführten Atemübung</button>}

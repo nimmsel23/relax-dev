@@ -630,3 +630,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Direkteinstiege führen jetzt von Grundlagen/Lerncheck über Methodenreflexion und Vier-Wochen-Fall bis Stundenplanung und Praxisnachweis.
 - Die Reihenfolge ist ausdrücklich als App-Orientierung gekennzeichnet und wird nicht als offizielle Prüfungsreihenfolge ausgegeben.
+
+# Fachgesprächs- und Praxisprobe an Methoden angebunden (2026-11-02)
+
+- Jede Methodenkarte bietet drei freiwillige Selbstchecks zum mündlichen Erklären, praktischen Zeigen einer bereits gelernten Folge sowie zum Anpassen und Einordnen der Trainerrolle.
+- Der Export enthält die markierten Lernstände. UI und Quellenmatrix kennzeichnen das Werkzeug als App-Lernhilfe, nicht als offizielle Prüfungsrubrik oder Bewertung.
