@@ -12,6 +12,7 @@
 - [x] Google-Drive-Suche nach eigenständigen AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
 - [x] Persönliche Entspannungs-Sitzungsnotizen und die erweiterte Atemnotiz gegen Original-Kursquellen abgrenzen, damit eigene Praxis und unbelegte Erweiterungen nicht als FlexyFit-Anleitungen erscheinen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
+- [x] Selbsterfahrung direkt an Methoden-Karten mit lokalem Reflexionsbogen erfassen und getrennt vom formalen 30-Einheiten-Nachweis halten.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
 - [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
 - [x] Vorhandene Tages-Sessions nach ausdrücklicher Selbstbestätigung in den Ausbildungsnachweis übernehmen; Export an 30-Zeilen-Vorlage anlehnen.

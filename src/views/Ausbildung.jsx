@@ -399,6 +399,12 @@ const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'
 const STRESS_REFLECTION_KEY = 'relax-stress-reflection-v1'
 const DELIVERY_STORAGE_KEY = 'relax-training-delivery-v1'
+const METHOD_REFLECTION_KEY = 'relax-method-reflections-v1'
+const METHOD_REFLECTION_FIELDS = [
+  ['experience', 'Eigene Erfahrung', 'Was hast du bei der tatsächlich durchgeführten oder besuchten Methode wahrgenommen? Was war angenehm, ungewohnt oder offen?'],
+  ['conditions', 'Hilfreiche Bedingungen und Anpassungen', 'Welche Rahmenbedingungen, Wahlmöglichkeiten oder Anpassungen haben deine Teilnahme unterstützt?'],
+  ['teaching', 'Anleiten und erklären', 'Was kannst du über Ziel und Ablauf verständlich erklären oder demonstrieren? Wo brauchst du noch praktische Einschulung?'],
+]
 const STRESS_REFLECTION_FIELDS = [
   { id: 'stressors', title: 'S · Stressoren und Bewertung', prompt: 'Welche konkrete Situation oder Anforderung möchtest du betrachten? Erlebst du sie eher als Herausforderung, Bedrohung oder Schaden/Verlust? Welche eigenen Bewältigungsmöglichkeiten nimmst du wahr?' },
   { id: 'organism', title: 'O · Persönliche Voraussetzungen', prompt: 'Welche Erfahrungen, Gewohnheiten, Überzeugungen, Fertigkeiten oder aktuellen Belastungen spielen für deine Einschätzung eine Rolle? Teile nur, was du festhalten möchtest.' },
@@ -495,6 +501,10 @@ export default function Ausbildung() {
     try { return { ...defaults, ...JSON.parse(localStorage.getItem(STRESS_REFLECTION_KEY) || '{}') } }
     catch { return defaults }
   })
+  const [methodReflections, setMethodReflections] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(METHOD_REFLECTION_KEY) || '{}') }
+    catch { return {} }
+  })
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -537,6 +547,9 @@ export default function Ausbildung() {
   useEffect(() => {
     try { localStorage.setItem(STRESS_REFLECTION_KEY, JSON.stringify(stressReflection)) } catch {}
   }, [stressReflection])
+  useEffect(() => {
+    try { localStorage.setItem(METHOD_REFLECTION_KEY, JSON.stringify(methodReflections)) } catch {}
+  }, [methodReflections])
   useEffect(() => {
     if (!delivery?.running) return undefined
     const timer = window.setInterval(() => setDelivery(current => {
@@ -670,6 +683,18 @@ export default function Ausbildung() {
       '\nQuelle: FlexyFit Academy, Stresstheorie, S. 32–44.',
     ]
     downloadText(`stressreflexion-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
+  }
+
+  function exportMethodReflection(selectedMethod) {
+    const reflection = methodReflections[selectedMethod.name] || {}
+    const lines = [
+      `# Selbsterfahrung: ${selectedMethod.name}`,
+      '', `Datum des Exports: ${localToday()}`, '',
+      ...METHOD_REFLECTION_FIELDS.flatMap(([id, title]) => [`## ${title}`, reflection[id] || '', '']),
+      `Ausbildungsbezug: ${selectedMethod.source}`,
+      '', 'Persönliche Reflexion nach eigener Erfahrung oder praktischer Einschulung. Kein Nachweis einer absolvierten Ausbildungseinheit.',
+    ]
+    downloadText(`selbsterfahrung-${selectedMethod.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
   }
 
   if (delivery) {
@@ -817,6 +842,12 @@ export default function Ausbildung() {
           </div>}
           {method.name === 'Entspannungsorientierte Ausdauer' && <div className="mt-4 rounded-xl p-3 text-xs leading-relaxed" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>Einzelne Entspannungseinheit und allgemeine Bewegungsempfehlung sind verschiedene Größen: Für Erwachsene nennt das österreichische Gesundheitsportal 150–300 Minuten Ausdauerbewegung mit mittlerer Intensität pro Woche sowie muskelkräftigende Übungen an mindestens zwei Tagen. <a href="https://www.gesundheit.gv.at/leben/bewegung/gesund-durch-sport/bewegungsempfehlungen-erwachsene.html" target="_blank" rel="noreferrer" className="font-semibold underline" style={{ color: 'var(--accent)' }}>Österreichische Bewegungsempfehlungen ↗</a></div>}
           <p className="mt-4 border-t pt-3 text-xs" style={{ borderColor: 'var(--line)', color: 'var(--dim)' }}>Ausbildungsbezug: {method.source}. Praxis immer an Person, Tagesform und Qualifikation anpassen.</p>
+          <section className="mt-4 rounded-xl border p-4" style={{ borderColor: 'var(--line)', background: 'var(--bg2)' }}>
+            <h3 className="text-sm font-bold">Selbsterfahrung & Lernreflexion</h3>
+            <p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Nach eigener Teilnahme oder praktischer Einschulung festhalten. Bei reinen Themenübersichten keine Durchführung ableiten. Die Notizen bleiben lokal in diesem Browser und zählen nicht als Ausbildungs-Praxiseinheit. Die <a href="https://www.flexyfitacademy.com/de/sport/yoga-pilates-entspannungstrainer" target="_blank" rel="noreferrer" className="font-semibold underline" style={{ color: 'var(--accent)' }}>offizielle Diplom-Kursbeschreibung ↗</a> nennt praktische Teile und Selbsterfahrung; bei Yoga auch Anleiten und Korrigieren ausgewählter Übungen.</p>
+            <div className="mt-3 space-y-3">{METHOD_REFLECTION_FIELDS.map(([id, title, prompt]) => <label key={id} className="block text-xs font-semibold">{title}<span className="mt-1 block font-normal leading-relaxed" style={{ color: 'var(--muted)' }}>{prompt}</span><textarea value={methodReflections[method.name]?.[id] || ''} onChange={event => setMethodReflections(current => ({ ...current, [method.name]: { ...(current[method.name] || {}), [id]: event.target.value.slice(0, 1500) } }))} rows={3} maxLength={1500} className="mt-2 w-full rounded-xl border px-3 py-2 text-sm font-normal" style={input} /></label>)}</div>
+            <button onClick={() => exportMethodReflection(method)} className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}><Download size={15} /> Reflexion als Markdown exportieren</button>
+          </section>
           {method.name === 'Atemschulung' && <button onClick={() => onNavigate?.('atem')} className="mt-4 w-full rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>Zur geführten Atemübung</button>}
           <button onClick={() => { setEntry(current => ({ ...current, technique: method.name })); navigateSection('nachweis') }} className="mt-2 w-full rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Methode im Ausbildungsnachweis dokumentieren</button>
         </article>

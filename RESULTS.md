@@ -619,3 +619,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Fünf quellgebundene Fragen prüfen Yoga-Grundsätze, Pilates-Kategorien, die Abgrenzung der fünf Tibeter von PMR, die uneindeutige PMR-Gruppenliste und die fehlenden Anleitungen zu AT/Fantasiereisen.
 - Antwortpositionen werden wie bei den vorhandenen Fragen deterministisch rotiert; jede Erklärung nennt den Kursbezug und die betroffene Quellgrenze.
+
+# Selbsterfahrung an die Methodenbibliothek angebunden (2026-11-02)
+
+- Jede Methodenkarte bietet jetzt drei lokal gespeicherte Reflexionsfelder zu eigener Erfahrung, hilfreichen Anpassungen sowie Anleiten/Erklären und praktischem Einschulungsbedarf.
+- Der Markdown-Export kennzeichnet die Notizen ausdrücklich als persönliche Reflexion und nicht als absolvierten Ausbildungsnachweis.
+- Die Ergänzung folgt der offiziellen Diplom-Kursbeschreibung, die Praxis und Selbsterfahrung nennt; die Methoden-PDFs bleiben die Quelle für konkrete Ausbildungsinhalte.
