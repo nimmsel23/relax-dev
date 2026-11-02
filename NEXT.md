@@ -4,15 +4,11 @@ Next work priorities for relax-dev.
 
 ## Active Work (Max 5)
 
-1. **Browser-test graph visualization** — Open SubstanceCatalog in browser, toggle to Graph view, search Mulungu/Caffeine, verify Reactflow renders correctly, check node interactivity + zoom/pan
-
-2. **Explore Physiology Obsidian Vault** — Review existing physiological models/HPA-Axis timing/cortisol patterns in user's Obsidian vault, determine integration points with current mood/session tracking
-
-3. **Implement Physio Timeline Graph Engine** (if starting) — Backend simulation engine for cortisol/dopamine/glucose curves in response to lifestyle events (coffee, meals, sleep), frontend event input UI + Nivo chart
-
-4. Update project documentation (CLAUDE.md, README) with dual-catalog architecture, graph visualization, and Physio Timeline feature spec
-
-5. _Reserved for emerging tasks_
+1. **Remaining original course instructions:** Recheck the course archive when new material is added. Add AT, Fantasiereisen or Meditation steps only when a suitable course source supports them; keep the current method cards explicit about what is missing.
+2. **Audit the course-to-app map:** For each assignment and practical unit, compare the live module flow with `docs/ENTSPANNUNGSTRAINER-QUELLEN.md` and the original PDFs; update page references and the learning check from evidence.
+3. **Review the 30-unit evidence workflow:** Confirm that source sessions, explicit self-confirmation, printing and CSV export remain easy to use on a phone and align with the supplied form.
+4. **Keep the course assignment usable:** Check the four-week worksheet against both assignment PDFs, including realistic weekly routines, a fully timed day cycle and the nutrition sections; preserve clear prevention boundaries.
+5. **Verify actual mobile/offline behavior** for Module, method pages, timer and saved worksheets before a release; distinguish build results from device acceptance.
 
 ## Offen aus Atem-/Build-Session (2026-10-29)
 

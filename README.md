@@ -82,8 +82,8 @@ Free-form markdown entries per day.
 - `/journal` endpoint
 - Stored as `data/journal/YYYY-MM-DD.md`
 
-### 3. **Physio Timeline (RELAX-002)** 🧠
-Deterministic physiological simulation of cortisol, dopamine, glucose curves.
+### Zusatzbereiche: Physio Timeline und Knowledge Base
+Diese vorhandenen Ansichten ergänzen das Ausbildungsmodul. Simulationen und Katalogeinträge sind app-interne Modelle bzw. Daten und keine individuelle physiologische Messung, Diagnose oder Trainings-/Gesundheitsempfehlung.
 - Add events (coffee, meals, nicotine, THC) with timestamps
 - Set conditions (fasted, sleep debt, stress level, circadian phase)
 - Run simulation → view real-time hormone curves
@@ -218,7 +218,7 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 | Dokument | Inhalt |
 |----------|--------|
 | **[ARCHITECTURE.md](./ARCHITECTURE.md)** | KB-Struktur, AI-Enrichment, Simulation Engine, Data Flow |
-| **[VISION.md](./VISION.md)** | Warum dieses Projekt existiert — Philosophie, Richtung, offene Fragen |
+| **[VISION.md](./VISION.md)** | Produktziel, Ausbildungsweg und fachliche Leitplanken des Moduls |
 | **[HOT.md](./HOT.md)** | Open Source Biochemie-DBs + nützliche Node Module |
 | **[AGENTS-11-05-2026.md](./AGENTS-11-05-2026.md)** | Physio Timeline Spec + Agent-Workflow |
 | **[UNKLARHEITEN.md](./UNKLARHEITEN.md)** | Offene Design-Fragen (Mood-Skalen, Sleep, Export) |

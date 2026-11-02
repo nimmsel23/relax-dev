@@ -548,3 +548,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Direkt am Fallarbeitsblatt wird klargestellt, dass Verdauungs- und Schlafbeschwerden keine Diagnose darstellen und die Fallbeschreibung kein Gespräch mit der Person ersetzt.
 - Die Aufgabe lenkt auf gemeinsam formulierte Wohlbefindensziele ohne Heil- oder Abnehmversprechen und nennt medizinische Abklärung bei anhaltenden oder zunehmenden Beschwerden.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+# Produktdokumentation auf das Ausbildungsmodul ausgerichtet (2026-11-02)
+
+- `VISION.md` beschreibt jetzt den Ausbildungsweg vom Kursverständnis über Planung und Anleitung bis zum Praxisnachweis sowie die Quellen- und Trainergrenzen.
+- `NEXT.md` priorisiert Kursabgleich, 30-Einheiten-Nachweis, Pflichtaufgabe und mobile/offline Akzeptanz. Physio- und Katalogthemen sind als Zusatzbereiche eingeordnet.
+- README und Agentenhinweise verweisen auf dieselbe Produktpriorität; unbelegte Wirkmodelle sind nicht länger als zentrales Produktziel formuliert.
