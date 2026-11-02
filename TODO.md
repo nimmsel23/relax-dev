@@ -23,6 +23,7 @@
 - [x] Assisted Stretching gegen das Original-PDF prüfen und Session-Dosierung, ROM-Check, Ablaufqualität, Feedback und Zustimmung bei Berührung in der Methodenkarte abbilden.
 - [x] Den separaten Abschnitt Faszientraining/SMR aus demselben PDF ergänzen und den knappen Umfang der verfügbaren Praxisanleitung kennzeichnen.
 - [x] Entspannungsbegriff aus dem Stresstheorie-Skript und das Ausdauer-Kursprofil mit Belastungsgefühl, Beispieldauern und individuellem Rahmen sichtbar machen.
+- [x] Die Unterscheidung zwischen relativer Entspannung und einem umfassenden Ruhezustand aus Stresstheorie S. 63 in der Grundlagenkarte kenntlich machen.
 - [x] Vollständiges Ausdauer-Kapitel (S. 4–24) quellenkritisch abbilden: Einsatz-/Wirkungsfelder, Kursrichtwerte und praktische Varianten als Lehrinhalte kennzeichnen.
 - [x] Ernährungs-Pflichtaufgabe um eine seitenbezogene Materialübersicht zu Essverhalten, Lebensmittelgruppen, Supplementen und Kräutern ergänzen; Gesundheitsversprechen und Einnahmeangaben als nicht verifizierte Kursinhalte abgrenzen.
 - [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.

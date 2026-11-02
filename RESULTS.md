@@ -1,3 +1,8 @@
+# Relative Entspannung aus dem Lehrskript ergänzt (2026-11-02)
+
+- Grundlagenkarte erklärt jetzt den Hinweis aus Stresstheorie S. 63: eine spürbare Entspannung gegenüber einem hohen Ausgangsniveau bedeutet nicht zwingend, dass bereits umfassende Ruhe erreicht ist.
+- Die Karte verknüpft diese relative Veränderung mit subjektiver Wahrnehmung und der Grenze, daraus keine Körpermesswerte abzuleiten. TODO aktualisiert.
+
 # Lokale Themenübersicht zum Autogenen Training erschlossen (2026-11-02)
 
 - Die AT-Methodenkarte führt jetzt die Themen aus der lokalen MOC-Notiz auf: Grund-, Mittel- und Oberstufe sowie Ruhe-, Schwere-, Wärme-, Atem-, Herz-, Bauch- und Stirnübungen.
