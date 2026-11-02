@@ -17,5 +17,6 @@
 - [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
 - [x] Die fünf Tibeter als eigenständige Bewegungsreihe aus dem offiziellen PMR-Kursskript erfassen und von der PMR-Technik unterscheiden.
 - [x] Die Vier-Ebenen-Systematik der Entspannungsverfahren aus dem Stresstheorie-Skript ergänzen und AT/Fantasiereisen als Übersichtsinhalte ohne konkrete Anleitung kennzeichnen.
+- [x] Stundenentwurf und Vorbereitungsliste an die offiziellen Anforderungen zu Raum, Gruppengröße, Privatsphäre, Freiwilligkeit, gemeinsamem Beginn/Ende und Abschlussgespräch angleichen.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training oder Phantasiereisen ergänzen, falls passende Originalanleitungen verfügbar werden.

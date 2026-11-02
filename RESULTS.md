@@ -190,3 +190,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Grundlagenkarte ergänzt um die vier Ebenen des Originalskripts: muskulär, vegetativ, emotional und kognitiv samt den dort genannten Methoden.
 - Lerncheck fragt die Zuordnung ab. Die AT- und Fantasiereisen-Karten nennen nun klar, dass die Skripte die Verfahren einordnen, aber keine konkrete Schritt-für-Schritt-Anleitung enthalten.
+
+## 2026-11-02 — Stundenplanung an Kursbedingungen angeglichen
+
+- Vorbereitungsliste ergänzt um die im Skript beschriebenen Raum-, Klima-, Gruppen- und Freiwilligkeitsbedingungen: 5–12 Personen als Richtwert, gewählter Mattenabstand, optionale persönliche Gegenstände sowie warme Kleidung und Polster.
+- Stundenentwurf benennt Einleitung, methodischen Hauptteil, Ruhephase, ritualisierte Rücknahme, Feedback, Verabschiedung und Hinweis auf die nächste Einheit klarer. Lerncheck greift Gruppengröße und persönlichen Raum auf.

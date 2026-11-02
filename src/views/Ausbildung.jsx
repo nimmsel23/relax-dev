@@ -66,18 +66,21 @@ const PMR_STEPS = [
 ]
 
 const DEFAULT_BLOCKS = [
-  { id: 'ankommen', name: 'Ankommen & Befinden', minutes: 5, detail: 'Begrüßung, Ziel und Ablauf nennen; Befinden erfragen.' },
+  { id: 'ankommen', name: 'Einleitung & Befinden', minutes: 5, detail: 'Begrüßung, Ziel und organisatorische Hinweise; Befinden erfragen, neue Teilnehmende willkommen heißen und ein gemeinsames Anfangsritual setzen.' },
   { id: 'einstimmung', name: 'Einstimmung & Übungseinschulung', minutes: 8, detail: 'Methode und Herkunft kurz vorstellen, Position finden, erklären und ausprobieren.' },
-  { id: 'hauptteil', name: 'Hauptteil', minutes: 35, detail: 'Übungen methodisch aufbauen, Pausen lassen und individuelle Varianten anbieten.' },
-  { id: 'ruhe', name: 'Nachspüren', minutes: 5, detail: 'Stille oder leise Instrumentalmusik; Zeit für die eigene Wahrnehmung geben.' },
-  { id: 'ruecknahme', name: 'Rücknahme & Abschluss', minutes: 7, detail: 'Langsam aktivieren, bewegen und orientieren; Feedback und Verabschiedung.' },
+  { id: 'hauptteil', name: 'Hauptteil', minutes: 35, detail: 'Ausgewählte Übungen methodisch sinnvoll aufbauen und so dosieren, dass die Gruppe entspannt folgen kann.' },
+  { id: 'ruhe', name: 'Ruhe & Nachspüren', minutes: 5, detail: 'Den individuellen Entspannungszustand kurz in Ruhe oder mit zarter Musik nachspüren lassen.' },
+  { id: 'ruecknahme', name: 'Rücknahme, Gespräch & Abschluss', minutes: 7, detail: 'Mit einem wiederkehrenden Ritual gefühlvoll zurückholen, Erleben und Feedback besprechen, verabschieden und auf die nächste Stunde hinweisen.' },
 ]
 const PREPARATION_CHECKS = [
   ['ziel', 'Stundenziel und Schwerpunkt sind klar.'],
-  ['raum', 'Raum ist ruhig, gelüftet und angenehm temperiert.'],
-  ['material', 'Matten, Decken und optionale Hilfsmittel sind bereit.'],
-  ['gruppe', 'Platz, Privatsphäre und individuelle Wahlmöglichkeiten sind geklärt.'],
-  ['rueckkehr', 'Genügend Zeit für Rücknahme und Abschluss ist eingeplant.'],
+  ['raum', 'Ruhiger Raum, angenehmes Licht, Lüftung und Temperatur sind vorbereitet; Störungen von außen sind geklärt.'],
+  ['material', 'Matten, Decken, warme Kleidung sowie optionale Knie- und Kopfpolster sind verfügbar.'],
+  ['gruppe', 'Gruppengröße und Raumbedingungen passen zusammen; der Kurs nennt 5–12 Personen als Richtwert.'],
+  ['platz', 'Teilnehmende können Matten und Abstand so wählen, dass ihr persönlicher Raum gewahrt bleibt.'],
+  ['freiwilligkeit', 'Schuhe, Brille, Uhr oder Schmuck dürfen auf Hinweis abgelegt werden; niemand wird dazu gedrängt.'],
+  ['beginn', 'Gemeinsamer Beginn und gemeinsames Ende sind vereinbart; Verspätungen und Störungen sind bedacht.'],
+  ['rueckkehr', 'Genügend Zeit für Rücknahme, Abschlussgespräch und Verabschiedung ist eingeplant.'],
 ]
 const LEARNING_CHECK = [
   {
@@ -93,6 +96,13 @@ const LEARNING_CHECK = [
     correct: 1,
     why: 'Die Notiz sagt, Musik kann helfen, muss aber nicht eingesetzt werden. Sie soll ruhig und leiser als die Stimme sein.',
     source: 'Stundenplanung · Musik',
+  },
+  {
+    question: 'Was ist bei Gruppengröße und Platz laut Stundenplanung wichtig?',
+    answers: ['5–12 Personen sind ein Richtwert; Mattenabstand und persönlicher Raum sollen zur Gruppe passen.', 'Alle legen die Matten eng zusammen, damit die Gruppe synchron bleibt.', 'Die Gruppengröße spielt keine Rolle, wenn Musik läuft.'],
+    correct: 0,
+    why: 'Das Skript nennt 5–12 Personen als optimale Gruppengröße und betont persönlichen Raum sowie selbst gewählten Mattenabstand.',
+    source: 'Stundenplanung · Gruppengröße und Platz',
   },
   {
     question: 'Was gehört nach einer tiefen Entspannung in Rückenlage zum Abschluss?',
