@@ -44,6 +44,7 @@
 - [x] Stressansätze (reaktions-, reiz-, persönlichkeits-, transaktions-, ressourcen- und biopsychosozial) sowie die Kursübersicht zu vegetativem Nervensystem/Hormonen und Entspannungswirkungen/EEG mit Fundstellen und Messgrenzen darstellen.
 - [x] Alle 22 Haltungen und Bewegungsformen des Yoga-Originalskripts mit Seitenverweisen in der Methodenkarte aufführen; ausgewählte Beispiele nicht länger als vollständigen Kursumfang erscheinen lassen.
 - [x] Pilates-Kategorien mit den 19 Übungsnamen und Seitenbereichen der Originalsammlung (S. 17–97) verknüpfen, ohne fehlende Kategorienzuordnungen zu erfinden.
+- [x] Pilates-Konzeptbegriffe und Atem-/Haltungscues aus dem Original (S. 8–15) mit Fundstellen ergänzen und als Quellbegriffe statt universeller Bewegungsvorgaben einordnen.
 - [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.
 - [x] Stundenplanung um Trainerhaltung und Teamkommunikation, optionale Musik, Wiederholung, Demonstration sowie den Puls-/Zeit-Richtwert für kombinierte Kurse erweitern.
 - [x] Die noch fehlenden Grundlagen zur Atemmechanik aus Atemschulung S. 9–14 und die Einstiegsfrage der Kursdiskussion auf S. 4 im Atemtrainer abbilden.

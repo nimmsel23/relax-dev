@@ -35,6 +35,12 @@
 - Wiederholungsempfehlung und umstrittene Herkunftserzählung sind als Quellinhalt eingeordnet und nicht als persönliche Trainingsvorgabe bzw. gesicherte historische Tatsache dargestellt.
 - Quellenmatrix und TODO an den Umfang der Praxisübersicht angepasst.
 
+# Pilates-Konzeptbegriffe in der Methodenkarte ergänzt (2026-11-02)
+
+- Pilates-Atmung, Stance, Flat Back/Imprint, Bauchnabel-Cue, Pospannung, Kinn-zur-Brust und Achseln-zum-Becken-Cue aus den Originalseiten 9–15 ergänzt.
+- Abweichende Atemempfehlungen im Skript und stark formulierte Haltungscues sind als Quellbegriffe gekennzeichnet, nicht als allgemeingültige Technikvorschrift.
+- Quellenmatrix und TODO ergänzt.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
