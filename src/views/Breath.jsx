@@ -221,6 +221,15 @@ export default function Breath() {
             <p className="text-[11px]" style={{ color: 'var(--dim)' }}>Kursinhalt zur Atemmechanik, keine Anleitung zur Diagnose oder Behandlung von Atembeschwerden.</p>
           </div>
         </details>
+        <details className="rounded-xl border p-3" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
+          <summary className="cursor-pointer text-sm font-semibold">Atemmechanik, Kehlkopf und Zwerchfell · S. 15–20, 24–27</summary>
+          <div className="mt-3 space-y-3 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>
+            <p><strong>Atembewegung · S. 15–20:</strong> Das Skript erklärt den Luftstrom über Druckunterschiede und die Veränderung des Brustraums. Es beschreibt das Zwerchfell als wesentlichen Atemmuskel, unterstützt durch die Rippenatmung; bei der Einatmung kontrahieren Zwerchfell und äußere Zwischenrippenmuskeln, die ruhige Ausatmung wird als weitgehend passiv dargestellt. Forcierte Atembewegungen werden gesondert beschrieben.</p>
+            <p><strong>Kehlkopf · S. 24–26:</strong> Die Unterlage ordnet den Kehlkopf zwischen Rachen und Luftröhre ein und beschreibt seine Rolle beim Schutz der unteren Atemwege beim Schlucken sowie bei der Stimmbildung durch die Stimmlippen.</p>
+            <p><strong>Zwerchfell · S. 27:</strong> Das Skript beschreibt es als kuppelförmige Muskel-Sehnen-Platte zwischen Brust- und Bauchraum und als wichtigsten Atemmuskel. Weitergehende Prozentangaben aus derselben Seite werden hier nicht als allgemeine individuelle Messwerte dargestellt.</p>
+            <p className="text-[11px]" style={{ color: 'var(--dim)' }}>Anatomischer Kursinhalt; keine Anleitung zu forcierter Atmung und keine Beurteilung von Atembeschwerden.</p>
+          </div>
+        </details>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Ein Timer gibt nur einen Rhythmus vor und misst keine Körperreaktionen. Atemtiefe und Pausen bleiben freiwillig; wenn etwas unangenehm ist, wieder natürlich atmen oder die Übung beenden.
         </p>

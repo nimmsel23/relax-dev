@@ -47,6 +47,12 @@
 - Die Quelle deckt jetzt S. 3–72 ab; alle 22 Haltungen/Bewegungsformen bleiben mit Seitenangaben aufgeführt.
 - Quellenmatrix und TODO aktualisiert.
 
+# Atemmechanik um Kehlkopf und Zwerchfell ergänzt (2026-11-02)
+
+- Aufklappbare Theorieübersicht aus Atemschulung S. 15–20 und 24–27 ergänzt: Druckmodell, Ein-/Ausatmung, Kehlkopffunktion und Zwerchfell.
+- Die Übersicht bleibt anatomischer Kursstoff; Prozentangaben werden nicht als individuelle Messung gezeigt und forcierte Atembewegungen nicht angeleitet.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
