@@ -57,4 +57,5 @@
 - [x] Die bislang zu knappe Brain-/Power-Food-Übersicht um Yamswurzel, weitere Power-Food-Beispiele und den Abschnitt zu sekundären Pflanzenstoffen (Ernährung S. 39–69) mit kritischer Kennzeichnung der Wirkversprechen ergänzen.
 - [x] Soul Food (S. 70–83) um Capsaicin/scharfe Lebensmittel und Moodfood sowie den bisher übergangenen Abschnitt Ernährung und Depression (S. 84) ergänzen; Stimmungs- und Gesundheitsbehauptungen als Kursinhalt einordnen.
 - [x] Naturheilmittel S. 90–104 mit dem vollständigen Kräuterinventar und Johanniskraut-Wechselwirkungshinweis sowie die beiden Kräuterteemischungen S. 106–107 als Quellenstoff sichtbar machen, ohne Dosierungs- oder Einnahmeempfehlung auszugeben.
+- [x] Das Wirbelsäulen-Skript bis zum tatsächlichen Ende des Bewegungsfreude-Kapitels (S. 39) abgleichen, die fehlenden Kursmethoden ergänzen und die verrutschten Seitenbezüge bei Beckenuhr/Druckpunkten korrigieren.
 - [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.

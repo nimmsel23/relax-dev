@@ -95,6 +95,12 @@
 - Einnahme- und Dosierungsangaben werden nicht als App-Anleitung übernommen; die Abschnitte bleiben als Kursquelle erkennbar.
 - Quellenmatrix und TODO aktualisiert.
 
+# Wirbelsäulen-Praxis bis zum tatsächlichen Skriptende ergänzt (2026-11-02)
+
+- Der PDF-Abgleich ergab 40 Seiten; das Bewegungsfreude-Kapitel endet auf S. 39, nicht S. 38. Kursmethoden (Kooperation, Kreativität, Geräte, Musik, Außenraum, Erfahrungsreflexion) sind nun in der Methodenkarte abgebildet.
+- Die Quellenmatrix deckt jetzt S. 24–39 ab. Beckenuhr (S. 35–36) und Druckpunkte (S. 32) haben korrigierte Seitenbezüge.
+- TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
