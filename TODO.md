@@ -88,4 +88,5 @@
 - [x] Ausbildungsabschnitte und einzelne Methodenkarten ebenfalls in URL und Browser-Verlauf abbilden, einschließlich direkter Links und Wiederherstellung bei Zurück/Vor.
 - [x] Shell-Routing bei Ausbildungs-Deep-Links anhand des ersten Hash-Segments auf den Tab „Modul“ auflösen.
 - [x] Durchführungs-Timer gegen gedrosselte Hintergrund-Ticks absichern, indem die Restzeit aus einer absoluten Endzeit berechnet wird.
+- [x] Timerstand lokal bewahren und nach Modulwechsel oder App-Neustart anhand der Endzeit wiederherstellen, statt den laufenden Stundenentwurf zu verlieren.
 - [x] Browser-Titel, PWA-/Homescreen-Name, Beschreibung und Repository-Kurztext auf das Entspannungstrainer-Ausbildungsmodul ausrichten.

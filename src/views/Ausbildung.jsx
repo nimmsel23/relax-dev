@@ -363,6 +363,7 @@ const LEARNING_CHECK = [
 const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'
 const STRESS_REFLECTION_KEY = 'relax-stress-reflection-v1'
+const DELIVERY_STORAGE_KEY = 'relax-training-delivery-v1'
 const STRESS_REFLECTION_FIELDS = [
   { id: 'stressors', title: 'S · Stressoren und Bewertung', prompt: 'Welche konkrete Situation oder Anforderung möchtest du betrachten? Erlebst du sie eher als Herausforderung, Bedrohung oder Schaden/Verlust? Welche eigenen Bewältigungsmöglichkeiten nimmst du wahr?' },
   { id: 'organism', title: 'O · Persönliche Voraussetzungen', prompt: 'Welche Erfahrungen, Gewohnheiten, Überzeugungen, Fertigkeiten oder aktuellen Belastungen spielen für deine Einschätzung eine Rolle? Teile nur, was du festhalten möchtest.' },
@@ -390,6 +391,21 @@ function emptyCasePlan() {
 }
 
 function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"` }
+function restoreDelivery() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DELIVERY_STORAGE_KEY) || 'null')
+    if (!saved || !Array.isArray(saved.blocks) || !saved.blocks.length || !Number.isInteger(saved.index) || saved.index < 0 || saved.index >= saved.blocks.length) return null
+    if (!saved.running) {
+      const remaining = Number(saved.remaining)
+      return Number.isFinite(remaining) && remaining >= 0 ? { ...saved, remaining, running: false, endsAt: null } : null
+    }
+    const endsAt = Number(saved.endsAt)
+    if (!Number.isFinite(endsAt)) return null
+    const remaining = Math.max(0, Math.ceil((endsAt - Date.now()) / 1000))
+    return { ...saved, remaining, running: remaining > 0, endsAt: remaining > 0 ? endsAt : null }
+  } catch { return null }
+}
+
 const MODULE_SECTIONS = new Set(['start', 'grundlagen', 'selbstcheck', 'methoden', 'fallkonzept', 'planung', 'nachweis'])
 function readTrainingRoute() {
   const [root, section = 'start', methodName = ''] = window.location.hash.slice(1).split('/')
@@ -448,7 +464,7 @@ export default function Ausbildung() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [markingId, setMarkingId] = useState(null)
-  const [delivery, setDelivery] = useState(null)
+  const [delivery, setDelivery] = useState(restoreDelivery)
   const [checkIndex, setCheckIndex] = useState(0)
   const [checkAnswer, setCheckAnswer] = useState(null)
   const [checkScore, setCheckScore] = useState(0)
@@ -477,6 +493,12 @@ export default function Ausbildung() {
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)) }, [plan])
   useEffect(() => { localStorage.setItem(CASE_STORAGE_KEY, JSON.stringify(casePlan)) }, [casePlan])
+  useEffect(() => {
+    try {
+      if (delivery) localStorage.setItem(DELIVERY_STORAGE_KEY, JSON.stringify(delivery))
+      else localStorage.removeItem(DELIVERY_STORAGE_KEY)
+    } catch {}
+  }, [delivery])
   useEffect(() => {
     try { localStorage.setItem(STRESS_REFLECTION_KEY, JSON.stringify(stressReflection)) } catch {}
   }, [stressReflection])

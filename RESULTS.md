@@ -603,3 +603,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Abschnitts-Timer berechnet Restzeit anhand einer Endzeit statt jede Intervall-Ausführung als verstrichene Sekunde zu zählen.
 - Bei Hintergrunddrosselung und Rückkehr in die App wird dadurch die tatsächliche Restzeit angezeigt; Pause, Fortsetzen, Abschnittswechsel und Neustart setzen die Endzeit passend zurück.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+
+# Laufenden Stunden-Timer nach App-Wechsel wiederaufnehmen (2026-11-02)
+
+- Der Durchführungszustand wird lokal gespeichert und beim Öffnen der Modulansicht validiert wiederhergestellt.
+- Eine laufende Einheit setzt die Restzeit aus der absoluten Endzeit fort; pausierte Einheiten behalten ihren Stand. Beenden und Abschließen entfernen den gespeicherten Lauf.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.
