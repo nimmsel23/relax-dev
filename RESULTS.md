@@ -699,3 +699,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Methodenliste filtert nun live nach Namen, Schwerpunkten, Anleitungstexten und Quellen.
 - Trefferzahl und verständlicher Leerzustand unterstützen die Suche auf schmalen Bildschirmen.
+
+# Schmale Browseransicht geprüft (2026-11-02)
+
+- Methodenliste und lange Biofeedback-Karte wurden bei 390×844 in Headless-Firefox gerendert. Name, Suchfeld, Karten und Navigationsleiste bleiben lesbar; kein horizontaler Seitenüberlauf war sichtbar.
+- Der Firefox-Scrollbar-Gutter zeigte zuvor einen hellen Streifen. `scrollbar-color` und `scrollbar-width` folgen jetzt dem App-Thema.
+- Die echte iPhone-/iPad-Abnahme und der vollständige Timer-/Nachweisablauf bleiben offen.
