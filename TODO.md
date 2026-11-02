@@ -15,6 +15,7 @@
 - [ ] Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; die Themenkarten bleiben Übersichten, konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
 - [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
+- [x] Kognitive Umstrukturierung als MOC-Thema mit den Coping-Ansätzen aus Stresstheorie S. 43 verknüpfen; die Übersicht ohne erfundene Technik oder Therapieanspruch halten.
 - [x] Hinweis unter der Methodenliste mit allen vier Themenbereichen ohne vollständige Anleitung abgleichen.
 - [x] Google-Drive-Suche nach eigenständigen Mentaltraining-, AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
 - [x] Drive-Zweitsuche mit den konkreten Kursbegriffen AT-Grundstufe/Ruhetönung, Fantasiereisen-Rücknahme und Mentaltraining nach Eberspächer geprüft; MOC und Diplom-Notiz wiederholen Themen, enthalten aber keine spezifischen Ablaufanleitungen.

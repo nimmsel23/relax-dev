@@ -794,3 +794,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Zwei quellengebundene Fragen prüfen jetzt den geforderten Arbeitsablauf und die vier Ernährungskapitel der Pflichtaufgabe.
 - Begründungen verlinken die jeweilige Aufgabenanforderung und grenzen sie von medizinischer Behandlung sowie individueller Ernährungs-/Supplementempfehlung ab.
 - TODO und diese Ergebnisnotiz aktualisiert.
+# Kognitive Umstrukturierung quellengebunden eingeordnet (2026-11-02)
+
+- Die Methodenübersicht erschließt jetzt den MOC-Themenpunkt „Kognitive Umstrukturierung zur Stressbewältigung“ direkt aus dem Kursindex.
+- Die Karte und eine neue Lerncheck-Frage verbinden die MOC mit Stresstheorie S. 43: Veränderung eigener Bewertungen ist dort ein Coping-Ansatz; eine eigenständige Technik oder Schrittfolge ist im Skript nicht ausgeführt.
+- Die App grenzt die Themenübersicht ausdrücklich von Therapie ab und verweist für die beschreibende Selbstreflexion auf das vorhandene SORKC-Arbeitsblatt.
+- Quellenmatrix und TODO aktualisiert.
