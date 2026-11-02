@@ -5,6 +5,11 @@
 - Der Import prüft Format und Grundstruktur, fragt vor dem Ersetzen des lokalen Arbeitsstands nach und rollt lokale Schlüssel bei einem Speicherfehler zurück. Der formale Praxisnachweis bleibt im Session-Speicher und wird nicht Teil der Sicherungsdatei.
 - `pnpm run build` scheiterte vor Vite an der schreibgeschützten pnpm-Engine-Store-Lockdatei (`ERR_PNPM_STORE_DIR_OPEN_OPERATION_LOCK`); der gleiche Projekt-Build lief mit dem vorhandenen `npm run build` erfolgreich durch (Vite und PWA-Service-Worker). `git diff --check` ist sauber; kein Test ausgeführt.
 
+# Wochenselbstcheck in der Vier-Wochen-Aufgabe ergänzt (2026-11-02)
+
+- Das Fallarbeitsblatt bildet jetzt auch den freiwilligen Wochenrückblick aus dem eigenen ausgearbeiteten Ernährung-/Entspannungskonzept ab: innere Unruhe, Einschlafen, Verdauung und Routinen auf einer 1–10-Skala.
+- Skalenrichtung und Grenzen sind direkt an den Feldern erläutert. Der Check bleibt optional, ergänzt keine offizielle Pflichtanforderung und erscheint auch im Markdown-Export.
+
 # Unterstützende Maßnahmen im Methoden- und Praxisprotokoll auswählbar gemacht (2026-11-02)
 
 - Neuer Sammelpunkt erschließt Tai-Chi, Qigong und Feldenkrais aus Stresstheorie S. 58; Yoga und Meditation bleiben mit eigenen Methodenkarten vertreten.
