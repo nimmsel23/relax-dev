@@ -99,6 +99,7 @@
 - [x] Quellenbereich der Ausdauer-Methodenkarte auf S. 4–26 angleichen und Trailrunning sowie die Inhalte von S. 23–25 präziser aufführen.
 - [x] Stresstheorie S. 5–13 um Stressor/Reaktion/Erleben und das Steinzeit-/Moderner-Mensch-Reaktionsschema als begrenztes Lehrmodell ergänzen.
 - [x] SORK-Lerncheck und Reflexionshilfe an der Schemafolie (S/O/R/K) ausrichten und die uneinheitliche spätere K-/C-Notation des Skripts kenntlich machen.
+- [x] Übernahme laufender Alt-Sessions im Praxisnachweis auch für ID-lose Zeilen eindeutig sperren und identifizieren.
 - [x] Die Bildgegenüberstellung Stress/Entspannung aus Stresstheorie S. 66 in der Grundlagenansicht darstellen, ohne die unbeschrifteten Pfeile als physiologische Messwerte auszulegen.
 - [x] Die bebilderten Flexibilitätstrainingsseiten Assisted Stretching S. 18–28 in der Methodenkarte ausweisen und die vorbereitende Gegenbewegung S. 41 aufnehmen, ohne nicht beschriftete Zeichnungen mit erfundenen Übungsnamen zu versehen.
 - [x] Die Pilates-Bildtafeln zu funktionell wichtigen Körpersegmenten (S. 22–23) in Quellenmatrix und Methodenansicht ergänzen, ohne sie als zusätzliche Bewegungsabläufe zu interpretieren.

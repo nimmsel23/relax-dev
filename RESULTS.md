@@ -715,3 +715,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Lerncheck fragt die eindeutige S/O/R/K-Zuordnung der Schemafolie ab und erklärt separat, dass Coping später als C erscheint.
 - Die Reflexionshilfe kennzeichnet die widersprüchliche Überschrift „K und C“ im Konsequenzen-Abschnitt und erklärt, dass Folgen und Coping in der App praktisch getrennt werden.
+
+# ID-lose Alt-Sessions eindeutig übernehmen (2026-11-02)
+
+- Jede unbestätigte Session erhält für die Listenzeile einen stabilen Schlüssel aus Datum und ID beziehungsweise Originalindex.
+- Während eine ID-lose Zeile gespeichert wird, ist nur deren Schaltfläche gesperrt; benachbarte Zeilen bleiben einzeln bedienbar.
