@@ -35,6 +35,29 @@ const METHODS = [
   { name: 'Achtsamkeit & Meditation', duration: '15–30 Min.', icon: Sparkles, focus: 'Aufmerksamkeit freundlich im gegenwärtigen Erleben halten', practice: 'Einen einfachen Anker wie Atem, Geräusche oder Kontakt zum Boden anbieten. Abschweifen ist normal; die Aufmerksamkeit kann ohne Bewertung zurückkehren.', adapt: 'Augen offen, Bewegung oder ein äußerer Anker sind gleichwertige Optionen.', source: 'Methodenübersicht; Ausbildungsnotizen' },
 ]
 
+const PMR_STEPS = [
+  ['Rechte Hand', 'Rechte Hand sanft zur Faust schließen. Kurz wahrnehmen, dann beim Ausatmen lösen und nachspüren.'],
+  ['Rechter Arm', 'Rechten Arm leicht anwinkeln und angenehm anspannen. Kurz halten, lösen und den Unterschied wahrnehmen.'],
+  ['Linke Hand', 'Linke Hand sanft zur Faust schließen. Lösen und nachspüren.'],
+  ['Linker Arm', 'Linken Arm leicht anwinkeln. Kurz anspannen, lösen und nachspüren.'],
+  ['Stirn', 'Augenbrauen leicht nach oben ziehen. Spannung kurz wahrnehmen, dann lösen.'],
+  ['Augen', 'Augen sanft zusammendrücken, ohne zu pressen. Lösen und nachspüren.'],
+  ['Kiefer', 'Zähne leicht aufeinander bringen. Dann den Kiefer lockern.'],
+  ['Zunge', 'Zunge sanft an den Gaumen legen. Lösen und nachspüren.'],
+  ['Kopf', 'Kinn vorsichtig in Richtung Brust bewegen. Nur im angenehmen Bereich; lösen.'],
+  ['Schultern', 'Schultern sanft zu den Ohren ziehen. Kurz halten, fallen lassen und nachspüren.'],
+  ['Bauch', 'Bauchdecke leicht anspannen, ohne die Luft anzuhalten. Lösen.'],
+  ['Rücken', 'Bauch vorsichtig nach vorne schieben und ein kleines Hohlkreuz bilden. Lösen.'],
+  ['Gesäß', 'Gesäßmuskeln sanft anspannen. Dann vollständig lösen.'],
+  ['Rechter Fuß', 'Rechten Fuß leicht nach vorne beugen. Spannung wahrnehmen und lösen.'],
+  ['Rechte Wade', 'Rechte Fußspitze sanft zum Körper ziehen. Lösen und nachspüren.'],
+  ['Rechter Oberschenkel', 'Rechten Oberschenkel leicht anspannen. Lösen.'],
+  ['Linker Fuß', 'Linken Fuß leicht nach vorne beugen. Spannung wahrnehmen und lösen.'],
+  ['Linke Wade', 'Linke Fußspitze sanft zum Körper ziehen. Lösen und nachspüren.'],
+  ['Linker Oberschenkel', 'Linken Oberschenkel leicht anspannen. Lösen und nachspüren.'],
+  ['Rückkehr', 'Bewege langsam Hände und Füße, strecke und räkle dich nach Bedarf. Atme frei, orientiere dich im Raum und öffne die Augen, wenn du soweit bist.'],
+]
+
 const DEFAULT_BLOCKS = [
   { id: 'ankommen', name: 'Ankommen & Befinden', minutes: 5, detail: 'Begrüßung, Ziel und Ablauf nennen; Befinden erfragen.' },
   { id: 'einstimmung', name: 'Einstimmung & Übungseinschulung', minutes: 8, detail: 'Methode und Herkunft kurz vorstellen, Position finden, erklären und ausprobieren.' },
@@ -102,6 +125,7 @@ function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"
 export default function Ausbildung() {
   const [section, setSection] = useState('start')
   const [method, setMethod] = useState(null)
+  const [pmrStep, setPmrStep] = useState(null)
   const [plan, setPlan] = useState(() => {
     const defaults = { title: 'Ruhig ankommen', focus: '', method: METHODS[0].name, blocks: DEFAULT_BLOCKS, checks: {}, reflection: '' }
     try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); return stored ? { ...defaults, ...stored, checks: stored.checks || {}, reflection: stored.reflection || '' } : defaults }
@@ -292,6 +316,27 @@ export default function Ausbildung() {
           <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{method.practice}</p>
           <h3 className="mt-4 text-sm font-bold">Anpassung & Selbstbestimmung</h3>
           <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{method.adapt}</p>
+          {method.name === 'Progressive Muskelrelaxation (PMR)' && (
+            <section className="mt-4 rounded-xl border p-4 space-y-3" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }} aria-label="Geführte PMR-Langform">
+              <div className="text-sm font-bold">PMR-Langform · 20 Schritte</div>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Angelehnt an die lokale FlexyFit-Academy-Handout-Zusammenfassung (20–30 Minuten). Die Schritte laufen manuell: Lass Zeit zum Anspannen und Nachspüren. Nur sanft und schmerzfrei anspannen; betroffene Bereiche überspringen oder die Übung ohne Anspannung beobachten.</p>
+              {pmrStep === null ? (
+                <button onClick={() => setPmrStep(0)} className="w-full rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Schrittfolge beginnen</button>
+              ) : (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs font-semibold" style={{ color: 'var(--muted)' }}><span>Schritt {pmrStep + 1} von {PMR_STEPS.length}</span><span>{Math.round((pmrStep + 1) / PMR_STEPS.length * 100)} %</span></div>
+                  <div className="h-1.5 overflow-hidden rounded-full" style={{ background: 'var(--line)' }}><div className="h-full rounded-full" style={{ width: `${(pmrStep + 1) / PMR_STEPS.length * 100}%`, background: 'var(--accent)' }} /></div>
+                  <div className="rounded-xl p-3" style={{ background: 'var(--card)' }}><div className="font-bold">{PMR_STEPS[pmrStep][0]}</div><p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{PMR_STEPS[pmrStep][1]}</p></div>
+                  <div className="flex gap-2">
+                    <button disabled={pmrStep === 0} onClick={() => setPmrStep(step => Math.max(0, step - 1))} className="flex-1 rounded-xl border px-3 py-2.5 text-sm font-semibold disabled:opacity-40" style={{ borderColor: 'var(--line)' }}>Zurück</button>
+                    {pmrStep < PMR_STEPS.length - 1
+                      ? <button onClick={() => setPmrStep(step => step + 1)} className="flex-1 rounded-xl px-3 py-2.5 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Weiter</button>
+                      : <button onClick={() => setPmrStep(null)} className="flex-1 rounded-xl px-3 py-2.5 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Abschließen</button>}
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
           {method.outline && <div className="mt-4 rounded-xl p-3" style={{ background: 'var(--bg2)' }}>
             <h3 className="text-sm font-bold">{method.outlineTitle}</h3>
             <div className="mt-3 space-y-3">{method.outline.map(([title, text]) => <div key={title}><div className="text-xs font-bold">{title}</div><p className="mt-0.5 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</p></div>)}</div>

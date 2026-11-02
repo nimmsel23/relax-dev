@@ -169,3 +169,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Atemseite ergänzt um den Kursablauf: Brust-/Bauchatmung zunächst wahrnehmen, Handkontakt am Bauch optional anbieten und kurze fünfminütige Übungsphasen als Vorschlag aus der lokalen Atemschulungsnotiz.
 - Hyperventilation und Atemanhalten als außerhalb dieses geführten Entspannungsangebots eingeordnet; bei Unwohlsein zurück zur natürlichen Atmung.
+
+## 2026-11-02 — PMR-Langform als manuelle Schrittfolge
+
+- Methodenkarte enthält eine geführte Abfolge der 19 Muskelgruppen aus der lokalen Zusammenfassung des FlexyFit-Academy-Handouts plus Rücknahme. Die Schritte werden manuell weitergeschaltet, damit Anspannungs- und Nachspürpausen angepasst werden können.
+- Quelle und Grenzen sichtbar: Zusammenfassung statt verifiziertem Originalskript; sanfte schmerzfreie Anspannung, Auslassen betroffener Bereiche und Beobachtungsalternative.
