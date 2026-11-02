@@ -207,3 +207,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Separate Methodenkarte für den Abschnitt Faszientraining aus dem Assisted-Stretching-Skript ergänzt: SMR, vorbereitendes Dehnen, Winkel-/Druckvariation, myofasziale Ketten und Rückkehr in die Ausgangsposition.
 - Kursziele werden als Inhalte des Skripts gekennzeichnet, nicht als Wirkungsversprechen. Die Karte macht sichtbar, dass das PDF nur eine kurze Praxisübersicht und kein vollständiges Übungsprogramm liefert.
 - Lerncheck greift die im Skript genannten Praxiselemente auf.
+
+## 2026-11-02 — Entspannungsbegriff und Ausdauerprofil konkretisiert
+
+- Grundlagenkarte erklärt nach dem Stresstheorie-Skript, dass subjektives Erleben, Muskelspannung und autonome Reaktionen auseinandergehen können; Entspannung wird nicht als Schlaf gleichgesetzt.
+- Ausdauermethode übernimmt den Kursansatz (gleichmäßig, moderat, sprechbar, individuell und ohne Leistungsfokus) sowie die dortigen beispielhaften Dauern und Umgebungsoptionen.
+- Allgemeine österreichische Bewegungsempfehlungen werden als eigener Wochenumfang getrennt vom Kursbeispiel verlinkt.
