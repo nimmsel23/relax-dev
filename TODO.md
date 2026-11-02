@@ -136,3 +136,7 @@
 - [x] Durchführungs-Timer gegen gedrosselte Hintergrund-Ticks absichern, indem die Restzeit aus einer absoluten Endzeit berechnet wird.
 - [x] Timerstand lokal bewahren und nach Modulwechsel oder App-Neustart anhand der Endzeit wiederherstellen, statt den laufenden Stundenentwurf zu verlieren.
 - [x] Browser-Titel, PWA-/Homescreen-Name, Beschreibung und Repository-Kurztext auf das Entspannungstrainer-Ausbildungsmodul ausrichten.
+
+## Atemtrainer Praxisfluss (2026-11-02)
+
+- [x] Einen sofort startbaren, dreiminütigen Einstieg mit Verlängerter Ausatmung ergänzen; Kurswissen und Pranayama-Aufgabe aus dem ersten Praxisblick nehmen und aufklappbar ans Ende setzen.
