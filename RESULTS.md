@@ -705,3 +705,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Methodenliste und lange Biofeedback-Karte wurden bei 390×844 in Headless-Firefox gerendert. Name, Suchfeld, Karten und Navigationsleiste bleiben lesbar; kein horizontaler Seitenüberlauf war sichtbar.
 - Der Firefox-Scrollbar-Gutter zeigte zuvor einen hellen Streifen. `scrollbar-color` und `scrollbar-width` folgen jetzt dem App-Thema.
 - Die echte iPhone-/iPad-Abnahme und der vollständige Timer-/Nachweisablauf bleiben offen.
+
+# 320-Pixel-Kopfbereich verbessert (2026-11-02)
+
+- Bei 320×640 waren App-Titel und Zeitplan-Schaltfläche optisch zu eng. Der App-Titel nutzt unter 640 Pixeln jetzt eine kleinere Schrift.
+- Der erneute Firefox-Screenshot zeigt Abstand zwischen Titel und Schaltfläche; Methodenliste, Suche und Abschnittsnavigation bleiben erreichbar.

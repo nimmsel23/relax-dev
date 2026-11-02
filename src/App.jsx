@@ -72,7 +72,7 @@ export default function App() {
   return (
     <div className="flex flex-col h-full" style={{ background: 'var(--bg)', color: 'var(--ink)' }}>
       <header style={{ background: 'var(--glass)', borderBottom: '1px solid var(--glass-border)', backdropFilter: 'blur(20px)' }} className="flex items-center justify-between px-4 py-2.5 z-20 shrink-0">
-        <div className="flex items-center gap-2 font-extrabold text-base tracking-tight"><MoonStar size={22} style={{ color: 'var(--accent)' }} />Entspannungstrainer</div>
+        <div className="flex items-center gap-2 font-extrabold text-sm tracking-tight sm:text-base"><MoonStar size={22} style={{ color: 'var(--accent)' }} />Entspannungstrainer</div>
         <button onClick={toggleTheme} title={manualOverride ? 'Manual override active (click to reset)' : `Circadian mode: ${currentSchedule?.name || theme}`} className="text-xs px-2.5 py-1 rounded-lg border transition-colors flex items-center gap-1.5" style={{ background: 'var(--card)', border: '1px solid var(--line)', color: 'var(--muted)' }}>
           {manualOverride ? <><Clock size={14} />{theme.slice(0, 3).toUpperCase()}</> : currentSchedule?.name || '🌓'}
         </button>
