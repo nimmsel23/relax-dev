@@ -815,3 +815,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die aktuelle Drive-Fassung der Master-MOC wurde direkt abgerufen und der AT-Abschnitt vollständig mit der Methodenkarte abgeglichen.
 - Die Karte enthält jetzt neben Grund-/Mittel-/Oberstufe auch Ursprung, Definition/Anwendungsbereiche, Entspannung/Wirkungsweisen, Rahmenbedingungen/Kontraindikationen und alle genannten Übungsfelder samt Themen für Mittel- und Oberstufe.
 - Eine Lerncheck-Frage prüft die Unterscheidung zwischen MOC-Kapitelstichworten und tatsächlich vorhandener Übungsanleitung. Quellenmatrix, TODO und NEXT aktualisiert.
+# MOC-Thema Stress im Beruf und Alltag quellengebunden abgebildet (2026-11-02)
+
+- Die aktuelle Master-MOC nennt in diesem Fach Ursachen und Folgen von Stress im privaten/beruflichen Umfeld sowie internationale Forschungsbezüge und nationale Trends.
+- Im 70-seitigen Stresstheorie-PDF gegengeprüft: WHO-Hinweis (S. 4), Unternehmerbefragung zum Stressverständnis (S. 6), Life-Event-Forschung/Daily Hassles (S. 25), Arbeitsplatzstressoren (S. 38) und chronische/gesellschaftliche Folgen (S. 43). Eine aktuelle nationale Statistikübersicht oder systematische internationale Forschungszusammenfassung liegt dort nicht vor.
+- Grundlagenansicht, Kursindex, Lerncheck, Quellenmatrix und TODO zeigen jetzt diese MOC/PDF-Grenze; es wurden keine unreferenzierten Kennzahlen ergänzt.
