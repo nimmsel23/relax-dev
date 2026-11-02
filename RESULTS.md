@@ -1,3 +1,9 @@
+# Stressgrundlagen aus dem Ernährungsskript ergänzt (2026-11-02)
+
+- Kursübersicht im 4-Wochen-Fallkonzept ergänzt: Stressreaktion, Alarm-/Widerstands-/Erschöpfungsphasen, im Skript aufgeführte Folgen und Gegenmaßnahmen aus „Entspannung und Ernährung“, S. 4–12.
+- Quellenmatrix präzisiert: S. 1–3 sind Titel, Inhaltsverzeichnis und Kapiteltrenner; die inhaltliche Abdeckung beginnt auf S. 4. Lehrmodell und Gesundheitsangaben bleiben als Kursinhalt eingeordnet.
+- TODO aktualisiert.
+
 # Ernährungs-Pflichtaufgabe mit Quellenübersicht erweitert (2026-11-02)
 
 - Aufklappbare Übersicht im Fallkonzept ergänzt: Essverhalten bei Stress, Brain-Food-Beispiele, Power-Food-Kapitel, Supplemente sowie Naturheilmittel und Rezepte mit Seitenbereichen.

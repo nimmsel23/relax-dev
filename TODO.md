@@ -54,6 +54,7 @@
 - [x] Die Vorbereitungsliste um die konkreten Rahmenbedingungen aus Stundenplanung S. 11, 16 und 19 ergänzen: Musik-/Naturgeräusch-Auswahl, Schutz vor Vorraumlärm und Anforderungen an größere Gruppen.
 - [x] Essverhalten bei Stress aus Ernährung S. 14–24 um Stress-Essen/-Hungern, den im Skript berichteten Situationswechsel und die Warnung vor pauschaler Abwertung/Ermahnung ergänzen, ohne daraus Diagnosetypen zu machen.
 - [x] Die Grundempfehlungen Ernährung S. 25–38 mit konkreten Skriptthemen und dem explizit als Kursrichtwert gekennzeichneten Trinkmengenbeispiel auffindbar machen.
+- [x] Die bisher ausgelassenen Stressgrundlagen aus Entspannung und Ernährung S. 4–12 (Anpassungsreaktion, drei Phasen, beschriebene Folgen und Gegenmaßnahmen) in der Kursübersicht einordnen.
 - [x] Die bislang zu knappe Brain-/Power-Food-Übersicht um Yamswurzel, weitere Power-Food-Beispiele und den Abschnitt zu sekundären Pflanzenstoffen (Ernährung S. 39–69) mit kritischer Kennzeichnung der Wirkversprechen ergänzen.
 - [x] Soul Food (S. 70–83) um Capsaicin/scharfe Lebensmittel und Moodfood sowie den bisher übergangenen Abschnitt Ernährung und Depression (S. 84) ergänzen; Stimmungs- und Gesundheitsbehauptungen als Kursinhalt einordnen.
 - [x] Naturheilmittel S. 90–104 mit dem vollständigen Kräuterinventar und Johanniskraut-Wechselwirkungshinweis sowie die beiden Kräuterteemischungen S. 106–107 als Quellenstoff sichtbar machen, ohne Dosierungs- oder Einnahmeempfehlung auszugeben.
