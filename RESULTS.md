@@ -563,3 +563,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die Antwortoptionen aller 22 Lerncheck-Fragen werden deterministisch rotiert; die korrekte Option und ihre Begründung/Quelle bleiben gekoppelt.
 - Vorher standen 17 von 22 korrekten Antworten an erster Stelle. Nach der Rotation verteilen sich die korrekten Positionen auf 8, 5 und 9 Fragen.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+# Dauerangabe im Praxisnachweis von der Kursvorgabe getrennt (2026-11-02)
+
+- Abgleich von `ESPT_Pflichtaufgabe_Trainingsprotokoll-A_Lizenz.pdf`, der zweiten offiziellen Formularvorlage und `Stundenplanung.pdf`: Die Formulare verlangen Datum, Beschreibung und Unterschrift, enthalten aber keine allgemeine Mindestdauer. Die 15 Minuten in der Stundenplanung gelten für einen Entspannungsteil in einem kombinierten Kurs.
+- Dauer im App-Nachweis ist nun optional; Sessions können ohne 15-Minuten-Schwelle nach ausdrücklicher Bestätigung übernommen und gezählt werden. Der CSV-Export lässt die Unterschrift wie die Druckansicht frei.
+- Quellenmatrix, README und TODO korrigiert. Vite-Produktionsbuild und `git diff --check` erfolgreich.
