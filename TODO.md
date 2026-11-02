@@ -61,4 +61,5 @@
 - [x] Das Ausdauer-PDF bis zu den Inhaltsseiten S. 26 abgleichen und die fehlenden Natur-/Bewegungspark-Beispiele sowie Flow als nicht garantiertes Erleben ergänzen.
 - [x] Stresstheorie S. 5–13 um Stressor/Reaktion/Erleben und das Steinzeit-/Moderner-Mensch-Reaktionsschema als begrenztes Lehrmodell ergänzen.
 - [x] Die bebilderten Flexibilitätstrainingsseiten Assisted Stretching S. 18–28 in der Methodenkarte ausweisen und die vorbereitende Gegenbewegung S. 41 aufnehmen, ohne nicht beschriftete Zeichnungen mit erfundenen Übungsnamen zu versehen.
+- [x] Die Pilates-Bildtafeln zu funktionell wichtigen Körpersegmenten (S. 22–23) in Quellenmatrix und Methodenansicht ergänzen, ohne sie als zusätzliche Bewegungsabläufe zu interpretieren.
 - [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.

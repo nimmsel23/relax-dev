@@ -119,6 +119,12 @@
 - Die Stretching-Karte dokumentiert diese Bereiche und trennt die nicht ausformulierten Zeichnungen von der textlichen Anleitung, statt Namen oder Cues zu erfinden.
 - Quellenmatrix und TODO aktualisiert.
 
+# Pilates-Körpersegmenttafeln erschlossen (2026-11-02)
+
+- Die bisher ausgesparten Seiten 22–23 zeigen visuell markierte, funktionell wichtige Körpersegmente zwischen Konzept und Übungssammlung.
+- Methodenkarte und Quellenmatrix führen sie nun als visuelle Orientierung auf, nicht als zusätzliche Übungsfolge.
+- TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
