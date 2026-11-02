@@ -80,6 +80,7 @@
 - [x] Das FlexyFit-PMR-Kursskript (S. 3–28) zusätzlich zur lokalen Handout-Langform abbilden: Methode, Vorbereitung, Kurszeiten, Gruppenabfolge, Rückführung und Nachexploration; abweichende 16-Schritte-Listen kennzeichnen.
 - [ ] Weitere methodenspezifische Abläufe für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
+- [x] Leeren Praxisnachweis wie das einseitige A4-Original auf genau eine A4-Seite setzen; die 30 Zeilen, Datum/Beschreibung/Unterschrift und Freifeld für Handsignatur bleiben erhalten.
 - [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.
 - [x] Quellkritische Hinweise zu Lebensmitteln gegen Stress, Power-Food-Werbung und Nahrungsergänzung direkt am Ernährungsarbeitsblatt mit PDF-Seitenangaben sichtbar machen.
 - [x] Kursbasierte Atemübungen von ergänzenden App-Rhythmen unterscheiden und Bhramari/Sama Vritti mit Fundstelle im Atemschulungs-PDF markieren.

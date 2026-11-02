@@ -1,3 +1,9 @@
+# 30-Zeilen-Praxisnachweis auf eine A4-Seite angepasst (2026-11-02)
+
+- Der erste Druckvergleich ergab zwei Seiten statt einer; Seitenränder und Zeilenhöhe wurden an das offizielle einseitige A4-Formular angeglichen.
+- App-Kopf/Fußnavigation und dunkler Bildschirmhintergrund werden im Ausdruck ausgeblendet; die Signaturspalte bleibt für handschriftliche Unterschriften frei.
+- Thorium-Druckvorschau ergab abschließend eine A4-Seite mit den Zeilen 1–30 und den Spalten Datum, Beschreibung und Unterschrift. `npm run build` und `git diff --check` waren erfolgreich; keine Tests ausgeführt.
+
 # Überblicksfach direkt mit Methoden verbunden (2026-11-02)
 
 - Das Fach „Entspannungsmethoden – ein Überblick“ führt jetzt in die Methodenbibliothek und direkt zu PMR, AT, Fantasiereise, Meditation, Coping-Ansatz und unterstützenden Verfahren.

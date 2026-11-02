@@ -181,8 +181,10 @@ body {
 /* Printable 30-session training record */
 #training-print { display: none; }
 @media print {
-  @page { size: A4 portrait; margin: 12mm; }
+  @page { size: A4 portrait; margin: 10mm; }
+  body, #root, #root > div { background: #fff !important; }
   body * { visibility: hidden !important; }
+  #root > div > header, #root > div > nav { display: none !important; }
   #training-print, #training-print * { visibility: visible !important; }
   #training-print {
     display: block !important;
@@ -207,6 +209,6 @@ body {
   #training-print .training-print-table td:nth-child(2) { width: 27mm; }
   #training-print .training-print-table th:last-child,
   #training-print .training-print-table td:last-child { width: 38mm; }
-  #training-print .training-print-table td:last-child { height: 8mm; }
+  #training-print .training-print-table td:last-child { height: 6.5mm; }
   #training-print .training-print-note { margin-top: 4mm; font-size: 8pt; }
 }
