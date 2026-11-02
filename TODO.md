@@ -20,6 +20,7 @@
 - [x] Die fünf Tibeter als eigenständige Bewegungsreihe aus dem offiziellen PMR-Kursskript mit Hauptbewegung, Positionen und Ausgleich erfassen und von der PMR-Technik unterscheiden; die Quell-Dosierung nicht als persönliche Trainingsvorgabe ausgeben.
 - [x] Die Vier-Ebenen-Systematik der Entspannungsverfahren aus dem Stresstheorie-Skript ergänzen und AT/Fantasiereisen als Übersichtsinhalte ohne konkrete Anleitung kennzeichnen.
 - [x] Die drei Verfahren der muskulären Ebene aus Stresstheorie S. 55 in Methodenliste und Lerncheck vollständig aufführen; fehlende Schrittfolgen transparent lassen.
+- [x] Suggestive Musik aus der emotionalen Ebene (Stresstheorie S. 55) als auswählbare Methode einordnen und von allgemeiner Musikplanung sowie einer fehlenden Schrittfolge abgrenzen.
 - [x] Stundenentwurf und Vorbereitungsliste an die offiziellen Anforderungen zu Raum, Gruppengröße, Privatsphäre, Freiwilligkeit, gemeinsamem Beginn/Ende und Abschlussgespräch angleichen.
 - [x] Assisted Stretching gegen das Original-PDF prüfen und Session-Dosierung, ROM-Check, Ablaufqualität, Feedback und Zustimmung bei Berührung in der Methodenkarte abbilden.
 - [x] Den separaten Abschnitt Faszientraining/SMR aus demselben PDF ergänzen und den knappen Umfang der verfügbaren Praxisanleitung kennzeichnen.
