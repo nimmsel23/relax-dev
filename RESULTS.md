@@ -241,3 +241,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Der Vier-Wochen-Entwurf zeigt den Arbeitsstand für Zielsetzung, alle vier Wochen, den ausgearbeiteten Tageszyklus und sämtliche Ernährungskapitel.
 - Der Check erkennt nur leere Pflichtbereiche und weist ausdrücklich darauf hin, dass er keine fachliche Bewertung ersetzt.
 - Gegen das offizielle Aufgaben-PDF abgeglichen: Wochenroutine, Übungsauswahl, Stundenaufbau/Zeitstruktur sowie Rezepte, Naturheilkunde, Lebensmittel und Nahrungsergänzung sind getrennt vertreten.
+
+## 2026-11-02 — Ernährungskapitel mit Quellkritik ergänzt
+
+- Das Arbeitsblatt weist jetzt auf die Aussagen des Originalskripts hin: kein einzelnes Lebensmittel reduziert nach Skript direkt Stress (S. 27), Power-Food-Versprechen werden kritisch besprochen (S. 53–55), und Nahrungsergänzung ist bei gesunden Menschen mit gesunder Ernährung laut Skript in der Regel nicht erforderlich (S. 85–86).
+- Die Notiz lenkt zu ausgewogener, alltagstauglicher Auswahl und grenzt individuelle Dosierung oder Therapie weiterhin aus.
