@@ -679,3 +679,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Export enthält Ziel, Methode samt Ausbildungsbezug und Quelle, alle Zeitblöcke, Vorbereitungsstatus und Nachreflexion.
 - Der Entwurf lässt sich damit für die Kursvorbereitung außerhalb des lokal speichernden Browsers mitnehmen.
+
+# Biofeedback als Kursmethode auffindbar gemacht (2026-11-02)
+
+- Stresstheorie S. 47 beschreibt Biofeedback als Gerät, das körpereigene Signale unmittelbar zurückmeldet, und nennt selbstgewählte Entspannungsschritte sowie größere Unabhängigkeit vom Gerät als Lernziel.
+- Die Methodenkarte und eine Lerncheck-Frage bilden diese Passage ab. Sie enthalten keine Geräteanleitung, Diagnostik, Messung in der App oder individuelle Wirkungsgarantie.

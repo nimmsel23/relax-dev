@@ -47,6 +47,11 @@ const METHODS = [
     ['Quellenaussage · S. 52', 'Das Skript beschreibt Selbsthypnose als dem Autogenen Training ähnlich und verbindet sie mit bestimmten persönlichen Zielen. Weitergehende Wirkungsangaben sind Aussagen der Unterlage; sie werden hier nicht als bestätigt oder individuell geeignet übernommen.'],
     ['Anleitungsgrenze', 'Das Kursarchiv enthält keine methodenspezifische Selbsthypnose-Formel oder vollständige Schrittfolge. Die Karte dient der Quellenorientierung, nicht der Durchführung.'],
   ] },
+  { name: 'Biofeedback · gerätegestütztes Lernverfahren', duration: 'Nur mit geeigneter Ausstattung und Einweisung', icon: HeartPulse, focus: 'Körpersignale als unmittelbare Rückmeldung im Lernprozess kennenlernen', practice: 'Das Stresstheorie-Skript beschreibt eine Apparatur, die körpereigene Signale über Licht oder Ton zurückmeldet. Die Person wählt eigene Entspannungsschritte und erhält dazu direkt Rückmeldung. Ziel laut Skript ist, Entspannung zunehmend unabhängig vom Gerät zu erreichen. Das ist eine Quellenzusammenfassung, keine Anleitung zur Auswahl oder Anwendung eines Messgeräts.', adapt: 'Die Rückmeldung ist keine Diagnose und garantiert keine bestimmte Wirkung. Keine Messwerte ohne qualifizierte Einweisung erheben oder interpretieren; das Gerät ist kein Ersatz für persönliche Wahrnehmung. Diese App misst keine Körpersignale und empfiehlt keine Geräte.', source: 'FlexyFit Academy: Stresstheorie, S. 47 · Beschreibung des Lernverfahrens, keine Geräteanleitung', outlineTitle: 'Biofeedback im Kursskript · S. 47', outline: [
+    ['Signalrückmeldung', 'Ein Gerät gibt körpereigene Signale, die laut Skript mit An- oder Entspannung verbunden sind, als Licht oder Ton zurück. Die App setzt keine konkreten Sensoren oder Messwerte voraus.'],
+    ['Eigene Entspannungsschritte', 'Die Person versucht laut Skript mit Methoden eigener Wahl kleine Entspannungsschritte und erhält dazu unmittelbar Rückmeldung. Eine bestimmte Technik wird an dieser Stelle nicht vorgeschrieben.'],
+    ['Ziel und Grenze', 'Das Skript beschreibt als Ziel, Entspannung zunehmend unabhängig vom technischen Gerät zu erreichen. Die App übernimmt diese Kursaussage ohne individuelle Wirkungsgarantie oder medizinische Auswertung.'],
+  ] },
   { name: 'Phantasiereise & innere Bilder', duration: '20–30 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“; das Kursarchiv enthält keine Schritt-für-Schritt-Anleitung.', icon: BookOpen, focus: 'Mit einer ruhigen, freiwilligen Vorstellungsübung arbeiten', practice: 'Die Stresstheorie ordnet Fantasiereisen der emotionalen Ebene zu und nennt sie als langfristige Stressbewältigung. Ein spezifisches Fantasiereisen-Anleitungsskript liegt im Kursarchiv nicht vor; konkrete Texte daher anhand der praktischen Einschulung selbst vorbereiten.', adapt: 'Keine belastenden oder überraschenden Szenen vorgeben. Augen offen halten oder aussteigen lassen und eine schrittweise Rücknahme mit Orientierung einplanen.', source: 'FlexyFit Academy: Stresstheorie, S. 55–56; Stundenplanung, S. 12–13', outlineTitle: 'Kursrahmen zur Rücknahme · keine Fantasiereisen-Anleitung', outline: [
     ['Rücknahme · Stundenplanung, S. 12', 'Für liegende Übungen mit geschlossenen Augen nennt das Skript eine ausreichend lange, schrittweise Rücknahme. Fantasiereisen werden ausdrücklich als Methode genannt, bei der eine gute Rücknahme wichtig ist. Ein wiederkehrendes Ritual mit kleinen Bewegungen und schrittweiser Aktivierung ist ein Kursbeispiel; einen konkreten Reise-Text enthält die Unterlage nicht.'],
     ['Abschluss · Stundenplanung, S. 13', 'Nach der Entspannungseinheit Zeit für ein Gespräch über das Erleben einplanen. Das Skript empfiehlt gezieltes, offenes Nachfragen und die Reflexion des eigenen Stundenkonzepts.'],
@@ -398,6 +403,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Die lokale MOC führt diese Begriffe als Themen des Kapitels auf. Im geprüften Kursarchiv liegt kein eigenständiges Mentaltraining-Anleitungsskript vor.',
     source: 'Lokale Ausbildungs-MOC · Mentales Training, Themenübersicht',
+  },
+  {
+    question: 'Wie beschreibt das Skript Biofeedback und sein Lernziel?',
+    answers: ['Ein Gerät gibt körpereigene Signale als Licht oder Ton zurück; Entspannung soll zunehmend unabhängig vom Gerät gelingen.', 'Ein einzelner Messwert stellt eine Diagnose und legt die richtige Entspannungsmethode fest.', 'Die App misst den Puls und bestätigt damit, dass eine Person entspannt ist.'],
+    correct: 0,
+    why: 'Auf S. 47 beschreibt das Skript die Rückmeldung über eine Apparatur und als Ziel eine größere Unabhängigkeit von der Technik. Die App selbst erhebt keine Körpersignale.',
+    source: 'Stresstheorie · Biofeedback, S. 47',
   },
 ].map((question, index) => {
   const offset = index % question.answers.length
