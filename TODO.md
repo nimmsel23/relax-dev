@@ -42,7 +42,7 @@
 - [x] Die persönliche Selbstreflexion aus Stresstheorie S. 32–44 als freiwilliges, lokal gespeichertes SORKC-Arbeitsblatt mit Markdown-Export abbilden und die Modellbegriffe am Kursskript ausrichten.
 - [x] Die Kursinhalte zu Stressmessung, LCU-Grenze und Biofeedback aus Stresstheorie S. 45–47 als Theorie mit Trainergrenze und passender Lerncheck-Frage abbilden.
 - [x] Stressansätze (reaktions-, reiz-, persönlichkeits-, transaktions-, ressourcen- und biopsychosozial) sowie die Kursübersicht zu vegetativem Nervensystem/Hormonen und Entspannungswirkungen/EEG mit Fundstellen und Messgrenzen darstellen.
-- [x] Alle 22 Haltungen und Bewegungsformen des Yoga-Originalskripts mit Seitenverweisen in der Methodenkarte aufführen; ausgewählte Beispiele nicht länger als vollständigen Kursumfang erscheinen lassen.
+- [x] Yoga-Einleitung und Asana-Ausführungsgrundsätze sowie alle 22 Haltungen/Bewegungsformen des Originalskripts mit Seitenverweisen in der Methodenkarte aufführen; ausgewählte Beispiele nicht länger als vollständigen Kursumfang erscheinen lassen.
 - [x] Pilates-Kategorien mit den 19 Übungsnamen und Seitenbereichen der Originalsammlung (S. 17–97) verknüpfen, ohne fehlende Kategorienzuordnungen zu erfinden.
 - [x] Pilates-Konzeptbegriffe und Atem-/Haltungscues aus dem Original (S. 8–15) mit Fundstellen ergänzen und als Quellbegriffe statt universeller Bewegungsvorgaben einordnen.
 - [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.
