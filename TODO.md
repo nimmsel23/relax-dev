@@ -26,6 +26,7 @@
 - [x] Ernährungs-Pflichtaufgabe um eine seitenbezogene Materialübersicht zu Essverhalten, Lebensmittelgruppen, Supplementen und Kräutern ergänzen; Gesundheitsversprechen und Einnahmeangaben als nicht verifizierte Kursinhalte abgrenzen.
 - [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.
 - [x] Das Skript „Entspannung & Wirbelsäule“ mit Schmerzverständnis, psychosozialem Kontext und psychologischer Bewältigung als Theorie sowie Körper-, Atemraum-, Bewegungs- und Standwahrnehmung in der Methodenbibliothek abbilden; Selbsttests und Medikamentenhinweise nicht als Traineranleitung ausgeben.
+- [x] Alle Wahrnehmungsübungen des Wirbelsäulen-Praxisteils einschließlich Wohlfühlkreis, Druckpunkte, Beckenuhr und Bewegungsfreude mit Seitenbezug erfassen; taktile Partnerübungen klar an freiwillige Zustimmung binden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [x] Das FlexyFit-PMR-Kursskript (S. 3–28) zusätzlich zur lokalen Handout-Langform abbilden: Methode, Vorbereitung, Kurszeiten, Gruppenabfolge, Rückführung und Nachexploration; abweichende 16-Schritte-Listen kennzeichnen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.

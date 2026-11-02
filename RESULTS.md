@@ -23,6 +23,12 @@
 - Kursliste der Pranayama-Techniken ist mit S. 38 referenziert. Für die meisten Techniken liefert das Skript keine vollständige Anleitung; das Arbeitsblatt erstellt deshalb keine eigene Praxisfolge.
 - Holotropes Atmen und Qigong werden als Exkurse des Skripts sichtbar, inklusive Hinweis auf spekulative/unbestätigte Behauptungen und ohne geführte Praxis.
 
+# Wirbelsäulen-Wahrnehmungsübungen vervollständigt (2026-11-02)
+
+- Methodenkarte ergänzt um den Bewegungsablauf der Beckenuhr, die Formate des Kapitels Bewegungsfreude und zwei bislang fehlende Partnerübungen: Wohlfühlkreis und Druckpunkte.
+- Taktile Übungen sind explizit freiwillig und zustimmungsbasiert; keine diagnostische Auswertung oder Anleitung an schmerzhaften Bereichen.
+- Quellenmatrix und TODO um die konkret abgebildeten Praxisinhalte aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
