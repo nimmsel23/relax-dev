@@ -1,3 +1,8 @@
+# Überblicksfach direkt mit Methoden verbunden (2026-11-02)
+
+- Das Fach „Entspannungsmethoden – ein Überblick“ führt jetzt in die Methodenbibliothek und direkt zu PMR, AT, Fantasiereise, Meditation, Coping-Ansatz und unterstützenden Verfahren.
+- Damit sind die expliziten MOC-Themen im Kursindex direkt erreichbar; die Themenkarten kennzeichnen fehlende Original-Abläufe weiterhin.
+
 # Kursfächer und Ausbildungsaufgaben klar getrennt (2026-11-02)
 
 - Den Kursindex auf genau die zwölf offiziellen Unterrichtsfächer begrenzt.
