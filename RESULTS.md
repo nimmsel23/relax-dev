@@ -843,3 +843,14 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die aktuelle FlexyFit-FAQ beschreibt Lehrvideos, Übungsdemonstrationen, regelmäßige eigene Wiederholung, Beobachtung erfahrener Trainer:innen und frühe Anleitungspraxis mit freiwilligen Übungspartnern als Lernwege.
 - Diese Hinweise stehen jetzt am Methoden-Reflexionsfeld und in der Quellenmatrix als ergänzende Lernempfehlungen. Sie werden ausdrücklich nicht als fehlende methodenspezifische Originalanleitung oder als Ersatz des A-Lizenz-Praxisnachweises ausgegeben.
+
+# Kursindex gegen offiziellen Vitaltrainer-Lehrgangsplan abgeglichen (2026-11-02)
+
+- Die offizielle Kursinfo LWLL26-we-4a bestätigt den Dipl.-Entspannungstrainer als Modul II des Präventiven Fitness- und Vitaltrainers, mit eLearning und optionaler Präsenz (Online-Webinare) sowie zwölf Unterrichtsfächern.
+- Der Kursindex verlinkt diese Quelle direkt und hält Pflichtaufgabe/Praxisprotokoll sichtbar von den zwölf Unterrichtsfächern getrennt.
+
+# Dokumente-Bestand und MOC-Themen erneut abgeglichen (2026-11-02)
+
+- Die relevanten Ausbildungsunterlagen unter `~/Dokumente` umfassen die FlexyFit-PDFs, den separaten Ausbildungsordner mit MOC und Markdown-Notizen sowie ältere Kopien. Die vier offenen Methoden enthalten weiterhin keine vollständigen methodenspezifischen Ablaufanleitungen.
+- In der vollständigen Master-MOC waren „Achtsamkeitstraining und Meditationstechniken“ sowie „Stressmanagement durch mentales Training“ als Themen genannt. Beide sind jetzt an den passenden Karten ausdrücklich als MOC-Stichworte sichtbar; daraus werden keine Abläufe abgeleitet.
+- Der Markdown-Text des separaten Sportpsychologie-Skripts bestätigt Fantasiereisen und Autogenes Training als Beispiele beim Angstmanagement (S. 45); die Stelle ist nur eine Methodenliste, keine Anleitung.
