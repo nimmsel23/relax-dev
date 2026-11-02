@@ -268,3 +268,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Grundlagenansicht fasst jetzt die Kurskapitel zu Schmerz als Sinnes-/Gefühlserlebnis, psychosozialem Kontext und psychologischer Bewältigung mit Seitenverweisen (S. 4–8, 10–23) zusammen.
 - Selbstuntersuchungen, Selbstbehandlung, physikalische Anwendungen und Medikamente werden als Kursinhalte eingeordnet, aber nicht in diagnostische oder therapeutische App-Anleitungen umgewandelt.
+
+## 2026-11-02 — Unbelegte Atemübungsdosierung korrigiert
+
+- Die Angabe „fünf Minuten, zwei- bis dreimal täglich“ wurde aus dem Kursbezug entfernt: Sie steht nicht im Atemschulungs-PDF.
+- Die App verweist nun auf die tatsächliche Praxisaufgabe auf S. 48 (Bauchatmung wahrnehmen und eigenen Anleitungstext vorbereiten) und kennzeichnet Timerlängen als App-Auswahl.

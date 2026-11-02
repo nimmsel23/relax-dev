@@ -31,3 +31,4 @@
 - [x] Quellkritische Hinweise zu Lebensmitteln gegen Stress, Power-Food-Werbung und Nahrungsergänzung direkt am Ernährungsarbeitsblatt mit PDF-Seitenangaben sichtbar machen.
 - [x] Kursbasierte Atemübungen von ergänzenden App-Rhythmen unterscheiden und Bhramari/Sama Vritti mit Fundstelle im Atemschulungs-PDF markieren.
 - [x] Nicht kursbelegte PNI- und physiologische Wirkversprechen im Atemtrainer entfernen; Rhythmus als Übungsvorgabe ohne Mess- oder Wirkungszusage kennzeichnen.
+- [x] Unbelegte „fünf Minuten, zwei- bis dreimal täglich“-Dosierung aus dem Atemtrainer entfernt; S. 48 des Original-PDFs nennt Atemwahrnehmung und Vorbereitung eines eigenen Anleitungstextes, aber keine Frequenz oder Dauer.

@@ -158,10 +158,10 @@ export default function Breath() {
       <section className="rounded-2xl border p-4 space-y-2" style={{ background: 'var(--card)', borderColor: 'var(--line)' }} aria-label="Atemschulung aus der Ausbildung">
         <div className="text-sm font-bold">Atemschulung · Kursbezug</div>
         <p className="text-sm" style={{ color: 'var(--muted)' }}>
-          Für die Anleitung zuerst Brust- und Bauchatmung wahrnehmen lassen. Eine Hand am Bauch kann die Bewegung spürbar machen; nichts korrigieren oder erzwingen. Die Kursnotiz schlägt kurze Übungsphasen von fünf Minuten, zwei- bis dreimal täglich, vor.
+          Das Skript leitet dazu an, die Hände auf den Bauch zu legen und Ein- und Ausatmung wahrzunehmen; außerdem soll ein eigener Anleitungstext zur Bauchatmung vorbereitet werden. Es gibt dafür keine feste Übungsdauer oder Häufigkeit vor.
         </p>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
-          Hyperventilation und Atemanhalten (z. B. Wim-Hof- oder holotropes Atmen) sind hier bewusst keine Entspannungsübungen. Bei Unwohlsein zur natürlichen Atmung zurückkehren.
+          Quelle: FlexyFit Academy, „Atemschulung“, S. 48. Die Timer-Dauern sind frei wählbare App-Einstellungen, keine Kursdosierung. Bei Unwohlsein zur natürlichen Atmung zurückkehren.
         </p>
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Kursübungen aus „Atemschulung“: Bauchatmung wahrnehmen (S. 48), Bhramari und Sama Vritti (S. 38). Die übrigen geführten Atemrhythmen sind ergänzende App-Übungen, keine Vorgaben des Ausbildungsskripts.
