@@ -1,3 +1,9 @@
+# Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
+
+- Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
+- Aussagen und Richtwerte des Skripts sind als Kursinhalte bzw. Beispiele gekennzeichnet; daraus werden keine individuellen Wirkungszusagen oder Trainingsverordnungen abgeleitet.
+- Quellenmatrix und TODO an den vollständigen Seitenumfang angepasst.
+
 # Push von dev und Meta-Repo-Release relax-release (2026-10-29)
 
 Abschluss der Release-Kette `dev` → `master` → `vitalos` für das Atem-Feature. Die Hinweise „nichts gepusht" in den beiden Einträgen darunter gelten damit nicht mehr.
