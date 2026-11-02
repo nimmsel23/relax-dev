@@ -69,6 +69,8 @@ Das Tagesprotokoll für Stimmung und Entspannungszeit bleibt vom formalen Ausbil
 
 Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden.
 
+Die Zuordnung der lokalen PDF-Quellen und Kursnotizen zu den App-Bereichen ist im [Quellenabgleich](./docs/ENTSPANNUNGSTRAINER-QUELLEN.md) dokumentiert.
+
 ### 1. **Session Tracking** 📋
 Log relaxation techniques with timing and mood.
 - `/session` endpoint

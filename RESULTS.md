@@ -278,3 +278,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die separate Kursnotiz `00_Entspannungs-Protokoll-MINIMAL.md` nennt Richtwerte für Atemschulung (15–20 Min.), PMR (15–30 Min.), AT und Fantasiereisen (je 20–30 Min.), Yoga/Pilates (je 30–60 Min.) und Meditation (15–30 Min.).
 - Diese Werte erscheinen auf den Methodenkarten ausdrücklich als lokale Kursrichtwerte; Abweichungen zur Dauerangabe im Original-PDF werden benannt, und fehlende Praxisanleitungen bleiben offen.
+
+## 2026-11-02 — Kursquellenmatrix dokumentiert
+
+- Neue Quellenmatrix ordnet Originalskripte, Pflichtaufgaben und lokale Kursnotizen den App-Bereichen zu und hält Seitenbereiche sowie absichtliche Grenzen fest.
+- README verlinkt die Matrix als Einstieg für weitere Kursabgleiche.
