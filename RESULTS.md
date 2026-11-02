@@ -263,3 +263,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Methodenkarten verweisen jetzt mit Seitenbereichen auf die Atemschulung, das PMR-Handout und PMR-Kursskript, Stresstheorie, Yoga, Pilates, Assisted Stretching, Ausdauer sowie Wirbelsäule.
 - Nicht belegte Dauerangaben für Atemschulung, Autogenes Training und Fantasiereisen auf „Dauer nach Stundenentwurf“ umgestellt; PMR-Dauer auf die 20–30 Minuten des Handouts ausgerichtet.
 - PMR-Handout als extern quellenbasiertes Handout statt als originales Akademie-Skript gekennzeichnet.
+
+## 2026-11-02 — Schmerztheorie aus dem Wirbelsäulenskript ergänzt
+
+- Die Grundlagenansicht fasst jetzt die Kurskapitel zu Schmerz als Sinnes-/Gefühlserlebnis, psychosozialem Kontext und psychologischer Bewältigung mit Seitenverweisen (S. 4–8, 10–23) zusammen.
+- Selbstuntersuchungen, Selbstbehandlung, physikalische Anwendungen und Medikamente werden als Kursinhalte eingeordnet, aber nicht in diagnostische oder therapeutische App-Anleitungen umgewandelt.

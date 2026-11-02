@@ -23,7 +23,7 @@
 - [x] Den separaten Abschnitt Faszientraining/SMR aus demselben PDF ergänzen und den knappen Umfang der verfügbaren Praxisanleitung kennzeichnen.
 - [x] Entspannungsbegriff aus dem Stresstheorie-Skript und das Ausdauer-Kursprofil mit Belastungsgefühl, Beispieldauern und individuellem Rahmen sichtbar machen.
 - [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.
-- [x] Das Skript „Entspannung & Wirbelsäule“ mit eigenen Körper-, Atemraum-, Bewegungs- und Standwahrnehmungsfeldern in der Methodenbibliothek abbilden.
+- [x] Das Skript „Entspannung & Wirbelsäule“ mit Schmerzverständnis, psychosozialem Kontext und psychologischer Bewältigung als Theorie sowie Körper-, Atemraum-, Bewegungs- und Standwahrnehmung in der Methodenbibliothek abbilden; Selbsttests und Medikamentenhinweise nicht als Traineranleitung ausgeben.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
