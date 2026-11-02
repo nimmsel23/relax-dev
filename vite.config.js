@@ -16,7 +16,7 @@ export default defineConfig({
       '@db': resolve(__dirname, 'src/lib/db/index.js'),
     },
   },
-  plugins: [vosChangelog({ appId: 'relax', appName: 'Relax', accent: '#fb923c' }),
+  plugins: [vosChangelog({ appId: 'relax', appName: 'Entspannungstrainer', accent: '#fb923c' }),
     {
       name: 'relax-strip-dev-entry-from-build-html',
       apply: 'build',
@@ -45,9 +45,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       manifest: {
-        name: 'Relax — VitalOS',
-        short_name: 'Relax',
-        description: 'Entspannung, Sessions, Journal, PNI-Wissen',
+        name: 'Entspannungstrainer — Präventiver Vitaltrainer',
+        short_name: 'Entspannung',
+        description: 'Lern- und Praxisbegleiter für das Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung.',
+        lang: 'de',
         theme_color: '#1e1e2e',
         background_color: '#1e1e2e',
         display: 'standalone',

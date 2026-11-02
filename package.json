@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=22.13"
   },
-  "description": "Relax Centre — Entspannung & Stress-Reset (Standalone)",
+  "description": "Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung",
   "scripts": {
     "dev": "node scripts/dev-runner.mjs",
     "start": "node server.mjs",

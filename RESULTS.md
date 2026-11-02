@@ -585,3 +585,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Grundlagen, Lerncheck, Methodenliste, Fallkonzept, Stundenplanung und Praxisnachweis aktualisieren den Hash unter `#ausbildung/<abschnitt>`.
 - Einzelne Methodenkarten nutzen `#ausbildung/methoden/<methodenname>`; direkter Aufruf und Browser-Zurück/Vor stellen die passende Karte wieder her.
 - README und TODO aktualisiert; Vite-Produktionsbuild erfolgreich.
+
+# Installations- und Browser-Auftritt auf das Fachmodul ausgerichtet (2026-11-02)
+
+- Browser-Titel und Beschreibung nennen jetzt das Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung.
+- PWA-Name, Homescreen-Kurzname, Manifestbeschreibung, Changelog-Label, Paketbeschreibung und README-Einstieg sind konsistent auf denselben Produktzweck ausgerichtet.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.

@@ -1,6 +1,6 @@
-# relax-dev — Entspannungstrainer + Physiologie-Simulator
+# relax-dev — Entspannungstrainer-Modul
 
-**Standalone-App** für Entspannungstechniken, Physiologie-Tracking und Substanz-Interactions.
+**Lern- und Praxis-App** für das Entspannungstrainer-Fachmodul der Präventiven Vitaltrainer-Ausbildung. Der Modul-Tab führt durch Ausbildungsgrundlagen, Methoden, Stundenplanung, Fallaufgabe und Praxisnachweis.
 
 Kombination aus:
 - React 18 + Vite (UI, `:5904`)
