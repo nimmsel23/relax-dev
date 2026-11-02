@@ -304,6 +304,13 @@ const LEARNING_CHECK = [
     why: 'Das Skript sagt, dass Nahrungsergänzung bei gesunden Menschen mit ausgewogener Ernährung in der Regel nicht erforderlich ist (S. 85–86). Die App leitet daraus keine individuelle Verordnung ab.',
     source: 'Entspannung und Ernährung · S. 85–89',
   },
+  {
+    question: 'Wie sollen Trainer:innen die Begriffe „Stress-Esser“ und „Stress-Hungerer“ einordnen?',
+    answers: ['Als feste Personentypen, aus denen sich der Gesundheitszustand ableiten lässt.', 'Als vereinfachte Beschreibungen aus dem Skript; sie erlauben weder eine Diagnose noch eine pauschale Bewertung des Gesundheitszustands.', 'Als Hinweis, dass Stress-Essen grundsätzlich unnormal ist und mit mehr Selbstdisziplin beendet werden muss.'],
+    correct: 1,
+    why: 'Das Skript warnt davor, den Gesundheitszustand aus den Mustern abzuleiten und Stress-Essen als unnormal zu bewerten. Ermahnungen zu mehr Selbstdisziplin können laut S. 24 zusätzlichen Stress auslösen.',
+    source: 'Entspannung und Ernährung · S. 19–24',
+  },
 ]
 const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'

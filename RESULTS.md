@@ -1,3 +1,8 @@
+# Essverhalten bei Stress im Lerncheck ergänzt (2026-11-02)
+
+- Lerncheck fragt jetzt auch ab, dass „Stress-Esser“ und „Stress-Hungerer“ vereinfachte Beschreibungen und weder Diagnosen noch feste Gesundheitstypen sind.
+- Die Begründung bildet die Warnung des Skripts vor pauschaler Abwertung und zusätzlichen Stress durch Ermahnungen ab (S. 19–24). TODO aktualisiert.
+
 # Ernährung im Lerncheck ergänzt (2026-11-02)
 
 - Zwei Fragen prüfen jetzt die Aussage, dass kein einzelnes Lebensmittel Stress direkt reduziert, und die Skriptaussage, dass Supplemente bei gesunden Menschen mit ausgewogener Ernährung in der Regel nicht erforderlich sind.
