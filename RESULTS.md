@@ -162,7 +162,7 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.
 - Eine Methode kann direkt für den Nachweis vorausgewählt werden; Atemschulung verlinkt zusätzlich in den geführten Atemtrainer.
-- Es liegen im Ausbildungsordner nur Markdown-Zusammenfassungen, keine Original-PDF/Handouts. Fehlende detaillierte Kursabläufe bleiben deshalb als solche markiert.
+- Bei der damaligen Sichtung wurden nur Modulnotizen berücksichtigt. Nachtrag 2026-11-02: Die Original-Skripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; spezifische Anleitungen für AT und Phantasiereisen sind dort weiterhin nicht vorhanden.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich. Keine Tests, kein Push und kein Release.
 
 ## 2026-11-02 — Atemtrainer an Ausbildungspraxis angebunden
@@ -172,5 +172,11 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 ## 2026-11-02 — PMR-Langform als manuelle Schrittfolge
 
-- Methodenkarte enthält eine geführte Abfolge der 19 Muskelgruppen aus der lokalen Zusammenfassung des FlexyFit-Academy-Handouts plus Rücknahme. Die Schritte werden manuell weitergeschaltet, damit Anspannungs- und Nachspürpausen angepasst werden können.
-- Quelle und Grenzen sichtbar: Zusammenfassung statt verifiziertem Originalskript; sanfte schmerzfreie Anspannung, Auslassen betroffener Bereiche und Beobachtungsalternative.
+- Methodenkarte enthält eine geführte Abfolge der 19 Muskelgruppen aus dem lokalen Handout-PDF plus Rücknahme. Die Schritte werden manuell weitergeschaltet, damit Anspannungs- und Nachspürpausen angepasst werden können.
+- Quelle und Grenzen sichtbar: lokales Handout-PDF mit externer Quellenangabe; sanfte schmerzfreie Anspannung, Auslassen betroffener Bereiche und Beobachtungsalternative.
+
+## 2026-11-02 — Vier-Wochen-Pflichtaufgabe ergänzt
+
+- Originale Aufgaben-PDF im separaten FlexyFit-Archiv gefunden und Anforderungen übernommen: Ziele, alltagstaugliche Wochenroutine, ein Tageszyklus mit Übungsauswahl und Zeitstruktur sowie Lebensmittel-, Rezept-, Naturheilkunde- und Supplementbausteine.
+- Neuer lokal gespeicherter Arbeitsbereich mit vier Wochenfeldern, Tageszyklus, Ernährungskapiteln und Markdown-Export. Vorformulierungen bleiben als Eingabeaufforderungen offen, damit der Entwurf aus den Skripten und der eigenen Kursarbeit entsteht.
+- Kursquellen-Inventar berichtigt: wichtige Skripte, PMR-Handout und Ausbildungsaufgaben sind als PDFs vorhanden; AT- und Phantasiereisen-Anleitungs-PDFs fehlen weiterhin.

@@ -5,8 +5,8 @@
 - [ ] `relax-dev` als digitale Repräsentation des Entspannungstrainer-Moduls der Präventiven Vitaltrainer-Ausbildung weiterentwickeln.
 - [x] Ausbildungsinhalte und Trainerpraxis mit lokalen Ausbildungsnotizen abgleichen.
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
-- [x] Verfügbare Kursmaterialien geprüft: Im Ausbildungsordner liegen Markdown-Zusammenfassungen, aber keine Original-PDF/Handouts. Methoden, deren genaue Abläufe dort fehlen, bleiben als Orientierung gekennzeichnet.
-- [ ] Bei Verfügbarkeit der Originalskripte die Methodenbeschreibungen gegenprüfen und mit korrekten Quellenangaben ergänzen.
+- [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
+- [ ] Methodenbeschreibungen weiter gegen die vorhandenen Original-PDFs prüfen und Quellen pro Inhalt sichtbar machen; für Autogenes Training und Phantasiereisen liegt noch kein spezifisches Anleitungs-PDF im Archiv.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
 - [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
@@ -14,5 +14,6 @@
 - [x] Modulansicht vom Physio-/Catalog-Paket trennen, damit der Ausbildungsstart nur benötigte Ansichten lädt.
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gemäß den lokalen Ausbildungsnotizen in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
-- [x] PMR-Langform aus der vorhandenen lokalen Handout-Zusammenfassung als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
+- [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
+- [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [ ] Weitere methodenspezifische Abläufe (z. B. Autogenes Training) ergänzen, sobald verlässliche Originalabläufe vorliegen; die PMR-Folge hier basiert bislang auf einer lokalen Zusammenfassung.

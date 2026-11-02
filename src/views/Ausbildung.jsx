@@ -5,7 +5,7 @@ import { downloadText, localToday } from '../lib/db/shared/utils.js'
 
 const METHODS = [
   { name: 'Atemschulung', duration: '15–20 Min.', icon: Wind, focus: 'Atem wahrnehmen und ruhig begleiten', practice: 'Beobachte zunächst Brust- und Bauchatmung. Lade dazu ein, eine Hand auf den Bauch zu legen und die Bewegung ohne Druck wahrzunehmen. Ein sanft verlängertes Ausatmen kann angeboten werden; Atempausen und Rhythmen bleiben freiwillig.', adapt: 'Bei Schwindel, Unruhe oder Atemnot sofort zum natürlichen Atem zurückkehren. Keine forcierte Atmung oder langen Atemhalte als Entspannungsübung anleiten.', source: 'Atemschulung; Stundenplanung' },
-  { name: 'Progressive Muskelrelaxation (PMR)', duration: '15–30 Min.', icon: HeartPulse, focus: 'Spannung und Loslassen im Wechsel unterscheiden', practice: 'Eine Muskelgruppe kurz und angenehm anspannen, dann lösen und den Unterschied nachspüren. Vom Üben einzelner Gruppen kann schrittweise zu kürzeren Formen übergeleitet werden. Die Wahrnehmung ist wichtiger als eine perfekte Ausführung.', adapt: 'Betroffene, schmerzhafte oder verletzte Bereiche auslassen; Anspannung stets dosieren. Bei Unsicherheit eine entspannte Beobachtung ohne Anspannen wählen.', source: 'Progressive Muskelrelaxation; Stundenplanung' },
+  { name: 'Progressive Muskelrelaxation (PMR)', duration: '15–30 Min.', icon: HeartPulse, focus: 'Spannung und Loslassen im Wechsel unterscheiden', practice: 'Eine Muskelgruppe kurz und angenehm anspannen, dann lösen und den Unterschied nachspüren. Vom Üben einzelner Gruppen kann schrittweise zu kürzeren Formen übergeleitet werden. Die Wahrnehmung ist wichtiger als eine perfekte Ausführung.', adapt: 'Betroffene, schmerzhafte oder verletzte Bereiche auslassen; Anspannung stets dosieren. Bei Unsicherheit eine entspannte Beobachtung ohne Anspannen wählen.', source: 'FlexyFit Academy: Progressive Muskelrelaxation Handout; Stundenplanung' },
   { name: 'Autogenes Training', duration: '20–30 Min.', icon: Sparkles, focus: 'Eine systematische Entspannungsmethode kennenlernen', practice: 'Die Ausbildungsunterlagen führen Autogenes Training als Methode für systematische Kurse an. Die genaue Übungsfolge wird im eigenen Kursmaterial erarbeitet und angeleitet; in der Stunde Ziel, Ablauf und freiwillige Teilnahme vorab erklären.', adapt: 'Bei Unwohlsein Augen öffnen, Haltung ändern oder Übung beenden lassen. Keine Wirkung versprechen und individuelle Reaktionen ernst nehmen.', source: 'Stundenplanung; Methodenübersicht im Ausbildungsprotokoll' },
   { name: 'Phantasiereise & innere Bilder', duration: '20–30 Min.', icon: BookOpen, focus: 'Mit einer ruhigen, freiwilligen Vorstellungsübung arbeiten', practice: 'Eine klare, langsam gesprochene Reise mit Pausen und neutralen Wahlmöglichkeiten vorbereiten. Teilnehmende dürfen Bilder verändern, die Augen offen halten oder jederzeit aussteigen.', adapt: 'Keine belastenden oder überraschenden Szenen vorgeben. Eine Rücknahme mit Bewegung und Orientierung im Raum fest einplanen.', source: 'Methodenübersicht; Stundenplanung' },
   { name: 'Yoga · Asana-Praxis', duration: '30–60 Min.', icon: Wind, focus: 'Haltungen, Atem und Körperwahrnehmung verbinden', practice: 'Asanas mit Vorübungen und passenden Variationen vermitteln. Die Ausbildungsnotiz betont eine angenehme Ausführung, Wohlbefinden und das Erlernen unter Aufsicht. Eine ruhige Stunde kann von einer stabilen Standhaltung in Bewegung, Ausgleich und Ruhe führen.', adapt: 'Anspruchsvolle Haltungen nur entsprechend der eigenen Anleitungskompetenz unterrichten. Teilnehmende wählen eine angenehme Variante oder setzen aus; die Übungssammlung ersetzt keine praktische Einschulung.', source: 'Ausbildungsnotiz „Grundübungen Yoga“', outlineTitle: 'Asanas aus der Ausbildungsnotiz', outline: [
@@ -117,8 +117,22 @@ const LEARNING_CHECK = [
   },
 ]
 const STORAGE_KEY = 'relax-training-plan-v1'
+const CASE_STORAGE_KEY = 'relax-stress-case-v1'
 const panel = { background: 'var(--card)', borderColor: 'var(--line)' }
 const input = { background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }
+
+function emptyCasePlan() {
+  return {
+    title: '4-Wochen-Konzept bei Stress',
+    goals: '',
+    weeks: Array.from({ length: 4 }, (_, index) => ({ number: index + 1, focus: '', routine: '', relaxation: '', nutrition: '' })),
+    dayCycle: { time: '', goal: '', sequence: '', duration: '', transition: '' },
+    foodIdeas: '',
+    recipeIdeas: '',
+    naturalProducts: '',
+    supplementNotes: '',
+  }
+}
 
 function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"` }
 
@@ -130,6 +144,14 @@ export default function Ausbildung() {
     const defaults = { title: 'Ruhig ankommen', focus: '', method: METHODS[0].name, blocks: DEFAULT_BLOCKS, checks: {}, reflection: '' }
     try { const stored = JSON.parse(localStorage.getItem(STORAGE_KEY)); return stored ? { ...defaults, ...stored, checks: stored.checks || {}, reflection: stored.reflection || '' } : defaults }
     catch { return defaults }
+  })
+  const [casePlan, setCasePlan] = useState(() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(CASE_STORAGE_KEY))
+      if (!stored) return emptyCasePlan()
+      const defaults = emptyCasePlan()
+      return { ...defaults, ...stored, weeks: defaults.weeks.map((week, index) => ({ ...week, ...(stored.weeks?.[index] || {}) })), dayCycle: { ...defaults.dayCycle, ...(stored.dayCycle || {}) } }
+    } catch { return emptyCasePlan() }
   })
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(true)
@@ -143,6 +165,7 @@ export default function Ausbildung() {
   const [entry, setEntry] = useState({ date: localToday(), technique: METHODS[0].name, minutes: 20, description: '', signed: false })
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)) }, [plan])
+  useEffect(() => { localStorage.setItem(CASE_STORAGE_KEY, JSON.stringify(casePlan)) }, [casePlan])
   useEffect(() => {
     if (!delivery?.running) return undefined
     const timer = window.setInterval(() => setDelivery(current => {
@@ -227,6 +250,23 @@ export default function Ausbildung() {
     downloadText(`entspannungstrainer-praxis-${localToday()}.csv`, rows.map(row => row.map(csvCell).join(';')).join('\r\n'), 'text/csv;charset=utf-8')
   }
 
+  function updateCaseWeek(index, key, value) {
+    setCasePlan(current => ({ ...current, weeks: current.weeks.map((week, i) => i === index ? { ...week, [key]: value } : week) }))
+  }
+
+  function exportCaseConcept() {
+    const lines = [
+      `# ${casePlan.title || '4-Wochen-Konzept bei Stress'}`,
+      '', '## Ziele', casePlan.goals || '', '', '## Wochenroutine',
+      ...casePlan.weeks.flatMap(week => [`### Woche ${week.number}${week.focus ? ` · ${week.focus}` : ''}`, `- Alltag/Routine: ${week.routine || ''}`, `- Entspannung: ${week.relaxation || ''}`, `- Ernährung: ${week.nutrition || ''}`, '']),
+      '## Ausgearbeiteter Tageszyklus',
+      `- Tageszeit: ${casePlan.dayCycle.time || ''}`, `- Ziel: ${casePlan.dayCycle.goal || ''}`, `- Übungen und Reihenfolge: ${casePlan.dayCycle.sequence || ''}`, `- Zeitstruktur: ${casePlan.dayCycle.duration || ''}`, `- Übergänge und Rücknahme: ${casePlan.dayCycle.transition || ''}`,
+      '', '## Ernährungsideen aus dem Skript', `- Lebensmittel/Mahlzeiten: ${casePlan.foodIdeas || ''}`, `- Rezeptideen: ${casePlan.recipeIdeas || ''}`, `- Naturheilkundliche Inhalte: ${casePlan.naturalProducts || ''}`, `- Nahrungsergänzungsmittel: ${casePlan.supplementNotes || ''}`,
+      '', '---', 'Arbeitsstand aus dem Relax-Ausbildungsmodul. Inhalte individuell prüfen und keine Diagnose oder Therapie ableiten.',
+    ]
+    downloadText(`stresskonzept-4-wochen-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
+  }
+
   if (delivery) {
     const block = delivery.blocks[delivery.index]
     const isLastBlock = delivery.index === delivery.blocks.length - 1
@@ -254,7 +294,7 @@ export default function Ausbildung() {
       <h1 className="mt-2 text-2xl font-black">Entspannung anleiten lernen</h1>
       <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Theorie verstehen, eine stimmige Einheit gestalten und die eigene Praxis für den Ausbildungsnachweis dokumentieren.</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">{[['start', 'Überblick'], ['grundlagen', 'Grundlagen'], ['selbstcheck', 'Lerncheck'], ['methoden', 'Methoden'], ['planung', 'Stunde planen'], ['nachweis', 'Praxisnachweis']].map(([id, label]) => <button key={id} onClick={() => { setSection(id); setMethod(null) }} aria-pressed={section === id} className="shrink-0 rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: section === id ? 'var(--accent)' : 'var(--line)', color: section === id ? 'var(--accent)' : 'var(--muted)', background: section === id ? 'var(--accent-glow)' : 'transparent' }}>{label}</button>)}</div>
+        <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">{[['start', 'Überblick'], ['grundlagen', 'Grundlagen'], ['selbstcheck', 'Lerncheck'], ['methoden', 'Methoden'], ['fallkonzept', '4-Wochen-Fall'], ['planung', 'Stunde planen'], ['nachweis', 'Praxisnachweis']].map(([id, label]) => <button key={id} onClick={() => { setSection(id); setMethod(null) }} aria-pressed={section === id} className="shrink-0 rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: section === id ? 'var(--accent)' : 'var(--line)', color: section === id ? 'var(--accent)' : 'var(--muted)', background: section === id ? 'var(--accent-glow)' : 'transparent' }}>{label}</button>)}</div>
       </div>
     </section>
 
@@ -268,6 +308,7 @@ export default function Ausbildung() {
       ].map(([title, text]) => <div className="rounded-xl p-3" key={title} style={{ background: 'var(--bg2)' }}><div className="text-sm font-bold">{title}</div><div className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</div></div>)}</div></div>
       <div className="rounded-2xl border p-4" style={panel}><h2 className="font-bold">Didaktische Leitlinien</h2><ul className="mt-2 space-y-2 text-sm" style={{ color: 'var(--muted)' }}><li>• Ziel und Ablauf zu Beginn verständlich machen; Übungen und ihre Methode einordnen.</li><li>• Ruhig sprechen, Pausen lassen und unterschiedliche Körperempfindungen zulassen.</li><li>• Körperwahrnehmung zählt mehr als korrekte oder vergleichbare Ausführung.</li><li>• Raum, Temperatur, Privatsphäre und genügend Zeit für eine sanfte Rücknahme vorbereiten.</li><li>• Ein gemeinsamer Beginn und Abschluss schaffen Orientierung; Feedback gehört dazu.</li></ul><p className="mt-3 text-xs" style={{ color: 'var(--dim)' }}>Grundlage: Ausbildungsnotiz „Stundenplanung“.</p></div>
       <div className="flex gap-3"><button onClick={() => setSection('planung')} className="flex-1 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Einheit entwerfen</button><button onClick={() => setSection('methoden')} className="flex-1 rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)' }}>Methoden ansehen</button></div>
+      <button onClick={() => setSection('fallkonzept')} className="w-full rounded-xl border px-4 py-3 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>4-Wochen-Fallkonzept bearbeiten</button>
     </>}
 
     {section === 'grundlagen' && <>
@@ -319,7 +360,7 @@ export default function Ausbildung() {
           {method.name === 'Progressive Muskelrelaxation (PMR)' && (
             <section className="mt-4 rounded-xl border p-4 space-y-3" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }} aria-label="Geführte PMR-Langform">
               <div className="text-sm font-bold">PMR-Langform · 20 Schritte</div>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Angelehnt an die lokale FlexyFit-Academy-Handout-Zusammenfassung (20–30 Minuten). Die Schritte laufen manuell: Lass Zeit zum Anspannen und Nachspüren. Nur sanft und schmerzfrei anspannen; betroffene Bereiche überspringen oder die Übung ohne Anspannung beobachten.</p>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Angelehnt an das lokale Ausbildungs-Handout (20–30 Minuten; Quellenangabe im PDF: progressivemuskelentspannung.com). Die Schritte laufen manuell: Lass Zeit zum Anspannen und Nachspüren. Nur sanft und schmerzfrei anspannen; betroffene Bereiche überspringen oder die Übung ohne Anspannung beobachten.</p>
               {pmrStep === null ? (
                 <button onClick={() => setPmrStep(0)} className="w-full rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Schrittfolge beginnen</button>
               ) : (
@@ -351,6 +392,34 @@ export default function Ausbildung() {
           <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Autogenes Training und Phantasiereisen sind im Ausbildungsprotokoll genannt; die konkrete Übungsfolge bitte nach dem Original-Kursmaterial unterrichten.</p>
         </div>
       )}
+    </>}
+
+    {section === 'fallkonzept' && <>
+      <section className="rounded-2xl border p-4 space-y-2" style={panel}>
+        <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Pflichtaufgabe · Entspannungstrainer</div>
+        <h2 className="text-lg font-black">Stresskonzept über vier Wochen</h2>
+        <p className="text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Der Fall aus dem Aufgaben-PDF: 38-jähriger Abteilungsleiter, unregelmäßige Mahlzeiten, wenig Bewegung, Verdauungsbeschwerden, innere Unruhe und Einschlafprobleme. Entwickle Ziele und eine alltagstaugliche Wochenroutine; arbeite einen Tageszyklus mit Übungsauswahl und Zeitstruktur aus.</p>
+        <p className="text-xs" style={{ color: 'var(--dim)' }}>Ausbildungsquelle: FlexyFit Academy, „ESPT_Pflichtaufgabe_ENTSPANNUNGSTRAINER“; ergänzende Skripte „Entspannung und Ernährung“ und „Stundenplanung“.</p>
+      </section>
+      <section className="rounded-2xl border p-4 space-y-3" style={panel}>
+        <div className="flex items-center justify-between gap-2"><h3 className="font-bold">Konzeptentwurf</h3><button onClick={exportCaseConcept} className="flex items-center gap-1 rounded-lg border px-2 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)' }}><Download size={14} /> Markdown</button></div>
+        <label className="block text-xs" style={{ color: 'var(--muted)' }}>Titel<input value={casePlan.title} onChange={event => setCasePlan(current => ({ ...current, title: event.target.value }))} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>
+        <label className="block text-xs" style={{ color: 'var(--muted)' }}>Ziele<textarea value={casePlan.goals} onChange={event => setCasePlan(current => ({ ...current, goals: event.target.value }))} rows={3} placeholder="Welche Veränderungen soll der Fallkunde selbst wahrnehmen? Formuliere überprüfbare, realistische Ziele." className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>
+      </section>
+      <div className="space-y-3">{casePlan.weeks.map((week, index) => <section key={week.number} className="rounded-2xl border p-4 space-y-3" style={panel}>
+        <h3 className="font-bold">Woche {week.number}</h3>
+        {[['focus', 'Wochenziel', 'Welcher kleine Schwerpunkt passt zu dieser Woche?'], ['routine', 'Alltagsroutine', 'Wann und wie lässt sich die Veränderung realistisch in den Alltag einbauen?'], ['relaxation', 'Entspannungsübung', 'Welche Methode aus den Skripten wird eingeplant und wie wird sie angeleitet?'], ['nutrition', 'Ernährungsbaustein', 'Welche passende Skriptidee wird ausgewählt und wie alltagstauglich umgesetzt?']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={week[key]} onChange={event => updateCaseWeek(index, key, event.target.value)} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
+      </section>)}</div>
+      <section className="rounded-2xl border p-4 space-y-3" style={panel}>
+        <h3 className="font-bold">Eine Einheit als Tageszyklus ausarbeiten</h3>
+        {[['time', 'Zeitpunkt und Alltagssituation', 'z. B. Feierabend; Voraussetzungen und Dauer'], ['goal', 'Ziel der Einheit', 'Was soll der Teilnehmer üben oder wahrnehmen?'], ['sequence', 'Übungsauswahl und Reihenfolge', 'Ankommen, Einschulung, Hauptteil, Nachspüren'], ['duration', 'Zeitstruktur', 'Minuten je Abschnitt; Gesamtzeit'], ['transition', 'Rücknahme und Abschluss', 'Orientierung, Feedback und Transfer in den Alltag']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={casePlan.dayCycle[key]} onChange={event => setCasePlan(current => ({ ...current, dayCycle: { ...current.dayCycle, [key]: event.target.value } }))} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
+      </section>
+      <section className="rounded-2xl border p-4 space-y-3" style={panel}>
+        <h3 className="font-bold">Ernährungsteil der Aufgabe</h3>
+        <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Die Pflichtaufgabe verlangt auch Lebensmittelideen, Rezepte, Naturheilkunde und Nahrungsergänzungsmittel. Belege deine Auswahl im Skript; bei Präparaten keine individuelle Dosierung oder Therapie ableiten.</p>
+        {[['foodIdeas', 'Lebensmittel und Mahlzeitenideen', 'Skriptbezug und Tageszeit'], ['recipeIdeas', 'Rezeptideen', 'Welche einfache Zubereitung passt zur Wochenroutine?'], ['naturalProducts', 'Nervenberuhigende Naturheilkunde', 'Kursinhalt und Grenzen der präventiven Trainerrolle'], ['supplementNotes', 'Nahrungsergänzungsmittel', 'Skriptinhalt, offene Fragen und nötige fachliche Abklärung']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={casePlan[key]} onChange={event => setCasePlan(current => ({ ...current, [key]: event.target.value }))} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
+        <div className="rounded-xl p-3 text-xs" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>Der Entwurf speichert lokal auf diesem Gerät. Er ist ein Ausbildungsarbeitsblatt, keine Diagnose oder individuelle Behandlungsempfehlung.</div>
+      </section>
     </>}
 
     {section === 'planung' && <>
