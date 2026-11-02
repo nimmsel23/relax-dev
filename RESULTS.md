@@ -288,3 +288,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Praxisaufgabe aus Atemschulung S. 48 ist im Atemtrainer nun als persönliches Textfeld direkt bei der Kursübung verfügbar.
 - Der Entwurf wird lokal auf dem Gerät gespeichert und kann als Markdown-Datei exportiert werden; die Quelle der Schreibaufgabe steht im Export.
+
+## 2026-11-02 — Selbstreflexion aus der Stresstheorie ergänzt
+
+- Die 20-minütige Selbstreflexionsaufgabe aus „Stresstheorie“, S. 32–44, ist jetzt als freiwilliges Arbeitsblatt in den Grundlagen verfügbar: Stressoren/Bewertung, persönliche Voraussetzungen, Reaktionsmuster, Folgen und Coping.
+- Einträge bleiben lokal im Browser und sind vom Praxistagebuch getrennt; Markdown-Export enthält Quelle und Diagnoseabgrenzung.
+- Quiz und Grundlagen verwenden nun die Begriffe des Skripts (Stressoren, Organismus, Stressreaktionen, Konsequenzen, Coping) statt einer abweichenden SORKC-Auflösung.

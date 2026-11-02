@@ -178,10 +178,10 @@ const LEARNING_CHECK = [
   },
   {
     question: 'Wofür stehen die Buchstaben im SORKC-Modell?',
-    answers: ['Situation, Orientierung, Reiz, Körper, Coping.', 'Stimulus, Organismus, Reaktion, Konsequenz, Kontingenz.', 'Stress, Output, Regulation, Kraft, Konzentration.'],
-    correct: 1,
-    why: 'SORKC gliedert Auslöser, individuelle Voraussetzungen, Reaktion, Folgen und deren Kontingenz.',
-    source: 'Stresstheorie · SORKC-Modell',
+    answers: ['Stressoren, Organismus, Stressreaktionen, Konsequenzen und Coping.', 'Situation, Orientierung, Reiz, Körper und Konzentration.', 'Stress, Output, Regulation, Kraft und Kontingenz.'],
+    correct: 0,
+    why: 'Die Selbstreflexion im Skript führt Stressoren, Organismus, persönliche Reaktionsmuster, Konsequenzen sowie Coping als Ansatzpunkte auf.',
+    source: 'Stresstheorie · SORKC und Selbstreflexion, S. 32–44',
   },
   {
     question: 'Wie ordnet die Stresstheorie Entspannungsverfahren den Ebenen zu?',
@@ -193,6 +193,14 @@ const LEARNING_CHECK = [
 ]
 const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'
+const STRESS_REFLECTION_KEY = 'relax-stress-reflection-v1'
+const STRESS_REFLECTION_FIELDS = [
+  { id: 'stressors', title: 'S · Stressoren und Bewertung', prompt: 'Welche konkrete Situation oder Anforderung möchtest du betrachten? Erlebst du sie eher als Herausforderung, Bedrohung oder Schaden/Verlust? Welche eigenen Bewältigungsmöglichkeiten nimmst du wahr?' },
+  { id: 'organism', title: 'O · Persönliche Voraussetzungen', prompt: 'Welche Erfahrungen, Gewohnheiten, Überzeugungen, Fertigkeiten oder aktuellen Belastungen spielen für deine Einschätzung eine Rolle? Teile nur, was du festhalten möchtest.' },
+  { id: 'reactions', title: 'R · Reaktionsmuster', prompt: 'Was bemerkst du bei dir auf körperlicher, emotionaler, gedanklicher oder verhaltensbezogener Ebene? Beschreibe Beobachtungen, ohne sie zu bewerten.' },
+  { id: 'consequences', title: 'K · Folgen', prompt: 'Welche unmittelbaren oder späteren Folgen hat das Muster für dich und deinen Alltag? Was wird dadurch kurzfristig leichter oder schwieriger?' },
+  { id: 'coping', title: 'C · Bewältigung und Ressourcen', prompt: 'Welche vorhandene Ressource könntest du nutzen? Gibt es einen kleinen Ansatz: Stressor verringern, eigene Bewertung prüfen oder eine Erregungsspitze drosseln/vermeiden?' },
+]
 const panel = { background: 'var(--card)', borderColor: 'var(--line)' }
 const input = { background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }
 
@@ -231,6 +239,11 @@ export default function Ausbildung() {
       return { ...defaults, ...stored, weeks: defaults.weeks.map((week, index) => ({ ...week, ...(stored.weeks?.[index] || {}) })), dayCycle: { ...defaults.dayCycle, ...(stored.dayCycle || {}) } }
     } catch { return emptyCasePlan() }
   })
+  const [stressReflection, setStressReflection] = useState(() => {
+    const defaults = Object.fromEntries(STRESS_REFLECTION_FIELDS.map(field => [field.id, '']))
+    try { return { ...defaults, ...JSON.parse(localStorage.getItem(STRESS_REFLECTION_KEY) || '{}') } }
+    catch { return defaults }
+  })
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -244,6 +257,9 @@ export default function Ausbildung() {
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)) }, [plan])
   useEffect(() => { localStorage.setItem(CASE_STORAGE_KEY, JSON.stringify(casePlan)) }, [casePlan])
+  useEffect(() => {
+    try { localStorage.setItem(STRESS_REFLECTION_KEY, JSON.stringify(stressReflection)) } catch {}
+  }, [stressReflection])
   useEffect(() => {
     if (!delivery?.running) return undefined
     const timer = window.setInterval(() => setDelivery(current => {
@@ -352,6 +368,17 @@ export default function Ausbildung() {
     downloadText(`stresskonzept-4-wochen-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
   }
 
+  function exportStressReflection() {
+    const lines = [
+      '# Persönliche Stressreflexion',
+      `\nDatum: ${localToday()}`,
+      '\nDiese Notizen sind eine freiwillige Selbstreflexion, keine Diagnose.',
+      ...STRESS_REFLECTION_FIELDS.flatMap(field => [`\n## ${field.title}`, stressReflection[field.id] || '_Noch keine Notiz._']),
+      '\nQuelle: FlexyFit Academy, Stresstheorie, S. 32–44.',
+    ]
+    downloadText(`stressreflexion-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
+  }
+
   if (delivery) {
     const block = delivery.blocks[delivery.index]
     const isLastBlock = delivery.index === delivery.blocks.length - 1
@@ -401,8 +428,14 @@ export default function Ausbildung() {
         ['Selye · Anpassungsverlauf', 'Alarm, Widerstand und Erschöpfung beschreiben einen möglichen Verlauf bei anhaltender Belastung. Das Modell ist eine Orientierung, keine individuelle Diagnose.'],
         ['Lazarus & Folkman · Bewertung und Ressourcen', 'Stress hängt auch davon ab, wie eine Situation eingeschätzt wird und welche Bewältigungsmöglichkeiten verfügbar erscheinen.'],
         ['Salutogenese · Ressourcen stärken', 'Der Blick richtet sich auf Verständlichkeit, Handhabbarkeit und Sinn sowie auf vorhandene persönliche und soziale Ressourcen.'],
-        ['SORKC · Verhalten im Kontext', 'Situation, Organismus, Reaktion, Konsequenz und Kontingenz helfen, Auslöser und Muster strukturiert zu betrachten.'],
+        ['SORKC · Verhalten im Kontext', 'Die Selbstreflexion im Skript betrachtet Stressoren, individuelle Voraussetzungen, Reaktionsmuster, Konsequenzen und Coping-Ansatzpunkte.'],
       ].map(([title, text]) => <div key={title} className="rounded-xl p-3" style={{ background: 'var(--bg2)' }}><div className="text-sm font-bold">{title}</div><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</p></div>)}</div><p className="mt-3 text-xs" style={{ color: 'var(--dim)' }}>Ausbildungsbezug: „Stresstheorie“. Modelle erklären Zusammenhänge auf unterschiedliche Weise.</p></div>
+      <div className="rounded-2xl border p-4" style={panel}>
+        <div className="flex items-start justify-between gap-3"><div><div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Selbstreflexion · SORKC</div><h2 className="mt-1 text-lg font-black">Ein eigenes Stressmuster betrachten</h2></div><button type="button" onClick={exportStressReflection} className="shrink-0 inline-flex items-center gap-1 rounded-lg border px-2.5 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)' }}><Download size={14} /> Markdown</button></div>
+        <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Das Kursskript schlägt dafür 20 Minuten vor und betont: Es gibt kein Richtig oder Falsch. Nutze die Felder freiwillig und nur so weit, wie es für dich passend ist. Deine Einträge bleiben im lokalen Browser dieses Geräts; sie werden nicht mit dem Praxistagebuch synchronisiert.</p>
+        <div className="mt-3 space-y-3">{STRESS_REFLECTION_FIELDS.map(field => <label key={field.id} className="block"><span className="mb-1 block text-sm font-semibold">{field.title}</span><span className="mb-1 block text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{field.prompt}</span><textarea value={stressReflection[field.id]} onChange={event => setStressReflection(current => ({ ...current, [field.id]: event.target.value }))} rows={3} className="w-full rounded-xl border p-3 text-sm" style={input} /></label>)}</div>
+        <p className="mt-3 text-xs" style={{ color: 'var(--dim)' }}>Kursbezug: FlexyFit Academy, „Stresstheorie“, S. 32–44. Die Reflexion dient der persönlichen Betrachtung, nicht der Diagnose oder Therapie.</p>
+      </div>
       <div className="rounded-2xl border p-4" style={panel}><div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Theorie · Entspannungsverfahren</div><h2 className="mt-1 text-lg font-black">Vier Ebenen der Entspannung</h2><div className="mt-3 grid gap-2 sm:grid-cols-2">{[
         ['Muskulär', 'Konzentrative Muskelentspannung, Progressive Muskelentspannung und muskuläres Tiefentraining.'],
         ['Vegetativ', 'Autogenes Training und Atemtechniken.'],

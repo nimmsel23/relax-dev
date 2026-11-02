@@ -35,3 +35,4 @@
 - [x] Dauer-Richtwerte aus der separaten lokalen Kursprotokollnotiz wieder eingebunden und von PDF-Angaben getrennt; fehlende Schritt-für-Schritt-Anleitungen für AT, Fantasiereisen und Meditation bleiben kenntlich.
 - [x] Kursquellen, Seitenbereiche, App-Abbildungen und Grenzen der nicht mitgelieferten bzw. fehlenden Anleitungen in einer Quellenmatrix zusammengeführt.
 - [x] Schreibaufgabe zur Bauchatmung aus Atemschulung S. 48 als lokal gespeichertes Arbeitsfeld mit Markdown-Export im Atemtrainer abbilden.
+- [x] Die persönliche Selbstreflexion aus Stresstheorie S. 32–44 als freiwilliges, lokal gespeichertes SORKC-Arbeitsblatt mit Markdown-Export abbilden und die Modellbegriffe am Kursskript ausrichten.
