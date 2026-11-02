@@ -740,4 +740,5 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Headless-Firefox stellte einen vorhandenen `Atemschulung`-Reflexionsdatensatz mit allen drei Feldern und gesetztem Selbstcheck wieder her.
 - Der Markdown-Download enthielt alle drei Einträge, den methodenspezifischen Dateinamen und den Hinweis, dass die Reflexion keine absolvierte Ausbildungseinheit belegt. Der Reflexionsspeicher blieb getrennt vom Trainingsnachweis.
-- Neue Texteingaben per echter Tastatur und deren Speicherung nach erneutem Öffnen im Zielbrowser bleiben offen.
+- Im anschließend gesteuerten Firefox-Profil wurden drei Notizen per WebDriver-Tastatureingabe geschrieben, im lokalen Reflexionsobjekt gespeichert, nach Reload wiederhergestellt und im tatsächlichen Markdown-Blob geprüft.
+- Der Fachgesprächs-Selbstcheck blieb ebenfalls nach Reload gesetzt; der Export nennt, dass die Reflexion keine absolvierte Ausbildungseinheit belegt. Geräteabnahme auf iPhone/iPad bleibt offen.
