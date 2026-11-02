@@ -1,3 +1,4 @@
+import { api } from '../api'
 import { useState, useEffect } from 'react'
 import { Search, X, ChevronDown, Network, BookOpen } from 'lucide-react'
 import KnowledgeGraph from '../components/KnowledgeGraph'
@@ -25,7 +26,7 @@ export default function SubstanceCatalog() {
   const fetchSubstances = async () => {
     setLoading(true)
     try {
-      const res = await fetch('/api/knowledge/substances')
+      const res = await api.fetch('/api/knowledge/substances')
       const data = await res.json()
       const subs = data.substances || {}
       setSubstances(subs)
@@ -40,7 +41,7 @@ export default function SubstanceCatalog() {
     setExpandedData(null)
     setExpandLoading(true)
     try {
-      const res = await fetch(`/api/knowledge/expand/substance/${encodeURIComponent(key)}`)
+      const res = await api.fetch(`/api/knowledge/expand/substance/${encodeURIComponent(key)}`)
       const data = await res.json()
       if (data.ok) setExpandedData(data)
     } finally {
@@ -52,7 +53,7 @@ export default function SubstanceCatalog() {
     setVaultContent(null)
     setVaultLoading(true)
     try {
-      const res = await fetch(`/api/knowledge/vault/${encodeURIComponent(key)}`)
+      const res = await api.fetch(`/api/knowledge/vault/${encodeURIComponent(key)}`)
       const data = await res.json()
       setVaultContent(data.ok
         ? { title: data.title, section: data.section, html: marked.parse(data.markdown) }

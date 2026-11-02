@@ -1,3 +1,4 @@
+import { api } from '../../api'
 import { usePhysioStore } from '../../store/physioStore'
 
 export default function SimulationControls() {
@@ -20,22 +21,12 @@ export default function SimulationControls() {
       setLoading(true)
       setError(null)
 
-      const response = await fetch('http://127.0.0.1:9123/api/physio/simulate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          events,
-          context,
-          horizonMinutes,
-          resolution: 1,
-        }),
+      const data = await api.post('/api/physio/simulate', {
+        events,
+        context,
+        horizonMinutes,
+        resolution: 1,
       })
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`)
-      }
-
-      const data = await response.json()
       setSimulationResult(data)
     } catch (err) {
       setError(err.message)

@@ -5,13 +5,16 @@ const BASE = import.meta.env.VITE_API_BASE
   || ''
 
 export const api = {
+  fetch(path, options = {}) {
+    return fetch(BASE + path, options)
+  },
   async get(path) {
-    const res = await fetch(BASE + path, { cache: 'no-store', signal: AbortSignal.timeout(8000) }) // Lie-Fi: nicht ewig hängen
+    const res = await this.fetch(path, { cache: 'no-store', signal: AbortSignal.timeout(8000) }) // Lie-Fi: nicht ewig hängen
     if (!res.ok) throw new Error(`GET ${path} → ${res.status}`)
     return res.json()
   },
   async post(path, data) {
-    const res = await fetch(BASE + path, {
+    const res = await this.fetch(path, {
       signal: AbortSignal.timeout(10000),
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

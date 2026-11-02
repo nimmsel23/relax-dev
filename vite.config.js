@@ -6,7 +6,7 @@ import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const BACKEND = 'http://localhost:9123'
+const BACKEND = 'http://127.0.0.1:9150'
 
 export default defineConfig({
   base: './',
@@ -72,14 +72,14 @@ export default defineConfig({
   server: {
     port: 5903,
     proxy: {
-      '/api': BACKEND,
-      '/session':   BACKEND,
-      '/journal':   BACKEND,
-      '/stats':     BACKEND,
-      '/techniques': BACKEND,
-      '/export':    BACKEND,
-      '/theme':     BACKEND,
-      '/health':    BACKEND,
+      '/api': { target: BACKEND, rewrite: (path) => '/api/relax' + path },
+      '/session':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/journal':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/stats':     { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/techniques': { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/export':    { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/theme':     { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/health':    { target: BACKEND, rewrite: (path) => '/relax-api' + path },
     }
   },
   build: {

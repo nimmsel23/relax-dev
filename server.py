@@ -4,11 +4,12 @@ import csv
 import time
 import uuid
 import re
+import importlib.util
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 from datetime import datetime, timedelta, timezone
 
-from fastapi import FastAPI, Request, Response, Query, HTTPException, BackgroundTasks, status
+from fastapi import FastAPI, Query, HTTPException, BackgroundTasks
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -33,7 +34,6 @@ DIST_DIR = BASE_DIR / "dist"
 STATIC_DIR = Path(os.getenv("RELAX_STATIC_DIR", str(DIST_DIR if DIST_DIR.exists() else PUBLIC_DIR)))
 
 BRIDGE_URL = os.getenv("BRIDGE_URL", "http://127.0.0.1:9080")
-NODE_BACKEND_URL = os.getenv("NODE_BACKEND_URL", "http://127.0.0.1:9123")
 
 # Ensure data directories exist
 (DATA_DIR / "sessions").mkdir(parents=True, exist_ok=True)
@@ -139,7 +139,7 @@ def health():
     return {
         "ok": True,
         "service": "relax-dev",
-        "port": 9123,
+        "port": int(os.getenv("COACH_PORT", "9150")),
         "uptime": int(time.time() - start_time)
     }
 
@@ -385,40 +385,22 @@ def post_relaxation_session(background_tasks: BackgroundTasks, payload: Dict[str
         "remaining": max(0, 30 - total)
     }
 
-# ── Proxy Router (Knowledge Base & Physio Sim) ──────────────────────────────────
-# Routes to Node server for biochemistry KB logic & PNI simulation engine.
+# ── In-process API modules ─────────────────────────────────────────────────────
 
-@app.api_route("/api/knowledge/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
-async def proxy_knowledge(path: str, request: Request):
-    return await handle_reverse_proxy(request, f"/api/knowledge/{path}")
+def _load_api_module(name: str, relative_path: str):
+    module_path = BASE_DIR / relative_path
+    spec = importlib.util.spec_from_file_location(name, module_path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"Could not load Relax API module: {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
-@app.api_route("/api/physio/{path:path}", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"])
-async def proxy_physio(path: str, request: Request):
-    return await handle_reverse_proxy(request, f"/api/physio/{path}")
 
-async def handle_reverse_proxy(request: Request, path: str):
-    target_url = f"{NODE_BACKEND_URL}{path}"
-    
-    query_params = request.url.query
-    if query_params:
-        target_url = f"{target_url}?{query_params}"
-        
-    headers = {k: v for k, v in request.headers.items() if k.lower() not in ("host", "content-length")}
-    body = await request.body()
-    
-    async with httpx.AsyncClient() as client:
-        try:
-            resp = await client.request(
-                method=request.method,
-                url=target_url,
-                headers=headers,
-                content=body,
-                timeout=15.0
-            )
-            resp_headers = {k: v for k, v in resp.headers.items() if k.lower() not in ("transfer-encoding", "content-encoding")}
-            return Response(content=resp.content, status_code=resp.status_code, headers=resp_headers)
-        except httpx.RequestError as e:
-            raise HTTPException(status_code=status.HTTP_524_A_TIMEOUT, detail=f"Node API backend unreachable: {e}")
+knowledge_api = _load_api_module("relax_knowledge_api", "server/knowledge/fastapi_api.py")
+physio_api = _load_api_module("relax_physio_api", "server/physio_fastapi.py")
+app.include_router(knowledge_api.create_router(DATA_DIR), prefix="/api/knowledge")
+app.include_router(physio_api.create_router(), prefix="/api/physio")
 
 # ── SPA / Static Serving ──────────────────────────────────────────────────────────
 
@@ -441,7 +423,4 @@ def spa_fallback(path: str, request: Request):
     raise HTTPException(status_code=404, detail="Not Found")
 
 if __name__ == "__main__":
-    import uvicorn
-    port = int(os.getenv("PORT", 9123))
-    host = os.getenv("HOST", "127.0.0.1")
-    uvicorn.run("server:app", host=host, port=port, reload=True)
+    raise SystemExit("Relax API is mounted by Coach on :9150; start it with coach-server.")
