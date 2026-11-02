@@ -143,6 +143,11 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Bestehende Tages-Sessions mit mindestens 15 Minuten Dauer werden als prüfbare Kandidaten angeboten und erst nach expliziter Bestätigung als selbst durchgeführte Ausbildungseinheit markiert.
 - CSV-Export enthält die Kopfzeile und exakt 30 nummerierte Zeilen, passend zur lokalen Minimalvorlage.
 
+## 2026-11-02 — Ansichten nach Bedarf laden
+
+- Alle App-Bereiche per React `lazy`/`Suspense` aufgeteilt. Der gebaute Haupt-JS-Chunk sank von ca. 865 KB auf 166 KB; der Ausbildungsbereich liegt bei ca. 36 KB. Die PWA precacht weiterhin alle Bereiche für Offline-Verfügbarkeit.
+- Produktionsbuild erfolgreich; kein Einzelchunk überschreitet Vites 500-KB-Warnschwelle. Keine Tests, kein Push oder Release.
+
 ## 2026-11-02 — Lern- und Praxisablauf verknüpft
 
 - Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.

@@ -62,6 +62,8 @@ Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fac
 
 Die Kernnavigation ist auf Heute, Modul, Praxis und Atem ausgerichtet. Journal, Stats, Physio, Catalog und Einstellungen liegen unter **Mehr**.
 
+Die Ansichten werden bei Bedarf separat geladen. So starten Modul und Atem ohne React-Flow- und Physiologie-Ansichten im Hauptpaket; die PWA hält weiterhin alle App-Bereiche offline verfügbar.
+
 Das Tagesprotokoll für Stimmung und Entspannungszeit bleibt vom formalen Ausbildungsnachweis getrennt. Die Methodenansicht führt zur Atemübung oder übernimmt die gewählte Methode in den Nachweis.
 
 Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden.

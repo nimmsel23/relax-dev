@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react'
+import { lazy, Suspense, useState, useEffect } from 'react'
 import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock, Settings2, Wind, GraduationCap, MoreHorizontal } from 'lucide-react'
-import Dashboard from './views/Dashboard.jsx'
-import Session from './views/Session.jsx'
-import Breath from './views/Breath.jsx'
-import Journal from './views/Journal.jsx'
-import Stats from './views/Stats.jsx'
-import PhysioTimeline from './views/PhysioTimeline.jsx'
-import SubstanceCatalog from './views/SubstanceCatalog.jsx'
-import Settings from './views/Settings.jsx'
-import Ausbildung from './views/Ausbildung.jsx'
 import { useCircadianTheme } from './hooks/useCircadianTheme.js'
+
+const Dashboard = lazy(() => import('./views/Dashboard.jsx'))
+const Session = lazy(() => import('./views/Session.jsx'))
+const Breath = lazy(() => import('./views/Breath.jsx'))
+const Journal = lazy(() => import('./views/Journal.jsx'))
+const Stats = lazy(() => import('./views/Stats.jsx'))
+const PhysioTimeline = lazy(() => import('./views/PhysioTimeline.jsx'))
+const SubstanceCatalog = lazy(() => import('./views/SubstanceCatalog.jsx'))
+const Settings = lazy(() => import('./views/Settings.jsx'))
+const Ausbildung = lazy(() => import('./views/Ausbildung.jsx'))
 
 const PRIMARY_TABS = [
   { id: 'dash', label: 'Heute', Icon: Activity },
@@ -74,7 +75,9 @@ export default function App() {
       </header>
 
       <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
-        <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}><View onNavigate={navigate} /></div>
+        <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}>
+          <Suspense fallback={<div role="status" className="rounded-2xl border p-4 text-sm" style={{ background: 'var(--card)', borderColor: 'var(--line)', color: 'var(--muted)' }}>Bereich wird geladen …</div>}><View onNavigate={navigate} /></Suspense>
+        </div>
       </main>
 
       {moreOpen && <>
