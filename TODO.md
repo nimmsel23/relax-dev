@@ -10,4 +10,5 @@
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
 - [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
+- [x] Vorhandene ausreichend lange Tages-Sessions nach ausdrücklicher Selbstbestätigung in den Ausbildungsnachweis übernehmen; Export an 30-Zeilen-Vorlage anlehnen.
 - [ ] Methoden-spezifische geführte Übungsabläufe (z. B. PMR) ergänzen, wenn dafür verlässliche Originalabläufe vorliegen.

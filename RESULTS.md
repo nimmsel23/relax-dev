@@ -138,6 +138,11 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Übergänge bleiben bewusst unter Trainerkontrolle und können nach Gruppe und Situation angepasst werden.
 - Kein PMR-Skript aus der lokal vorliegenden, nicht als Akademie-Original gekennzeichneten Zusammenfassung abgeleitet.
 
+## 2026-11-02 — Ausbildungsnachweis aus vorhandenen Praxislogs
+
+- Bestehende Tages-Sessions mit mindestens 15 Minuten Dauer werden als prüfbare Kandidaten angeboten und erst nach expliziter Bestätigung als selbst durchgeführte Ausbildungseinheit markiert.
+- CSV-Export enthält die Kopfzeile und exakt 30 nummerierte Zeilen, passend zur lokalen Minimalvorlage.
+
 ## 2026-11-02 — Lern- und Praxisablauf verknüpft
 
 - Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.
