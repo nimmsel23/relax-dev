@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock, Settings2, Wind } from 'lucide-react'
+import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock, Settings2, Wind, GraduationCap } from 'lucide-react'
 import Dashboard from './views/Dashboard.jsx'
 import Session from './views/Session.jsx'
 import Breath from './views/Breath.jsx'
@@ -8,12 +8,14 @@ import Stats from './views/Stats.jsx'
 import PhysioTimeline from './views/PhysioTimeline.jsx'
 import SubstanceCatalog from './views/SubstanceCatalog.jsx'
 import Settings from './views/Settings.jsx'
+import Ausbildung from './views/Ausbildung.jsx'
 import { useCircadianTheme } from './hooks/useCircadianTheme.js'
 
 const TABS = [
   { id: 'dash',    label: 'Heute',    Icon: Activity },
   { id: 'session', label: 'Session',  Icon: MoonStar },
   { id: 'atem',    label: 'Atem',     Icon: Wind },
+  { id: 'ausbildung', label: 'Ausbildung', Icon: GraduationCap },
   { id: 'journal', label: 'Journal',  Icon: BookOpen },
   { id: 'stats',   label: 'Stats',    Icon: BarChart3 },
   { id: 'physio',  label: 'Physio',   Icon: Zap },
@@ -56,7 +58,7 @@ export default function App() {
     }
   }
 
-  const View = { dash: Dashboard, session: Session, atem: Breath, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog, settings: Settings }[tab]
+  const View = { dash: Dashboard, session: Session, atem: Breath, ausbildung: Ausbildung, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog, settings: Settings }[tab]
 
   return (
     <div className="flex flex-col h-full" style={{ background: 'var(--bg)', color: 'var(--ink)' }}>

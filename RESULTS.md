@@ -116,3 +116,10 @@ All API endpoints tested & functional:
 ## 2026-10-31 — Dev-Projekte unter ~/dev
 
 Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgestellt. Runtime-Daten, Branches und Release-Checkouts behalten ihre Zuständigkeit. Keine Pushes oder Releases. Gesamter Umzug und Prüfungen: `~/RESULTS.md`.
+
+## 2026-11-02 — Entspannungstrainer-Modul als App-Bereich
+
+- Ausbildungsbereich `Ausbildung` in die App-Navigation integriert: Modulüberblick, didaktische Leitlinien, Methodenbibliothek, editierbarer 60-Minuten-Stundenentwurf und 30-Einheiten-Praxisnachweis.
+- Methodenbeschreibungen und Stundenstruktur an den lokalen Ausbildungsnotizen (Stundenplanung, Atemschulung, PMR, Assisted Stretching, Entspannung & Ausdauer und Protokoll) ausgerichtet; Übungen enthalten Optionen zur individuellen Anpassung.
+- Praxisnachweise nutzen das bestehende Relax-Session-Datenmodell und Firestore-/Offline-Speicher. CSV-Export für das Protokoll ergänzt.
+- Ausbildungs-Notizen für das Ziel und Folgeabgleich in `TODO.md` festgehalten. Kein Push oder Release.

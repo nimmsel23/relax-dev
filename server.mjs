@@ -185,6 +185,8 @@ app.post("/session", (req, reply) => {
     mood_before: clamp(Number(it.mood_before) || 3, 1, 5),
     mood_after: clamp(Number(it.mood_after) || 3, 1, 5),
     note: String(it.note || "").slice(0, 2000),
+    trainingUnit: it.trainingUnit === true,
+    signed: it.signed === true,
   }));
   writeJson(file, { date, items, saved_at: new Date().toISOString() });
   firestoreSync(date);

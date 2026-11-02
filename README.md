@@ -51,6 +51,15 @@ Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `da
 
 ## Features
 
+### Ausbildungsbereich Entspannungstrainer
+Der Tab **Ausbildung** bildet die zentralen Praxisabläufe des Fachmoduls ab:
+- Modulüberblick und didaktische Leitlinien aus der Ausbildungsnotiz „Stundenplanung“
+- Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga/Pilates, Stretching, Meditation und entspannungsorientierter Ausdauer
+- anpassbarer Stundenentwurf mit Ankommen, Einschulung, Hauptteil, Nachspüren und Rücknahme
+- 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher, inklusive CSV-Export
+
+Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden.
+
 ### 1. **Session Tracking** 📋
 Log relaxation techniques with timing and mood.
 - `/session` endpoint
