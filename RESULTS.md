@@ -224,3 +224,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Eigenständige Methodenkarte nach dem Originalskript mit Körperteil- und Bewegungswahrnehmung, Atemräumen, Fuß-/Standwahrnehmung, Beckenuhr und Bewegungsfreude.
 - Die Karte trennt Kurslernen von Diagnose und Behandlung; taktile Partnerübungen sind ausdrücklich zustimmungsbasiert.
 - Lerncheck prüft die im Skript aufgeführten Wahrnehmungsfelder.
+
+## 2026-11-02 — Yoga- und Pilateskarten mit Original-PDFs abgeglichen
+
+- Yoga- und Pilatesmethoden jetzt direkt den FlexyFit-Originalskripten zugeordnet; unbelegte Sitzposition Sukhasana aus der Asana-Auswahl entfernt und durch die im PDF beschriebene Utthita Parsvakonasana ersetzt.
+- Viparita Karani korrekt als Umkehr-Mudra statt als Asana gekennzeichnet. Verletzungsbezogene Kurzmodifikation aus der früheren Zusammenfassung durch Verweis auf praktische Einschulung ersetzt.
+- Yoga-/Pilatesdauer nicht mehr als Kursvorgabe ausgewiesen; Dauer wird im eigenen Stundenentwurf festgelegt.
