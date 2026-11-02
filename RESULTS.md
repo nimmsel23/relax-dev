@@ -782,4 +782,5 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Jeder Eintrag führt direkt zum passenden App-Bereich; Atemschulung öffnet den bestehenden Atem-Tab. Hinweise stellen klar, dass die Navigation weder absolvierte Kurseinheiten bestätigt noch Originalskripte ersetzt.
 - Die Methodenfächer springen direkt auf ihre jeweilige Karte; Bereichs- und Tabwechsel setzen den gemeinsamen Scrollbereich auf den Anfang zurück.
 - Statische Namensprüfung bestätigte alle elf Methodenkarten-Ziele; der Build und die Diff-Prüfung waren erfolgreich.
+- Ein Abgleich der MOC-Hauptüberschriften bestätigt alle zwölf Kursfächer im Index; die Fachtitel entsprechen nun auch in den zuvor verkürzten Einträgen der Ausbildungsübersicht.
 - TODO, NEXT und diese Ergebnisnotiz aktualisiert.
