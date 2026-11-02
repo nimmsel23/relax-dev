@@ -201,3 +201,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Methodenkarte übernimmt die im Skript getrennte Dosierung: eigenständige 30-Minuten-Einheit mit 2 × 15 Sekunden je Muskel und 10–15-minütiger Trainingsausklang mit 1 × 10–15 Sekunden.
 - Session-Check ergänzt um ROM-Test, Handtuch, neutrale Gelenk-/Beckenposition, Trainerhaltung, fließende Übergänge, individuelles Feedback und freiwillige Zustimmung vor Berührungen.
 - Lerncheck prüft die Unterscheidung zwischen eigenständiger Einheit und Trainingsausklang.
+
+## 2026-11-02 — Faszientraining und SMR ergänzt
+
+- Separate Methodenkarte für den Abschnitt Faszientraining aus dem Assisted-Stretching-Skript ergänzt: SMR, vorbereitendes Dehnen, Winkel-/Druckvariation, myofasziale Ketten und Rückkehr in die Ausgangsposition.
+- Kursziele werden als Inhalte des Skripts gekennzeichnet, nicht als Wirkungsversprechen. Die Karte macht sichtbar, dass das PDF nur eine kurze Praxisübersicht und kein vollständiges Übungsprogramm liefert.
+- Lerncheck greift die im Skript genannten Praxiselemente auf.

@@ -43,6 +43,12 @@ const METHODS = [
     ['Session-Check', 'ROM testen, angenehme Atmosphäre schaffen, Handtuch nutzen, Gelenke und Becken neutral halten, Feedback einholen und passende Übungen individuell auswählen.'],
     ['Trainer:innen-Praxis', 'Eigene Körperhaltung und fließende Übergänge beachten. Das Skript fordert Kundenkontakt; kläre vor jeder Berührung Zustimmung und halte verbales Feedback offen.'],
   ] },
+  { name: 'Faszientraining · SMR', duration: 'Im Stundenentwurf festlegen', icon: HeartPulse, focus: 'Körperwahrnehmung und Bewegungsrichtungen in faszialen Ketten erkunden', practice: 'Das Assisted-Stretching-Skript stellt Self Myofascial Release (SMR) als verbreitete Form des Faszientrainings vor. In der Praxisnotiz werden Vordehnen, veränderte Winkel und Druck sowie die Rückkehr aus mehreren Bewegungsrichtungen in die Ausgangsposition genannt.', adapt: 'Das PDF enthält nur eine knappe Praxisübersicht, kein vollständiges Übungsprogramm. Konkrete Übungen deshalb praktisch erlernen und individuell auswählen; keine therapeutische Wirkung versprechen oder Beschwerden behandeln.', source: 'FlexyFit Academy: Assisted Stretching · Faszientraining', outlineTitle: 'Praxisideen aus dem Skript', outline: [
+    ['SMR · Self Myofascial Release', 'Das Skript nennt Wahrnehmung, Gleitfähigkeit und Hydration als Lernziele des Abschnitts; dies sind Kursinhalte, keine Wirkungszusage der App.'],
+    ['Bewegungsrichtungen', 'Aus einer Ausgangsposition in verschiedene Richtungen arbeiten und jeweils wieder kontrolliert zur Ausgangsposition zurückkehren.'],
+    ['Winkel und Druck', 'In den praktischen Übungen Winkel und Druck variieren; die konkrete Ausführung und Dosierung aus der praktischen Einschulung übernehmen.'],
+    ['Myofasziale Ketten', 'Der Kursabschnitt regt an, mehrere verbundene Bereiche in die Bewegung einzubeziehen und vorbereitende Gegenbewegungen zu nutzen.'],
+  ] },
   { name: 'Entspannungsorientierte Ausdauer', duration: '20–45 Min.', icon: HeartPulse, focus: 'Rhythmische, moderate Bewegung als Ausgleich nutzen', practice: 'Eine passende zyklische Bewegungsform und eine ruhige Umgebung wählen. Leichtes Tempo, lockeres Sprechen und fehlender Zeitdruck helfen, die Belastung angenehm zu halten.', adapt: 'Die individuelle Belastbarkeit entscheidet. Bei Beschwerden abbrechen und fachliche Abklärung empfehlen.', source: 'Entspannung & Ausdauer' },
   { name: 'Achtsamkeit & Meditation', duration: '15–30 Min.', icon: Sparkles, focus: 'Aufmerksamkeit freundlich im gegenwärtigen Erleben halten', practice: 'Einen einfachen Anker wie Atem, Geräusche oder Kontakt zum Boden anbieten. Abschweifen ist normal; die Aufmerksamkeit kann ohne Bewertung zurückkehren.', adapt: 'Augen offen, Bewegung oder ein äußerer Anker sind gleichwertige Optionen.', source: 'Methodenübersicht; Ausbildungsnotizen' },
 ]
@@ -115,6 +121,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Das Assisted-Stretching-Skript nennt unterschiedliche Dauer und Wiederholungen für die eigenständige Einheit und den Ausklang nach einem Training.',
     source: 'Assisted Stretching · Dosierung',
+  },
+  {
+    question: 'Welche Praxiselemente nennt das Skript für Faszientraining?',
+    answers: ['Vordehnen, Winkel und Druck variieren und aus unterschiedlichen Richtungen zur Ausgangsposition zurückkehren.', 'Eine Bewegungsrichtung ohne Rückkehr und unabhängig vom Körpergefühl wiederholen.', 'Nur lange statische Dehnungen ohne Variation ausführen.'],
+    correct: 0,
+    why: 'Der kurze Praxisabschnitt nennt Vordehnen, Variation von Winkel und Druck, myofasziale Ketten und die Rückkehr aus jeder Dehnrichtung zur Ausgangsposition.',
+    source: 'Assisted Stretching · Faszientraining',
   },
   {
     question: 'Was gehört nach einer tiefen Entspannung in Rückenlage zum Abschluss?',
