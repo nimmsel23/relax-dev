@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**relax-dev** — Standalone Relax Centre application for relaxation techniques, stress management, and personal wellness tracking. Self-contained React/Vite frontend + Node.js backend with file-based data storage (no database).
+**relax-dev** — App für das Entspannungstrainer-Fachmodul der Präventiven Vitaltrainer-Ausbildung, ergänzt um persönliche Praxis- und Trackingbereiche. Der Modul-Tab ist der Standard-Einstieg. React/Vite-Frontend mit Node.js-Backend; Session- und Journaldaten sind dateibasiert, die optionale Knowledge Base nutzt SQLite.
 
-**Leitplanke**: **Psychoneuroimmunologie (PNI)** — die wissenschaftliche Grundlage des Projekts. Stressphysiologie (HPA-Achse, Cortisol), Neurotransmitter (GABA, Serotonin, Dopamin), Immunmodulation (IL-10, Inflammation) und deren Wechselwirkungen mit Relaxationstechniken und Substanzen. Alle Features bauen auf diesem Rahmen auf.
+**Inhaltliche Leitplanke**: Für Ausbildungsinhalte haben die lokalen Kurs-PDFs Vorrang. Kursaussagen werden als solche kenntlich gemacht. Zusätzliche biochemische Modelle oder Katalogdaten sind kein Beleg für individuelle Wirkungen und dürfen nicht als Diagnose, Messung oder Trainerempfehlung erscheinen.
 
-**Status**: Active development. Dual-catalog KB + SQLite-Layer + Vault integration + cross-substance graph + Python Enrichment-Engine implementiert. Physio Timeline (PNI-Simulation) ist das nächste Major Feature.
+**Status**: Active development. Der Ausbildungsablauf mit Grundlagen, Methoden, Stundenentwurf, Fallaufgabe und Praxisnachweis ist der Produktfokus. Knowledge Base, Physiologie-Ansicht und Katalog sind unterstützende Zusatzbereiche.
 
 ## Architecture
 
@@ -21,15 +21,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Port Convention
 | Service | Port | Dev Path |
 |---------|------|----------|
-| Vite (UI) | 5904 | `npm run ui:dev` (or via dev-runner) |
-| Node API | 9123 | `npm run start` (or via dev-runner) |
+| Vite (UI) | 5904 | `pnpm run ui:dev` (or via dev-runner) |
+| Node API | 9123 | `pnpm run start` (or via dev-runner) |
 | KB Enricher (Python) | 9124 | `python server/knowledge/kb_enricher.py serve` |
 
 **Wichtig**: Im Dev-Betrieb immer über `:5904` zugreifen (Vite + HMR). `:9123` direkt serviert nur `dist/` — Änderungen ohne Build unsichtbar.
 
 ### Knowledge Base Architecture (Dual-Catalog)
 
-**Konzept**: Bidirektionales Mapping zwischen Herbal Substances (user-facing) und biochemischen Molekülen (wissenschaftliche Ebene). Fundament ist PNI — jede Substanz wirkt über Moleküle auf Neurotransmitter, Hormone oder Immunmediatoren.
+**Konzept**: Optionale Knowledge Base mit bidirektionalem Mapping zwischen Herbal Substances (user-facing) und biochemischen Molekülen. Sie ist ein eigenständiger Zusatzbereich und keine Ausbildungsquelle oder Grundlage für individuelle Wirkungsversprechen.
 
 ### Zwei-Schichten-Architektur (KB)
 
@@ -117,7 +117,7 @@ Single-file HTTP API server (no frameworks, native Node.js):
   - `GET /techniques` — Available relaxation techniques (hardcoded list)
   - `GET /session?date=YYYY-MM-DD` — Fetch session data
   - `POST /session` — Save session items
-  - `GET /session/history?limit=10` — Last N sessions
+  - `GET /session/history?limit=10&before=YYYY-MM-DD` — Sessions before an optional date cursor (exclusive), newest first; request earlier pages with the last returned date
   - `GET /session/latest` — Most recent session
   - `GET /journal?date=...` — Fetch markdown entry
   - `POST /journal` — Save markdown entry
@@ -153,7 +153,7 @@ Environment variables:
 ### Running
 ```bash
 # Both UI + API together (recommended)
-cd ~/relax-dev && npm run dev
+cd ~/relax-dev && pnpm run dev
 
 # Access via :5904 (Vite HMR) — not :9123
 ```
@@ -206,25 +206,11 @@ http GET ':9123/api/knowledge/interaction?mol1=cortisol&mol2=testosterone'
 node scripts/migrate-yaml-to-sqlite.mjs --force
 ```
 
-## Planned Feature: Physio Timeline (PNI-Simulation)
+## Ausbildungsmodul als Produktziel
 
-Das zentrale nächste Feature — direkter Ausdruck der PNI-Leitplanke:
+Der Modul-Tab ist der Standard-Einstieg und fachlicher Schwerpunkt dieses Repositories. Kurs-PDFs sind für Ausbildungsinhalte maßgeblich; lokale Notizen sind entsprechend zu kennzeichnen. Keine biochemischen oder gesundheitlichen Wirkungen als individuelle Messung, Diagnose oder Zusage ausgeben. Die Produktvision und die nächsten fachlichen Schritte stehen in `VISION.md` und `NEXT.md`; der seitenbezogene Quellenabgleich steht in `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`.
 
-> **Physiological Simulation System** — Modelliert Kortisol, Dopamin, Glukose-Kurven als Reaktion auf Lifestyle-Events (Kaffee, Training, Mulungu, Fasten) mit Kontext-Modifikatoren (nüchtern, Schlafdefizit, Stresslevel).
-
-**Architecture**:
-```
-Backend: POST /api/physio/simulate → deterministisches Simulations-Engine (pure functions, kein ML)
-Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven gleichzeitig)
-```
-
-**Datenquellen** (dokumentiert in `HOT.md`):
-- PubChem REST — Moleküldaten
-- Psychonaut Wiki — Onset/Duration/Intensity-Kurven
-- HMDB — endogene Biochemie (Kortisol, Dopamin, Serotonin)
-- DSLD (NIH) — Supplement-Daten (Adaptogene, Mikronährstoffe)
-
-**Bezug zu PNI**: HPA-Achse (Kortisol-Kurve), autonomes Nervensystem (Dopamin/Adenosin), Nährstoff-Timing (Glukose + Insulin → Tryptophan → Serotonin).
+Physio-Timeline und Substanzkatalog sind zusätzliche Bereiche. Sie dürfen den Kursablauf und die belegte Trainerrolle nicht überlagern. Wirkmodelle und externe Datenquellen brauchen eigene Belege und ersetzen keine Ausbildungsquelle.
 
 ## File Manifest
 
@@ -232,7 +218,8 @@ Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven glei
 - `package.json` — dependencies: React, Vite, Tailwind, lucide-react, reactflow, marked, @google/generative-ai
 - `vite.config.js` — Vite + proxy config
 - `CLAUDE.md` — This file
-- `HOT.md` — Open-source Datenquellen + Node-Module für Physio-Simulation
+- `VISION.md` — Produktziel und fachliche Leitplanken des Entspannungstrainer-Moduls
+- `NEXT.md` — Nächste Schritte für Kursabgleich, Nachweis und Akzeptanz
 
 ### Knowledge Base Data
 - `knowledge/substance.catalog.yaml` — 11 kuratierte Substanzen
@@ -270,12 +257,12 @@ Frontend: Physio-Timeline View → Event-Panel + @nivo/line Chart (3 Kurven glei
 
 ## Notes for Future Sessions
 
-- **PNI-Leitplanke**: Psychoneuroimmunologie ist der inhaltliche Rahmen. Kortisol, GABA, HPA-Achse, Vagaltonus, Entzündungs-Depression-Kaskade — alles hängt zusammen. Beim Erweitern des KB immer fragen: wie passt das ins PNI-Bild?
+- **Kursfidelität**: Bei Änderungen am Ausbildungsmodul zuerst `docs/ENTSPANNUNGSTRAINER-QUELLEN.md` und die referenzierten Original-PDFs prüfen. Lokale Notizen nicht als Originalskript ausgeben; fehlende Anleitungen nicht erfinden.
 - **Katalog-Status**: 11 Substances, 38 Molecules (inkl. Testosteron), 33 Interactions — kuratiert auf eigene Erfahrung. Neue Substanzen nur hinzufügen wenn tatsächlich genutzt.
 - **YAML editieren → Migration**: Nach manuellen YAML-Änderungen immer `node scripts/migrate-yaml-to-sqlite.mjs --force` ausführen, damit SQLite aktuell bleibt.
 - **Vault-Notes**: Obsidian-Vault `~/Vitaltrainer/` (Symlink auf `~/Dokumente/Vitaltrainer/`). `[[links]]` sind konsistenter als `#tags`. Vault-Files können KB-Frontmatter bekommen: `kb_key`, `category`, `formula`, `kb_interactions`.
 - **KB Enricher (Python)**: `server/knowledge/kb_enricher/` (Paket). Start: `python -m server.knowledge.kb_enricher serve`. Gemini REST direkt (kein SDK). `enriched_at IS NULL` = noch nicht angereichert. COALESCE-Semantik. 503-Retry (3x). Immer von relax-dev root aufrufen.
-- **Nächste Features**: Physio Timeline (PNI-Simulation). `HOT.md` enthält Datenquellen-Recherche.
+- **Nächste Features**: siehe `NEXT.md`; der Ausbildungsablauf hat Vorrang, zusätzliche Physio-/Katalogarbeit bleibt nachgeordnet.
 - **Keine UI-Framework-Creep**: Tailwind + CSS variables reicht. Nicht shadcn/MUI einführen.
 - **Gemini AI**: Optional für KB-Enrichment. Key in `~/.env/relax.env`. Pipeline schreibt in `molecule_details`, nie in kuratierte Index-Einträge.
 

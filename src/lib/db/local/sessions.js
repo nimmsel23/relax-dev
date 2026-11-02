@@ -20,9 +20,11 @@ export async function saveRelaxSession(date = localToday(), items = []) {
 }
 
 // Für die journal-dev Timeline-Aggregation (Journal zeigt alle Pillars).
-export async function getRelaxSessionHistory(n = 30) {
+export async function getRelaxSessionHistory(n = 30, before = null) {
   try {
-    const d = await api.get(`/session/history?limit=${n}`)
+    const params = new URLSearchParams({ limit: String(n) })
+    if (before) params.set('before', before)
+    const d = await api.get(`/session/history?${params.toString()}`)
     return d?.sessions || []
   } catch {
     return []

@@ -1,0 +1,138 @@
+# TODO — relax-dev
+
+## Aktive Zielsetzung
+
+- [ ] `relax-dev` als digitale Repräsentation des Entspannungstrainer-Moduls der Präventiven Vitaltrainer-Ausbildung weiterentwickeln.
+- [x] Ausbildungsinhalte und Trainerpraxis mit lokalen Ausbildungsnotizen abgleichen.
+- [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
+- [x] Die Fächerübersicht der Ausbildungs-MOC in der Modul-Startansicht mit direkten Einstiegen zu Grundlagen, Methoden, Atemschulung, Fallaufgabe, Planung und Praxisnachweis verknüpfen.
+- [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
+- [x] Methodenbeschreibungen gegen die vorhandenen Original-PDFs prüfen und belegte Seitenbereiche direkt auf den Methodenkarten sichtbar machen; unbelegte Anleitungen und Dauerangaben als solche kennzeichnen.
+- [x] Methodenbibliothek nach Namen, Schwerpunkten, Anleitungstexten und Kursquellen durchsuchbar machen.
+- [x] Methodenliste und lange Methodendetails bei 390×844 im Headless-Firefox visuell prüfen und Scrollleisten im Firefox-Thema angleichen.
+- [x] Methodenliste bei 320×640 prüfen und den App-Titel im Kopfbereich für sehr schmale Ansichten verkleinern.
+- [x] Vite- und PWA-Assetpfade relativ ausgeben, damit die Mini-App keinem Domain-Root-Pfad für Assets oder Offline-Fallback verpflichtet ist.
+- [x] `relax-devctl start/restart` nur als erfolgreich melden, wenn sowohl das User-Service aktiv ist als auch der Node-API-Endpunkt antwortet; ein bereits antwortender Listener auf :9123 darf keinen falschen Healthy-Status erzeugen.
+- [ ] Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; die Themenkarten bleiben Übersichten, konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
+- [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
+- [x] Die vollständigen AT-Kapitelthemen der Ausbildungs-MOC (Ursprung, Anwendungsbereiche, Wirkungsweisen, drei Stufen, Rahmenbedingungen und Übungsfelder) in Karte und Lerncheck abbilden, ohne Formeln oder Durchführungsschritte zu erfinden.
+- [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
+- [x] Die offizielle Kursbeschreibung des Präventiven Fitness- und Vitaltrainers für Mentales & autogenes Training abgleichen und Theorie/Praxis/Selbsterfahrung von einer nicht veröffentlichten Schrittfolge trennen.
+- [x] Die öffentlichen FlexyFit-Lernhinweise zu Lehrvideos, Übungsdemonstrationen, eigener Wiederholung und beobachteter Anleitung als ergänzenden Lernweg kenntlich machen, ohne sie mit den konkreten Kursanleitungen oder dem A-Lizenz-Praxisnachweis gleichzusetzen.
+- [x] Die öffentliche Kursinfo zum Präventiven Fitness- und Vitaltrainer (LWLL26-we-4a) mit Modulnummer, Lernformat und zwölf Unterrichtsfächern gegen den Kursindex abgleichen; Pflichtaufgabe und Praxisprotokoll als ergänzende Aufgaben kennzeichnen.
+- [x] Die zwölf Unterrichtsfächer im Kursindex optisch von Pflichtaufgabe und 30-Einheiten-Praxisprotokoll trennen, damit die Kursstruktur nicht wie ein dreizehntes Fach erscheint.
+- [x] Das Unterrichtsfach „Entspannungsmethoden – ein Überblick“ direkt mit der Methodenbibliothek, PMR, AT, Fantasiereise, Meditation und ergänzenden Kursmethoden verknüpfen.
+- [x] Die vollständige Ausbildungs-MOC unter `Dokumente/Dipl. Präventiver Vitaltrainer/00_MOCs` erneut mit den Methoden- und Grundlagenkarten abgleichen und „Achtsamkeitstraining und Meditationstechniken“ sowie „Stressmanagement durch mentales Training“ ausdrücklich als MOC-Themen markieren.
+- [x] Die Markdown-Konvertierungen zu den Kurs-PDFs und das separate Sportpsychologie-Skript auf zusätzliche Hinweise zu AT, Fantasiereisen und Meditation prüfen; fachübergreifende bloße Methodennennungen von fehlenden Ablaufanleitungen trennen.
+- [x] Kognitive Umstrukturierung als MOC-Thema mit den Coping-Ansätzen aus Stresstheorie S. 43 verknüpfen; die Übersicht ohne erfundene Technik oder Therapieanspruch halten.
+- [x] Das MOC-Thema „Stress im Beruf und Alltag“ gegen das Stresstheorie-PDF abgleichen und dessen einzelne Belege von fehlender Statistik-/Forschungsübersicht abgrenzen; einen aktuellen österreichischen Präsentismus-Indikator separat als externe Kontextquelle mit Erhebungsgrenzen ergänzen.
+- [x] Die gemeinsame Überschrift der Methodenkarten auf „Praxisrahmen“ präzisieren, damit quellengebundene Einordnungen ohne Schrittfolge nicht als konkrete Anleitungen erscheinen.
+- [x] Veraltete `UNKLARHEITEN.md`-Aussage zum Platzhalter-/Psychoneuroimmunologie-Konzept als historischen Stand kennzeichnen und von offenen Entscheidungen im aktuellen Ausbildungsmodul abgrenzen.
+- [x] Hinweis unter der Methodenliste mit allen vier Themenbereichen ohne vollständige Anleitung abgleichen.
+- [x] Google-Drive-Suche nach eigenständigen Mentaltraining-, AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
+- [x] Drive-Zweitsuche mit den konkreten Kursbegriffen AT-Grundstufe/Ruhetönung, Fantasiereisen-Rücknahme und Mentaltraining nach Eberspächer geprüft; MOC und Diplom-Notiz wiederholen Themen, enthalten aber keine spezifischen Ablaufanleitungen.
+- [x] Ältere lokale Kursarchiv-Sicherung per SHA-256 mit dem aktuellen FlexyFit-Archiv verglichen; anders benannte Dateien sind Kopien, keine zusätzlichen Methoden-Anleitungen.
+- [x] Persönliche Entspannungs-Sitzungsnotizen und die erweiterte Atemnotiz gegen Original-Kursquellen abgrenzen, damit eigene Praxis und unbelegte Erweiterungen nicht als FlexyFit-Anleitungen erscheinen.
+- [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
+- [x] Selbsterfahrung direkt an Methoden-Karten mit lokalem Reflexionsbogen erfassen und getrennt vom formalen 30-Einheiten-Nachweis halten.
+- [x] Lokale Ausbildungs- und Atemschulungs-Arbeitsblätter samt Timerstand als versionierte JSON-Sicherung exportieren und auf einem anderen Gerät mit Formatprüfung und ausdrücklicher Ersetzungsbestätigung wiederherstellen.
+- [x] Methodenreflexion um freiwillige, nicht-offizielle Fachgesprächs-/Praxisprobe ergänzen: erklären, praktisch zeigen und an Teilnehmende anpassen; fehlende Einschulung nicht als Kompetenz abhaken.
+- [x] Startansicht als durchgängigen Lernpfad von Grundlagen und Lerncheck bis Reflexion, Fallaufgabe, Stundenplanung und Praxisnachweis verknüpfen; die Abfolge als App-Orientierung statt offizielle Prüfungsreihenfolge kennzeichnen.
+- [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
+- [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
+- [x] Den Stundenentwurf einschließlich Zeitblöcken, Methodenbezug, Vorbereitung und Reflexion als Markdown exportieren.
+- [x] Die gewählte Schwerpunktmethode samt Anleitungshinweis, Anpassung und Kursquelle aus dem Stundenentwurf in den gespeicherten Durchführungs-Timer übernehmen.
+- [x] Nach bewusstem Timer-Abschluss einen unbestätigten Nachweis-Entwurf mit Datum und Schwerpunktmethode vorbereiten; Zählung weiterhin erst nach separater Selbstbestätigung.
+- [x] Vorhandene Tages-Sessions nach ausdrücklicher Selbstbestätigung in den Ausbildungsnachweis übernehmen; Export an 30-Zeilen-Vorlage anlehnen.
+- [x] Für den Ausbildungsnachweis die komplette Session-Historie rückwärts paginieren, damit ältere Einheiten und Übernahmekandidaten nicht nach einem 365-Tage-Fenster verschwinden.
+- [x] Im 30-Einheiten-Nachweis nur ausdrücklich bestätigte Einheiten zählen/drucken und ältere unbestätigte Einträge zur nachträglichen Prüfung anbieten; keine nicht belegte allgemeine Mindestdauer voraussetzen.
+- [x] Bei der nachträglichen Bestätigung älterer Sessions auch ID-lose Legacy-Einträge einzeln statt alle gleichartigen Tageszeilen gemeinsam markieren.
+- [x] Modulansicht vom Physio-/Catalog-Paket trennen, damit der Ausbildungsstart nur benötigte Ansichten lädt.
+- [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gegen die Original-PDFs prüfen und in der Methodenbibliothek sichtbar machen.
+- [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
+- [x] Lerncheck an die konkreten Anforderungen der offiziellen Vier-Wochen-Pflichtaufgabe (Ziele, Wochenroutine, Tageszyklus, Ernährungskapitel) anschließen.
+- [x] Lerncheck-Fortschritt lokal speichern und nach Modulwechsel oder erneutem Öffnen fortsetzen.
+- [x] Korrekte Antwortpositionen im Lerncheck deterministisch verteilen, damit die Lösung nicht aus einem wiederkehrenden Positionsmuster geraten werden kann.
+- [x] Lerncheck um quellgebundene Fragen zu Yoga, Pilates, den fünf Tibetern und der abweichenden PMR-Gruppenliste erweitern; fehlende Schrittfolgen bei Mentaltraining, AT und Fantasiereisen als Quellenkompetenz abfragen.
+- [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
+- [x] Die vorgegebenen Verdauungs- und Schlafbeschwerden im Fallarbeitsblatt als Anlass für gemeinsame Präventionsziele, ohne Heil-/Abnehmversprechen und mit Hinweis auf medizinische Abklärung bei anhaltenden Beschwerden, einordnen.
+- [x] Den Fallprompt um männliches Geschlecht, Unternehmenskontext und das im Aufgabenblatt genannte leichte Übergewicht vervollständigen; kein Abnehmziel daraus ableiten.
+- [x] Den freiwilligen Vier-Wochen-Selbstrückblick aus dem eigenen Konzeptentwurf ins Fallarbeitsblatt und dessen Export übernehmen; Skalenrichtung klarstellen und von Messung oder Diagnose abgrenzen.
+- [x] Die persönliche Kurzvariante für hektische Tage und den Vier-Wochen-Abschlussrückblick als optionale, exportierbare Felder der Fallaufgabe abbilden.
+- [x] Projektvision, aktive nächste Schritte und Agentenhinweise auf das Ausbildungsmodul als Produktziel ausrichten; Physiologie-/Katalogbereiche als unterstützende Zusatzbereiche einordnen.
+- [x] Vision, README und aktuelle NEXT-Liste an die Mentaltraining-Themenkarte und den vollständigen Planung-zu-Nachweis-Ablauf anpassen; ältere, nicht neu geprüfte NEXT-Notizen archivieren.
+- [x] Gemini-/Claude-Agentenkontext auf den Fachmodul-Fokus und pnpm ausrichten; den alten Physio-Agentenauftrag klar als historisch markieren.
+- [x] Die fünf Tibeter als eigenständige Bewegungsreihe aus dem offiziellen PMR-Kursskript mit Hauptbewegung, Positionen und Ausgleich erfassen und von der PMR-Technik unterscheiden; die Quell-Dosierung nicht als persönliche Trainingsvorgabe ausgeben.
+- [x] Die Vier-Ebenen-Systematik der Entspannungsverfahren aus dem Stresstheorie-Skript ergänzen und AT/Fantasiereisen als Übersichtsinhalte ohne konkrete Anleitung kennzeichnen.
+- [x] Die drei Verfahren der muskulären Ebene aus Stresstheorie S. 55 in Methodenliste und Lerncheck vollständig aufführen; fehlende Schrittfolgen transparent lassen.
+- [x] Suggestive Musik aus der emotionalen Ebene (Stresstheorie S. 55) als auswählbare Methode einordnen und von allgemeiner Musikplanung sowie einer fehlenden Schrittfolge abgrenzen.
+- [x] Stundenentwurf und Vorbereitungsliste an die offiziellen Anforderungen zu Raum, Gruppengröße, Privatsphäre, Freiwilligkeit, gemeinsamem Beginn/Ende und Abschlussgespräch angleichen.
+- [x] Assisted Stretching gegen das Original-PDF prüfen und Session-Dosierung, ROM-Check, Ablaufqualität, Feedback und Zustimmung bei Berührung in der Methodenkarte abbilden.
+- [x] Die im Assisted-Stretching-Kursheft auf S. 33 aufgeführten Kontraindikationen quellengetreu sichtbar machen und als keine individuelle oder vollständige medizinische Eignungsprüfung einordnen.
+- [x] Den separaten Abschnitt Faszientraining/SMR aus demselben PDF ergänzen und den knappen Umfang der verfügbaren Praxisanleitung kennzeichnen.
+- [x] Entspannungsbegriff aus dem Stresstheorie-Skript und das Ausdauer-Kursprofil mit Belastungsgefühl, Beispieldauern und individuellem Rahmen sichtbar machen.
+- [x] Die Unterscheidung zwischen relativer Entspannung und einem umfassenden Ruhezustand aus Stresstheorie S. 63 in der Grundlagenkarte kenntlich machen.
+- [x] Vollständiges Ausdauer-Kapitel (S. 4–24) quellenkritisch abbilden: Einsatz-/Wirkungsfelder, Kursrichtwerte und praktische Varianten als Lehrinhalte kennzeichnen.
+- [x] Ernährungs-Pflichtaufgabe um eine seitenbezogene Materialübersicht zu Essverhalten, Lebensmittelgruppen, Supplementen und Kräutern ergänzen; Gesundheitsversprechen und Einnahmeangaben als nicht verifizierte Kursinhalte abgrenzen.
+- [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.
+- [x] Das Skript „Entspannung & Wirbelsäule“ mit Schmerzverständnis, psychosozialem Kontext und psychologischer Bewältigung als Theorie sowie Körper-, Atemraum-, Bewegungs- und Standwahrnehmung in der Methodenbibliothek abbilden; Selbsttests und Medikamentenhinweise nicht als Traineranleitung ausgeben.
+- [x] Alle Wahrnehmungsübungen des Wirbelsäulen-Praxisteils einschließlich Wohlfühlkreis, Druckpunkte, Beckenuhr und Bewegungsfreude mit Seitenbezug erfassen; taktile Partnerübungen klar an freiwillige Zustimmung binden.
+- [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
+- [x] Das FlexyFit-PMR-Kursskript (S. 3–28) zusätzlich zur lokalen Handout-Langform abbilden: Methode, Vorbereitung, Kurszeiten, Gruppenabfolge, Rückführung und Nachexploration; abweichende 16-Schritte-Listen kennzeichnen.
+- [x] Die beiden im PMR-Original auf S. 5 aufgeführten Kontraindikationen quellengetreu sichtbar machen und als keine individuelle oder vollständige medizinische Eignungsprüfung einordnen.
+- [ ] Weitere methodenspezifische Abläufe für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
+- [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
+- [x] Leeren Praxisnachweis wie das einseitige A4-Original auf genau eine A4-Seite setzen; die 30 Zeilen, Datum/Beschreibung/Unterschrift und Freifeld für Handsignatur bleiben erhalten.
+- [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.
+- [x] Quellkritische Hinweise zu Lebensmitteln gegen Stress, Power-Food-Werbung und Nahrungsergänzung direkt am Ernährungsarbeitsblatt mit PDF-Seitenangaben sichtbar machen.
+- [x] Kursbasierte Atemübungen von ergänzenden App-Rhythmen unterscheiden und Bhramari/Sama Vritti mit Fundstelle im Atemschulungs-PDF markieren.
+- [x] Nicht kursbelegte PNI- und physiologische Wirkversprechen im Atemtrainer entfernen; Rhythmus als Übungsvorgabe ohne Mess- oder Wirkungszusage kennzeichnen.
+- [x] Unbelegte „fünf Minuten, zwei- bis dreimal täglich“-Dosierung aus dem Atemtrainer entfernt; S. 48 des Original-PDFs nennt Atemwahrnehmung und Vorbereitung eines eigenen Anleitungstextes, aber keine Frequenz oder Dauer.
+- [x] Dauer-Richtwerte aus der separaten lokalen Kursprotokollnotiz wieder eingebunden und von PDF-Angaben getrennt; fehlende Schritt-für-Schritt-Anleitungen für Mentaltraining, AT, Fantasiereisen und Meditation bleiben kenntlich.
+- [x] Kursquellen, Seitenbereiche, App-Abbildungen und Grenzen der nicht mitgelieferten bzw. fehlenden Anleitungen in einer Quellenmatrix zusammengeführt.
+- [x] Schreibaufgabe zur Bauchatmung aus Atemschulung S. 48 als lokal gespeichertes Arbeitsfeld mit Markdown-Export im Atemtrainer abbilden.
+- [x] Die persönliche Selbstreflexion aus Stresstheorie S. 32–44 als freiwilliges, lokal gespeichertes SORKC-Arbeitsblatt mit Markdown-Export abbilden und die Modellbegriffe am Kursskript ausrichten.
+- [x] Die Kursinhalte zu Stressmessung, LCU-Grenze und Biofeedback aus Stresstheorie S. 45–47 als Theorie mit Trainergrenze und passender Lerncheck-Frage abbilden.
+- [x] Biofeedback aus Stresstheorie S. 47 zusätzlich als quellengebundene Methodenkarte mit Geräte-, Mess- und Wirkungsgrenzen auffindbar machen.
+- [x] Stressansätze (reaktions-, reiz-, persönlichkeits-, transaktions-, ressourcen- und biopsychosozial) sowie die Kursübersicht zu vegetativem Nervensystem/Hormonen und Entspannungswirkungen/EEG mit Fundstellen und Messgrenzen darstellen.
+- [x] Yoga-Einleitung und Asana-Ausführungsgrundsätze sowie alle 22 Haltungen/Bewegungsformen des Originalskripts mit Seitenverweisen in der Methodenkarte aufführen; ausgewählte Beispiele nicht länger als vollständigen Kursumfang erscheinen lassen.
+- [x] Pilates-Kategorien mit den 19 Übungsnamen und Seitenbereichen der Originalsammlung (S. 17–97) verknüpfen, ohne fehlende Kategorienzuordnungen zu erfinden.
+- [x] Pilates-Konzeptbegriffe und Atem-/Haltungscues aus dem Original (S. 8–15) mit Fundstellen ergänzen und als Quellbegriffe statt universeller Bewegungsvorgaben einordnen.
+- [x] Die Listen zu „Soforthilfe“, langfristiger Prävention und unterstützenden Maßnahmen aus Stresstheorie S. 51–58 in der Grundlagenansicht darstellen und fehlende konkrete Anleitungen transparent lassen.
+- [x] Selbsthypnose aus Stresstheorie S. 52 in der Methodenliste und im Lerncheck als Kursverweis ohne Anleitung oder individuelle Wirkungsempfehlung abbilden.
+- [x] Die weiteren unterstützenden Maßnahmen aus Stresstheorie S. 58 im Stunden-/Praxisprotokoll auswählbar machen und bei Sammelauswahl die konkrete durchgeführte Praxis erfassen.
+- [x] Bei Sammelauswahl im Praxisnachweis die konkrete unterstützende Praxis verpflichtend abfragen.
+- [x] Stundenplanung um Trainerhaltung und Teamkommunikation, optionale Musik, Wiederholung, Demonstration sowie den Puls-/Zeit-Richtwert für kombinierte Kurse erweitern.
+- [x] Das Anfangsritual aus Stundenplanung S. 22 im Stundenentwurf konkretisieren: bewusste Teilnahmeentscheidung, passende Position und Innenwendung der Aufmerksamkeit; Augenschluss als optionale Möglichkeit.
+- [x] Die noch fehlenden Grundlagen zur Atemmechanik aus Atemschulung S. 9–14 und die Einstiegsfrage der Kursdiskussion auf S. 4 im Atemtrainer abbilden.
+- [x] Die Pranayama-Gruppenaufgabe aus Atemschulung S. 38–39 als lokal speicherbaren und exportierbaren Ablauf von Übungsauswahl über Textvorbereitung und Sprechprobe bis Gruppenanleitung/Feedback abbilden; holotropes Atmen und Qigong als Theorieexkurse ohne Praxisanleitung einordnen.
+- [x] Atemmechanik über die Brust-/Bauchatmung hinaus um Ein-/Ausatmungsmechanik, Kehlkopf und Zwerchfell aus Atemschulung S. 15–20, 24–27 ergänzen; forcierte Atembewegungen nicht als Anleitung darstellen.
+- [x] Die Rücknahme für AT und Fantasiereisen nach Stundenplanung S. 12 mit dem Kursbeispiel eines wiederkehrenden Aktivierungsrituals sowie das Abschlussgespräch nach S. 13 direkt in den Methodenansichten abbilden, ohne eine fehlende Übungsanleitung zu erfinden.
+- [x] Die Vorbereitungsliste um die konkreten Rahmenbedingungen aus Stundenplanung S. 11, 16 und 19 ergänzen: Musik-/Naturgeräusch-Auswahl, Schutz vor Vorraumlärm und Anforderungen an größere Gruppen.
+- [x] Essverhalten bei Stress aus Ernährung S. 14–24 um Stress-Essen/-Hungern, den im Skript berichteten Situationswechsel und die Warnung vor pauschaler Abwertung/Ermahnung ergänzen, ohne daraus Diagnosetypen zu machen.
+- [x] Die Grundempfehlungen Ernährung S. 25–38 mit konkreten Skriptthemen und dem explizit als Kursrichtwert gekennzeichneten Trinkmengenbeispiel auffindbar machen.
+- [x] Den Lerncheck um quellengebundene Fragen zu Lebensmittelversprechen gegen Stress und Nahrungsergänzung aus dem Ernährungsskript erweitern.
+- [x] Im Lerncheck die trainerische Einordnung der im Skript beschriebenen Stress-Ess-/Stress-Hunger-Muster aus S. 19–24 prüfen.
+- [x] Den im Ernährungsskript berichteten Situationswechsel im Essverhalten als Studienbefund, nicht als feste Personenregel, im Lerncheck abbilden.
+- [x] Die bisher ausgelassenen Stressgrundlagen aus Entspannung und Ernährung S. 4–12 (Anpassungsreaktion, drei Phasen, beschriebene Folgen und Gegenmaßnahmen) in der Kursübersicht einordnen.
+- [x] Die bislang zu knappe Brain-/Power-Food-Übersicht um Yamswurzel, weitere Power-Food-Beispiele und den Abschnitt zu sekundären Pflanzenstoffen (Ernährung S. 39–69) mit kritischer Kennzeichnung der Wirkversprechen ergänzen.
+- [x] Soul Food (S. 70–83) um Capsaicin/scharfe Lebensmittel und Moodfood sowie den bisher übergangenen Abschnitt Ernährung und Depression (S. 84) ergänzen; Stimmungs- und Gesundheitsbehauptungen als Kursinhalt einordnen.
+- [x] Naturheilmittel S. 90–104 mit dem vollständigen Kräuterinventar und Johanniskraut-Wechselwirkungshinweis sowie die beiden Kräuterteemischungen S. 106–107 als Quellenstoff sichtbar machen, ohne Dosierungs- oder Einnahmeempfehlung auszugeben.
+- [x] Das Wirbelsäulen-Skript bis zum tatsächlichen Ende des Bewegungsfreude-Kapitels (S. 39) abgleichen, die fehlenden Kursmethoden ergänzen und die verrutschten Seitenbezüge bei Beckenuhr/Druckpunkten korrigieren.
+- [x] Das Ausdauer-PDF bis zu den Inhaltsseiten S. 26 abgleichen und die fehlenden Natur-/Bewegungspark-Beispiele sowie Flow als nicht garantiertes Erleben ergänzen.
+- [x] Quellenbereich der Ausdauer-Methodenkarte auf S. 4–26 angleichen und Trailrunning sowie die Inhalte von S. 23–25 präziser aufführen.
+- [x] Stresstheorie S. 5–13 um Stressor/Reaktion/Erleben und das Steinzeit-/Moderner-Mensch-Reaktionsschema als begrenztes Lehrmodell ergänzen.
+- [x] SORK-Lerncheck und Reflexionshilfe an der Schemafolie (S/O/R/K) ausrichten und die uneinheitliche spätere K-/C-Notation des Skripts kenntlich machen.
+- [x] Übernahme laufender Alt-Sessions im Praxisnachweis auch für ID-lose Zeilen eindeutig sperren und identifizieren.
+- [x] Abweichende Einordnungen der lokalen Master-MOC zu Autogenem Training und Pilates gegenüber den konkreten Original-PDFs an den Lernkarten und im Quellenabgleich kennzeichnen, einschließlich Pilates-Kategorien und Übungszählung.
+- [x] Metazeile des Durchführungs-Timers bei 320 Pixeln verkleinern, damit die Abschnittsanzahl nicht als einzelne Ziffer umbricht.
+- [x] Die Bildgegenüberstellung Stress/Entspannung aus Stresstheorie S. 66 in der Grundlagenansicht darstellen, ohne die unbeschrifteten Pfeile als physiologische Messwerte auszulegen.
+- [x] Die bebilderten Flexibilitätstrainingsseiten Assisted Stretching S. 18–28 in der Methodenkarte ausweisen und die vorbereitende Gegenbewegung S. 41 aufnehmen, ohne nicht beschriftete Zeichnungen mit erfundenen Übungsnamen zu versehen.
+- [x] Die Pilates-Bildtafeln zu funktionell wichtigen Körpersegmenten (S. 22–23) in Quellenmatrix und Methodenansicht ergänzen, ohne sie als zusätzliche Bewegungsabläufe zu interpretieren.
+- [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.
+- [x] Hauptnavigation mit URL-Hash und Browser-Zurück synchronisieren, sodass der Modul-Tab direkt verlinkbar ist und die hashlose Route wieder zum Standard-Einstieg führt.
+- [x] Ausbildungsabschnitte und einzelne Methodenkarten ebenfalls in URL und Browser-Verlauf abbilden, einschließlich direkter Links und Wiederherstellung bei Zurück/Vor.
+- [x] Shell-Routing bei Ausbildungs-Deep-Links anhand des ersten Hash-Segments auf den Tab „Modul“ auflösen.
+- [x] Durchführungs-Timer gegen gedrosselte Hintergrund-Ticks absichern, indem die Restzeit aus einer absoluten Endzeit berechnet wird.
+- [x] Timerstand lokal bewahren und nach Modulwechsel oder App-Neustart anhand der Endzeit wiederherstellen, statt den laufenden Stundenentwurf zu verlieren.
+- [x] Browser-Titel, PWA-/Homescreen-Name, Beschreibung und Repository-Kurztext auf das Entspannungstrainer-Ausbildungsmodul ausrichten.

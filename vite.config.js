@@ -6,9 +6,10 @@ import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const BACKEND = 'http://localhost:9123'
+const BACKEND = 'http://127.0.0.1:9150'
 
 export default defineConfig({
+  base: './',
   resolve: {
     alias: {
       // Standalone-Default (:9123-Backend). Im vitalos-Firebase-Build biegt
@@ -16,7 +17,7 @@ export default defineConfig({
       '@db': resolve(__dirname, 'src/lib/db/index.js'),
     },
   },
-  plugins: [vosChangelog({ appId: 'relax', appName: 'Relax', accent: '#fb923c' }),
+  plugins: [vosChangelog({ appId: 'relax', appName: 'Entspannungstrainer', accent: '#fb923c' }),
     {
       name: 'relax-strip-dev-entry-from-build-html',
       apply: 'build',
@@ -40,29 +41,30 @@ export default defineConfig({
     // PWA nach dem habits-Muster: workbox precached mit Content-Hashes,
     // ersetzt public/sw.js (relax-v2, manuell versioniert → archive/).
     VitePWA({
-      base: '/',
-      scope: '/',
+      base: './',
+      scope: './',
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       manifest: {
-        name: 'Relax — VitalOS',
-        short_name: 'Relax',
-        description: 'Entspannung, Sessions, Journal, PNI-Wissen',
+        name: 'Entspannungstrainer — Präventiver Vitaltrainer',
+        short_name: 'Entspannung',
+        description: 'Lern- und Praxisbegleiter für das Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung.',
+        lang: 'de',
         theme_color: '#1e1e2e',
         background_color: '#1e1e2e',
         display: 'standalone',
-        start_url: '/',
-        scope: '/',
+        start_url: './',
+        scope: './',
         icons: [
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: './icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: './icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+          { src: './icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        navigateFallback: '/index.html',
+        navigateFallback: './index.html',
         navigateFallbackDenylist: [/^\/api/, /^\/session/, /^\/journal/, /^\/stats/, /^\/techniques/, /^\/export/, /^\/theme/, /^\/health/],
       },
     }),
@@ -70,14 +72,14 @@ export default defineConfig({
   server: {
     port: 5903,
     proxy: {
-      '/api': BACKEND,
-      '/session':   BACKEND,
-      '/journal':   BACKEND,
-      '/stats':     BACKEND,
-      '/techniques': BACKEND,
-      '/export':    BACKEND,
-      '/theme':     BACKEND,
-      '/health':    BACKEND,
+      '/api': { target: BACKEND, rewrite: (path) => '/api/relax' + path },
+      '/session':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/journal':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/stats':     { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/techniques': { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/export':    { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/theme':     { target: BACKEND, rewrite: (path) => '/relax-api' + path },
+      '/health':    { target: BACKEND, rewrite: (path) => '/relax-api' + path },
     }
   },
   build: {

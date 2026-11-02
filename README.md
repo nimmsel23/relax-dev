@@ -1,6 +1,6 @@
-# relax-dev — Entspannungstrainer + Physiologie-Simulator
+# relax-dev — Entspannungstrainer-Modul
 
-**Standalone-App** für Entspannungstechniken, Physiologie-Tracking und Substanz-Interactions.
+**Lern- und Praxis-App** für das Entspannungstrainer-Fachmodul der Präventiven Vitaltrainer-Ausbildung. Der Modul-Tab führt durch Ausbildungsgrundlagen, Methoden, Stundenplanung, Fallaufgabe und Praxisnachweis.
 
 Kombination aus:
 - React 18 + Vite (UI, `:5904`)
@@ -51,6 +51,28 @@ Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `da
 
 ## Features
 
+### Ausbildungsbereich Entspannungstrainer
+Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fachmoduls ab:
+- Grundlagen zu Stressmodellen, Ressourcen, Körperreaktionen, Bewegung, Ernährung und Wirbelsäulen-Wahrnehmung
+- interaktiver Lerncheck mit Rückmeldung und Quellenhinweis zur lokalen Ausbildungsnotiz
+- didaktische Leitlinien und Präventionsrolle aus den Ausbildungsnotizen
+- Methodenorientierung zu Atemschulung, PMR, Mentaltraining-Themen, Autogenem Training, Phantasiereisen, Yoga-Asanas, den acht Pilates-Bewegungskategorien, Stretching, Meditation und entspannungsorientierter Ausdauer
+- lokale Selbsterfahrung und freiwillige Fachgesprächs-/Praxis-Selbstchecks an jeder Methodenkarte; sie zählen nicht als formaler Ausbildungsnachweis
+- anpassbarer Stundenentwurf mit Vorbereitungscheckliste, Ankommen, Einschulung, Hauptteil, Nachspüren, Rücknahme und anschließender Reflexion
+- Durchführungsansicht mit pausierbarem Abschnitts-Timer, angezeigter Schwerpunktmethode und unbestätigtem Übergang zum Nachweis; Trainer:innen steuern die Übergänge selbst und bestätigen die Praxis separat
+- 30-Einheiten-Praxisnachweis im bestehenden Relax-Speicher; bisherige Sessions können nach persönlicher Bestätigung übernommen und als 30-Zeilen-CSV exportiert werden. Eine Dauer ist im offiziellen Formular nicht vorgeschrieben; die App-Dauerangabe ist optional.
+
+Die Kernnavigation ist auf Heute, Modul, Praxis und Atem ausgerichtet. Journal, Stats, Physio, Catalog und Einstellungen liegen unter **Mehr**.
+Der aktive Bereich steht im URL-Hash; direkte Links, Neuladen und Browser-Zurück bleiben mit der Navigation synchron. Ausbildungsabschnitte sind unter `#ausbildung/<abschnitt>` erreichbar, Methodenkarten unter `#ausbildung/methoden/<methodenname>`.
+
+Die Ansichten werden bei Bedarf separat geladen. So starten Modul und Atem ohne React-Flow- und Physiologie-Ansichten im Hauptpaket; die PWA hält weiterhin alle App-Bereiche offline verfügbar.
+
+Das Tagesprotokoll für Stimmung und Entspannungszeit bleibt vom formalen Ausbildungsnachweis getrennt. Die Methodenansicht führt zur Atemübung oder übernimmt die gewählte Methode in den Nachweis.
+
+Die konkreten Kursanleitungen für Methoden, deren Ablauf nicht in den Ausbildungsnotizen enthalten ist, müssen weiterhin aus dem Original-Kursmaterial übernommen werden. Das betrifft im geprüften Archiv Mentaltraining, Autogenes Training, Fantasiereisen und Meditation.
+
+Die Zuordnung der lokalen PDF-Quellen und Kursnotizen zu den App-Bereichen ist im [Quellenabgleich](./docs/ENTSPANNUNGSTRAINER-QUELLEN.md) dokumentiert.
+
 ### 1. **Session Tracking** 📋
 Log relaxation techniques with timing and mood.
 - `/session` endpoint
@@ -62,8 +84,8 @@ Free-form markdown entries per day.
 - `/journal` endpoint
 - Stored as `data/journal/YYYY-MM-DD.md`
 
-### 3. **Physio Timeline (RELAX-002)** 🧠
-Deterministic physiological simulation of cortisol, dopamine, glucose curves.
+### Zusatzbereiche: Physio Timeline und Knowledge Base
+Diese vorhandenen Ansichten ergänzen das Ausbildungsmodul. Simulationen und Katalogeinträge sind app-interne Modelle bzw. Daten und keine individuelle physiologische Messung, Diagnose oder Trainings-/Gesundheitsempfehlung.
 - Add events (coffee, meals, nicotine, THC) with timestamps
 - Set conditions (fasted, sleep debt, stress level, circadian phase)
 - Run simulation → view real-time hormone curves
@@ -163,7 +185,7 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 ### Sessions
 - `GET /session?date=YYYY-MM-DD` — Fetch session
 - `POST /session` — Save session
-- `GET /session/history?limit=10` — Last N sessions
+  - `GET /session/history?limit=10&before=YYYY-MM-DD` — Sessions before an optional date cursor (exclusive), newest first; request earlier pages with the last returned date
 - `GET /session/latest` — Most recent session
 
 ### Journal
@@ -198,9 +220,9 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 | Dokument | Inhalt |
 |----------|--------|
 | **[ARCHITECTURE.md](./ARCHITECTURE.md)** | KB-Struktur, AI-Enrichment, Simulation Engine, Data Flow |
-| **[VISION.md](./VISION.md)** | Warum dieses Projekt existiert — Philosophie, Richtung, offene Fragen |
+| **[VISION.md](./VISION.md)** | Produktziel, Ausbildungsweg und fachliche Leitplanken des Moduls |
 | **[HOT.md](./HOT.md)** | Open Source Biochemie-DBs + nützliche Node Module |
-| **[AGENTS-11-05-2026.md](./AGENTS-11-05-2026.md)** | Physio Timeline Spec + Agent-Workflow |
+| **[AGENTS-11-05-2026.md](./AGENTS-11-05-2026.md)** | Historische Physio-Timeline-Spezifikation (nicht aktive Repo-Anweisung) |
 | **[UNKLARHEITEN.md](./UNKLARHEITEN.md)** | Offene Design-Fragen (Mood-Skalen, Sleep, Export) |
 | **[OFFEN.md](./OFFEN.md)** | Technische Offene Punkte |
 
@@ -238,7 +260,7 @@ curl -X POST http://localhost:9123/api/physio/simulate \
 ## Production
 
 ```bash
-npm run build          # Create dist/
+pnpm run build         # Create dist/
 node server.mjs        # Serve dist/ + API
 ```
 

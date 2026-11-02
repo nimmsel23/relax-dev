@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 
 # --- Configuration ---
-RELAX_KB_DIR = Path("/home/alpha/relax-dev/knowledge")
+RELAX_KB_DIR = Path("/home/alpha/dev/relax-dev/knowledge")
 
 def load_kb():
     kb = {}

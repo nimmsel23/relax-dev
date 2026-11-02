@@ -14,7 +14,7 @@ test("jedes Muster hat gültige Kategorie, Phasen und eindeutige id", () => {
       assert.ok(ph.s > 0, `${p.id}: Phase ohne Dauer`);
       assert.ok(ph.to >= 0 && ph.to <= 1, `${p.id}: to außerhalb 0..1`);
     }
-    assert.ok(p.technique && p.pni && p.how, `${p.id}: Pflichttexte`);
+    assert.ok(p.technique && p.desc && p.how, `${p.id}: Pflichttexte`);
   }
   for (const c of CATEGORIES) assert.ok(PATTERNS.some((p) => p.category === c.id), `${c.id} leer`);
 });

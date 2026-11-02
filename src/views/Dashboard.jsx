@@ -48,7 +48,7 @@ export default function Dashboard({ onNavigate }) {
             <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Heute</div>
             <div className="mt-1 text-3xl font-black tracking-tight">{todayMinutes} min</div>
             <div className="text-sm mt-1" style={{ color: 'var(--muted)' }}>
-              Ziel: täglicher Reset (5–20 Minuten) für Ausbildung/Prüfung.
+              Deine persönliche Entspannungszeit. Der 30-Einheiten-Nachweis wird separat im Modul geführt.
             </div>
           </div>
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center border"
@@ -57,6 +57,11 @@ export default function Dashboard({ onNavigate }) {
           </div>
         </div>
       </div>
+
+      <button onClick={() => onNavigate?.('ausbildung')} className="w-full rounded-2xl border p-4 text-left" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
+        <div className="text-sm font-bold" style={{ color: 'var(--accent)' }}>Entspannungstrainer-Modul öffnen →</div>
+        <div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Grundlagen lernen, eine Stunde planen und den Ausbildungsnachweis ansehen.</div>
+      </button>
 
       <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
         <div className="flex items-center justify-between gap-3 mb-3">

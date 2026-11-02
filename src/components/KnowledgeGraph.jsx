@@ -1,3 +1,4 @@
+import { api } from '../api'
 import { useEffect, useState, useCallback } from 'react'
 import ReactFlow, {
   Controls,
@@ -414,7 +415,7 @@ export default function KnowledgeGraph({ query }) {
     setMode('overview')
     setFocusKey(null)
     try {
-      const res = await fetch('/api/knowledge/substances')
+      const res = await api.fetch('/api/knowledge/substances')
       const data = await res.json()
       const entries = Object.entries(data.substances || {})
       const cols = 4
@@ -443,7 +444,7 @@ export default function KnowledgeGraph({ query }) {
     setMode('expanded')
     setFocusKey(null)
     try {
-      const res = await fetch(`/api/knowledge/expand?q=${encodeURIComponent(q)}`)
+      const res = await api.fetch(`/api/knowledge/expand?q=${encodeURIComponent(q)}`)
       const data = await res.json()
       if (!data.ok || !data.data) {
         setError(data.suggestion || `"${q}" nicht gefunden`)
@@ -466,7 +467,7 @@ export default function KnowledgeGraph({ query }) {
     setMode('hub')
     setFocusKey(null)
     try {
-      const res = await fetch(`/api/knowledge/hub/${encodeURIComponent(molKey)}`)
+      const res = await api.fetch(`/api/knowledge/hub/${encodeURIComponent(molKey)}`)
       const data = await res.json()
       if (!data.ok) {
         setError(`Kein Hub für "${molKey}"`)
@@ -489,7 +490,7 @@ export default function KnowledgeGraph({ query }) {
     setMode('network')
     setFocusKey(initialFocus)
     try {
-      const res = await fetch('/api/knowledge/network')
+      const res = await api.fetch('/api/knowledge/network')
       const data = await res.json()
       if (!data.ok) { setError('Netzwerk konnte nicht geladen werden'); return }
       setNetworkData(data)

@@ -185,6 +185,8 @@ app.post("/session", (req, reply) => {
     mood_before: clamp(Number(it.mood_before) || 3, 1, 5),
     mood_after: clamp(Number(it.mood_after) || 3, 1, 5),
     note: String(it.note || "").slice(0, 2000),
+    trainingUnit: it.trainingUnit === true,
+    signed: it.signed === true,
   }));
   writeJson(file, { date, items, saved_at: new Date().toISOString() });
   firestoreSync(date);
@@ -193,8 +195,9 @@ app.post("/session", (req, reply) => {
 
 app.get("/session/history", (req, reply) => {
   const limit = clamp(Number(req.query.limit || 10), 1, 365);
+  const before = typeof req.query.before === "string" ? req.query.before : null;
   const dir = path.join(DATA_DIR, "sessions");
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort().reverse().slice(0, limit);
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".json") && (!before || f.replace(".json", "") < before)).sort().reverse().slice(0, limit);
   const sessions = files.map((f) => ({ date: f.replace(".json", ""), ...readJson(path.join(dir, f)) }));
   return reply.send({ ok: true, sessions });
 });
