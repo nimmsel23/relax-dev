@@ -720,3 +720,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Jede unbestätigte Session erhält für die Listenzeile einen stabilen Schlüssel aus Datum und ID beziehungsweise Originalindex.
 - Während eine ID-lose Zeile gespeichert wird, ist nur deren Schaltfläche gesperrt; benachbarte Zeilen bleiben einzeln bedienbar.
+
+# Master-MOC-Abweichungen an Originalskripten kenntlich gemacht (2026-11-02)
+
+- Die Master-MOC ordnet Autogenes Training der muskulären Ebene zu; das Stresstheorie-PDF nennt es auf S. 55 unter vegetativ. App-Karte und Lerncheck folgen dem PDF und weisen auf die MOC-Abweichung hin.
+- Die Master-MOC bündelt Pilates in sechs Gruppen; das Original-PDF trennt acht Kategorien. Methodenkarte und Quellenmatrix erklären die unterschiedliche Gruppierung.
