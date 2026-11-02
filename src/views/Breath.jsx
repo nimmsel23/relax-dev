@@ -165,6 +165,9 @@ export default function Breath() {
         <p className="text-xs" style={{ color: 'var(--dim)' }}>
           Hyperventilation und Atemanhalten (z. B. Wim-Hof- oder holotropes Atmen) sind hier bewusst keine Entspannungsübungen. Bei Unwohlsein zur natürlichen Atmung zurückkehren.
         </p>
+        <p className="text-xs" style={{ color: 'var(--dim)' }}>
+          Kursübungen aus „Atemschulung“: Bauchatmung wahrnehmen (S. 48), Bhramari und Sama Vritti (S. 38). Die übrigen geführten Atemrhythmen sind ergänzende App-Übungen, keine Vorgaben des Ausbildungsskripts.
+        </p>
       </section>
 
       {result && (
@@ -242,6 +245,7 @@ export default function Breath() {
                   <div className="font-bold">{p.name}</div>
                   <div className="text-xs font-semibold tabular-nums" style={{ color: 'var(--muted)' }}>{p.ratio}</div>
                 </div>
+                <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: p.courseReference ? 'var(--accent)' : 'var(--dim)' }}>{p.courseReference ? `Kursübung · ${p.courseReference}` : 'Zusatzübung · nicht als Kursvorgabe aufgeführt'}</div>
                 <PhaseBar pattern={p} />
                 {!open && <div className="text-sm" style={{ color: 'var(--muted)' }}>{p.desc}</div>}
               </button>

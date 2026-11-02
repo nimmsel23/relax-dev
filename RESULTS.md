@@ -246,3 +246,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Das Arbeitsblatt weist jetzt auf die Aussagen des Originalskripts hin: kein einzelnes Lebensmittel reduziert nach Skript direkt Stress (S. 27), Power-Food-Versprechen werden kritisch besprochen (S. 53–55), und Nahrungsergänzung ist bei gesunden Menschen mit gesunder Ernährung laut Skript in der Regel nicht erforderlich (S. 85–86).
 - Die Notiz lenkt zu ausgewogener, alltagstauglicher Auswahl und grenzt individuelle Dosierung oder Therapie weiterhin aus.
+
+## 2026-11-02 — Kursübungen im Atemtrainer gekennzeichnet
+
+- Bhramari und Sama Vritti sind im Atemtrainer jetzt nach dem Atemschulungs-PDF (S. 38) benannt und mit Fundstelle markiert.
+- Die Bauchatmung wird als eigene Kursübung (S. 48) ohne festes Atemtempo benannt; andere Timer-Muster sind als Zusatzübungen statt als Ausbildungsvorgaben gekennzeichnet.
