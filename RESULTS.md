@@ -543,3 +543,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Session-Historie kann über einen exklusiven `before`-Datums-Cursor rückwärts paginiert werden (Firestore und lokale Server).
 - Der Ausbildungsnachweis lädt die Seiten vollständig, sodass ältere bestätigte Einheiten und noch zu prüfende Praxislogs auch bei langen Ausbildungsverläufen sichtbar bleiben. Der Drucknachweis bleibt bei seinen 30 Formularzeilen.
 - API-Vertrag dokumentiert; Vite-Produktionsbuild erfolgreich und `git diff --check` sauber.
+# Fallaufgabe um konkrete Präventionsgrenze ergänzt (2026-11-02)
+
+- Direkt am Fallarbeitsblatt wird klargestellt, dass Verdauungs- und Schlafbeschwerden keine Diagnose darstellen und die Fallbeschreibung kein Gespräch mit der Person ersetzt.
+- Die Aufgabe lenkt auf gemeinsam formulierte Wohlbefindensziele ohne Heil- oder Abnehmversprechen und nennt medizinische Abklärung bei anhaltenden oder zunehmenden Beschwerden.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.

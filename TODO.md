@@ -19,6 +19,7 @@
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gegen die Original-PDFs prüfen und in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
 - [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
+- [x] Die vorgegebenen Verdauungs- und Schlafbeschwerden im Fallarbeitsblatt als Anlass für gemeinsame Präventionsziele, ohne Heil-/Abnehmversprechen und mit Hinweis auf medizinische Abklärung bei anhaltenden Beschwerden, einordnen.
 - [x] Die fünf Tibeter als eigenständige Bewegungsreihe aus dem offiziellen PMR-Kursskript mit Hauptbewegung, Positionen und Ausgleich erfassen und von der PMR-Technik unterscheiden; die Quell-Dosierung nicht als persönliche Trainingsvorgabe ausgeben.
 - [x] Die Vier-Ebenen-Systematik der Entspannungsverfahren aus dem Stresstheorie-Skript ergänzen und AT/Fantasiereisen als Übersichtsinhalte ohne konkrete Anleitung kennzeichnen.
 - [x] Die drei Verfahren der muskulären Ebene aus Stresstheorie S. 55 in Methodenliste und Lerncheck vollständig aufführen; fehlende Schrittfolgen transparent lassen.
