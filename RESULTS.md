@@ -710,3 +710,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Bei 320×640 waren App-Titel und Zeitplan-Schaltfläche optisch zu eng. Der App-Titel nutzt unter 640 Pixeln jetzt eine kleinere Schrift.
 - Der erneute Firefox-Screenshot zeigt Abstand zwischen Titel und Schaltfläche; Methodenliste, Suche und Abschnittsnavigation bleiben erreichbar.
+
+# SORK-Notation an die Kursquelle angepasst (2026-11-02)
+
+- Der Lerncheck fragt die eindeutige S/O/R/K-Zuordnung der Schemafolie ab und erklärt separat, dass Coping später als C erscheint.
+- Die Reflexionshilfe kennzeichnet die widersprüchliche Überschrift „K und C“ im Konsequenzen-Abschnitt und erklärt, dass Folgen und Coping in der App praktisch getrennt werden.
