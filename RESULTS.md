@@ -820,3 +820,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die aktuelle Master-MOC nennt in diesem Fach Ursachen und Folgen von Stress im privaten/beruflichen Umfeld sowie internationale Forschungsbezüge und nationale Trends.
 - Im 70-seitigen Stresstheorie-PDF gegengeprüft: WHO-Hinweis (S. 4), Unternehmerbefragung zum Stressverständnis (S. 6), Life-Event-Forschung/Daily Hassles (S. 25), Arbeitsplatzstressoren (S. 38) und chronische/gesellschaftliche Folgen (S. 43). Eine aktuelle nationale Statistikübersicht oder systematische internationale Forschungszusammenfassung liegt dort nicht vor.
 - Grundlagenansicht, Kursindex, Lerncheck, Quellenmatrix und TODO zeigen jetzt diese MOC/PDF-Grenze; es wurden keine unreferenzierten Kennzahlen ergänzt.
+# Österreichischen Arbeitskontext quellgetrennt ergänzt (2026-11-02)
+
+- Die Grundlagenkarte führt nun 65 % Präsentismus laut AK-Arbeitsklima-Index 2025 an: unselbständig Beschäftigte, die im letzten Halbjahr mindestens einmal trotz gesundheitlicher Einschränkung arbeiteten.
+- Die Kennzahl ist ausdrücklich als selbstberichteter Kontextindikator und nicht als Stressprävalenz oder FlexyFit-Kursinhalt gekennzeichnet. Erhebungsbasen (Trend n = 44.096; Branchenvergleich 2025 n = 4.179) und direkte Quellenverknüpfung stehen dabei.
+- Quellenmatrix und TODO führen die externe Ergänzung mit denselben Abgrenzungen.
