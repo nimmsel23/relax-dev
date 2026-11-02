@@ -17,6 +17,7 @@
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
 - [x] Die vollständigen AT-Kapitelthemen der Ausbildungs-MOC (Ursprung, Anwendungsbereiche, Wirkungsweisen, drei Stufen, Rahmenbedingungen und Übungsfelder) in Karte und Lerncheck abbilden, ohne Formeln oder Durchführungsschritte zu erfinden.
 - [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
+- [x] Die offizielle Kursbeschreibung des Präventiven Fitness- und Vitaltrainers für Mentales & autogenes Training abgleichen und Theorie/Praxis/Selbsterfahrung von einer nicht veröffentlichten Schrittfolge trennen.
 - [x] Kognitive Umstrukturierung als MOC-Thema mit den Coping-Ansätzen aus Stresstheorie S. 43 verknüpfen; die Übersicht ohne erfundene Technik oder Therapieanspruch halten.
 - [x] Das MOC-Thema „Stress im Beruf und Alltag“ gegen das Stresstheorie-PDF abgleichen und dessen einzelne Belege von fehlender Statistik-/Forschungsübersicht abgrenzen; einen aktuellen österreichischen Präsentismus-Indikator separat als externe Kontextquelle mit Erhebungsgrenzen ergänzen.
 - [x] Die gemeinsame Überschrift der Methodenkarten auf „Praxisrahmen“ präzisieren, damit quellengebundene Einordnungen ohne Schrittfolge nicht als konkrete Anleitungen erscheinen.

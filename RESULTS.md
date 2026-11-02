@@ -832,3 +832,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die fehlschlagende Dublette `aos-relax-dev.service` wurde gestoppt; `coach-relax.service` blieb aktiv und unverändert. Das User-Service des standalone Dev-Controllers ist nicht aktiviert.
 - `relax-devctl start` und `restart` gelten jetzt erst als erfolgreich, wenn das jeweils konfigurierte User-Service und die API gleichzeitig aktiv sind; andernfalls endet der CLI-Aufruf mit Fehler und nennt beide Zustände. Die UI auf :5904 läuft derzeit nicht.
 - Syntax per Python-AST und `git diff --check` geprüft; keine Tests ausgeführt.
+# Offizielle Modulbeschreibung beim Mentaltraining quellengetrennt ergänzt (2026-11-02)
+
+- Die offizielle Kursbeschreibung des Präventiven Fitness- und Vitaltrainer-Lehrgangs bestätigt beim Fach „Mentales- & autogenes Training“ Theorie und Praxis mit Raum für Selbsterfahrung; sie nennt öffentlich keine konkreten Formeln, Technikfolgen oder Dosierungen.
+- Mentaltraining- und AT-Karten zeigen diesen Rahmen nun ausdrücklich neben den MOC-Themen. Die bestehende Reflexion verlinkt auf die programmspezifische Kursbeschreibung; die fehlenden Übungsfolgen bleiben offen, bis passende Kursmaterialien vorliegen.
+- Die Kursbeschreibung nennt außerdem die mündlich-praktische Abschlussprüfung; die freiwillige Reflexionsprobe bleibt als App-Lernhilfe und nicht als offizielle Prüfungsrubrik gekennzeichnet.
+- Der Produktionsbuild mit dem dokumentierten pnpm-Installationssetup lief durch und generierte den PWA-Service-Worker; `git diff --check` ist sauber. Keine Tests ausgeführt.
