@@ -2,6 +2,7 @@
 // vitalos-Shell setzt der RelaxApp-Wrapper window.__RELAX_API_BASE__ = '/relax-api'.
 const BASE = import.meta.env.VITE_API_BASE
   || (typeof window !== 'undefined' && window.__RELAX_API_BASE__)
+  || (typeof window !== 'undefined' && window.location.pathname.startsWith('/relax/') ? '/relax-api' : '')
   || ''
 
 export const api = {

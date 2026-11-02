@@ -65,7 +65,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         navigateFallback: './index.html',
-        navigateFallbackDenylist: [/^\/api/, /^\/session/, /^\/journal/, /^\/stats/, /^\/techniques/, /^\/export/, /^\/theme/, /^\/health/],
+        navigateFallbackDenylist: [/^\/api/, /^\/relax-api/, /^\/session/, /^\/journal/, /^\/stats/, /^\/techniques/, /^\/export/, /^\/theme/, /^\/health/],
       },
     }),
   ],
@@ -73,6 +73,7 @@ export default defineConfig({
     port: 5903,
     strictPort: true,
     proxy: {
+      '/relax-api': { target: BACKEND },
       '/api': { target: BACKEND, rewrite: (path) => '/api/relax' + path },
       '/session':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },
       '/journal':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },

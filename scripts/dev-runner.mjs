@@ -11,7 +11,7 @@ function run(cmd, args, env = {}) {
   return p
 }
 
-const vite = run('node', ['node_modules/.bin/vite'], { VITE_API_BASE: '' })
+const vite = run('./node_modules/.bin/vite', ['--host', '127.0.0.1'], { VITE_API_BASE: '' })
 
 process.on('SIGTERM', () => vite.kill())
 process.on('SIGINT',  () => vite.kill())
