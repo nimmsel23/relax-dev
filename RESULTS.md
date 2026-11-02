@@ -784,3 +784,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Statische Namensprüfung bestätigte alle elf Methodenkarten-Ziele; der Build und die Diff-Prüfung waren erfolgreich.
 - Ein Abgleich der MOC-Hauptüberschriften bestätigt alle zwölf Kursfächer im Index; die Fachtitel entsprechen nun auch in den zuvor verkürzten Einträgen der Ausbildungsübersicht.
 - TODO, NEXT und diese Ergebnisnotiz aktualisiert.
+# Fallbeschreibung der offiziellen Vier-Wochen-Aufgabe vervollständigt (2026-11-02)
+
+- Den Fallprompt mit den im Original-PDF genannten Angaben ergänzt: männlich, 38 Jahre, Abteilungsleiter eines Großunternehmens und leichtes Übergewicht.
+- Der präventive Hinweis stellt jetzt ausdrücklich klar, dass das im Fall erwähnte Übergewicht kein zusätzliches Abnehmziel begründet; Verdauungs- und Schlafbeschwerden bleiben als Fallangaben, nicht als Diagnose, gekennzeichnet.
+- TODO und diese Ergebnisnotiz aktualisiert.

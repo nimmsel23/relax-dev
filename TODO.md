@@ -42,6 +42,7 @@
 - [x] Lerncheck um quellgebundene Fragen zu Yoga, Pilates, den fünf Tibetern und der abweichenden PMR-Gruppenliste erweitern; fehlende Schrittfolgen bei Mentaltraining, AT und Fantasiereisen als Quellenkompetenz abfragen.
 - [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
 - [x] Die vorgegebenen Verdauungs- und Schlafbeschwerden im Fallarbeitsblatt als Anlass für gemeinsame Präventionsziele, ohne Heil-/Abnehmversprechen und mit Hinweis auf medizinische Abklärung bei anhaltenden Beschwerden, einordnen.
+- [x] Den Fallprompt um männliches Geschlecht, Unternehmenskontext und das im Aufgabenblatt genannte leichte Übergewicht vervollständigen; kein Abnehmziel daraus ableiten.
 - [x] Den freiwilligen Vier-Wochen-Selbstrückblick aus dem eigenen Konzeptentwurf ins Fallarbeitsblatt und dessen Export übernehmen; Skalenrichtung klarstellen und von Messung oder Diagnose abgrenzen.
 - [x] Die persönliche Kurzvariante für hektische Tage und den Vier-Wochen-Abschlussrückblick als optionale, exportierbare Felder der Fallaufgabe abbilden.
 - [x] Projektvision, aktive nächste Schritte und Agentenhinweise auf das Ausbildungsmodul als Produktziel ausrichten; Physiologie-/Katalogbereiche als unterstützende Zusatzbereiche einordnen.
