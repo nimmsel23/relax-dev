@@ -778,6 +778,6 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Quellenmatrix, TODO und NEXT enthalten jetzt diese Prüfung. Die Methodenkarten bleiben bei den durch Kursunterlagen belegten Angaben.
 # Ausbildungs-MOC in der Modul-Startansicht erschlossen (2026-11-02)
 
-- Die Startansicht enthält jetzt einen aufklappbaren Kursindex mit den Fächern aus der Ausbildungsübersicht: Stresstheorie, Methoden, Atemschulung, PMR, Bewegung/Körperarbeit, Ernährung, Stundenplanung und Aufgaben/Nachweis.
+- Die Startansicht enthält jetzt einen aufklappbaren Kursindex mit den einzelnen Fächern aus der Ausbildungs-MOC: Stresstheorie, Methodenüberblick, Mentales/autogenes Training, Atemschulung, PMR, Yoga, Pilates, Assisted Stretching/Faszien, Ausdauer, Wirbelsäule, Ernährung, Stundenplanung und Aufgaben/Nachweis.
 - Jeder Eintrag führt direkt zum passenden App-Bereich; Atemschulung öffnet den bestehenden Atem-Tab. Hinweise stellen klar, dass die Navigation weder absolvierte Kurseinheiten bestätigt noch Originalskripte ersetzt.
 - TODO, NEXT und diese Ergebnisnotiz aktualisiert.

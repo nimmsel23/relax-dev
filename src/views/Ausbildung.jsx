@@ -941,10 +941,15 @@ export default function Ausbildung({ onNavigate }) {
         <p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Der Kursindex ordnet die Themen deiner MOC den passenden App-Bereichen zu. Eine Zuordnung öffnet den Lernbereich; sie bestätigt weder eine absolvierte Kurseinheit noch ersetzt sie das Originalskript.</p>
         <div className="mt-3 grid gap-2 sm:grid-cols-2">{[
           ['Stresstheorie & Stressmanagement', 'Stressreaktion, Stressansätze, Ressourcen, SORKC und Messbarkeit.', [['grundlagen', 'Grundlagen']]],
-          ['Entspannungsmethoden im Überblick', 'Vier Ebenen, PMR, Autogenes Training, Mentaltraining, Fantasiereisen, Meditation, Selbsthypnose und unterstützende Verfahren; fehlende Ablaufskripte sind an den Methodenkarten markiert.', [['methoden', 'Methoden']]],
+          ['Entspannungsmethoden im Überblick', 'Vier Ebenen, Selbsthypnose, Biofeedback und weitere unterstützende Verfahren aus der Stresstheorie.', [['methoden', 'Methoden']]],
+          ['Mentales und autogenes Training', 'Themen der Ausbildungs-MOC sowie AT-Einordnung im Kursmaterial. Die Übersicht kennzeichnet fehlende methodenspezifische Ablaufskripte.', [['methoden', 'Themenkarten']]],
           ['Atemschulung', 'Atemmechanik, Kursübungen sowie Arbeitsblätter zur eigenen Anleitung und Gruppenpraxis.', [['atem', 'Atemschulung']]],
           ['Progressive Muskelrelaxation', 'Grundlagen, Praxisrahmen, Rücknahme und die im Skript ergänzten fünf Tibeter.', [['methoden', 'PMR und fünf Tibeter']]],
-          ['Bewegung und Körperarbeit', 'Yoga, Pilates, Assisted Stretching, Faszientraining/SMR, Wirbelsäulenwahrnehmung und entspannungsorientierte Ausdauer.', [['methoden', 'Bewegungsmethoden']]],
+          ['Yoga-Grundübungen', 'Asana-Grundsätze, Varianten und die Haltungen aus dem Originalskript.', [['methoden', 'Yoga-Karte']]],
+          ['Pilates-Grundübungen', 'Kursbegriffe, acht Kategorien und die Übungssammlung aus dem Skript.', [['methoden', 'Pilates-Karte']]],
+          ['Assisted Stretching und Faszientraining', 'Flexibilität, angeleitete Partnerarbeit und die SMR-Praxisübersicht.', [['methoden', 'Stretching-Karten']]],
+          ['Entspannung und Ausdauersport', 'Extensive gleichmäßige Bewegung und Kursbeispiele als Entspannungsbaustein.', [['methoden', 'Ausdauer-Karte']]],
+          ['Entspannung und Wirbelsäule', 'Körperwahrnehmung, Bewegungsfreude und präventive Trainergrenzen.', [['methoden', 'Wirbelsäulen-Karte']]],
           ['Entspannung und Ernährung', 'Stressessen, Ernährungsthemen sowie Lebensmittel, Pflanzenstoffe, Naturheilmittel und Rezepte als Kursinhalte.', [['fallkonzept', 'Ernährungsaufgabe']]],
           ['Stundenplanung', 'Ziele, Gruppe, Raum, Vorbereitung, Stundenaufbau, Zeitblöcke, Rücknahme und Abschluss.', [['planung', 'Stunde planen']]],
           ['Pflichtaufgabe und Praxisprotokoll', 'Vier-Wochen-Konzept mit Tageszyklus sowie der getrennte Nachweis der 30 Praxiseinheiten.', [['fallkonzept', 'Vier-Wochen-Fall'], ['nachweis', '30 Einheiten']]],
