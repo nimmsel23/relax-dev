@@ -412,6 +412,7 @@ const CASE_STORAGE_KEY = 'relax-stress-case-v1'
 const STRESS_REFLECTION_KEY = 'relax-stress-reflection-v1'
 const DELIVERY_STORAGE_KEY = 'relax-training-delivery-v1'
 const METHOD_REFLECTION_KEY = 'relax-method-reflections-v1'
+const LEARNING_CHECK_KEY = 'relax-learning-check-v1'
 const METHOD_REFLECTION_FIELDS = [
   ['experience', 'Eigene Erfahrung', 'Was hast du bei der tatsächlich durchgeführten oder besuchten Methode wahrgenommen? Was war angenehm, ungewohnt oder offen?'],
   ['conditions', 'Hilfreiche Bedingungen und Anpassungen', 'Welche Rahmenbedingungen, Wahlmöglichkeiten oder Anpassungen haben deine Teilnahme unterstützt?'],
@@ -527,9 +528,15 @@ export default function Ausbildung() {
   const [saving, setSaving] = useState(false)
   const [markingId, setMarkingId] = useState(null)
   const [delivery, setDelivery] = useState(restoreDelivery)
-  const [checkIndex, setCheckIndex] = useState(0)
-  const [checkAnswer, setCheckAnswer] = useState(null)
-  const [checkScore, setCheckScore] = useState(0)
+  const [learningCheck, setLearningCheck] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(LEARNING_CHECK_KEY) || '{}')
+      const index = Number.isInteger(saved.index) ? Math.max(0, Math.min(saved.index, LEARNING_CHECK.length)) : 0
+      const answer = Number.isInteger(saved.answer) && index < LEARNING_CHECK.length && saved.answer >= 0 && saved.answer < LEARNING_CHECK[index].answers.length ? saved.answer : null
+      return { index, answer, score: Number.isInteger(saved.score) ? Math.max(0, Math.min(saved.score, index + (answer !== null ? 1 : 0))) : 0 }
+    } catch { return { index: 0, answer: null, score: 0 } }
+  })
+  const { index: checkIndex, answer: checkAnswer, score: checkScore } = learningCheck
   const [message, setMessage] = useState('')
   const [entry, setEntry] = useState({ date: localToday(), technique: METHODS[0].name, minutes: 20, description: '', signed: false })
 
@@ -567,6 +574,9 @@ export default function Ausbildung() {
   useEffect(() => {
     try { localStorage.setItem(METHOD_REFLECTION_KEY, JSON.stringify(methodReflections)) } catch {}
   }, [methodReflections])
+  useEffect(() => {
+    try { localStorage.setItem(LEARNING_CHECK_KEY, JSON.stringify(learningCheck)) } catch {}
+  }, [learningCheck])
   useEffect(() => {
     if (!delivery?.running) return undefined
     const timer = window.setInterval(() => setDelivery(current => {
@@ -635,11 +645,10 @@ export default function Ausbildung() {
   function formatTimer(seconds) { return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}` }
   function answerCheck(index) {
     if (checkAnswer !== null) return
-    setCheckAnswer(index)
-    if (index === LEARNING_CHECK[checkIndex].correct) setCheckScore(score => score + 1)
+    setLearningCheck(current => ({ ...current, answer: index, score: index === LEARNING_CHECK[current.index].correct ? current.score + 1 : current.score }))
   }
-  function nextCheck() { setCheckIndex(index => index + 1); setCheckAnswer(null) }
-  function resetCheck() { setCheckIndex(0); setCheckAnswer(null); setCheckScore(0) }
+  function nextCheck() { setLearningCheck(current => ({ ...current, index: current.index + 1, answer: null })) }
+  function resetCheck() { setLearningCheck({ index: 0, answer: null, score: 0 }) }
 
   async function addPractice(event) {
     event.preventDefault()
@@ -835,6 +844,7 @@ export default function Ausbildung() {
     </>}
 
     {section === 'selbstcheck' && <section className="rounded-2xl border p-5" style={panel}>
+      <p className="mb-3 text-xs" style={{ color: 'var(--muted)' }}>Dein Lernstand wird lokal auf diesem Gerät gespeichert und beim nächsten Öffnen fortgesetzt.</p>
       {checkIndex >= LEARNING_CHECK.length ? <div className="text-center">
         <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Lerncheck abgeschlossen</div>
         <h2 className="mt-2 text-2xl font-black">{checkScore} von {LEARNING_CHECK.length} richtig</h2>

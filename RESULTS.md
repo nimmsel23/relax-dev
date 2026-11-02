@@ -669,3 +669,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - SHA-256-Abgleich bestätigt, dass die beiden Vier-Wochen-Aufgaben-PDFs byte-identisch sind.
 - Ebenso sind die zwei Trainingsprotokoll-PDFs identische Kopien mit denselben 30 Zeilen. Die Quellenmatrix weist sie deshalb gemeinsam aus, ohne eine separate Aufgabenvariante anzunehmen.
+
+# Lerncheck-Fortschritt lokal gespeichert (2026-11-02)
+
+- Zwischenstand, aktuelle Antwort und Punktzahl des Lernchecks bleiben lokal erhalten und werden beim erneuten Öffnen fortgesetzt.
+- Die Ansicht kennzeichnet die lokale Speicherung; ein bewusster Neustart setzt den Lerncheck weiterhin zurück.
