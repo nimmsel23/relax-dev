@@ -294,3 +294,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die 20-minütige Selbstreflexionsaufgabe aus „Stresstheorie“, S. 32–44, ist jetzt als freiwilliges Arbeitsblatt in den Grundlagen verfügbar: Stressoren/Bewertung, persönliche Voraussetzungen, Reaktionsmuster, Folgen und Coping.
 - Einträge bleiben lokal im Browser und sind vom Praxistagebuch getrennt; Markdown-Export enthält Quelle und Diagnoseabgrenzung.
 - Quiz und Grundlagen verwenden nun die Begriffe des Skripts (Stressoren, Organismus, Stressreaktionen, Konsequenzen, Coping) statt einer abweichenden SORKC-Auflösung.
+
+## 2026-11-02 — Messbarkeit von Stress eingeordnet
+
+- Grundlagen und Lerncheck decken jetzt die in „Stresstheorie“, S. 45–47 genannten Beobachtungs-, Fragebogen-, Ereignis-, biologischen und körperbezogenen Messzugänge sowie Biofeedback ab.
+- Die LCU-Einschränkung zum subjektiven Stresserleben ist sichtbar; die App selbst misst keine Körperwerte und leitet daraus keine Diagnose ab.
