@@ -1,7 +1,7 @@
 # Suggestive Musik als emotionales Kursverfahren ergänzt (2026-11-02)
 
 - Methodenliste bildet jetzt auch die zweite emotionale Methode aus Stresstheorie S. 55 ab: suggestive Musik.
-- Die Karte trennt die Einordnung von der allgemeinen optionalen Musikplanung aus Stundenplanung S. 15–17 und enthält keine unbelegte Suggestiv- oder Musikfolge. Lerncheck und Quellenmatrix aktualisiert.
+- Die Karte trennt die Einordnung von der allgemeinen optionalen Musikplanung aus Stundenplanung S. 11, 16 und 24 und enthält keine unbelegte Suggestiv- oder Musikfolge. Lerncheck und Quellenmatrix aktualisiert.
 
 # Muskuläre Methodenebene vervollständigt (2026-11-02)
 
