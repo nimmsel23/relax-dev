@@ -27,6 +27,8 @@ Weitere lokale Vertiefungsnotizen enthalten persönliche, nachträglich ergänzt
 
 Die lokale MOC-Notiz `MOC-Dipl.Entspannungstrainer.md` enthält ergänzend eine Themenliste zum Autogenen Training (Grund-, Mittel- und Oberstufe sowie mehrere Übungsfelder). Sie liefert keine konkreten Formeln oder Anleitungsschritte und wird in der App daher nur als persönliche Themenübersicht ausgewiesen.
 
+Die persönlichen Sitzungsnotizen `Sessions/2026-03-06-Session-01.md` und `Sessions/2026-03-13-Session-02.md` dokumentieren selbst durchgeführte Praxis, sind aber keine FlexyFit-Anleitungen. Die weiterführende lokale Datei `Atemschulung.md` enthält zusätzliche Atemmethoden und Wirkbehauptungen, die nicht dem Original-PDF zugeordnet werden können. Diese Inhalte werden deshalb nicht als Kursanleitung oder bestätigtes App-Wissen übernommen; für die Atemmethodenkarte hat das Original-PDF Vorrang.
+
 Das lokale PMR-Handout `Progressive Muskelrelaxation Handout.pdf` ist kein als FlexyFit-Original ausgewiesenes Skript; es nennt selbst eine externe Quelle. Die App kennzeichnet die geführte Langform entsprechend.
 
 ## Abgrenzung

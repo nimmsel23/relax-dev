@@ -1,3 +1,8 @@
+# Persönliche Sitzungsnotizen als Praxisprotokolle abgegrenzt (2026-11-02)
+
+- Quellenmatrix kennzeichnet die beiden lokalen Sitzungsnotizen als eigene Praxisdokumentation, nicht als FlexyFit-Anleitungen.
+- Die erweiterte Atemnotiz enthält zusätzliche Methoden und Wirkbehauptungen, die im Original-PDF nicht belegt sind; das Originalskript bleibt für die Methodenkarte maßgeblich.
+
 # Suggestive Musik als emotionales Kursverfahren ergänzt (2026-11-02)
 
 - Methodenliste bildet jetzt auch die zweite emotionale Methode aus Stresstheorie S. 55 ab: suggestive Musik.
