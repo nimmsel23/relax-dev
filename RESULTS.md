@@ -905,3 +905,9 @@ Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions
 - Im Atem-Tab gibt es jetzt einen prominenten Drei-Minuten-Schnellstart für die Verlängerte Ausatmung; er startet den bestehenden geführten Atemkreis und merkt Muster/Kategorie.
 - Ausbildungsinhalte und die lokal gespeicherte Pranayama-Praxisaufgabe bleiben vollständig erreichbar, sind aber aufklappbar und stehen nach der Übungsauswahl. Hinweise zum freiwilligen Atemrhythmus und Abbruch bleiben sichtbar in der Übung.
 - `pnpm run build` erfolgreich; `git diff --check` sauber. Keine Tests ausgeführt, nicht gepusht oder deployed.
+
+
+## 2026-11-02 — Relax API in Coach integriert
+- Relax Session-, Journal-, KB- und Physio-Routen laufen eingebettet in Coach :9150; :9123-Worker und User-Units entfernt. Relax-CLI und Vite-Proxy zeigen auf Coach, der Dev-Runner startet nur Vite.
+- Coach-Merge `a461177`; Relax-Umsetzung zuvor `55324f8`. Der aktive Tailscale-Funnel konnte nicht auf :9150 umgestellt werden, weil der lokale Tailscale-Daemon dafür sudo verlangt und Codex hier kein sudo ausführt.
+- Verifiziert: Coach/Relax/KB-Health auf :9150, Vite-Proxy auf :5903, :9123 offline; :5173 beendet. Coach-Vite/UI-Index wiederhergestellt. Keine Tests ausgeführt.

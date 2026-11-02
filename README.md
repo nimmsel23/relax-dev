@@ -3,8 +3,8 @@
 **Lern- und Praxis-App** für das Entspannungstrainer-Fachmodul der Präventiven Vitaltrainer-Ausbildung. Der Modul-Tab führt durch Ausbildungsgrundlagen, Methoden, Stundenplanung, Fallaufgabe und Praxisnachweis.
 
 Kombination aus:
-- React 18 + Vite (UI, `:5904`)
-- Node.js HTTP API (`:9123`)
+- React 18 + Vite (UI, `:5903`)
+- Relax FastAPI routes embedded in Coach (`:9150`)
 - Zustand (State Management)
 - Recharts (Visualisierungen)
 - Gemini AI (Knowledge Base Enrichment)
@@ -18,12 +18,12 @@ Kombination aus:
 corepack enable
 bash scripts/ci-install.sh
 
-# Development (Vite HMR + Nodemon backend)
+# Development (Vite HMR; API supplied by Coach)
 pnpm run dev
 
 # Or separate terminals:
-pnpm run ui:dev   # Vite only (:5904)
-pnpm run start    # API only (:9123)
+pnpm run ui:dev   # Vite only (:5903)
+pnpm run start    # prints the shared Coach API entrypoint
 
 # Tests (node:test, inkl. Server-Smoke-Test)
 pnpm test
@@ -34,16 +34,17 @@ pnpm run preview  # Test prod build locally
 ```
 
 **Ports:**
-- UI (Vite + HMR): `http://localhost:5904`
-- API (Node HTTP): `http://localhost:9123`
+- UI (Vite + HMR): `http://localhost:5903`
+- API (Coach): `http://localhost:9150/relax-api/health`
 
 ### Cloud-Entwicklung (ohne eigenen Rechner)
 
 Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `data/`:
 
-- **Devcontainer / Codespaces:** `.devcontainer/devcontainer.json` (Node 22, richtet sich per `postCreateCommand` selbst ein, leitet 5904 und 9123 weiter).
+- **Devcontainer / Codespaces:** `.devcontainer/devcontainer.json` (Node 22; leitet den UI-Port 5903 weiter).
+- The Vite proxy expects Coach on `127.0.0.1:9150`; set `VITE_COACH_API_URL` when Coach is reachable at another address.
 - **Setup:** `scripts/ci-install.sh` ist der gemeinsame Einstieg für Devcontainer und CI. `pnpm-lock.yaml` ist eingecheckt und wird strikt verwendet (`--frozen-lockfile`); nach Änderungen an `package.json` mit `pnpm install` neu erzeugen und mit committen. Ein `pnpm-workspace.yaml` liegt bewusst nicht im Repo; das Skript schreibt die nötige `allowBuilds`-Freigabe flüchtig, wenn kein Workspace darüber liegt.
-- **Datenbank:** `node:sqlite` ist in Node eingebaut, kein natives Modul. Beim ersten Start importiert der Server die KB aus `knowledge/*.yaml` nach `data/kb.db`.
+- **Datenbank:** Python `sqlite3` liest und aktualisiert die KB in `data/kb.db`; YAML-Migrationen bleiben ein separater Authoring-Schritt.
 - **Optional:** Vault-Treffer (`~/Vitaltrainer`, `~/BODY`) gibt es nur mit lokalem Vault; ohne ihn antwortet `/api/knowledge/vault/*` mit 404. Gemini-Anreicherung braucht `GEMINI_API_KEY` als Umgebungsvariable (als Codespaces-Secret o. ä.).
 - **CI:** `check.yml` (Install, Tests, Build) läuft bei jedem PR und `dev`-Push, `preview-dev.yml` baut einen 24-h-Preview-Channel. Live-Deploys laufen nicht von einem Rechner, sondern per CI über den Release-Weg `dev` → `master` → `vitalos` (siehe `AGENTS.md`).
 
@@ -173,7 +174,7 @@ GEMINI_MODEL=gemini-2.5-flash
 
 **Optional:**
 ```bash
-PORT=9123              # API port
+COACH_API_URL=http://127.0.0.1:9150  # shared API host
 HOST=127.0.0.1        # API host
 RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 ```
@@ -232,25 +233,25 @@ RELAX_STATIC_DIR=...  # Override static dir (dist or public)
 
 ### Code Style
 - **Frontend:** React functional components, Zustand for state
-- **Backend:** Node.js native HTTP (no framework), file-based persistence
+- **Backend:** Relax FastAPI routes mounted inside Coach; Relax-owned file/SQLite data remains in `data/`
 - **ESM throughout:** `type: "module"` in package.json
 - **No comments:** Code is self-documenting; comments only for non-obvious "why"
 
 ### Hot Reload
 - **UI:** Vite HMR (instant on source change)
-- **API:** Nodemon watches `server.mjs` (restart on change)
-- Both run parallel via `dev-runner.mjs`
+- **API:** Coach serves Relax routes in-process on :9150
+- `dev-runner.mjs` starts only Vite; no second API server is created
 
 ### Testing
 ```bash
 # API health
-curl http://localhost:9123/health | jq
+curl http://localhost:9150/relax-api/health | jq
 
 # KB search
-curl 'http://localhost:9123/api/knowledge/search?q=caffeine' | jq
+curl 'http://localhost:9150/api/relax/api/knowledge/search?q=caffeine' | jq
 
 # Physio simulation
-curl -X POST http://localhost:9123/api/physio/simulate \
+curl -X POST http://localhost:9150/api/relax/api/physio/simulate \
   -H 'Content-Type: application/json' \
   -d '{"events":[{"type":"coffee","time":0}],"context":{},"horizonMinutes":480}'
 ```
@@ -261,7 +262,7 @@ curl -X POST http://localhost:9123/api/physio/simulate \
 
 ```bash
 pnpm run build         # Create dist/
-node server.mjs        # Serve dist/ + API
+coach-server start     # Start the shared API host
 ```
 
 The server auto-detects `dist/` (prod build) and falls back to `public/` if not present.
@@ -292,8 +293,8 @@ relax-dev/
 │       ├── SimulationControls.jsx     # Context modifiers
 │       └── PhysioChart.jsx            # Recharts visualization
 │
+├── server.py                          # Relax FastAPI routes mounted by Coach
 ├── server/
-│   ├── server.mjs                     # Main HTTP server
 │   ├── knowledge/
 │   │   ├── kb-loader.js               # YAML loading + caching
 │   │   └── ai-enricher.js             # Gemini API integration

@@ -12,7 +12,7 @@ The React/Vite app also contains personal tracking, a physiology simulator, and 
 
 **Key Technologies:**
 - **Frontend:** React 18, Vite, Zustand (state management), Recharts (visualizations), Tailwind CSS.
-- **Backend:** Node.js, Fastify (HTTP API), `node:sqlite` (for KB cache), `yaml` (for KB data).
+- **Backend:** Relax FastAPI routes mounted in Coach :9150; Relax owns its SQLite KB and files.
 - **AI/Knowledge:** Google Gemini API (`@google/generative-ai`), `dotenv`.
 - **Persistence:** Local file system (`data/`).
 
@@ -37,16 +37,16 @@ The repository uses `pnpm` for dependency management and scripts for development
     ```bash
     pnpm install
     ```
-2.  **Development (Vite HMR + Nodemon backend):**
+2.  **Development (Vite HMR; API in shared Coach host):**
     ```bash
     pnpm run dev
     ```
-    This runs both the UI and API concurrently.
+    This runs the UI only. Coach serves the API on :9150.
 
     Alternatively, run separately:
     ```bash
-    pnpm run ui:dev   # Vite only (UI: http://localhost:5904)
-    pnpm run start    # API only (API: http://localhost:9123)
+    pnpm run ui:dev   # Vite only (UI: http://localhost:5903)
+    pnpm run start    # prints the Coach API entrypoint
     ```
 3.  **Production build:**
     ```bash
@@ -60,13 +60,13 @@ The repository uses `pnpm` for dependency management and scripts for development
 
 **Code Style:**
 -   **Frontend:** React functional components, Zustand for state management.
--   **Backend:** Node.js native HTTP (using Fastify as a lightweight framework), file-based persistence.
+-   **Backend:** Relax FastAPI routes mounted in Coach; file-based session/journal persistence.
 -   **Modules:** ECMAScript Modules (ESM) are used throughout (`"type": "module"` in `package.json`).
 -   **Comments:** Sparingly used, primarily for explaining the "why" of complex logic, not the "what". Code is expected to be self-documenting.
 
 **Hot Reload:**
 -   **UI:** Vite HMR provides instant updates on source code changes.
--   **API:** `nodemon` monitors `server.mjs` and restarts the backend on changes.
+-   **API:** Coach serves Relax routes in-process on :9150; Vite does not start a second backend.
 
 **Testing:**
 -   API endpoints can be tested using `curl` commands. Examples are provided in `README.md` and `ARCHITECTURE.md`.
@@ -84,12 +84,12 @@ The repository uses `pnpm` for dependency management and scripts for development
 -   **State Management:** `zustand` is used, particularly for `physioStore.js`.
 -   **Styling:** Tailwind CSS and `styles.css` (Catppuccin + CSS variables).
 
-### 4.2. Backend (Node.js/Fastify API)
+### 4.2. Relax API in Coach
 
--   **Main Server:** `server.mjs` sets up the Fastify server, serves static files, and defines core API routes (sessions, journal, stats, theme, export).
+-   **Main Module:** `server.py` defines Relax routes; Coach mounts this FastAPI app at `/relax-api` and `/api/relax`.
 -   **API Routing:**
-    -   `/api/knowledge/*` routes are handled by `server/routes/knowledge.js` via `handleKnowledgeAPI`.
-    -   `/api/physio/*` routes are handled by `server/routes/physio.js` via `handlePhysioSimulate`.
+    -   `/api/knowledge/*` routes are handled by `server/knowledge/fastapi_api.py` mounted in Coach.
+    -   `/api/physio/*` routes are handled by `server/physio_fastapi.py` mounted in Coach.
 -   **Data Persistence:** User-specific data (sessions, journal, theme) is stored in `data/` as JSON or Markdown files.
 
 ### 4.3. Biochemistry Knowledge Base (KB)
@@ -110,8 +110,8 @@ The KB is a central component for scientific data, implemented with a dynamic, A
 
 ### 4.4. Physio Timeline Simulation
 
--   **API Endpoint:** `/api/physio/simulate` (handled by `server/routes/physio.js`).
--   **Core Logic:** `server/engine/simulate.js` performs deterministic physiological simulations based on user-defined events (e.g., coffee, meals) and context (e.g., sleep debt, stress level).
+-   **API Endpoint:** `/api/relax/api/physio/simulate` on Coach :9150.
+-   **Core Logic:** `server/physio_fastapi.py` performs the deterministic physiological simulation.
 -   **Input:** Events (type, time), context (sleep debt, stress level), horizon (minutes), resolution.
 
 ---
@@ -125,8 +125,7 @@ Environment variables are managed via `.env` files, loaded using `dotenv`.
 -   `GEMINI_MODEL`: The Gemini model to use (default: `gemini-2.5-flash`). Also in `~/.env/relax.env`.
 
 **Optional:**
--   `PORT`: API server port (default: `9123`).
--   `HOST`: API host (default: `127.0.0.1`).
+-   `COACH_API_URL`: shared API host (default: `http://127.0.0.1:9150`).
 -   `RELAX_STATIC_DIR`: Override the static file serving directory (`dist/` or `public/`).
 
 ---

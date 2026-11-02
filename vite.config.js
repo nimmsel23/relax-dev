@@ -6,13 +6,13 @@ import { resolve, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const BACKEND = 'http://127.0.0.1:9150'
+const BACKEND = process.env.VITE_COACH_API_URL || 'http://127.0.0.1:9150'
 
 export default defineConfig({
   base: './',
   resolve: {
     alias: {
-      // Standalone-Default (:9123-Backend). Im vitalos-Firebase-Build biegt
+      // Standalone-Default: API wird von Coach :9150 bereitgestellt. Im vitalos-Firebase-Build biegt
       // die Shell '@db' auf shell/db/relax.js → firestore/sessions.js um.
       '@db': resolve(__dirname, 'src/lib/db/index.js'),
     },
@@ -65,13 +65,15 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         navigateFallback: './index.html',
-        navigateFallbackDenylist: [/^\/api/, /^\/session/, /^\/journal/, /^\/stats/, /^\/techniques/, /^\/export/, /^\/theme/, /^\/health/],
+        navigateFallbackDenylist: [/^\/api/, /^\/relax-api/, /^\/session/, /^\/journal/, /^\/stats/, /^\/techniques/, /^\/export/, /^\/theme/, /^\/health/],
       },
     }),
   ],
   server: {
     port: 5903,
+    strictPort: true,
     proxy: {
+      '/relax-api': { target: BACKEND },
       '/api': { target: BACKEND, rewrite: (path) => '/api/relax' + path },
       '/session':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },
       '/journal':   { target: BACKEND, rewrite: (path) => '/relax-api' + path },

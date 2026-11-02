@@ -9,8 +9,8 @@ import os
 import urllib.parse
 import urllib.request
 
-NODE_PORT = int(os.environ.get("RELAX_NODE_PORT", 9123))
-_BASE = f"http://127.0.0.1:{NODE_PORT}"
+COACH_API_URL = os.environ.get("COACH_API_URL", "http://127.0.0.1:9150").rstrip("/")
+_BASE = f"{COACH_API_URL}/api/relax"
 
 
 def api_get(path: str, timeout: float = 5.0) -> dict:

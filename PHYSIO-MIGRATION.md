@@ -20,7 +20,7 @@ physio-sim/
 ### Target Structure (Standalone)
 ```
 relax-dev/
-├─ server.mjs         → Extend with /api/physio/simulate endpoint
+├─ server.py          → Relax routes mounted in Coach :9150
 ├─ src/
 │  ├─ components/physio/
 │  │  ├─ EventInputPanel.jsx
@@ -71,9 +71,14 @@ Port from `packages/shared/types.ts`:
 
 ---
 
-## Phase 3: Backend API Integration
+## Historical implementation plan (superseded)
 
-### Current server.mjs
+The dedicated Node server described below was retired. Physiology simulation is
+implemented in `server/physio_fastapi.py` and mounted through Coach :9150.
+
+## Phase 3: Backend API Integration (historical)
+
+### Former server.mjs
 - Add new endpoint: `POST /api/physio/simulate`
 - Route file: `server/routes/physio.js`
 - Reuse readJson/writeJson/json helpers from server.mjs
