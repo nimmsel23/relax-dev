@@ -1,3 +1,8 @@
+# Unterstützende Maßnahmen im Methoden- und Praxisprotokoll auswählbar gemacht (2026-11-02)
+
+- Neuer Sammelpunkt erschließt Tai-Chi, Qigong und Feldenkrais aus Stresstheorie S. 58; Yoga und Meditation bleiben mit eigenen Methodenkarten vertreten.
+- Die 30-Einheiten-Erfassung gibt beim Sammelpunkt einen Hinweis, die konkret durchgeführte Praxis im Beschreibungsfeld zu benennen. Die Quellenkarte bleibt eine Übersicht ohne erfundene Schrittfolgen.
+
 # Selbsthypnose als Soforthilfe-Kursverweis ergänzt (2026-11-02)
 
 - Methodenliste und Lerncheck enthalten jetzt Selbsthypnose aus Stresstheorie S. 52.
