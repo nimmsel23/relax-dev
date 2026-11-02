@@ -164,3 +164,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Eine Methode kann direkt für den Nachweis vorausgewählt werden; Atemschulung verlinkt zusätzlich in den geführten Atemtrainer.
 - Es liegen im Ausbildungsordner nur Markdown-Zusammenfassungen, keine Original-PDF/Handouts. Fehlende detaillierte Kursabläufe bleiben deshalb als solche markiert.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich. Keine Tests, kein Push und kein Release.
+
+## 2026-11-02 — Atemtrainer an Ausbildungspraxis angebunden
+
+- Atemseite ergänzt um den Kursablauf: Brust-/Bauchatmung zunächst wahrnehmen, Handkontakt am Bauch optional anbieten und kurze fünfminütige Übungsphasen als Vorschlag aus der lokalen Atemschulungsnotiz.
+- Hyperventilation und Atemanhalten als außerhalb dieses geführten Entspannungsangebots eingeordnet; bei Unwohlsein zurück zur natürlichen Atmung.

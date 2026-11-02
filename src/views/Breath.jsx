@@ -157,6 +157,16 @@ export default function Breath() {
         </div>
       </div>
 
+      <section className="rounded-2xl border p-4 space-y-2" style={{ background: 'var(--card)', borderColor: 'var(--line)' }} aria-label="Atemschulung aus der Ausbildung">
+        <div className="text-sm font-bold">Atemschulung · Kursbezug</div>
+        <p className="text-sm" style={{ color: 'var(--muted)' }}>
+          Für die Anleitung zuerst Brust- und Bauchatmung wahrnehmen lassen. Eine Hand am Bauch kann die Bewegung spürbar machen; nichts korrigieren oder erzwingen. Die Kursnotiz schlägt kurze Übungsphasen von fünf Minuten, zwei- bis dreimal täglich, vor.
+        </p>
+        <p className="text-xs" style={{ color: 'var(--dim)' }}>
+          Hyperventilation und Atemanhalten (z. B. Wim-Hof- oder holotropes Atmen) sind hier bewusst keine Entspannungsübungen. Bei Unwohlsein zur natürlichen Atmung zurückkehren.
+        </p>
+      </section>
+
       {result && (
         <div className="p-4 rounded-2xl border space-y-3" style={{ background: 'var(--card)', borderColor: 'var(--accent)' }}>
           <div className="flex items-center gap-2 font-bold">
