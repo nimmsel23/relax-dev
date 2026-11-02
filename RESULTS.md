@@ -625,3 +625,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Jede Methodenkarte bietet jetzt drei lokal gespeicherte Reflexionsfelder zu eigener Erfahrung, hilfreichen Anpassungen sowie Anleiten/Erklären und praktischem Einschulungsbedarf.
 - Der Markdown-Export kennzeichnet die Notizen ausdrücklich als persönliche Reflexion und nicht als absolvierten Ausbildungsnachweis.
 - Die Ergänzung folgt der offiziellen Diplom-Kursbeschreibung, die Praxis und Selbsterfahrung nennt; die Methoden-PDFs bleiben die Quelle für konkrete Ausbildungsinhalte.
+
+# Fachmodul-Startseite als Lernpfad verknüpft (2026-11-02)
+
+- Direkteinstiege führen jetzt von Grundlagen/Lerncheck über Methodenreflexion und Vier-Wochen-Fall bis Stundenplanung und Praxisnachweis.
+- Die Reihenfolge ist ausdrücklich als App-Orientierung gekennzeichnet und wird nicht als offizielle Prüfungsreihenfolge ausgegeben.
