@@ -77,6 +77,12 @@
 - Die Mengenangabe und Wirkannahmen bleiben klar als Aussagen der Kursunterlage statt als persönliche Vorgaben markiert.
 - Quellenmatrix und TODO aktualisiert.
 
+# Brain- und Power-Food-Kapitel vollständiger erschlossen (2026-11-02)
+
+- Die Materialübersicht nennt nun auch Yamswurzel als Brain-Food-Beispiel sowie heimische Lebensmittel, Beeren, Trockenobst, Weizengras, Chia, Zimt, Zitronen und den Abschnitt zu sekundären Pflanzenstoffen (S. 39–69).
+- Wirkversprechen bleiben sichtbar als Aussagen des Lehrskripts gekennzeichnet und werden nicht als Empfehlung übernommen.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
