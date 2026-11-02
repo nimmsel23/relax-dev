@@ -899,3 +899,9 @@ Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions
 - Die relevanten Ausbildungsunterlagen unter `~/Dokumente` umfassen die FlexyFit-PDFs, den separaten Ausbildungsordner mit MOC und Markdown-Notizen sowie ältere Kopien. Die vier offenen Methoden enthalten weiterhin keine vollständigen methodenspezifischen Ablaufanleitungen.
 - In der vollständigen Master-MOC waren „Achtsamkeitstraining und Meditationstechniken“ sowie „Stressmanagement durch mentales Training“ als Themen genannt. Beide sind jetzt an den passenden Karten ausdrücklich als MOC-Stichworte sichtbar; daraus werden keine Abläufe abgeleitet.
 - Der Markdown-Text des separaten Sportpsychologie-Skripts bestätigt Fantasiereisen und Autogenes Training als Beispiele beim Angstmanagement (S. 45); die Stelle ist nur eine Methodenliste, keine Anleitung.
+
+# Atemtrainer: Praxis zuerst (2026-11-02)
+
+- Im Atem-Tab gibt es jetzt einen prominenten Drei-Minuten-Schnellstart für die Verlängerte Ausatmung; er startet den bestehenden geführten Atemkreis und merkt Muster/Kategorie.
+- Ausbildungsinhalte und die lokal gespeicherte Pranayama-Praxisaufgabe bleiben vollständig erreichbar, sind aber aufklappbar und stehen nach der Übungsauswahl. Hinweise zum freiwilligen Atemrhythmus und Abbruch bleiben sichtbar in der Übung.
+- `pnpm run build` erfolgreich; `git diff --check` sauber. Keine Tests ausgeführt, nicht gepusht oder deployed.
