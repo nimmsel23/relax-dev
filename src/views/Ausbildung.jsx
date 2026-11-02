@@ -17,6 +17,12 @@ const METHODS = [
     ['Quellenstatus', 'Die interaktive Schrittfolge weiter oben folgt dem lokalen Handout, das auf eine externe Quelle verweist. Sie ist nicht die nummerierte Gruppenfolge des FlexyFit-Ausbildungsskripts.'],
     ['Skriptgrenze', 'Das Ausbildungsskript enthält auf S. 5 eine eigene Rubrik zu Kontraindikationen. Diese App-Karte ist keine medizinische Eignungsprüfung; bei Unsicherheit die Teilnahme fachlich abklären lassen.'],
   ] },
+  { name: 'Konzentrative Muskelentspannung', duration: 'Im Stundenentwurf festlegen', icon: HeartPulse, focus: 'Als Verfahren der muskulären Ebene kennenlernen', practice: 'Die Stresstheorie führt die konzentrative Muskelentspannung als Beispiel der muskulären Ebene auf. Im geprüften Kursarchiv liegt dazu keine methodenspezifische Anleitung vor; die Karte dokumentiert deshalb nur die Einordnung.', adapt: 'Keine eigene Übungsfolge aus dem Namen ableiten. Nur nach praktischer Einschulung anleiten und Rückmeldungen der Teilnehmenden berücksichtigen.', source: 'FlexyFit Academy: Stresstheorie, S. 55 · Einordnung, keine Schrittfolge', outlineTitle: 'Kurseinordnung', outline: [
+    ['Muskuläre Ebene · S. 55', 'Das Skript listet konzentrative Muskelentspannung neben Progressiver Muskelentspannung und muskulärem Tiefentraining. Eine konkrete Übungsfolge oder Dosierung ist auf dieser Übersichtsseite nicht enthalten.'],
+  ] },
+  { name: 'Muskuläres Tiefentraining', duration: 'Im Stundenentwurf festlegen', icon: HeartPulse, focus: 'Als Verfahren der muskulären Ebene kennenlernen', practice: 'Die Stresstheorie führt muskuläres Tiefentraining als Beispiel der muskulären Ebene auf. Im geprüften Kursarchiv liegt dazu keine methodenspezifische Anleitung vor; die Karte dokumentiert deshalb nur die Einordnung.', adapt: 'Keine eigene Übungsfolge aus dem Namen ableiten. Nur nach praktischer Einschulung anleiten und Rückmeldungen der Teilnehmenden berücksichtigen.', source: 'FlexyFit Academy: Stresstheorie, S. 55 · Einordnung, keine Schrittfolge', outlineTitle: 'Kurseinordnung', outline: [
+    ['Muskuläre Ebene · S. 55', 'Das Skript listet muskuläres Tiefentraining neben konzentrativer Muskelentspannung und Progressiver Muskelentspannung. Eine konkrete Übungsfolge oder Dosierung ist auf dieser Übersichtsseite nicht enthalten.'],
+  ] },
   { name: 'Die fünf Tibeter · Bewegungsreihe', duration: 'Dauer nach Stundenentwurf', icon: HeartPulse, focus: 'Eine Bewegungsfolge mit Ausgangs-, End- und Ausgleichsposition kennenlernen', practice: 'Das PMR-Kursskript führt als ergänzenden Praxisteil fünf Bewegungen auf: Kreisel, Kerze, Halbmond, Brücke und Berg. Die Übersicht erschließt die im Text beschriebenen Positionen und Übergänge; die Fotos und praktische Einschulung bleiben für die konkrete Durchführung maßgeblich.', adapt: 'Bewegungen an eigene Möglichkeiten anpassen oder auslassen und bei Unsicherheit praktisch rückfragen. Das Skript enthält eine eigene Wiederholungsempfehlung (S. 30); sie wird hier nicht als allgemeines persönliches Trainingsziel übernommen. Die Reihe ist ein ergänzender Bewegungsteil und kein PMR-Anspannungsprotokoll.', source: 'FlexyFit Academy: Progressive Muskelrelaxation, S. 29–46', outlineTitle: 'Bewegungsfolgen im Kursskript', outline: [
     ['1 · Der Kreisel · S. 31–33', 'Langsam im Uhrzeigersinn um die eigene Achse drehen und dabei die eigene stabile Geschwindigkeit wählen. Zum Ausgleich die Hände vor der Brust falten und ruhig atmen, bis sich die Drehung legt.'],
     ['2 · Die Kerze · S. 34–36', 'In Rückenlage zunächst Kopf/Nacken und unteren Rücken Richtung Boden orientieren. Dann Beine und Kopf gleichzeitig anheben; Beine möglichst gestreckt und Füße angewinkelt halten. Zurück in Rückenlage und die Ausgangsposition erneut finden.'],
@@ -289,6 +295,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Das Skript unterscheidet muskuläre, vegetative, emotionale und kognitive Ebenen und ordnet jeder Beispiele zu.',
     source: 'Stresstheorie · Entspannungstechniken',
+  },
+  {
+    question: 'Welche Verfahren nennt die Stresstheorie auf der muskulären Ebene?',
+    answers: ['Konzentrative Muskelentspannung, Progressive Muskelentspannung und muskuläres Tiefentraining.', 'Autogenes Training, Atemtechniken und Meditation.', 'Fantasiereisen, suggestive Musik und Yoga.'],
+    correct: 0,
+    why: 'Die Liste auf S. 55 nennt die drei Verfahren als Beispiele für die muskuläre Ebene. Sie liefert für die zwei nicht anderweitig ausgearbeiteten Verfahren hier keine eigene Schrittfolge.',
+    source: 'Stresstheorie · Entspannungstechniken, S. 55',
   },
   {
     question: 'Was sagt das Ernährungsskript über einzelne Lebensmittel und Stress?',

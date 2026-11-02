@@ -1,3 +1,8 @@
+# Muskuläre Methodenebene vervollständigt (2026-11-02)
+
+- Methodenliste enthält jetzt alle drei Verfahren aus Stresstheorie S. 55: konzentrative Muskelentspannung, PMR und muskuläres Tiefentraining.
+- Für die beiden nur aufgezählten Verfahren bleiben die Karten bewusst bei der Einordnung; es werden keine unbelegten Anleitungen erzeugt. Eine passende Lerncheck-Frage ergänzt.
+
 # Bildvergleich Stress und Entspannung ergänzt (2026-11-02)
 
 - Grundlagenansicht enthält jetzt eine zugängliche Vektorgrafik zur Gegenüberstellung aus Stresstheorie S. 66.
