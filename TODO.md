@@ -13,4 +13,5 @@
 - [x] Vorhandene ausreichend lange Tages-Sessions nach ausdrücklicher Selbstbestätigung in den Ausbildungsnachweis übernehmen; Export an 30-Zeilen-Vorlage anlehnen.
 - [x] Modulansicht vom Physio-/Catalog-Paket trennen, damit der Ausbildungsstart nur benötigte Ansichten lädt.
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gemäß den lokalen Ausbildungsnotizen in der Methodenbibliothek sichtbar machen.
+- [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
 - [ ] Methoden-spezifische geführte Übungsabläufe (z. B. PMR) ergänzen, wenn dafür verlässliche Originalabläufe vorliegen.

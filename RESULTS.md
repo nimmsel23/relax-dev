@@ -153,6 +153,11 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die gemeinsame Karte getrennt: Yoga listet ausgewählte Asanas samt Kursnotizen zu Atem, Varianten und Abschlussruhe; Pilates zeigt die acht im Basisprogramm aufgeführten Bewegungskategorien.
 - Methodenhinweise direkt aus `Grundübungen Yoga.md` und `Grundübungen_Pilates.md` zusammengefasst. Anspruchsvolle Positionen sind als praktische Einschulung erfordernde Inhalte markiert.
 
+## 2026-11-02 — Selbstcheck zu Theorie und Didaktik
+
+- Lernbereich enthält sechs Multiple-Choice-Fragen zu Übungseinschulung, Musik, Rücknahme, Stundenzeit, Lazarus und SORKC.
+- Jede Antwort gibt eine Begründung und verweist auf die zugehörige lokale Ausbildungsnotiz; Ergebnis ist als Wiederholung, nicht als Prüfungsnachweis gekennzeichnet.
+
 ## 2026-11-02 — Lern- und Praxisablauf verknüpft
 
 - Dashboard und Session-Seite unterscheiden jetzt das persönliche Tages-/Stimmungsprotokoll vom offiziellen 30-Einheiten-Nachweis und verlinken zurück zum Modul.

@@ -49,6 +49,50 @@ const PREPARATION_CHECKS = [
   ['gruppe', 'Platz, Privatsphäre und individuelle Wahlmöglichkeiten sind geklärt.'],
   ['rueckkehr', 'Genügend Zeit für Rücknahme und Abschluss ist eingeplant.'],
 ]
+const LEARNING_CHECK = [
+  {
+    question: 'Worauf liegt der Schwerpunkt beim Einschulen einer Übung?',
+    answers: ['Auf einer für alle identischen Bewegungsausführung.', 'Auf Körperwahrnehmung und einer passenden Ausführung für die einzelne Person.', 'Auf möglichst vielen Wiederholungen ohne Unterbrechung.'],
+    correct: 1,
+    why: 'Die Stundenplanung stellt Körper- und Bewegungsempfinden in den Mittelpunkt; Leistungsdenken und Vergleiche sollen vermieden werden.',
+    source: 'Stundenplanung · Übungseinschulung',
+  },
+  {
+    question: 'Wie sollte Musik in einer Entspannungseinheit eingesetzt werden?',
+    answers: ['Immer, damit niemand Geräusche aus dem Raum wahrnimmt.', 'Optional; ruhige Instrumentalmusik kann helfen, darf die Anleitung aber nicht übertönen oder ablenken.', 'So laut, dass sie die Stimme vollständig ersetzt.'],
+    correct: 1,
+    why: 'Die Notiz sagt, Musik kann helfen, muss aber nicht eingesetzt werden. Sie soll ruhig und leiser als die Stimme sein.',
+    source: 'Stundenplanung · Musik',
+  },
+  {
+    question: 'Was gehört nach einer tiefen Entspannung in Rückenlage zum Abschluss?',
+    answers: ['Sofort aufstehen, damit der Kreislauf aktiviert wird.', 'Eine ruhige Rücknahme mit kleinen Bewegungen, Orientierung und Zeit zum Nachspüren.', 'Direkt mit einer intensiven Belastung fortfahren.'],
+    correct: 1,
+    why: 'Nach AT, PMR und Phantasiereisen empfiehlt die Stundenplanung eine ausreichend lange, schrittweise Rücknahme und ein Abschlussgespräch.',
+    source: 'Stundenplanung · Rücknahme und Abschluss',
+  },
+  {
+    question: 'Wie viel Entspannungszeit wird in Kombination mit anderen Trainingsformen eingeplant?',
+    answers: ['Rund 15 Minuten für den Entspannungsteil; ein geschlossener Kurs kann etwa 60 Minuten dauern.', 'Immer genau 60 Minuten zusätzlich zum Haupttraining.', 'Es gibt keinen zeitlichen Rahmen.'],
+    correct: 0,
+    why: 'Die beiden Angaben beziehen sich auf unterschiedliche Formate: Entspannungsteil in einer kombinierten Stunde und geschlossener Entspannungskurs.',
+    source: 'Stundenplanung · Zeitlicher Rahmen',
+  },
+  {
+    question: 'Was beschreibt Lazarus’ transaktionales Stressmodell?',
+    answers: ['Stress wird ausschließlich durch die Stärke des äußeren Reizes bestimmt.', 'Bewertung einer Anforderung und Einschätzung eigener Bewältigungsressourcen beeinflussen das Stresserleben.', 'Stress folgt bei allen Menschen einem identischen zeitlichen Ablauf.'],
+    correct: 1,
+    why: 'Die Ausbildungsnotiz beschreibt primäre und sekundäre Bewertung sowie das Verhältnis von Anforderungen und verfügbaren Ressourcen.',
+    source: 'Stresstheorie · Transaktionales Modell',
+  },
+  {
+    question: 'Wofür stehen die Buchstaben im SORKC-Modell?',
+    answers: ['Situation, Orientierung, Reiz, Körper, Coping.', 'Stimulus, Organismus, Reaktion, Konsequenz, Kontingenz.', 'Stress, Output, Regulation, Kraft, Konzentration.'],
+    correct: 1,
+    why: 'SORKC gliedert Auslöser, individuelle Voraussetzungen, Reaktion, Folgen und deren Kontingenz.',
+    source: 'Stresstheorie · SORKC-Modell',
+  },
+]
 const STORAGE_KEY = 'relax-training-plan-v1'
 const panel = { background: 'var(--card)', borderColor: 'var(--line)' }
 const input = { background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }
@@ -68,6 +112,9 @@ export default function Ausbildung() {
   const [saving, setSaving] = useState(false)
   const [markingId, setMarkingId] = useState(null)
   const [delivery, setDelivery] = useState(null)
+  const [checkIndex, setCheckIndex] = useState(0)
+  const [checkAnswer, setCheckAnswer] = useState(null)
+  const [checkScore, setCheckScore] = useState(0)
   const [message, setMessage] = useState('')
   const [entry, setEntry] = useState({ date: localToday(), technique: METHODS[0].name, minutes: 20, description: '', signed: false })
 
@@ -105,6 +152,13 @@ export default function Ausbildung() {
     setDelivery(current => ({ ...current, index, remaining: Math.max(1, Number(block.minutes) || 1) * 60, running: false }))
   }
   function formatTimer(seconds) { return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}` }
+  function answerCheck(index) {
+    if (checkAnswer !== null) return
+    setCheckAnswer(index)
+    if (index === LEARNING_CHECK[checkIndex].correct) setCheckScore(score => score + 1)
+  }
+  function nextCheck() { setCheckIndex(index => index + 1); setCheckAnswer(null) }
+  function resetCheck() { setCheckIndex(0); setCheckAnswer(null); setCheckScore(0) }
 
   async function addPractice(event) {
     event.preventDefault()
@@ -176,7 +230,7 @@ export default function Ausbildung() {
       <h1 className="mt-2 text-2xl font-black">Entspannung anleiten lernen</h1>
       <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Theorie verstehen, eine stimmige Einheit gestalten und die eigene Praxis für den Ausbildungsnachweis dokumentieren.</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">{[['start', 'Überblick'], ['grundlagen', 'Grundlagen'], ['methoden', 'Methoden'], ['planung', 'Stunde planen'], ['nachweis', 'Praxisnachweis']].map(([id, label]) => <button key={id} onClick={() => { setSection(id); setMethod(null) }} aria-pressed={section === id} className="shrink-0 rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: section === id ? 'var(--accent)' : 'var(--line)', color: section === id ? 'var(--accent)' : 'var(--muted)', background: section === id ? 'var(--accent-glow)' : 'transparent' }}>{label}</button>)}</div>
+        <div className="flex flex-nowrap gap-2 overflow-x-auto no-scrollbar">{[['start', 'Überblick'], ['grundlagen', 'Grundlagen'], ['selbstcheck', 'Lerncheck'], ['methoden', 'Methoden'], ['planung', 'Stunde planen'], ['nachweis', 'Praxisnachweis']].map(([id, label]) => <button key={id} onClick={() => { setSection(id); setMethod(null) }} aria-pressed={section === id} className="shrink-0 rounded-full border px-3 py-2 text-xs font-bold" style={{ borderColor: section === id ? 'var(--accent)' : 'var(--line)', color: section === id ? 'var(--accent)' : 'var(--muted)', background: section === id ? 'var(--accent-glow)' : 'transparent' }}>{label}</button>)}</div>
       </div>
     </section>
 
@@ -207,6 +261,25 @@ export default function Ausbildung() {
       ].map(([title, text]) => <div key={title}><h3 className="text-sm font-bold">{title}</h3><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</p></div>)}</div></div>
       <div className="rounded-2xl border p-4" style={{ ...panel, borderColor: 'color-mix(in srgb, var(--orange) 45%, var(--line))' }}><h2 className="font-bold">Präventive Trainerrolle</h2><p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Du gestaltest Lern- und Bewegungsangebote, keine Diagnose oder Therapie. Teilnahme, Körperkontakt und Augen schließen bleiben freiwillig. Bei Schmerzen, deutlichem Unwohlsein oder gesundheitlichen Fragen Übung stoppen, eine passende Alternative anbieten und bei Bedarf an medizinische Fachpersonen verweisen.</p></div>
     </>}
+
+    {section === 'selbstcheck' && <section className="rounded-2xl border p-5" style={panel}>
+      {checkIndex >= LEARNING_CHECK.length ? <div className="text-center">
+        <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Lerncheck abgeschlossen</div>
+        <h2 className="mt-2 text-2xl font-black">{checkScore} von {LEARNING_CHECK.length} richtig</h2>
+        <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Nutze Antworten als Wiederholung der Kursnotizen. Sie ersetzen nicht die praktische Einschulung und das Originalmaterial.</p>
+        <button onClick={resetCheck} className="mt-4 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>Noch einmal</button>
+      </div> : <>
+        <div className="flex items-center justify-between gap-3 text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--muted)' }}><span>Lerncheck · Frage {checkIndex + 1} / {LEARNING_CHECK.length}</span><span>{checkScore} richtig</span></div>
+        <h2 className="mt-4 text-lg font-black">{LEARNING_CHECK[checkIndex].question}</h2>
+        <div className="mt-4 space-y-2">{LEARNING_CHECK[checkIndex].answers.map((answer, index) => {
+          const selected = checkAnswer === index
+          const correctAnswer = checkAnswer !== null && index === LEARNING_CHECK[checkIndex].correct
+          const wrongAnswer = selected && index !== LEARNING_CHECK[checkIndex].correct
+          return <button key={answer} disabled={checkAnswer !== null} onClick={() => answerCheck(index)} className="w-full rounded-xl border p-3 text-left text-sm leading-relaxed disabled:cursor-default" style={{ background: correctAnswer ? 'color-mix(in srgb, var(--green) 14%, var(--bg2))' : wrongAnswer ? 'color-mix(in srgb, var(--red) 14%, var(--bg2))' : 'var(--bg2)', borderColor: correctAnswer ? 'var(--green)' : wrongAnswer ? 'var(--red)' : 'var(--line)' }}>{answer}</button>
+        })}</div>
+        {checkAnswer !== null && <div className="mt-4 rounded-xl p-3" style={{ background: 'var(--bg2)' }}><div className="text-sm font-bold" style={{ color: checkAnswer === LEARNING_CHECK[checkIndex].correct ? 'var(--green)' : 'var(--orange)' }}>{checkAnswer === LEARNING_CHECK[checkIndex].correct ? 'Richtig' : 'Noch einmal anschauen'}</div><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{LEARNING_CHECK[checkIndex].why}</p><p className="mt-2 text-[10px]" style={{ color: 'var(--dim)' }}>{LEARNING_CHECK[checkIndex].source}</p><button onClick={nextCheck} className="mt-3 w-full rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>{checkIndex + 1 === LEARNING_CHECK.length ? 'Ergebnis ansehen' : 'Nächste Frage'}</button></div>}
+      </>}
+    </section>}
 
     {section === 'methoden' && <>
       {method ? (

@@ -54,6 +54,7 @@ Ein frischer Checkout reicht — kein `~/.env`, kein Vault, keine vorhandene `da
 ### Ausbildungsbereich Entspannungstrainer
 Der Tab **Modul** ist der Einstieg der App und bildet Theorie und Praxis des Fachmoduls ab:
 - Grundlagen zu Stressmodellen, Ressourcen, Körperreaktionen, Bewegung, Ernährung und Wirbelsäulen-Wahrnehmung
+- interaktiver Lerncheck mit Rückmeldung und Quellenhinweis zur lokalen Ausbildungsnotiz
 - didaktische Leitlinien und Präventionsrolle aus den Ausbildungsnotizen
 - Methodenorientierung zu Atemschulung, PMR, Autogenem Training, Phantasiereisen, Yoga-Asanas, den acht Pilates-Bewegungskategorien, Stretching, Meditation und entspannungsorientierter Ausdauer
 - anpassbarer Stundenentwurf mit Vorbereitungscheckliste, Ankommen, Einschulung, Hauptteil, Nachspüren, Rücknahme und anschließender Reflexion
