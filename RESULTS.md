@@ -1,3 +1,9 @@
+# Kontraindikationsliste aus Assisted Stretching ergänzt (2026-11-02)
+
+- Beim Abgleich des Markdown-Exports und des Original-PDFs wurde die Liste auf S. 33 gefunden; sie fehlte bisher in der Methodenkarte.
+- Die sieben im Kursheft aufgeführten Punkte sind jetzt als Quellinhalt sichtbar und ausdrücklich keine vollständige oder individuelle medizinische Eignungsprüfung.
+- Quellenmatrix und TODO aktualisiert.
+
 # Übungswiederholung im editierbaren Stundenentwurf verankert (2026-11-02)
 
 - Der Standardtext des Hauptteils erinnert jetzt daran, ausgewählte Übungen oder kleine Übungskomplexe zu wiederholen, damit das Erlernte leichter in den Alltag übergeht.

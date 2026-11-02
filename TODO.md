@@ -68,6 +68,7 @@
 - [x] Suggestive Musik aus der emotionalen Ebene (Stresstheorie S. 55) als auswählbare Methode einordnen und von allgemeiner Musikplanung sowie einer fehlenden Schrittfolge abgrenzen.
 - [x] Stundenentwurf und Vorbereitungsliste an die offiziellen Anforderungen zu Raum, Gruppengröße, Privatsphäre, Freiwilligkeit, gemeinsamem Beginn/Ende und Abschlussgespräch angleichen.
 - [x] Assisted Stretching gegen das Original-PDF prüfen und Session-Dosierung, ROM-Check, Ablaufqualität, Feedback und Zustimmung bei Berührung in der Methodenkarte abbilden.
+- [x] Die im Assisted-Stretching-Kursheft auf S. 33 aufgeführten Kontraindikationen quellengetreu sichtbar machen und als keine individuelle oder vollständige medizinische Eignungsprüfung einordnen.
 - [x] Den separaten Abschnitt Faszientraining/SMR aus demselben PDF ergänzen und den knappen Umfang der verfügbaren Praxisanleitung kennzeichnen.
 - [x] Entspannungsbegriff aus dem Stresstheorie-Skript und das Ausdauer-Kursprofil mit Belastungsgefühl, Beispieldauern und individuellem Rahmen sichtbar machen.
 - [x] Die Unterscheidung zwischen relativer Entspannung und einem umfassenden Ruhezustand aus Stresstheorie S. 63 in der Grundlagenkarte kenntlich machen.
