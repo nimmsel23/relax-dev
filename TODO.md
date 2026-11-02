@@ -79,6 +79,7 @@
 - [x] Alle Wahrnehmungsübungen des Wirbelsäulen-Praxisteils einschließlich Wohlfühlkreis, Druckpunkte, Beckenuhr und Bewegungsfreude mit Seitenbezug erfassen; taktile Partnerübungen klar an freiwillige Zustimmung binden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [x] Das FlexyFit-PMR-Kursskript (S. 3–28) zusätzlich zur lokalen Handout-Langform abbilden: Methode, Vorbereitung, Kurszeiten, Gruppenabfolge, Rückführung und Nachexploration; abweichende 16-Schritte-Listen kennzeichnen.
+- [x] Die beiden im PMR-Original auf S. 5 aufgeführten Kontraindikationen quellengetreu sichtbar machen und als keine individuelle oder vollständige medizinische Eignungsprüfung einordnen.
 - [ ] Weitere methodenspezifische Abläufe für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
 - [x] Leeren Praxisnachweis wie das einseitige A4-Original auf genau eine A4-Seite setzen; die 30 Zeilen, Datum/Beschreibung/Unterschrift und Freifeld für Handsignatur bleiben erhalten.

@@ -1,3 +1,11 @@
+# Quellenabgleich Entspannungstrainer fortgesetzt (2026-11-02)
+
+- Zusätzliche Markdown-Umsetzungen in `Dokumente/Dipl. Präventiver Vitaltrainer/Dipl.Entspannungstrainer/` gegen App und Original-PDFs geprüft; die Umsetzungen liegen häufig außerhalb des FlexyFit-PDF-Ordners.
+- Die Ausbildungs-MOC enthält zwölf Kursfächer; der App-Index führt dieselben zwölf als eigene Karten und trennt Pflichtaufgabe und Praxisnachweis davon.
+- Dabei fehlten zwei quellenspezifische Listen: Assisted Stretching S. 33 mit sieben Punkten und PMR S. 5 mit zwei Punkten unter „Kontraindikationen“. Beide sind nun an den Methodenkarten sichtbar, jeweils ausdrücklich als Kursinhalt und nicht als individuelle oder vollständige medizinische Eignungsprüfung.
+- Noch offen: passende Original-Ablaufanleitungen für Mentales Training, Autogenes Training, Fantasiereisen und Meditation sind im geprüften Archiv nicht vorhanden. Eine reale iPhone-/iPad-Abnahme liegt ebenfalls nicht vor; die breite Inhaltsprüfung ist noch nicht abgeschlossen.
+- `npm run build` und `git diff --check` erfolgreich; keine Tests ausgeführt.
+
 # Kontraindikationsliste aus Assisted Stretching ergänzt (2026-11-02)
 
 - Beim Abgleich des Markdown-Exports und des Original-PDFs wurde die Liste auf S. 33 gefunden; sie fehlte bisher in der Methodenkarte.
