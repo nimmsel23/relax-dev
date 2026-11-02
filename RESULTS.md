@@ -805,3 +805,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - `UNKLARHEITEN.md` beschrieb noch die frühere Planung einer Psychoneuroimmunologie-App und bezeichnete den inzwischen entwickelten Ausbildungsbereich als Platzhalter.
 - Die Datei dokumentiert diesen Text nun als historischen Stand und stellt klar, dass die alten Skalen-/Schlaf-/CSV-Fragen das aktuelle Ziel der Kursrepräsentation nicht blockieren.
 - `NEXT.md` hält die neue direkte Kursindex-Verknüpfung der kognitiven Umstrukturierung aktuell.
+# Praxisrahmen der Methodenkarten klarer bezeichnet (2026-11-02)
+
+- Die auf der Modulkarte verwendete Überschrift „Anleitungsidee“ konnte bei reinen Kursübersichten mit fehlender Schrittfolge wie eine konkrete Anleitung wirken.
+- Die Überschrift heißt jetzt „Praxisrahmen“; der Markdown-Export des Stundenentwurfs verwendet ebenfalls „Praxisrahmen und Anpassung“.
+- Die gebaute Ansicht des neuen Kursindex-Routings wurde manuell in Firefox bei dessen kleinstmöglicher Fensterbreite (500 CSS-Pixel) geprüft: Coping-Ansatz-Button öffnet die richtige Karte, der Deep-Link ist korrekt und die Dokumentbreite überschreitet die Viewportbreite nicht. Die echte 390-Pixel-Ansicht auf iPhone/iPad bleibt offen.

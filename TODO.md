@@ -16,6 +16,7 @@
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
 - [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
 - [x] Kognitive Umstrukturierung als MOC-Thema mit den Coping-Ansätzen aus Stresstheorie S. 43 verknüpfen; die Übersicht ohne erfundene Technik oder Therapieanspruch halten.
+- [x] Die gemeinsame Überschrift der Methodenkarten auf „Praxisrahmen“ präzisieren, damit quellengebundene Einordnungen ohne Schrittfolge nicht als konkrete Anleitungen erscheinen.
 - [x] Veraltete `UNKLARHEITEN.md`-Aussage zum Platzhalter-/Psychoneuroimmunologie-Konzept als historischen Stand kennzeichnen und von offenen Entscheidungen im aktuellen Ausbildungsmodul abgrenzen.
 - [x] Hinweis unter der Methodenliste mit allen vier Themenbereichen ohne vollständige Anleitung abgleichen.
 - [x] Google-Drive-Suche nach eigenständigen Mentaltraining-, AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.

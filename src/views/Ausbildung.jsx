@@ -848,7 +848,7 @@ export default function Ausbildung({ onNavigate }) {
       '', `Datum des Exports: ${localToday()}`, '',
       '## Stundenziel', plan.focus || '_Noch nicht formuliert._', '',
       '## Schwerpunktmethode', plan.method || '_Keine Methode ausgewählt._',
-      ...(selectedMethod ? [`\n**Fokus:** ${selectedMethod.focus}`, `\n**Anleitung und Anpassung:** ${selectedMethod.practice} ${selectedMethod.adapt}`, `\n**Quelle:** ${selectedMethod.source}`] : []),
+      ...(selectedMethod ? [`\n**Fokus:** ${selectedMethod.focus}`, `\n**Praxisrahmen und Anpassung:** ${selectedMethod.practice} ${selectedMethod.adapt}`, `\n**Quelle:** ${selectedMethod.source}`] : []),
       '', '## Stundenablauf',
       ...plan.blocks.flatMap((block, index) => [`### ${index + 1}. ${block.name} · ${block.minutes} Min.`, block.detail || '', '']),
       '## Vorbereitung',
@@ -1071,7 +1071,7 @@ export default function Ausbildung({ onNavigate }) {
           {method.durationSource && <p className="mt-1 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Dauerquelle: {method.durationSource}</p>}
           <h2 className="mt-1 text-xl font-black">{method.name}</h2>
           <div className="mt-4 rounded-xl p-3 text-sm font-semibold" style={{ background: 'var(--bg2)' }}>{method.focus}</div>
-          <h3 className="mt-4 text-sm font-bold">Anleitungsidee</h3>
+          <h3 className="mt-4 text-sm font-bold">Praxisrahmen</h3>
           <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{method.practice}</p>
           <h3 className="mt-4 text-sm font-bold">Anpassung & Selbstbestimmung</h3>
           <p className="mt-1 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>{method.adapt}</p>
