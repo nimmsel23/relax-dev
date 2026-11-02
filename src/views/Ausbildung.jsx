@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { BookOpen, ClipboardList, Download, Upload, Plus, Check, Clock3, Wind, HeartPulse, Sparkles, Play, Pause, SkipBack, SkipForward, Square } from 'lucide-react'
 import { getRelaxSession, getRelaxSessionHistory, saveRelaxSession } from '@db'
 import { downloadText, localToday } from '../lib/db/shared/utils.js'
+import { TEACHING_SCRIPT_KEY, PRANAYAMA_ASSIGNMENT_KEY } from '../lib/training/storage.js'
 
 const METHODS = [
   { name: 'Atemschulung', duration: '15–20 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“ (erstellt 6. März 2026); das Atemschulungs-PDF selbst nennt keine Dauer.', icon: Wind, focus: 'Atem wahrnehmen und ruhig begleiten', practice: 'Das Kursskript schlägt vor, die Hände auf den Bauch zu legen und die Ein- und Ausatmung wahrzunehmen (S. 48). Ein bequemes Ausatmen ohne festes Zähltempo kann als App-Ergänzung angeboten werden; Atempausen und Rhythmen bleiben freiwillig.', adapt: 'Bei Schwindel, Unruhe oder Atemnot sofort zum natürlichen Atem zurückkehren. Keine forcierte Atmung oder langen Atemhalte als Entspannungsübung anleiten.', source: 'FlexyFit Academy: Atemschulung, S. 48; Stundenplanung, S. 8–12' },
@@ -427,7 +428,7 @@ const DELIVERY_STORAGE_KEY = 'relax-training-delivery-v1'
 const METHOD_REFLECTION_KEY = 'relax-method-reflections-v1'
 const LEARNING_CHECK_KEY = 'relax-learning-check-v1'
 const MODULE_BACKUP_FORMAT = 'relax-ausbildung-arbeitsstand'
-const MODULE_BACKUP_KEYS = [STORAGE_KEY, CASE_STORAGE_KEY, DELIVERY_STORAGE_KEY, STRESS_REFLECTION_KEY, METHOD_REFLECTION_KEY, LEARNING_CHECK_KEY]
+const MODULE_BACKUP_KEYS = [STORAGE_KEY, CASE_STORAGE_KEY, DELIVERY_STORAGE_KEY, STRESS_REFLECTION_KEY, METHOD_REFLECTION_KEY, LEARNING_CHECK_KEY, TEACHING_SCRIPT_KEY, PRANAYAMA_ASSIGNMENT_KEY]
 const METHOD_REFLECTION_FIELDS = [
   ['experience', 'Eigene Erfahrung', 'Was hast du bei der tatsächlich durchgeführten oder besuchten Methode wahrgenommen? Was war angenehm, ungewohnt oder offen?'],
   ['conditions', 'Hilfreiche Bedingungen und Anpassungen', 'Welche Rahmenbedingungen, Wahlmöglichkeiten oder Anpassungen haben deine Teilnahme unterstützt?'],
@@ -465,17 +466,25 @@ function emptyCasePlan() {
 }
 
 function csvCell(value) { return `"${String(value ?? '').replaceAll('"', '""')}"` }
-function validateModuleBackup(backup) {
-  if (!backup || backup.format !== MODULE_BACKUP_FORMAT || backup.version !== 1 || !backup.data || typeof backup.data !== 'object' || Array.isArray(backup.data)) return false
-  if (MODULE_BACKUP_KEYS.some(key => !Object.hasOwn(backup.data, key))) return false
-  if (Object.keys(backup.data).some(key => !MODULE_BACKUP_KEYS.includes(key))) return false
-  const { [STORAGE_KEY]: plan, [CASE_STORAGE_KEY]: casePlan, [DELIVERY_STORAGE_KEY]: delivery, [STRESS_REFLECTION_KEY]: stress, [METHOD_REFLECTION_KEY]: methods, [LEARNING_CHECK_KEY]: learning } = backup.data
+function normalizeModuleBackup(backup) {
+  if (!backup || backup.format !== MODULE_BACKUP_FORMAT || !backup.data || typeof backup.data !== 'object' || Array.isArray(backup.data)) return null
+  if (backup.version === 1) {
+    const originalKeys = MODULE_BACKUP_KEYS.filter(key => key !== TEACHING_SCRIPT_KEY && key !== PRANAYAMA_ASSIGNMENT_KEY)
+    if (Object.keys(backup.data).length !== originalKeys.length || originalKeys.some(key => !Object.hasOwn(backup.data, key))) return null
+    backup = { ...backup, version: 2, data: { ...backup.data, [TEACHING_SCRIPT_KEY]: '', [PRANAYAMA_ASSIGNMENT_KEY]: null } }
+  }
+  if (backup.version !== 2) return null
+  if (MODULE_BACKUP_KEYS.some(key => !Object.hasOwn(backup.data, key))) return null
+  if (Object.keys(backup.data).some(key => !MODULE_BACKUP_KEYS.includes(key))) return null
+  const { [STORAGE_KEY]: plan, [CASE_STORAGE_KEY]: casePlan, [DELIVERY_STORAGE_KEY]: delivery, [STRESS_REFLECTION_KEY]: stress, [METHOD_REFLECTION_KEY]: methods, [LEARNING_CHECK_KEY]: learning, [TEACHING_SCRIPT_KEY]: breathingScript, [PRANAYAMA_ASSIGNMENT_KEY]: pranayama } = backup.data
   const isObject = value => value !== null && typeof value === 'object' && !Array.isArray(value)
-  return isObject(plan) && typeof plan.title === 'string' && Array.isArray(plan.blocks)
+  const valid = isObject(plan) && typeof plan.title === 'string' && Array.isArray(plan.blocks)
     && isObject(casePlan) && Array.isArray(casePlan.weeks) && casePlan.weeks.length === 4 && isObject(casePlan.dayCycle)
     && (delivery === null || (isObject(delivery) && Array.isArray(delivery.blocks) && delivery.blocks.length > 0 && Number.isInteger(delivery.index) && delivery.index >= 0 && delivery.index < delivery.blocks.length && Number.isFinite(delivery.remaining) && delivery.remaining >= 0 && typeof delivery.running === 'boolean' && (!delivery.running || Number.isFinite(delivery.endsAt))))
     && isObject(stress) && isObject(methods)
     && isObject(learning) && Number.isInteger(learning.index) && learning.index >= 0 && learning.index <= LEARNING_CHECK.length && Number.isInteger(learning.score) && learning.score >= 0 && learning.score <= LEARNING_CHECK.length
+    && typeof breathingScript === 'string' && (pranayama === null || (isObject(pranayama) && typeof pranayama.technique === 'string' && ['script', 'rehearsal', 'groupPractice', 'feedback'].every(field => typeof pranayama[field] === 'string')))
+  return valid ? backup : null
 }
 function restoreDelivery() {
   try {
@@ -742,8 +751,10 @@ export default function Ausbildung() {
         [STRESS_REFLECTION_KEY]: stressReflection,
         [METHOD_REFLECTION_KEY]: methodReflections,
         [LEARNING_CHECK_KEY]: learningCheck,
+        [TEACHING_SCRIPT_KEY]: localStorage.getItem(TEACHING_SCRIPT_KEY) || '',
+        [PRANAYAMA_ASSIGNMENT_KEY]: JSON.parse(localStorage.getItem(PRANAYAMA_ASSIGNMENT_KEY) || 'null'),
       }
-      const backup = { format: MODULE_BACKUP_FORMAT, version: 1, exportedAt: new Date().toISOString(), data }
+      const backup = { format: MODULE_BACKUP_FORMAT, version: 2, exportedAt: new Date().toISOString(), data }
       downloadText(`relax-ausbildung-arbeitsstand-${localToday()}.json`, JSON.stringify(backup, null, 2), 'application/json;charset=utf-8')
       notify('Ausbildungs-Arbeitsstand exportiert.')
     } catch {
@@ -761,15 +772,15 @@ export default function Ausbildung() {
       return
     }
     try {
-      const backup = JSON.parse(await file.text())
-      if (!validateModuleBackup(backup)) throw new Error('invalid backup')
+      const backup = normalizeModuleBackup(JSON.parse(await file.text()))
+      if (!backup) throw new Error('invalid backup')
       if (!window.confirm('Dieser Ausbildungs-Arbeitsstand ersetzt die lokalen Arbeitsblätter und den Timer auf diesem Gerät. Der formale Praxisnachweis bleibt separat. Fortfahren?')) return
       const previous = Object.fromEntries(MODULE_BACKUP_KEYS.map(key => [key, localStorage.getItem(key)]))
       try {
         for (const key of MODULE_BACKUP_KEYS) {
           const value = backup.data[key]
           if (value === null) localStorage.removeItem(key)
-          else localStorage.setItem(key, JSON.stringify(value))
+          else localStorage.setItem(key, key === TEACHING_SCRIPT_KEY ? value : JSON.stringify(value))
         }
       } catch (error) {
         for (const key of MODULE_BACKUP_KEYS) {
@@ -888,7 +899,7 @@ export default function Ausbildung() {
     {section === 'start' && <>
       <section className="rounded-2xl border p-4" style={panel} aria-labelledby="module-backup-title">
         <div className="flex items-start gap-3">
-          <div className="min-w-0 flex-1"><h2 id="module-backup-title" className="font-bold">Arbeitsstand auf ein anderes Gerät mitnehmen</h2><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Sichert Stundenentwurf, Fallaufgabe, Lerncheck, Reflexionen und einen pausierten oder laufenden Timer als JSON-Datei. Die Datei lässt sich auf iPhone, iPad oder Rechner übertragen und dort wiederherstellen.</p></div>
+          <div className="min-w-0 flex-1"><h2 id="module-backup-title" className="font-bold">Arbeitsstand auf ein anderes Gerät mitnehmen</h2><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Sichert Stundenentwurf, Fallaufgabe, Lerncheck, Reflexionen, Atemschulungs-Arbeitsblätter und einen pausierten oder laufenden Timer als JSON-Datei. Die Datei lässt sich auf iPhone, iPad oder Rechner übertragen und dort wiederherstellen.</p></div>
           <button type="button" onClick={exportModuleBackup} className="shrink-0 inline-flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}><Download size={15} /> Sichern</button>
         </div>
         <label htmlFor="module-backup-file" className="mt-3 inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}><Upload size={16} /> Sicherung wiederherstellen</label>

@@ -6,12 +6,11 @@ import { CATEGORIES, PATTERNS, patternsByCategory, getPattern, cycleSeconds, rou
 import BreathPlayer, { KIND_COLOR } from '../components/breath/BreathPlayer.jsx'
 import { loadPrefs, savePrefs } from '../lib/breath/prefs.js'
 import { isBreathTechnique } from '../lib/breath/stats.js'
+import { TEACHING_SCRIPT_KEY, PRANAYAMA_ASSIGNMENT_KEY } from '../lib/training/storage.js'
 
 const ICONS = { Wind, Moon, Target, Zap, LifeBuoy }
 const DURATIONS = [1, 3, 5, 10]
 const MOOD = ['😞', '😕', '😐', '🙂', '😄']
-const TEACHING_SCRIPT_KEY = 'relax-breath-teaching-script-v1'
-const PRANAYAMA_ASSIGNMENT_KEY = 'relax-pranayama-assignment-v1'
 const PRANAYAMA_TECHNIQUES = [
   'Anuloma Pranayama · Wechselatmung',
   'Bhastrika Pranayama · Blasebalgatmung',

@@ -1,6 +1,7 @@
 # Ausbildungsarbeitsstand zwischen Geräten übertragen (2026-11-02)
 
-- Der Modulstart kann Stundenentwurf, Vier-Wochen-Fallaufgabe, Lerncheck, persönliche Reflexionen und den pausierten oder laufenden Timer gemeinsam als versionierte JSON-Datei sichern und auf einem anderen Gerät wiederherstellen.
+- Der Modulstart kann Stundenentwurf, Vier-Wochen-Fallaufgabe, Lerncheck, Reflexionen, die beiden Atemschulungs-Arbeitsblätter und den pausierten oder laufenden Timer gemeinsam als versionierte JSON-Datei sichern und auf einem anderen Gerät wiederherstellen.
+- Die Local-Storage-Schlüssel der Atemschulungsaufgaben sind zentral definiert und werden von Ausbildungsansicht und Atemtrainer gemeinsam verwendet. Schema-Version 2 importiert außerdem frühere Version-1-Sicherungen mit leeren Atemschulungsfeldern.
 - Der Import prüft Format und Grundstruktur, fragt vor dem Ersetzen des lokalen Arbeitsstands nach und rollt lokale Schlüssel bei einem Speicherfehler zurück. Der formale Praxisnachweis bleibt im Session-Speicher und wird nicht Teil der Sicherungsdatei.
 - `pnpm run build` scheiterte vor Vite an der schreibgeschützten pnpm-Engine-Store-Lockdatei (`ERR_PNPM_STORE_DIR_OPEN_OPERATION_LOCK`); der gleiche Projekt-Build lief mit dem vorhandenen `npm run build` erfolgreich durch (Vite und PWA-Service-Worker). `git diff --check` ist sauber; kein Test ausgeführt.
 
