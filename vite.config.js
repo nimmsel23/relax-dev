@@ -8,8 +8,11 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const BACKEND = process.env.VITE_COACH_API_URL || 'http://127.0.0.1:9150'
 
-export default defineConfig({
-  base: './',
+export default defineConfig(({ command }) => ({
+  // Tailscale Serve/Funnel mounts this dev server beneath /relax/. Vite's
+  // injected HMR client must use that prefix too; production builds stay
+  // relative so the Firebase PWA remains mountable under any path.
+  base: command === 'serve' ? '/relax/' : './',
   resolve: {
     alias: {
       // Standalone-Default: API wird von Coach :9150 bereitgestellt. Im vitalos-Firebase-Build biegt
@@ -87,4 +90,4 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   }
-})
+}))

@@ -34,7 +34,7 @@ pnpm run preview  # Test prod build locally
 ```
 
 **Ports:**
-- UI (Vite + HMR): `http://localhost:5903`
+- UI (Vite + HMR): `http://localhost:5903/relax/` (mounted path, also used by Tailscale)
 - API (Coach): `http://localhost:9150/relax-api/health`
 
 ### Cloud-Entwicklung (ohne eigenen Rechner)
