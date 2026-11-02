@@ -23,6 +23,7 @@
 - [x] Den separaten Abschnitt Faszientraining/SMR aus demselben PDF ergänzen und den knappen Umfang der verfügbaren Praxisanleitung kennzeichnen.
 - [x] Entspannungsbegriff aus dem Stresstheorie-Skript und das Ausdauer-Kursprofil mit Belastungsgefühl, Beispieldauern und individuellem Rahmen sichtbar machen.
 - [x] Vollständiges Ausdauer-Kapitel (S. 4–24) quellenkritisch abbilden: Einsatz-/Wirkungsfelder, Kursrichtwerte und praktische Varianten als Lehrinhalte kennzeichnen.
+- [x] Ernährungs-Pflichtaufgabe um eine seitenbezogene Materialübersicht zu Essverhalten, Lebensmittelgruppen, Supplementen und Kräutern ergänzen; Gesundheitsversprechen und Einnahmeangaben als nicht verifizierte Kursinhalte abgrenzen.
 - [x] Ernährungsarbeitsblatt mit den drei Skriptkategorien Brain Food, Power Food und Soul Food ergänzen und für den Markdown-Export berücksichtigen.
 - [x] Das Skript „Entspannung & Wirbelsäule“ mit Schmerzverständnis, psychosozialem Kontext und psychologischer Bewältigung als Theorie sowie Körper-, Atemraum-, Bewegungs- und Standwahrnehmung in der Methodenbibliothek abbilden; Selbsttests und Medikamentenhinweise nicht als Traineranleitung ausgeben.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.

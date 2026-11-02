@@ -1,3 +1,9 @@
+# Ernährungs-Pflichtaufgabe mit Quellenübersicht erweitert (2026-11-02)
+
+- Aufklappbare Übersicht im Fallkonzept ergänzt: Essverhalten bei Stress, Brain-Food-Beispiele, Power-Food-Kapitel, Supplemente sowie Naturheilmittel und Rezepte mit Seitenbereichen.
+- Gesundheitsbehauptungen und Einnahmeangaben werden als Inhalte der Vorlage kenntlich gemacht und nicht als bestätigte Wirkung oder Trainerempfehlung dargestellt.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
