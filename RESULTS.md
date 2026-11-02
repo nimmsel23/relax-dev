@@ -101,6 +101,12 @@
 - Die Quellenmatrix deckt jetzt S. 24–39 ab. Beckenuhr (S. 35–36) und Druckpunkte (S. 32) haben korrigierte Seitenbezüge.
 - TODO aktualisiert.
 
+# Ausdauer-Kapitel bis S. 26 vervollständigt (2026-11-02)
+
+- Das 27-seitige PDF enthält nach der bisherigen Abdeckung bis S. 24 weitere Kursbeispiele: Wassersport, Mannschaftssport, Naturerlebniswege und Bewegungsparks (S. 25–26).
+- Die Karte führt diese mit Fundstellen auf und kennzeichnet Flow als mögliches individuelles Erleben statt als Ergebnis.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.
