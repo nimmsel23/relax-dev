@@ -674,3 +674,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Zwischenstand, aktuelle Antwort und Punktzahl des Lernchecks bleiben lokal erhalten und werden beim erneuten Öffnen fortgesetzt.
 - Die Ansicht kennzeichnet die lokale Speicherung; ein bewusster Neustart setzt den Lerncheck weiterhin zurück.
+
+# Stundenentwurf als Markdown exportierbar (2026-11-02)
+
+- Der Export enthält Ziel, Methode samt Ausbildungsbezug und Quelle, alle Zeitblöcke, Vorbereitungsstatus und Nachreflexion.
+- Der Entwurf lässt sich damit für die Kursvorbereitung außerhalb des lokal speichernden Browsers mitnehmen.

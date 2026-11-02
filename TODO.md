@@ -18,6 +18,7 @@
 - [x] Startansicht als durchgängigen Lernpfad von Grundlagen und Lerncheck bis Reflexion, Fallaufgabe, Stundenplanung und Praxisnachweis verknüpfen; die Abfolge als App-Orientierung statt offizielle Prüfungsreihenfolge kennzeichnen.
 - [x] Methodenwissen mit dem Atemtrainer und dem Nachweisfluss verknüpfen.
 - [x] Planbare Stundenabschnitte mit einem pausierbaren Durchführungs-Timer verbinden.
+- [x] Den Stundenentwurf einschließlich Zeitblöcken, Methodenbezug, Vorbereitung und Reflexion als Markdown exportieren.
 - [x] Die gewählte Schwerpunktmethode samt Anleitungshinweis, Anpassung und Kursquelle aus dem Stundenentwurf in den gespeicherten Durchführungs-Timer übernehmen.
 - [x] Nach bewusstem Timer-Abschluss einen unbestätigten Nachweis-Entwurf mit Datum und Schwerpunktmethode vorbereiten; Zählung weiterhin erst nach separater Selbstbestätigung.
 - [x] Vorhandene Tages-Sessions nach ausdrücklicher Selbstbestätigung in den Ausbildungsnachweis übernehmen; Export an 30-Zeilen-Vorlage anlehnen.
