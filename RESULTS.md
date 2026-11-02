@@ -1,3 +1,8 @@
+# Lokale Themenübersicht zum Autogenen Training erschlossen (2026-11-02)
+
+- Die AT-Methodenkarte führt jetzt die Themen aus der lokalen MOC-Notiz auf: Grund-, Mittel- und Oberstufe sowie Ruhe-, Schwere-, Wärme-, Atem-, Herz-, Bauch- und Stirnübungen.
+- Die Notiz ist ausdrücklich als persönliche Themenübersicht gekennzeichnet; konkrete Formeln und Schrittfolgen fehlen weiterhin. Quellenmatrix und TODO aktualisiert.
+
 # Anfangsritual im Stundenentwurf konkretisiert (2026-11-02)
 
 - Der Einleitungsblock nennt jetzt die drei Schritte des Kursrituals aus „Stundenplanung“, S. 22: bewusste Entscheidung, Entspannungsposition und Innenwendung der Aufmerksamkeit.

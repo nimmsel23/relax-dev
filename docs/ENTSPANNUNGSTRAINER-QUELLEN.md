@@ -25,6 +25,8 @@ Stand: 2026-11-02. Die App fasst Ausbildungsinhalte zusammen; die PDFs selbst li
 
 Weitere lokale Vertiefungsnotizen enthalten persönliche, nachträglich ergänzte und teils weitergehende Aussagen (z. B. Wirkversprechen zu Pranayama/Vagotonus). Sie sind keine eigenständigen FlexyFit-Originalskripte. Für Kurszuordnung und Praxisangaben haben die Original-PDFs Vorrang; nur klar als lokal gekennzeichnete Dauer-Richtwerte werden zusätzlich verwendet.
 
+Die lokale MOC-Notiz `MOC-Dipl.Entspannungstrainer.md` enthält ergänzend eine Themenliste zum Autogenen Training (Grund-, Mittel- und Oberstufe sowie mehrere Übungsfelder). Sie liefert keine konkreten Formeln oder Anleitungsschritte und wird in der App daher nur als persönliche Themenübersicht ausgewiesen.
+
 Das lokale PMR-Handout `Progressive Muskelrelaxation Handout.pdf` ist kein als FlexyFit-Original ausgewiesenes Skript; es nennt selbst eine externe Quelle. Die App kennzeichnet die geführte Langform entsprechend.
 
 ## Abgrenzung
