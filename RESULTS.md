@@ -640,3 +640,7 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Ausbildungs-MOC nennt ein Mentaltraining-Kapitel mit Visualisierung, Autosuggestion, Ankern, Zielsetzung, Eberspächer und ideomotorischen Themen; diese Themen waren bisher nicht als eigene Methodenkarte auffindbar.
 - Neue Karte und Lerncheck-Frage erschließen die Überschriften, kennzeichnen aber das fehlende Mentaltraining-Skript und erfinden keine Übungsfolge. Ein gleichlautender Visualisierungsbegriff im Wirbelsäulen-PDF bleibt als anatomische Anschauung abgegrenzt.
+
+# Offene Anleitungsquellen um Mentaltraining ergänzt (2026-11-02)
+
+- TODO, Quellenmatrix und Quellenabgrenzung führen Mentales Training jetzt neben AT, Fantasiereisen und Meditation als fehlende methodenspezifische Anleitung. Die Themenkarte aus der MOC wird nicht mit einem Kurs-Anleitungsskript verwechselt.

@@ -7,10 +7,10 @@
 - [x] Didaktik, Grundlagen, Stundenplanung, Methodenorientierung und 30-Einheiten-Nachweis in einen nutzbaren App-Ablauf integrieren.
 - [x] Kursquellen-Inventar aktualisiert: Hauptskripte und Aufgaben-PDFs liegen im separaten Archiv `Dokumente/FlexyFit-ACADEMY/_Entspannungstrainer/`; die Modulnotizen enthalten zusätzlich Zusammenfassungen.
 - [x] Methodenbeschreibungen gegen die vorhandenen Original-PDFs prüfen und belegte Seitenbereiche direkt auf den Methodenkarten sichtbar machen; unbelegte Anleitungen und Dauerangaben als solche kennzeichnen.
-- [ ] Für Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
+- [ ] Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegt noch kein spezifisches Anleitungs-PDF im Archiv; die Themenkarten bleiben Übersichten, konkrete Ablaufkarten erst nach Bereitstellung geeigneter Kursmaterialien erstellen.
 - [x] Die ergänzende lokale MOC-Themenliste zum Autogenen Training als solche in der Methodenkarte erschließen, ohne sie zu einer Originalanleitung aufzuwerten.
 - [x] Mentaltraining-Themen aus der Ausbildungs-MOC in einer eigenen Übersichtskarte erschließen und fehlende Originalanleitung von der anatomischen Visualisierung im Wirbelsäulen-Skript abgrenzen.
-- [x] Google-Drive-Suche nach eigenständigen AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
+- [x] Google-Drive-Suche nach eigenständigen Mentaltraining-, AT-, Fantasiereisen- und Meditations-Anleitungen durchgeführt; Treffer waren MOC-/Themenübersichten ohne konkrete Schrittfolgen.
 - [x] Persönliche Entspannungs-Sitzungsnotizen und die erweiterte Atemnotiz gegen Original-Kursquellen abgrenzen, damit eigene Praxis und unbelegte Erweiterungen nicht als FlexyFit-Anleitungen erscheinen.
 - [x] Dashboard und Tagesprotokoll mit dem Ausbildungsnachweis verbinden und die beiden Speicherzwecke kenntlich machen.
 - [x] Selbsterfahrung direkt an Methoden-Karten mit lokalem Reflexionsbogen erfassen und getrennt vom formalen 30-Einheiten-Nachweis halten.
@@ -26,7 +26,7 @@
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gegen die Original-PDFs prüfen und in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
 - [x] Korrekte Antwortpositionen im Lerncheck deterministisch verteilen, damit die Lösung nicht aus einem wiederkehrenden Positionsmuster geraten werden kann.
-- [x] Lerncheck um quellgebundene Fragen zu Yoga, Pilates, den fünf Tibetern und der abweichenden PMR-Gruppenliste erweitern; fehlende AT-/Fantasiereisen-Schrittfolgen als Quellenkompetenz abfragen.
+- [x] Lerncheck um quellgebundene Fragen zu Yoga, Pilates, den fünf Tibetern und der abweichenden PMR-Gruppenliste erweitern; fehlende Schrittfolgen bei Mentaltraining, AT und Fantasiereisen als Quellenkompetenz abfragen.
 - [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
 - [x] Die vorgegebenen Verdauungs- und Schlafbeschwerden im Fallarbeitsblatt als Anlass für gemeinsame Präventionsziele, ohne Heil-/Abnehmversprechen und mit Hinweis auf medizinische Abklärung bei anhaltenden Beschwerden, einordnen.
 - [x] Projektvision, aktive nächste Schritte und Agentenhinweise auf das Ausbildungsmodul als Produktziel ausrichten; Physiologie-/Katalogbereiche als unterstützende Zusatzbereiche einordnen.
@@ -46,14 +46,14 @@
 - [x] Alle Wahrnehmungsübungen des Wirbelsäulen-Praxisteils einschließlich Wohlfühlkreis, Druckpunkte, Beckenuhr und Bewegungsfreude mit Seitenbezug erfassen; taktile Partnerübungen klar an freiwillige Zustimmung binden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [x] Das FlexyFit-PMR-Kursskript (S. 3–28) zusätzlich zur lokalen Handout-Langform abbilden: Methode, Vorbereitung, Kurszeiten, Gruppenabfolge, Rückführung und Nachexploration; abweichende 16-Schritte-Listen kennzeichnen.
-- [ ] Weitere methodenspezifische Abläufe für Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
+- [ ] Weitere methodenspezifische Abläufe für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation ergänzen, falls passende Originalanleitungen verfügbar werden.
 - [x] Druck-/PDF-Ansicht für den 30-Zeilen-Praxisnachweis an die Spalten des offiziellen Trainingsprotokolls angleichen.
 - [x] Arbeitsstand der Pflichtaufgabe sichtbar machen: Ziele, jede Wochenroutine, Tageszyklus und Ernährungskapitel auf ausgefüllte Felder prüfen.
 - [x] Quellkritische Hinweise zu Lebensmitteln gegen Stress, Power-Food-Werbung und Nahrungsergänzung direkt am Ernährungsarbeitsblatt mit PDF-Seitenangaben sichtbar machen.
 - [x] Kursbasierte Atemübungen von ergänzenden App-Rhythmen unterscheiden und Bhramari/Sama Vritti mit Fundstelle im Atemschulungs-PDF markieren.
 - [x] Nicht kursbelegte PNI- und physiologische Wirkversprechen im Atemtrainer entfernen; Rhythmus als Übungsvorgabe ohne Mess- oder Wirkungszusage kennzeichnen.
 - [x] Unbelegte „fünf Minuten, zwei- bis dreimal täglich“-Dosierung aus dem Atemtrainer entfernt; S. 48 des Original-PDFs nennt Atemwahrnehmung und Vorbereitung eines eigenen Anleitungstextes, aber keine Frequenz oder Dauer.
-- [x] Dauer-Richtwerte aus der separaten lokalen Kursprotokollnotiz wieder eingebunden und von PDF-Angaben getrennt; fehlende Schritt-für-Schritt-Anleitungen für AT, Fantasiereisen und Meditation bleiben kenntlich.
+- [x] Dauer-Richtwerte aus der separaten lokalen Kursprotokollnotiz wieder eingebunden und von PDF-Angaben getrennt; fehlende Schritt-für-Schritt-Anleitungen für Mentaltraining, AT, Fantasiereisen und Meditation bleiben kenntlich.
 - [x] Kursquellen, Seitenbereiche, App-Abbildungen und Grenzen der nicht mitgelieferten bzw. fehlenden Anleitungen in einer Quellenmatrix zusammengeführt.
 - [x] Schreibaufgabe zur Bauchatmung aus Atemschulung S. 48 als lokal gespeichertes Arbeitsfeld mit Markdown-Export im Atemtrainer abbilden.
 - [x] Die persönliche Selbstreflexion aus Stresstheorie S. 32–44 als freiwilliges, lokal gespeichertes SORKC-Arbeitsblatt mit Markdown-Export abbilden und die Modellbegriffe am Kursskript ausrichten.
