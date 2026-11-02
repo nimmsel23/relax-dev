@@ -39,15 +39,22 @@ const METHODS = [
     ['Shavasana · Totenstellung · S. 67–69', 'Abschlussruhe am Ende der Yogaeinheit; das Skript nennt 5–15 Minuten und freie Atmung.'],
     ['Sukhasana · bequemer Sitz · S. 70–72', 'Aufgerichtete, schmerzfreie Sitzhaltung für Atemübungen und Meditation; Decke oder Block können unterstützen.'],
   ] },
-  { name: 'Pilates · Basisprogramm', duration: '30–60 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“; das Originalskript enthält Übungsbeschreibungen, aber keine Dauer für eine Einheit.', icon: HeartPulse, focus: 'Zentrum, Atmung und kontrollierte Ganzkörperbewegung verbinden', practice: 'Das Originalskript ordnet das Basisprogramm nach acht Bewegungskategorien. Es verbindet Körperzentrum, Atem, Haltung und Bewegung mit funktionalen Bewegungsaufgaben.', adapt: 'Die Übersicht ersetzt keine praktische Einschulung. Übungen an Gruppe und Ziel anpassen; Bewegungsqualität und Wahlmöglichkeiten berücksichtigen.', source: 'FlexyFit Academy: Grundübungen Pilates, S. 17–21', outlineTitle: 'Acht Kategorien aus dem Originalskript', outline: [
-    ['Rückenlage', 'Körperzentrum wahrnehmen und Atmung mit kontrollierten Arm- oder Beinbewegungen verbinden.'],
-    ['Seitlage', 'Stabilisation und axiale Länge mit einer kleineren Unterstützungsfläche üben.'],
-    ['Sitz', 'Aufrichtung, Rumpforganisation und ruhige Atmung erkunden.'],
-    ['Bauchlage', 'Rumpfbewegung mit Schwerpunkt Rücken und kontrollierter Extension.'],
-    ['Stütz / Gewichtsübernahme der Arme', 'Arme und Rumpf verbinden; Stützkraft und Kopf-Nacken-Organisation beachten.'],
-    ['Ganzkörperintegration', 'Unterschiedliche Körperabschnitte koordiniert und kontrolliert bewegen.'],
-    ['Überkopforganisation', 'Umkehrhaltungen; laut Kursnotiz nur mit ausreichender Beweglichkeit und dynamischer Stabilität.'],
-    ['Stand', 'Ausrichtung und Gleichgewicht als Grundlage natürlicher Fortbewegung wahrnehmen.'],
+  { name: 'Pilates · Basisprogramm', duration: '30–60 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“; das Originalskript enthält Übungsbeschreibungen, aber keine Dauer für eine Einheit.', icon: HeartPulse, focus: 'Zentrum, Atmung und kontrollierte Ganzkörperbewegung verbinden', practice: 'Das Originalskript ordnet das Basisprogramm nach acht Bewegungskategorien und führt anschließend eine Übungssammlung mit Ausgangsstellungen, Durchführung und Fehlerquellen auf. Die Übersicht erschließt beide Teile, ersetzt aber keine praktische Einschulung.', adapt: 'Übungen an Gruppe und Ziel anpassen; Bewegungsqualität und Wahlmöglichkeiten berücksichtigen. Die gelisteten Fehlerquellen sind Kurslernhinweise, keine Diagnosehilfe.', source: 'FlexyFit Academy: Grundübungen Pilates, S. 17–21, 24–97', outlineTitle: 'Acht Kategorien aus dem Originalskript', outline: [
+    ['1 · Rückenlage · S. 18', 'Körperzentrum wahrnehmen und Atmung mit kontrollierten Arm- oder Beinbewegungen verbinden.'],
+    ['2 · Seitlage · S. 19', 'Stabilisation und axiale Länge mit einer kleineren Unterstützungsfläche üben.'],
+    ['3 · Sitz · S. 19', 'Aufrichtung, Rumpforganisation und ruhige Atmung erkunden.'],
+    ['4 · Bauchlage · S. 20', 'Rumpfbewegung mit Schwerpunkt Rücken und kontrollierter Extension.'],
+    ['5 · Gewichtsübernahme der oberen Extremitäten · S. 20', 'Arme und Rumpf verbinden; Stützkraft und Kopf-Nacken-Organisation beachten.'],
+    ['6 · Ganzkörperintegration · S. 20', 'Unterschiedliche Körperabschnitte koordiniert und kontrolliert bewegen.'],
+    ['7 · Überkopforganisation · S. 21', 'Umkehrhaltungen; das Skript nennt Beweglichkeit und dynamische Stabilität als Voraussetzungen.'],
+    ['8 · Stand · S. 21', 'Ausrichtung und Gleichgewicht als Grundlage natürlicher Fortbewegung wahrnehmen.'],
+  ], outlineExtraTitle: 'Übungssammlung im Skript · nach Ausgangsposition', outlineExtra: [
+    ['Rückenlage · S. 24–54', 'Pelvic Clock, Shoulder Drops, Chest Lift, Dead Bug, Side to Side, Bridging I, Roll Over I und Assisted Roll Up / Roll Down.'],
+    ['Seitlage · S. 55–66', 'Book Openings, Side-Kick Serie und Side Lift.'],
+    ['Sitz · S. 67–73', 'Spine Stretch I und Mermaid I.'],
+    ['Bauchlage · S. 74–84', 'Scarecrow, Swan und Dart.'],
+    ['Vierfüßlerstand · S. 85–88', 'Quadruped.'],
+    ['Weitere Übungen im Stand · S. 89–97', 'Roll Down und Standing Balance. Die Einzelseiten führen diese Übungen im Stand aus; eine Kategoriezuordnung wird dort nicht wiederholt.'],
   ] },
   { name: 'Stretching & Assisted Stretching', duration: '30 Min. / Ausklang 10–15 Min.', icon: Clock3, focus: 'Beweglichkeit achtsam und individuell erkunden', practice: 'Vor jeder Einheit aufwärmen und den Bewegungsumfang (ROM) testen. Eine entspannte Atmosphäre und ein Handtuch vorbereiten; Gelenke und Becken neutral halten, die eigene Körperhaltung beachten und fließend zwischen individuell gewählten Übungen wechseln. Atmung und Körpergefühl beachten: „Wollen ist gut – zu viel tut weh.“', adapt: 'Eignung, Tagesform und Einschränkungen vorher klären. Feedback und Wohlergehen laufend erfragen; Berührungen nur nach ausdrücklicher Zustimmung. Bei Schmerz oder Unsicherheit abbrechen oder eine andere Übung wählen.', source: 'FlexyFit Academy: Assisted Stretching, S. 30–35', outlineTitle: 'Dosierung laut Kursskript', outline: [
     ['Eigenständige Entspannungseinheit', '30-Minuten-Session; pro Muskel 2 × 15 Sekunden bei 7 RPE.'],
@@ -527,6 +534,7 @@ export default function Ausbildung() {
           {method.outline && <div className="mt-4 rounded-xl p-3" style={{ background: 'var(--bg2)' }}>
             <h3 className="text-sm font-bold">{method.outlineTitle}</h3>
             <div className="mt-3 space-y-3">{method.outline.map(([title, text]) => <div key={title}><div className="text-xs font-bold">{title}</div><p className="mt-0.5 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</p></div>)}</div>
+            {method.outlineExtra && <><h3 className="mt-5 border-t pt-4 text-sm font-bold" style={{ borderColor: 'var(--line)' }}>{method.outlineExtraTitle}</h3><div className="mt-3 space-y-3">{method.outlineExtra.map(([title, text]) => <div key={title}><div className="text-xs font-bold">{title}</div><p className="mt-0.5 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{text}</p></div>)}</div></>}
           </div>}
           {method.name === 'Entspannungsorientierte Ausdauer' && <div className="mt-4 rounded-xl p-3 text-xs leading-relaxed" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>Einzelne Entspannungseinheit und allgemeine Bewegungsempfehlung sind verschiedene Größen: Für Erwachsene nennt das österreichische Gesundheitsportal 150–300 Minuten Ausdauerbewegung mit mittlerer Intensität pro Woche sowie muskelkräftigende Übungen an mindestens zwei Tagen. <a href="https://www.gesundheit.gv.at/leben/bewegung/gesund-durch-sport/bewegungsempfehlungen-erwachsene.html" target="_blank" rel="noreferrer" className="font-semibold underline" style={{ color: 'var(--accent)' }}>Österreichische Bewegungsempfehlungen ↗</a></div>}
           <p className="mt-4 border-t pt-3 text-xs" style={{ borderColor: 'var(--line)', color: 'var(--dim)' }}>Ausbildungsbezug: {method.source}. Praxis immer an Person, Tagesform und Qualifikation anpassen.</p>

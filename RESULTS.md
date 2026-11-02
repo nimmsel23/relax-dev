@@ -304,3 +304,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Seitenabgleich des Originalskripts „Grundübungen Yoga“ (S. 6–72) ergab 22 Haltungen und Bewegungsformen; bisher zeigte die Karte zehn Beispiele.
 - Die Methodenkarte führt nun alle 22 mit Seitenbereichen und knapper Beschreibung. Ausfallschritt, Katze-Kuh und Viparita Karani sind entsprechend der Quelle als Bewegungsform bzw. Mudra abgegrenzt.
+
+## 2026-11-02 — Pilates-Basisprogramm mit Übungsregister verbunden
+
+- Der Seitenabgleich des Pilates-Originals bestätigte acht Kategorien (S. 17–21) und 19 benannte Übungsfolgen (S. 24–97).
+- Die Methodenkarte führt die Kategorien samt Fundstellen und listet die Bewegungen nach den im Skript beschriebenen Ausgangspositionen. Wo das PDF die Kategorien bei den späteren Einzelseiten nicht wiederholt, wird keine zusätzliche Zuordnung behauptet.
