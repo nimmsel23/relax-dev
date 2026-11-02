@@ -352,7 +352,14 @@ const LEARNING_CHECK = [
     why: 'In der beschriebenen Untersuchung aßen Stress-Hungerer in der positiven Situation mehr als die Stress-Esser; das Skript fasst dies als Kompensationsmuster auf (S. 20–23). Es ist ein Studienbericht und keine feste Regel für einzelne Personen.',
     source: 'Entspannung und Ernährung · S. 20–23',
   },
-]
+].map((question, index) => {
+  const offset = index % question.answers.length
+  return {
+    ...question,
+    answers: question.answers.map((_, choiceIndex) => question.answers[(choiceIndex + offset) % question.answers.length]),
+    correct: (question.correct - offset + question.answers.length) % question.answers.length,
+  }
+})
 const STORAGE_KEY = 'relax-training-plan-v1'
 const CASE_STORAGE_KEY = 'relax-stress-case-v1'
 const STRESS_REFLECTION_KEY = 'relax-stress-reflection-v1'

@@ -558,3 +558,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Der 30er-Zähler, die Protokollliste sowie CSV- und Druckexport enthalten nun nur Einheiten ab 15 Minuten mit `trainingUnit` und expliziter Bestätigung.
 - Ältere Sessions ohne gültige Bestätigung bleiben als prüfbare Kandidaten sichtbar, auch wenn ein alter Datensatz bereits `trainingUnit: true` markiert hatte.
 - Vite-Produktionsbuild und `git diff --check` erfolgreich.
+# Antwortmuster im Ausbildungs-Lerncheck aufgelöst (2026-11-02)
+
+- Die Antwortoptionen aller 22 Lerncheck-Fragen werden deterministisch rotiert; die korrekte Option und ihre Begründung/Quelle bleiben gekoppelt.
+- Vorher standen 17 von 22 korrekten Antworten an erster Stelle. Nach der Rotation verteilen sich die korrekten Positionen auf 8, 5 und 9 Fragen.
+- Vite-Produktionsbuild und `git diff --check` erfolgreich.

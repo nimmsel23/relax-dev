@@ -19,6 +19,7 @@
 - [x] Modulansicht vom Physio-/Catalog-Paket trennen, damit der Ausbildungsstart nur benötigte Ansichten lädt.
 - [x] Yoga-Asana-Beispiele und die acht Pilates-Bewegungskategorien gegen die Original-PDFs prüfen und in der Methodenbibliothek sichtbar machen.
 - [x] Grundlagen zu Stress- und Stundenplanung mit einem interaktiven Lerncheck samt Begründungen und Quellhinweisen verbinden.
+- [x] Korrekte Antwortpositionen im Lerncheck deterministisch verteilen, damit die Lösung nicht aus einem wiederkehrenden Positionsmuster geraten werden kann.
 - [x] Offizielle 4-Wochen-Pflichtaufgabe mit Zielsetzung, Wochenroutine, einem ausgearbeiteten Tageszyklus und Ernährungskapiteln als lokal gespeichertes, exportierbares Arbeitsblatt abbilden.
 - [x] Die vorgegebenen Verdauungs- und Schlafbeschwerden im Fallarbeitsblatt als Anlass für gemeinsame Präventionsziele, ohne Heil-/Abnehmversprechen und mit Hinweis auf medizinische Abklärung bei anhaltenden Beschwerden, einordnen.
 - [x] Projektvision, aktive nächste Schritte und Agentenhinweise auf das Ausbildungsmodul als Produktziel ausrichten; Physiologie-/Katalogbereiche als unterstützende Zusatzbereiche einordnen.
