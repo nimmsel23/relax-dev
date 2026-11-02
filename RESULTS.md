@@ -530,3 +530,7 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Der Atemtrainer enthält jetzt die Kursfrage aus der Gruppenarbeit (S. 4) und eine aufklappbare Übersicht zu Einatmung, Brust- und Bauchatmung (S. 9–14).
 - Die Anatomieangaben sind auf die Kursmechanik begrenzt und als Ausbildungsinhalt statt Diagnose- oder Behandlungshinweis markiert.
+# Konkrete Methode beim Sammelpunkt verpflichtend erfasst (2026-11-02)
+
+- Beim Praxisnachweis ist die konkrete unterstützende Praxis nun Pflicht, wenn „Weitere unterstützende Verfahren“ ausgewählt wird.
+- Browserseitige Pflichtfeldprüfung und zusätzliche Formularvalidierung verhindern einen generischen oder nur aus Leerzeichen bestehenden Eintrag.
