@@ -726,3 +726,7 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Die Master-MOC ordnet Autogenes Training der muskulären Ebene zu; das Stresstheorie-PDF nennt es auf S. 55 unter vegetativ. App-Karte und Lerncheck folgen dem PDF und weisen auf die MOC-Abweichung hin.
 - Die Master-MOC bündelt Pilates in sechs Gruppen; das Original-PDF trennt acht Kategorien. Methodenkarte und Quellenmatrix erklären die unterschiedliche Gruppierung.
 - Auch die Pilates-Übungsübersicht zählt unterschiedlich: 16 Einträge in der Master-MOC gegenüber 19 im Original-PDF und in der App.
+
+# Timer-Metazeile auf schmalen Displays angepasst (2026-11-02)
+
+- Die Timer-Kopfzeile verwendet unter der Small-Breakpoint eine kleinere Schrift, damit die Abschnittsanzahl bei 320 Pixeln nicht allein in eine neue Zeile rutscht.
