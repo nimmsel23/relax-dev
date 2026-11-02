@@ -107,6 +107,12 @@
 - Die Karte führt diese mit Fundstellen auf und kennzeichnet Flow als mögliches individuelles Erleben statt als Ergebnis.
 - Quellenmatrix und TODO aktualisiert.
 
+# Stressdefinition und Reaktionsschema ergänzt (2026-11-02)
+
+- Die Grundlagenansicht unterscheidet nun Stressor, Stressreaktion und subjektives Erleben (Stresstheorie S. 5) und enthält das Steinzeit-/Moderner-Mensch-Schema aus S. 10–13.
+- Das zugespitzte Schema ist ausdrücklich als Unterrichtsillustration und nicht als allgemeine Stressfolge oder individuelle Prognose eingeordnet.
+- Quellenmatrix und TODO aktualisiert.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.

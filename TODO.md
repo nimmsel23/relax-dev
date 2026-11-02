@@ -59,4 +59,5 @@
 - [x] Naturheilmittel S. 90–104 mit dem vollständigen Kräuterinventar und Johanniskraut-Wechselwirkungshinweis sowie die beiden Kräuterteemischungen S. 106–107 als Quellenstoff sichtbar machen, ohne Dosierungs- oder Einnahmeempfehlung auszugeben.
 - [x] Das Wirbelsäulen-Skript bis zum tatsächlichen Ende des Bewegungsfreude-Kapitels (S. 39) abgleichen, die fehlenden Kursmethoden ergänzen und die verrutschten Seitenbezüge bei Beckenuhr/Druckpunkten korrigieren.
 - [x] Das Ausdauer-PDF bis zu den Inhaltsseiten S. 26 abgleichen und die fehlenden Natur-/Bewegungspark-Beispiele sowie Flow als nicht garantiertes Erleben ergänzen.
+- [x] Stresstheorie S. 5–13 um Stressor/Reaktion/Erleben und das Steinzeit-/Moderner-Mensch-Reaktionsschema als begrenztes Lehrmodell ergänzen.
 - [x] Die bisher ausgelassenen Grundlagen des Flexibilitätstrainings (Begriffe, Einflussfaktoren, Methodenwahl und Grundregeln) aus dem Assisted-Stretching-PDF in der Methodenkarte ergänzen.
