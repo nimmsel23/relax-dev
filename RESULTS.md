@@ -735,3 +735,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Im Headless-Firefox bei 320 Pixeln führte der Abschlussknopf aus einem pausierten Timerzustand zum Nachweis-Entwurf und übernahm Methode und Stundenname.
 - Die Selbstbestätigung blieb leer und der Nachweiszähler bei 0/30. Die Prüfung nutzte nur ein wegwerfbares Browserprofil; der echte iPhone/iPad-Ablauf, laufender Timer-Restore sowie Druck und CSV bleiben offen.
+
+# Methodenreflexion und Markdown-Export im Browser geprüft (2026-11-02)
+
+- Headless-Firefox stellte einen vorhandenen `Atemschulung`-Reflexionsdatensatz mit allen drei Feldern und gesetztem Selbstcheck wieder her.
+- Der Markdown-Download enthielt alle drei Einträge, den methodenspezifischen Dateinamen und den Hinweis, dass die Reflexion keine absolvierte Ausbildungseinheit belegt. Der Reflexionsspeicher blieb getrennt vom Trainingsnachweis.
+- Neue Texteingaben per echter Tastatur und deren Speicherung nach erneutem Öffnen im Zielbrowser bleiben offen.
