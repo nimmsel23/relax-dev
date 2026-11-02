@@ -18,5 +18,6 @@
 - [x] Die fünf Tibeter als eigenständige Bewegungsreihe aus dem offiziellen PMR-Kursskript erfassen und von der PMR-Technik unterscheiden.
 - [x] Die Vier-Ebenen-Systematik der Entspannungsverfahren aus dem Stresstheorie-Skript ergänzen und AT/Fantasiereisen als Übersichtsinhalte ohne konkrete Anleitung kennzeichnen.
 - [x] Stundenentwurf und Vorbereitungsliste an die offiziellen Anforderungen zu Raum, Gruppengröße, Privatsphäre, Freiwilligkeit, gemeinsamem Beginn/Ende und Abschlussgespräch angleichen.
+- [x] Assisted Stretching gegen das Original-PDF prüfen und Session-Dosierung, ROM-Check, Ablaufqualität, Feedback und Zustimmung bei Berührung in der Methodenkarte abbilden.
 - [x] PMR-Langform aus dem vorhandenen lokalen Handout-PDF als manuell geführte Schrittfolge abbilden und Quellenstatus kenntlich machen.
 - [ ] Weitere methodenspezifische Abläufe für Autogenes Training oder Phantasiereisen ergänzen, falls passende Originalanleitungen verfügbar werden.

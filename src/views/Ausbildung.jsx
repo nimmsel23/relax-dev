@@ -37,7 +37,12 @@ const METHODS = [
     ['Überkopforganisation', 'Umkehrhaltungen; laut Kursnotiz nur mit ausreichender Beweglichkeit und dynamischer Stabilität.'],
     ['Stand', 'Ausrichtung und Gleichgewicht als Grundlage natürlicher Fortbewegung wahrnehmen.'],
   ] },
-  { name: 'Stretching & Assisted Stretching', duration: '20–30 Min.', icon: Clock3, focus: 'Beweglichkeit achtsam und individuell erkunden', practice: 'Vorbereiten, Bewegungsumfang (ROM) wahrnehmen, langsam in eine angenehme Dehnung gehen und ruhig weiteratmen. Bei Partnerarbeit fortlaufend Kontakt und Feedback halten; Übergänge fließend gestalten.', adapt: 'Nicht in Schmerz oder gegen Widerstand dehnen. Eignung, Tagesform und mögliche Einschränkungen vorher klären; bei Unsicherheit Übung auslassen.', source: 'Assisted Stretching' },
+  { name: 'Stretching & Assisted Stretching', duration: '30 Min. / Ausklang 10–15 Min.', icon: Clock3, focus: 'Beweglichkeit achtsam und individuell erkunden', practice: 'Vor jeder Einheit aufwärmen und den Bewegungsumfang (ROM) testen. Eine entspannte Atmosphäre und ein Handtuch vorbereiten; Gelenke und Becken neutral halten, die eigene Körperhaltung beachten und fließend zwischen individuell gewählten Übungen wechseln. Atmung und Körpergefühl beachten: „Wollen ist gut – zu viel tut weh.“', adapt: 'Eignung, Tagesform und Einschränkungen vorher klären. Feedback und Wohlergehen laufend erfragen; Berührungen nur nach ausdrücklicher Zustimmung. Bei Schmerz oder Unsicherheit abbrechen oder eine andere Übung wählen.', source: 'FlexyFit Academy: Assisted Stretching', outlineTitle: 'Dosierung laut Kursskript', outline: [
+    ['Eigenständige Entspannungseinheit', '30-Minuten-Session; pro Muskel 2 × 15 Sekunden bei 7 RPE.'],
+    ['Ausklang nach einem Training', '10–15-Minuten-Session; pro Muskel 1 × 10–15 Sekunden bei 7 RPE.'],
+    ['Session-Check', 'ROM testen, angenehme Atmosphäre schaffen, Handtuch nutzen, Gelenke und Becken neutral halten, Feedback einholen und passende Übungen individuell auswählen.'],
+    ['Trainer:innen-Praxis', 'Eigene Körperhaltung und fließende Übergänge beachten. Das Skript fordert Kundenkontakt; kläre vor jeder Berührung Zustimmung und halte verbales Feedback offen.'],
+  ] },
   { name: 'Entspannungsorientierte Ausdauer', duration: '20–45 Min.', icon: HeartPulse, focus: 'Rhythmische, moderate Bewegung als Ausgleich nutzen', practice: 'Eine passende zyklische Bewegungsform und eine ruhige Umgebung wählen. Leichtes Tempo, lockeres Sprechen und fehlender Zeitdruck helfen, die Belastung angenehm zu halten.', adapt: 'Die individuelle Belastbarkeit entscheidet. Bei Beschwerden abbrechen und fachliche Abklärung empfehlen.', source: 'Entspannung & Ausdauer' },
   { name: 'Achtsamkeit & Meditation', duration: '15–30 Min.', icon: Sparkles, focus: 'Aufmerksamkeit freundlich im gegenwärtigen Erleben halten', practice: 'Einen einfachen Anker wie Atem, Geräusche oder Kontakt zum Boden anbieten. Abschweifen ist normal; die Aufmerksamkeit kann ohne Bewertung zurückkehren.', adapt: 'Augen offen, Bewegung oder ein äußerer Anker sind gleichwertige Optionen.', source: 'Methodenübersicht; Ausbildungsnotizen' },
 ]
@@ -103,6 +108,13 @@ const LEARNING_CHECK = [
     correct: 0,
     why: 'Das Skript nennt 5–12 Personen als optimale Gruppengröße und betont persönlichen Raum sowie selbst gewählten Mattenabstand.',
     source: 'Stundenplanung · Gruppengröße und Platz',
+  },
+  {
+    question: 'Welche Assisted-Stretching-Dosierung unterscheidet das Kursskript?',
+    answers: ['Eigene Entspannungseinheit: 30 Minuten mit 2 × 15 Sekunden je Muskel; Ausklang: 10–15 Minuten mit 1 × 10–15 Sekunden.', 'Für beide Varianten immer 60 Minuten mit maximaler Dehnung.', 'Eine feste Wiederholungszahl, unabhängig davon, ob es eine eigene Einheit oder ein Trainingsausklang ist.'],
+    correct: 0,
+    why: 'Das Assisted-Stretching-Skript nennt unterschiedliche Dauer und Wiederholungen für die eigenständige Einheit und den Ausklang nach einem Training.',
+    source: 'Assisted Stretching · Dosierung',
   },
   {
     question: 'Was gehört nach einer tiefen Entspannung in Rückenlage zum Abschluss?',

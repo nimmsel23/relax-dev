@@ -195,3 +195,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Vorbereitungsliste ergänzt um die im Skript beschriebenen Raum-, Klima-, Gruppen- und Freiwilligkeitsbedingungen: 5–12 Personen als Richtwert, gewählter Mattenabstand, optionale persönliche Gegenstände sowie warme Kleidung und Polster.
 - Stundenentwurf benennt Einleitung, methodischen Hauptteil, Ruhephase, ritualisierte Rücknahme, Feedback, Verabschiedung und Hinweis auf die nächste Einheit klarer. Lerncheck greift Gruppengröße und persönlichen Raum auf.
+
+## 2026-11-02 — Assisted Stretching nach Original-PDF konkretisiert
+
+- Methodenkarte übernimmt die im Skript getrennte Dosierung: eigenständige 30-Minuten-Einheit mit 2 × 15 Sekunden je Muskel und 10–15-minütiger Trainingsausklang mit 1 × 10–15 Sekunden.
+- Session-Check ergänzt um ROM-Test, Handtuch, neutrale Gelenk-/Beckenposition, Trainerhaltung, fließende Übergänge, individuelles Feedback und freiwillige Zustimmung vor Berührungen.
+- Lerncheck prüft die Unterscheidung zwischen eigenständiger Einheit und Trainingsausklang.
