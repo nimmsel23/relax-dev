@@ -63,6 +63,7 @@ export default function App() {
   function navigate(nextTab) {
     setTab(nextTab)
     setMoreOpen(false)
+    document.querySelector('main')?.scrollTo({ top: 0 })
     if (window.location.hash !== `#${nextTab}`) window.location.hash = nextTab
   }
 

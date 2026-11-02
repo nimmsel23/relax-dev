@@ -780,4 +780,6 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Die Startansicht enthält jetzt einen aufklappbaren Kursindex mit den einzelnen Fächern aus der Ausbildungs-MOC: Stresstheorie, Methodenüberblick, Mentales/autogenes Training, Atemschulung, PMR, Yoga, Pilates, Assisted Stretching/Faszien, Ausdauer, Wirbelsäule, Ernährung, Stundenplanung und Aufgaben/Nachweis.
 - Jeder Eintrag führt direkt zum passenden App-Bereich; Atemschulung öffnet den bestehenden Atem-Tab. Hinweise stellen klar, dass die Navigation weder absolvierte Kurseinheiten bestätigt noch Originalskripte ersetzt.
+- Die Methodenfächer springen direkt auf ihre jeweilige Karte; Bereichs- und Tabwechsel setzen den gemeinsamen Scrollbereich auf den Anfang zurück.
+- Statische Namensprüfung bestätigte alle elf Methodenkarten-Ziele; der Build und die Diff-Prüfung waren erfolgreich.
 - TODO, NEXT und diese Ergebnisnotiz aktualisiert.

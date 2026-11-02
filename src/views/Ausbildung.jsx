@@ -598,13 +598,29 @@ export default function Ausbildung({ onNavigate }) {
   function navigateSection(nextSection) {
     const validSection = MODULE_SECTIONS.has(nextSection) ? nextSection : 'start'
     setRoute({ section: validSection, method: null })
+    document.querySelector('main')?.scrollTo({ top: 0 })
     const nextHash = validSection === 'start' ? '#ausbildung' : `#ausbildung/${validSection}`
     if (window.location.hash !== nextHash) window.location.hash = nextHash
   }
 
   function selectMethod(nextMethod) {
     setRoute({ section: 'methoden', method: nextMethod })
+    document.querySelector('main')?.scrollTo({ top: 0 })
     window.location.hash = `#ausbildung/methoden/${encodeURIComponent(nextMethod.name)}`
+  }
+
+  function navigateCourseTarget(target) {
+    if (target === 'atem') {
+      onNavigate?.('atem')
+      return
+    }
+    if (target.startsWith('method:')) {
+      const method = METHODS.find(item => item.name === target.slice(7))
+      if (method) selectMethod(method)
+      else navigateSection('methoden')
+      return
+    }
+    navigateSection(target)
   }
 
   useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(plan)) }, [plan])
@@ -941,19 +957,19 @@ export default function Ausbildung({ onNavigate }) {
         <p className="mt-2 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Der Kursindex ordnet die Themen deiner MOC den passenden App-Bereichen zu. Eine Zuordnung öffnet den Lernbereich; sie bestätigt weder eine absolvierte Kurseinheit noch ersetzt sie das Originalskript.</p>
         <div className="mt-3 grid gap-2 sm:grid-cols-2">{[
           ['Stresstheorie & Stressmanagement', 'Stressreaktion, Stressansätze, Ressourcen, SORKC und Messbarkeit.', [['grundlagen', 'Grundlagen']]],
-          ['Entspannungsmethoden im Überblick', 'Vier Ebenen, Selbsthypnose, Biofeedback und weitere unterstützende Verfahren aus der Stresstheorie.', [['methoden', 'Methoden']]],
-          ['Mentales und autogenes Training', 'Themen der Ausbildungs-MOC sowie AT-Einordnung im Kursmaterial. Die Übersicht kennzeichnet fehlende methodenspezifische Ablaufskripte.', [['methoden', 'Themenkarten']]],
+          ['Entspannungsmethoden im Überblick', 'Vier Ebenen, Selbsthypnose, Biofeedback und weitere unterstützende Verfahren aus der Stresstheorie.', [['grundlagen', 'Vier Ebenen ansehen'], ['method:Weitere unterstützende Verfahren', 'Zusatzverfahren']]],
+          ['Mentales und autogenes Training', 'Themen der Ausbildungs-MOC sowie AT-Einordnung im Kursmaterial. Die Übersicht kennzeichnet fehlende methodenspezifische Ablaufskripte.', [['method:Mentales Training · Themenübersicht', 'Mentaltraining'], ['method:Autogenes Training', 'Autogenes Training']]],
           ['Atemschulung', 'Atemmechanik, Kursübungen sowie Arbeitsblätter zur eigenen Anleitung und Gruppenpraxis.', [['atem', 'Atemschulung']]],
-          ['Progressive Muskelrelaxation', 'Grundlagen, Praxisrahmen, Rücknahme und die im Skript ergänzten fünf Tibeter.', [['methoden', 'PMR und fünf Tibeter']]],
-          ['Yoga-Grundübungen', 'Asana-Grundsätze, Varianten und die Haltungen aus dem Originalskript.', [['methoden', 'Yoga-Karte']]],
-          ['Pilates-Grundübungen', 'Kursbegriffe, acht Kategorien und die Übungssammlung aus dem Skript.', [['methoden', 'Pilates-Karte']]],
-          ['Assisted Stretching und Faszientraining', 'Flexibilität, angeleitete Partnerarbeit und die SMR-Praxisübersicht.', [['methoden', 'Stretching-Karten']]],
-          ['Entspannung und Ausdauersport', 'Extensive gleichmäßige Bewegung und Kursbeispiele als Entspannungsbaustein.', [['methoden', 'Ausdauer-Karte']]],
-          ['Entspannung und Wirbelsäule', 'Körperwahrnehmung, Bewegungsfreude und präventive Trainergrenzen.', [['methoden', 'Wirbelsäulen-Karte']]],
+          ['Progressive Muskelrelaxation', 'Grundlagen, Praxisrahmen, Rücknahme und die im Skript ergänzten fünf Tibeter.', [['method:Progressive Muskelrelaxation (PMR)', 'PMR-Karte'], ['method:Die fünf Tibeter · Bewegungsreihe', 'Fünf Tibeter']]],
+          ['Yoga-Grundübungen', 'Asana-Grundsätze, Varianten und die Haltungen aus dem Originalskript.', [['method:Yoga · Asana-Praxis', 'Yoga-Karte']]],
+          ['Pilates-Grundübungen', 'Kursbegriffe, acht Kategorien und die Übungssammlung aus dem Skript.', [['method:Pilates · Basisprogramm', 'Pilates-Karte']]],
+          ['Assisted Stretching und Faszientraining', 'Flexibilität, angeleitete Partnerarbeit und die SMR-Praxisübersicht.', [['method:Stretching & Assisted Stretching', 'Stretching-Karte'], ['method:Faszientraining · SMR', 'SMR-Karte']]],
+          ['Entspannung und Ausdauersport', 'Extensive gleichmäßige Bewegung und Kursbeispiele als Entspannungsbaustein.', [['method:Entspannungsorientierte Ausdauer', 'Ausdauer-Karte']]],
+          ['Entspannung und Wirbelsäule', 'Körperwahrnehmung, Bewegungsfreude und präventive Trainergrenzen.', [['method:Körperwahrnehmung & Wirbelsäule', 'Wirbelsäulen-Karte']]],
           ['Entspannung und Ernährung', 'Stressessen, Ernährungsthemen sowie Lebensmittel, Pflanzenstoffe, Naturheilmittel und Rezepte als Kursinhalte.', [['fallkonzept', 'Ernährungsaufgabe']]],
           ['Stundenplanung', 'Ziele, Gruppe, Raum, Vorbereitung, Stundenaufbau, Zeitblöcke, Rücknahme und Abschluss.', [['planung', 'Stunde planen']]],
           ['Pflichtaufgabe und Praxisprotokoll', 'Vier-Wochen-Konzept mit Tageszyklus sowie der getrennte Nachweis der 30 Praxiseinheiten.', [['fallkonzept', 'Vier-Wochen-Fall'], ['nachweis', '30 Einheiten']]],
-        ].map(([title, description, actions]) => <article key={title} className="rounded-xl p-3" style={{ background: 'var(--bg2)' }}><h3 className="text-sm font-bold">{title}</h3><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{description}</p><div className="mt-3 flex flex-wrap gap-2">{actions.map(([target, label]) => <button key={target} type="button" onClick={() => target === 'atem' ? onNavigate?.('atem') : navigateSection(target)} className="min-h-10 rounded-lg border px-3 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>{label}</button>)}</div></article>)}</div>
+        ].map(([title, description, actions]) => <article key={title} className="rounded-xl p-3" style={{ background: 'var(--bg2)' }}><h3 className="text-sm font-bold">{title}</h3><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{description}</p><div className="mt-3 flex flex-wrap gap-2">{actions.map(([target, label]) => <button key={target} type="button" onClick={() => navigateCourseTarget(target)} className="min-h-10 rounded-lg border px-3 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>{label}</button>)}</div></article>)}</div>
         <p className="mt-3 text-[11px]" style={{ color: 'var(--dim)' }}>Grundlage: lokale Ausbildungs-MOC „MOC-Dipl.Entspannungstrainer“ und die zugeordneten Kurs-PDFs. Die Aufteilung hier ist eine Navigation für die App, keine offizielle Prüfungsreihenfolge.</p>
       </details>
     </>}
