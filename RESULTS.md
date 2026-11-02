@@ -1,3 +1,8 @@
+# Bildvergleich Stress und Entspannung ergänzt (2026-11-02)
+
+- Grundlagenansicht enthält jetzt eine zugängliche Vektorgrafik zur Gegenüberstellung aus Stresstheorie S. 66.
+- Da die Quelle den Pfeilen keine Größen oder Körpervorgänge zuordnet, kennzeichnet die App die Illustration ausdrücklich als schematisch. Quellenmatrix und TODO aktualisiert.
+
 # Kompensationsmuster aus der Ernährungsstudie im Lerncheck ergänzt (2026-11-02)
 
 - Eine weitere Lernfrage behandelt den im Skript beschriebenen Wechsel des Essverhaltens zwischen belastenden und positiven Situationen (S. 20–23).
