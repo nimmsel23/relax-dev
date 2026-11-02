@@ -760,3 +760,9 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Der Markdown-Download enthielt alle drei Einträge, den methodenspezifischen Dateinamen und den Hinweis, dass die Reflexion keine absolvierte Ausbildungseinheit belegt. Der Reflexionsspeicher blieb getrennt vom Trainingsnachweis.
 - Im anschließend gesteuerten Firefox-Profil wurden drei Notizen per WebDriver-Tastatureingabe geschrieben, im lokalen Reflexionsobjekt gespeichert, nach Reload wiederhergestellt und im tatsächlichen Markdown-Blob geprüft.
 - Der Fachgesprächs-Selbstcheck blieb ebenfalls nach Reload gesetzt; der Export nennt, dass die Reflexion keine absolvierte Ausbildungseinheit belegt. Geräteabnahme auf iPhone/iPad bleibt offen.
+
+# Drive-Kursordner erneut auf fehlende Methoden-Anleitungen geprüft (2026-11-02)
+
+- Den direkten Entspannungstrainer-Ordner und gezielte Drive-Suchen für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation geprüft.
+- Der Ordner enthält die Pflichtaufgabe in zwei gleich großen PDF-Kopien, die Aufgaben-Markdown-Datei und Trainingsprotokoll-Kopien, aber keine eigenständigen Methoden-Anleitungen. Die ausgelesene Aufgaben-PDF bestätigt den App-Workflow aus Zielen, Vier-Wochen-Routine, ausgearbeitetem Tageszyklus und Ernährungstipps.
+- Quellenmatrix und NEXT dokumentieren den aktuellen Suchstand; fehlende Schrittfolgen bleiben offen und werden nicht aus der Aufgabenbeschreibung abgeleitet.
