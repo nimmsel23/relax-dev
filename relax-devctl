@@ -54,13 +54,22 @@ def _service_enabled(unit: str) -> bool:
 def _ctl(*args: str) -> int:
     return subprocess.run(["systemctl", "--user", *args]).returncode
 
-def _wait_healthy(timeout: int = 10) -> None:
+def _wait_healthy(timeout: int = 10) -> bool:
     for _ in range(timeout):
-        if _http_ok(NODE_URL):
-            msg.good("Node API healthy")
-            return
+        service_active = _service_active(NODE_SERVICE)
+        api_healthy = _http_ok(NODE_URL)
+        if service_active and api_healthy:
+            msg.good("Node API healthy (service active)")
+            return True
         time.sleep(1)
-    msg.warn(f"Node API not healthy after {timeout}s")
+    service_active = _service_active(NODE_SERVICE)
+    api_healthy = _http_ok(NODE_URL)
+    msg.fail(
+        f"Node API not healthy after {timeout}s "
+        f"(service {'active' if service_active else 'inactive'}, "
+        f"endpoint {'responding' if api_healthy else 'offline'})"
+    )
+    return False
 
 # ── Commands ──────────────────────────────────────────────────────────────────
 
@@ -86,11 +95,12 @@ def status():
 def start():
     """Node API via systemd starten."""
     msg.info(f"Starting {NODE_SERVICE}...")
-    if _ctl("start", NODE_SERVICE) == 0:
-        msg.good(f"{NODE_SERVICE} started")
-    else:
+    if _ctl("start", NODE_SERVICE) != 0:
         msg.fail(f"Failed to start {NODE_SERVICE}")
-    _wait_healthy()
+        raise typer.Exit(1)
+    if not _wait_healthy():
+        raise typer.Exit(1)
+    msg.good(f"{NODE_SERVICE} started")
 
 
 @app.command()
@@ -103,9 +113,12 @@ def stop():
 @app.command()
 def restart():
     """Node API neu starten."""
-    _ctl("restart", NODE_SERVICE)
+    if _ctl("restart", NODE_SERVICE) != 0:
+        msg.fail(f"Failed to restart {NODE_SERVICE}")
+        raise typer.Exit(1)
+    if not _wait_healthy():
+        raise typer.Exit(1)
     msg.good(f"{NODE_SERVICE} restarted")
-    _wait_healthy()
 
 
 @app.command()
