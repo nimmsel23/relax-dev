@@ -17,6 +17,12 @@
 - Die Überschrift „16 Schritte“ stimmt in der Quelle nicht klar mit den beiden gelisteten Abläufen überein; die App weist auf diese Unstimmigkeit hin, statt eine eigene Reihenfolge als Original auszugeben.
 - Lokale interaktive 20-Schritte-Langform und offizielles PMR-Kursskript sind in der Karte als unterschiedliche Quellen ausgewiesen.
 
+# Pranayama-Kursaufgabe im Atemtrainer ergänzt (2026-11-02)
+
+- Neues lokales Arbeitsblatt bildet den Kursauftrag S. 39 ab: Technik auswählen, Anleitungstext vorbereiten, frei sprechen üben, in der Gruppe anleiten und Feedback reflektieren; Markdown-Export ergänzt.
+- Kursliste der Pranayama-Techniken ist mit S. 38 referenziert. Für die meisten Techniken liefert das Skript keine vollständige Anleitung; das Arbeitsblatt erstellt deshalb keine eigene Praxisfolge.
+- Holotropes Atmen und Qigong werden als Exkurse des Skripts sichtbar, inklusive Hinweis auf spekulative/unbestätigte Behauptungen und ohne geführte Praxis.
+
 # Ausdauer-Kapitel vollständig abgeglichen (2026-11-02)
 
 - Methodenkarte auf das vollständige Kapitel „Entspannung & Ausdauer“ (S. 4–24) erweitert: allgemeine und spezielle Wirkungsfelder, Belastungsgefühl, Kursrichtwerte, Sportdauern, Alltagsbezug und praktische Varianten.

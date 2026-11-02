@@ -11,6 +11,24 @@ const ICONS = { Wind, Moon, Target, Zap, LifeBuoy }
 const DURATIONS = [1, 3, 5, 10]
 const MOOD = ['😞', '😕', '😐', '🙂', '😄']
 const TEACHING_SCRIPT_KEY = 'relax-breath-teaching-script-v1'
+const PRANAYAMA_ASSIGNMENT_KEY = 'relax-pranayama-assignment-v1'
+const PRANAYAMA_TECHNIQUES = [
+  'Anuloma Pranayama · Wechselatmung',
+  'Bhastrika Pranayama · Blasebalgatmung',
+  'Bhramari Pranayama · Summen beim Ausatmen',
+  'Kapalabhati Pranayama · Reinigungstechnik',
+  'Sama Vritti Pranayama · gleich lange Atemanteile',
+  'Shitali Pranayama · kühlende Atmung',
+  'Shitkari Pranayama · kühlende Atmung',
+  'Surya Bhedana Pranayama · einseitige Atmung',
+  'Ujjayi Pranayama · Enge- oder Ozean-Atmung',
+]
+const PRANAYAMA_FIELDS = [
+  { id: 'script', label: '1 · Anleitungstext vorbereiten', placeholder: 'Begrüßung, freiwillige Position, verständliche Hinweise zur gewählten Methode, Pausen und Abschluss …' },
+  { id: 'rehearsal', label: '2 · Leise frei sprechen üben', placeholder: 'Was klang beim lauten Üben klar? Wo brauche ich noch eine Pause oder einfachere Formulierung?' },
+  { id: 'groupPractice', label: '3 · Übung in der Gruppe anleiten', placeholder: 'Rahmen und Durchführung der tatsächlich angeleiteten Praxiseinheit festhalten …' },
+  { id: 'feedback', label: '4 · Gruppenfeedback und nächste Anpassung', placeholder: 'Rückmeldungen der Gruppe und einen konkreten nächsten Lernschritt notieren …' },
+]
 function PhaseBar({ pattern }) {
   return (
     <div className="flex gap-0.5 h-1.5 w-full" aria-hidden="true">
@@ -60,6 +78,10 @@ export default function Breath() {
   const [teachingScript, setTeachingScript] = useState(() => {
     try { return localStorage.getItem(TEACHING_SCRIPT_KEY) || '' } catch { return '' }
   })
+  const [pranayamaAssignment, setPranayamaAssignment] = useState(() => {
+    const defaults = { technique: PRANAYAMA_TECHNIQUES[2], script: '', rehearsal: '', groupPractice: '', feedback: '' }
+    try { return { ...defaults, ...JSON.parse(localStorage.getItem(PRANAYAMA_ASSIGNMENT_KEY) || '{}') } } catch { return defaults }
+  })
   const chipsRef = useRef(null)
 
   const category = CATEGORIES.find((c) => c.id === catId)
@@ -80,6 +102,20 @@ export default function Breath() {
   useEffect(() => {
     try { localStorage.setItem(TEACHING_SCRIPT_KEY, teachingScript) } catch {}
   }, [teachingScript])
+  useEffect(() => {
+    try { localStorage.setItem(PRANAYAMA_ASSIGNMENT_KEY, JSON.stringify(pranayamaAssignment)) } catch {}
+  }, [pranayamaAssignment])
+
+  function exportPranayamaAssignment() {
+    const lines = [
+      '# Pranayama · Kursaufgabe',
+      '', `Ausgewählte Technik: ${pranayamaAssignment.technique}`,
+      ...PRANAYAMA_FIELDS.flatMap((field) => [`\n## ${field.label.replace(/^\d+ · /, '')}`, pranayamaAssignment[field.id] || '_Noch keine Notiz._']),
+      '\nQuelle: FlexyFit Academy, Atemschulung, Yoga-Pranayama S. 36–42; Übungsauftrag S. 39.',
+      'Hinweis: Die Quelle nennt Techniken, liefert für die meisten aber keine konkrete Schritt-für-Schritt-Anleitung. Anleitung nur nach praktischer Einschulung; Atempausen nicht erzwingen.',
+    ]
+    downloadText(`pranayama-kursaufgabe-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
+  }
 
   // Gemerkte Kategorie in der Chip-Leiste ins Bild holen.
   useEffect(() => {
@@ -211,6 +247,37 @@ export default function Breath() {
             </button>
           </div>
         </div>
+      </section>
+
+      <section className="rounded-2xl border p-4 space-y-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }} aria-label="Pranayama-Praxisaufgabe aus der Ausbildung">
+        <div>
+          <div className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Praxisaufgabe · Atemschulung S. 39</div>
+          <h2 className="mt-1 text-lg font-black">Eine Pranayama-Übung vorbereiten und anleiten</h2>
+          <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Das Kursskript führt fünf Arbeitsschritte auf: Übung auswählen, Anleitungstext vorbereiten, frei sprechen üben, in der Gruppe anleiten und Feedback einholen. Es beschreibt die meisten Techniken nur knapp oder nennt sie ohne vollständigen Ablauf. Wähle daher nur eine praktisch eingeschulte Übung; die App erzeugt keine zusätzliche Atemanleitung.</p>
+        </div>
+        <label className="block text-xs font-semibold" style={{ color: 'var(--muted)' }}>Ausgewählte Technik · Kursliste S. 38
+          <select value={pranayamaAssignment.technique} onChange={(event) => setPranayamaAssignment((current) => ({ ...current, technique: event.target.value }))} className="mt-1 w-full rounded-xl border p-3 text-sm" style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }}>
+            {PRANAYAMA_TECHNIQUES.map((technique) => <option key={technique}>{technique}</option>)}
+          </select>
+        </label>
+        <div className="space-y-3">
+          {PRANAYAMA_FIELDS.map((field) => <label key={field.id} className="block text-xs font-semibold" style={{ color: 'var(--muted)' }}>{field.label}
+            <textarea value={pranayamaAssignment[field.id]} onChange={(event) => setPranayamaAssignment((current) => ({ ...current, [field.id]: event.target.value }))} rows={3} placeholder={field.placeholder} className="mt-1 w-full rounded-xl border p-3 text-sm font-normal" style={{ background: 'var(--bg2)', borderColor: 'var(--line)', color: 'var(--ink)' }} />
+          </label>)}
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="text-xs" style={{ color: 'var(--dim)' }}>Lokal auf diesem Gerät gespeichert · Anleitung, Üben, Gruppenpraxis und Feedback getrennt festhalten.</span>
+          <button type="button" onClick={exportPranayamaAssignment} className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-semibold" style={{ background: 'transparent', borderColor: 'var(--line)', color: 'var(--ink)' }}><Download size={14} /> Aufgabe als Markdown exportieren</button>
+        </div>
+        <details className="rounded-xl border p-3" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
+          <summary className="cursor-pointer text-sm font-semibold">Weitere Atem-Exkurse im Skript · nur Theorie</summary>
+          <div className="mt-3 space-y-3 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>
+            <p><strong>Pranayama · Aussagen zu möglichen Effekten · S. 40–42:</strong> Das Skript führt behauptete Veränderungen bei Atmung, Puls, Blutdruck, Hautleitwert, EEG und subjektiver Wachheit an. Das wird hier als Aussage der Ausbildungsunterlage wiedergegeben, nicht als Wirkungsgarantie, Messwert oder Eigenschaft eines bestimmten App-Rhythmus.</p>
+            <p><strong>Holotropes Atmen · S. 30–35:</strong> Die Unterlage beschreibt eine Praxis mit beschleunigtem und vertieftem Atmen, Musik, Körperarbeit und längerer Dauer. Sie enthält physiologische Erklärungen und kennzeichnet eine DMT-Erklärung ausdrücklich als ungeprüfte Hypothese. Diese App bietet dafür keine Übung oder Anleitung.</p>
+            <p><strong>Qigong · S. 43–46:</strong> Der Exkurs behandelt Atemanhalten und Vorstellungen über Qi, einschließlich Heilungs- und Sauerstoffnutzungsbehauptungen. Das sind Inhalte der Quelle, keine hier bestätigten Aussagen oder Praxisanleitungen; Timer und geführte Atempausen der App setzen diesen Exkurs nicht um.</p>
+            <p>Quelle: FlexyFit Academy, „Atemschulung“, S. 30–46. Für Gruppenanleitungen gelten die praktisch vermittelten Abläufe der Ausbildung.</p>
+          </div>
+        </details>
       </section>
 
       {result && (
