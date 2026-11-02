@@ -352,6 +352,41 @@ const LEARNING_CHECK = [
     why: 'In der beschriebenen Untersuchung aßen Stress-Hungerer in der positiven Situation mehr als die Stress-Esser; das Skript fasst dies als Kompensationsmuster auf (S. 20–23). Es ist ein Studienbericht und keine feste Regel für einzelne Personen.',
     source: 'Entspannung und Ernährung · S. 20–23',
   },
+  {
+    question: 'Was ist bei den Yoga-Haltungen laut Ausbildungsskript wichtig?',
+    answers: ['Eine Haltung nur so weit ausführen, dass sie angenehm bleibt; Varianten und praktische Einschulung berücksichtigen.', 'Jede Haltung vollständig erreichen, auch wenn sie unangenehm ist.', 'Alle Teilnehmenden müssen dieselbe Variante und Tiefe halten.'],
+    correct: 0,
+    why: 'Das Yoga-Skript betont angenehme Ausführung, Varianten und praktische Aufsicht. Eine Pose muss nicht erzwungen oder vollständig erreicht werden.',
+    source: 'Grundübungen Yoga · Einleitung und Asana-Grundsätze, S. 3–8',
+  },
+  {
+    question: 'Wie ist die Pilates-Übungssammlung im Originalskript gegliedert?',
+    answers: ['In acht Bewegungskategorien, darunter Rückenlage, Seitlage, Sitz, Bauchlage, Gewichtsübernahme, Ganzkörperintegration, Umkehrhaltungen und Stand.', 'Ausschließlich in Übungen für die Rückenlage.', 'Nach festen Leistungsstufen, die für alle Teilnehmenden gelten.'],
+    correct: 0,
+    why: 'Das Skript ordnet die Übungssammlung in acht Kategorien nach Ausgangsposition und Bewegungsorganisation ein; daraus folgt keine für alle gleiche Leistungsstufe.',
+    source: 'Grundübungen Pilates · Basisprogramm, S. 17–21',
+  },
+  {
+    question: 'Wie sind die fünf Tibeter im Kursmaterial eingeordnet?',
+    answers: ['Als ergänzende Bewegungsreihe mit fünf Bewegungen, getrennt von der PMR-Anspannungsfolge.', 'Als fünf Muskelgruppen der PMR, die nacheinander angespannt werden.', 'Als Atemübung mit fünf festgelegten Atempausen.'],
+    correct: 0,
+    why: 'Das PMR-Kursskript führt Kreisel, Kerze, Halbmond, Brücke und Berg als ergänzenden Praxisteil auf; es handelt sich nicht um die PMR-Muskelgruppenfolge.',
+    source: 'Progressive Muskelrelaxation · Die fünf Tibeter, S. 29–46',
+  },
+  {
+    question: 'Welche Aussage zur PMR-Gruppenfolge gibt die App quellentreu wieder?',
+    answers: ['Das Skript bezeichnet sie als „16 Schritte“, aber die nummerierten Listen stimmen nicht eindeutig überein; deshalb wird keine bereinigte Standardliste behauptet.', 'Das Skript enthält eine eindeutige und überall identische 20-Schritte-Liste.', 'Die Abfolge besteht laut Skript aus fünf Yoga-Haltungen.'],
+    correct: 0,
+    why: 'Die Kursunterlage überschreibt die Praxis mit „16 Schritte“, während Einzelpositionen und Kurzliste nicht deckungsgleich sind. Die App macht diese Quellenabweichung sichtbar.',
+    source: 'Progressive Muskelrelaxation · Gruppenfolge, S. 23–25',
+  },
+  {
+    question: 'Was lässt sich aus den Kursunterlagen zu Autogenem Training und Fantasiereisen sicher ableiten?',
+    answers: ['Sie werden als Verfahren bzw. Kursmethoden eingeordnet und die Rücknahme wird behandelt; eine konkrete Übungsfolge liegt im geprüften Archiv nicht vor.', 'Die MOC-Themenliste liefert vollständige Formeln und eine verbindliche AT-Abfolge.', 'Die App kann aus der Methodennennung eine originale Fantasiereise ableiten.'],
+    correct: 0,
+    why: 'Die Stresstheorie und die MOC geben Themen und Einordnungen vor. Die geprüften Dateien enthalten jedoch keine methodenspezifische Schritt-für-Schritt-Anleitung; die App ergänzt deshalb keine als Original ausgegebene Folge.',
+    source: 'Stresstheorie · S. 52, 55; Stundenplanung · S. 12; Kursquellen-MOC',
+  },
 ].map((question, index) => {
   const offset = index % question.answers.length
   return {

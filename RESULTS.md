@@ -614,3 +614,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 
 - Gezielt nach konkreten Anleitungen zu Autogenem Training, Fantasiereisen und Meditation gesucht und die passende Entspannungstrainer-MOC geprüft.
 - Drive-Treffer sind thematische MOCs ohne methodenspezifische Schrittfolgen; Quellenmatrix und offene Beschaffung dieser Originalanleitungen entsprechend dokumentiert.
+
+# Lerncheck um zentrale Methodenquellen erweitert (2026-11-02)
+
+- Fünf quellgebundene Fragen prüfen Yoga-Grundsätze, Pilates-Kategorien, die Abgrenzung der fünf Tibeter von PMR, die uneindeutige PMR-Gruppenliste und die fehlenden Anleitungen zu AT/Fantasiereisen.
+- Antwortpositionen werden wie bei den vorhandenen Fragen deterministisch rotiert; jede Erklärung nennt den Kursbezug und die betroffene Quellgrenze.
