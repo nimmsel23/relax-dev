@@ -188,6 +188,9 @@ function emptyCasePlan() {
     weeks: Array.from({ length: 4 }, (_, index) => ({ number: index + 1, focus: '', routine: '', relaxation: '', nutrition: '' })),
     dayCycle: { time: '', goal: '', sequence: '', duration: '', transition: '' },
     foodIdeas: '',
+    brainFood: '',
+    powerFood: '',
+    soulFood: '',
     recipeIdeas: '',
     naturalProducts: '',
     supplementNotes: '',
@@ -321,7 +324,7 @@ export default function Ausbildung() {
       ...casePlan.weeks.flatMap(week => [`### Woche ${week.number}${week.focus ? ` · ${week.focus}` : ''}`, `- Alltag/Routine: ${week.routine || ''}`, `- Entspannung: ${week.relaxation || ''}`, `- Ernährung: ${week.nutrition || ''}`, '']),
       '## Ausgearbeiteter Tageszyklus',
       `- Tageszeit: ${casePlan.dayCycle.time || ''}`, `- Ziel: ${casePlan.dayCycle.goal || ''}`, `- Übungen und Reihenfolge: ${casePlan.dayCycle.sequence || ''}`, `- Zeitstruktur: ${casePlan.dayCycle.duration || ''}`, `- Übergänge und Rücknahme: ${casePlan.dayCycle.transition || ''}`,
-      '', '## Ernährungsideen aus dem Skript', `- Lebensmittel/Mahlzeiten: ${casePlan.foodIdeas || ''}`, `- Rezeptideen: ${casePlan.recipeIdeas || ''}`, `- Naturheilkundliche Inhalte: ${casePlan.naturalProducts || ''}`, `- Nahrungsergänzungsmittel: ${casePlan.supplementNotes || ''}`,
+      '', '## Ernährungsideen aus dem Skript', `- Lebensmittel/Mahlzeiten: ${casePlan.foodIdeas || ''}`, `- Brain Food: ${casePlan.brainFood || ''}`, `- Power Food: ${casePlan.powerFood || ''}`, `- Soul Food: ${casePlan.soulFood || ''}`, `- Rezeptideen: ${casePlan.recipeIdeas || ''}`, `- Naturheilkundliche Inhalte: ${casePlan.naturalProducts || ''}`, `- Nahrungsergänzungsmittel: ${casePlan.supplementNotes || ''}`,
       '', '---', 'Arbeitsstand aus dem Relax-Ausbildungsmodul. Inhalte individuell prüfen und keine Diagnose oder Therapie ableiten.',
     ]
     downloadText(`stresskonzept-4-wochen-${localToday()}.md`, lines.join('\n'), 'text/markdown;charset=utf-8')
@@ -483,8 +486,8 @@ export default function Ausbildung() {
       </section>
       <section className="rounded-2xl border p-4 space-y-3" style={panel}>
         <h3 className="font-bold">Ernährungsteil der Aufgabe</h3>
-        <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Die Pflichtaufgabe verlangt auch Lebensmittelideen, Rezepte, Naturheilkunde und Nahrungsergänzungsmittel. Belege deine Auswahl im Skript; bei Präparaten keine individuelle Dosierung oder Therapie ableiten.</p>
-        {[['foodIdeas', 'Lebensmittel und Mahlzeitenideen', 'Skriptbezug und Tageszeit'], ['recipeIdeas', 'Rezeptideen', 'Welche einfache Zubereitung passt zur Wochenroutine?'], ['naturalProducts', 'Nervenberuhigende Naturheilkunde', 'Kursinhalt und Grenzen der präventiven Trainerrolle'], ['supplementNotes', 'Nahrungsergänzungsmittel', 'Skriptinhalt, offene Fragen und nötige fachliche Abklärung']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={casePlan[key]} onChange={event => setCasePlan(current => ({ ...current, [key]: event.target.value }))} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
+        <p className="text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Das Skript „Entspannung und Ernährung“ gliedert „Lebensmittel gegen Stress“ in Brain Food, Power Food und Soul Food. Nutze die Felder, um die Kursbegriffe mit eigenen Beispielen und Quellenstellen zu bearbeiten. Bei Präparaten keine individuelle Dosierung oder Therapie ableiten.</p>
+        {[['foodIdeas', 'Lebensmittel und Mahlzeitenideen', 'Skriptbezug und Tageszeit'], ['brainFood', 'Brain Food', 'Beispiele und Skriptstelle'], ['powerFood', 'Power Food', 'Beispiele und Skriptstelle'], ['soulFood', 'Soul Food', 'Beispiele und Skriptstelle'], ['recipeIdeas', 'Rezeptideen', 'Welche einfache Zubereitung passt zur Wochenroutine?'], ['naturalProducts', 'Nervenberuhigende Naturheilkunde', 'Kursinhalt und Grenzen der präventiven Trainerrolle'], ['supplementNotes', 'Nahrungsergänzungsmittel', 'Skriptinhalt, offene Fragen und nötige fachliche Abklärung']].map(([key, label, placeholder]) => <label key={key} className="block text-xs" style={{ color: 'var(--muted)' }}>{label}<textarea value={casePlan[key]} onChange={event => setCasePlan(current => ({ ...current, [key]: event.target.value }))} rows={2} placeholder={placeholder} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label>)}
         <div className="rounded-xl p-3 text-xs" style={{ background: 'var(--bg2)', color: 'var(--muted)' }}>Der Entwurf speichert lokal auf diesem Gerät. Er ist ein Ausbildungsarbeitsblatt, keine Diagnose oder individuelle Behandlungsempfehlung.</div>
       </section>
     </>}

@@ -213,3 +213,8 @@ Lokale Entwicklungspfade und betroffene Verknüpfungen auf `~/dev/*-dev` umgeste
 - Grundlagenkarte erklärt nach dem Stresstheorie-Skript, dass subjektives Erleben, Muskelspannung und autonome Reaktionen auseinandergehen können; Entspannung wird nicht als Schlaf gleichgesetzt.
 - Ausdauermethode übernimmt den Kursansatz (gleichmäßig, moderat, sprechbar, individuell und ohne Leistungsfokus) sowie die dortigen beispielhaften Dauern und Umgebungsoptionen.
 - Allgemeine österreichische Bewegungsempfehlungen werden als eigener Wochenumfang getrennt vom Kursbeispiel verlinkt.
+
+## 2026-11-02 — Ernährungskategorien aus dem Kursskript ergänzt
+
+- Das Vier-Wochen-Arbeitsblatt enthält nun eigene Felder für Brain Food, Power Food und Soul Food, die drei Kategorien aus dem Skript „Entspannung und Ernährung“.
+- Markdown-Export führt alle drei Kategorien mit; der Arbeitsbereich bleibt quellenbezogen und gibt keine eigenen Lebensmittel- oder Wirkungsversprechen vor.
