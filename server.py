@@ -4,6 +4,7 @@ import csv
 import time
 import uuid
 import re
+import tempfile
 import importlib.util
 from pathlib import Path
 from typing import Optional, Dict, Any, List
@@ -63,11 +64,20 @@ def read_json(p: Path, default=None):
         return default
 
 def write_json(p: Path, data: Any):
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def write_session_json(p: Path, data: Any):
+    p.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
     try:
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception as e:
-        print(f"Error writing json to {p}: {e}")
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=p.parent, prefix=".session-", delete=False) as handle:
+            temporary = Path(handle.name)
+            json.dump(data, handle, ensure_ascii=False, indent=2)
+        os.replace(temporary, p)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 def local_today() -> str:
     return datetime.now().strftime("%Y-%m-%d")
@@ -214,8 +224,10 @@ def get_session(date: Optional[str] = Query(None)):
     date_str = date or local_today()
     session_file = DATA_DIR / "sessions" / f"{date_str}.json"
     data = read_json(session_file)
-    if data:
+    if isinstance(data, dict) and isinstance(data.get("items"), list):
         return { "ok": True, "data": data }
+    if session_file.exists():
+        raise HTTPException(status_code=500, detail="Session file could not be read")
     raise HTTPException(status_code=404, detail={ "ok": False })
 
 @app.post("/session")
@@ -247,6 +259,8 @@ def save_session(background_tasks: BackgroundTasks, payload: Dict[str, Any], dat
             "return_minutes": optional_minutes(it.get("return_minutes")),
             "mood_before": mood_before,
             "mood_after": mood_after,
+            "trainingUnit": it.get("trainingUnit") is True,
+            "signed": it.get("signed") is True,
             "focus": str(it.get("focus") or "")[:500],
             "setting": str(it.get("setting") or "")[:500],
             "reflection": str(it.get("reflection") or it.get("note") or "")[:2000],
@@ -254,7 +268,7 @@ def save_session(background_tasks: BackgroundTasks, payload: Dict[str, Any], dat
             "note": str(it.get("note") or it.get("reflection") or "")[:2000]
         })
         
-    write_json(session_file, {
+    write_session_json(session_file, {
         "date": date_str,
         "items": items,
         "saved_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")

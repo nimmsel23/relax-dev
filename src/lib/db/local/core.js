@@ -1,6 +1,6 @@
 // Standalone: same-origin (Vite-Proxy :5903 → Coach :9150). Embedded in der
 // vitalos-Shell setzt der RelaxApp-Wrapper window.__RELAX_API_BASE__ = '/relax-api'.
-const BASE = import.meta.env.VITE_API_BASE
+const BASE = import.meta.env?.VITE_API_BASE
   || (typeof window !== 'undefined' && window.__RELAX_API_BASE__)
   || (typeof window !== 'undefined' && window.location.pathname.startsWith('/relax/') ? '/relax-api' : '')
   || ''
@@ -8,7 +8,11 @@ const BASE = import.meta.env.VITE_API_BASE
 export const api = {
   async get(path) {
     const res = await fetch(BASE + path, { cache: 'no-store', signal: AbortSignal.timeout(8000) }) // Lie-Fi: nicht ewig hängen
-    if (!res.ok) throw new Error(`GET ${path} → ${res.status}`)
+    if (!res.ok) {
+      const error = new Error(`GET ${path} → ${res.status}`)
+      error.status = res.status
+      throw error
+    }
     return res.json()
   },
   async post(path, data) {

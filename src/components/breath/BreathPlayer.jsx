@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Pause, Play, Square } from 'lucide-react'
-import { phaseAt } from '../../lib/breath/patterns.js'
+import { cycleSeconds, phaseAt } from '../../lib/breath/patterns.js'
 
 export const KIND_COLOR = {
   in: 'var(--accent)',
@@ -35,14 +35,32 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
   const elapsedRef = useRef(0)
   const finishedRef = useRef(false)
 
+  const pause = () => {
+    if (pausedAtRef.current != null) return
+    const now = performance.now()
+    pausedAtRef.current = now
+    if (startRef.current != null) elapsedRef.current = Math.max(0, now - startRef.current)
+    setPaused(true)
+  }
+
   const finish = (completed) => {
     if (finishedRef.current) return
     finishedRef.current = true
-    onFinish({ seconds: Math.round(elapsedRef.current / 1000), rounds: lastRef.current.round, completed })
+    const elapsed = Math.min(elapsedRef.current, cycleSeconds(pattern) * rounds * 1000)
+    onFinish({ seconds: Math.round(elapsed / 1000), rounds: Math.floor(elapsed / (cycleSeconds(pattern) * 1000)), completed })
   }
+
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.hidden) pause()
+    }
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', onVisibilityChange)
+  }, [])
 
   // Bildschirm wach halten (Mobile). Fehler/Unsupported ignorieren.
   useEffect(() => {
+    if (paused) return undefined
     let lock = null
     let cancelled = false
     try {
@@ -55,11 +73,11 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
       cancelled = true
       lock?.release().catch(() => {})
     }
-  }, [])
+  }, [paused])
 
   useEffect(() => {
     if (paused) {
-      pausedAtRef.current = performance.now()
+      if (pausedAtRef.current == null) pausedAtRef.current = performance.now()
       return undefined
     }
     const now0 = performance.now()
@@ -69,6 +87,7 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
 
     let raf
     const tick = (now) => {
+      if (pausedAtRef.current != null || document.hidden) return
       const t = now - startRef.current
       let fill = 0
       let progress = 0
@@ -159,7 +178,7 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
       </div>
 
       <div className="w-full max-w-md text-center text-2xl font-extrabold -mt-2 mb-2" style={{ color }} role="status" aria-live="polite">
-        {label}
+        {paused ? 'Pausiert' : label}
       </div>
 
       <div className="w-full max-w-md">
@@ -185,7 +204,7 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
             <Square size={16} /> Beenden
           </button>
           <button
-            onClick={() => setPaused((p) => !p)}
+            onClick={() => paused ? setPaused(false) : pause()}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold"
             style={{ background: 'var(--accent)', color: '#0b0f19', border: 'none' }}
           >

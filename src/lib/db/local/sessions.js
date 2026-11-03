@@ -8,9 +8,11 @@ import { localToday } from '../shared/utils.js'
 export async function getRelaxSession(date = localToday()) {
   try {
     const d = await api.get(`/session?date=${date}`)
-    return d?.ok && d?.data ? d.data : null
-  } catch {
-    return null
+    if (!d?.ok || !d.data || !Array.isArray(d.data.items)) throw new Error('Invalid session response')
+    return d.data
+  } catch (error) {
+    if (error.status === 404) return null
+    throw error
   }
 }
 
