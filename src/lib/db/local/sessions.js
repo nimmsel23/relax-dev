@@ -22,13 +22,15 @@ export async function saveRelaxSession(date = localToday(), items = []) {
 }
 
 // Für die journal-dev Timeline-Aggregation (Journal zeigt alle Pillars).
-export async function getRelaxSessionHistory(n = 30, before = null) {
+export async function getRelaxSessionHistory(n = 30, before = null, { strict = false } = {}) {
   try {
     const params = new URLSearchParams({ limit: String(n) })
     if (before) params.set('before', before)
     const d = await api.get(`/session/history?${params.toString()}`)
-    return d?.sessions || []
-  } catch {
+    if (!Array.isArray(d?.sessions)) throw new Error('Invalid session history response')
+    return d.sessions
+  } catch (error) {
+    if (strict) throw error
     return []
   }
 }
