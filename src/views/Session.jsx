@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { BookOpen, Download, Plus, Save, Trash2 } from 'lucide-react'
 import { getRelaxSession, saveRelaxSession, getRelaxTechniques, exportRelaxCsv } from '@db'
 import { localToday, downloadText } from '../lib/db/shared/utils.js'
+import { readSessionDraft, writeSessionDraft, removeSessionDraft } from '../lib/training/sessionDraft.js'
 
 const MOOD = [
   { v: 1, label: '😞', name: 'sehr unruhig' },
@@ -46,6 +47,10 @@ export default function Session({ onNavigate }) {
   const [loadError, setLoadError] = useState(false)
   const [dirty, setDirty] = useState(false)
   const [reload, setReload] = useState(0)
+  const [loadedDate, setLoadedDate] = useState(null)
+  const [base, setBase] = useState('[]')
+  const [draftConflict, setDraftConflict] = useState(null)
+  const [draftError, setDraftError] = useState(false)
   const [toast, setToast] = useState('')
 
   useEffect(() => {
@@ -56,15 +61,29 @@ export default function Session({ onNavigate }) {
     let active = true
     setLoading(true)
     setLoadError(false)
+    setLoadedDate(null)
     getRelaxSession(date).then(data => {
       if (active) {
-        setItems(data?.items || [])
-        setDirty(false)
+        const saved = data?.items || []
+        let draft = { status: 'none' }
+        try { draft = readSessionDraft(sessionStorage, date, saved); setDraftError(draft.status === 'invalid') }
+        catch { setDraftError(true) }
+        setBase(JSON.stringify(saved))
+        setItems(draft.status === 'restore' ? draft.items : saved)
+        setDirty(draft.status === 'restore')
+        setDraftConflict(draft.status === 'conflict' ? draft.items : null)
+        setLoadedDate(date)
       }
     }).catch(() => { if (active) setLoadError(true) })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [date, reload])
+
+  useEffect(() => {
+    if (!dirty || loadedDate !== date || draftConflict) return
+    try { writeSessionDraft(sessionStorage, date, base, items); setDraftError(false) }
+    catch { setDraftError(true) }
+  }, [dirty, date, loadedDate, base, items, draftConflict])
 
   useEffect(() => {
     if (!dirty) return undefined
@@ -87,14 +106,31 @@ export default function Session({ onNavigate }) {
 
   function changeDate(nextDate) {
     if (!nextDate || nextDate === date) return
-    if (dirty && !window.confirm('Ungespeicherte Änderungen an diesem Praxistag verwerfen?')) return
+    let unableToSave = draftError
+    if (dirty) {
+      try { writeSessionDraft(sessionStorage, date, base, items); unableToSave = false }
+      catch { unableToSave = true; setDraftError(true) }
+    }
+    if ((dirty || draftConflict) && unableToSave && !window.confirm('Der Entwurf konnte nicht im Browser gesichert werden. Ungespeicherte Änderungen verwerfen?')) return
+    setLoadedDate(null)
+    setDirty(false)
+    setDraftConflict(null)
     setDate(nextDate)
   }
 
   async function save() {
-    if (loading || loadError || saving) return
+    if (loading || loadError || saving || draftConflict) return
     setSaving(true)
     try {
+      const latestItems = (await getRelaxSession(date))?.items || []
+      const latestBase = JSON.stringify(latestItems)
+      if (latestBase !== base) {
+        setDraftConflict(items)
+        setItems(latestItems)
+        setBase(latestBase)
+        setDirty(false)
+        return
+      }
       const sanitized = items.map(item => ({
         ...item,
         technique: String(item.technique || '').trim(),
@@ -111,7 +147,9 @@ export default function Session({ onNavigate }) {
         note: String(item.note || '').slice(0, 2000),
       })).filter(item => item.technique || item.minutes > 0 || item.note || item.reflection || item.focus || item.setting || item.transfer || ['arrival_minutes', 'practice_minutes', 'return_minutes'].some(key => item[key] !== ''))
       await saveRelaxSession(date, sanitized)
+      try { removeSessionDraft(sessionStorage, date); setDraftError(false) } catch { setDraftError(true) }
       setItems(sanitized)
+      setBase(JSON.stringify(sanitized))
       setDirty(false)
       showToast('Praxisprotokoll gespeichert')
     } catch {
@@ -146,7 +184,10 @@ export default function Session({ onNavigate }) {
         </div>
       </section>
 
-      <fieldset disabled={saving} className="min-w-0 space-y-5">
+      {draftError && <p role="alert" className="rounded-xl border p-3 text-sm" style={{ borderColor: 'var(--orange)' }}>Der Entwurf konnte im Browser nicht gesichert oder gelesen werden. Bitte speichere deinen Eintrag, bevor du den Bereich verlässt.</p>}
+      {draftConflict && !loading && !loadError && <div role="alert" className="rounded-xl border p-4 text-sm space-y-3" style={{ borderColor: 'var(--orange)', background: 'var(--card)' }}><p>Für diesen Tag gibt es einen ungespeicherten Entwurf, aber der gespeicherte Stand hat sich seitdem verändert. Wähle, welchen Stand du bearbeiten möchtest. Beim Speichern ersetzt der gewählte Entwurf den aktuellen Tagesstand.</p><div className="flex flex-wrap gap-2"><button type="button" onClick={() => { setItems(draftConflict); setDirty(true); setDraftConflict(null) }} className="rounded-lg border px-3 py-2 font-bold" style={{ borderColor: 'var(--line)' }}>Entwurf bearbeiten</button><button type="button" onClick={() => { try { removeSessionDraft(sessionStorage, date); setDraftError(false); setDraftConflict(null) } catch { setDraftError(true) } }} className="rounded-lg border px-3 py-2 font-bold" style={{ borderColor: 'var(--line)' }}>Gespeicherten Stand behalten</button></div></div>}
+      {dirty && !draftError && <p role="status" className="text-xs" style={{ color: 'var(--muted)' }}>Ungespeicherter Entwurf in diesem Browser-Tab gesichert. Zum dauerhaften Speichern „Protokoll speichern“ wählen.</p>}
+      <fieldset disabled={saving || !!draftConflict} className="min-w-0 space-y-5">
       {loading ? <p role="status">Praxistag wird geladen …</p> : loadError ? (
         <div role="alert" className="rounded-2xl border p-5" style={{ background: 'var(--card)', borderColor: 'var(--orange)' }}>
           Der Praxistag konnte nicht geladen werden. Bitte prüfe die Verbindung und öffne den Tag erneut; Speichern ist bis dahin gesperrt.
@@ -259,8 +300,8 @@ export default function Session({ onNavigate }) {
         </section>
 
         <section className="space-y-2 rounded-2xl border p-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-          <button onClick={() => { setDirty(true); setItems(current => [...current, makeItem()]) }} disabled={loading || loadError || saving} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold disabled:opacity-50" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}><Plus size={17} />Session hinzufügen</button>
-          <button onClick={save} disabled={loading || loadError || saving} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold disabled:opacity-50" style={{ background: saving ? 'var(--line)' : 'var(--accent)', color: saving ? 'var(--muted)' : '#0b0f19' }}><Save size={17} />{saving ? 'Speichert …' : 'Protokoll speichern'}</button>
+          <button onClick={() => { setDirty(true); setItems(current => [...current, makeItem()]) }} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold disabled:opacity-50" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}><Plus size={17} />Session hinzufügen</button>
+          <button onClick={save} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold disabled:opacity-50" style={{ background: saving ? 'var(--line)' : 'var(--accent)', color: saving ? 'var(--muted)' : '#0b0f19' }}><Save size={17} />{saving ? 'Speichert …' : 'Protokoll speichern'}</button>
           <button onClick={() => exportCsv(30)} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold" style={{ background: 'transparent', borderColor: 'var(--line)' }} title="CSV-Export der letzten 30 Tage"><Download size={16} />30-Tage-Export</button>
         </section>
 
