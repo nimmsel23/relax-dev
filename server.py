@@ -8,7 +8,7 @@ import tempfile
 import importlib.util
 from pathlib import Path
 from typing import Optional, Dict, Any, List
-from datetime import datetime, timedelta, timezone
+from datetime import date as calendar_date, datetime, timedelta, timezone
 
 from fastapi import FastAPI, Query, HTTPException, BackgroundTasks
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -81,6 +81,16 @@ def write_session_json(p: Path, data: Any):
 
 def local_today() -> str:
     return datetime.now().strftime("%Y-%m-%d")
+
+def validated_day(value: Optional[str]) -> str:
+    candidate = value or local_today()
+    try:
+        parsed = calendar_date.fromisoformat(candidate)
+    except (TypeError, ValueError):
+        raise HTTPException(status_code=422, detail="date must be a valid YYYY-MM-DD day")
+    if parsed.isoformat() != candidate:
+        raise HTTPException(status_code=422, detail="date must be a valid YYYY-MM-DD day")
+    return candidate
 
 def last_dates(days: int) -> List[str]:
     today = datetime.now()
@@ -221,7 +231,7 @@ def export_csv(days: int = Query(14, ge=1, le=365)):
 
 @app.get("/session")
 def get_session(date: Optional[str] = Query(None)):
-    date_str = date or local_today()
+    date_str = validated_day(date)
     session_file = DATA_DIR / "sessions" / f"{date_str}.json"
     data = read_json(session_file)
     if isinstance(data, dict) and isinstance(data.get("items"), list):
@@ -232,7 +242,7 @@ def get_session(date: Optional[str] = Query(None)):
 
 @app.post("/session")
 def save_session(background_tasks: BackgroundTasks, payload: Dict[str, Any], date: Optional[str] = Query(None)):
-    date_str = date or local_today()
+    date_str = validated_day(date)
     session_file = DATA_DIR / "sessions" / f"{date_str}.json"
     
     items_in = payload.get("items")
@@ -305,7 +315,7 @@ def get_session_latest():
 
 @app.get("/journal")
 def get_journal(date: Optional[str] = Query(None)):
-    date_str = date or local_today()
+    date_str = validated_day(date)
     journal_file = DATA_DIR / "journal" / f"{date_str}.md"
     if not journal_file.exists():
         raise HTTPException(status_code=404, detail={ "ok": False })
@@ -316,7 +326,7 @@ def get_journal(date: Optional[str] = Query(None)):
 
 @app.post("/journal")
 def save_journal(background_tasks: BackgroundTasks, payload: Dict[str, Any], date: Optional[str] = Query(None)):
-    date_str = date or local_today()
+    date_str = validated_day(date)
     journal_file = DATA_DIR / "journal" / f"{date_str}.md"
     content = payload.get("content", "")
     
@@ -359,7 +369,7 @@ def get_relaxation_progress():
 
 @app.post("/relaxation/session")
 def post_relaxation_session(background_tasks: BackgroundTasks, payload: Dict[str, Any]):
-    datum = payload.get("datum") or local_today()
+    datum = validated_day(payload.get("datum"))
     methode = payload.get("methode") or "Progressive Muskelrelaxation (PMR)"
     dauer = payload.get("dauer")
     ort = payload.get("ort")
