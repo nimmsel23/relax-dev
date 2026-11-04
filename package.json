@@ -20,15 +20,23 @@
     "deploy:preview": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
     "deploy:prev": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
     "build:preview": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
-    "build:prev": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h"
+    "build:prev": "pnpm run build && firebase hosting:channel:deploy preview --expires 24h",
+    "build:native": "vite build --mode native",
+    "native:sync": "pnpm run build:native && cap sync",
+    "native:android": "cap open android",
+    "build:android": "pnpm run native:sync && cd android && ./gradlew assembleDebug",
+    "run:android": "pnpm run native:sync && cap run android"
   },
   "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.0",
     "@fastify/static": "^9.1.3",
     "@google/generative-ai": "^0.21.0",
     "@tanstack/react-query": "^5.100.10",
     "dotenv": "^16.4.5",
-    "firebase": "^11.10.0",
     "fastify": "^5.8.5",
+    "firebase": "^11.10.0",
     "lucide-react": "^0.453.0",
     "marked": "^18.0.3",
     "react": "^18.3.1",
@@ -39,6 +47,7 @@
     "zustand": "^5.0.13"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.6.0",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "nodemon": "^3.1.10",

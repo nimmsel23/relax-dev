@@ -174,7 +174,9 @@ Das Repo ist ohne diesen Rechner lauffähig: `corepack enable && bash scripts/ci
 
 ### Building
 ```bash
-pnpm run build   # Vite build → dist/
+pnpm run build          # Vite build → dist/
+pnpm run build:android  # Baut natives Bundle & Debug-APK via Gradle/Capacitor
+pnpm run run:android    # Deployt direkt auf Android-Gerät/Emulator
 ```
 Production API: Coach :9150. The retired `server.mjs` entrypoint does not listen.
 
