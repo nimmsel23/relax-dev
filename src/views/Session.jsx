@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { BookOpen, Download, Plus, Save, Trash2 } from 'lucide-react'
 import { getRelaxSession, saveRelaxSession, getRelaxTechniques, exportRelaxCsv } from '@db'
 import { localToday, downloadText } from '../lib/db/shared/utils.js'
+import { readSessionDraft, writeSessionDraft, removeSessionDraft } from '../lib/training/sessionDraft.js'
 
 const MOOD = [
   { v: 1, label: '😞', name: 'sehr unruhig' },
@@ -42,6 +43,14 @@ export default function Session({ onNavigate }) {
   const [date, setDate] = useState(today)
   const [items, setItems] = useState([])
   const [saving, setSaving] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState(false)
+  const [dirty, setDirty] = useState(false)
+  const [reload, setReload] = useState(0)
+  const [loadedDate, setLoadedDate] = useState(null)
+  const [base, setBase] = useState('[]')
+  const [draftConflict, setDraftConflict] = useState(null)
+  const [draftError, setDraftError] = useState(false)
   const [toast, setToast] = useState('')
 
   useEffect(() => {
@@ -50,11 +59,38 @@ export default function Session({ onNavigate }) {
 
   useEffect(() => {
     let active = true
+    setLoading(true)
+    setLoadError(false)
+    setLoadedDate(null)
     getRelaxSession(date).then(data => {
-      if (active) setItems(data?.items || [])
-    }).catch(() => { if (active) setItems([]) })
+      if (active) {
+        const saved = data?.items || []
+        let draft = { status: 'none' }
+        try { draft = readSessionDraft(sessionStorage, date, saved); setDraftError(draft.status === 'invalid') }
+        catch { setDraftError(true) }
+        setBase(JSON.stringify(saved))
+        setItems(draft.status === 'restore' ? draft.items : saved)
+        setDirty(draft.status === 'restore')
+        setDraftConflict(draft.status === 'conflict' ? draft.items : null)
+        setLoadedDate(date)
+      }
+    }).catch(() => { if (active) setLoadError(true) })
+      .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
-  }, [date])
+  }, [date, reload])
+
+  useEffect(() => {
+    if (!dirty || loadedDate !== date || draftConflict) return
+    try { writeSessionDraft(sessionStorage, date, base, items); setDraftError(false) }
+    catch { setDraftError(true) }
+  }, [dirty, date, loadedDate, base, items, draftConflict])
+
+  useEffect(() => {
+    if (!dirty) return undefined
+    const warn = event => { event.preventDefault(); event.returnValue = '' }
+    window.addEventListener('beforeunload', warn)
+    return () => window.removeEventListener('beforeunload', warn)
+  }, [dirty])
 
   const totalMinutes = useMemo(() => items.reduce((sum, item) => sum + (Number(item.minutes) || 0), 0), [items])
 
@@ -64,12 +100,37 @@ export default function Session({ onNavigate }) {
   }
 
   function updateItem(index, patch) {
+    setDirty(true)
     setItems(current => current.map((item, itemIndex) => itemIndex === index ? { ...item, ...patch } : item))
   }
 
+  function changeDate(nextDate) {
+    if (!nextDate || nextDate === date) return
+    let unableToSave = draftError
+    if (dirty) {
+      try { writeSessionDraft(sessionStorage, date, base, items); unableToSave = false }
+      catch { unableToSave = true; setDraftError(true) }
+    }
+    if ((dirty || draftConflict) && unableToSave && !window.confirm('Der Entwurf konnte nicht im Browser gesichert werden. Ungespeicherte Änderungen verwerfen?')) return
+    setLoadedDate(null)
+    setDirty(false)
+    setDraftConflict(null)
+    setDate(nextDate)
+  }
+
   async function save() {
+    if (loading || loadError || saving || draftConflict) return
     setSaving(true)
     try {
+      const latestItems = (await getRelaxSession(date))?.items || []
+      const latestBase = JSON.stringify(latestItems)
+      if (latestBase !== base) {
+        setDraftConflict(items)
+        setItems(latestItems)
+        setBase(latestBase)
+        setDirty(false)
+        return
+      }
       const sanitized = items.map(item => ({
         ...item,
         technique: String(item.technique || '').trim(),
@@ -84,9 +145,12 @@ export default function Session({ onNavigate }) {
         reflection: String(item.reflection || '').slice(0, 2000),
         transfer: String(item.transfer || '').slice(0, 1000),
         note: String(item.note || '').slice(0, 2000),
-      })).filter(item => item.technique || item.minutes > 0 || item.note || item.reflection || item.focus)
+      })).filter(item => item.technique || item.minutes > 0 || item.note || item.reflection || item.focus || item.setting || item.transfer || ['arrival_minutes', 'practice_minutes', 'return_minutes'].some(key => item[key] !== ''))
       await saveRelaxSession(date, sanitized)
+      try { removeSessionDraft(sessionStorage, date); setDraftError(false) } catch { setDraftError(true) }
       setItems(sanitized)
+      setBase(JSON.stringify(sanitized))
+      setDirty(false)
       showToast('Praxisprotokoll gespeichert')
     } catch {
       showToast('Fehler beim Speichern')
@@ -120,13 +184,22 @@ export default function Session({ onNavigate }) {
         </div>
       </section>
 
-      {items.length === 0 ? (
+      {draftError && <p role="alert" className="rounded-xl border p-3 text-sm" style={{ borderColor: 'var(--orange)' }}>Der Entwurf konnte im Browser nicht gesichert oder gelesen werden. Bitte speichere deinen Eintrag, bevor du den Bereich verlässt.</p>}
+      {draftConflict && !loading && !loadError && <div role="alert" className="rounded-xl border p-4 text-sm space-y-3" style={{ borderColor: 'var(--orange)', background: 'var(--card)' }}><p>Für diesen Tag gibt es einen ungespeicherten Entwurf, aber der gespeicherte Stand hat sich seitdem verändert. Wähle, welchen Stand du bearbeiten möchtest. Beim Speichern ersetzt der gewählte Entwurf den aktuellen Tagesstand.</p><div className="flex flex-wrap gap-2"><button type="button" onClick={() => { setItems(draftConflict); setDirty(true); setDraftConflict(null) }} className="rounded-lg border px-3 py-2 font-bold" style={{ borderColor: 'var(--line)' }}>Entwurf bearbeiten</button><button type="button" onClick={() => { try { removeSessionDraft(sessionStorage, date); setDraftError(false); setDraftConflict(null) } catch { setDraftError(true) } }} className="rounded-lg border px-3 py-2 font-bold" style={{ borderColor: 'var(--line)' }}>Gespeicherten Stand behalten</button></div></div>}
+      {dirty && !draftError && <p role="status" className="text-xs" style={{ color: 'var(--muted)' }}>Ungespeicherter Entwurf in diesem Browser-Tab gesichert. Zum dauerhaften Speichern „Protokoll speichern“ wählen.</p>}
+      <fieldset disabled={saving || !!draftConflict} className="min-w-0 space-y-5">
+      {loading ? <p role="status">Praxistag wird geladen …</p> : loadError ? (
+        <div role="alert" className="rounded-2xl border p-5" style={{ background: 'var(--card)', borderColor: 'var(--orange)' }}>
+          Der Praxistag konnte nicht geladen werden. Bitte prüfe die Verbindung und öffne den Tag erneut; Speichern ist bis dahin gesperrt.
+          <button type="button" onClick={() => setReload(value => value + 1)} className="ml-2 font-bold" style={{ color: 'var(--accent)' }}>Erneut laden</button>
+        </div>
+      ) : items.length === 0 ? (
         <div className="rounded-2xl border px-6 py-10 sm:px-10 sm:py-14" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
           <div className="max-w-xl">
             <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>Dein nächster Eintrag</div>
             <h2 className="mt-2 text-xl font-bold sm:text-2xl">Noch keine Praxis dokumentiert</h2>
             <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Starte mit einer Methode, die du kennst. Notiere auch Anpassungen und Pausen; nichts muss erzwungen werden.</p>
-            <button onClick={() => setItems([makeItem()])} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold" style={{ background: 'var(--accent)', color: '#0b0f19' }}><Plus size={17} />Erste Session anlegen</button>
+            <button onClick={() => { setDirty(true); setItems([makeItem()]) }} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold" style={{ background: 'var(--accent)', color: '#0b0f19' }}><Plus size={17} />Erste Session anlegen</button>
           </div>
         </div>
       ) : items.map((item, index) => {
@@ -140,7 +213,7 @@ export default function Session({ onNavigate }) {
                 <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>Praxis {index + 1}</div>
                 <div className="mt-0.5 font-bold">{item.technique || 'Methode auswählen'}</div>
               </div>
-              <button onClick={() => setItems(current => current.filter((_, itemIndex) => itemIndex !== index))} aria-label={`Praxis ${index + 1} entfernen`} className="rounded-xl border p-2" style={{ borderColor: 'var(--line)', background: 'transparent', color: 'var(--dim)' }}><Trash2 size={17} /></button>
+              <button onClick={() => { setDirty(true); setItems(current => current.filter((_, itemIndex) => itemIndex !== index)) }} aria-label={`Praxis ${index + 1} entfernen`} className="rounded-xl border p-2" style={{ borderColor: 'var(--line)', background: 'transparent', color: 'var(--dim)' }}><Trash2 size={17} /></button>
             </div>
 
             <div className="space-y-4 p-4">
@@ -209,6 +282,7 @@ export default function Session({ onNavigate }) {
         )
       })}
 
+      </fieldset>
       <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Die Stimmungsskala beschreibt nur dein eigenes Erleben. Sie ist weder Messung noch Diagnose. Der offizielle Praxisnachweis wird separat im Ausbildungsmodul bestätigt.</p>
       </main>
 
@@ -216,7 +290,7 @@ export default function Session({ onNavigate }) {
         <section className="rounded-2xl border p-4 sm:p-5" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
           <label className="block text-xs font-semibold" style={{ color: 'var(--muted)' }}>
             Praxistag
-            <input type="date" value={date} onChange={event => setDate(event.target.value)} className={`${FIELD} mt-2`} style={fieldStyle} />
+            <input type="date" value={date} onChange={event => changeDate(event.target.value)} disabled={saving} className={`${FIELD} mt-2`} style={fieldStyle} />
           </label>
           <div className="mt-5 border-t pt-4" style={{ borderColor: 'var(--line)' }}>
             <div className="text-sm" style={{ color: 'var(--muted)' }}>Gesamte Praxiszeit</div>
@@ -226,8 +300,8 @@ export default function Session({ onNavigate }) {
         </section>
 
         <section className="space-y-2 rounded-2xl border p-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-          <button onClick={() => setItems(current => [...current, makeItem()])} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}><Plus size={17} />Session hinzufügen</button>
-          <button onClick={save} disabled={saving} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold" style={{ background: saving ? 'var(--line)' : 'var(--accent)', color: saving ? 'var(--muted)' : '#0b0f19' }}><Save size={17} />{saving ? 'Speichert …' : 'Protokoll speichern'}</button>
+          <button onClick={() => { setDirty(true); setItems(current => [...current, makeItem()]) }} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold disabled:opacity-50" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}><Plus size={17} />Session hinzufügen</button>
+          <button onClick={save} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold disabled:opacity-50" style={{ background: saving ? 'var(--line)' : 'var(--accent)', color: saving ? 'var(--muted)' : '#0b0f19' }}><Save size={17} />{saving ? 'Speichert …' : 'Protokoll speichern'}</button>
           <button onClick={() => exportCsv(30)} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold" style={{ background: 'transparent', borderColor: 'var(--line)' }} title="CSV-Export der letzten 30 Tage"><Download size={16} />30-Tage-Export</button>
         </section>
 

@@ -22,3 +22,4 @@ archive/
 
 # flüchtig von scripts/ci-install.sh geschrieben
 pnpm-workspace.yaml
+.idea/

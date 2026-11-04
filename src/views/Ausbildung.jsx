@@ -3,6 +3,8 @@ import { BookOpen, ClipboardList, Download, Upload, Plus, Check, Clock3, Wind, H
 import { getRelaxSession, getRelaxSessionHistory, saveRelaxSession } from '@db'
 import { downloadText, localToday } from '../lib/db/shared/utils.js'
 import { TEACHING_SCRIPT_KEY, PRANAYAMA_ASSIGNMENT_KEY } from '../lib/training/storage.js'
+import { confirmPracticeCandidate, practiceCandidateKey } from '../lib/training/practiceConfirmation.js'
+import { loadPracticeHistory } from '../lib/training/practiceHistory.js'
 
 const METHODS = [
   { name: 'Atemschulung', duration: '15–20 Min. · lokaler Kursrichtwert', durationSource: 'Lokale Kursnotiz „00_Entspannungs-Protokoll-MINIMAL.md“ (erstellt 6. März 2026); das Atemschulungs-PDF selbst nennt keine Dauer.', icon: Wind, focus: 'Atem wahrnehmen und ruhig begleiten', practice: 'Das Kursskript schlägt vor, die Hände auf den Bauch zu legen und die Ein- und Ausatmung wahrzunehmen (S. 48). Ein bequemes Ausatmen ohne festes Zähltempo kann als App-Ergänzung angeboten werden; Atempausen und Rhythmen bleiben freiwillig.', adapt: 'Bei Schwindel, Unruhe oder Atemnot sofort zum natürlichen Atem zurückkehren. Keine forcierte Atmung oder langen Atemhalte als Entspannungsübung anleiten.', source: 'FlexyFit Academy: Atemschulung, S. 48; Stundenplanung, S. 8–12' },
@@ -575,25 +577,7 @@ function practiceDescription(item) {
   return `${label}${duration}${technique && note ? ` — ${note}` : ''}`
 }
 
-function practiceCandidateKey(candidate) {
-  return candidate.id != null
-    ? `${candidate.date}:id:${candidate.id}`
-    : `${candidate.date}:index:${candidate._sessionItemIndex}`
-}
-
-async function getCompleteRelaxSessionHistory() {
-  const rows = []
-  let before = null
-  while (true) {
-    const page = await getRelaxSessionHistory(365, before)
-    rows.push(...(page || []))
-    if (!page || page.length < 365) break
-    const nextBefore = page[page.length - 1]?.date
-    if (!nextBefore || nextBefore === before) break
-    before = nextBefore
-  }
-  return rows
-}
+const getCompleteRelaxSessionHistory = () => loadPracticeHistory(getRelaxSessionHistory)
 
 export default function Ausbildung({ onNavigate }) {
   const [{ section, method }, setRoute] = useState(readTrainingRoute)
@@ -623,6 +607,8 @@ export default function Ausbildung({ onNavigate }) {
   })
   const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(true)
+  const [historyError, setHistoryError] = useState(false)
+  const [historyReload, setHistoryReload] = useState(0)
   const [saving, setSaving] = useState(false)
   const [markingId, setMarkingId] = useState(null)
   const [delivery, setDelivery] = useState(restoreDelivery)
@@ -703,14 +689,20 @@ export default function Ausbildung({ onNavigate }) {
   }, [delivery?.running])
   useEffect(() => {
     let alive = true
-    getCompleteRelaxSessionHistory().then(rows => { if (alive) setHistory(rows || []) }).catch(() => { if (alive) setHistory([]) }).finally(() => { if (alive) setLoading(false) })
+    setLoading(true)
+    getCompleteRelaxSessionHistory().then(rows => { if (alive) { setHistory(rows); setHistoryError(false) } }).catch(() => { if (alive) setHistoryError(true) }).finally(() => { if (alive) setLoading(false) })
     return () => { alive = false }
-  }, [])
+  }, [historyReload])
 
   const practice = useMemo(() => history.flatMap(day => (day.items || []).filter(item => item.trainingUnit === true && item.signed === true).map(item => ({ ...item, date: day.date }))).sort((a, b) => a.date.localeCompare(b.date)), [history])
-  const candidates = useMemo(() => history.flatMap(day => (day.items || []).map((item, itemIndex) => ({ ...item, date: day.date, _sessionItemIndex: itemIndex })).filter(item => !(item.trainingUnit === true && item.signed === true) && (String(item.technique || '').trim() || Number(item.minutes) > 0 || String(item.note || '').trim()))).sort((a, b) => a.date.localeCompare(b.date)), [history])
+  const candidates = useMemo(() => history.flatMap(day => {
+    const items = day.items || []
+    const snapshot = JSON.stringify(items)
+    return items.map((item, itemIndex) => ({ ...item, date: day.date, _sessionItemIndex: itemIndex, _sessionDaySnapshot: snapshot })).filter(item => !(item.trainingUnit === true && item.signed === true) && (String(item.technique || '').trim() || Number(item.minutes) > 0 || String(item.note || '').trim()))
+  }).sort((a, b) => a.date.localeCompare(b.date)), [history])
   const totalMinutes = plan.blocks.reduce((sum, block) => sum + (Number(block.minutes) || 0), 0)
   const completed = practice.length
+  const historyReady = !loading && !historyError
   const caseProgress = [
     { label: 'Ziele formuliert', done: Boolean(casePlan.goals.trim()) },
     ...casePlan.weeks.map(week => ({ label: `Woche ${week.number} ausgearbeitet`, done: ['focus', 'routine', 'relaxation', 'nutrition'].every(key => Boolean(week[key]?.trim())) })),
@@ -776,11 +768,17 @@ export default function Ausbildung({ onNavigate }) {
       const items = current?.items || []
       items.push({ id: crypto.randomUUID?.() || String(Date.now()), technique: entry.technique, minutes: entry.minutes === '' ? null : Number(entry.minutes), mood_before: 3, mood_after: 3, note: entry.description.trim(), trainingUnit: true, signed: true })
       await saveRelaxSession(entry.date, items)
-      const rows = await getCompleteRelaxSessionHistory()
-      setHistory(rows || [])
       setEntry(value => ({ ...value, date: localToday(), description: '', signed: false }))
-      notify('Einheit gespeichert')
-    } catch { notify('Speichern fehlgeschlagen. Bitte Verbindung prüfen.') }
+      try {
+        const rows = await getCompleteRelaxSessionHistory()
+        setHistory(rows)
+        setHistoryError(false)
+        notify('Einheit gespeichert')
+      } catch {
+        setHistoryError(true)
+        notify('Einheit gespeichert. Übersicht konnte nicht aktualisiert werden.')
+      }
+    } catch { notify('Speicherung nicht bestätigt. Bitte Verbindung und Eintrag prüfen, bevor du erneut speicherst.') }
     finally { setSaving(false) }
   }
 
@@ -791,10 +789,12 @@ export default function Ausbildung({ onNavigate }) {
     setMarkingId(candidateKey)
     try {
       const current = await getRelaxSession(candidate.date)
-      const updated = (current?.items || []).map((item, index) => {
-        const matches = candidate.id != null ? item.id === candidate.id : index === candidate._sessionItemIndex
-        return matches ? { ...item, trainingUnit: true, signed: true } : item
-      })
+      const updated = confirmPracticeCandidate(current?.items, candidate)
+      if (!updated) {
+        setHistory(rows => rows.map(day => day.date === candidate.date ? { ...day, items: current?.items || [] } : day))
+        notify('Der Praxistag hat sich geändert. Bitte den Eintrag erneut prüfen und bestätigen.')
+        return
+      }
       await saveRelaxSession(candidate.date, updated)
       setHistory(rows => rows.map(day => day.date === candidate.date ? { ...day, items: updated } : day))
       notify('Session als Praxiseinheit bestätigt')
@@ -985,7 +985,7 @@ export default function Ausbildung({ onNavigate }) {
         <p className="mt-2 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Die Datei enthält persönliche Texte und bleibt in deiner Verantwortung. Der formale Praxisnachweis wird separat im Relax-Session-Speicher geführt und nicht importiert.</p>
       </section>
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-2xl border p-4" style={panel}><div className="text-xs" style={{ color: 'var(--muted)' }}>Praxisnachweis</div><div className="mt-1 text-2xl font-black">{Math.min(completed, 30)}<span className="text-sm font-semibold" style={{ color: 'var(--muted)' }}> / 30</span></div><div className="mt-2 h-2 overflow-hidden rounded-full" style={{ background: 'var(--bg2)' }}><div className="h-full rounded-full" style={{ width: `${Math.min(100, completed / 30 * 100)}%`, background: 'var(--accent)' }} /></div></div>
+        <div className="rounded-2xl border p-4" style={panel}><div className="text-xs" style={{ color: 'var(--muted)' }}>Praxisnachweis</div><div className="mt-1 text-2xl font-black">{historyReady ? Math.min(completed, 30) : '–'}<span className="text-sm font-semibold" style={{ color: 'var(--muted)' }}> / 30</span></div><div className="mt-2 h-2 overflow-hidden rounded-full" style={{ background: 'var(--bg2)' }}><div className="h-full rounded-full" style={{ width: `${historyReady ? Math.min(100, completed / 30 * 100) : 0}%`, background: 'var(--accent)' }} /></div></div>
         <div className="rounded-2xl border p-4" style={panel}><div className="text-xs" style={{ color: 'var(--muted)' }}>Stundenentwurf</div><div className="mt-1 text-2xl font-black">{totalMinutes}<span className="text-sm font-semibold" style={{ color: 'var(--muted)' }}> Min.</span></div><div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Richtwert: 60 Minuten</div></div>
       </div>
       <div className="rounded-2xl border p-4" style={panel}><h2 className="font-bold">Worum es im Modul geht</h2><p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Entspannungstraining verbindet Grundlagen zu Stress und Erholung mit der passenden Auswahl und verständlichen Anleitung von Übungen. Als Trainer:in gibst du einen sicheren Rahmen, vermittelst Ruhe und passt die Stunde an die Gruppe an.</p><div className="mt-4 grid gap-2 sm:grid-cols-2">{[
@@ -1220,13 +1220,13 @@ export default function Ausbildung({ onNavigate }) {
     </>}
 
     {section === 'nachweis' && <>
-      <div className="rounded-2xl border p-4" style={panel}><div className="flex items-center justify-between gap-3"><div><h2 className="font-bold">30 Praxiseinheiten</h2><p className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Dokumentiere Datum, Methode, Dauer und deine Bestätigung.</p></div><div className="flex gap-2"><button onClick={() => window.print()} className="flex items-center gap-1 rounded-lg border px-2 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)' }}><BookOpen size={14} /> Drucken / PDF</button><button onClick={exportPractice} className="flex items-center gap-1 rounded-lg border px-2 py-2 text-xs font-bold" style={{ borderColor: 'var(--line)' }}><Download size={14} /> CSV</button></div></div><div className="mt-4 flex items-end justify-between"><div className="text-3xl font-black">{Math.min(completed, 30)}<span className="text-base" style={{ color: 'var(--muted)' }}> / 30</span></div><div className="text-right text-xs" style={{ color: 'var(--muted)' }}>{Math.max(0, 30 - completed)} noch offen</div></div><div className="mt-2 h-2 overflow-hidden rounded-full" style={{ background: 'var(--bg2)' }}><div className="h-full rounded-full" style={{ width: `${Math.min(100, completed / 30 * 100)}%`, background: 'var(--green)' }} /></div></div>
-      <form onSubmit={addPractice} className="space-y-3 rounded-2xl border p-4" style={panel}><h3 className="font-bold">Einheit eintragen</h3><div className="grid grid-cols-2 gap-3"><label className="text-xs" style={{ color: 'var(--muted)' }}>Datum<input type="date" required value={entry.date} onChange={event => setEntry({ ...entry, date: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="text-xs" style={{ color: 'var(--muted)' }}>Dauer (Min., optional)<input type="number" min="1" max="240" value={entry.minutes} onChange={event => setEntry({ ...entry, minutes: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label></div><label className="block text-xs" style={{ color: 'var(--muted)' }}>Methode<select value={entry.technique} onChange={event => setEntry({ ...entry, technique: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input}>{METHODS.map(item => <option key={item.name}>{item.name}</option>)}</select></label><label className="block text-xs" style={{ color: 'var(--muted)' }}>{entry.technique === 'Weitere unterstützende Verfahren' ? 'Konkret durchgeführte Praxis (Pflichtfeld)' : 'Beschreibung (optional)'}<input value={entry.description} onChange={event => setEntry({ ...entry, description: event.target.value })} required={entry.technique === 'Weitere unterstützende Verfahren'} maxLength={300} placeholder={entry.technique === 'Weitere unterstützende Verfahren' ? 'z. B. Qigong' : 'z. B. PMR, Grundform, zu Hause'} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="flex items-start gap-2 rounded-xl p-3 text-xs leading-relaxed" style={{ background: 'var(--bg2)' }}><input type="checkbox" checked={entry.signed} onChange={event => setEntry({ ...entry, signed: event.target.checked })} className="mt-0.5" /><span>Ich bestätige, dass ich diese Entspannungseinheit selbst durchgeführt habe.</span></label><button disabled={saving} className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}><Plus size={16} />{saving ? 'Speichert …' : 'Einheit speichern'}</button><p className="text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Der offizielle Nachweis verlangt Datum, Beschreibung und Unterschrift, aber keine Dauerangabe. Die Dauer ist hier freiwillige Zusatzinformation; die 15 Minuten aus der Stundenplanung beziehen sich auf den Entspannungsteil eines kombinierten Kurses. Der CSV-Export lässt die Unterschrift zur handschriftlichen Unterzeichnung frei.</p></form>
-      {candidates.length > 0 && <div className="overflow-hidden rounded-2xl border" style={panel}><div className="p-4"><h3 className="font-bold">Vorhandene Sessions prüfen</h3><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Diese Einträge aus deinem Tagesprotokoll sind noch nicht als Ausbildungseinheit bestätigt. Übernimm nur Sessions, die du tatsächlich selbst durchgeführt hast.</p></div><div className="divide-y" style={{ borderColor: 'var(--line)' }}>{candidates.map((item, index) => {
+      <div className="rounded-2xl border p-4" style={panel}><div className="flex items-center justify-between gap-3"><div><h2 className="font-bold">30 Praxiseinheiten</h2><p className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Dokumentiere Datum, Methode, Dauer und deine Bestätigung.</p></div><div className="flex gap-2"><button disabled={!historyReady} onClick={() => window.print()} className="flex items-center gap-1 rounded-lg border px-2 py-2 text-xs font-bold disabled:opacity-50" style={{ borderColor: 'var(--line)' }}><BookOpen size={14} /> Drucken / PDF</button><button disabled={!historyReady} onClick={exportPractice} className="flex items-center gap-1 rounded-lg border px-2 py-2 text-xs font-bold disabled:opacity-50" style={{ borderColor: 'var(--line)' }}><Download size={14} /> CSV</button></div></div><div className="mt-4 flex items-end justify-between"><div className="text-3xl font-black">{historyReady ? Math.min(completed, 30) : '–'}<span className="text-base" style={{ color: 'var(--muted)' }}> / 30</span></div><div className="text-right text-xs" style={{ color: 'var(--muted)' }}>{historyReady ? `${Math.max(0, 30 - completed)} noch offen` : 'Stand nicht verfügbar'}</div></div><div className="mt-2 h-2 overflow-hidden rounded-full" style={{ background: 'var(--bg2)' }}><div className="h-full rounded-full" style={{ width: `${historyReady ? Math.min(100, completed / 30 * 100) : 0}%`, background: 'var(--green)' }} /></div></div>
+      <form onSubmit={addPractice} className="space-y-3 rounded-2xl border p-4" style={panel}><h3 className="font-bold">Einheit eintragen</h3><div className="grid grid-cols-2 gap-3"><label className="text-xs" style={{ color: 'var(--muted)' }}>Datum<input type="date" required value={entry.date} onChange={event => setEntry({ ...entry, date: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="text-xs" style={{ color: 'var(--muted)' }}>Dauer (Min., optional)<input type="number" min="1" max="240" value={entry.minutes} onChange={event => setEntry({ ...entry, minutes: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label></div><label className="block text-xs" style={{ color: 'var(--muted)' }}>Methode<select value={entry.technique} onChange={event => setEntry({ ...entry, technique: event.target.value })} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input}>{METHODS.map(item => <option key={item.name}>{item.name}</option>)}</select></label><label className="block text-xs" style={{ color: 'var(--muted)' }}>{entry.technique === 'Weitere unterstützende Verfahren' ? 'Konkret durchgeführte Praxis (Pflichtfeld)' : 'Beschreibung (optional)'}<input value={entry.description} onChange={event => setEntry({ ...entry, description: event.target.value })} required={entry.technique === 'Weitere unterstützende Verfahren'} maxLength={300} placeholder={entry.technique === 'Weitere unterstützende Verfahren' ? 'z. B. Qigong' : 'z. B. PMR, Grundform, zu Hause'} className="mt-1 w-full rounded-xl border px-3 py-2 text-sm" style={input} /></label><label className="flex items-start gap-2 rounded-xl p-3 text-xs leading-relaxed" style={{ background: 'var(--bg2)' }}><input type="checkbox" checked={entry.signed} onChange={event => setEntry({ ...entry, signed: event.target.checked })} className="mt-0.5" /><span>Ich bestätige, dass ich diese Entspannungseinheit selbst durchgeführt habe.</span></label><button disabled={saving || loading || markingId !== null} className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-bold" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}><Plus size={16} />{saving ? 'Speichert …' : 'Einheit speichern'}</button><p className="text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Der offizielle Nachweis verlangt Datum, Beschreibung und Unterschrift, aber keine Dauerangabe. Die Dauer ist hier freiwillige Zusatzinformation; die 15 Minuten aus der Stundenplanung beziehen sich auf den Entspannungsteil eines kombinierten Kurses. Der CSV-Export lässt die Unterschrift zur handschriftlichen Unterzeichnung frei.</p></form>
+      {historyReady && candidates.length > 0 && <div className="overflow-hidden rounded-2xl border" style={panel}><div className="p-4"><h3 className="font-bold">Vorhandene Sessions prüfen</h3><p className="mt-1 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Diese Einträge aus deinem Tagesprotokoll sind noch nicht als Ausbildungseinheit bestätigt. Übernimm nur Sessions, die du tatsächlich selbst durchgeführt hast.</p></div><div className="divide-y" style={{ borderColor: 'var(--line)' }}>{candidates.map((item, index) => {
         const candidateKey = practiceCandidateKey(item)
-        return <div key={candidateKey || `${item.date}-${index}`} className="flex flex-wrap items-center gap-3 p-3"><div className="min-w-0 flex-1"><div className="truncate text-sm font-semibold">{item.technique || item.note || 'Unbenannte Praxis'}{Number(item.minutes) > 0 ? ` · ${item.minutes} Min.` : ''}</div><div className="text-xs" style={{ color: 'var(--muted)' }}>{item.date}</div></div><button disabled={markingId === candidateKey} onClick={() => confirmExistingPractice(item)} className="rounded-lg border px-3 py-2 text-xs font-bold disabled:opacity-50" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>{markingId === candidateKey ? 'Speichert …' : 'Bestätigen'}</button></div>
+        return <div key={candidateKey || `${item.date}-${index}`} className="flex flex-wrap items-center gap-3 p-3"><div className="min-w-0 flex-1"><div className="truncate text-sm font-semibold">{item.technique || item.note || 'Unbenannte Praxis'}{Number(item.minutes) > 0 ? ` · ${item.minutes} Min.` : ''}</div><div className="text-xs" style={{ color: 'var(--muted)' }}>{item.date}</div></div><button disabled={saving || markingId !== null} onClick={() => confirmExistingPractice(item)} className="rounded-lg border px-3 py-2 text-xs font-bold disabled:opacity-50" style={{ borderColor: 'var(--line)', color: 'var(--accent)' }}>{markingId === candidateKey ? 'Speichert …' : 'Bestätigen'}</button></div>
       })}</div></div>}
-      <div className="overflow-hidden rounded-2xl border" style={panel}><div className="flex items-center gap-2 border-b p-4 font-bold" style={{ borderColor: 'var(--line)' }}><BookOpen size={17} style={{ color: 'var(--accent)' }} />Protokoll</div>{loading ? <div className="p-4 text-sm" style={{ color: 'var(--muted)' }}>Lade Einträge …</div> : practice.length === 0 ? <div className="p-4 text-sm" style={{ color: 'var(--muted)' }}>Noch keine Praxiseinheiten dokumentiert.</div> : <div className="divide-y" style={{ borderColor: 'var(--line)' }}>{practice.map((item, index) => <div key={item.id || `${item.date}-${index}`} className="flex items-center gap-3 p-3"><div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}>{index + 1}</div><div className="min-w-0 flex-1"><div className="truncate text-sm font-semibold">{item.technique || item.note || 'Entspannungseinheit'}{Number(item.minutes) > 0 ? ` · ${item.minutes} Min.` : ''}</div><div className="text-xs" style={{ color: 'var(--muted)' }}>{item.date}{item.technique && item.note ? ` · ${item.note}` : ''}</div></div><Check size={17} style={{ color: 'var(--green)' }} /></div>)}</div>}</div>
+      <div className="overflow-hidden rounded-2xl border" style={panel}><div className="flex items-center gap-2 border-b p-4 font-bold" style={{ borderColor: 'var(--line)' }}><BookOpen size={17} style={{ color: 'var(--accent)' }} />Protokoll</div>{loading ? <div className="p-4 text-sm" style={{ color: 'var(--muted)' }}>Lade Einträge …</div> : historyError ? <div role="alert" className="p-4 text-sm">Der Praxisnachweis konnte nicht vollständig geladen werden. <button type="button" onClick={() => setHistoryReload(value => value + 1)} className="font-bold" style={{ color: 'var(--accent)' }}>Erneut laden</button></div> : practice.length === 0 ? <div className="p-4 text-sm" style={{ color: 'var(--muted)' }}>Noch keine Praxiseinheiten dokumentiert.</div> : <div className="divide-y" style={{ borderColor: 'var(--line)' }}>{practice.map((item, index) => <div key={item.id || `${item.date}-${index}`} className="flex items-center gap-3 p-3"><div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold" style={{ background: 'var(--accent-glow)', color: 'var(--accent)' }}>{index + 1}</div><div className="min-w-0 flex-1"><div className="truncate text-sm font-semibold">{item.technique || item.note || 'Entspannungseinheit'}{Number(item.minutes) > 0 ? ` · ${item.minutes} Min.` : ''}</div><div className="text-xs" style={{ color: 'var(--muted)' }}>{item.date}{item.technique && item.note ? ` · ${item.note}` : ''}</div></div><Check size={17} style={{ color: 'var(--green)' }} /></div>)}</div>}</div>
       <section id="training-print" aria-hidden="true">
         <header className="training-print-header">
           <div><div>Dipl. EntspannungstrainerIn · A-Lizenz</div><h1>Trainingsprotokoll</h1><p>Name: __________________________________________</p></div>

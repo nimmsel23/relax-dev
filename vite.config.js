@@ -75,6 +75,7 @@ export default defineConfig(({ command }) => ({
   server: {
     port: 5903,
     strictPort: true,
+    allowedHosts: ['ideapad.tail7a15d6.ts.net'],
     proxy: {
       '/relax-api': { target: BACKEND },
       '/api': { target: BACKEND, rewrite: (path) => '/api/relax' + path },

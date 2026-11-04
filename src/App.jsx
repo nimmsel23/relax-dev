@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useEffect } from 'react'
-import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock, Settings2, Wind, GraduationCap, MoreHorizontal } from 'lucide-react'
+import { Activity, BookOpen, MoonStar, BarChart3, Zap, Beaker, Clock, Settings2, Wind, GraduationCap, MoreHorizontal, HeartPulse } from 'lucide-react'
 import { useCircadianTheme } from './hooks/useCircadianTheme.js'
 
 const Dashboard = lazy(() => import('./views/Dashboard.jsx'))
@@ -11,12 +11,14 @@ const PhysioTimeline = lazy(() => import('./views/PhysioTimeline.jsx'))
 const SubstanceCatalog = lazy(() => import('./views/SubstanceCatalog.jsx'))
 const Settings = lazy(() => import('./views/Settings.jsx'))
 const Ausbildung = lazy(() => import('./views/Ausbildung.jsx'))
+const PMR = lazy(() => import('./views/PMR.jsx'))
 
 const PRIMARY_TABS = [
   { id: 'dash', label: 'Heute', Icon: Activity },
   { id: 'ausbildung', label: 'Modul', Icon: GraduationCap },
   { id: 'session', label: 'Praxis', Icon: MoonStar },
   { id: 'atem', label: 'Atem', Icon: Wind },
+  { id: 'pmr', label: 'PMR', Icon: HeartPulse },
 ]
 
 const MORE_TABS = [
@@ -27,7 +29,7 @@ const MORE_TABS = [
   { id: 'settings', label: 'Einstellungen', Icon: Settings2 },
 ]
 const TAB_IDS = [...PRIMARY_TABS, ...MORE_TABS].map(item => item.id)
-const VIEWS = { dash: Dashboard, session: Session, atem: Breath, ausbildung: Ausbildung, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog, settings: Settings }
+const VIEWS = { dash: Dashboard, session: Session, atem: Breath, pmr: PMR, ausbildung: Ausbildung, journal: Journal, stats: Stats, physio: PhysioTimeline, catalog: SubstanceCatalog, settings: Settings }
 function tabFromHash() {
   const routeTab = window.location.hash.replace(/^#/, '').split('/')[0]
   return TAB_IDS.includes(routeTab) ? routeTab : null

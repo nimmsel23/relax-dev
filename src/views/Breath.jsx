@@ -162,7 +162,7 @@ export default function Breath() {
     setRunning(null)
     // Unter 20 s ist es kein Durchlauf, der ins Log gehört.
     if (r.seconds < 20) return
-    setMoodAfter(Math.min(5, running.moodBefore + 1))
+    setMoodAfter(running.moodBefore)
     setResult({ pattern: p, ...r, moodBefore: running.moodBefore })
   }
 
@@ -178,7 +178,7 @@ export default function Breath() {
         minutes: Math.max(1, Math.round(result.seconds / 60)),
         mood_before: result.moodBefore,
         mood_after: moodAfter,
-        note: `Atem-Visualizer · ${result.rounds} Runden${result.completed ? '' : ' (vorzeitig beendet)'}`,
+        note: `Atem-Visualizer · ${result.rounds} abgeschlossene Runden${result.completed ? '' : ' (vorzeitig beendet)'}`,
       }
       await saveRelaxSession(date, [...(existing?.items || []), item])
       setResult(null)
@@ -219,7 +219,7 @@ export default function Breath() {
             {result.completed ? 'Geschafft' : 'Beendet'} · {result.pattern.name}
           </div>
           <div className="text-sm" style={{ color: 'var(--muted)' }}>
-            {Math.max(1, Math.round(result.seconds / 60))} min, {result.rounds} Runden. Wie fühlst du dich jetzt?
+            {Math.max(1, Math.round(result.seconds / 60))} min, {result.rounds} abgeschlossene Runden. Wie fühlst du dich jetzt?
           </div>
           <MoodPicker value={moodAfter} onChange={setMoodAfter} />
           <div className="flex gap-2">
