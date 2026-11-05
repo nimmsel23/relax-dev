@@ -1,0 +1,16 @@
+{
+  "repo": "relax-dev",
+  "apps": [
+    {
+      "id": "relax-vos",
+      "kind": "main",
+      "name": "relax-vos",
+      "short": "relax-vos",
+      "description": "",
+      "accent": "#888",
+      "site": "relax-vos",
+      "url": "https://relax-vos.web.app",
+      "tab": null
+    }
+  ]
+}

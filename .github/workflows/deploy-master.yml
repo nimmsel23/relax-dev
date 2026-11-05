@@ -1,57 +1,76 @@
-# Standalone-Prod Relax: Push auf master deployt live (nur CI). Gleiche Schritte wie das frühere
-# Meta-Repo-Workflow deploy-relax.yml; das Meta-Repo liefert nur die Nachbar-Repos (Cross-Repo-Aliase),
-# relax-app wird auf den ausgelösten Commit gesetzt.
+# Standalone-Prod Relax: Push auf master deployt live (nur CI) — aus den MASTER-Checkouts der
+# eigenen Repos, OHNE das Meta-Repo vitalos (gleiches Muster wie fitness-dev/deploy-master.yml).
+#
+# Layout (Geschwister nebeneinander, wie lokal unter ~/dev): relax-dev/ (dieser Commit) und
+# (keine Nachbarn nötig) jeweils `master`. Jedes Repo installiert mit
+# seinem EIGENEN Lockfile (--frozen-lockfile, --ignore-scripts). Die Vite-Configs lösen die Nachbarn über
+# resolveSibling()/siblingDir() auf (`<x>-app` oder `<x>-dev` daneben).
+#
+# Auslöser: push auf master und workflow_dispatch (automerge.yml) -> baut und deployt live (nur master).
+# Push auf `ci-test/**` -> reiner Build-Test (Nachbarn von dev), KEIN Deploy.
+# Release-Branch `vitalos` und die Submodul-Pfade im Meta-Repo bleiben unberührt.
 
 name: Live Deploy (Relax master)
+
 'on':
-  workflow_dispatch: null
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Live deployen? (nur auf master wirksam; false = nur bauen)"
+        type: boolean
+        default: true
   push:
     branches:
-    - master
+      - master
+      - 'ci-test/**'
+
 concurrency:
-  group: live-relax-master
+  group: live-relax-${{ github.ref }}
   cancel-in-progress: false
+
 permissions:
   contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NEIGHBOR_REF: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
+      DO_DEPLOY: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || inputs.deploy) }}
     steps:
-    - name: Checkout vitalos (Meta-Repo, liefert Nachbar-Repos)
-      uses: actions/checkout@v4
-      with:
-        repository: nimmsel23/vitalos
-        ref: master
-    - name: Private Skills submodule access
-      uses: ./.github/actions/skills-submodule-auth
-      with:
-        deploy-key: ${{ secrets.SKILLS_DEPLOY_KEY }}
-    - name: Submodules via HTTPS + Token
-      run: |
-        git config --global url."https://x-access-token:${{ secrets.GH_SUBMODULE_TOKEN || secrets.GITHUB_TOKEN }}@github.com/".insteadOf "git@github.com:"
-        git submodule sync
-        git submodule update --init --recursive
-    - name: relax-app auf den ausgelösten Commit setzen
-      run: |
-        cd relax-app
-        SHA="${{ github.sha }}"
-        git fetch origin "$SHA"
-        git checkout "$SHA"
-    - uses: pnpm/action-setup@v4
-      with:
-        version: 11.3.0
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 22
-        cache: pnpm
-    - name: Install (Workspaces)
-      run: pnpm install --no-frozen-lockfile
-    - name: Build Relax
-      run: pnpm --filter ./relax-app run build
-    - name: Deploy Relax to Firebase Hosting
-      run: |
-        cd relax-app
-        echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT || secrets.FIREBASE_SERVICE_ACCOUNT_FITNESS_AOS }}' > /tmp/sa.json
-        GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json \
-          npx firebase-tools@latest deploy --only hosting \
-          --project fitness-aos --non-interactive
+      - name: Checkout relax-dev
+        uses: actions/checkout@v4
+        with:
+          path: relax-dev
+          # Volle Historie: der Changelog (scripts/vos-changelog) liest bei workflow_dispatch `git log <parent>..HEAD`.
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.3.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: relax-dev/pnpm-lock.yaml
+
+      - name: Install (relax-dev, eigener Lockfile)
+        working-directory: relax-dev
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build Relax
+        working-directory: relax-dev
+        run: pnpm run build
+
+      - name: Deploy Relax to Firebase Hosting
+        if: env.DO_DEPLOY == 'true'
+        working-directory: relax-dev
+        env:
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT || secrets.FIREBASE_SERVICE_ACCOUNT_FITNESS_AOS }}
+        run: |
+          printf '%s' "$FIREBASE_SA" > "$RUNNER_TEMP/sa.json"
+          GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/sa.json" \
+            npx firebase-tools@latest deploy --only hosting \
+            --project fitness-aos --non-interactive
