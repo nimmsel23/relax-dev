@@ -57,14 +57,15 @@ export default function Journal() {
     <div>
       {/* Date nav */}
       <div className="flex items-center justify-between mb-4 p-3 rounded-2xl" style={{ background: 'var(--card)', border: '1px solid var(--line)' }}>
-        <button onClick={() => shiftDate(-1)} style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer' }}>
+        <button onClick={() => shiftDate(-1)} aria-label="Vorheriger Tag" className="relative after:absolute after:-inset-2.5 after:content-['']" style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer' }}>
           <ChevronLeft size={18} />
         </button>
         <div className="text-center">
           <div className="font-semibold text-sm" style={{ color: 'var(--ink)' }}>{date}</div>
           {date === localToday() && <div className="text-[10px]" style={{ color: 'var(--accent)' }}>Heute</div>}
         </div>
-        <button onClick={() => shiftDate(1)} disabled={date >= localToday()}
+        <button onClick={() => shiftDate(1)} disabled={date >= localToday()} aria-label="Nächster Tag"
+          className="relative after:absolute after:-inset-2.5 after:content-['']"
           style={{ background: 'none', border: 'none', color: date >= localToday() ? 'var(--dim)' : 'var(--muted)', cursor: date >= localToday() ? 'default' : 'pointer' }}>
           <ChevronRight size={18} />
         </button>
@@ -76,6 +77,8 @@ export default function Journal() {
         <div className="flex justify-between">
           {MOODS.map((emoji, i) => (
             <button key={i} onClick={() => setMood(mood === i ? null : i)}
+              aria-label={`Stimmung ${i + 1}`}
+              aria-pressed={mood === i}
               className="text-2xl transition-all rounded-xl p-2"
               style={{
                 background: mood === i ? 'var(--accent)' + '22' : 'transparent',

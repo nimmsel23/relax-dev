@@ -289,7 +289,7 @@ export default function SubstanceCatalog() {
                 <h2 className="text-xl font-bold" style={{ color: 'var(--ink)' }}>{selected.de_name || selected.name}</h2>
                 <p className="text-sm mt-0.5 italic" style={{ color: 'var(--muted)' }}>{selected.source_plant || selected.name}</p>
               </div>
-              <button onClick={() => setSelected(null)} className="p-2 rounded-lg hover:opacity-70 transition">
+              <button onClick={() => setSelected(null)} aria-label="Schließen" className="p-2 rounded-lg hover:opacity-70 transition relative after:absolute after:-inset-2.5 after:content-['']">
                 <X className="w-5 h-5" style={{ color: 'var(--ink)' }} />
               </button>
             </div>

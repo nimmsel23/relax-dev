@@ -213,7 +213,7 @@ export default function Session({ onNavigate }) {
                 <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>Praxis {index + 1}</div>
                 <div className="mt-0.5 font-bold">{item.technique || 'Methode auswählen'}</div>
               </div>
-              <button onClick={() => { setDirty(true); setItems(current => current.filter((_, itemIndex) => itemIndex !== index)) }} aria-label={`Praxis ${index + 1} entfernen`} className="rounded-xl border p-2" style={{ borderColor: 'var(--line)', background: 'transparent', color: 'var(--dim)' }}><Trash2 size={17} /></button>
+              <button onClick={() => { setDirty(true); setItems(current => current.filter((_, itemIndex) => itemIndex !== index)) }} aria-label={`Praxis ${index + 1} entfernen`} className="rounded-xl border p-2 relative after:absolute after:-inset-2.5 after:content-['']" style={{ borderColor: 'var(--line)', background: 'transparent', color: 'var(--dim)' }}><Trash2 size={17} /></button>
             </div>
 
             <div className="space-y-4 p-4">
