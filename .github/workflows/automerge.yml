@@ -3,7 +3,7 @@
 #   Check auf dev gruen            -> master wird per Fast-Forward auf dev gezogen, Live-Deploy per Dispatch
 #   dev hinter master              -> dev wird per Fast-Forward auf master gezogen
 #   beide haben eigene Commits     -> master wird in dev gemergt, Check laeuft neu, dann Fast-Forward (siehe oben)
-# Rot bleibt liegen (kein Promote). Fast-Forward statt Merge-Commit auf master, weil der Branch-Schutz den Check
+# Rot bleibt liegen (kein Promote). Ein Zeitplan (alle 30 Min) faengt haengende Faelle ab. Fast-Forward statt Merge-Commit auf master, weil der Branch-Schutz den Check
 # `check` fuer genau diesen Commit verlangt. Pushes mit GITHUB_TOKEN loesen keine Workflows aus -> Deploy und Check
 # werden per workflow_dispatch gestartet. Laeuft aus dem Default-Branch; die Datei muss dort liegen.
 
@@ -15,6 +15,8 @@ on:
     types: [completed]
   push:
     branches: [master]
+  schedule:
+    - cron: '17,47 * * * *'   # Sicherungsnetz: haengende Faelle alle 30 Min abgleichen
   workflow_dispatch:
 
 permissions:
@@ -45,10 +47,32 @@ jobs:
           fetch-depth: 0
           ref: dev
       - name: Abgleichen
+        timeout-minutes: 40
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Wartet auf das Check-Ergebnis fuer $1 (Pushes/Dispatches mit GITHUB_TOKEN loesen workflow_run nicht aus).
+          check_result() {
+            gh api "repos/$REPO/commits/$1/check-runs" --jq '[.check_runs[]|select(.name=="check")]|first|if .==null then "none" elif .status!="completed" then "pending" else .conclusion end'
+          }
+          wait_check() {
+            for _ in $(seq 1 75); do
+              r=$(check_result "$1"); [ "$r" != "pending" ] && [ "$r" != "none" ] && { echo "$r"; return; }
+              sleep 20
+            done
+            echo timeout
+          }
+          promote() {   # $1 = dev-SHA mit gruenem Check
+            git fetch -q origin dev master
+            [ "$(git rev-parse origin/dev)" = "$1" ] || { echo "dev hat sich bewegt, naechster Lauf uebernimmt."; return; }
+            git merge-base --is-ancestor origin/master "$1" || { echo "master hat sich bewegt, naechster Lauf gleicht ab."; return; }
+            echo "Check gruen auf $1 -> master per Fast-Forward, Live-Deploy per Dispatch."
+            git push origin "${1}:refs/heads/master"
+            gh workflow run "$DEPLOY_FILE" -R "$REPO" --ref master
+          }
+
           git fetch -q origin master dev
           master=$(git rev-parse origin/master); dev=$(git rev-parse origin/dev)
           [ "$master" = "$dev" ] && { echo "dev == master, nichts zu tun."; exit 0; }
@@ -59,31 +83,28 @@ jobs:
             exit 0
           fi
 
-          if git merge-base --is-ancestor "$master" "$dev"; then
-            res=$(gh api "repos/$REPO/commits/$dev/check-runs" --jq '[.check_runs[]|select(.name=="check")|.conclusion]|first // "none"')
-            case "$res" in
-              success)
-                echo "Check gruen auf $dev -> master per Fast-Forward, Live-Deploy per Dispatch."
-                git push origin "${dev}:refs/heads/master"
-                gh workflow run "$DEPLOY_FILE" -R "$REPO" --ref master
-                ;;
-              none|null|"")
-                echo "Kein Check fuer $dev -> Check starten, danach promotet dieser Workflow erneut."
-                gh workflow run "$CHECK_FILE" -R "$REPO" --ref dev
-                ;;
-              *)
-                echo "Check auf $dev ist '$res' -> bleibt auf dev liegen (rot)."
-                ;;
-            esac
-            exit 0
+          if ! git merge-base --is-ancestor "$master" "$dev"; then
+            echo "dev und master haben eigene Commits -> master in dev mergen."
+            git checkout -q -B dev origin/dev
+            if ! git merge --no-edit origin/master; then
+              echo "::error::Merge-Konflikt master -> dev, manuell loesen."
+              git merge --abort || true
+              exit 1
+            fi
+            git push origin HEAD:refs/heads/dev
+            dev=$(git rev-parse HEAD)
           fi
 
-          echo "dev und master haben eigene Commits -> master in dev mergen, Check neu starten."
-          git checkout -q -B dev origin/dev
-          if ! git merge --no-edit origin/master; then
-            echo "::error::Merge-Konflikt master -> dev, manuell loesen."
-            git merge --abort || true
-            exit 1
+          res=$(check_result "$dev")
+          if [ "$res" = "none" ]; then
+            echo "Kein Check fuer $dev -> starten."
+            gh workflow run "$CHECK_FILE" -R "$REPO" --ref dev
+            res=$(wait_check "$dev")
+          elif [ "$res" = "pending" ]; then
+            echo "Check fuer $dev laeuft -> warten."
+            res=$(wait_check "$dev")
           fi
-          git push origin HEAD:refs/heads/dev
-          gh workflow run "$CHECK_FILE" -R "$REPO" --ref dev
+          case "$res" in
+            success) promote "$dev" ;;
+            *) echo "Check auf $dev ist '$res' -> bleibt auf dev liegen." ;;
+          esac
