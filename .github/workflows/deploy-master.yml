@@ -58,7 +58,12 @@ jobs:
 
       - name: Install (relax-dev, eigener Lockfile)
         working-directory: relax-dev
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: |
+          # overrides-Block des Lockfiles (z. B. @grpc/grpc-js) auch in die Konfiguration; pnpm 11 liest overrides nur aus pnpm-workspace.yaml.
+          if grep -q '^overrides:' pnpm-lock.yaml && [ ! -f pnpm-workspace.yaml ]; then
+            sed -n '/^overrides:/,/^$/p' pnpm-lock.yaml > pnpm-workspace.yaml
+          fi
+          pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Build Relax
         working-directory: relax-dev
