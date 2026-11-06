@@ -340,6 +340,7 @@ export default function Breath() {
                       onClick={() => setVibrate((v) => !v)}
                       aria-pressed={vibrate}
                       title="Haptisches Signal bei Phasenwechsel (nur Mobilgeräte)"
+                      aria-label="Haptisches Signal bei Phasenwechsel (nur Mobilgeräte)"
                       className="p-3 rounded-xl border"
                       style={{
                         background: vibrate ? 'color-mix(in srgb, var(--accent) 22%, var(--bg2))' : 'var(--bg2)',
