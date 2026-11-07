@@ -16,3 +16,9 @@ Nächste Schritte für das Entspannungstrainer-Fachmodul in `relax-dev`.
 6. **Kursindex aktuell halten:** Die zwölf MOC-Hauptfächer und die konkreten Methodenthemen führen zu passenden Lernbereichen. „Kognitive Umstrukturierung zur Stressbewältigung“ und „Stress im Beruf und Alltag“ sind mit Kursübersicht/PDF abgeglichen; bei künftigen MOC- oder Quellenänderungen den Index und die Quellenmatrix gemeinsam prüfen.
 
 Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT-legacy-2026-10-29.md` bewahrt die ältere Arbeitsliste und damalige Betriebsnotizen; deren aktueller Status wurde hier nicht neu geprüft.
+
+
+## Gemini CI-Agent — verbleibende Betriebsprüfung
+
+- [ ] Einen echten roten, code-behebbaren CI-Lauf beobachten und bestätigen, dass Reparatur-Commit, grüner Check und vorgesehener Promote/Deploy enden.
+- [ ] Fehler außerhalb des Codes (fehlende Deploy-Credentials, externe Dienste, Runner-Ausfälle) separat als Diagnose melden; keine ungeprüften Änderungen an Secrets oder Deploy-Konfiguration.
