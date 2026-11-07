@@ -937,3 +937,10 @@ Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions
 - Relax Session-, Journal-, KB- und Physio-Routen laufen eingebettet in Coach :9150; :9123-Worker und User-Units entfernt. Relax-CLI und Vite-Proxy zeigen auf Coach, der Dev-Runner startet nur Vite.
 - Coach-Merge `a461177`; Relax-Umsetzung zuvor `55324f8`. Der aktive Tailscale-Funnel konnte nicht auf :9150 umgestellt werden, weil der lokale Tailscale-Daemon dafür sudo verlangt und Codex hier kein sudo ausführt.
 - Verifiziert: Coach/Relax/KB-Health auf :9150, Vite-Proxy auf :5903, :9123 offline; :5173 beendet. Coach-Vite/UI-Index wiederhergestellt. Keine Tests ausgeführt.
+
+
+## 2026-11-07 — Gemini CI-Agent aktiviert
+
+- Agent-Workflow und lokale Trigger für `relax-dev` auf `dev` eingerichtet; `GEMINI_API_KEY` als Actions-Secret gesetzt.
+- `Check`/Preview und Agent-Run [42405224802](https://github.com/nimmsel23/relax-dev/actions/runs/42405224802) waren auf Commit `744438af` grün. Dieser Lauf war ein No-op auf einem erfolgreichen Check; ein roter Code-Fehler wurde noch nicht absichtlich simuliert.
+- Pushes und PR-Merges verwenden die eng berechtigte `GITHUB_TOKEN`-Workflow-Berechtigung; kein separates `SYNC_TOKEN` erforderlich.
