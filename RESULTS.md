@@ -1,3 +1,14 @@
+## 2026-11-08 — Persistenz-Zählung Ausbildung.jsx & Store-Vorschlag
+
+- Guide-Aufgabe 2 durchgeführt: `localStorage`-Zugriffe in `src/views/Ausbildung.jsx` gezählt. Insgesamt 19 Zugriffe auf 8 Schlüssel (8 getItem: 5 useState-Init-Reader + 2 Export-Fremdkeys Breath + 1 Import-Snapshot-Loop; 8 setItem: 6 Persist-Effekte + Import-Schreib-/Rollback-Loop; 3 removeItem); dazu 1 getItem in `lib/training/moduleBackup.js:39` (`restoreDelivery`).
+- Store-Vorschlag im Tageslog dokumentiert: Variante A (`usePersistentState`-Hook, Schlüssel und JSON-Formate bleiben 1:1 kompatibel) empfohlen; Variante B (monolithischer Zentralstore) verworfen. Umbau erst nach explizitem Auftrag (`+go`).
+- Guide-Queue für `relax-dev` damit vollständig abgearbeitet.
+
+## 2026-11-07 — Org-Taskwarrior-Konvention v1 & Modul-Backup-Refactor
+
+- Commit `74f7f2d`: Globale Org-Task-DB (`TASKRC=~/.local/state/vitalos-org/taskrc`), Rolle=Tag, Abteilung/Repo=project und UUID-Regel in AGENTS.md, CLAUDE.md und GEMINI.md verankert (Owner-Weisung 2026-11-07).
+- Commit `e98cb8d`: Backup/Export-Logik aus `src/views/Ausbildung.jsx` in `src/lib/training/moduleBackup.js` ausgelagert (`csvCell`, `normalizeModuleBackup`, `restoreDelivery`). 8 Node-Tests in `tests/moduleBackup.test.mjs` ergänzt, CI grün.
+
 ## 2026-11-07 — CI-Agent-Fix: gh pr list Feld korrigiert
 
 - Journal-Run 42416606547 scheiterte vor Gemini: GitHub CLI meldete `Unknown JSON field: baseRepository`; `gh pr list` beendete den Analyse-Step mit Exit 1. Kein Gemini-API-Key-Fehler.

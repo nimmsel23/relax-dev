@@ -22,6 +22,7 @@ completed	success	Live Deploy (Relax master)	Live Deploy (Relax master)	master	w
 - Arbeitsbaum: sauber
 
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
-- Erledigt: Guide-Aufgabe 2 — localStorage in src/views/Ausbildung.jsx gezaehlt: 19 Zugriffe auf 8 Schluessel (8 getItem: 5 useState-Init-Reader + 2 Export-Fremdkeys Breath + 1 Import-Snapshot-Loop; 8 setItem: 6 Persist-Effekte + Import-Schreib-/Rollback-Loop; 3 removeItem); dazu 1 getItem in lib/training/moduleBackup.js:39 (restoreDelivery). Store-Vorschlag (Variante A usePersistentState-Hook, Formate/Schluessel unveraendert; Variante B Zentralstore abgelehnt) steht im Tageslog ~/.local/state/abteilung/relax-dev.log (2026-11-08, Lauf 2); kein Umbau laut Aufgabenstellung.
-- Offen/Weiter: Guide-Queue leer (Aufgaben 1+2 abgehakt, Abhaken vitalos-prod docs/product-dev). Naechster Code-Schritt nur mit Auftrag: Store-Umbau Variante A braucht +go (Vorschlag im Tageslog).
-- Blocker: keine. Hinweise: (1) Guide-Lektuere ~/vitalos-prod/docs/product-dev/{README.md,WOCHENPLAN.md,FRONTEND-REVIEWS.md} existieren nicht (nur legacy/README.md) — Pflege CTO. (2) Checkout liegt auf Branch master, AGENTS.md sagt fest auf dev — nicht angefasst, CTO-Sicht.
+- Erledigt: Doku-Schuld abreissen (vos-docs-dirty, Org-Task fb7c7e85-20f8-481e-a97c-8947e39eb5df) — RESULTS.md um Commits 74f7f2d (Org-Taskwarrior-Konvention v1) & e98cb8d (moduleBackup) sowie Guide-Aufgabe 2 (19 localStorage-Zugriffe, Store-Vorschlag Variante A) ergänzt; NEXT.md aktualisiert; dirty-Marker abgeräumt.
+- Offen/Weiter: Guide-Queue leer (Aufgaben 1+2 abgehakt); Store-Umbau Ausbildung.jsx Variante A (usePersistentState-Hook) wartet auf Auftrag/CEO-+go.
+- Blocker: keine.
+AUTOMATION: AL-Lauf Checkout-Sync — 'vos-al-log' bzw. AL-Runner sollte vor Laufstart 'git merge --ff-only origin/dev' im Haupt-Checkout ausführen, damit der lokale Branch nicht hinterherhinkt — 2 min manuelle Diagnose/Merge pro Lauf.
