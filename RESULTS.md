@@ -1,3 +1,9 @@
+## 2026-11-09 — Dependabot minimatch Override (Alert #27)
+
+- Guide/Org-Queue leer → Security unter Feature-Freeze: Alert #27 `minimatch` (medium) per pnpm-Override `minimatch@>=7 <11.0.1 → 11.0.5` in `scripts/ci-install.sh` und Lockfile; `minimatch@5.1.9` bleibt (außerhalb vulnerable Range).
+- Alert #24 `deepmerge` (low): kein Upstream-Patch (`first_patched_version: null`, letzte Version 4.3.1); Transitiv über `vite-plugin-pwa` → `workbox-build` → `@rollup/plugin-node-resolve`, nur Build-Zeit.
+- Tests: 37/37 grün (`node --test tests/*.test.mjs`).
+
 ## 2026-11-09 — Major-AutoMerge-Stabilitätswache
 
 - Org-Task `0ad90fdb-5e0c-4892-9617-9af1eb1aa531` erledigt: zwei grüne CI-Tage (08.+09.11.) für Check/Auto-Promote/PR-AutoMerge/Live-Deploy; Montags-Lauf PR-AutoMerge `42552117167` success bei leerer Dependabot-PR-Queue (kein Squash-Kandidat).
