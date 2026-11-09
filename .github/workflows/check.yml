@@ -41,5 +41,12 @@ jobs:
       - name: Tests
         run: pnpm test
 
+      - name: Tooling (Biome format scripts/)
+        run: pnpm run tooling:biome
+
+      - name: Tooling (knip report)
+        continue-on-error: true
+        run: pnpm run tooling:knip
+
       - name: Build Relax
         run: pnpm run build

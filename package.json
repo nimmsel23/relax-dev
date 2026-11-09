@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=22.13"
   },
-  "description": "Entspannungstrainer-Modul der Präventiven Vitaltrainer-Ausbildung",
+  "description": "Entspannungstrainer-Modul der Pr\u00e4ventiven Vitaltrainer-Ausbildung",
   "scripts": {
     "dev": "node scripts/dev-runner.mjs",
     "start": "python3 server.py",
@@ -25,7 +25,11 @@
     "native:sync": "pnpm run build:native && cap sync",
     "native:android": "cap open android",
     "build:android": "pnpm run native:sync && cd android && ./gradlew assembleDebug",
-    "run:android": "pnpm run native:sync && cap run android"
+    "run:android": "pnpm run native:sync && cap run android",
+    "tooling:biome": "pnpm dlx @biomejs/biome@2.6.6 check --formatter-enabled=true --linter-enabled=false --no-errors-on-unmatched scripts",
+    "tooling:knip": "pnpm dlx knip@6.44.2 --no-progress",
+    "tooling:check": "pnpm run tooling:biome && pnpm run tooling:knip",
+    "tooling:biome:lint": "pnpm dlx @biomejs/biome@2.6.6 check --formatter-enabled=true --linter-enabled=true --no-errors-on-unmatched scripts"
   },
   "dependencies": {
     "@capacitor/android": "^8.6.0",
