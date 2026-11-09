@@ -27,7 +27,7 @@ on:
       - '!**/*.md'
       - '!**/*.bak*'
   pull_request:
-    branches: [vitalos, master, dev]
+    branches: [master, dev]
     paths:
       - 'src/**'
       - 'public/**'

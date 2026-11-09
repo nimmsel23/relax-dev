@@ -1,3 +1,8 @@
+## 2026-11-09 — Shell-Pin auf origin/master (CI/AGENTS)
+
+CI: kein Auto-Vorspulen von `vitalos` mehr; Merge-Agent nur `master`; PR-Checks
+auf `[master, dev]`. AGENTS Release-Weg: `dev → master` + Shell-Pin.
+
 ## 2026-11-09 — Dependabot minimatch Override (Alert #27)
 
 - Guide/Org-Queue leer → Security unter Feature-Freeze: Alert #27 `minimatch` (medium) per pnpm-Override `minimatch@>=7 <11.0.1 → 11.0.5` in `scripts/ci-install.sh` und Lockfile; `minimatch@5.1.9` bleibt (außerhalb vulnerable Range).
