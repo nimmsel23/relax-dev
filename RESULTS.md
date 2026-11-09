@@ -1,3 +1,7 @@
+## 2026-11-09 — deps: minor/patch Upgrades
+
+- ncu --target minor; Age-sichere Pins (vite/rolldown); packageManager pnpm@11.3.0.
+
 ## 2026-11-09 — Node Tooling (Biome/knip/engines/smoke)
 
 - `engines.node: >=22.13`, Scripts `tooling:biome|knip|check`.
