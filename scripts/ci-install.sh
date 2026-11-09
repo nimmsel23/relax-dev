@@ -25,6 +25,6 @@ if in_workspace; then
   exit 0
 fi
 
-printf "overrides:\n  '@grpc/grpc-js@<1.13.6': '^1.14.6'\nallowBuilds:\n  '@firebase/util': true\n  esbuild: true\n  protobufjs: true\n" > pnpm-workspace.yaml
+printf "overrides:\n  '@grpc/grpc-js@<1.13.6': '^1.14.6'\n  'minimatch@>=7 <11.0.1': '11.0.5'\nallowBuilds:\n  '@firebase/util': true\n  esbuild: true\n  protobufjs: true\n" > pnpm-workspace.yaml
 
 pnpm install --frozen-lockfile

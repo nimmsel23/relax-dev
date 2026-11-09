@@ -39,7 +39,7 @@ completed	success	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev ->
 - Arbeitsbaum: sauber
 
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
-- Erledigt: Org-Task `0ad90fdb-5e0c-4892-9617-9af1eb1aa531` (Major-AutoMerge-Stabilitätswache) — 2 grüne Tage 08.+09.11. (Check/Auto-Promote/PR-AutoMerge/Live-Deploy success; u. a. 42488927020, 42488974650, 42548696622); Mo-Lauf PR-AutoMerge `42552117167` success, 0 offene Dependabot-PRs (Queue leer, kein Squash-Kandidat).
-- Offen/Weiter: Guide-Queue leer; Store-Umbau Ausbildung.jsx Variante A wartet auf CEO-+go.
-- Blocker: keine.
-AUTOMATION: Mo-Stabilitätswache = `gh run list` + offene Dependabot-PRs prüfen — vos-al-hilfzeile `relax-ci-watch` (2 Tage success + letzter automerge-pr + offene dependabot/*) — ~3 min/AL-Lauf.
+- Erledigt: Dependabot-Alert #27 `minimatch` (medium, GHSA-g3hv-75wg-m249) — Override `minimatch@>=7 <11.0.1 → 11.0.5` in `scripts/ci-install.sh` + `pnpm-lock.yaml` (5.1.9 unverändert außerhalb Range); 37/37 Tests grün.
+- Offen/Weiter: Alert #24 `deepmerge` (low, GHSA-gcqx-w48m-w2h4) ohne Upstream-Patch (≤4.3.1, via vite-plugin-pwa→workbox-build); Guide-Queue leer; Store-Umbau Variante A weiter ohne CEO-+go.
+- Blocker: keine (deepmerge nur wartend auf Upstream, Build-Zeit-Transitiv).
+AUTOMATION: Offene Dependabot-Alerts prüfen — `gh api repos/nimmsel23/relax-dev/dependabot/alerts --jq '[.[]|select(.state=="open")]'` in vos-al-hilfzeile `relax-ci-watch` — ~2 min/AL-Lauf.
