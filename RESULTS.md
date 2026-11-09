@@ -1,3 +1,8 @@
+## 2026-11-09 — Major-AutoMerge-Stabilitätswache
+
+- Org-Task `0ad90fdb-5e0c-4892-9617-9af1eb1aa531` erledigt: zwei grüne CI-Tage (08.+09.11.) für Check/Auto-Promote/PR-AutoMerge/Live-Deploy; Montags-Lauf PR-AutoMerge `42552117167` success bei leerer Dependabot-PR-Queue (kein Squash-Kandidat).
+- Guide-Queue bleibt leer; Store-Umbau Ausbildung.jsx Variante A weiter ohne `+go`.
+
 ## 2026-11-08 — Persistenz-Zählung Ausbildung.jsx & Store-Vorschlag
 
 - Guide-Aufgabe 2 durchgeführt: `localStorage`-Zugriffe in `src/views/Ausbildung.jsx` gezählt. Insgesamt 19 Zugriffe auf 8 Schlüssel (8 getItem: 5 useState-Init-Reader + 2 Export-Fremdkeys Breath + 1 Import-Snapshot-Loop; 8 setItem: 6 Persist-Effekte + Import-Schreib-/Rollback-Loop; 3 removeItem); dazu 1 getItem in `lib/training/moduleBackup.js:39` (`restoreDelivery`).
