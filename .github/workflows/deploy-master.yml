@@ -1,14 +1,9 @@
-# Standalone-Prod Relax: Push auf master deployt live (nur CI) — aus den MASTER-Checkouts der
-# eigenen Repos, OHNE das Meta-Repo vitalos (gleiches Muster wie fitness-dev/deploy-master.yml).
-#
-# Layout (Geschwister nebeneinander, wie lokal unter ~/dev): relax-dev/ (dieser Commit) und
-# (keine Nachbarn nötig) jeweils `master`. Jedes Repo installiert mit
-# seinem EIGENEN Lockfile (--frozen-lockfile, --ignore-scripts). Die Vite-Configs lösen die Nachbarn über
-# resolveSibling()/siblingDir() auf (`<x>-app` oder `<x>-dev` daneben).
+# Standalone-Prod Relax: Push auf master deployt live (nur CI) — nur relax-dev.
+# Kein vitalos-Meta, keine Nachbar-Repos.
 #
 # Auslöser: push auf master und workflow_dispatch (automerge.yml) -> baut und deployt live (nur master).
-# Push auf `ci-test/**` -> reiner Build-Test (Nachbarn von dev), KEIN Deploy.
-# Shell-Pin im Meta-Repo bleibt bewusst: Pointer-Bump via vos-release/vos-ship, kein Auto-Push auf einen vitalos-Branch.
+# Push auf `ci-test/**` -> reiner Build-Test, KEIN Deploy.
+# Shell-Pin im Meta-Repo bleibt bewusst: Pointer-Bump via vos-release/vos-ship.
 
 name: Live Deploy (Relax master)
 
@@ -36,7 +31,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      NEIGHBOR_REF: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
       DO_DEPLOY: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || inputs.deploy) }}
     steps:
       - name: Checkout relax-dev
