@@ -27,5 +27,5 @@ Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT
 
 - [ ] Einen echten roten, code-behebbaren CI-Lauf beobachten und bestätigen, dass Reparatur-Commit, grüner Check und vorgesehener Promote/Deploy enden.
 - [ ] Fehler außerhalb des Codes (fehlende Deploy-Credentials, externe Dienste, Runner-Ausfälle) separat als Diagnose melden; keine ungeprüften Änderungen an Secrets oder Deploy-Konfiguration.
-- [ ] GitHub Pages fuer `relax-dev` auf Branch `dev`, Ordner `/docs` prüfen/aktivieren; Pages-Admin-Einstellungen sind über die aktuelle GitHub-Schnittstelle nicht erreichbar.
+- [x] GitHub Pages fuer `relax-dev` auf Branch `dev`, Ordner `/docs` prüfen/aktivieren — erledigt 2026-11-10 via `POST /repos/nimmsel23/relax-dev/pages` (`source.branch=dev`, `path=/docs`); Status `built`, Live `https://nimmsel23.github.io/relax-dev/` HTTP 200.
 - [ ] Gemini-Reparaturpfad nach dem Feld-Fix anhand eines isolierten roten Checks verifizieren: Diagnose, Commit, Check-Neustart und nachgelagerter Deploy.
