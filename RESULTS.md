@@ -6,6 +6,7 @@
 
 - Guide/Org-Queue leer, Feature-Freeze → CI/Docs: GitHub Pages für `relax-dev` per REST aktiviert (`POST /repos/nimmsel23/relax-dev/pages`, `build_type=legacy`, `source.branch=dev`, `path=/docs`).
 - Belege: Pages-Status `built` (Build `2026-11-10T14:12:46Z`→`14:14:13Z`, Commit `029527a`); Live `https://nimmsel23.github.io/relax-dev/` HTTP 200, Titel „Relax Documentation“.
+- AL-LOG `e7c2787` (Nachmittagslauf); NEXT Pages-Checkbox `[x]`.
 - Offen bleibt: Gemini absichtlich-roter-Check→Repair; Alert #24 `deepmerge` ohne Upstream-Patch; Store-Umbau Variante A nur mit CEO-+go.
 
 ## 2026-11-10 — Major-Upgrade-Stabilitätswache + Alert #27 zu + CI-Secrets
