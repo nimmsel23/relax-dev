@@ -6,6 +6,7 @@
 - Belege: Check `42726404659` + Preview `42726404383` success; Auto-Promote `42726487315` + Live-Deploy `42726506701` + Gemini CI Agent `42726532135` success; lokal 37/37 Tests grün.
 - Dependabot Alert #27 `minimatch` state=`fixed` (`fixed_at` 2026-11-09T14:20:09Z); Alert #24 `deepmerge` weiter open, kein Upstream-Patch (≤4.3.1, Build-Zeit via vite-plugin-pwa→workbox-build→@rollup/plugin-node-resolve).
 - Actions-Secrets `GEMINI_API_KEY` (seit 2026-11-07) und `SYNC_TOKEN` (seit 2026-11-09) vorhanden; absichtlich roter Check→Repair-Beobachtung bleibt offen.
+- AL-LOG `c6b12e1` (Lauf 2026-11-10) mit denselben Belegen.
 
 ## 2026-11-09 — deps: minor/patch Upgrades
 
