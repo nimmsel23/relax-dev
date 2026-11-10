@@ -1,6 +1,7 @@
 # CI-Agent — offener Betriebspunkt
 
-- [ ] `GEMINI_API_KEY` und `SYNC_TOKEN` als Actions-Secrets fuer diesen Repo-Zweig einrichten/prüfen; einen absichtlich roten Check bis zum grünen Promote/Deploy beobachten.
+- [x] `GEMINI_API_KEY` und `SYNC_TOKEN` als Actions-Secrets einrichten/prüfen — erledigt 2026-11-10 (Secrets vorhanden seit 2026-11-07 bzw. 2026-11-09; `gh secret list`).
+- [ ] Einen absichtlich roten, code-behebbaren Check bis zum grünen Promote/Deploy beobachten (Gemini-Repair-Pfad).
 
 # NEXT.md
 
@@ -8,7 +9,7 @@ Nächste Schritte für das Entspannungstrainer-Fachmodul in `relax-dev`.
 
 ## Aktive Arbeit
 
-1. **Dependabot deepmerge (Alert #24, low):** Kein Upstream-Patch (`deepmerge` ≤4.3.1); Transitiv Build-Zeit via `vite-plugin-pwa` → `workbox-build`. Bei Patch-Release Override analog `minimatch` nachziehen; Alert #27 (`minimatch`) ist geschlossen/ gepatcht.
+1. **Dependabot deepmerge (Alert #24, low):** Weiter ohne Upstream-Patch (`deepmerge` ≤4.3.1, `first_patched_version: null`); Transitiv Build-Zeit via `vite-plugin-pwa` → `workbox-build` → `@rollup/plugin-node-resolve`. Bei Patch-Release Override analog `minimatch` nachziehen. Alert #27 (`minimatch`) bestätigt `fixed` (2026-11-09).
 2. **Store-Umbau Ausbildung.jsx (Variante A):** Sobald ein explizites `+go` des CEO vorliegt, die 19 `localStorage`-Zugriffe auf 8 Schlüssel über einen dedizierten `usePersistentState`-Hook konsolidieren. Formate und Schlüssel bleiben unverändert. (Store-Vorschlag liegt im Tageslog vor; Guide-Queue ist bis dahin leer).
 3. **Fehlende Originalanleitungen:** Drive-Ordner, sämtliche relevanten Quell- und Notizdateien unter `~/Dokumente`, Kurskapitel-Suchen und ältere Archivkopien am 2026-11-02 gegengeprüft. Weder das FlexyFit-PDF-Archiv noch die Ausbildungs-MOC, Diplom-Notizen oder ältere Sicherung enthält eine methodenspezifische Ablaufanleitung für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation. Die MOC-Themen Achtsamkeit/Meditation und Stressmanagement durch mentales Training sind in den Karten markiert; AT-Themen bleiben ohne Formel oder erfundene Übungsfolge. Bei neuen Kursunterlagen erneut prüfen.
 4. **Mobile Ablaufabnahme:** Im Headless-Firefox bei 320×640 sind Timeransicht und Abschlusszeile geprüft; bei 320×1400 auch der Fallaufgaben-Einstieg. Ein isolierter Marionette-Lauf bei 500 CSS-Pixeln (Firefox erzwang mindestens 500) bestätigte per Tastatureingabe Wochenselbstcheck, Kurzvariante und Abschlussrückblick, lokale Speicherung nach Reload, keinen horizontalen Überlauf sowie JSON-Export und Import nach absichtlicher Änderung eines lokalen Werts. Die Vorschau lief ohne Session-API-Proxys. Aus einem pausierten gespeicherten Timerzustand führte der Abschlussknopf zum vorbefüllten Nachweis-Entwurf; die Selbstbestätigung blieb leer und der Zähler bei 0/30. Den kompletten Weg auf iPhone/iPad weiter prüfen, einschließlich laufendem Timer-Restore, Formularbestätigung, Druck, CSV sowie Sicherung und Wiederherstellung der Ausbildungs- und Atemschulungs-Arbeitsblätter.
