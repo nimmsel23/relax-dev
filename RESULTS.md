@@ -1,5 +1,12 @@
 - 2026-11-10: chore(deps) major stack align — React 19 / Vite 8.3.6 / plugin-react 6.2.1 / Firebase 13 (age-safe pins, pnpm-workspace overrides).
 
+## 2026-11-10 — Major-Upgrade-Stabilitätswache + Alert #27 zu + CI-Secrets
+
+- Guide/Org-Queue leer, Feature-Freeze → CI/Security-Nachweis: Major-Welle React 19 / Vite 8 / Firebase 13 nach Install-Failures (`42726122151`/`42725149137`) per Recovery `cadd199` stabil.
+- Belege: Check `42726404659` + Preview `42726404383` success; Auto-Promote `42726487315` + Live-Deploy `42726506701` + Gemini CI Agent `42726532135` success; lokal 37/37 Tests grün.
+- Dependabot Alert #27 `minimatch` state=`fixed` (`fixed_at` 2026-11-09T14:20:09Z); Alert #24 `deepmerge` weiter open, kein Upstream-Patch (≤4.3.1, Build-Zeit via vite-plugin-pwa→workbox-build→@rollup/plugin-node-resolve).
+- Actions-Secrets `GEMINI_API_KEY` (seit 2026-11-07) und `SYNC_TOKEN` (seit 2026-11-09) vorhanden; absichtlich roter Check→Repair-Beobachtung bleibt offen.
+
 ## 2026-11-09 — deps: minor/patch Upgrades
 
 - ncu --target minor; Age-sichere Pins (vite/rolldown); packageManager pnpm@11.3.0.
