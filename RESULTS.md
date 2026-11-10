@@ -2,6 +2,12 @@
 - 2026-11-10: chore(deps) major stack align — React 19 / Vite 8.3.6 / plugin-react 6.2.1 / Firebase 13 (age-safe pins, pnpm-workspace overrides).
 
 
+## 2026-11-10 — GitHub Pages aktiviert (dev /docs)
+
+- Guide/Org-Queue leer, Feature-Freeze → CI/Docs: GitHub Pages für `relax-dev` per REST aktiviert (`POST /repos/nimmsel23/relax-dev/pages`, `build_type=legacy`, `source.branch=dev`, `path=/docs`).
+- Belege: Pages-Status `built` (Build `2026-11-10T14:12:46Z`→`14:14:13Z`, Commit `029527a`); Live `https://nimmsel23.github.io/relax-dev/` HTTP 200, Titel „Relax Documentation“.
+- Offen bleibt: Gemini absichtlich-roter-Check→Repair; Alert #24 `deepmerge` ohne Upstream-Patch; Store-Umbau Variante A nur mit CEO-+go.
+
 ## 2026-11-10 — Major-Upgrade-Stabilitätswache + Alert #27 zu + CI-Secrets
 
 - Guide/Org-Queue leer, Feature-Freeze → CI/Security-Nachweis: Major-Welle React 19 / Vite 8 / Firebase 13 nach Install-Failures (`42726122151`/`42725149137`) per Recovery `cadd199` stabil.
