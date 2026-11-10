@@ -69,7 +69,7 @@ completed	success	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev ->
 - Arbeitsbaum: sauber
 
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
-- Erledigt: Guide/Org leer → Major-Upgrade-Stabilitätswache nach `cadd199` (Check `42726404659`, Preview `42726404383`, Auto-Promote `42726487315`, Live-Deploy `42726506701`, Gemini `42726532135` success; 37/37 Tests); Alert #27 `minimatch` state=`fixed`; CI-Secrets `GEMINI_API_KEY`+`SYNC_TOKEN` verifiziert (`gh secret list`).
-- Offen/Weiter: Alert #24 `deepmerge` (low) ohne Upstream-Patch; Gemini absichtlich-roter-Check→Repair weiter offen; Store-Umbau Variante A nur mit CEO-+go; Guide-Queue leer.
-- Blocker: keine (deepmerge wartend auf Upstream, Build-Zeit-Transitiv).
-AUTOMATION: Failed-step nach Major-Upgrade — `gh api repos/.../actions/runs/<id>/jobs --jq '…failure…'` in vos-al-hilfzeile `relax-ci-watch` — ~1 min/AL-Lauf.
+- Erledigt: Guide/Org leer → GitHub Pages aktiviert (`POST …/pages`, `dev`+/docs`); Status `built` (Build 14:12–14:14Z, Commit `029527a`); Live `https://nimmsel23.github.io/relax-dev/` HTTP 200; NEXT/RESULTS/AL-LOG nachgezogen.
+- Offen/Weiter: Gemini absichtlich-roter-Check→Repair weiter offen; Alert #24 `deepmerge` (low) ohne Upstream-Patch; Store-Umbau Variante A nur mit CEO-+go; Guide-Queue leer.
+- Blocker: keine.
+AUTOMATION: Pages-Status/Activate — `gh api repos/<org>/<repo>/pages` (+ optional POST create) in vos-al-hilfzeile `relax-ci-watch` — ~1 min/AL-Lauf (früher fälschlich als API-unerreichbar geführt).
