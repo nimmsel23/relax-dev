@@ -1,4 +1,4 @@
-- 2026-11-10: fix(build): `fixRolldownPreloadMarker` in `vite.config.js` (Vite 8 / Rolldown `__VITE_PRELOAD__<hash>` → Blackscreen-Vorbeuge, analog 6pack/skills). React.lazy + Capacitor-Deps; AGENTS.md dokumentiert.
+- 2026-11-10: fix(build): `fixRolldownPreloadMarker` in `vite.config.js` (Vite 8 / Rolldown `__VITE_PRELOAD__<hash>` → Blackscreen-Vorbeuge, analog 6pack/skills). React.lazy + Capacitor-Deps; AGENTS.md dokumentiert. Commit `321d90d`, Build grün.
 - 2026-11-10: chore(deps) major stack align — React 19 / Vite 8.3.6 / plugin-react 6.2.1 / Firebase 13 (age-safe pins, pnpm-workspace overrides).
 
 
