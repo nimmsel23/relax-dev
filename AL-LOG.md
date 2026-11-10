@@ -43,3 +43,33 @@ _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen sta
 - Offen/Weiter: Alert #24 `deepmerge` (low, GHSA-gcqx-w48m-w2h4) ohne Upstream-Patch (≤4.3.1, via vite-plugin-pwa→workbox-build); Guide-Queue leer; Store-Umbau Variante A weiter ohne CEO-+go.
 - Blocker: keine (deepmerge nur wartend auf Upstream, Build-Zeit-Transitiv).
 AUTOMATION: Offene Dependabot-Alerts prüfen — `gh api repos/nimmsel23/relax-dev/dependabot/alerts --jq '[.[]|select(.state=="open")]'` in vos-al-hilfzeile `relax-ci-watch` — ~2 min/AL-Lauf.
+
+## 2026-11-10 (Dienstag) — Abteilungsleiter-Lauf
+
+_Automatik (vos-al-log Vorlage 2026-11-10):_
+- Commits seit 2026-11-08: cadd199 fix(ci): align install overrides with Vite-8 age-safe lockfile
+dec8594 fix(deps): regenerate lockfile on rolldown 1.3.0 (release-age)
+8b405da chore(deps): major upgrades to React 19 / Vite 8 / Firebase 13
+55feb8a chore(deps): minor/patch upgrades (age-safe pins)
+fd47c73 chore(tooling): engines, Biome scripts-format, knip, smoke in Check
+b1b705e docs: RESULTS — CI Deploy-Cleanup 2026-11-09
+0c91487 docs(ci): Live-Deploy-Kommentar — wirklich standalone, kein Sibling-Gerede
+f7a2de6 chore: Pre-Push ohne vitalos; Remote-Branch vitalos obsolet
+bab696d chore: CI/AGENTS — Shell-Pin auf origin/master (kein vitalos-Vorspulen)
+33997ea fix(deps): override vulnerable minimatch (>=7 <11.0.1 → 11.0.5)
+e33957d docs: auto-update NEXT.md
+24a65c6 docs: auto-update NEXT.md
+18dcc80 docs: auto-update RESULTS.md
+feabf4a docs(al-log): Stabilitätswache Major-AutoMerge (0ad90fdb) — 2 grüne Tage + Mo-Lauf 42552117167
+a5ddb65 docs: auto-update RESULTS.md
+- Offene PRs: (keine offenen PRs / gh nicht verfuegbar)
+- CI (letzte Läufe): completed	success	Gemini CI Agent	Gemini CI Agent	master	workflow_run	42726532135	9s	2026-11-10T00:12:39Z
+completed	success	Live Deploy (Relax master)	Live Deploy (Relax master)	master	workflow_dispatch	42726506701	48s	2026-11-10T00:12:28Z
+completed	success	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev -> master (Check (Relax))	master	workflow_run	42726487315	12s	2026-11-10T00:12:19Z
+- Arbeitsbaum: sauber
+
+_Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
+- Erledigt: Guide/Org leer → Major-Upgrade-Stabilitätswache nach `cadd199` (Check `42726404659`, Preview `42726404383`, Auto-Promote `42726487315`, Live-Deploy `42726506701`, Gemini `42726532135` success; 37/37 Tests); Alert #27 `minimatch` state=`fixed`; CI-Secrets `GEMINI_API_KEY`+`SYNC_TOKEN` verifiziert (`gh secret list`).
+- Offen/Weiter: Alert #24 `deepmerge` (low) ohne Upstream-Patch; Gemini absichtlich-roter-Check→Repair weiter offen; Store-Umbau Variante A nur mit CEO-+go; Guide-Queue leer.
+- Blocker: keine (deepmerge wartend auf Upstream, Build-Zeit-Transitiv).
+AUTOMATION: Failed-step nach Major-Upgrade — `gh api repos/.../actions/runs/<id>/jobs --jq '…failure…'` in vos-al-hilfzeile `relax-ci-watch` — ~1 min/AL-Lauf.
