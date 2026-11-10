@@ -8,6 +8,21 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const BACKEND = process.env.VITE_COACH_API_URL || 'http://127.0.0.1:9150'
 
+// Vite 8 / Rolldown appends a content-hash to the `__VITE_PRELOAD__` marker
+// (`__VITE_PRELOAD__50b3…`). Vite's import-analysis then replaces only the
+// 16-char marker, leaving `[]50b3…` — invalid JS (black screen, same as vos-6pack).
+// Preventive: React.lazy chunks + future Capacitor lazy `import('./web')`.
+function fixRolldownPreloadMarker() {
+  return {
+    name: 'fix-rolldown-preload-marker',
+    renderChunk(code) {
+      if (!code.includes('__VITE_PRELOAD__')) return null
+      const next = code.replace(/__VITE_PRELOAD__[a-f\d]{8,}/g, '__VITE_PRELOAD__')
+      return next === code ? null : { code: next, map: null }
+    },
+  }
+}
+
 export default defineConfig(({ command }) => ({
   // Tailscale Serve/Funnel mounts this dev server beneath /relax/. Vite's
   // injected HMR client must use that prefix too; production builds stay
@@ -41,6 +56,7 @@ export default defineConfig(({ command }) => ({
       },
     },
     react(),
+    fixRolldownPreloadMarker(),
     // PWA nach dem habits-Muster: workbox precached mit Content-Hashes,
     // ersetzt public/sw.js (relax-v2, manuell versioniert → archive/).
     VitePWA({

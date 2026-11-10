@@ -19,3 +19,10 @@ Stand 2026-11-09. Ausführlich: `~/vitalos/docs/DEPLOYMENT.md`.
 - Parallel-Branches/Worktrees nur mit Owner-Ausnahme.
 - Default-Branch des Repos ist `master`; die Workflows auf `master` bestimmen das Live-Verhalten.
 <!-- release-weg:end -->
+
+## Vite 8 / Rolldown
+
+`vite.config.js` enthält `fixRolldownPreloadMarker`. Rolldown hängt sonst an
+`__VITE_PRELOAD__` einen Hash; Vite ersetzt nur die Marke und lässt `[]<hash>`
+im Bundle (SyntaxError → Blackscreen, wie bei `vos-6pack.web.app`). Plugin nicht
+entfernen — Relax nutzt `React.lazy` und hat Capacitor-Deps für Native.
