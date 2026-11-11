@@ -7,6 +7,7 @@
 - Guide/Org-Queue leer, Feature-Freeze → CI: `.github/ci-agent/repair.mjs` an Release-Weg `dev→master` (AGENTS.md) angeglichen.
 - Entfernt: Auto-Merge `master→vitalos` (`shouldMergeProductRelease`) und PR-Lookup-Ziel `vitalos` bei grünem Check / Failure-PR-Suche.
 - Behalten: Auto-Merge nur für grüne `ci-agent/repair/*` → `master`/`main`; Legacy-Branch `vitalos` weiter als erlaubte Basis/Repair-Quelle (remote darf existieren).
+- Belege: Commit `dde8813` (repair.mjs + AL-LOG); NEXT `d925eb4`/`3eaf80b`; RESULTS `fc72f70`.
 - NEXT CI-Checkbox nachgezogen; absichtlich-roter-Check→Repair bleibt offen; Alert #24 `deepmerge` weiter ohne Upstream-Patch.
 
 ## 2026-11-10 — GitHub Pages aktiviert (dev /docs)
