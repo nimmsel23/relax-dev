@@ -2,6 +2,13 @@
 - 2026-11-10: chore(deps) major stack align — React 19 / Vite 8.3.6 / plugin-react 6.2.1 / Firebase 13 (age-safe pins, pnpm-workspace overrides).
 
 
+## 2026-11-11 — Gemini CI-Agent: kein master→vitalos mehr
+
+- Guide/Org-Queue leer, Feature-Freeze → CI: `.github/ci-agent/repair.mjs` an Release-Weg `dev→master` (AGENTS.md) angeglichen.
+- Entfernt: Auto-Merge `master→vitalos` (`shouldMergeProductRelease`) und PR-Lookup-Ziel `vitalos` bei grünem Check / Failure-PR-Suche.
+- Behalten: Auto-Merge nur für grüne `ci-agent/repair/*` → `master`/`main`; Legacy-Branch `vitalos` weiter als erlaubte Basis/Repair-Quelle (remote darf existieren).
+- NEXT CI-Checkbox nachgezogen; absichtlich-roter-Check→Repair bleibt offen; Alert #24 `deepmerge` weiter ohne Upstream-Patch.
+
 ## 2026-11-10 — GitHub Pages aktiviert (dev /docs)
 
 - Guide/Org-Queue leer, Feature-Freeze → CI/Docs: GitHub Pages für `relax-dev` per REST aktiviert (`POST /repos/nimmsel23/relax-dev/pages`, `build_type=legacy`, `source.branch=dev`, `path=/docs`).
