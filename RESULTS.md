@@ -1023,3 +1023,4 @@ Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions
 - Agent-Workflow und lokale Trigger für `relax-dev` auf `dev` eingerichtet; `GEMINI_API_KEY` als Actions-Secret gesetzt.
 - `Check`/Preview und Agent-Run [42405224802](https://github.com/nimmsel23/relax-dev/actions/runs/42405224802) waren auf Commit `744438af` grün. Dieser Lauf war ein No-op auf einem erfolgreichen Check; ein roter Code-Fehler wurde noch nicht absichtlich simuliert.
 - Pushes und PR-Merges verwenden die eng berechtigte `GITHUB_TOKEN`-Workflow-Berechtigung; kein separates `SYNC_TOKEN` erforderlich.
+
