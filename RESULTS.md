@@ -1,3 +1,9 @@
+## 2026-11-11 — CI Simplicity: remove Gemini/Merge-Agent
+
+- Removed: gemini-ci-repair.yml
+- Spine bleibt: Check → automerge-pr (Dependabot) → automerge (dev→master) → Deploy.
+- Owner: complexity only in vitalos/prod (CI.md Kopf).
+
 - 2026-11-10: fix(build): `fixRolldownPreloadMarker` in `vite.config.js` (Vite 8 / Rolldown `__VITE_PRELOAD__<hash>` → Blackscreen-Vorbeuge, analog 6pack/skills). React.lazy + Capacitor-Deps; AGENTS.md dokumentiert. Commit `321d90d`, Build grün.
 - 2026-11-10: chore(deps) major stack align — React 19 / Vite 8.3.6 / plugin-react 6.2.1 / Firebase 13 (age-safe pins, pnpm-workspace overrides).
 
@@ -1029,4 +1035,3 @@ Enabled Dependabot alerts and security updates. Configured weekly GitHub Actions
 - Agent-Workflow und lokale Trigger für `relax-dev` auf `dev` eingerichtet; `GEMINI_API_KEY` als Actions-Secret gesetzt.
 - `Check`/Preview und Agent-Run [42405224802](https://github.com/nimmsel23/relax-dev/actions/runs/42405224802) waren auf Commit `744438af` grün. Dieser Lauf war ein No-op auf einem erfolgreichen Check; ein roter Code-Fehler wurde noch nicht absichtlich simuliert.
 - Pushes und PR-Merges verwenden die eng berechtigte `GITHUB_TOKEN`-Workflow-Berechtigung; kein separates `SYNC_TOKEN` erforderlich.
-
