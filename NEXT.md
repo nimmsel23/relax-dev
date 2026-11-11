@@ -1,6 +1,7 @@
 # CI-Agent — offener Betriebspunkt
 
 - [x] `GEMINI_API_KEY` und `SYNC_TOKEN` als Actions-Secrets einrichten/prüfen — erledigt 2026-11-10 (Secrets vorhanden seit 2026-11-07 bzw. 2026-11-09; `gh secret list`).
+- [x] Gemini Merge-Agent an Release-Weg `dev→master` angeglichen — erledigt 2026-11-11: `repair.mjs` ohne `master→vitalos`-Product-Release-Merge; Auto-Merge nur noch für grüne `ci-agent/repair/*` → `master`/`main`.
 - [ ] Einen absichtlich roten, code-behebbaren Check bis zum grünen Promote/Deploy beobachten (Gemini-Repair-Pfad).
 - ~~Vite-8 Rolldown `__VITE_PRELOAD__`-Blackscreen~~: `fixRolldownPreloadMarker` vorbeugend (wie 6pack/skills).
 
