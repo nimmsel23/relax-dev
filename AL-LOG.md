@@ -99,7 +99,7 @@ completed	success	PR-AutoMerge (Dependabot -> dev)	PR-AutoMerge (Dependabot -> d
 - Arbeitsbaum: sauber
 
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
-- Erledigt: Guide/Org leer → CI: `repair.mjs` ohne `master→vitalos`-Product-Release-Merge (Release-Weg `dev→master`); Auto-Merge nur `ci-agent/repair/*`→`master`/`main`; Commit `dde8813` (+ NEXT `d925eb4`/`3eaf80b`, RESULTS `fc72f70`).
-- Offen/Weiter: Gemini absichtlich-roter-Check→Repair weiter offen; Alert #24 `deepmerge` (low) ohne Upstream-Patch; Store-Umbau Variante A nur mit CEO-+go; lokal voraus `origin/dev` (u. a. Pages-AL-LOG `e7c2787`) — Push ausstehend.
+- Erledigt: Org `ed94e4cd` (+cto +hit) — Push `029527a..42b5438` → `origin/dev` (inkl. `dde8813`); Check `43035981365` success; Pages `43035980431` success; fremdes WIP (`docs/apps.*`, `scripts/portal.mjs`) unberührt.
+- Offen/Weiter: Gemini absichtlich-roter-Check→Repair; Alert #24 `deepmerge` (low, `patched:null`); Store-Umbau Variante A nur mit CEO-+go; Guide-/Org-Queue leer.
 - Blocker: keine.
-AUTOMATION: origin/dev-Nachlauf prüfen — nach AL-Commit `git status -sb` / `git log origin/dev..HEAD` in vos-al-hilfzeile, sonst bleiben Docs-Commits lokal voraus — ~1 min/AL-Lauf.
+AUTOMATION: AL-Commit mit lokalem Fremd-WIP — `git add` path-scoped (AL-LOG/RESULTS/NEXT), nie `git add -A`, sonst landet Portal-WIP im AL-Commit — ~30 s/AL-Lauf.
