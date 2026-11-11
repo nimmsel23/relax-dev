@@ -1,5 +1,7 @@
 # AGENTS.md — Relax
 
+**Simplicity (Owner 2026-11-11):** So simpel wie möglich. Ausnahme nur `vitalos/prod`. CI-Spine: Check → automerge-pr → automerge → Deploy (CI.md §1).
+
 <!-- release-weg:start -->
 ## Release-Weg und Branches (Relax)
 
