@@ -71,25 +71,23 @@ async function rerunOrRepairDeploy() {
 
 async function mergeGreenReleaseOrRepair() {
   if (run.conclusion !== "success") return false;
+  // Release-Weg ist Auto-Promote dev→master (+ Shell-Pin auf origin/master).
+  // Gemini merged nur noch grüne ci-agent/repair/*-PRs — kein master→vitalos mehr.
   let pull = run.pull_requests?.find(sameRepoPullRequest);
-  if (!pull && (run.head_branch === "master" || run.head_branch.startsWith("ci-agent/repair/"))) {
-    const targets = run.head_branch === "master" ? ["vitalos"] : ["master", "vitalos", "main"];
-    for (const target of targets) {
+  if (!pull && run.head_branch.startsWith("ci-agent/repair/")) {
+    for (const target of ["master", "main"]) {
       pull = prFor(run.head_branch, target, run.head_sha);
       if (pull) break;
     }
   }
   let branch = pull?.head?.ref ?? run.head_branch;
   let base = pull?.base?.ref;
-  if (pull && !base) base = prFor(branch, "vitalos", run.head_sha)?.baseRefName;
   if (!base) return false;
-  const shouldMergeRepair = branch.startsWith("ci-agent/repair/") && ["master", "vitalos", "main"].includes(base);
-  const shouldMergeProductRelease = branch === "master" && base === "vitalos";
-  if (!shouldMergeRepair && !shouldMergeProductRelease) return false;
+  const shouldMergeRepair = branch.startsWith("ci-agent/repair/") && ["master", "main"].includes(base);
+  if (!shouldMergeRepair) return false;
   const current = prFor(branch, base, run.head_sha);
   if (!current) return false;
-  const method = "--merge";
-  execFileSync("gh", ["pr", "merge", String(current.number), "-R", repo, method, ...(shouldMergeRepair ? ["--delete-branch"] : [])], {
+  execFileSync("gh", ["pr", "merge", String(current.number), "-R", repo, "--merge", "--delete-branch"], {
     cwd, stdio: "inherit", env: { ...process.env, GH_TOKEN: token },
   });
   console.log(`PR #${current.number} in ${base} mit grünem Check zusammengeführt.`);
@@ -135,7 +133,6 @@ if (prEvent) {
   let pull = run.pull_requests?.find(sameRepoPullRequest);
   if (!pull && run.event === "pull_request") {
     pull = prFor(run.head_branch, "master", run.head_sha)
-      ?? prFor(run.head_branch, "vitalos", run.head_sha)
       ?? prFor(run.head_branch, "dev", run.head_sha);
   }
   if (pull) {
