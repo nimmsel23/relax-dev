@@ -2,6 +2,12 @@
 - 2026-11-10: chore(deps) major stack align — React 19 / Vite 8.3.6 / plugin-react 6.2.1 / Firebase 13 (age-safe pins, pnpm-workspace overrides).
 
 
+## 2026-11-11 — Teilergebnis Push (Org ed94e4cd)
+
+- Org-Task `ed94e4cd-3ad4-4d93-8f0f-1794772844d3` (`+cto +hit`, CTO-Freigabe): FF-Push `029527a..42b5438` → `origin/dev` (inkl. `dde8813` Gemini-Repair-Align + Docs/AL-LOG-Nachzüge); fremdes WIP unberührt.
+- Belege: Check `43035981365` success (HEAD `42b5438`); Pages `43035980431` success; Org-Task done; relax-dev Org-Queue leer.
+- Offen bleibt: Gemini absichtlich-roter-Check→Repair; Alert #24 `deepmerge`; Store-Umbau Variante A nur mit CEO-+go.
+
 ## 2026-11-11 — Gemini CI-Agent: kein master→vitalos mehr
 
 - Guide/Org-Queue leer, Feature-Freeze → CI: `.github/ci-agent/repair.mjs` an Release-Weg `dev→master` (AGENTS.md) angeglichen.
