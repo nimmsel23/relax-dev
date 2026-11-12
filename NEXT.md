@@ -4,6 +4,7 @@
 - [x] Gemini Merge-Agent an Release-Weg `dev→master` angeglichen — erledigt 2026-11-11: `repair.mjs` ohne `master→vitalos`-Product-Release-Merge; Auto-Merge nur noch für grüne `ci-agent/repair/*` → `master`/`main`.
 - [x] Teilergebnis Push Org `ed94e4cd` — erledigt 2026-11-11: `029527a..42b5438` auf `origin/dev`, Check `43035981365` success; fremdes WIP unberührt.
 - [x] Einen absichtlich roten, code-behebbaren Check bis zum grünen Promote/Deploy beobachten (Gemini-Repair-Pfad) — erledigt 2026-11-12: Probe `2acf731` → Repair `61dc56d`; Check `43140013721` + Live-Deploy `43140105706` success.
+- [x] Checkout-Sync Org `d5c6a0f7` — erledigt 2026-11-12: `origin/dev`=`cadeefb`/`ed21341`, Org-Queue leer; AL-LOG `ed21341`.
 - ~~Vite-8 Rolldown `__VITE_PRELOAD__`-Blackscreen~~: `fixRolldownPreloadMarker` vorbeugend (wie 6pack/skills).
 
 
