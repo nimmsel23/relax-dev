@@ -4,8 +4,9 @@ import SimulationControls from '../components/physio/SimulationControls'
 import PhysioChart from '../components/physio/PhysioChart'
 import { usePhysioStore } from '../store/physioStore'
 import { Zap } from 'lucide-react'
+import { storeGated } from '../components/StoreGate.jsx'
 
-export default function PhysioTimeline() {
+function PhysioTimeline() {
   const error = usePhysioStore((s) => s.error)
   const isLoading = usePhysioStore((s) => s.isLoading)
   const clearEvents = usePhysioStore((s) => s.clearEvents)
@@ -136,3 +137,5 @@ export default function PhysioTimeline() {
     </div>
   )
 }
+
+export default storeGated(PhysioTimeline)

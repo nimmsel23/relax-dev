@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { storeGated } from '../components/StoreGate.jsx'
 import { BookOpen, ClipboardList, Download, Upload, Plus, Check, Play, Pause, SkipBack, SkipForward, Square } from 'lucide-react'
 import { getRelaxSession, getRelaxSessionHistory, saveRelaxSession } from '@db'
 import { downloadText, localToday } from '../lib/db/shared/utils.js'
@@ -67,7 +68,7 @@ function practiceDescription(item) {
 
 const getCompleteRelaxSessionHistory = () => loadPracticeHistory(getRelaxSessionHistory)
 
-export default function Ausbildung({ onNavigate }) {
+function Ausbildung({ onNavigate }) {
   const [{ section, method }, setRoute] = useState(readTrainingRoute)
   const [pmrStep, setPmrStep] = useState(null)
   const [methodQuery, setMethodQuery] = useState('')
@@ -734,3 +735,5 @@ export default function Ausbildung({ onNavigate }) {
     {message && <div role="status" className="fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-full px-4 py-2 text-xs font-bold shadow-xl" style={{ background: 'var(--accent)', color: 'var(--bg2)' }}>{message}</div>}
   </div>
 }
+
+export default storeGated(Ausbildung)

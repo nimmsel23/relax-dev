@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BarChart3, Sparkles } from 'lucide-react'
 import { getRelaxStatsSummary } from '@db'
+import { STORE } from '../lib/edition.js'
 
 function round1(n) {
   return Math.round((Number(n) || 0) * 10) / 10
 }
 
-export default function Stats() {
+export default function Stats({ onNavigate }) {
   const [days, setDays] = useState(14)
   const [summary, setSummary] = useState(null)
 
@@ -27,7 +28,7 @@ export default function Stats() {
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <BarChart3 size={18} style={{ color: 'var(--accent)' }} />
-            <div className="font-extrabold tracking-tight">Stats</div>
+            <div className="font-extrabold tracking-tight">{STORE ? 'Statistik' : 'Stats'}</div>
           </div>
           <select
             value={days}
@@ -42,25 +43,36 @@ export default function Stats() {
         </div>
       </div>
 
-      {!summary ? (
+      {!summary || (STORE && !summary.total_minutes) ? (
         <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-          <div className="font-bold">Keine Daten</div>
+          <div className="font-bold">{STORE ? 'Noch keine Auswertung' : 'Keine Daten'}</div>
           <div className="text-sm mt-1" style={{ color: 'var(--muted)' }}>
-            Logge Sessions im Tab „Session“, dann erscheinen hier Auswertungen.
+            {STORE
+              ? 'Sobald du die erste Übung gemacht oder eine Praxis eingetragen hast, siehst du hier deine Minuten, Tage und Stimmung.'
+              : 'Logge Sessions im Tab „Session“, dann erscheinen hier Auswertungen.'}
           </div>
+          {STORE && (
+            <button
+              onClick={() => onNavigate?.('atem')}
+              className="mt-3 inline-flex min-h-11 items-center rounded-xl px-4 py-2.5 text-sm font-bold"
+              style={{ background: 'var(--accent)', color: '#0b0f19' }}
+            >
+              Erste Atemübung starten
+            </button>
+          )}
         </div>
       ) : (
         <>
           <div className="grid grid-cols-2 gap-3">
             <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-              <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Total</div>
+              <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{STORE ? 'Gesamt' : 'Total'}</div>
               <div className="text-2xl font-black">{summary.total_minutes || 0} min</div>
               <div className="text-xs mt-1" style={{ color: 'var(--muted)' }}>{summary.days_with_sessions || 0} / {summary.days || days} Tage</div>
             </div>
             <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-              <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Mood Δ</div>
+              <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{STORE ? 'Stimmung Δ' : 'Mood Δ'}</div>
               <div className="text-2xl font-black">{round1(summary.avg_mood_delta)}</div>
-              <div className="text-xs mt-1" style={{ color: 'var(--muted)' }}>Ø Verbesserung pro Item</div>
+              <div className="text-xs mt-1" style={{ color: 'var(--muted)' }}>{STORE ? 'Ø Verbesserung pro Eintrag' : 'Ø Verbesserung pro Item'}</div>
             </div>
           </div>
 

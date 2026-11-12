@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { BookOpen, Download, Plus, Save, Trash2 } from 'lucide-react'
 import { getRelaxSession, saveRelaxSession, getRelaxTechniques, exportRelaxCsv } from '@db'
 import { localToday, downloadText } from '../lib/db/shared/utils.js'
+import { STORE } from '../lib/edition.js'
 import { readSessionDraft, writeSessionDraft, removeSessionDraft } from '../lib/training/sessionDraft.js'
 
 const MOOD = [
@@ -178,7 +179,7 @@ export default function Session({ onNavigate }) {
             <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>Eigene Praxis</div>
             <h1 className="mt-1 text-2xl font-black tracking-tight sm:text-3xl xl:text-4xl">Praxisjournal</h1>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed sm:text-base" style={{ color: 'var(--muted)' }}>
-              Halte Methode, Ablauf und dein Erleben fest. Das Protokoll unterstützt deine Selbsterfahrung und ersetzt keine Ausbildungsbestätigung.
+              Halte Methode, Ablauf und dein Erleben fest. {STORE ? 'Das Protokoll unterstützt deine Selbsterfahrung.' : 'Das Protokoll unterstützt deine Selbsterfahrung und ersetzt keine Ausbildungsbestätigung.'}
             </p>
           </div>
         </div>
@@ -199,7 +200,7 @@ export default function Session({ onNavigate }) {
             <div className="text-sm font-semibold" style={{ color: 'var(--accent)' }}>Dein nächster Eintrag</div>
             <h2 className="mt-2 text-xl font-bold sm:text-2xl">Noch keine Praxis dokumentiert</h2>
             <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--muted)' }}>Starte mit einer Methode, die du kennst. Notiere auch Anpassungen und Pausen; nichts muss erzwungen werden.</p>
-            <button onClick={() => { setDirty(true); setItems([makeItem()]) }} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold" style={{ background: 'var(--accent)', color: '#0b0f19' }}><Plus size={17} />Erste Session anlegen</button>
+            <button onClick={() => { setDirty(true); setItems([makeItem()]) }} className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold" style={{ background: 'var(--accent)', color: '#0b0f19' }}><Plus size={17} />{STORE ? 'Erste Praxis eintragen' : 'Erste Session anlegen'}</button>
           </div>
         </div>
       ) : items.map((item, index) => {
@@ -251,12 +252,12 @@ export default function Session({ onNavigate }) {
                 </div>
                 <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                   {[
-                    ['arrival_minutes', 'Ankommen & Einschulung'],
-                    ['practice_minutes', 'Entspannungsmethode'],
-                    ['return_minutes', 'Nachspüren & Rücknahme'],
+                    ['arrival_minutes', STORE ? 'Ankommen' : 'Ankommen & Einschulung'],
+                    ['practice_minutes', STORE ? 'Übung' : 'Entspannungsmethode'],
+                    ['return_minutes', STORE ? 'Nachspüren & Abschluss' : 'Nachspüren & Rücknahme'],
                   ].map(([key, label]) => <label key={key} className="rounded-xl border p-3 text-xs font-semibold" style={{ borderColor: 'var(--line)', color: 'var(--muted)' }}>{label}<div className="mt-2 flex items-center gap-2"><input type="number" inputMode="numeric" min={0} max={240} value={item[key] ?? ''} onChange={event => updateItem(index, { [key]: event.target.value })} className="w-20 rounded-lg border px-2 py-1.5 text-sm" style={fieldStyle} /><span>Minuten</span></div></label>)}
                 </div>
-                <p className="mt-2 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>Ein Kursabschnitt kann etwa mit Begrüßung und Befinden beginnen, die Übung einschulen, genügend Zeit zum Nachspüren und eine passende Rücknahme einplanen. Passe den Ablauf an Methode und Person an.</p>
+                <p className="mt-2 text-[11px] leading-relaxed" style={{ color: 'var(--dim)' }}>{STORE ? 'Eine Einheit kann mit Ankommen und einem kurzen Check-in beginnen, die Übung selbst enthalten und genügend Zeit zum Nachspüren lassen. Passe den Ablauf an dich an.' : 'Ein Kursabschnitt kann etwa mit Begrüßung und Befinden beginnen, die Übung einschulen, genügend Zeit zum Nachspüren und eine passende Rücknahme einplanen. Passe den Ablauf an Methode und Person an.'}</p>
               </div>
 
               <label className="block text-xs font-semibold" style={{ color: 'var(--muted)' }}>
@@ -283,7 +284,7 @@ export default function Session({ onNavigate }) {
       })}
 
       </fieldset>
-      <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Die Stimmungsskala beschreibt nur dein eigenes Erleben. Sie ist weder Messung noch Diagnose. Der offizielle Praxisnachweis wird separat im Ausbildungsmodul bestätigt.</p>
+      <p className="px-1 text-xs leading-relaxed" style={{ color: 'var(--dim)' }}>Die Stimmungsskala beschreibt nur dein eigenes Erleben. Sie ist weder Messung noch Diagnose.{STORE ? '' : ' Der offizielle Praxisnachweis wird separat im Ausbildungsmodul bestätigt.'}</p>
       </main>
 
       <aside className="min-w-0 space-y-4 xl:sticky xl:top-5">
@@ -300,7 +301,7 @@ export default function Session({ onNavigate }) {
         </section>
 
         <section className="space-y-2 rounded-2xl border p-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-          <button onClick={() => { setDirty(true); setItems(current => [...current, makeItem()]) }} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold disabled:opacity-50" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}><Plus size={17} />Session hinzufügen</button>
+          <button onClick={() => { setDirty(true); setItems(current => [...current, makeItem()]) }} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold disabled:opacity-50" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}><Plus size={17} />{STORE ? 'Praxis hinzufügen' : 'Session hinzufügen'}</button>
           <button onClick={save} disabled={loading || loadError || saving || !!draftConflict} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold disabled:opacity-50" style={{ background: saving ? 'var(--line)' : 'var(--accent)', color: saving ? 'var(--muted)' : '#0b0f19' }}><Save size={17} />{saving ? 'Speichert …' : 'Protokoll speichern'}</button>
           <button onClick={() => exportCsv(30)} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2.5 text-sm font-semibold" style={{ background: 'transparent', borderColor: 'var(--line)' }} title="CSV-Export der letzten 30 Tage"><Download size={16} />30-Tage-Export</button>
         </section>
@@ -309,18 +310,26 @@ export default function Session({ onNavigate }) {
           <h2 className="font-bold">Ein guter Ablauf</h2>
           <ol className="mt-3 space-y-3 text-sm">
             {[
-              ['Ankommen', 'Befinden erfragen, Ziel und Rahmen klären.'],
-              ['Einschulung & Übung', 'Methode erklären, passend anleiten und wiederholen.'],
-              ['Nachspüren & Rücknahme', 'Zeit geben, ruhig orientieren und gemeinsam abschließen.'],
+              ...(STORE ? [
+                ['Ankommen', 'Wie geht es dir gerade? Was brauchst du?'],
+                ['Üben', 'Eine Methode wählen und in deinem Tempo üben.'],
+                ['Nachspüren', 'Dir Zeit geben, ruhig ankommen und den Abschluss selbst bestimmen.'],
+              ] : [
+                ['Ankommen', 'Befinden erfragen, Ziel und Rahmen klären.'],
+                ['Einschulung & Übung', 'Methode erklären, passend anleiten und wiederholen.'],
+                ['Nachspüren & Rücknahme', 'Zeit geben, ruhig orientieren und gemeinsam abschließen.'],
+              ]),
             ].map(([title, description], index) => <li key={title} className="flex gap-3"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold" style={{ color: 'var(--accent)', background: 'var(--accent-glow)' }}>{index + 1}</span><div><div className="font-semibold">{title}</div><p className="mt-0.5 text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>{description}</p></div></li>)}
           </ol>
           <p className="mt-4 border-t pt-3 text-xs leading-relaxed" style={{ borderColor: 'var(--line)', color: 'var(--dim)' }}>Ablauf und Dauer richten sich nach Methode, Gruppe und Person. Augen schließen und Musik bleiben freiwillig.</p>
         </section>
 
-        <button onClick={() => onNavigate?.('ausbildung')} className="w-full rounded-2xl border p-4 text-left" style={{ background: 'var(--accent-glow)', borderColor: 'color-mix(in srgb, var(--accent) 38%, var(--line))' }}>
-          <span className="block text-sm font-bold" style={{ color: 'var(--accent)' }}>Ausbildung weiterführen</span>
-          <span className="mt-1 block text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Stundenplanung, Methodenkarten und bestätigten 30-Einheiten-Nachweis öffnen.</span>
-        </button>
+        {!STORE && (
+          <button onClick={() => onNavigate?.('ausbildung')} className="w-full rounded-2xl border p-4 text-left" style={{ background: 'var(--accent-glow)', borderColor: 'color-mix(in srgb, var(--accent) 38%, var(--line))' }}>
+            <span className="block text-sm font-bold" style={{ color: 'var(--accent)' }}>Ausbildung weiterführen</span>
+            <span className="mt-1 block text-xs leading-relaxed" style={{ color: 'var(--muted)' }}>Stundenplanung, Methodenkarten und bestätigten 30-Einheiten-Nachweis öffnen.</span>
+          </button>
+        )}
       </aside>
 
       {toast && <div role="status" className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 rounded-xl border px-4 py-2 text-sm font-semibold shadow-xl" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>{toast}</div>}

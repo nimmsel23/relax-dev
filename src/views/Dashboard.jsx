@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CalendarDays, Download, Flame, MoonStar } from 'lucide-react'
+import { CalendarDays, Download, Flame, MoonStar, Wind } from 'lucide-react'
 import { getRelaxSession, getRelaxStatsSummary, exportRelaxCsv } from '@db'
 import { localToday, getWeekDates, downloadText } from '../lib/db/shared/utils.js'
 import BreathCard from '../components/breath/BreathCard.jsx'
+import { STORE } from '../lib/edition.js'
 
 const DAY_LABELS = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So']
 
@@ -30,6 +31,8 @@ export default function Dashboard({ onNavigate }) {
 
   const weekTotal = useMemo(() => week.reduce((a, d) => a + (d.minutes || 0), 0), [week])
   const todayMinutes = useMemo(() => (week.find(d => d.date === today)?.minutes || 0), [week, today])
+  // Neuer Nutzer (nur Store-Build): Wochendaten geladen, aber nichts geloggt -> klarer erster Schritt.
+  const isNew = STORE && week.length > 0 && weekTotal === 0 && !(summary7?.streak_days > 0)
 
   async function exportCsv(days) {
     try {
@@ -48,8 +51,21 @@ export default function Dashboard({ onNavigate }) {
             <div className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Heute</div>
             <div className="mt-1 text-3xl font-black tracking-tight">{todayMinutes} min</div>
             <div className="text-sm mt-1" style={{ color: 'var(--muted)' }}>
-              Deine persönliche Entspannungszeit. Der 30-Einheiten-Nachweis wird separat im Modul geführt.
+              {isNew
+                ? 'Willkommen. Schon eine Minute bewusstes Atmen zählt – fang einfach an.'
+                : STORE
+                  ? 'Deine persönliche Entspannungszeit heute.'
+                  : 'Deine persönliche Entspannungszeit. Der 30-Einheiten-Nachweis wird separat im Modul geführt.'}
             </div>
+            {isNew && (
+              <button
+                onClick={() => onNavigate?.('atem')}
+                className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold"
+                style={{ background: 'var(--accent)', color: '#0b0f19' }}
+              >
+                <Wind size={16} /> Erste Atemübung starten
+              </button>
+            )}
           </div>
           <div className="w-14 h-14 rounded-2xl flex items-center justify-center border"
             style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
@@ -58,10 +74,12 @@ export default function Dashboard({ onNavigate }) {
         </div>
       </div>
 
-      <button onClick={() => onNavigate?.('ausbildung')} className="w-full rounded-2xl border p-4 text-left" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
-        <div className="text-sm font-bold" style={{ color: 'var(--accent)' }}>Entspannungstrainer-Modul öffnen →</div>
-        <div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Grundlagen lernen, eine Stunde planen und den Ausbildungsnachweis ansehen.</div>
-      </button>
+      {!STORE && (
+        <button onClick={() => onNavigate?.('ausbildung')} className="w-full rounded-2xl border p-4 text-left" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
+          <div className="text-sm font-bold" style={{ color: 'var(--accent)' }}>Entspannungstrainer-Modul öffnen →</div>
+          <div className="mt-1 text-xs" style={{ color: 'var(--muted)' }}>Grundlagen lernen, eine Stunde planen und den Ausbildungsnachweis ansehen.</div>
+        </button>
+      )}
 
       <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
         <div className="flex items-center justify-between gap-3 mb-3">
@@ -107,15 +125,15 @@ export default function Dashboard({ onNavigate }) {
           </div>
           <div className="grid grid-cols-3 gap-3">
             <div className="p-3 rounded-xl border" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
-              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Streak</div>
+              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{STORE ? 'Serie' : 'Streak'}</div>
               <div className="text-xl font-black">{summary7.streak_days || 0}</div>
             </div>
             <div className="p-3 rounded-xl border" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
-              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Mood Δ</div>
+              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{STORE ? 'Stimmung Δ' : 'Mood Δ'}</div>
               <div className="text-xl font-black">{(summary7.avg_mood_delta ?? 0).toFixed(1)}</div>
             </div>
             <div className="p-3 rounded-xl border" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }}>
-              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Days</div>
+              <div className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{STORE ? 'Tage' : 'Days'}</div>
               <div className="text-xl font-black">{summary7.days_with_sessions || 0}</div>
             </div>
           </div>
@@ -125,7 +143,7 @@ export default function Dashboard({ onNavigate }) {
       <div className="p-4 rounded-2xl border" style={{ background: 'var(--card)', borderColor: 'var(--line)' }}>
         <div className="flex items-center gap-2 mb-2">
           <CalendarDays size={15} style={{ color: 'var(--accent)' }} />
-          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>Exports</span>
+          <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--muted)' }}>{STORE ? 'Daten exportieren' : 'Exports'}</span>
         </div>
         <div className="flex gap-2">
           <button

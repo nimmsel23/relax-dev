@@ -6,6 +6,7 @@ import { CATEGORIES, PATTERNS, patternsByCategory, getPattern, cycleSeconds, rou
 import BreathPlayer, { KIND_COLOR } from '../components/breath/BreathPlayer.jsx'
 import { loadPrefs, savePrefs } from '../lib/breath/prefs.js'
 import { isBreathTechnique } from '../lib/breath/stats.js'
+import { STORE } from '../lib/edition.js'
 import { TEACHING_SCRIPT_KEY, PRANAYAMA_ASSIGNMENT_KEY } from '../lib/training/storage.js'
 
 const ICONS = { Wind, Moon, Target, Zap, LifeBuoy }
@@ -287,7 +288,7 @@ export default function Breath() {
                   <div className="font-bold">{p.name}</div>
                   <div className="text-xs font-semibold tabular-nums" style={{ color: 'var(--muted)' }}>{p.ratio}</div>
                 </div>
-                <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: p.courseReference ? 'var(--accent)' : 'var(--dim)' }}>{p.courseReference ? `Kursübung · ${p.courseReference}` : 'Zusatzübung · nicht als Kursvorgabe aufgeführt'}</div>
+                {!STORE && <div className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: p.courseReference ? 'var(--accent)' : 'var(--dim)' }}>{p.courseReference ? `Kursübung · ${p.courseReference}` : 'Zusatzübung · nicht als Kursvorgabe aufgeführt'}</div>}
                 <PhaseBar pattern={p} />
                 {!open && <div className="text-sm" style={{ color: 'var(--muted)' }}>{p.desc}</div>}
               </button>
@@ -369,6 +370,7 @@ export default function Breath() {
         {PATTERNS.length} Techniken · Keine Medizinberatung. Bei Schwindel oder Unwohlsein die Übung abbrechen und normal atmen.
       </div>
 
+      {!STORE && (<>
       <details className="rounded-2xl border p-4 space-y-2" style={{ background: 'var(--card)', borderColor: 'var(--line)' }} aria-label="Atemschulung aus der Ausbildung">
         <summary className="cursor-pointer text-sm font-bold">Kurswissen &amp; Ausbildungsaufgabe · Atemschulung</summary>
         <p className="text-sm" style={{ color: 'var(--muted)' }}>
@@ -463,6 +465,7 @@ export default function Breath() {
         </div>
       </details>
 
+      </>)}
 
       {toast && (
         <div className="fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl border text-sm font-semibold"

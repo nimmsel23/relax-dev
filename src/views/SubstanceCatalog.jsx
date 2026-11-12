@@ -1,11 +1,12 @@
 import { api } from '../api'
+import { storeGated } from '../components/StoreGate.jsx'
 import { useState, useEffect } from 'react'
 import { Search, X, ChevronDown, Network, BookOpen } from 'lucide-react'
 import KnowledgeGraph from '../components/KnowledgeGraph'
 import { marked } from 'marked'
 import { useSwipeToDismiss } from '../hooks/useSwipeToDismiss.js'
 
-export default function SubstanceCatalog() {
+function SubstanceCatalog() {
   const [substances, setSubstances] = useState({})
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -485,3 +486,5 @@ export default function SubstanceCatalog() {
     </div>
   )
 }
+
+export default storeGated(SubstanceCatalog)
