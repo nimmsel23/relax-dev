@@ -129,7 +129,7 @@ completed	skipped	PR-AutoMerge (Dependabot -> dev)	PR-AutoMerge (Dependabot -> d
 - Arbeitsbaum: 3 uncommittete Pfade
 
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
-- Erledigt: Gemini-Repair-Pfad verifiziert — absichtlich rot `2acf731` (Syntax `sumMinutes`); Check fail `43139925926` → Gemini `43139977112`/`43139989299` → Repair `61dc56d` → Check `43140013721` success → Auto-Promote → Live-Deploy `43140105706` success (`origin/master`=`61dc56d`); Probe-Kommentar bereinigt in Folge-Commit.
-- Offen/Weiter: Alert #24 `deepmerge` (low, `patched:null`, npm latest weiterhin 4.3.1); Store-Umbau Variante A nur mit CEO-+go; Guide-/Org-Queue leer.
+- Erledigt: Org `d5c6a0f7` — Haupt-Checkout bereits FF `origin/dev`=`cadeefb` (`8ae9b6c` Ancestor inkl. Gemini-Probe `2acf731`→`61dc56d`; Store-Build `207322b`); Task done; Check `43198570460` / Auto-Promote `43213150692` / Live-Deploy `43198705651` success; Alert #24 weiter `open`/`patched:null` (npm 4.3.1).
+- Offen/Weiter: Alert #24 `deepmerge` (low) ohne Upstream-Patch; Store-Umbau Variante A nur mit CEO-+go; Guide-/Org-Queue leer.
 - Blocker: keine.
-AUTOMATION: Absichtlich-roter-Check-Probe — einmaliges Skript `vos-al-gemini-probe` (Syntax-Break in erlaubtem src-Pfad + Poll Check/Gemini/Promote) statt manuellem Worktree-Push/Watch — ~10–15 min/AL-Lauf (Aufgabe erledigt, Zeile für CTO-Aggregation).
+AUTOMATION: Org-LR „Checkout hinter origin/dev syncen“ — Runner/`vos-al-log` vor Prefill `git fetch` + `merge --ff-only origin/dev` (bei sauberem Index) und Task nur anlegen wenn `rev-list HEAD..origin/dev` >0 — vermeidet Stale-LR nach bereits erfolgtem Sync — ~2 min/AL-Lauf.
