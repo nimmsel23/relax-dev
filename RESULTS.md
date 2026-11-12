@@ -1,7 +1,7 @@
 ## 2026-11-12 — Checkout-Sync Org d5c6a0f7 (AL Nachmittag)
 
 - Org `d5c6a0f7` (`+cto +lr`): Haupt-Checkout bereits FF auf `origin/dev`=`cadeefb` (`8ae9b6c` Ancestor inkl. Gemini-Probe); Task done; Org-Queue relax-dev leer.
-- Belege: Check `43198570460` / Auto-Promote `43213150692` / Live-Deploy `43198705651` success; Alert #24 weiter `open`/`patched:null` (npm deepmerge 4.3.1); fremdes WIP unberührt.
+- Belege: Check `43198570460` / Auto-Promote `43213150692` / Live-Deploy `43198705651` success; Alert #24 weiter `open`/`patched:null` (npm deepmerge 4.3.1); AL-LOG `ed21341`; fremdes WIP unberührt.
 
 ## 2026-11-12 — Store-Build Relax: Owner-Inhalte raus, Leerzustand, Konzept vos-relax
 
