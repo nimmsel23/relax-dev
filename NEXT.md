@@ -31,5 +31,5 @@ Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT
 - [ ] Fehler außerhalb des Codes (fehlende Deploy-Credentials, externe Dienste, Runner-Ausfälle) separat als Diagnose melden; keine ungeprüften Änderungen an Secrets oder Deploy-Konfiguration.
 - [x] GitHub Pages fuer `relax-dev` auf Branch `dev`, Ordner `/docs` prüfen/aktivieren — erledigt 2026-11-10 via `POST /repos/nimmsel23/relax-dev/pages` (`source.branch=dev`, `path=/docs`); Status `built`, Live `https://nimmsel23.github.io/relax-dev/` HTTP 200.
 - [x] Merge-Agent ohne `master→vitalos` — erledigt 2026-11-11 in `.github/ci-agent/repair.mjs` (Release-Weg `dev→master`).
-- [ ] Gemini-Reparaturpfad nach dem Feld-Fix anhand eines isolierten roten Checks verifizieren: Diagnose, Commit, Check-Neustart und nachgelagerter Deploy.
+- [x] Gemini-Reparaturpfad nach dem Feld-Fix anhand eines isolierten roten Checks verifizieren — erledigt 2026-11-12: Diagnose/Repair `61dc56d` (`fix(ci): source repair [ci-agent]`), grüner Check `43140013721`, Promote + Live-Deploy `43140105706`.
 
