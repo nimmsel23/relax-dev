@@ -25,7 +25,6 @@ export function lastDates(days) {
 }
 
 export function sumMinutes(session) {
-  // INTENTIONAL CI PROBE 2026-11-12: missing paren — Gemini repair path verification
   return (session?.items || []).reduce((a, it) => a + (Number(it.minutes) || 0), 0)
 }
 

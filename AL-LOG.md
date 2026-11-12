@@ -103,3 +103,33 @@ _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen sta
 - Offen/Weiter: Gemini absichtlich-roter-Check→Repair; Alert #24 `deepmerge` (low, `patched:null`); Store-Umbau Variante A nur mit CEO-+go; Guide-/Org-Queue leer.
 - Blocker: keine.
 AUTOMATION: AL-Commit mit lokalem Fremd-WIP — `git add` path-scoped (AL-LOG/RESULTS/NEXT), nie `git add -A`, sonst landet Portal-WIP im AL-Commit — ~30 s/AL-Lauf.
+
+## 2026-11-12 (Donnerstag) — Abteilungsleiter-Lauf
+
+_Automatik (vos-al-log Vorlage 2026-11-12):_
+- Commits seit 2026-11-08: 3bc1d3a ci: restore Gemini repair + Merge-Agent (full automation)
+763d715 docs(agents): simplicity pointer — CI.md §1 spine
+bdd75d2 ci: drop Gemini repair and Merge-Agent (simplicity)
+e16388d docs: auto-update RESULTS.md
+f7bc919 docs: auto-update NEXT.md
+6c5184d docs(al-log): Push-Beleg ed94e4cd (029527a..42b5438, Check 43035981365)
+1dbf789 docs: auto-update RESULTS.md
+42b5438 docs: RESULTS/NEXT Beleg dde8813 (vos-docs-dirty clear)
+b6c2318 docs(al-log): Belege dde8813 in RESULTS/AL-LOG nachziehen
+fe9e068 docs: auto-update RESULTS.md
+dde8813 fix(ci): drop Gemini master→vitalos merge; align repair agent to dev→master
+3eaf80b docs: auto-update NEXT.md
+fc72f70 docs: auto-update RESULTS.md
+d925eb4 docs: auto-update NEXT.md
+67e8a1f docs: auto-update RESULTS.md
+- Offene PRs: (keine offenen PRs / gh nicht verfuegbar)
+- CI (letzte Läufe): completed	success	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev -> master (Check (Relax))	master	workflow_dispatch	43134456668	11s	2026-11-12T01:25:51Z
+completed	success	Live Deploy (Relax master)	Live Deploy (Relax master)	master	workflow_dispatch	43133777326	43s	2026-11-12T01:19:59Z
+completed	skipped	PR-AutoMerge (Dependabot -> dev)	PR-AutoMerge (Dependabot -> dev)	master	workflow_run	43133760749	1s	2026-11-12T01:19:50Z
+- Arbeitsbaum: 3 uncommittete Pfade
+
+_Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
+- Erledigt: Gemini-Repair-Pfad verifiziert — absichtlich rot `2acf731` (Syntax `sumMinutes`); Check fail `43139925926` → Gemini `43139977112`/`43139989299` → Repair `61dc56d` → Check `43140013721` success → Auto-Promote → Live-Deploy `43140105706` success (`origin/master`=`61dc56d`); Probe-Kommentar bereinigt in Folge-Commit.
+- Offen/Weiter: Alert #24 `deepmerge` (low, `patched:null`, npm latest weiterhin 4.3.1); Store-Umbau Variante A nur mit CEO-+go; Guide-/Org-Queue leer.
+- Blocker: keine.
+AUTOMATION: Absichtlich-roter-Check-Probe — einmaliges Skript `vos-al-gemini-probe` (Syntax-Break in erlaubtem src-Pfad + Poll Check/Gemini/Promote) statt manuellem Worktree-Push/Watch — ~10–15 min/AL-Lauf (Aufgabe erledigt, Zeile für CTO-Aggregation).
