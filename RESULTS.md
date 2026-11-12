@@ -1,3 +1,8 @@
+## 2026-11-12 — Checkout-Sync Org d5c6a0f7 (AL Nachmittag)
+
+- Org `d5c6a0f7` (`+cto +lr`): Haupt-Checkout bereits FF auf `origin/dev`=`cadeefb` (`8ae9b6c` Ancestor inkl. Gemini-Probe); Task done; Org-Queue relax-dev leer.
+- Belege: Check `43198570460` / Auto-Promote `43213150692` / Live-Deploy `43198705651` success; Alert #24 weiter `open`/`patched:null` (npm deepmerge 4.3.1); fremdes WIP unberührt.
+
 ## 2026-11-12 — Store-Build Relax: Owner-Inhalte raus, Leerzustand, Konzept vos-relax
 
 - `src/lib/edition.js` (STORE = VITE_VOS_EDITION store/observe/operate oder VITE_VOS_PRODUCT_BUILD=1); im Store-Build: Heute-Karte ohne 30-Einheiten-Text, Modul-Karte, Ausbildungs-Karte und Nachweis-Hinweise in Praxis weg, Kursblöcke in Atem weg, Modul/Physio/Catalog-Views hinter `storeGated()`.
