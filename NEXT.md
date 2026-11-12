@@ -27,7 +27,7 @@ Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT
 
 ## Gemini CI-Agent — verbleibende Betriebsprüfung
 
-- [ ] Einen echten roten, code-behebbaren CI-Lauf beobachten und bestätigen, dass Reparatur-Commit, grüner Check und vorgesehener Promote/Deploy enden.
+- [x] Einen echten roten, code-behebbaren CI-Lauf beobachten und bestätigen, dass Reparatur-Commit, grüner Check und vorgesehener Promote/Deploy enden — erledigt 2026-11-12 (`2acf731`→`61dc56d`, Check `43140013721`, Live-Deploy `43140105706`).
 - [ ] Fehler außerhalb des Codes (fehlende Deploy-Credentials, externe Dienste, Runner-Ausfälle) separat als Diagnose melden; keine ungeprüften Änderungen an Secrets oder Deploy-Konfiguration.
 - [x] GitHub Pages fuer `relax-dev` auf Branch `dev`, Ordner `/docs` prüfen/aktivieren — erledigt 2026-11-10 via `POST /repos/nimmsel23/relax-dev/pages` (`source.branch=dev`, `path=/docs`); Status `built`, Live `https://nimmsel23.github.io/relax-dev/` HTTP 200.
 - [x] Merge-Agent ohne `master→vitalos` — erledigt 2026-11-11 in `.github/ci-agent/repair.mjs` (Release-Weg `dev→master`).
