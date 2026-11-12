@@ -1,3 +1,9 @@
+## 2026-11-12 — Store-Build Relax: Owner-Inhalte raus, Leerzustand, Konzept vos-relax
+
+- `src/lib/edition.js` (STORE = VITE_VOS_EDITION store/observe/operate oder VITE_VOS_PRODUCT_BUILD=1); im Store-Build: Heute-Karte ohne 30-Einheiten-Text, Modul-Karte, Ausbildungs-Karte und Nachweis-Hinweise in Praxis weg, Kursblöcke in Atem weg, Modul/Physio/Catalog-Views hinter `storeGated()`.
+- Erstnutzer: Heute und Statistik mit Button „Erste Atemübung starten"; Stats/Mood/Days/Exports/Total deutsch. Owner-Build unverändert. Test `tests/edition.test.mjs`.
+- Konzept `docs/FINAL-VARIANT.md` (vos-relax als Wrapper, Owner-Ausbildungsmodul getrennt). Shell-Subnav-Vorschlag: Heute, Atem, Praxis, Journal, Statistik.
+
 ## 2026-11-12 — Gemini-Repair-Pfad: absichtlich roter Check → Deploy
 
 - Feature-Freeze / CI: isolierte Probe `sumMinutes`-Syntaxbruch in `src/lib/db/shared/utils.js` (`2acf731`) → Check fail `43139925926` → Gemini CI Agent `43139977112`/`43139989299` → Repair-Commit `61dc56d` → Check `43140013721` success → Auto-Promote → Live-Deploy `43140105706` success; `origin/master`=`61dc56d`.
