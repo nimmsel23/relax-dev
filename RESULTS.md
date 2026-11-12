@@ -1,7 +1,7 @@
 ## 2026-11-12 — Gemini-Repair-Pfad: absichtlich roter Check → Deploy
 
 - Feature-Freeze / CI: isolierte Probe `sumMinutes`-Syntaxbruch in `src/lib/db/shared/utils.js` (`2acf731`) → Check fail `43139925926` → Gemini CI Agent `43139977112`/`43139989299` → Repair-Commit `61dc56d` → Check `43140013721` success → Auto-Promote → Live-Deploy `43140105706` success; `origin/master`=`61dc56d`.
-- NEXT CI-Checkboxen (absichtlich rot + Feld-Fix-Verifikation) `[x]`; Probe-Kommentar bereinigt; Alert #24 `deepmerge` weiter open/`patched:null` (npm latest 4.3.1).
+- NEXT CI-Checkboxen (absichtlich rot + Feld-Fix-Verifikation) `[x]`; Probe-Kommentar bereinigt; AL-LOG `4b6326f`; Alert #24 `deepmerge` weiter open/`patched:null` (npm latest 4.3.1).
 - Fremdes WIP (`docs/apps.*`, `scripts/portal.mjs`) unberührt.
 
 ## 2026-11-12 — CI: Gemini + Merge-Agent wiederhergestellt
