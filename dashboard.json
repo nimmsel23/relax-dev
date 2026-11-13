@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-13T00:09:40+00:00",
+  "generated_at": "2026-11-13T00:12:21+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-13T00:09:18Z",
+   "pushed_at": "2026-11-13T00:12:04Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -20,11 +20,17 @@
    "has_dev": true,
    "dev_behind": 0,
    "dev_ahead": 1,
-   "oldest_unpromoted": "2026-11-13T01:09:16+01:00",
-   "dev_head": "9fc75b7 2026-11-13T01:09:16+01:00",
-   "master_head": "58a99ed 2026-11-12T15:13:40+01:00"
+   "oldest_unpromoted": "2026-11-13T01:12:02+01:00",
+   "dev_head": "2ff6ccf 2026-11-13T01:12:02+01:00",
+   "master_head": "9fc75b7 2026-11-13T01:09:16+01:00"
   },
   "commits": [
+   {
+    "sha": "2ff6ccf",
+    "date": "2026-11-13T01:12:02+01:00",
+    "author": "Alpha",
+    "subject": "chore(portal): portal.mjs + docs/apps.* aus vitalos vos-portal --all synchronisiert"
+   },
    {
     "sha": "9fc75b7",
     "date": "2026-11-13T01:09:16+01:00",
@@ -138,12 +144,6 @@
     "date": "2026-11-11T15:12:59+01:00",
     "author": "Alpha",
     "subject": "docs: auto-update RESULTS.md"
-   },
-   {
-    "sha": "f7bc919",
-    "date": "2026-11-11T15:12:55+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update NEXT.md"
    }
   ],
   "activity": [
@@ -229,7 +229,7 @@
    },
    {
     "day": "2026-11-13",
-    "n": 1
+    "n": 2
    }
   ],
   "workflows": [
@@ -239,29 +239,9 @@
     "event": "push",
     "status": "in_progress",
     "conclusion": null,
-    "created_at": "2026-11-13T00:09:20Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334760438",
-    "sha": "9fc75b7"
-   },
-   {
-    "name": "PR-AutoMerge (Dependabot -> dev)",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-12T20:47:42Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43303821112",
-    "sha": "58a99ed"
-   },
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-12T20:02:18Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43296248644",
-    "sha": "58a99ed"
+    "created_at": "2026-11-13T00:12:05Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43335141769",
+    "sha": "2ff6ccf"
    },
    {
     "name": "Live Deploy (Relax master)",
@@ -269,8 +249,18 @@
     "event": "workflow_dispatch",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-12T14:14:51Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43235199250",
+    "created_at": "2026-11-13T00:10:02Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334856474",
+    "sha": "9fc75b7"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T00:09:51Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334830896",
     "sha": "58a99ed"
    },
    {
@@ -279,9 +269,19 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-12T14:14:39Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43235161729",
-    "sha": "ed21341"
+    "created_at": "2026-11-13T00:09:51Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334830727",
+    "sha": "58a99ed"
+   },
+   {
+    "name": "PR-AutoMerge (Dependabot -> dev)",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-11-13T00:09:51Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334830649",
+    "sha": "58a99ed"
    },
    {
     "name": "Preview (Relax dev)",
@@ -304,46 +304,33 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: CI-Agent-Pfad verifiziert, Living Dashboard in Arbeit",
-   "lage": "Die `dev`-Branch ist aktiv mit einem neuen Feature für ein Living Dashboard. Der Reparatur-Pfad des Gemini CI Agents wurde erfolgreich getestet und verifiziert. Die `dev`-Branch ist aktuell einen Commit vor `master`, und der zugehörige Workflow läuft noch.",
+   "headline": "relax-dev: Living Dashboard auf master, dev-Workflow läuft",
+   "lage": "Die `dev`-Branch ist einen Commit vor `master` und der zugehörige \"Check (Relax)\" Workflow für `2ff6ccf` läuft noch. Das Living Dashboard Feature (`9fc75b7`) wurde erfolgreich auf `master` deployed. Der Reparatur-Pfad des Gemini CI Agents ist verifiziert.",
    "auffaelligkeiten": [
     {
      "level": "hoch",
-     "text": "Der Workflow \"Check (Relax)\" für Commit `9fc75b7` auf der `dev`-Branch ist noch 'in_progress'."
-    },
-    {
-     "level": "mittel",
-     "text": "Die `dev`-Branch ist 1 Commit (`9fc75b7`) vor der `master`-Branch."
+     "text": "Der \"Check (Relax)\" Workflow für den `dev`-Head `2ff6ccf` ist aktuell 'in_progress'."
     },
     {
      "level": "info",
-     "text": "Das Living Dashboard als GitHub Page wird mit Commit `9fc75b7` implementiert."
+     "text": "Der Commit `9fc75b7` ('feat(ci): Living Dashboard als GitHub Page') wurde erfolgreich auf `master` deployed."
     },
     {
      "level": "info",
-     "text": "Der Gemini CI Agent Repair-Pfad wurde mit den Commits `2acf731` und `61dc56d` erfolgreich verifiziert."
-    },
-    {
-     "level": "info",
-     "text": "Ein offener Dependabot-Alert #24 (deepmerge) besteht ohne Upstream-Patch."
-    },
-    {
-     "level": "info",
-     "text": "Originalanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation fehlen weiterhin."
+     "text": "Die `dev`-Branch ist einen Commit (`2ff6ccf`) vor `master`."
     }
    ],
    "naechste_schritte": [
-    "Überprüfen des \"Check (Relax)\" Workflows für `9fc75b7`.",
+    "Überprüfen des \"Check (Relax)\" Workflows für `2ff6ccf`.",
     "Fortsetzen der mobilen Ablaufabnahme auf iPhone/iPad.",
-    "Entscheiden über den Store-Umbau Ausbildung.jsx (Variante A)."
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion."
    ],
-   "veraendert": "",
+   "veraendert": "Das Living Dashboard Feature wurde erfolgreich auf `master` deployed, und die Verifizierung des CI-Agent-Reparaturpfads ist abgeschlossen.",
    "fragen": [
-    "Soll der Store-Umbau Ausbildung.jsx (Variante A) umgesetzt werden?",
-    "Gibt es neue Kursunterlagen, die eine Prüfung der fehlenden Originalanleitungen ermöglichen?"
+    "Entscheiden über den Store-Umbau Ausbildung.jsx (Variante A)."
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-13T00:09:42+00:00"
+  "ai_at": "2026-11-13T00:12:23+00:00"
  }
 }
