@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-13T02:59:42+00:00",
+  "generated_at": "2026-11-13T12:33:49+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-13T02:59:19Z",
+   "pushed_at": "2026-11-13T07:12:11Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,10 +19,10 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 4,
-   "oldest_unpromoted": "2026-11-13T01:12:02+01:00",
+   "dev_ahead": 0,
+   "oldest_unpromoted": null,
    "dev_head": "6fb7783 2026-11-13T03:59:17+01:00",
-   "master_head": "9fc75b7 2026-11-13T01:09:16+01:00"
+   "master_head": "6fb7783 2026-11-13T03:59:17+01:00"
   },
   "commits": [
    {
@@ -234,44 +234,24 @@
   ],
   "workflows": [
    {
-    "name": "Check (Relax)",
-    "branch": "dev",
-    "event": "push",
-    "status": "in_progress",
-    "conclusion": null,
-    "created_at": "2026-11-13T02:59:21Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43355871783",
-    "sha": "6fb7783"
-   },
-   {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
-    "event": "workflow_run",
+    "event": "schedule",
     "status": "completed",
-    "conclusion": "skipped",
-    "created_at": "2026-11-13T02:13:06Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350563011",
-    "sha": "9fc75b7"
+    "conclusion": "success",
+    "created_at": "2026-11-13T09:29:05Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43401689956",
+    "sha": "6fb7783"
    },
    {
     "name": "Auto-Promote dev -> master (Check (Relax))",
     "branch": "master",
-    "event": "workflow_run",
-    "status": "completed",
-    "conclusion": "skipped",
-    "created_at": "2026-11-13T02:13:06Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350562975",
-    "sha": "9fc75b7"
-   },
-   {
-    "name": "Gemini CI Agent",
-    "branch": "master",
-    "event": "workflow_run",
+    "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T02:13:06Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350562956",
-    "sha": "9fc75b7"
+    "created_at": "2026-11-13T08:05:50Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43390539911",
+    "sha": "6fb7783"
    },
    {
     "name": "Live Deploy (Relax master)",
@@ -279,9 +259,29 @@
     "event": "workflow_dispatch",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T00:10:02Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334856474",
+    "created_at": "2026-11-13T03:00:02Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43355946042",
+    "sha": "6fb7783"
+   },
+   {
+    "name": "Gemini CI Agent",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T02:59:53Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43355929480",
     "sha": "9fc75b7"
+   },
+   {
+    "name": "Check (Relax)",
+    "branch": "dev",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T02:59:21Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43355871783",
+    "sha": "6fb7783"
    },
    {
     "name": "Preview (Relax dev)",
@@ -294,19 +294,7 @@
     "sha": "207322b"
    }
   ],
-  "issues": [
-   {
-    "number": 18,
-    "title": "Dashboard-Lage: rot",
-    "created_at": "2026-11-13T02:12:26Z",
-    "updated_at": "2026-11-13T02:13:18Z",
-    "labels": [
-     "dashboard"
-    ],
-    "url": "https://github.com/nimmsel23/relax-dev/issues/18",
-    "author": "github-actions[bot]"
-   }
-  ],
+  "issues": [],
   "pulls": [],
   "live_sites": [
    "https://relax-vos.web.app"
@@ -316,33 +304,27 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: dev-Branch 4 Commits vor master, CI für 6fb7783 läuft",
-   "lage": "Die `dev`-Branch ist 4 Commits (`2ff6ccf`, `d5311fb`, `48e5191`, `6fb7783`) vor `master` (`9fc75b7`). Der \"Check (Relax)\" Workflow für den neuesten Commit `6fb7783` auf `dev` ist aktuell `in_progress`. Das Living Dashboard Feature (`9fc75b7`) ist weiterhin erfolgreich auf `master` deployed und Issue #18 \"Dashboard-Lage: rot\" ist offen.",
+   "headline": "relax-dev: dev und master synchronisiert, alle CI-Workflows erfolgreich",
+   "lage": "Die `dev`- und `master`-Branches sind auf Commit `6fb7783` synchronisiert. Alle relevanten CI-Workflows, einschließlich \"Check (Relax)\" und \"Auto-Promote\", wurden erfolgreich abgeschlossen, und die neuesten Änderungen sind auf `master` live deployed.",
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Der \"Check (Relax)\" Workflow für den aktuellen dev-Head `6fb7783` ist in Bearbeitung."
+     "text": "NEXT.md Punkt 1 \"Dependabot deepmerge (Alert #24, low)\" ist weiterhin offen."
     },
     {
      "level": "info",
-     "text": "Dependabot Alert #24 (deepmerge) ist laut NEXT.md Punkt 1 weiterhin ohne Upstream-Patch."
-    },
-    {
-     "level": "info",
-     "text": "Issue #18 \"Dashboard-Lage: rot\" ist weiterhin offen."
+     "text": "TODO.md erwähnt, dass für Mentales Training, Autogenes Training, Fantasiereisen und Meditation noch keine spezifischen Anleitungs-PDFs im Archiv liegen."
     }
    ],
    "naechste_schritte": [
-    "Überwachen des \"Check (Relax)\" Workflows für Commit `6fb7783`.",
     "Fortsetzen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
-    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5)."
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
+    "Überprüfen des Status von Dependabot Alert #24 (deepmerge) gemäß NEXT.md Punkt 1."
    ],
-   "veraendert": "Die `dev`-Branch ist nun 4 Commits vor `master` (zuvor 3), und der \"Check (Relax)\" Workflow für den aktuellen `dev`-Head `6fb7783` ist `in_progress`, nachdem der vorherige Fehler behoben wurde.",
-   "fragen": [
-    "Soll der Dependabot Alert #24 (deepmerge) aktiv verfolgt oder die aktuelle Strategie (ohne Upstream-Patch) beibehalten werden?"
-   ],
+   "veraendert": "Die `dev`-Branch ist nicht mehr 4 Commits vor `master`, sondern beide Branches sind auf dem neuesten Commit `6fb7783` synchronisiert, und der CI-Workflow für diesen Commit ist erfolgreich abgeschlossen.",
+   "fragen": [],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-13T02:59:44+00:00"
+  "ai_at": "2026-11-13T12:33:51+00:00"
  }
 }
