@@ -22,6 +22,7 @@ Nächste Schritte für das Entspannungstrainer-Fachmodul in `relax-dev`.
 6. **Quellenänderungen nachziehen:** Bei neuen PDFs oder Aufgaben das MOC, `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`, Methodenkarten, Lerncheck und Arbeitsblätter gemeinsam abgleichen.
 7. **Ausbildungsgrenzen erhalten:** Kursangaben zu Ernährung, Stresswirkungen und Physiologie weiter als Lehrmaterial kennzeichnen; keine Diagnosen, Messungen, Heilversprechen oder individuellen Verordnungen daraus ableiten.
 8. **Kursindex aktuell halten:** Die zwölf MOC-Hauptfächer und die konkreten Methodenthemen führen zu passenden Lernbereichen. „Kognitive Umstrukturierung zur Stressbewältigung“ und „Stress im Beruf und Alltag“ sind mit Kursübersicht/PDF abgeglichen; bei künftigen MOC- oder Quellenänderungen den Index und die Quellenmatrix gemeinsam prüfen.
+9. **Portal-Kopie uncommitted (seit 2026-11-13):** `docs/apps.html` (Testlauf-Neugenerierung, Titel „App-Links“) liegt uncommitted — Owner-Entscheid committen oder verwerfen. Im Working Tree ist `scripts/portal.mjs` inzwischen erneut durch eine neuere `vos-portal`-Kopie überschrieben und wieder **nicht** Biome-formatiert (`pnpm run tooling:biome` meldet Fehler) — vor jedem Commit `pnpm dlx @biomejs/biome@2.6.6 format --write scripts/portal.mjs`, sonst wird Check (Relax) erneut rot.
 
 Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT-legacy-2026-10-29.md` bewahrt die ältere Arbeitsliste und damalige Betriebsnotizen; deren aktueller Status wurde hier nicht neu geprüft.
 
@@ -34,3 +35,8 @@ Der Stand wurde am 2026-11-02 an den aktuellen Modulablauf angepasst. `docs/NEXT
 - [x] Merge-Agent ohne `master→vitalos` — erledigt 2026-11-11 in `.github/ci-agent/repair.mjs` (Release-Weg `dev→master`).
 - [x] Gemini-Reparaturpfad nach dem Feld-Fix anhand eines isolierten roten Checks verifizieren — erledigt 2026-11-12: Diagnose/Repair `61dc56d` (`fix(ci): source repair [ci-agent]`), grüner Check `43140013721`, Promote + Live-Deploy `43140105706`.
 
+
+**Gemini-Review (potenzielle blinde Flecken, 2026-11-13):**
+*   **GitHub-Sicherheitslücken ignoriert:** Die `vos-release`-Ausgabe meldete 43 Schwachstellen in `vitalos`, die in der Selbstzusammenfassung und weiteren Bearbeitung nicht erwähnt wurden.
+*   **`vos-portal`-Warnung nicht analysiert:** Die Ursache der Registry-Abweichung und die Konsequenzen des Nicht-Ausführens von `vos-portal` wurden nicht untersucht.
+*   **`docs/apps.html`-Änderung unzureichend behandelt:** Die durch `portal.mjs` erzeugte und geänderte Datei wurde nicht weiter geprüft oder ihr Status geklärt, sondern nur als "uncommitted" belassen.

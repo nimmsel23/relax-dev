@@ -1,3 +1,13 @@
+# Biome-Fix für scripts/portal.mjs, Check (Relax) wieder grün (2026-11-13)
+
+Check (Relax) auf `dev` war rot (`43350514905`), weil die von `vos-portal` verteilte Kopie von `scripts/portal.mjs` nicht Biome-formatiert war.
+
+- **`scripts/portal.mjs`:** mit `pnpm dlx @biomejs/biome@2.6.6 format --write` formatiert; `pnpm run tooling:biome` sauber, `node --check` ok. Commit `6fb7783` (`style(scripts): format portal.mjs with biome (fixes CI check)`), auf `origin/dev` gepusht.
+- **CI:** Check (Relax) `43355871783` success → Auto-Promote dev → master success (`origin/master` = `6fb7783`) → Live Deploy (Relax master) `43355946042` success.
+- **`docs/apps.html`:** vom Testlauf `node scripts/portal.mjs` neu erzeugt (Titel „App-Links“ statt „Dev-Dashboard“); bewusst nicht mitcommittet, Zurücksetzen wurde vom Guard/Auto-Mode blockiert → bleibt uncommitted.
+
+---
+
 ## 2026-11-12 — Checkout-Sync Org d5c6a0f7 (AL Nachmittag)
 
 - Org `d5c6a0f7` (`+cto +lr`): Haupt-Checkout bereits FF auf `origin/dev`=`cadeefb` (`8ae9b6c` Ancestor inkl. Gemini-Probe); Task done; Org-Queue relax-dev leer.
