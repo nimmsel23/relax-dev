@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-13T02:12:11+00:00",
+  "generated_at": "2026-11-13T02:13:05+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-13T02:11:49Z",
+   "pushed_at": "2026-11-13T02:12:39Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,12 +19,18 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 2,
+   "dev_ahead": 3,
    "oldest_unpromoted": "2026-11-13T01:12:02+01:00",
-   "dev_head": "d5311fb 2026-11-13T03:11:37+01:00",
+   "dev_head": "48e5191 2026-11-13T03:12:19+01:00",
    "master_head": "9fc75b7 2026-11-13T01:09:16+01:00"
   },
   "commits": [
+   {
+    "sha": "48e5191",
+    "date": "2026-11-13T03:12:19+01:00",
+    "author": "Alpha",
+    "subject": "docs(al-log): record pre-existing red CI check"
+   },
    {
     "sha": "d5311fb",
     "date": "2026-11-13T03:11:37+01:00",
@@ -138,12 +144,6 @@
     "date": "2026-11-11T19:14:21+01:00",
     "author": "Alpha",
     "subject": "docs(agents): simplicity pointer — CI.md §1 spine"
-   },
-   {
-    "sha": "bdd75d2",
-    "date": "2026-11-11T19:11:35+01:00",
-    "author": "Alpha",
-    "subject": "ci: drop Gemini repair and Merge-Agent (simplicity)"
    }
   ],
   "activity": [
@@ -229,7 +229,7 @@
    },
    {
     "day": "2026-11-13",
-    "n": 3
+    "n": 4
    }
   ],
   "workflows": [
@@ -239,28 +239,18 @@
     "event": "push",
     "status": "completed",
     "conclusion": "failure",
-    "created_at": "2026-11-13T02:11:51Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350417752",
-    "sha": "d5311fb"
+    "created_at": "2026-11-13T02:12:41Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350514905",
+    "sha": "48e5191"
    },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
-    "event": "schedule",
+    "event": "workflow_run",
     "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-13T01:49:00Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43347666422",
-    "sha": "9fc75b7"
-   },
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-13T01:10:18Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43342843829",
+    "conclusion": "skipped",
+    "created_at": "2026-11-13T02:12:14Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350464100",
     "sha": "9fc75b7"
    },
    {
@@ -269,8 +259,18 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T00:12:29Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43335196329",
+    "created_at": "2026-11-13T02:12:14Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350463906",
+    "sha": "9fc75b7"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-11-13T02:12:14Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350463902",
     "sha": "9fc75b7"
    },
    {
@@ -294,7 +294,19 @@
     "sha": "207322b"
    }
   ],
-  "issues": [],
+  "issues": [
+   {
+    "number": 18,
+    "title": "Dashboard-Lage: rot",
+    "created_at": "2026-11-13T02:12:26Z",
+    "updated_at": "2026-11-13T02:12:26Z",
+    "labels": [
+     "dashboard"
+    ],
+    "url": "https://github.com/nimmsel23/relax-dev/issues/18",
+    "author": "github-actions[bot]"
+   }
+  ],
   "pulls": [],
   "live_sites": [
    "https://relax-vos.web.app"
@@ -306,36 +318,38 @@
    {
     "level": "red",
     "key": "ci:Check (Relax):dev",
-    "text": "„Check (Relax)“ auf dev ist rot (failure, d5311fb)",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350417752"
+    "text": "„Check (Relax)“ auf dev ist rot (failure, 48e5191)",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350514905"
    }
   ],
   "ai": {
-   "headline": "relax-dev: dev-Branch mit fehlgeschlagenem CI, 2 Commits vor master",
-   "lage": "Die `dev`-Branch ist zwei Commits (`d5311fb`, `2ff6ccf`) vor `master`. Der aktuelle \"Check (Relax)\" Workflow für Commit `d5311fb` auf `dev` ist fehlgeschlagen. Das Living Dashboard Feature (`9fc75b7`) ist weiterhin erfolgreich auf `master` deployed.",
+   "headline": "relax-dev: dev-Branch mit fehlgeschlagenem CI, 3 Commits vor master",
+   "lage": "Die `dev`-Branch ist 3 Commits (`48e5191`, `d5311fb`, `2ff6ccf`) vor `master`. Der \"Check (Relax)\" Workflow für Commit `48e5191` auf `dev` ist fehlgeschlagen. Das Living Dashboard Feature (`9fc75b7`) ist weiterhin erfolgreich auf `master` deployed und Issue #18 \"Dashboard-Lage: rot\" wurde erstellt.",
    "auffaelligkeiten": [
     {
      "level": "hoch",
-     "text": "Der Workflow \"Check (Relax)\" auf der `dev`-Branch ist für Commit `d5311fb` fehlgeschlagen."
+     "text": "„Check (Relax)“ auf dev ist rot (failure, 48e5191)"
     },
     {
      "level": "info",
-     "text": "Die `dev`-Branch ist zwei Commits (`d5311fb`, `2ff6ccf`) vor `master`."
+     "text": "dev-Branch ist 3 Commits vor master (zuletzt 48e5191)."
     },
     {
      "level": "info",
-     "text": "Dependabot deepmerge (Alert #24, low) ist in `NEXT.md` als aktive Arbeit vermerkt."
+     "text": "Neues Issue #18 \"Dashboard-Lage: rot\" wurde durch github-actions[bot] erstellt."
     }
    ],
    "naechste_schritte": [
-    "Analysieren des Fehlers im \"Check (Relax)\" Workflow für Commit `d5311fb`.",
-    "Fortsetzen der mobilen Ablaufabnahme auf iPhone/iPad.",
-    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad."
+    "Analysieren des Fehlers im \"Check (Relax)\" Workflow für Commit `48e5191`.",
+    "Fortsetzen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5)."
    ],
-   "veraendert": "Die `dev`-Branch ist nun zwei Commits vor `master` und der \"Check (Relax)\" Workflow für den neuesten Commit `d5311fb` ist fehlgeschlagen, während er zuvor für `2ff6ccf` noch lief.",
-   "fragen": [],
+   "veraendert": "Die `dev`-Branch ist nun 3 Commits vor `master` und der fehlgeschlagene CI-Check betrifft jetzt Commit `48e5191`; zudem wurde Issue #18 \"Dashboard-Lage: rot\" erstellt.",
+   "fragen": [
+    "Soll der Store-Umbau Ausbildung.jsx (Variante A) mit Konsolidierung der `localStorage`-Zugriffe begonnen werden?"
+   ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-13T02:12:13+00:00"
+  "ai_at": "2026-11-13T02:13:07+00:00"
  }
 }
