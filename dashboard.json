@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-13T00:12:21+00:00",
+  "generated_at": "2026-11-13T02:12:11+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-13T00:12:04Z",
+   "pushed_at": "2026-11-13T02:11:49Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,12 +19,18 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 1,
+   "dev_ahead": 2,
    "oldest_unpromoted": "2026-11-13T01:12:02+01:00",
-   "dev_head": "2ff6ccf 2026-11-13T01:12:02+01:00",
+   "dev_head": "d5311fb 2026-11-13T03:11:37+01:00",
    "master_head": "9fc75b7 2026-11-13T01:09:16+01:00"
   },
   "commits": [
+   {
+    "sha": "d5311fb",
+    "date": "2026-11-13T03:11:37+01:00",
+    "author": "Alpha",
+    "subject": "docs(al-log): verify deepmerge alert 24 patch status"
+   },
    {
     "sha": "2ff6ccf",
     "date": "2026-11-13T01:12:02+01:00",
@@ -138,12 +144,6 @@
     "date": "2026-11-11T19:11:35+01:00",
     "author": "Alpha",
     "subject": "ci: drop Gemini repair and Merge-Agent (simplicity)"
-   },
-   {
-    "sha": "e16388d",
-    "date": "2026-11-11T15:12:59+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md"
    }
   ],
   "activity": [
@@ -229,7 +229,7 @@
    },
    {
     "day": "2026-11-13",
-    "n": 2
+    "n": 3
    }
   ],
   "workflows": [
@@ -237,11 +237,41 @@
     "name": "Check (Relax)",
     "branch": "dev",
     "event": "push",
-    "status": "in_progress",
-    "conclusion": null,
-    "created_at": "2026-11-13T00:12:05Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43335141769",
-    "sha": "2ff6ccf"
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-11-13T02:11:51Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350417752",
+    "sha": "d5311fb"
+   },
+   {
+    "name": "PR-AutoMerge (Dependabot -> dev)",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T01:49:00Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43347666422",
+    "sha": "9fc75b7"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T01:10:18Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43342843829",
+    "sha": "9fc75b7"
+   },
+   {
+    "name": "Gemini CI Agent",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-13T00:12:29Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43335196329",
+    "sha": "9fc75b7"
    },
    {
     "name": "Live Deploy (Relax master)",
@@ -252,36 +282,6 @@
     "created_at": "2026-11-13T00:10:02Z",
     "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334856474",
     "sha": "9fc75b7"
-   },
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "workflow_run",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-13T00:09:51Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334830896",
-    "sha": "58a99ed"
-   },
-   {
-    "name": "Gemini CI Agent",
-    "branch": "master",
-    "event": "workflow_run",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-13T00:09:51Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334830727",
-    "sha": "58a99ed"
-   },
-   {
-    "name": "PR-AutoMerge (Dependabot -> dev)",
-    "branch": "master",
-    "event": "workflow_run",
-    "status": "completed",
-    "conclusion": "skipped",
-    "created_at": "2026-11-13T00:09:51Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43334830649",
-    "sha": "58a99ed"
    },
    {
     "name": "Preview (Relax dev)",
@@ -301,36 +301,41 @@
   ]
  },
  "assessment": {
-  "status": "green",
-  "signals": [],
+  "status": "red",
+  "signals": [
+   {
+    "level": "red",
+    "key": "ci:Check (Relax):dev",
+    "text": "„Check (Relax)“ auf dev ist rot (failure, d5311fb)",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43350417752"
+   }
+  ],
   "ai": {
-   "headline": "relax-dev: Living Dashboard auf master, dev-Workflow läuft",
-   "lage": "Die `dev`-Branch ist einen Commit vor `master` und der zugehörige \"Check (Relax)\" Workflow für `2ff6ccf` läuft noch. Das Living Dashboard Feature (`9fc75b7`) wurde erfolgreich auf `master` deployed. Der Reparatur-Pfad des Gemini CI Agents ist verifiziert.",
+   "headline": "relax-dev: dev-Branch mit fehlgeschlagenem CI, 2 Commits vor master",
+   "lage": "Die `dev`-Branch ist zwei Commits (`d5311fb`, `2ff6ccf`) vor `master`. Der aktuelle \"Check (Relax)\" Workflow für Commit `d5311fb` auf `dev` ist fehlgeschlagen. Das Living Dashboard Feature (`9fc75b7`) ist weiterhin erfolgreich auf `master` deployed.",
    "auffaelligkeiten": [
     {
      "level": "hoch",
-     "text": "Der \"Check (Relax)\" Workflow für den `dev`-Head `2ff6ccf` ist aktuell 'in_progress'."
+     "text": "Der Workflow \"Check (Relax)\" auf der `dev`-Branch ist für Commit `d5311fb` fehlgeschlagen."
     },
     {
      "level": "info",
-     "text": "Der Commit `9fc75b7` ('feat(ci): Living Dashboard als GitHub Page') wurde erfolgreich auf `master` deployed."
+     "text": "Die `dev`-Branch ist zwei Commits (`d5311fb`, `2ff6ccf`) vor `master`."
     },
     {
      "level": "info",
-     "text": "Die `dev`-Branch ist einen Commit (`2ff6ccf`) vor `master`."
+     "text": "Dependabot deepmerge (Alert #24, low) ist in `NEXT.md` als aktive Arbeit vermerkt."
     }
    ],
    "naechste_schritte": [
-    "Überprüfen des \"Check (Relax)\" Workflows für `2ff6ccf`.",
+    "Analysieren des Fehlers im \"Check (Relax)\" Workflow für Commit `d5311fb`.",
     "Fortsetzen der mobilen Ablaufabnahme auf iPhone/iPad.",
-    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion."
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad."
    ],
-   "veraendert": "Das Living Dashboard Feature wurde erfolgreich auf `master` deployed, und die Verifizierung des CI-Agent-Reparaturpfads ist abgeschlossen.",
-   "fragen": [
-    "Entscheiden über den Store-Umbau Ausbildung.jsx (Variante A)."
-   ],
+   "veraendert": "Die `dev`-Branch ist nun zwei Commits vor `master` und der \"Check (Relax)\" Workflow für den neuesten Commit `d5311fb` ist fehlgeschlagen, während er zuvor für `2ff6ccf` noch lief.",
+   "fragen": [],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-13T00:12:23+00:00"
+  "ai_at": "2026-11-13T02:12:13+00:00"
  }
 }
