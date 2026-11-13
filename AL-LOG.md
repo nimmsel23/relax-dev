@@ -161,4 +161,4 @@ completed	skipped	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev ->
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
 - Erledigt: Security-Wache auf `2ff6ccf`: [Dependabot #24](https://github.com/nimmsel23/relax-dev/security/dependabot/24) geprüft — `open`, low, Development/transitiv; `first_patched_version:null`, npm `latest=4.3.1` (2026-11-13).
 - Offen/Weiter: [GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4) ohne Patch; #24 weiter beobachten; Store-Umbau Variante A nur mit CEO-+go.
-- Blocker: #24-Behebung wartet auf Upstream-Patch; Beobachtungsauftrag abgeschlossen.
+- Blocker: #24 wartet auf Upstream-Patch; Check `43335141769` failure auf Vor-HEAD `2ff6ccf`; für Berichtscommit `d5311fb` kein eigener CI-Lauf sichtbar, gemäß Guide keine Reparatur.
