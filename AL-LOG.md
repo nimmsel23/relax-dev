@@ -133,3 +133,32 @@ _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen sta
 - Offen/Weiter: Alert #24 `deepmerge` (low) ohne Upstream-Patch; Store-Umbau Variante A nur mit CEO-+go; Guide-/Org-Queue leer.
 - Blocker: keine.
 AUTOMATION: Org-LR „Checkout hinter origin/dev syncen“ — Runner/`vos-al-log` vor Prefill `git fetch` + `merge --ff-only origin/dev` (bei sauberem Index) und Task nur anlegen wenn `rev-list HEAD..origin/dev` >0 — vermeidet Stale-LR nach bereits erfolgtem Sync — ~2 min/AL-Lauf.
+
+## 2026-11-13 (Freitag) — Abteilungsleiter-Lauf
+
+_Automatik (vos-al-log Vorlage 2026-11-13):_
+- Commits seit 2026-11-08: 2ff6ccf chore(portal): portal.mjs + docs/apps.* aus vitalos vos-portal --all synchronisiert
+9fc75b7 feat(ci): Living Dashboard als GitHub Page
+58a99ed docs: auto-update RESULTS.md
+bca634a docs: auto-update NEXT.md
+ed21341 docs(al-log): Checkout-Sync Org d5c6a0f7 (cadeefb = origin/dev)
+b80dbfb docs: auto-update RESULTS.md
+cadeefb docs: Konzept vos-relax (finale Variante) + RESULTS Store-Build
+207322b feat(store): Owner-Inhalte im Store-Build ausblenden, Leerzustand, Eindeutschung
+8ae9b6c docs: auto-update RESULTS.md
+4b6326f docs(al-log): Gemini repair probe verified (2acf731→61dc56d)
+bd3a6a1 docs: auto-update NEXT.md
+a142113 docs: auto-update RESULTS.md
+a0156e0 docs: auto-update NEXT.md
+9469fdd docs: auto-update NEXT.md
+61dc56d fix(ci): source repair [ci-agent]
+- Offene PRs: (keine offenen PRs / gh nicht verfuegbar)
+- CI (letzte Läufe): completed	success	PR-AutoMerge (Dependabot -> dev)	PR-AutoMerge (Dependabot -> dev)	master	schedule	43347666422	7s	2026-11-13T01:49:00Z
+completed	success	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev -> master (Check (Relax))	master	schedule	43342843829	19s	2026-11-13T01:10:18Z
+completed	skipped	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev -> master (Check (Relax))	master	workflow_run	43335196343	1s	2026-11-13T00:12:29Z
+- Arbeitsbaum: sauber
+
+_Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
+- Erledigt: Security-Wache auf `2ff6ccf`: [Dependabot #24](https://github.com/nimmsel23/relax-dev/security/dependabot/24) geprüft — `open`, low, Development/transitiv; `first_patched_version:null`, npm `latest=4.3.1` (2026-11-13).
+- Offen/Weiter: [GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4) ohne Patch; #24 weiter beobachten; Store-Umbau Variante A nur mit CEO-+go.
+- Blocker: #24-Behebung wartet auf Upstream-Patch; Beobachtungsauftrag abgeschlossen.
