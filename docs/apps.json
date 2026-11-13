@@ -10,7 +10,10 @@
       "accent": "#888",
       "site": "relax-vos",
       "url": "https://relax-vos.web.app",
-      "tab": null
+      "tab": null,
+      "bundledAuthDomain": "fitness-aos.firebaseapp.com"
     }
-  ]
+  ],
+  "pages": "https://nimmsel23.github.io/relax-dev/",
+  "bundledAuthDomain": "fitness-aos.firebaseapp.com"
 }
