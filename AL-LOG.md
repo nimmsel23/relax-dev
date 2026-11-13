@@ -159,6 +159,7 @@ completed	skipped	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev ->
 - Arbeitsbaum: sauber
 
 _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
-- Erledigt: Security-Wache auf `2ff6ccf`: [Dependabot #24](https://github.com/nimmsel23/relax-dev/security/dependabot/24) geprüft — `open`, low, Development/transitiv; `first_patched_version:null`, npm `latest=4.3.1` (2026-11-13).
-- Offen/Weiter: [GHSA-gcqx-w48m-w2h4](https://github.com/advisories/GHSA-gcqx-w48m-w2h4) ohne Patch; #24 weiter beobachten; Store-Umbau Variante A nur mit CEO-+go.
-- Blocker: #24 wartet auf Upstream-Patch; Check `43335141769` failure auf Vor-HEAD `2ff6ccf`; für Berichtscommit `d5311fb` kein eigener CI-Lauf sichtbar, gemäß Guide keine Reparatur.
+- Erledigt: Rot aus Frühlauf geschlossen — Ursache Biome-Format `scripts/portal.mjs` (Check `43350417752`), Fix `6fb7783` → Check `43355871783` / Auto-Promote `43355929550` / Live-Deploy `43355946042` success; [Dependabot #24](https://github.com/nimmsel23/relax-dev/security/dependabot/24) weiter `open`/low/`patched:null`.
+- Offen/Weiter: Lokales Fremd-WIP `scripts/portal.mjs` (+`docs/apps.html`) ist neuer `vos-portal`-Sync im Nicht-Biome-Stil (`"`/`;`) → unformatiert committet wird Check wieder rot; #24 beobachten; Store-Umbau Variante A nur mit CEO-+go.
+- Blocker: keine (CI grün); CTO-Befund: `vos-portal`-Generator (vitalos) muss Biome-konform schreiben oder `scripts/portal.mjs` aus `tooling:biome` nehmen.
+AUTOMATION: Portal-Sync nach jedem `vos-portal --all` von Hand per Biome nachformatieren (`6fb7783`) — Generator formatiert Ausgabe mit `biome format` vor dem Schreiben — ~1 roter CI-Zyklus + Fix-Commit pro Sync und Repo.
