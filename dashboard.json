@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-14T11:42:44+00:00",
+  "generated_at": "2026-11-14T17:58:57+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-14T07:06:51Z",
+   "pushed_at": "2026-11-14T17:58:36Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -21,10 +21,16 @@
    "dev_behind": 0,
    "dev_ahead": 0,
    "oldest_unpromoted": null,
-   "dev_head": "b5ee2a0 2026-11-14T03:11:04+01:00",
-   "master_head": "b5ee2a0 2026-11-14T03:11:04+01:00"
+   "dev_head": "5225381 2026-11-14T18:58:33+01:00",
+   "master_head": "5225381 2026-11-14T18:58:33+01:00"
   },
   "commits": [
+   {
+    "sha": "5225381",
+    "date": "2026-11-14T18:58:33+01:00",
+    "author": "Alpha",
+    "subject": "chore: AL-LOG.md entfernt"
+   },
    {
     "sha": "b5ee2a0",
     "date": "2026-11-14T03:11:04+01:00",
@@ -138,12 +144,6 @@
     "date": "2026-11-12T03:17:13+01:00",
     "author": "Alpha",
     "subject": "docs: auto-update NEXT.md"
-   },
-   {
-    "sha": "9469fdd",
-    "date": "2026-11-12T03:17:11+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update NEXT.md"
    }
   ],
   "activity": [
@@ -229,19 +229,39 @@
    },
    {
     "day": "2026-11-14",
-    "n": 1
+    "n": 2
    }
   ],
   "workflows": [
    {
+    "name": "Live Deploy (Relax master)",
+    "branch": "master",
+    "event": "push",
+    "status": "in_progress",
+    "conclusion": null,
+    "created_at": "2026-11-14T17:58:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993697",
+    "sha": "5225381"
+   },
+   {
     "name": "Auto-Promote dev -> master (Check (Relax))",
     "branch": "master",
-    "event": "schedule",
+    "event": "push",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-14T09:29:48Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43580808231",
-    "sha": "b5ee2a0"
+    "created_at": "2026-11-14T17:58:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993675",
+    "sha": "5225381"
+   },
+   {
+    "name": "Check (Relax)",
+    "branch": "dev",
+    "event": "push",
+    "status": "in_progress",
+    "conclusion": null,
+    "created_at": "2026-11-14T17:58:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993639",
+    "sha": "5225381"
    },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
@@ -249,18 +269,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-14T06:18:18Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43565679359",
-    "sha": "b5ee2a0"
-   },
-   {
-    "name": "Live Deploy (Relax master)",
-    "branch": "master",
-    "event": "workflow_dispatch",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-14T02:11:54Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43544929410",
+    "created_at": "2026-11-14T14:07:46Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43603231685",
     "sha": "b5ee2a0"
    },
    {
@@ -272,16 +282,6 @@
     "created_at": "2026-11-14T02:11:46Z",
     "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43544916115",
     "sha": "c69e7c8"
-   },
-   {
-    "name": "Check (Relax)",
-    "branch": "dev",
-    "event": "push",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-14T02:11:09Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43544862061",
-    "sha": "b5ee2a0"
    },
    {
     "name": "Preview (Relax dev)",
@@ -304,30 +304,34 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: dev und master synchronisiert, alle CIs für b5ee2a0 erfolgreich",
-   "lage": "Der `dev`-Branch wurde auf `master` promotet, sodass beide Branches nun auf Commit `b5ee2a0` synchronisiert sind. Alle zugehörigen CI-Workflows, inklusive \"Check (Relax)\" und \"Auto-Promote dev -> master\", sind erfolgreich durchgelaufen.",
+   "headline": "relax-dev: dev/master auf 5225381 synchronisiert, CIs laufen noch",
+   "lage": "Die Branches `dev` und `master` sind auf Commit `5225381` synchronisiert. Die Workflows \"Live Deploy (Relax master)\" und \"Check (Relax)\" für diesen Commit sind aktuell noch in Bearbeitung.",
    "auffaelligkeiten": [
     {
+     "level": "hoch",
+     "text": "Die CI-Workflows \"Live Deploy (Relax master)\" und \"Check (Relax)\" für den aktuellen Head-Commit `5225381` sind noch nicht abgeschlossen."
+    },
+    {
      "level": "mittel",
-     "text": "Dependabot Alert #24 (deepmerge) ist in NEXT.md als 'Weiter ohne Upstream-Patch' vermerkt."
+     "text": "Die mobile Ablaufabnahme (NEXT.md Punkt 4) und die Prüfung der mobilen Texteingabe/des Exports (NEXT.md Punkt 5) auf iPhone/iPad stehen noch aus."
     },
     {
      "level": "info",
-     "text": "Die mobile Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4) ist noch zu prüfen."
-    },
-    {
-     "level": "info",
-     "text": "Die mobile Texteingabe und der Export für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5) sind noch zu prüfen."
+     "text": "Dependabot Alert #24 (deepmerge) ist laut NEXT.md Punkt 1 weiterhin ohne Upstream-Patch offen."
     }
    ],
    "naechste_schritte": [
+    "Beobachten der laufenden CI-Workflows für Commit `5225381`.",
     "Prüfen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5)."
    ],
-   "veraendert": "Der `dev`-Branch ist nicht mehr 1 Commit vor `master`, sondern beide Branches sind auf Commit `b5ee2a0` synchronisiert, und der \"Check (Relax)\"-Workflow für `b5ee2a0` ist erfolgreich abgeschlossen.",
-   "fragen": [],
+   "veraendert": "Der Head-Commit hat sich von `b5ee2a0` auf `5225381` geändert, und die zugehörigen CI-Workflows sind im Gegensatz zur letzten Einschätzung noch nicht alle erfolgreich abgeschlossen.",
+   "fragen": [
+    "Soll der Store-Umbau Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 mit den 19 `localStorage`-Zugriffen auf 8 Schlüssel umgesetzt werden?",
+    "Wie soll mit dem Dependabot Alert #24 (deepmerge) verfahren werden, da laut NEXT.md Punkt 1 kein Upstream-Patch verfügbar ist?"
+   ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-14T11:42:46+00:00"
+  "ai_at": "2026-11-14T17:58:59+00:00"
  }
 }
