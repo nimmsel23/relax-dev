@@ -163,3 +163,32 @@ _Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen sta
 - Offen/Weiter: Lokales Fremd-WIP `scripts/portal.mjs` (+`docs/apps.html`) ist neuer `vos-portal`-Sync im Nicht-Biome-Stil (`"`/`;`) → unformatiert committet wird Check wieder rot; #24 beobachten; Store-Umbau Variante A nur mit CEO-+go.
 - Blocker: keine (CI grün); CTO-Befund: `vos-portal`-Generator (vitalos) muss Biome-konform schreiben oder `scripts/portal.mjs` aus `tooling:biome` nehmen.
 AUTOMATION: Portal-Sync nach jedem `vos-portal --all` von Hand per Biome nachformatieren (`6fb7783`) — Generator formatiert Ausgabe mit `biome format` vor dem Schreiben — ~1 roter CI-Zyklus + Fix-Commit pro Sync und Repo.
+
+## 2026-11-14 (Samstag) — Abteilungsleiter-Lauf
+
+_Automatik (vos-al-log Vorlage 2026-11-14):_
+- Commits seit 2026-11-08: c69e7c8 docs(al-log): CI-Rot via 6fb7783 geschlossen, vos-portal-WIP-Befund
+ddf59fd docs: auto-update RESULTS.md NEXT.md (pre-compact)
+6fb7783 style(scripts): format portal.mjs with biome (fixes CI check)
+48e5191 docs(al-log): record pre-existing red CI check
+d5311fb docs(al-log): verify deepmerge alert 24 patch status
+2ff6ccf chore(portal): portal.mjs + docs/apps.* aus vitalos vos-portal --all synchronisiert
+9fc75b7 feat(ci): Living Dashboard als GitHub Page
+58a99ed docs: auto-update RESULTS.md
+bca634a docs: auto-update NEXT.md
+ed21341 docs(al-log): Checkout-Sync Org d5c6a0f7 (cadeefb = origin/dev)
+b80dbfb docs: auto-update RESULTS.md
+cadeefb docs: Konzept vos-relax (finale Variante) + RESULTS Store-Build
+207322b feat(store): Owner-Inhalte im Store-Build ausblenden, Leerzustand, Eindeutschung
+8ae9b6c docs: auto-update RESULTS.md
+4b6326f docs(al-log): Gemini repair probe verified (2acf731→61dc56d)
+- Offene PRs: (keine offenen PRs / gh nicht verfuegbar)
+- CI (letzte Läufe): completed	success	PR-AutoMerge (Dependabot -> dev)	PR-AutoMerge (Dependabot -> dev)	master	schedule	43527624990	7s	2026-11-13T23:30:35Z
+completed	success	Auto-Promote dev -> master (Check (Relax))	Auto-Promote dev -> master (Check (Relax))	master	schedule	43517574863	10s	2026-11-13T22:14:03Z
+completed	success	PR-AutoMerge (Dependabot -> dev)	PR-AutoMerge (Dependabot -> dev)	master	schedule	43475492386	20s	2026-11-13T17:42:46Z
+- Arbeitsbaum: 2 uncommittete Pfade
+
+_Vom AL ausfüllen (knapp & belegbar, je 1–3 Zeilen, Commit-/PR-Referenzen statt Erzählung):_
+- Erledigt: Stabilitäts-/Security-Wache — `c69e7c8`: Check `43440431719` / Auto-Promote `43440525692` / Live-Deploy `43440548270` success; `origin/master` = `origin/dev` = `c69e7c8`; seit 13.11. kein roter Lauf. Alert #24 `deepmerge` weiter `open`/low/`patched:null`.
+- Offen/Weiter: Fremd-WIP `scripts/portal.mjs` (+144/−207) + `docs/apps.html` weiter uncommittet und nicht Biome-konform (vgl. `6fb7783`) → Commit ohne Nachformatierung = rotes Check; #24 beobachten; Store-Umbau Variante A nur mit CEO-+go.
+- Blocker: keine (CI grün); CTO-Befund vom 13.11. (Generator `vos-portal` Biome-konform machen) unverändert offen.
