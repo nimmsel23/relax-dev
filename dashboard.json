@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-13T14:12:10+00:00",
+  "generated_at": "2026-11-14T02:11:27+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-13T14:11:49Z",
+   "pushed_at": "2026-11-14T02:11:07Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,12 +19,18 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 2,
-   "oldest_unpromoted": "2026-11-13T04:49:40+01:00",
-   "dev_head": "c69e7c8 2026-11-13T15:11:42+01:00",
-   "master_head": "6fb7783 2026-11-13T03:59:17+01:00"
+   "dev_ahead": 1,
+   "oldest_unpromoted": "2026-11-14T03:11:04+01:00",
+   "dev_head": "b5ee2a0 2026-11-14T03:11:04+01:00",
+   "master_head": "c69e7c8 2026-11-13T15:11:42+01:00"
   },
   "commits": [
+   {
+    "sha": "b5ee2a0",
+    "date": "2026-11-14T03:11:04+01:00",
+    "author": "Alpha",
+    "subject": "docs(al-log): Stabilitäts-/Security-Wache 2026-11-14 (c69e7c8 grün, #24 offen)"
+   },
    {
     "sha": "c69e7c8",
     "date": "2026-11-13T15:11:42+01:00",
@@ -138,19 +144,9 @@
     "date": "2026-11-12T03:17:11+01:00",
     "author": "Alpha",
     "subject": "docs: auto-update NEXT.md"
-   },
-   {
-    "sha": "61dc56d",
-    "date": "2026-11-12T02:14:29Z",
-    "author": "github-actions[bot]",
-    "subject": "fix(ci): source repair [ci-agent]"
    }
   ],
   "activity": [
-   {
-    "day": "2026-10-24",
-    "n": 0
-   },
    {
     "day": "2026-10-25",
     "n": 2
@@ -230,6 +226,10 @@
    {
     "day": "2026-11-13",
     "n": 7
+   },
+   {
+    "day": "2026-11-14",
+    "n": 1
    }
   ],
   "workflows": [
@@ -239,9 +239,9 @@
     "event": "push",
     "status": "in_progress",
     "conclusion": null,
-    "created_at": "2026-11-13T14:11:51Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43440431719",
-    "sha": "c69e7c8"
+    "created_at": "2026-11-14T02:11:09Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43544862061",
+    "sha": "b5ee2a0"
    },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
@@ -249,9 +249,9 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T09:29:05Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43401689956",
-    "sha": "6fb7783"
+    "created_at": "2026-11-13T23:30:35Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43527624990",
+    "sha": "c69e7c8"
    },
    {
     "name": "Auto-Promote dev -> master (Check (Relax))",
@@ -259,9 +259,9 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T08:05:50Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43390539911",
-    "sha": "6fb7783"
+    "created_at": "2026-11-13T22:14:03Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43517574863",
+    "sha": "c69e7c8"
    },
    {
     "name": "Live Deploy (Relax master)",
@@ -269,9 +269,9 @@
     "event": "workflow_dispatch",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T03:00:02Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43355946042",
-    "sha": "6fb7783"
+    "created_at": "2026-11-13T14:12:36Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43440548270",
+    "sha": "c69e7c8"
    },
    {
     "name": "Gemini CI Agent",
@@ -279,9 +279,9 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-13T02:59:53Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43355929480",
-    "sha": "9fc75b7"
+    "created_at": "2026-11-13T14:12:28Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43440525616",
+    "sha": "6fb7783"
    },
    {
     "name": "Preview (Relax dev)",
@@ -304,29 +304,41 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: dev 2 Commits vor master, CI für dev läuft noch",
-   "lage": "Der `dev`-Branch ist 2 Commits vor dem `master`-Branch. Der `master`-Branch steht auf Commit `6fb7783`. Für den aktuellen `dev`-Head `c69e7c8` läuft der Workflow \"Check (Relax)\" noch.",
+   "headline": "relax-dev: dev 1 Commit vor master, CI für neuen dev-Head läuft",
+   "lage": "Der `dev`-Branch wurde auf `master` promotet, sodass `master` nun auf Commit `c69e7c8` steht. Der `dev`-Branch ist mit Commit `b5ee2a0` 1 Commit vor `master`. Für `b5ee2a0` läuft der Workflow \"Check (Relax)\" noch.",
    "auffaelligkeiten": [
     {
-     "level": "hoch",
-     "text": "Der Workflow \"Check (Relax)\" für den aktuellen `dev`-Head `c69e7c8` ist noch `in_progress`. Eine Promotion von `dev` zu `master` ist erst nach erfolgreichem Abschluss möglich."
+     "level": "info",
+     "text": "Workflow \"PR-AutoMerge (Dependabot -> dev)\" für `c69e7c8` wurde erfolgreich abgeschlossen."
     },
     {
      "level": "info",
-     "text": "Dependabot Alert #24 (deepmerge) bleibt ohne Upstream-Patch, wird aber beobachtet (NEXT.md Punkt 1)."
+     "text": "Workflow \"Auto-Promote dev -> master (Check (Relax))\" für `c69e7c8` wurde erfolgreich abgeschlossen."
+    },
+    {
+     "level": "info",
+     "text": "Workflow \"Live Deploy (Relax master)\" für `c69e7c8` wurde erfolgreich abgeschlossen."
+    },
+    {
+     "level": "info",
+     "text": "Issue #24 (deepmerge) ist laut NEXT.md weiterhin offen und ohne Upstream-Patch."
+    },
+    {
+     "level": "info",
+     "text": "Laut NEXT.md fehlen weiterhin spezifische Anleitungs-PDFs für Mentales Training, Autogenes Training, Fantasiereisen und Meditation."
     }
    ],
    "naechste_schritte": [
+    "Beobachten des \"Check (Relax)\"-Workflows für `b5ee2a0`.",
     "Prüfen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
-    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
-    "Beobachten des \"Check (Relax)\"-Workflows für `c69e7c8`."
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5)."
    ],
-   "veraendert": "Die `dev`- und `master`-Branches sind nicht mehr synchronisiert; `dev` ist 2 Commits voraus, und der \"Check (Relax)\"-Workflow für den `dev`-Head `c69e7c8` läuft noch.",
+   "veraendert": "Der `dev`-Branch wurde auf `master` promotet, und `dev` ist nun mit einem neuen Commit (`b5ee2a0`) 1 Commit vor `master`, für den der CI-Lauf noch aussteht.",
    "fragen": [
-    "Soll der Store-Umbau Ausbildung.jsx (Variante A) mit der Konsolidierung der `localStorage`-Zugriffe begonnen werden (NEXT.md Punkt 2)?"
+    "Soll der Store-Umbau für Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 begonnen werden?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-13T14:12:12+00:00"
+  "ai_at": "2026-11-14T02:11:29+00:00"
  }
 }
