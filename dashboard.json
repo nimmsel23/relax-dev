@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-14T17:58:57+00:00",
+  "generated_at": "2026-11-15T12:12:44+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-14T17:58:36Z",
+   "pushed_at": "2026-11-15T07:11:31Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,12 +148,8 @@
   ],
   "activity": [
    {
-    "day": "2026-10-25",
-    "n": 0
-   },
-   {
     "day": "2026-10-26",
-    "n": 3
+    "n": 0
    },
    {
     "day": "2026-10-27",
@@ -230,48 +226,32 @@
    {
     "day": "2026-11-14",
     "n": 2
+   },
+   {
+    "day": "2026-11-15",
+    "n": 0
    }
   ],
   "workflows": [
-   {
-    "name": "Live Deploy (Relax master)",
-    "branch": "master",
-    "event": "push",
-    "status": "in_progress",
-    "conclusion": null,
-    "created_at": "2026-11-14T17:58:38Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993697",
-    "sha": "5225381"
-   },
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "push",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-14T17:58:38Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993675",
-    "sha": "5225381"
-   },
-   {
-    "name": "Check (Relax)",
-    "branch": "dev",
-    "event": "push",
-    "status": "in_progress",
-    "conclusion": null,
-    "created_at": "2026-11-14T17:58:38Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993639",
-    "sha": "5225381"
-   },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-14T14:07:46Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43603231685",
-    "sha": "b5ee2a0"
+    "created_at": "2026-11-15T10:49:02Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43705896015",
+    "sha": "5225381"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-15T07:15:29Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43689136960",
+    "sha": "5225381"
    },
    {
     "name": "Gemini CI Agent",
@@ -279,9 +259,29 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-14T02:11:46Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43544916115",
-    "sha": "c69e7c8"
+    "created_at": "2026-11-14T17:59:27Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43624063210",
+    "sha": "5225381"
+   },
+   {
+    "name": "Live Deploy (Relax master)",
+    "branch": "master",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-14T17:58:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993697",
+    "sha": "5225381"
+   },
+   {
+    "name": "Check (Relax)",
+    "branch": "dev",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-14T17:58:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993639",
+    "sha": "5225381"
    },
    {
     "name": "Preview (Relax dev)",
@@ -304,34 +304,25 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: dev/master auf 5225381 synchronisiert, CIs laufen noch",
-   "lage": "Die Branches `dev` und `master` sind auf Commit `5225381` synchronisiert. Die Workflows \"Live Deploy (Relax master)\" und \"Check (Relax)\" für diesen Commit sind aktuell noch in Bearbeitung.",
+   "headline": "relax-dev: CIs für 5225381 erfolgreich abgeschlossen",
+   "lage": "Die Branches `dev` und `master` sind weiterhin auf Commit `5225381` synchronisiert. Alle relevanten CI-Workflows für diesen Commit, einschließlich \"Live Deploy (Relax master)\" und \"Check (Relax)\", wurden erfolgreich abgeschlossen.",
    "auffaelligkeiten": [
     {
-     "level": "hoch",
-     "text": "Die CI-Workflows \"Live Deploy (Relax master)\" und \"Check (Relax)\" für den aktuellen Head-Commit `5225381` sind noch nicht abgeschlossen."
-    },
-    {
-     "level": "mittel",
-     "text": "Die mobile Ablaufabnahme (NEXT.md Punkt 4) und die Prüfung der mobilen Texteingabe/des Exports (NEXT.md Punkt 5) auf iPhone/iPad stehen noch aus."
-    },
-    {
      "level": "info",
-     "text": "Dependabot Alert #24 (deepmerge) ist laut NEXT.md Punkt 1 weiterhin ohne Upstream-Patch offen."
+     "text": "Dependabot deepmerge (Alert #24) ist weiterhin ohne Upstream-Patch offen und erfordert bei Patch-Release ein manuelles Nachziehen (NEXT.md Punkt 1)."
     }
    ],
    "naechste_schritte": [
-    "Beobachten der laufenden CI-Workflows für Commit `5225381`.",
     "Prüfen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
-    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5)."
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
+    "Entscheiden über die Freigabe für den Store-Umbau Ausbildung.jsx (NEXT.md Punkt 2)."
    ],
-   "veraendert": "Der Head-Commit hat sich von `b5ee2a0` auf `5225381` geändert, und die zugehörigen CI-Workflows sind im Gegensatz zur letzten Einschätzung noch nicht alle erfolgreich abgeschlossen.",
+   "veraendert": "Die zuvor als in Bearbeitung gemeldeten CI-Workflows für Commit `5225381` sind nun erfolgreich abgeschlossen.",
    "fragen": [
-    "Soll der Store-Umbau Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 mit den 19 `localStorage`-Zugriffen auf 8 Schlüssel umgesetzt werden?",
-    "Wie soll mit dem Dependabot Alert #24 (deepmerge) verfahren werden, da laut NEXT.md Punkt 1 kein Upstream-Patch verfügbar ist?"
+    "Soll der Store-Umbau Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 freigegeben werden?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-14T17:58:59+00:00"
+  "ai_at": "2026-11-15T12:12:47+00:00"
  }
 }
