@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-15T12:12:44+00:00",
+  "generated_at": "2026-11-16T05:34:52+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-15T07:11:31Z",
+   "pushed_at": "2026-11-16T05:34:32Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,12 +19,24 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 0,
-   "oldest_unpromoted": null,
-   "dev_head": "5225381 2026-11-14T18:58:33+01:00",
+   "dev_ahead": 2,
+   "oldest_unpromoted": "2026-11-16T06:34:29+01:00",
+   "dev_head": "a35f38a 2026-11-16T06:34:29+01:00",
    "master_head": "5225381 2026-11-14T18:58:33+01:00"
   },
   "commits": [
+   {
+    "sha": "a35f38a",
+    "date": "2026-11-16T06:34:29+01:00",
+    "author": "Alpha",
+    "subject": "ci(automerge): Dependabot base=master auf base=dev retargeten"
+   },
+   {
+    "sha": "2c1fe7b",
+    "date": "2026-11-16T06:34:29+01:00",
+    "author": "Alpha",
+    "subject": "docs: auto-update RESULTS.md"
+   },
    {
     "sha": "5225381",
     "date": "2026-11-14T18:58:33+01:00",
@@ -132,25 +144,9 @@
     "date": "2026-11-12T03:17:53+01:00",
     "author": "Alpha",
     "subject": "docs: auto-update NEXT.md"
-   },
-   {
-    "sha": "a142113",
-    "date": "2026-11-12T03:17:19+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md"
-   },
-   {
-    "sha": "a0156e0",
-    "date": "2026-11-12T03:17:13+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update NEXT.md"
    }
   ],
   "activity": [
-   {
-    "day": "2026-10-26",
-    "n": 0
-   },
    {
     "day": "2026-10-27",
     "n": 0
@@ -230,17 +226,31 @@
    {
     "day": "2026-11-15",
     "n": 0
+   },
+   {
+    "day": "2026-11-16",
+    "n": 2
    }
   ],
   "workflows": [
+   {
+    "name": "Check (Relax)",
+    "branch": "dev",
+    "event": "push",
+    "status": "in_progress",
+    "conclusion": null,
+    "created_at": "2026-11-16T05:34:34Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43811128332",
+    "sha": "a35f38a"
+   },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-15T10:49:02Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43705896015",
+    "created_at": "2026-11-16T02:43:17Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43793862899",
     "sha": "5225381"
    },
    {
@@ -249,8 +259,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-15T07:15:29Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43689136960",
+    "created_at": "2026-11-16T00:25:25Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43780274875",
     "sha": "5225381"
    },
    {
@@ -272,26 +282,6 @@
     "created_at": "2026-11-14T17:58:38Z",
     "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993697",
     "sha": "5225381"
-   },
-   {
-    "name": "Check (Relax)",
-    "branch": "dev",
-    "event": "push",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-14T17:58:38Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993639",
-    "sha": "5225381"
-   },
-   {
-    "name": "Preview (Relax dev)",
-    "branch": "dev",
-    "event": "push",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-12T10:13:43Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43198475018",
-    "sha": "207322b"
    }
   ],
   "issues": [],
@@ -304,25 +294,29 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: CIs für 5225381 erfolgreich abgeschlossen",
-   "lage": "Die Branches `dev` und `master` sind weiterhin auf Commit `5225381` synchronisiert. Alle relevanten CI-Workflows für diesen Commit, einschließlich \"Live Deploy (Relax master)\" und \"Check (Relax)\", wurden erfolgreich abgeschlossen.",
+   "headline": "relax-dev: dev-Branch 2 Commits voraus, Check (Relax) läuft",
+   "lage": "Der `dev`-Branch ist mit Commit `a35f38a` zwei Commits vor dem `master`-Branch (`5225381`). Der Workflow \"Check (Relax)\" für den `dev`-Head `a35f38a` ist aktuell `in_progress`. Die letzten Workflows auf `master` sind für `5225381` erfolgreich abgeschlossen.",
    "auffaelligkeiten": [
     {
+     "level": "mittel",
+     "text": "Der Workflow \"Check (Relax)\" für den aktuellen dev-Head a35f38a ist in Bearbeitung."
+    },
+    {
      "level": "info",
-     "text": "Dependabot deepmerge (Alert #24) ist weiterhin ohne Upstream-Patch offen und erfordert bei Patch-Release ein manuelles Nachziehen (NEXT.md Punkt 1)."
+     "text": "Der Dependabot-Automerge wurde von base=master auf base=dev retargetet (Commit a35f38a)."
     }
    ],
    "naechste_schritte": [
     "Prüfen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
-    "Entscheiden über die Freigabe für den Store-Umbau Ausbildung.jsx (NEXT.md Punkt 2)."
+    "Warten auf den Abschluss des Workflows \"Check (Relax)\" für a35f38a."
    ],
-   "veraendert": "Die zuvor als in Bearbeitung gemeldeten CI-Workflows für Commit `5225381` sind nun erfolgreich abgeschlossen.",
+   "veraendert": "Gegenüber der letzten Einschätzung ist der `dev`-Branch nun zwei Commits vor `master`, und der Workflow \"Check (Relax)\" für den aktuellen `dev`-Head `a35f38a` läuft.",
    "fragen": [
-    "Soll der Store-Umbau Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 freigegeben werden?"
+    "Entscheiden über die Freigabe für den Store-Umbau Ausbildung.jsx (NEXT.md Punkt 2)."
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-15T12:12:47+00:00"
+  "ai_at": "2026-11-16T05:34:54+00:00"
  }
 }
