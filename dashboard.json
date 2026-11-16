@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-16T05:34:52+00:00",
+  "generated_at": "2026-11-16T11:36:11+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-16T05:34:32Z",
+   "pushed_at": "2026-11-16T11:35:50Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,12 +19,30 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 2,
-   "oldest_unpromoted": "2026-11-16T06:34:29+01:00",
-   "dev_head": "a35f38a 2026-11-16T06:34:29+01:00",
-   "master_head": "5225381 2026-11-14T18:58:33+01:00"
+   "dev_ahead": 3,
+   "oldest_unpromoted": "2026-11-16T11:26:46Z",
+   "dev_head": "20a9b84 2026-11-16T11:35:49Z",
+   "master_head": "a35f38a 2026-11-16T06:34:29+01:00"
   },
   "commits": [
+   {
+    "sha": "20a9b84",
+    "date": "2026-11-16T11:35:49Z",
+    "author": "Cursor Agent",
+    "subject": "dashboard: Check und Dashboard starten"
+   },
+   {
+    "sha": "a87785c",
+    "date": "2026-11-16T11:33:35Z",
+    "author": "Cursor Agent",
+    "subject": "dashboard: Check und Dashboard auf dev starten"
+   },
+   {
+    "sha": "c95827f",
+    "date": "2026-11-16T11:26:46Z",
+    "author": "Cursor Agent",
+    "subject": "dashboard: master-Push baut ebenfalls dev"
+   },
    {
     "sha": "a35f38a",
     "date": "2026-11-16T06:34:29+01:00",
@@ -126,24 +144,6 @@
     "date": "2026-11-12T11:13:31+01:00",
     "author": "Alpha",
     "subject": "feat(store): Owner-Inhalte im Store-Build ausblenden, Leerzustand, Eindeutschung"
-   },
-   {
-    "sha": "8ae9b6c",
-    "date": "2026-11-12T03:18:17+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md"
-   },
-   {
-    "sha": "4b6326f",
-    "date": "2026-11-12T03:17:53+01:00",
-    "author": "Alpha",
-    "subject": "docs(al-log): Gemini repair probe verified (2acf731→61dc56d)"
-   },
-   {
-    "sha": "bd3a6a1",
-    "date": "2026-11-12T03:17:53+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update NEXT.md"
    }
   ],
   "activity": [
@@ -229,7 +229,7 @@
    },
    {
     "day": "2026-11-16",
-    "n": 2
+    "n": 5
    }
   ],
   "workflows": [
@@ -239,9 +239,9 @@
     "event": "push",
     "status": "in_progress",
     "conclusion": null,
-    "created_at": "2026-11-16T05:34:34Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43811128332",
-    "sha": "a35f38a"
+    "created_at": "2026-11-16T11:35:52Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43859141733",
+    "sha": "20a9b84"
    },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
@@ -249,9 +249,9 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-16T02:43:17Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43793862899",
-    "sha": "5225381"
+    "created_at": "2026-11-16T11:11:29Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43855541453",
+    "sha": "a35f38a"
    },
    {
     "name": "Auto-Promote dev -> master (Check (Relax))",
@@ -259,9 +259,19 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-16T00:25:25Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43780274875",
-    "sha": "5225381"
+    "created_at": "2026-11-16T07:21:31Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43823276570",
+    "sha": "a35f38a"
+   },
+   {
+    "name": "Live Deploy (Relax master)",
+    "branch": "master",
+    "event": "workflow_dispatch",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-16T05:35:18Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43811210171",
+    "sha": "a35f38a"
    },
    {
     "name": "Gemini CI Agent",
@@ -269,18 +279,8 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-14T17:59:27Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43624063210",
-    "sha": "5225381"
-   },
-   {
-    "name": "Live Deploy (Relax master)",
-    "branch": "master",
-    "event": "push",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-14T17:58:38Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43623993697",
+    "created_at": "2026-11-16T05:35:09Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43811194083",
     "sha": "5225381"
    }
   ],
@@ -294,29 +294,29 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "relax-dev: dev-Branch 2 Commits voraus, Check (Relax) läuft",
-   "lage": "Der `dev`-Branch ist mit Commit `a35f38a` zwei Commits vor dem `master`-Branch (`5225381`). Der Workflow \"Check (Relax)\" für den `dev`-Head `a35f38a` ist aktuell `in_progress`. Die letzten Workflows auf `master` sind für `5225381` erfolgreich abgeschlossen.",
+   "headline": "relax-dev: dev-Branch 3 Commits voraus, Check (Relax) für 20a9b84 läuft",
+   "lage": "Der `dev`-Branch ist mit Commit `20a9b84` drei Commits vor dem `master`-Branch (`a35f38a`). Der Workflow \"Check (Relax)\" für den `dev`-Head `20a9b84` ist aktuell `in_progress`. Der `master`-Branch wurde erfolgreich auf `a35f38a` aktualisiert und deployed.",
    "auffaelligkeiten": [
     {
-     "level": "mittel",
-     "text": "Der Workflow \"Check (Relax)\" für den aktuellen dev-Head a35f38a ist in Bearbeitung."
+     "level": "info",
+     "text": "Die drei neuesten Commits auf `dev` (`20a9b84`, `a87785c`, `c95827f`) stammen vom \"Cursor Agent\" und betreffen das Dashboard."
     },
     {
      "level": "info",
-     "text": "Der Dependabot-Automerge wurde von base=master auf base=dev retargetet (Commit a35f38a)."
+     "text": "Der `master`-Branch wurde durch den Workflow \"Auto-Promote dev -> master (Check (Relax))\" erfolgreich auf den Stand des vorherigen `dev`-Heads `a35f38a` gebracht und via \"Live Deploy (Relax master)\" deployed."
     }
    ],
    "naechste_schritte": [
+    "Warten auf den Abschluss des Workflows \"Check (Relax)\" für `20a9b84`.",
     "Prüfen der mobilen Ablaufabnahme auf iPhone/iPad (NEXT.md Punkt 4).",
-    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
-    "Warten auf den Abschluss des Workflows \"Check (Relax)\" für a35f38a."
+    "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5)."
    ],
-   "veraendert": "Gegenüber der letzten Einschätzung ist der `dev`-Branch nun zwei Commits vor `master`, und der Workflow \"Check (Relax)\" für den aktuellen `dev`-Head `a35f38a` läuft.",
+   "veraendert": "Der `dev`-Branch ist nun drei Commits vor `master` und der `master`-Branch wurde erfolgreich auf den vorherigen `dev`-Stand `a35f38a` aktualisiert.",
    "fragen": [
-    "Entscheiden über die Freigabe für den Store-Umbau Ausbildung.jsx (NEXT.md Punkt 2)."
+    "Liegt ein explizites `+go` des CEO für den Store-Umbau Ausbildung.jsx (NEXT.md Punkt 2) vor?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-16T05:34:54+00:00"
+  "ai_at": "2026-11-16T11:36:13+00:00"
  }
 }
