@@ -1,3 +1,12 @@
+# automerge-pr: Dependabot base=master → base=dev Retarget (2026-11-16)
+
+Org `c1f9b6ce` (Restlücke): `relax-dev` hatte im PR-AutoMerge nur Squash auf `--base dev`, keinen Retarget-Schritt.
+
+- **`.github/workflows/automerge-pr.yml`:** Step „Dependabot base=master auf base=dev retargeten“ aus fuel/journal-SSOT vor Squash eingefügt (nur `dependabot/*`-Heads).
+- Fremdes WIP (`scripts/portal.mjs`, `docs/apps.*`) unberührt.
+
+---
+
 # Biome-Fix für scripts/portal.mjs, Check (Relax) wieder grün (2026-11-13)
 
 Check (Relax) auf `dev` war rot (`43350514905`), weil die von `vos-portal` verteilte Kopie von `scripts/portal.mjs` nicht Biome-formatiert war.
