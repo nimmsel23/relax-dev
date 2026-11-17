@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-16T13:06:43+00:00",
+  "generated_at": "2026-11-17T13:47:32+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-16T11:36:31Z",
+   "pushed_at": "2026-11-17T07:54:07Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,10 +148,6 @@
   ],
   "activity": [
    {
-    "day": "2026-10-27",
-    "n": 0
-   },
-   {
     "day": "2026-10-28",
     "n": 10
    },
@@ -230,9 +226,33 @@
    {
     "day": "2026-11-16",
     "n": 5
+   },
+   {
+    "day": "2026-11-17",
+    "n": 0
    }
   ],
   "workflows": [
+   {
+    "name": "PR-AutoMerge (Dependabot -> dev)",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-17T13:20:47Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44091802110",
+    "sha": "20a9b84"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-17T09:16:52Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44054128127",
+    "sha": "20a9b84"
+   },
    {
     "name": "Live Deploy (Relax master)",
     "branch": "master",
@@ -242,26 +262,6 @@
     "created_at": "2026-11-16T11:36:32Z",
     "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43859242883",
     "sha": "20a9b84"
-   },
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "workflow_run",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-16T11:36:20Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43859210067",
-    "sha": "a35f38a"
-   },
-   {
-    "name": "PR-AutoMerge (Dependabot -> dev)",
-    "branch": "master",
-    "event": "workflow_run",
-    "status": "completed",
-    "conclusion": "skipped",
-    "created_at": "2026-11-16T11:36:20Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43859210043",
-    "sha": "a35f38a"
    },
    {
     "name": "Gemini CI Agent",
@@ -294,20 +294,12 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "dev und master synchron auf 20a9b84, alle Checks erfolgreich",
-   "lage": "Der `dev`- und `master`-Branch sind auf Commit `20a9b84` synchronisiert. Alle zugehörigen Workflows, einschliesslich \"Check (Relax)\" und \"Live Deploy (Relax master)\", wurden erfolgreich abgeschlossen.",
+   "headline": "dev und master synchron auf 20a9b84, alle Workflows erfolgreich",
+   "lage": "Der `dev`- und `master`-Branch sind auf Commit `20a9b84` synchronisiert. Alle zugehörigen Workflows, einschliesslich \"PR-AutoMerge (Dependabot -> dev)\" und \"Auto-Promote dev -> master (Check (Relax))\", wurden erfolgreich abgeschlossen. Das Living Dashboard ist als GitHub Page verfügbar.",
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Der Workflow \"Check (Relax)\" für Commit `20a9b84` wurde erfolgreich abgeschlossen."
-    },
-    {
-     "level": "info",
-     "text": "Die Branches `dev` und `master` sind nun auf dem gleichen Commit `20a9b84`."
-    },
-    {
-     "level": "info",
-     "text": "Der Dependabot deepmerge Alert #24 ist laut NEXT.md weiterhin offen und wird ohne Upstream-Patch weitergeführt."
+     "text": "Dependabot Alert #24 (deepmerge) ist weiterhin offen und erfordert Beobachtung für einen Upstream-Patch."
     }
    ],
    "naechste_schritte": [
@@ -315,10 +307,12 @@
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
     "Beobachten des Dependabot deepmerge Alerts #24 (NEXT.md Punkt 1)."
    ],
-   "veraendert": "Der `dev`-Branch ist nicht mehr drei Commits vor `master`, sondern beide Branches sind auf `20a9b84` synchronisiert, und der Workflow \"Check (Relax)\" für diesen Commit ist erfolgreich abgeschlossen.",
-   "fragen": [],
+   "veraendert": "Die geplanten Workflows \"PR-AutoMerge (Dependabot -> dev)\" und \"Auto-Promote dev -> master (Check (Relax))\" wurden erfolgreich abgeschlossen.",
+   "fragen": [
+    "Liegt ein explizites `+go` des CEO für den Store-Umbau Ausbildung.jsx (Variante A) vor (NEXT.md Punkt 2)?"
+   ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-16T13:06:45+00:00"
+  "ai_at": "2026-11-17T13:47:34+00:00"
  }
 }
