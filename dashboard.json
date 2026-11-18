@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-17T16:06:11+00:00",
+  "generated_at": "2026-11-18T13:23:36+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-17T16:06:01Z",
+   "pushed_at": "2026-11-18T10:35:38Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,12 +148,8 @@
   ],
   "activity": [
    {
-    "day": "2026-10-28",
-    "n": 10
-   },
-   {
     "day": "2026-10-29",
-    "n": 16
+    "n": 2
    },
    {
     "day": "2026-10-30",
@@ -230,27 +226,21 @@
    {
     "day": "2026-11-17",
     "n": 1
+   },
+   {
+    "day": "2026-11-18",
+    "n": 0
    }
   ],
   "workflows": [
    {
-    "name": "Live Deploy (Relax master)",
-    "branch": "master",
-    "event": "push",
-    "status": "in_progress",
-    "conclusion": null,
-    "created_at": "2026-11-17T16:05:49Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44121818539",
-    "sha": "c01c2d3"
-   },
-   {
     "name": "Auto-Promote dev -> master (Check (Relax))",
     "branch": "master",
-    "event": "push",
+    "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-17T16:05:49Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44121818311",
+    "created_at": "2026-11-18T09:14:07Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44274008522",
     "sha": "c01c2d3"
    },
    {
@@ -259,9 +249,9 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-17T13:20:47Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44091802110",
-    "sha": "20a9b84"
+    "created_at": "2026-11-18T04:17:22Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44236283154",
+    "sha": "c01c2d3"
    },
    {
     "name": "Gemini CI Agent",
@@ -269,9 +259,19 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-16T11:36:20Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43859210000",
-    "sha": "a35f38a"
+    "created_at": "2026-11-17T16:06:35Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44121964150",
+    "sha": "c01c2d3"
+   },
+   {
+    "name": "Live Deploy (Relax master)",
+    "branch": "master",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-17T16:05:49Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44121818539",
+    "sha": "c01c2d3"
    },
    {
     "name": "Check (Relax)",
@@ -294,27 +294,25 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "dev und master auf c01c2d3 synchronisiert, Live Deploy läuft",
-   "lage": "Die `dev`- und `master`-Branches sind auf Commit `c01c2d3` synchronisiert. Der Workflow \"Auto-Promote dev -> master (Check (Relax))\" wurde erfolgreich abgeschlossen. Der Workflow \"Live Deploy (Relax master)\" ist aktuell in Bearbeitung.",
+   "headline": "Live Deploy erfolgreich abgeschlossen, dev und master synchronisiert",
+   "lage": "Die `dev`- und `master`-Branches sind weiterhin auf Commit `c01c2d3` synchronisiert. Der Workflow \"Live Deploy (Relax master)\" wurde erfolgreich abgeschlossen. Auch der \"Auto-Promote dev -> master (Check (Relax))\" Workflow lief erfolgreich.",
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Der Workflow \"Live Deploy (Relax master)\" ist aktuell in Bearbeitung (SHA `c01c2d3`)."
-    },
-    {
-     "level": "info",
-     "text": "Dependabot deepmerge Alert #24 ist weiterhin offen und wird ohne Upstream-Patch beobachtet (NEXT.md Punkt 1)."
+     "text": "Dependabot Alert #24 (deepmerge) ist weiterhin ohne Upstream-Patch und wird transitiv über vite-plugin-pwa eingebunden (NEXT.md Punkt 1)."
     }
    ],
    "naechste_schritte": [
     "Prüfen des kompletten mobilen Ablaufs auf iPhone/iPad (NEXT.md Punkt 4).",
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
-    "Verifizieren des Abschlusses des \"Live Deploy (Relax master)\" Workflows."
+    "Verifizieren der Aktualität der Live-Site `https://relax-vos.web.app` nach dem Deploy."
    ],
-   "veraendert": "Die `dev`- und `master`-Branches wurden auf Commit `c01c2d3` aktualisiert und synchronisiert, und ein neuer \"Live Deploy\"-Workflow wurde gestartet.",
-   "fragen": [],
+   "veraendert": "Der Workflow \"Live Deploy (Relax master)\" wurde erfolgreich abgeschlossen, während er in der letzten Einschätzung noch als in Bearbeitung galt.",
+   "fragen": [
+    "Soll der Store-Umbau in Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 durchgeführt werden?"
+   ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-17T16:06:14+00:00"
+  "ai_at": "2026-11-18T13:23:39+00:00"
  }
 }
