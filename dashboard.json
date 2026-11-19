@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-18T13:23:36+00:00",
+  "generated_at": "2026-11-19T13:49:52+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-18T10:35:38Z",
+   "pushed_at": "2026-11-18T13:23:54Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,10 +148,6 @@
   ],
   "activity": [
    {
-    "day": "2026-10-29",
-    "n": 2
-   },
-   {
     "day": "2026-10-30",
     "n": 0
    },
@@ -230,27 +226,31 @@
    {
     "day": "2026-11-18",
     "n": 0
+   },
+   {
+    "day": "2026-11-19",
+    "n": 0
    }
   ],
   "workflows": [
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-18T09:14:07Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44274008522",
-    "sha": "c01c2d3"
-   },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-18T04:17:22Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44236283154",
+    "created_at": "2026-11-19T12:59:55Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44529092321",
+    "sha": "c01c2d3"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-19T07:59:08Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44483817637",
     "sha": "c01c2d3"
    },
    {
@@ -294,25 +294,30 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "Live Deploy erfolgreich abgeschlossen, dev und master synchronisiert",
-   "lage": "Die `dev`- und `master`-Branches sind weiterhin auf Commit `c01c2d3` synchronisiert. Der Workflow \"Live Deploy (Relax master)\" wurde erfolgreich abgeschlossen. Auch der \"Auto-Promote dev -> master (Check (Relax))\" Workflow lief erfolgreich.",
+   "headline": "Repo-Status stabil: dev und master synchronisiert, Workflows erfolgreich",
+   "lage": "Die `dev`- und `master`-Branches sind weiterhin auf Commit `c01c2d3` synchronisiert. Alle relevanten Workflows, inklusive \"PR-AutoMerge (Dependabot -> dev)\" und \"Auto-Promote dev -> master (Check (Relax))\", wurden erfolgreich abgeschlossen.",
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Dependabot Alert #24 (deepmerge) ist weiterhin ohne Upstream-Patch und wird transitiv über vite-plugin-pwa eingebunden (NEXT.md Punkt 1)."
+     "text": "Dependabot Alert #24 (deepmerge) bleibt laut NEXT.md Punkt 1 ohne Upstream-Patch offen."
+    },
+    {
+     "level": "info",
+     "text": "Es fehlen weiterhin methodenspezifische Ablaufanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation (NEXT.md Punkt 3, TODO.md)."
     }
    ],
    "naechste_schritte": [
     "Prüfen des kompletten mobilen Ablaufs auf iPhone/iPad (NEXT.md Punkt 4).",
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
-    "Verifizieren der Aktualität der Live-Site `https://relax-vos.web.app` nach dem Deploy."
+    "Abgleichen von MOC, docs/ENTSPANNUNGSTRAINER-QUELLEN.md, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
    ],
-   "veraendert": "Der Workflow \"Live Deploy (Relax master)\" wurde erfolgreich abgeschlossen, während er in der letzten Einschätzung noch als in Bearbeitung galt.",
+   "veraendert": "",
    "fragen": [
-    "Soll der Store-Umbau in Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 durchgeführt werden?"
+    "Entscheiden, ob der Store-Umbau für Ausbildung.jsx (Variante A) mit +go freigegeben werden soll (NEXT.md Punkt 2).",
+    "Klären, wie mit den fehlenden methodenspezifischen Ablaufanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation umgegangen werden soll (NEXT.md Punkt 3, TODO.md)."
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-18T13:23:39+00:00"
+  "ai_at": "2026-11-19T13:49:54+00:00"
  }
 }
