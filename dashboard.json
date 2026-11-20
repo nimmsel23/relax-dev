@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-19T13:49:52+00:00",
+  "generated_at": "2026-11-20T13:31:52+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-18T13:23:54Z",
+   "pushed_at": "2026-11-19T13:50:12Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,12 +148,8 @@
   ],
   "activity": [
    {
-    "day": "2026-10-30",
-    "n": 0
-   },
-   {
     "day": "2026-10-31",
-    "n": 3
+    "n": 0
    },
    {
     "day": "2026-11-01",
@@ -230,6 +226,10 @@
    {
     "day": "2026-11-19",
     "n": 0
+   },
+   {
+    "day": "2026-11-20",
+    "n": 0
    }
   ],
   "workflows": [
@@ -239,8 +239,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-19T12:59:55Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44529092321",
+    "created_at": "2026-11-20T11:36:01Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44728920612",
     "sha": "c01c2d3"
    },
    {
@@ -249,8 +249,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-19T07:59:08Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44483817637",
+    "created_at": "2026-11-20T07:26:17Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44694952713",
     "sha": "c01c2d3"
    },
    {
@@ -299,11 +299,15 @@
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Dependabot Alert #24 (deepmerge) bleibt laut NEXT.md Punkt 1 ohne Upstream-Patch offen."
+     "text": "Der Dependabot-Alert #24 (deepmerge) wird laut NEXT.md weiterhin ohne Upstream-Patch behandelt."
     },
     {
      "level": "info",
-     "text": "Es fehlen weiterhin methodenspezifische Ablaufanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation (NEXT.md Punkt 3, TODO.md)."
+     "text": "Die \"Fehlenden Originalanleitungen\" für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation sind laut NEXT.md weiterhin nicht im Archiv."
+    },
+    {
+     "level": "info",
+     "text": "Der Store-Umbau für Ausbildung.jsx (Variante A) wartet auf ein explizites `+go` des CEO."
     }
    ],
    "naechste_schritte": [
@@ -311,13 +315,12 @@
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
     "Abgleichen von MOC, docs/ENTSPANNUNGSTRAINER-QUELLEN.md, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
    ],
-   "veraendert": "",
+   "veraendert": "Die `AL-LOG.md` wurde entfernt (Commit `5225381`), während die Branches weiterhin synchronisiert sind und Workflows erfolgreich laufen.",
    "fragen": [
-    "Entscheiden, ob der Store-Umbau für Ausbildung.jsx (Variante A) mit +go freigegeben werden soll (NEXT.md Punkt 2).",
-    "Klären, wie mit den fehlenden methodenspezifischen Ablaufanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation umgegangen werden soll (NEXT.md Punkt 3, TODO.md)."
+    "Soll der Store-Umbau für Ausbildung.jsx (Variante A) mit dem `usePersistentState`-Hook durchgeführt werden?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-19T13:49:54+00:00"
+  "ai_at": "2026-11-20T13:31:55+00:00"
  }
 }
