@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-21T12:57:44+00:00",
+  "generated_at": "2026-11-21T20:08:43+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-20T13:32:06Z",
+   "pushed_at": "2026-11-21T12:57:57Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -239,8 +239,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-21T12:45:43Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44905501169",
+    "created_at": "2026-11-21T19:51:09Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44943139135",
     "sha": "c01c2d3"
    },
    {
@@ -249,8 +249,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-21T09:46:05Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44891128998",
+    "created_at": "2026-11-21T17:28:43Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44930250536",
     "sha": "c01c2d3"
    },
    {
@@ -299,11 +299,7 @@
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Der Dependabot-Alert #24 (deepmerge, low) wird weiterhin ohne Upstream-Patch behandelt."
-    },
-    {
-     "level": "info",
-     "text": "Fehlende Originalanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation sind weiterhin nicht im Archiv vorhanden (NEXT.md Punkt 3)."
+     "text": "Der Dependabot-Alert #24 (deepmerge) wird laut NEXT.md weiterhin ohne Upstream-Patch behandelt."
     }
    ],
    "naechste_schritte": [
@@ -313,10 +309,11 @@
    ],
    "veraendert": "",
    "fragen": [
-    "Entscheidung zum Store-Umbau in Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 treffen."
+    "Soll der Store-Umbau in Ausbildung.jsx (NEXT.md Punkt 2) ohne explizites `+go` des CEO begonnen werden?",
+    "Wie soll mit den fehlenden spezifischen Anleitungs-PDFs für Mentales Training, Autogenes Training, Fantasiereisen und Meditation verfahren werden, um die Erstellung konkreter Ablaufkarten zu ermöglichen (TODO.md)?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-21T12:57:46+00:00"
+  "ai_at": "2026-11-21T20:08:45+00:00"
  }
 }
