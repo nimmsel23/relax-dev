@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-20T13:31:52+00:00",
+  "generated_at": "2026-11-21T12:57:44+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-19T13:50:12Z",
+   "pushed_at": "2026-11-20T13:32:06Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,10 +148,6 @@
   ],
   "activity": [
    {
-    "day": "2026-10-31",
-    "n": 0
-   },
-   {
     "day": "2026-11-01",
     "n": 0
    },
@@ -230,27 +226,31 @@
    {
     "day": "2026-11-20",
     "n": 0
+   },
+   {
+    "day": "2026-11-21",
+    "n": 0
    }
   ],
   "workflows": [
-   {
-    "name": "PR-AutoMerge (Dependabot -> dev)",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-20T11:36:01Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44728920612",
-    "sha": "c01c2d3"
-   },
    {
     "name": "Auto-Promote dev -> master (Check (Relax))",
     "branch": "master",
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-20T07:26:17Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44694952713",
+    "created_at": "2026-11-21T12:45:43Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44905501169",
+    "sha": "c01c2d3"
+   },
+   {
+    "name": "PR-AutoMerge (Dependabot -> dev)",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-21T09:46:05Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44891128998",
     "sha": "c01c2d3"
    },
    {
@@ -299,15 +299,11 @@
    "auffaelligkeiten": [
     {
      "level": "info",
-     "text": "Der Dependabot-Alert #24 (deepmerge) wird laut NEXT.md weiterhin ohne Upstream-Patch behandelt."
+     "text": "Der Dependabot-Alert #24 (deepmerge, low) wird weiterhin ohne Upstream-Patch behandelt."
     },
     {
      "level": "info",
-     "text": "Die \"Fehlenden Originalanleitungen\" für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation sind laut NEXT.md weiterhin nicht im Archiv."
-    },
-    {
-     "level": "info",
-     "text": "Der Store-Umbau für Ausbildung.jsx (Variante A) wartet auf ein explizites `+go` des CEO."
+     "text": "Fehlende Originalanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation sind weiterhin nicht im Archiv vorhanden (NEXT.md Punkt 3)."
     }
    ],
    "naechste_schritte": [
@@ -315,12 +311,12 @@
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
     "Abgleichen von MOC, docs/ENTSPANNUNGSTRAINER-QUELLEN.md, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
    ],
-   "veraendert": "Die `AL-LOG.md` wurde entfernt (Commit `5225381`), während die Branches weiterhin synchronisiert sind und Workflows erfolgreich laufen.",
+   "veraendert": "",
    "fragen": [
-    "Soll der Store-Umbau für Ausbildung.jsx (Variante A) mit dem `usePersistentState`-Hook durchgeführt werden?"
+    "Entscheidung zum Store-Umbau in Ausbildung.jsx (Variante A) gemäß NEXT.md Punkt 2 treffen."
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-20T13:31:55+00:00"
+  "ai_at": "2026-11-21T12:57:46+00:00"
  }
 }
