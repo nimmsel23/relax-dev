@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-21T20:08:43+00:00",
+  "generated_at": "2026-11-22T12:49:33+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-21T12:57:57Z",
+   "pushed_at": "2026-11-21T20:09:00Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -148,12 +148,8 @@
   ],
   "activity": [
    {
-    "day": "2026-11-01",
-    "n": 0
-   },
-   {
     "day": "2026-11-02",
-    "n": 168
+    "n": 50
    },
    {
     "day": "2026-11-03",
@@ -230,27 +226,31 @@
    {
     "day": "2026-11-21",
     "n": 0
+   },
+   {
+    "day": "2026-11-22",
+    "n": 0
    }
   ],
   "workflows": [
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-21T19:51:09Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44943139135",
-    "sha": "c01c2d3"
-   },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-21T17:28:43Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44930250536",
+    "created_at": "2026-11-22T11:26:04Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45017299315",
+    "sha": "c01c2d3"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-22T07:30:28Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44998537102",
     "sha": "c01c2d3"
    },
    {
@@ -298,8 +298,16 @@
    "lage": "Die `dev`- und `master`-Branches sind weiterhin auf Commit `c01c2d3` synchronisiert. Alle relevanten Workflows, inklusive \"PR-AutoMerge (Dependabot -> dev)\" und \"Auto-Promote dev -> master (Check (Relax))\", wurden erfolgreich abgeschlossen.",
    "auffaelligkeiten": [
     {
+     "level": "mittel",
+     "text": "Der Store-Umbau in Ausbildung.jsx (Variante A) wartet auf explizites +go des CEO (NEXT.md Punkt 2)."
+    },
+    {
      "level": "info",
-     "text": "Der Dependabot-Alert #24 (deepmerge) wird laut NEXT.md weiterhin ohne Upstream-Patch behandelt."
+     "text": "Dependabot Alert #24 (deepmerge) ist weiterhin ohne Upstream-Patch offen (NEXT.md Punkt 1)."
+    },
+    {
+     "level": "info",
+     "text": "Originalanleitungen für Mentaltraining, Autogenes Training, Fantasiereisen und Meditation fehlen weiterhin (NEXT.md Punkt 3)."
     }
    ],
    "naechste_schritte": [
@@ -309,11 +317,10 @@
    ],
    "veraendert": "",
    "fragen": [
-    "Soll der Store-Umbau in Ausbildung.jsx (NEXT.md Punkt 2) ohne explizites `+go` des CEO begonnen werden?",
-    "Wie soll mit den fehlenden spezifischen Anleitungs-PDFs für Mentales Training, Autogenes Training, Fantasiereisen und Meditation verfahren werden, um die Erstellung konkreter Ablaufkarten zu ermöglichen (TODO.md)?"
+    "Soll der Store-Umbau in Ausbildung.jsx (Variante A) mit der Konsolidierung der localStorage-Zugriffe gestartet werden?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-21T20:08:45+00:00"
+  "ai_at": "2026-11-22T12:49:35+00:00"
  }
 }
