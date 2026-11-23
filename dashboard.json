@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-23T18:03:53+00:00",
+  "generated_at": "2026-11-23T18:12:43+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-23T15:18:49Z",
+   "pushed_at": "2026-11-23T18:11:58Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -19,10 +19,14 @@
    "main": "master",
    "has_dev": true,
    "dev_behind": 0,
-   "dev_ahead": 0,
-   "oldest_unpromoted": null,
-   "dev_head": "c01c2d3 2026-11-17T17:05:46+01:00",
+   "dev_ahead": 1,
+   "oldest_unpromoted": "2026-11-23T19:11:58+01:00",
+   "dev_head": "b0bd1c0 2026-11-23T19:11:58+01:00",
    "master_head": "c01c2d3 2026-11-17T17:05:46+01:00"
+  },
+  "work": {
+   "branch": "master",
+   "sha": "c01c2d31cd1f18737e2a8b032f9debd0088ba5b2"
   },
   "commits": [
    {
@@ -234,34 +238,44 @@
   ],
   "workflows": [
    {
+    "name": "Gemini CI Agent",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "queued",
+    "conclusion": null,
+    "created_at": "2026-11-23T18:12:32Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235895808",
+    "sha": "c01c2d3"
+   },
+   {
     "name": "Auto-Promote dev -> master (Check (Relax))",
     "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-23T10:52:48Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45160064104",
+    "event": "workflow_run",
+    "status": "queued",
+    "conclusion": null,
+    "created_at": "2026-11-23T18:12:32Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235895767",
     "sha": "c01c2d3"
    },
    {
     "name": "PR-AutoMerge (Dependabot -> dev)",
     "branch": "master",
-    "event": "schedule",
+    "event": "workflow_run",
     "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-23T08:59:29Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45143075110",
+    "conclusion": "skipped",
+    "created_at": "2026-11-23T18:12:32Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235895719",
     "sha": "c01c2d3"
    },
    {
-    "name": "Gemini CI Agent",
-    "branch": "master",
-    "event": "workflow_run",
+    "name": "Check (Relax)",
+    "branch": "dev",
+    "event": "push",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-17T16:06:35Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44121964150",
-    "sha": "c01c2d3"
+    "created_at": "2026-11-23T18:12:01Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235803496",
+    "sha": "b0bd1c0"
    },
    {
     "name": "Live Deploy (Relax master)",
@@ -272,16 +286,6 @@
     "created_at": "2026-11-17T16:05:49Z",
     "url": "https://github.com/nimmsel23/relax-dev/actions/runs/44121818539",
     "sha": "c01c2d3"
-   },
-   {
-    "name": "Check (Relax)",
-    "branch": "dev",
-    "event": "push",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-16T11:35:52Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/43859141733",
-    "sha": "20a9b84"
    }
   ],
   "issues": [],
@@ -294,29 +298,34 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "Repo-Status stabil: dev und master synchronisiert, Workflows erfolgreich",
-   "lage": "Die `dev`- und `master`-Branches sind weiterhin auf Commit `c01c2d3` synchronisiert. Die Workflows \"PR-AutoMerge (Dependabot -> dev)\" und \"Auto-Promote dev -> master (Check (Relax))\" wurden am 2026-11-23 erfolgreich abgeschlossen.",
+   "headline": "Dev-Branch 1 Commit vor Master; Promote-Workflows in Warteschlange",
+   "lage": "Der `dev`-Branch (`b0bd1c0`) ist dem `master`-Branch (`c01c2d3`) um einen Commit voraus. Der `Check (Relax)`-Workflow auf `dev` wurde erfolgreich abgeschlossen. Die Workflows \"Gemini CI Agent\" und \"Auto-Promote dev -> master (Check (Relax))\" sind für `master` in der Warteschlange.",
    "auffaelligkeiten": [
     {
-     "level": "info",
-     "text": "Dependabot deepmerge (Alert #24, low) ist weiterhin ohne Upstream-Patch offen (NEXT.md Punkt 1)."
+     "level": "hoch",
+     "text": "Der `dev`-Branch ist mit Commit `b0bd1c0` vom 2026-11-23 dem `master`-Branch um einen Commit voraus, was eine Abweichung vom synchronisierten Zustand darstellt."
     },
     {
      "level": "info",
-     "text": "Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegen noch keine spezifischen Anleitungs-PDFs im Archiv (TODO.md)."
+     "text": "Der \"Check (Relax)\"-Workflow für den `dev`-Branch (`b0bd1c0`) wurde erfolgreich abgeschlossen."
+    },
+    {
+     "level": "info",
+     "text": "Die Workflows \"Gemini CI Agent\" und \"Auto-Promote dev -> master (Check (Relax))\" sind für den `master`-Branch in der Warteschlange."
     }
    ],
    "naechste_schritte": [
     "Prüfen des kompletten mobilen Ablaufs auf iPhone/iPad (NEXT.md Punkt 4).",
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
-    "Abgleichen von MOC, docs/ENTSPANNUNGSTRAINER-QUELLEN.md, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
+    "Abgleichen von MOC, `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
    ],
-   "veraendert": "Die erfolgreichen Workflow-Läufe für PR-AutoMerge und Auto-Promote wurden am 2026-11-23 registriert.",
+   "veraendert": "Der `dev`-Branch ist nicht mehr mit `master` synchronisiert, sondern liegt einen Commit voraus; die Promote-Workflows sind aktuell in der Warteschlange, nicht abgeschlossen.",
    "fragen": [
-    "Soll der Store-Umbau in Ausbildung.jsx (NEXT.md Punkt 2) mit den 19 `localStorage`-Zugriffen auf 8 Schlüssel über einen `usePersistentState`-Hook konsolidiert werden?"
+    "Soll der Store-Umbau in `Ausbildung.jsx` (NEXT.md Punkt 2) mit einem expliziten `+go` begonnen werden?",
+    "Wann werden die spezifischen Anleitungs-PDFs für Mentales Training, Autogenes Training, Fantasiereisen und Meditation bereitgestellt, um konkrete Ablaufkarten zu erstellen (TODO.md)?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-23T18:03:55+00:00"
+  "ai_at": "2026-11-23T18:12:45+00:00"
  }
 }
