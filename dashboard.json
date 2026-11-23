@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-23T15:18:25+00:00",
+  "generated_at": "2026-11-23T18:03:53+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-22T12:49:49Z",
+   "pushed_at": "2026-11-23T15:18:49Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -298,12 +298,12 @@
    "lage": "Die `dev`- und `master`-Branches sind weiterhin auf Commit `c01c2d3` synchronisiert. Die Workflows \"PR-AutoMerge (Dependabot -> dev)\" und \"Auto-Promote dev -> master (Check (Relax))\" wurden am 2026-11-23 erfolgreich abgeschlossen.",
    "auffaelligkeiten": [
     {
-     "level": "mittel",
-     "text": "Der Dependabot-Alert #24 (deepmerge) ist laut NEXT.md Punkt 1 weiterhin offen und wartet auf einen Upstream-Patch."
+     "level": "info",
+     "text": "Dependabot deepmerge (Alert #24, low) ist weiterhin ohne Upstream-Patch offen (NEXT.md Punkt 1)."
     },
     {
      "level": "info",
-     "text": "Für Mentaltraining, Autogenes Training, Fantasiereisen oder Meditation wurden laut NEXT.md Punkt 3 weiterhin keine spezifischen Originalanleitungen gefunden."
+     "text": "Für Mentales Training, Autogenes Training, Fantasiereisen und Meditation liegen noch keine spezifischen Anleitungs-PDFs im Archiv (TODO.md)."
     }
    ],
    "naechste_schritte": [
@@ -311,12 +311,12 @@
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
     "Abgleichen von MOC, docs/ENTSPANNUNGSTRAINER-QUELLEN.md, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
    ],
-   "veraendert": "",
+   "veraendert": "Die erfolgreichen Workflow-Läufe für PR-AutoMerge und Auto-Promote wurden am 2026-11-23 registriert.",
    "fragen": [
-    "Erteilen des `+go` für den Store-Umbau in `Ausbildung.jsx` (NEXT.md Punkt 2)."
+    "Soll der Store-Umbau in Ausbildung.jsx (NEXT.md Punkt 2) mit den 19 `localStorage`-Zugriffen auf 8 Schlüssel über einen `usePersistentState`-Hook konsolidiert werden?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-23T15:18:30+00:00"
+  "ai_at": "2026-11-23T18:03:55+00:00"
  }
 }
