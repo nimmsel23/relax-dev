@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-24T05:10:18+00:00",
+  "generated_at": "2026-11-24T15:12:40+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-23T18:13:02Z",
+   "pushed_at": "2026-11-24T09:40:51Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -21,14 +21,62 @@
    "dev_behind": 0,
    "dev_ahead": 0,
    "oldest_unpromoted": null,
-   "dev_head": "b0bd1c0 2026-11-23T19:11:58+01:00",
-   "master_head": "b0bd1c0 2026-11-23T19:11:58+01:00"
+   "dev_head": "eee8316 2026-11-24T10:39:37+01:00",
+   "master_head": "eee8316 2026-11-24T10:39:37+01:00"
   },
   "work": {
    "branch": "master",
-   "sha": "b0bd1c0891c4d772500959baa0fd3e5fdb4a5312"
+   "sha": "eee8316b3c1c0ad960574850ec861c16a3474493"
   },
   "commits": [
+   {
+    "sha": "eee8316",
+    "date": "2026-11-24T10:39:37+01:00",
+    "author": "nimmsel23",
+    "subject": "ci: Merge nur mit --match-head-commit des geprüften Heads"
+   },
+   {
+    "sha": "43d0a32",
+    "date": "2026-11-24T10:38:38+01:00",
+    "author": "nimmsel23",
+    "subject": "ci: keine Zweitfreigabe mehr, Merge sobald Checks grün (Owner Daniel 24.11.2026 10:33)"
+   },
+   {
+    "sha": "128efdd",
+    "date": "2026-11-24T10:26:22+01:00",
+    "author": "nimmsel23",
+    "subject": "fix(ci): Approval zählt nicht bei offenem Security-Befund HIGH/CRITICAL"
+   },
+   {
+    "sha": "3a367aa",
+    "date": "2026-11-24T10:19:08+01:00",
+    "author": "nimmsel23",
+    "subject": "fix(ci): Org-Bot fail-closed, Merge-Logik ist Klasse B (Security Review vos#125)"
+   },
+   {
+    "sha": "907f210",
+    "date": "2026-11-24T10:11:40+01:00",
+    "author": "nimmsel23",
+    "subject": "ci: Approval-Agent-Freigabe zählt als peer-ok (Daniel 24.11.2026 10:08)"
+   },
+   {
+    "sha": "bc44f2f",
+    "date": "2026-11-24T08:46:39+01:00",
+    "author": "nimmsel23",
+    "subject": "ci: Org-Bot/ci-heal mit zwei Zeitplan-Slots abseits der vollen Stunde + repository_dispatch"
+   },
+   {
+    "sha": "acddd61",
+    "date": "2026-11-24T08:41:15+01:00",
+    "author": "nimmsel23",
+    "subject": "ci(org-bot): v2 wartet auf PR-Events auf angemeldete Checks"
+   },
+   {
+    "sha": "2d0c9e4",
+    "date": "2026-11-24T08:39:56+01:00",
+    "author": "nimmsel23",
+    "subject": "ci: Org-Bot v2 und CI-Heilung aus Vorlage (vos cto/tools)"
+   },
    {
     "sha": "b0bd1c0",
     "date": "2026-11-23T19:11:58+01:00",
@@ -100,60 +148,12 @@
     "date": "2026-11-13T03:59:17+01:00",
     "author": "Alpha",
     "subject": "style(scripts): format portal.mjs with biome (fixes CI check)"
-   },
-   {
-    "sha": "48e5191",
-    "date": "2026-11-13T03:12:19+01:00",
-    "author": "Alpha",
-    "subject": "docs(al-log): record pre-existing red CI check"
-   },
-   {
-    "sha": "d5311fb",
-    "date": "2026-11-13T03:11:37+01:00",
-    "author": "Alpha",
-    "subject": "docs(al-log): verify deepmerge alert 24 patch status"
-   },
-   {
-    "sha": "2ff6ccf",
-    "date": "2026-11-13T01:12:02+01:00",
-    "author": "Alpha",
-    "subject": "chore(portal): portal.mjs + docs/apps.* aus vitalos vos-portal --all synchronisiert"
-   },
-   {
-    "sha": "9fc75b7",
-    "date": "2026-11-13T01:09:16+01:00",
-    "author": "Alpha",
-    "subject": "feat(ci): Living Dashboard als GitHub Page"
-   },
-   {
-    "sha": "58a99ed",
-    "date": "2026-11-12T15:13:40+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md"
-   },
-   {
-    "sha": "bca634a",
-    "date": "2026-11-12T15:13:36+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update NEXT.md"
-   },
-   {
-    "sha": "ed21341",
-    "date": "2026-11-12T15:12:49+01:00",
-    "author": "Alpha",
-    "subject": "docs(al-log): Checkout-Sync Org d5c6a0f7 (cadeefb = origin/dev)"
-   },
-   {
-    "sha": "b80dbfb",
-    "date": "2026-11-12T15:12:42+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md"
    }
   ],
   "activity": [
    {
     "day": "2026-11-04",
-    "n": 3
+    "n": 2
    },
    {
     "day": "2026-11-05",
@@ -233,39 +233,29 @@
    },
    {
     "day": "2026-11-24",
-    "n": 0
+    "n": 8
    }
   ],
   "workflows": [
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-23T22:42:35Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45282232147",
-    "sha": "b0bd1c0"
-   },
-   {
-    "name": "PR-AutoMerge (Dependabot -> dev)",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-23T21:18:28Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45268311344",
-    "sha": "b0bd1c0"
-   },
    {
     "name": "Live Deploy (Relax master)",
     "branch": "master",
     "event": "workflow_dispatch",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-23T18:13:02Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235981986",
-    "sha": "b0bd1c0"
+    "created_at": "2026-11-24T09:40:52Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367488658",
+    "sha": "eee8316"
+   },
+   {
+    "name": "PR-AutoMerge (Dependabot -> dev)",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-11-24T09:40:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367450087",
+    "sha": "43d0a32"
    },
    {
     "name": "Gemini CI Agent",
@@ -273,9 +263,19 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-23T18:12:32Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235895808",
-    "sha": "c01c2d3"
+    "created_at": "2026-11-24T09:40:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367450073",
+    "sha": "43d0a32"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-24T09:40:38Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367449983",
+    "sha": "43d0a32"
    },
    {
     "name": "Check (Relax)",
@@ -283,9 +283,9 @@
     "event": "push",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-23T18:12:01Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45235803496",
-    "sha": "b0bd1c0"
+    "created_at": "2026-11-24T09:39:40Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367298566",
+    "sha": "eee8316"
    }
   ],
   "issues": [],
@@ -298,12 +298,16 @@
   "status": "green",
   "signals": [],
   "ai": {
-   "headline": "Dev-Branch mit Master synchronisiert; Promote-Workflows erfolgreich abgeschlossen",
-   "lage": "Der `dev`-Branch ist nun mit dem `master`-Branch auf Commit `b0bd1c0` synchronisiert. Der `Auto-Promote dev -> master (Check (Relax))` Workflow wurde erfolgreich abgeschlossen, ebenso wie der `Check (Relax)` Workflow auf `dev`.",
+   "headline": "CI/CD-Logik aktualisiert; dev und master synchronisiert",
+   "lage": "Die Branches `dev` und `master` sind auf Commit `eee8316` synchronisiert. Es gab umfangreiche Anpassungen an der CI/CD-Logik, insbesondere bezüglich Merge-Regeln, Security-Befunden und Approval-Prozessen. Alle relevanten Workflows wurden erfolgreich abgeschlossen.",
    "auffaelligkeiten": [
     {
+     "level": "hoch",
+     "text": "Umfangreiche Änderungen an der CI/CD-Pipeline und Merge-Logik durch acht Commits (z.B. `eee8316`, `43d0a32`, `128efdd`) zur Verbesserung der Automatisierung und Sicherheit."
+    },
+    {
      "level": "info",
-     "text": "Der `Gemini CI Agent` Workflow wurde auf dem vorherigen `master`-Commit `c01c2d3` erfolgreich ausgeführt."
+     "text": "Die Punkte 4, 5 und 6 aus `NEXT.md` zur mobilen Abnahme und Quellenpflege sind weiterhin offen."
     }
    ],
    "naechste_schritte": [
@@ -311,13 +315,12 @@
     "Prüfen der mobilen Texteingabe und des Exports für lokale Reflexion auf iPhone/iPad (NEXT.md Punkt 5).",
     "Abgleichen von MOC, `docs/ENTSPANNUNGSTRAINER-QUELLEN.md`, Methodenkarten, Lerncheck und Arbeitsblättern bei neuen PDFs oder Aufgaben (NEXT.md Punkt 6)."
    ],
-   "veraendert": "Der `dev`-Branch ist nun mit dem `master`-Branch auf Commit `b0bd1c0` synchronisiert, und die zuvor in der Warteschlange befindlichen Promote-Workflows wurden erfolgreich abgeschlossen.",
+   "veraendert": "Die Branches `dev` und `master` wurden seit der letzten Einschätzung von Commit `b0bd1c0` auf `eee8316` aktualisiert und synchronisiert, begleitet von umfassenden CI/CD-Anpassungen.",
    "fragen": [
-    "Soll der `deepmerge` (Alert #24) ohne Upstream-Patch weitergeführt oder ein Override bei Patch-Release nachgezogen werden?",
-    "Wird der Store-Umbau in `Ausbildung.jsx` (Variante A) mit Konsolidierung der `localStorage`-Zugriffe freigegeben?"
+    "Soll der Store-Umbau für `Ausbildung.jsx` (Variante A) gemäß `NEXT.md` Punkt 2 initiiert werden?"
    ],
    "model": "gemini-2.5-flash"
   },
-  "ai_at": "2026-11-24T05:10:20+00:00"
+  "ai_at": "2026-11-24T15:12:43+00:00"
  }
 }
