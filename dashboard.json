@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-25T14:52:43+00:00",
+  "generated_at": "2026-11-26T14:20:48+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-24T15:12:54Z",
+   "pushed_at": "2026-11-25T14:52:49Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -152,12 +152,8 @@
   ],
   "activity": [
    {
-    "day": "2026-11-05",
-    "n": 7
-   },
-   {
     "day": "2026-11-06",
-    "n": 15
+    "n": 12
    },
    {
     "day": "2026-11-07",
@@ -234,17 +230,31 @@
    {
     "day": "2026-11-25",
     "n": 0
+   },
+   {
+    "day": "2026-11-26",
+    "n": 0
    }
   ],
   "workflows": [
+   {
+    "name": "PR-AutoMerge (Dependabot -> dev)",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-26T04:59:56Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45758685985",
+    "sha": "eee8316"
+   },
    {
     "name": "CI-Heilung (rote Läufe wiederholen)",
     "branch": "master",
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-25T13:24:59Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45623344315",
+    "created_at": "2026-11-26T04:54:50Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45758179962",
     "sha": "eee8316"
    },
    {
@@ -253,8 +263,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-25T13:10:37Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45620912639",
+    "created_at": "2026-11-26T04:31:29Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45755754033",
     "sha": "eee8316"
    },
    {
@@ -263,18 +273,8 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-25T13:06:30Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45620231344",
-    "sha": "eee8316"
-   },
-   {
-    "name": "PR-AutoMerge (Dependabot -> dev)",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-25T12:48:15Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45617278709",
+    "created_at": "2026-11-26T04:29:25Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45755519564",
     "sha": "eee8316"
    },
    {
