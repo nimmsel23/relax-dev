@@ -43,6 +43,11 @@
       ],
       "redirects": [
         {
+          "source": "/",
+          "destination": "https://vos-relax.web.app/",
+          "type": 301
+        },
+        {
           "source": "/:path*",
           "destination": "https://vos-relax.web.app/:path",
           "type": 301
