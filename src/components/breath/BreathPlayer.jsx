@@ -24,14 +24,14 @@ const RING_C = 2 * Math.PI * RING_R
  */
 export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
   const [paused, setPaused] = useState(false)
-  const [disp, setDisp] = useState({ prep: true, idx: 0, sec: PREP_MS / 1000, round: 1 })
+  const [disp, setDisp] = useState({ prep: true, idx: 0, sec: PREP_MS / 1000, round: 1, remaining: cycleSeconds(pattern) * rounds })
 
   const orbRef = useRef(null)
   const glowRef = useRef(null)
   const ringRef = useRef(null)
   const startRef = useRef(null)
   const pausedAtRef = useRef(null)
-  const lastRef = useRef({ prep: true, idx: -1, sec: -1, round: -1 })
+  const lastRef = useRef({ prep: true, idx: -1, sec: -1, round: -1, remaining: -1 })
   const elapsedRef = useRef(0)
   const finishedRef = useRef(false)
 
@@ -94,13 +94,13 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
       let next
 
       if (t < 0) {
-        next = { prep: true, idx: 0, sec: Math.ceil(-t / 1000), round: 1 }
+        next = { prep: true, idx: 0, sec: Math.ceil(-t / 1000), round: 1, remaining: cycleSeconds(pattern) * rounds }
       } else {
         const st = phaseAt(pattern, t, rounds)
         elapsedRef.current = t
         fill = st.fill
         progress = st.progress
-        next = { prep: false, idx: st.phaseIndex, sec: st.secondsLeft, round: st.round }
+        next = { prep: false, idx: st.phaseIndex, sec: st.secondsLeft, round: st.round, remaining: Math.max(0, Math.ceil((cycleSeconds(pattern) * rounds * 1000 - t) / 1000)) }
         if (st.done) {
           paint(fill, 1)
           finish(true)
@@ -111,7 +111,7 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
       paint(fill, progress)
 
       const last = lastRef.current
-      if (next.prep !== last.prep || next.idx !== last.idx || next.sec !== last.sec || next.round !== last.round) {
+      if (next.prep !== last.prep || next.idx !== last.idx || next.sec !== last.sec || next.round !== last.round || next.remaining !== last.remaining) {
         if (vibrate && !next.prep && (next.idx !== last.idx || next.round !== last.round)) {
           try { navigator.vibrate?.(pattern.phases[next.idx].kind === 'in' ? 40 : 18) } catch { /* ignore */ }
         }
@@ -147,6 +147,10 @@ export default function BreathPlayer({ pattern, rounds, vibrate, onFinish }) {
         <div className="text-[11px] mt-0.5" style={{ color: 'var(--dim)' }}>
           {disp.prep ? `${rounds} Runden · ${pattern.ratio}` : `Runde ${disp.round} / ${rounds} · ${pattern.ratio}`}
         </div>
+      </div>
+
+      <div className="text-sm tabular-nums" role="timer" aria-label="Verbleibende Übungszeit" style={{ color: 'var(--muted)' }}>
+        Noch {Math.floor(disp.remaining / 60)}:{String(disp.remaining % 60).padStart(2, '0')}
       </div>
 
       <div className="relative w-full max-w-sm aspect-square flex items-center justify-center">

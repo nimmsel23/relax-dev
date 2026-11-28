@@ -42,6 +42,8 @@ export default function App() {
     return window.location.port === '9124' ? 'catalog' : 'ausbildung'
   })
   const [moreOpen, setMoreOpen] = useState(false)
+  const [breathing, setBreathing] = useState(false)
+  const immersive = tab === 'atem' && breathing
   const { theme, setManualTheme, resetToCircadian, manualOverride, currentSchedule } = useCircadianTheme()
 
   useEffect(() => {
@@ -83,18 +85,18 @@ export default function App() {
 
       <main className="flex-1 overflow-y-auto overflow-x-hidden" style={{ WebkitOverflowScrolling: 'touch' }}>
         <div className={tab === 'physio' || tab === 'catalog' ? 'h-full flex flex-col' : tab === 'session' ? 'w-full max-w-screen-2xl mx-auto px-4 sm:px-6 xl:px-10 py-5 pb-28' : 'max-w-2xl mx-auto px-4 py-4 pb-28'}>
-          <Suspense fallback={<div role="status" className="rounded-2xl border p-4 text-sm" style={{ background: 'var(--card)', borderColor: 'var(--line)', color: 'var(--muted)' }}>Bereich wird geladen …</div>}><View onNavigate={navigate} /></Suspense>
+          <Suspense fallback={<div role="status" className="rounded-2xl border p-4 text-sm" style={{ background: 'var(--card)', borderColor: 'var(--line)', color: 'var(--muted)' }}>Bereich wird geladen …</div>}><View onNavigate={navigate} onRunningChange={setBreathing} /></Suspense>
         </div>
       </main>
 
-      {moreOpen && <>
+      {!immersive && moreOpen && <>
         <button aria-label="Mehr-Menü schließen" onClick={() => setMoreOpen(false)} className="fixed inset-0 z-30" style={{ background: 'rgba(0,0,0,0.18)' }} />
         <div className="fixed inset-x-3 z-40 grid grid-cols-2 gap-2 rounded-2xl border p-3 shadow-2xl" style={{ bottom: 'calc(68px + env(safe-area-inset-bottom))', background: 'var(--glass)', borderColor: 'var(--line)', backdropFilter: 'blur(20px)' }}>
           {MORE_TABS.map(({ id, label, Icon }) => <button key={id} onClick={() => navigate(id)} className="flex items-center gap-3 rounded-xl border p-3 text-sm font-semibold" style={{ background: tab === id ? 'var(--accent-glow)' : 'var(--card)', borderColor: tab === id ? 'var(--accent)' : 'var(--line)', color: tab === id ? 'var(--accent)' : 'var(--ink)' }}><Icon size={18} />{label}</button>)}
         </div>
       </>}
 
-      <nav aria-label="Hauptnavigation" style={{ background: 'var(--glass)', borderTop: '1px solid var(--glass-border)', backdropFilter: 'blur(20px)' }} className="flex shrink-0 px-2 pb-safe z-50">
+      {!immersive && <nav aria-label="Hauptnavigation" style={{ background: 'var(--glass)', borderTop: '1px solid var(--glass-border)', backdropFilter: 'blur(20px)' }} className="flex shrink-0 px-2 pb-safe z-50">
         {PRIMARY_TABS.map(({ id, label, Icon }) => {
           const isActive = tab === id
           return <button key={id} onClick={() => navigate(id)} aria-current={isActive ? 'page' : undefined} className="flex-1 flex flex-col items-center gap-0.5 py-2 rounded-xl text-[10px] font-semibold tracking-wide transition-all" style={{ color: isActive ? 'var(--accent)' : 'var(--dim)', background: 'none', border: 'none' }}>
@@ -104,7 +106,7 @@ export default function App() {
         <button onClick={() => setMoreOpen(value => !value)} aria-expanded={moreOpen} className="flex-1 flex flex-col items-center gap-0.5 py-2 rounded-xl text-[10px] font-semibold tracking-wide transition-all" style={{ color: moreOpen || secondaryActive ? 'var(--accent)' : 'var(--dim)', background: 'none', border: 'none' }}>
           <span className="flex items-center justify-center rounded-full" style={{ width: 34, height: 26, background: moreOpen || secondaryActive ? 'color-mix(in srgb, var(--accent) 18%, transparent)' : 'transparent' }}><MoreHorizontal size={20} /></span>Mehr
         </button>
-      </nav>
+      </nav>}
     </div>
   )
 }

@@ -61,11 +61,11 @@ function MoodPicker({ value, onChange }) {
   )
 }
 
-export default function Breath() {
+export default function Breath({ onRunningChange }) {
   const prefs = useMemo(loadPrefs, [])
   const [catId, setCatId] = useState(CATEGORIES.some((c) => c.id === prefs.cat) ? prefs.cat : 'calm')
   const [patId, setPatId] = useState(getPattern(prefs.pattern) ? prefs.pattern : null)
-  const [minutes, setMinutes] = useState(null) // null = Default des Musters
+  const [minutes, setMinutes] = useState(Number.isInteger(prefs.minutes) && prefs.minutes >= 1 && prefs.minutes <= 60 ? prefs.minutes : 3)
   const [vibrate, setVibrate] = useState(!!prefs.vibrate)
   const [moodBefore, setMoodBefore] = useState(3)
 
@@ -89,6 +89,16 @@ export default function Breath() {
   const pattern = patId ? getPattern(patId) : null
   const effMinutes = minutes ?? pattern?.minutes ?? 3
   const rounds = pattern ? roundsFor(pattern, effMinutes) : 0
+
+  useEffect(() => {
+    onRunningChange?.(!!running)
+    return () => onRunningChange?.(false)
+  }, [running, onRunningChange])
+
+  function changeDuration(value) {
+    setMinutes(value)
+    savePrefs({ minutes: value })
+  }
 
   function refreshToday() {
     getRelaxSession(localToday()).then((d) => {
@@ -136,7 +146,6 @@ export default function Breath() {
   function pickPattern(id) {
     const next = patId === id ? null : id
     setPatId(next)
-    setMinutes(null)
     if (next) savePrefs({ pattern: next })
   }
 
@@ -153,9 +162,8 @@ export default function Breath() {
     savePrefs({ vibrate, pattern: quickPattern.id, cat: quickPattern.category })
     setCatId(quickPattern.category)
     setPatId(quickPattern.id)
-    setMinutes(3)
     setResult(null)
-    setRunning({ pattern: quickPattern, rounds: roundsFor(quickPattern, 3), moodBefore })
+    setRunning({ pattern: quickPattern, rounds: roundsFor(quickPattern, effMinutes), moodBefore })
   }
 
   function onFinish(r) {
@@ -209,8 +217,18 @@ export default function Breath() {
         </div>
       </div>
 
+      <section className="rounded-2xl border p-4 space-y-3" style={{ background: 'var(--card)', borderColor: 'var(--line)' }} aria-label="Übungsdauer">
+        <label htmlFor="breath-duration" className="block text-sm font-bold">Übungsdauer</label>
+        <div className="flex flex-wrap items-center gap-2">
+          {DURATIONS.map((d) => <button key={d} type="button" aria-pressed={minutes === d} onClick={() => changeDuration(d)} className="rounded-xl border px-3 py-2 text-sm font-semibold" style={{ background: minutes === d ? 'var(--accent-glow)' : 'var(--bg2)', borderColor: minutes === d ? 'var(--accent)' : 'var(--line)' }}>{d} min</button>)}
+          <input id="breath-duration" type="number" min="1" max="60" step="1" value={minutes} onChange={(event) => { const value = Number(event.target.value); if (Number.isInteger(value) && value >= 1 && value <= 60) changeDuration(value) }} className="w-20 rounded-xl border px-3 py-2 text-sm" style={{ background: 'var(--bg2)', borderColor: 'var(--line)' }} />
+          <span className="text-xs" style={{ color: 'var(--muted)' }}>Minuten (1–60)</span>
+        </div>
+        <p className="text-xs" style={{ color: 'var(--muted)' }}>Endet automatisch nach der letzten vollständigen Atemrunde · Dauer ungefähr {minutes} min.</p>
+      </section>
+
       <button type="button" onClick={startQuickPractice} className="w-full rounded-2xl border p-4 text-left shadow-sm transition-transform active:scale-[0.99]" style={{ background: 'color-mix(in srgb, var(--accent) 13%, var(--card))', borderColor: 'color-mix(in srgb, var(--accent) 45%, var(--line))' }}>
-        <span className="flex items-center justify-between gap-3"><span><span className="block text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent)' }}>Direkt starten · 3 Minuten</span><span className="mt-1 block text-base font-bold">Verlängerte Ausatmung</span><span className="mt-1 block text-xs" style={{ color: 'var(--muted)' }}>Sanft einatmen, etwas länger ausatmen · jederzeit beenden</span></span><span className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-lg" style={{ background: 'var(--accent)', color: '#0b0f19' }}>▶</span></span>
+        <span className="flex items-center justify-between gap-3"><span><span className="block text-xs font-semibold uppercase tracking-wider" style={{ color: 'var(--accent)' }}>Direkt starten · {effMinutes} Minuten</span><span className="mt-1 block text-base font-bold">Verlängerte Ausatmung</span><span className="mt-1 block text-xs" style={{ color: 'var(--muted)' }}>Sanft einatmen, etwas länger ausatmen · jederzeit beenden</span></span><span className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-lg" style={{ background: 'var(--accent)', color: '#0b0f19' }}>▶</span></span>
       </button>
 
       {result && (
@@ -313,7 +331,8 @@ export default function Breath() {
                         return (
                           <button
                             key={d}
-                            onClick={() => setMinutes(d)}
+                            aria-pressed={active}
+                            onClick={() => changeDuration(d)}
                             className="flex-1 py-2 rounded-xl border text-sm font-semibold"
                             style={{
                               background: active ? 'color-mix(in srgb, var(--accent) 22%, var(--bg2))' : 'var(--bg2)',

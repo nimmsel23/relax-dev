@@ -76,3 +76,15 @@ test("phaseAt: Füllstand ist stetig und bleibt in 0..1", () => {
     }
   }
 });
+
+test("jede wählbare Dauer endet automatisch nach der letzten Atemrunde", () => {
+  for (const pattern of PATTERNS) {
+    for (let minutes = 1; minutes <= 60; minutes++) {
+      const rounds = roundsFor(pattern, minutes);
+      const endMs = rounds * cycleSeconds(pattern) * 1000;
+      assert.equal(phaseAt(pattern, endMs - 1, rounds).done, false);
+      assert.equal(phaseAt(pattern, endMs, rounds).done, true);
+      assert.ok(Math.abs(endMs / 1000 - minutes * 60) <= cycleSeconds(pattern) / 2);
+    }
+  }
+});
