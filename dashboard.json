@@ -1,12 +1,12 @@
 {
  "evidence": {
-  "generated_at": "2026-11-27T14:15:46+00:00",
+  "generated_at": "2026-11-28T13:31:36+00:00",
   "repo": "nimmsel23/relax-dev",
   "meta": {
    "name": "relax-dev",
    "description": null,
    "html_url": "https://github.com/nimmsel23/relax-dev",
-   "pushed_at": "2026-11-26T14:20:53Z",
+   "pushed_at": "2026-11-28T07:12:33Z",
    "default_branch": "master",
    "visibility": "public",
    "pages_url": "https://nimmsel23.github.io/relax-dev/"
@@ -21,14 +21,44 @@
    "dev_behind": 0,
    "dev_ahead": 0,
    "oldest_unpromoted": null,
-   "dev_head": "eee8316 2026-11-24T10:39:37+01:00",
-   "master_head": "eee8316 2026-11-24T10:39:37+01:00"
+   "dev_head": "1f4b9d3 2026-11-28T08:11:52+01:00",
+   "master_head": "1f4b9d3 2026-11-28T08:11:52+01:00"
   },
   "work": {
    "branch": "master",
-   "sha": "eee8316b3c1c0ad960574850ec861c16a3474493"
+   "sha": "1f4b9d3213d31fd6108f3d29124c362b68c766b0"
   },
   "commits": [
+   {
+    "sha": "1f4b9d3",
+    "date": "2026-11-28T08:11:52+01:00",
+    "author": "Alpha",
+    "subject": "fix(breath): expose duration and hide navigation during practice"
+   },
+   {
+    "sha": "66532e9",
+    "date": "2026-11-28T08:01:04+01:00",
+    "author": "Alpha",
+    "subject": "fix(hosting): redirect legacy site root explicitly"
+   },
+   {
+    "sha": "b801b59",
+    "date": "2026-11-28T07:58:44+01:00",
+    "author": "Alpha",
+    "subject": "style(portal): satisfy CI formatter"
+   },
+   {
+    "sha": "2aee180",
+    "date": "2026-11-28T07:56:57+01:00",
+    "author": "Alpha",
+    "subject": "fix(hosting): migrate Relax to vos-relax with legacy redirect"
+   },
+   {
+    "sha": "05de722",
+    "date": "2026-11-28T07:56:23+01:00",
+    "author": "Alpha",
+    "subject": "Merge remote-tracking branch 'origin/dev' into dev"
+   },
    {
     "sha": "eee8316",
     "date": "2026-11-24T10:39:37+01:00",
@@ -84,6 +114,12 @@
     "subject": "ci(dashboard): Board baut master, Push-Trigger master (Daniel 23.11.)"
    },
    {
+    "sha": "04587d4",
+    "date": "2026-11-21T19:31:17+01:00",
+    "author": "Alpha",
+    "subject": "portal: App-Links neu erzeugt (vos-portal)"
+   },
+   {
     "sha": "c01c2d3",
     "date": "2026-11-17T17:05:46+01:00",
     "author": "nimmsel23",
@@ -112,52 +148,12 @@
     "date": "2026-11-16T06:34:29+01:00",
     "author": "Alpha",
     "subject": "ci(automerge): Dependabot base=master auf base=dev retargeten"
-   },
-   {
-    "sha": "2c1fe7b",
-    "date": "2026-11-16T06:34:29+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md"
-   },
-   {
-    "sha": "5225381",
-    "date": "2026-11-14T18:58:33+01:00",
-    "author": "Alpha",
-    "subject": "chore: AL-LOG.md entfernt"
-   },
-   {
-    "sha": "b5ee2a0",
-    "date": "2026-11-14T03:11:04+01:00",
-    "author": "Alpha",
-    "subject": "docs(al-log): Stabilitäts-/Security-Wache 2026-11-14 (c69e7c8 grün, #24 offen)"
-   },
-   {
-    "sha": "c69e7c8",
-    "date": "2026-11-13T15:11:42+01:00",
-    "author": "Alpha",
-    "subject": "docs(al-log): CI-Rot via 6fb7783 geschlossen, vos-portal-WIP-Befund"
-   },
-   {
-    "sha": "ddf59fd",
-    "date": "2026-11-13T04:49:40+01:00",
-    "author": "Alpha",
-    "subject": "docs: auto-update RESULTS.md NEXT.md (pre-compact)"
-   },
-   {
-    "sha": "6fb7783",
-    "date": "2026-11-13T03:59:17+01:00",
-    "author": "Alpha",
-    "subject": "style(scripts): format portal.mjs with biome (fixes CI check)"
    }
   ],
   "activity": [
    {
-    "day": "2026-11-07",
-    "n": 12
-   },
-   {
     "day": "2026-11-08",
-    "n": 2
+    "n": 1
    },
    {
     "day": "2026-11-09",
@@ -209,7 +205,7 @@
    },
    {
     "day": "2026-11-21",
-    "n": 0
+    "n": 1
    },
    {
     "day": "2026-11-22",
@@ -234,6 +230,10 @@
    {
     "day": "2026-11-27",
     "n": 0
+   },
+   {
+    "day": "2026-11-28",
+    "n": 5
    }
   ],
   "workflows": [
@@ -243,9 +243,9 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-27T08:24:45Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45965454731",
-    "sha": "eee8316"
+    "created_at": "2026-11-28T10:22:32Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46134886784",
+    "sha": "1f4b9d3"
    },
    {
     "name": "CI-Heilung (rote Läufe wiederholen)",
@@ -253,39 +253,9 @@
     "event": "schedule",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-27T08:06:09Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45963093232",
-    "sha": "eee8316"
-   },
-   {
-    "name": "Org-Bot (PR anlegen & mergen)",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-27T05:26:10Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45945789997",
-    "sha": "eee8316"
-   },
-   {
-    "name": "Auto-Promote dev -> master (Check (Relax))",
-    "branch": "master",
-    "event": "schedule",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-27T05:25:11Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45945687858",
-    "sha": "eee8316"
-   },
-   {
-    "name": "Live Deploy (Relax master)",
-    "branch": "master",
-    "event": "workflow_dispatch",
-    "status": "completed",
-    "conclusion": "success",
-    "created_at": "2026-11-24T09:40:52Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367488658",
-    "sha": "eee8316"
+    "created_at": "2026-11-28T09:22:57Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46130206237",
+    "sha": "1f4b9d3"
    },
    {
     "name": "Gemini CI Agent",
@@ -293,9 +263,29 @@
     "event": "workflow_run",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-24T09:40:38Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367450073",
-    "sha": "43d0a32"
+    "created_at": "2026-11-28T07:12:54Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46120154451",
+    "sha": "1f4b9d3"
+   },
+   {
+    "name": "Live Deploy (Relax master)",
+    "branch": "master",
+    "event": "workflow_dispatch",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-28T07:12:34Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46120128416",
+    "sha": "1f4b9d3"
+   },
+   {
+    "name": "Auto-Promote dev -> master (Check (Relax))",
+    "branch": "master",
+    "event": "workflow_run",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-28T07:12:25Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46120116680",
+    "sha": "66532e9"
    },
    {
     "name": "Check (Relax)",
@@ -303,15 +293,36 @@
     "event": "push",
     "status": "completed",
     "conclusion": "success",
-    "created_at": "2026-11-24T09:39:40Z",
-    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/45367298566",
+    "created_at": "2026-11-28T07:11:56Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46120080115",
+    "sha": "1f4b9d3"
+   },
+   {
+    "name": "Preview (Relax dev)",
+    "branch": "dev",
+    "event": "push",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-28T07:11:56Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46120080076",
+    "sha": "1f4b9d3"
+   },
+   {
+    "name": "Org-Bot (PR anlegen & mergen)",
+    "branch": "master",
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-11-28T05:01:57Z",
+    "url": "https://github.com/nimmsel23/relax-dev/actions/runs/46110224911",
     "sha": "eee8316"
    }
   ],
   "issues": [],
   "pulls": [],
   "live_sites": [
-   "https://relax-vos.web.app"
+   "https://relax-vos.web.app",
+   "https://vos-relax.web.app"
   ]
  },
  "assessment": {
