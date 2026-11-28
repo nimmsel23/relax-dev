@@ -3,7 +3,7 @@
 # Relax baut standalone (pnpm laut packageManager, mit pnpm-lock.yaml), kein vitalos-Meta-Repo nötig.
 # Ersetzt firebase-hosting-dev-preview.yml (jetzt in workflows.disabled/): der alte Workflow
 # lief nur auf dev-Push, hatte keinen PR-Trigger und war beim letzten Lauf (2026-08-23) im
-# Firebase-Schritt rot. Hosting-Site relax-vos steht als einzige Site in firebase.json.
+# Firebase-Schritt rot. App-Target vos-relax; die alte Site ist nur ein Live-Redirect.
 # Telegram-Link wie in den anderen Modulen.
 
 name: Preview (Relax dev)
@@ -75,6 +75,7 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FITNESS_AOS || secrets.FIREBASE_SERVICE_ACCOUNT }}
           projectId: fitness-aos
+          target: vos-relax
           channelId: ${{ github.event_name != 'pull_request' && 'dev' || '' }}
           expires: 24h
 

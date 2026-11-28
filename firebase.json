@@ -1,18 +1,53 @@
 {
-  "hosting": {
-    "site": "relax-vos",
-    "public": "dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [{ "source": "**", "destination": "/index.html" }],
-    "headers": [
-      {
-        "source": "/sw.js",
-        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
-      },
-      {
-        "source": "**/*.@(js|css|woff2)",
-        "headers": [{ "key": "Cache-Control", "value": "max-age=31536000, immutable" }]
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "target": "vos-relax",
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "/sw.js",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(js|css|woff2)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=31536000, immutable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target": "relax-vos-redirect",
+      "public": "hosting-redirect",
+      "ignore": [
+        "**/*"
+      ],
+      "redirects": [
+        {
+          "source": "/:path*",
+          "destination": "https://vos-relax.web.app/:path",
+          "type": 301
+        }
+      ]
+    }
+  ]
 }

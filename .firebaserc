@@ -1,1 +1,17 @@
-{"projects":{"default":"fitness-aos"}}
+{
+  "projects": {
+    "default": "fitness-aos"
+  },
+  "targets": {
+    "fitness-aos": {
+      "hosting": {
+        "vos-relax": [
+          "vos-relax"
+        ],
+        "relax-vos-redirect": [
+          "relax-vos"
+        ]
+      }
+    }
+  }
+}
